@@ -1,0 +1,3 @@
+my first project
+this project is for learning terminal + vs code + Git
+I just edited this file.
