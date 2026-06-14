@@ -96,6 +96,9 @@
             border-radius: 20px;
             padding: 0.8rem 1.5rem;
             box-shadow: var(--button-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .title-area h1 {
@@ -701,6 +704,29 @@
 
         /* 響應式佈局 */
         @media (max-width: 1023px) {
+            .control-bar {
+                padding: 0.6rem 1rem;
+                border-radius: 16px;
+            }
+
+            .title-area h1 {
+                font-size: 1.1rem;
+            }
+
+            .title-area p {
+                display: none;
+            }
+
+            .btn-ctrl span {
+                display: none;
+            }
+
+            .btn-ctrl {
+                padding: 0.5rem 0.7rem;
+                border-radius: 10px;
+                white-space: nowrap;
+            }
+
             .layout-grid {
                 grid-template-columns: 1fr;
             }
@@ -726,6 +752,92 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* ================= Teacher Mode 切換按鈕 ================= */
+        .mode-group {
+            display: flex;
+            gap: 0.3rem;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            padding: 0.3rem;
+        }
+
+        .btn-mode {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.45rem 0.85rem;
+            font-size: calc(0.85rem * var(--font-scale));
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .btn-mode.active {
+            background: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 2px 6px var(--primary-glow);
+        }
+
+        .btn-mode:hover:not(.active) {
+            background: var(--container-bg);
+            color: var(--text-primary);
+        }
+
+        /* mode 顯示控制 */
+        .formula-mode-only {
+            display: block;
+        }
+
+        .concept-mode-only {
+            display: none;
+        }
+
+        .solution-mode-only {
+            display: none;
+        }
+
+        body[data-mode="concept"] .formula-mode-only {
+            display: none;
+        }
+
+        body[data-mode="concept"] .concept-mode-only {
+            display: block;
+        }
+
+        body[data-mode="concept"] .solution-mode-only {
+            display: none;
+        }
+
+        body[data-mode="solution"] .formula-mode-only {
+            display: none;
+        }
+
+        body[data-mode="solution"] .concept-mode-only {
+            display: none;
+        }
+
+        body[data-mode="solution"] .solution-mode-only {
+            display: block;
+        }
+
+        /* extra-section 在 formula mode 下隱藏 */
+        body:not([data-mode]) .extra-section,
+        body[data-mode="formula"] .extra-section {
+            display: none;
+        }
+
+        body[data-mode="concept"] .extra-section {
+            display: block;
+        }
+
+        body[data-mode="solution"] .extra-section {
+            display: block;
+        }
     </style>
 </head>
 
@@ -748,6 +860,14 @@
                 </button>
                 <button class="btn-ctrl" onclick="adjustFont(-0.1)" title="字型縮小">A-</button>
                 <button class="btn-ctrl" onclick="adjustFont(0.1)" title="字型放大">A+</button>
+                <div class="mode-group" id="mode-group">
+                    <button class="btn-mode active" id="btn-mode-formula" onclick="setMode('formula')" title="公式模式">📘
+                        公式</button>
+                    <button class="btn-mode" id="btn-mode-concept" onclick="setMode('concept')" title="概念模式">🧠
+                        概念</button>
+                    <button class="btn-mode" id="btn-mode-solution" onclick="setMode('solution')" title="解題模式">✏️
+                        解題</button>
+                </div>
             </div>
         </header>
 
@@ -894,6 +1014,7 @@
             fontSize: 1.05,
             theme: 'whiteboard',
             currentTab: 'module-dashboard',
+            mode: 'formula', // 'formula' | 'concept' | 'solution'
 
             // 轉盤旋轉狀態
             isSpinning: false,
@@ -1452,11 +1573,11 @@
     <div class="formula-box-header">
         <span class="formula-box-title">${formula.name}</span>
     </div>
-    <div class="math-blackboard">
+    <div class="math-blackboard formula-mode-only">
         <span class="math-display">$$${formula.expr}$$</span>
     </div>
 
-    <div class="info-grid">
+    <div class="info-grid formula-mode-only">
         <div class="info-block">
             <div class="info-block-title">💡 公式說明</div>
             <p>${formula.desc}</p>
@@ -1467,68 +1588,81 @@
         </div>
     </div>
 
-    <!-- 典型例題板塊 -->
-    <div class="example-block">
-        <div class="example-header">📝 典型課堂挑戰：</div>
-        <p style="font-weight: 500; font-size:1.1em; line-height: 1.5; margin-bottom:0.8rem;">${formula.example}</p>
-
-        <div style="display: flex; gap: 0.8rem;">
-            <button class="btn-action-large" onclick="toggleFormulaDetail('${detailId}', this)" style="background: var(--accent-green); flex: 1.3; margin-top:0;">
-                🔑 顯示答案與詳解
-            </button>
-            <button class="btn-action-large" onclick="toggleCanvasBox('${canvasBoxId}', this)" style="background: var(--accent-purple); flex: 1; margin-top:0;">
-                ✍️ 開啟黑板塗鴉板
-            </button>
-        </div>
-
-        <!-- 詳解摺疊 -->
-        <div id="${detailId}" class="solution-detail">
-            <div class="step-item" style="border:none; padding:0; margin:0;">
-                <span class="step-badge">詳細解析</span>
-                <p style="white-space: pre-line; margin-top:0.6rem; line-height:1.6;">${formula.solution}</p>
-            </div>
-        </div>
-
-        <!-- 練習題產生器模板展示 -->
-        ${templateHtml}
+    <!-- 概念模式區塊 -->
+    <div class="concept-mode-only" style="padding: 0.2rem 0;">
         ${formula.concept ? `
-        <div class="extra-section">
-            <div class="extra-title">① 前置知識</div>
+        <div class="extra-section" style="display:block;">
+            <div class="extra-title">① 核心概念</div>
             <p>${formula.concept}</p>
         </div>` : ''}
         ${formula.prerequisite ? `
-        <div class="extra-section">
-            <div class="extra-title">② 核心觀念</div>
+        <div class="extra-section" style="display:block;">
+            <div class="extra-title">② 先備知識</div>
             <p>${formula.prerequisite}</p>
         </div>` : ''}
-        ${formula.commonMistakes ? `
-        <div class="extra-section">
-            <div class="extra-title">③ 常見錯誤</div>
-            <p>${formula.commonMistakes}</p>
-        </div>` : ''}
         ${formula.quickReview ? `
-        <div class="extra-section">
-            <div class="extra-title">④ 一分鐘複習</div>
+        <div class="extra-section" style="display:block;">
+            <div class="extra-title">③ 一分鐘複習</div>
             <p>${formula.quickReview}</p>
         </div>` : ''}
-        ${formula.futureTopics ? `
-        <div class="extra-section">
-            <div class="extra-title">⑤ 延伸學習</div>
-            <p>${formula.futureTopics}</p>
-        </div>` : ''}
+        ${!formula.concept && !formula.prerequisite && !formula.quickReview ? `
+        <div style="color: var(--text-secondary); font-size: 0.9em; padding: 1rem 0;">此公式尚無概念說明。</div>` : ''}
+    </div>
 
-        <!-- 手手寫寫塗鴉區 -->
-        <div id="${canvasBoxId}" class="scribble-box" style="display: none;">
-            <div class="scribble-tools">
-                <span style="font-weight: bold;">🖍️ 上課隨手寫草稿區</span>
-                <div class="brush-colors">
-                    <div class="brush-dot selected" style="background: #2563eb;" onclick="setBrushColor(this, '#2563eb')"></div>
-                    <div class="brush-dot" style="background: #dc2626;" onclick="setBrushColor(this, '#dc2626')"></div>
-                    <div class="brush-dot" style="background: #eab308;" onclick="setBrushColor(this, '#eab308')"></div>
-                    <button class="btn-ctrl" onclick="clearCanvas('${canvasBoxId}')" style="padding: 0.2rem 0.6rem; font-size: 0.8rem; margin-left: 0.8rem;">清除畫布</button>
+    <!-- 解題模式區塊 -->
+    <div class="solution-mode-only" style="padding: 0.2rem 0;">
+        <div class="example-block">
+            <div class="example-header">📝 典型課堂挑戰：</div>
+            <p style="font-weight: 500; font-size:1.1em; line-height: 1.5; margin-bottom:0.8rem;">${formula.example}</p>
+
+            <div style="display: flex; gap: 0.8rem;">
+                <button class="btn-action-large" onclick="toggleFormulaDetail('${detailId}', this)" style="background: var(--accent-green); flex: 1.3; margin-top:0;">
+                    🔑 顯示答案與詳解
+                </button>
+                <button class="btn-action-large" onclick="toggleCanvasBox('${canvasBoxId}', this)" style="background: var(--accent-purple); flex: 1; margin-top:0;">
+                    ✍️ 開啟黑板塗鴉板
+                </button>
+            </div>
+
+            <!-- 詳解摺疊 -->
+            <div id="${detailId}" class="solution-detail">
+                <div class="step-item" style="border:none; padding:0; margin:0;">
+                    <span class="step-badge">詳細解析</span>
+                    <p style="white-space: pre-line; margin-top:0.6rem; line-height:1.6;">${formula.solution}</p>
                 </div>
             </div>
-            <canvas class="scribble-canvas"></canvas>
+
+            ${formula.commonMistakes ? `
+            <div class="extra-section" style="display:block; margin-top:0.8rem;">
+                <div class="extra-title">⚠️ 常見錯誤</div>
+                <p>${formula.commonMistakes}</p>
+            </div>` : ''}
+            ${formula.futureTopics ? `
+            <div class="extra-section" style="display:block; margin-top:0.8rem;">
+                <div class="extra-title">⑤ 延伸學習</div>
+                <p>${formula.futureTopics}</p>
+            </div>` : ''}
+
+            <!-- 練習題模板（解題模式顯示） -->
+            ${formula.template ? `
+            <div style="margin-top: 1rem; padding: 0.6rem 0.8rem; background: rgba(0,0,0,0.02); border: 1px dashed var(--border-color); border-radius: 8px; font-size: 0.85em; color: var(--text-secondary);">
+                <strong style="color: var(--accent-purple);">🧩 練習題產生器模板：</strong>
+                <code style="font-family: 'Fira Code', monospace; display: block; margin-top: 0.2rem; white-space: pre-wrap;">${formula.template}</code>
+            </div>` : ''}
+
+            <!-- 手寫塗鴉區 -->
+            <div id="${canvasBoxId}" class="scribble-box" style="display: none;">
+                <div class="scribble-tools">
+                    <span style="font-weight: bold;">🖍️ 上課隨手寫草稿區</span>
+                    <div class="brush-colors">
+                        <div class="brush-dot selected" style="background: #2563eb;" onclick="setBrushColor(this, '#2563eb')"></div>
+                        <div class="brush-dot" style="background: #dc2626;" onclick="setBrushColor(this, '#dc2626')"></div>
+                        <div class="brush-dot" style="background: #eab308;" onclick="setBrushColor(this, '#eab308')"></div>
+                        <button class="btn-ctrl" onclick="clearCanvas('${canvasBoxId}')" style="padding: 0.2rem 0.6rem; font-size: 0.8rem; margin-left: 0.8rem;">清除畫布</button>
+                    </div>
+                </div>
+                <canvas class="scribble-canvas"></canvas>
+            </div>
         </div>
     </div>
 `;
@@ -1690,6 +1824,30 @@
             // 如果切換到輪盤頁面，重繪輪盤以適配寬度
             if (moduleId === 'module-random') {
                 setTimeout(() => drawWheel(), 100);
+            }
+        }
+
+        // ================= Teacher Mode 切換 =================
+        function setMode(mode) {
+            appState.mode = mode;
+            document.body.setAttribute('data-mode', mode);
+
+            // 更新按鈕 active 狀態
+            ['formula', 'concept', 'solution'].forEach(m => {
+                const btn = document.getElementById(`btn-mode-${m}`);
+                if (btn) btn.classList.toggle('active', m === mode);
+            });
+
+            // 重新觸發 KaTeX（切換 mode 後需重新 render 數學式）
+            if (typeof renderMathInElement !== 'undefined') {
+                setTimeout(() => {
+                    renderMathInElement(document.body, {
+                        delimiters: [
+                            { left: '$$', right: '$$', display: true },
+                            { left: '$', right: '$', display: false }
+                        ]
+                    });
+                }, 50);
             }
         }
 
@@ -2033,6 +2191,7 @@
         window.addEventListener('load', () => {
             renderDatabase();
             drawWheel();
+            setMode('formula'); // 預設公式模式
         });
     </script>
 </body>
