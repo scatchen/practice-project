@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="國中數學教學助手 - 國中數學公式資料庫與課堂大字投影板。">
     <title>國中數學教學助手 - 數學公式資料庫</title>
-    
+
     <!-- 引入高品質字型 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@600;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@600;800;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
     <!-- KaTeX 數學公式渲染 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
 
     <style>
         :root {
@@ -145,6 +150,7 @@
             color: #ffffff;
             border-color: transparent;
         }
+
         .btn-fullscreen:hover {
             opacity: 0.9;
             color: #ffffff;
@@ -224,8 +230,15 @@
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ================= 儀表板 ================= */
@@ -237,6 +250,7 @@
             margin-bottom: 1.5rem;
             box-shadow: var(--button-shadow);
         }
+
         .welcome-card h2 {
             font-size: calc(1.6rem * var(--font-scale));
             font-weight: 800;
@@ -278,6 +292,7 @@
             border-radius: 12px;
             border: 2px solid var(--border-color);
         }
+
         [data-theme="chalkboard"] .timer-display {
             background: rgba(255, 255, 255, 0.04);
         }
@@ -313,6 +328,7 @@
             border: 2px dashed var(--border-color);
             margin-bottom: 1rem;
         }
+
         [data-theme="chalkboard"] .student-num-display {
             background: rgba(255, 255, 255, 0.04);
         }
@@ -324,6 +340,7 @@
             gap: 0.5rem;
             margin-bottom: 1rem;
         }
+
         .student-config input {
             width: 70px;
             padding: 0.4rem;
@@ -402,7 +419,8 @@
         }
 
         .unit-accordion.active .unit-content {
-            max-height: 6000px; /* 大容量容許展開所有公式 */
+            max-height: 6000px;
+            /* 大容量容許展開所有公式 */
             border-top: 1px solid var(--border-color);
             padding: 1.5rem;
         }
@@ -416,6 +434,7 @@
             margin-bottom: 1.5rem;
             box-shadow: var(--button-shadow);
         }
+
         .formula-box:last-child {
             margin-bottom: 0;
         }
@@ -446,6 +465,7 @@
             align-items: center;
             overflow-x: auto;
         }
+
         [data-theme="chalkboard"] .math-blackboard {
             background: rgba(0, 0, 0, 0.3);
         }
@@ -468,6 +488,7 @@
             border-radius: 8px;
             padding: 0.8rem;
         }
+
         [data-theme="chalkboard"] .info-block {
             background: rgba(255, 255, 255, 0.01);
         }
@@ -516,6 +537,7 @@
             user-select: none;
             margin-top: 0.8rem;
         }
+
         .btn-action-large:active {
             transform: scale(0.99);
         }
@@ -529,9 +551,11 @@
             background: rgba(0, 0, 0, 0.02);
             border-radius: 12px;
         }
+
         [data-theme="chalkboard"] .solution-detail {
             background: rgba(255, 255, 255, 0.02);
         }
+
         .solution-detail.show {
             max-height: 1000px;
             opacity: 1;
@@ -548,6 +572,7 @@
             overflow: hidden;
             background: var(--canvas-bg);
         }
+
         .scribble-tools {
             display: flex;
             justify-content: space-between;
@@ -557,10 +582,12 @@
             border-bottom: 2px solid var(--border-color);
             font-size: 0.85em;
         }
+
         .brush-colors {
             display: flex;
             gap: 0.4rem;
         }
+
         .brush-dot {
             width: 26px;
             height: 26px;
@@ -568,10 +595,12 @@
             cursor: pointer;
             border: 2px solid transparent;
         }
+
         .brush-dot.selected {
             border-color: var(--text-primary);
             transform: scale(1.15);
         }
+
         .scribble-canvas {
             display: block;
             width: 100%;
@@ -614,7 +643,7 @@
             border-right: 20px solid transparent;
             border-top: 35px solid var(--accent-orange);
             z-index: 10;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
         }
 
         .wheel-svg {
@@ -622,7 +651,7 @@
             height: 100%;
             transform: rotate(0deg);
             transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
-            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
         }
 
         .btn-spin-center {
@@ -642,10 +671,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             z-index: 5;
             user-select: none;
         }
+
         .btn-spin-center:active {
             transform: translate(-50%, -50%) scale(0.95);
         }
@@ -674,30 +704,35 @@
             .layout-grid {
                 grid-template-columns: 1fr;
             }
+
             .sidebar-nav {
                 flex-direction: row;
                 overflow-x: auto;
                 padding: 0.6rem;
                 white-space: nowrap;
             }
+
             .nav-item {
                 width: auto;
                 padding: 0.8rem 1.2rem;
                 font-size: 1.05rem;
             }
+
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
+
             .wheel-container {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
 
     <div class="app-wrapper" id="app-root">
-        
+
         <!-- 頂部主控面板 -->
         <header class="control-bar">
             <div class="title-area">
@@ -718,7 +753,7 @@
 
         <!-- 雙欄佈局 -->
         <div class="layout-grid">
-            
+
             <!-- 觸控大導覽側邊欄 -->
             <nav class="sidebar-nav" aria-label="年級公式單元導覽">
                 <button class="nav-item active" onclick="switchTab('module-dashboard', this)" id="nav-dashboard">
@@ -766,8 +801,10 @@
                                 <button class="btn-preset" onclick="setTimerPreset(300)">5分鐘</button>
                             </div>
                             <div class="timer-controls">
-                                <button class="btn-action-large" onclick="toggleTimer()" id="btn-timer-toggle" style="background: var(--accent-green); margin-top:0;">⏱️ 開始計時</button>
-                                <button class="btn-action-large" onclick="resetTimer()" style="background: var(--text-secondary); flex: 0.6; margin-top:0;">重置</button>
+                                <button class="btn-action-large" onclick="toggleTimer()" id="btn-timer-toggle"
+                                    style="background: var(--accent-green); margin-top:0;">⏱️ 開始計時</button>
+                                <button class="btn-action-large" onclick="resetTimer()"
+                                    style="background: var(--text-secondary); flex: 0.6; margin-top:0;">重置</button>
                             </div>
                         </div>
 
@@ -779,9 +816,11 @@
                                 <div class="student-num-display" id="student-display">-- 號</div>
                                 <div class="student-config">
                                     <label for="class-range">學生座號範圍：1 至 </label>
-                                    <input type="number" id="class-range" value="40" min="5" max="60" aria-label="班級最高座號"> 號
+                                    <input type="number" id="class-range" value="40" min="5" max="60"
+                                        aria-label="班級最高座號"> 號
                                 </div>
-                                <button class="btn-action-large" onclick="pickStudent()" id="btn-pick-student" style="background: var(--accent-orange); margin-top:0;">
+                                <button class="btn-action-large" onclick="pickStudent()" id="btn-pick-student"
+                                    style="background: var(--accent-orange); margin-top:0;">
                                     🎰 抽出幸運座號！
                                 </button>
                             </div>
@@ -812,14 +851,15 @@
                     <div class="teaching-card" style="margin-bottom: 0;">
                         <h3>🎲 課堂大輪盤挑戰 (動態同步公式題庫)</h3>
                         <p>旋轉幸運大輪盤！系統會自動從七、八、九年級的公式庫中，動態彙整典型例題加入轉盤，點擊即可大字投影給學生挑戰！</p>
-                        
+
                         <div class="wheel-container">
                             <!-- 轉盤 (左側) -->
                             <div class="wheel-left">
                                 <div class="wheel-svg-wrapper">
                                     <div class="wheel-pointer"></div>
                                     <canvas id="canvas-wheel" width="380" height="380" class="wheel-svg"></canvas>
-                                    <button class="btn-spin-center" onclick="spinWheel()" id="btn-spin-wheel">SPIN</button>
+                                    <button class="btn-spin-center" onclick="spinWheel()"
+                                        id="btn-spin-wheel">SPIN</button>
                                 </div>
                             </div>
 
@@ -829,12 +869,15 @@
                                 <div class="wheel-result-panel" id="wheel-result-box">
                                     點擊轉盤中心 SPIN 開始抽題！
                                 </div>
-                                
+
                                 <div id="wheel-solution-area" style="display:none; margin-top: 1rem;">
-                                    <button class="btn-action-large" id="btn-wheel-solution" onclick="toggleWheelSolution()" style="background: var(--accent-green); margin-top:0;">
+                                    <button class="btn-action-large" id="btn-wheel-solution"
+                                        onclick="toggleWheelSolution()"
+                                        style="background: var(--accent-green); margin-top:0;">
                                         🔑 顯示此題解析與答案
                                     </button>
-                                    <div id="wheel-solution-detail" class="solution-detail" style="margin-top: 1rem;"></div>
+                                    <div id="wheel-solution-detail" class="solution-detail" style="margin-top: 1rem;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -851,17 +894,17 @@
             fontSize: 1.05,
             theme: 'whiteboard',
             currentTab: 'module-dashboard',
-            
+
             // 轉盤旋轉狀態
             isSpinning: false,
             wheelStartAngle: 0,
             wheelWinningItem: null,
-            
+
             // 計時器狀態
             timerSeconds: 120,
             timerInterval: null,
             isTimerRunning: false,
-            
+
             // 國中數學公式資料庫 (擴充式 JSON 架構)
             database: [
                 // ---------------- 七年級 ----------------
@@ -1094,7 +1137,7 @@
                             desc: "直角坐標平面上，任意兩點 $A(x_1, y_1)$ 與 $B(x_2, y_2)$ 之間的直線距離。此公式為畢氏定理在平面幾何上的最重要應用。",
                             variables: "$(x_1, y_1), (x_2, y_2)$：兩點在坐標平面上的座標；$d$：兩點間直線距離。",
                             example: "求直角坐標平面上 $A(2, -1)$ 與 $B(-2, 2)$ 兩點間的距離。",
-                            solution: "代入兩點距離公式：\n$$d = \\sqrt{((-2) - 2)^2 + (2 - (-1))^2}$$\n$$d = \\sqrt{(-4)^2 + 3^2} = \\sqrt{16 + 9} = \\sqrt{25} = 5$$\n答：兩點距離為 5。" ,
+                            solution: "代入兩點距離公式：\n$$d = \\sqrt{((-2) - 2)^2 + (2 - (-1))^2}$$\n$$d = \\sqrt{(-4)^2 + 3^2} = \\sqrt{16 + 9} = \\sqrt{25} = 5$$\n答：兩點距離為 5。",
                             template: "求直角座標上 A({x1}, {y1}) 與 B({x2}, {y2}) 兩點間的距離。\n[參數限制：計算出的距離值需為整數]"
                         },
                         {
@@ -1117,22 +1160,7 @@
                         }
                     ]
                 },
-                {
-                    grade: "grade-8",
-                    unit: "勾股定理",
-                    icon: "🔺",
-                    formulas: [
-                        {
-                            name: "畢氏定理",
-                            expr: "a^2 + b^2 = c^2",
-                            desc: "直角三角形中，兩直角邊的平方和恆等於斜邊的平方。是中學幾何的靈魂定理。",
-                            variables: "$a, b$：直角邊（股）長；$c$：斜邊長度。",
-                            example: "已知直角三角形兩股長為 5 公分與 12 公分，求斜邊長為多少公分？",
-                            solution: "設斜邊為 $c$，代入畢氏定理公式：\n$$c^2 = 5^2 + 12^2 = 25 + 144 = 169$$\n$$c = \\sqrt{169} = 13$$\n答：斜邊長度為 13 公分。",
-                            template: "已知直角三角形兩股長為 {a} 公分與 {b} 公分，求斜邊長為多少公分？\n[參數限制：a^2 + b^2 為完全平方數]"
-                        }
-                    ]
-                },
+
                 {
                     grade: "grade-8",
                     unit: "多邊形與幾何全等",
@@ -1323,6 +1351,10 @@
                     grade: "grade-9",
                     unit: "二次函數",
                     icon: "📈",
+                    // 新增 knowledgeMap 欄位
+                    prerequisiteLinks: ["一次函數"],
+                    relatedLinks: ["拋物線應用"],
+                    nextLinks: ["二次方程式求根"],
                     formulas: [
                         {
                             name: "二次函數標準式 (頂點式)",
@@ -1331,9 +1363,14 @@
                             variables: "$(h, k)$：拋物線的頂點座標；$x = h$：對稱軸方程式；$a$：控制開口大小與朝向 ($a > 0$ 開口朝上)。",
                             example: "已知一個二次函數的方程式為 $y = -2(x - 3)^2 + 5$，求此二次函數的對稱軸與頂點座標？",
                             solution: "比對標準頂點式 $y = a(x - h)^2 + k$ ： \n得出 $h = 3$，$k = 5$，$a = -2$。\n頂點座標為 $(3, 5)$，對稱軸為 $x = 3$。\n答：頂點為 $(3, 5)$，對稱軸為 $x = 3$（開口朝下）。",
-                            template: "已知二次函數 y = {a}(x - {h})^2 + {k}，求其對稱軸與頂點座標？\n[參數限制：a, h, k 為整數]"
+                            template: "已知二次函數 y = {a}(x - {h})^2 + {k}，求其對稱軸與頂點座標？\n\n[參數限制：a, h, k 為整數]",
+                            concept: "二次函數描述拋物線的形狀與頂點位置，與一次函數的直線不同，呈現對稱性。",
+                            prerequisite: "需要了解一次函數的斜率概念與平方運算的基礎。",
+                            commonMistakes: "常見錯誤包括符號錯位、忘記加負號或忽略係數 a 的正負判斷。",
+                            quickReview: "快速回顧頂點式與標準式的轉換公式，記得 $h$ 為頂點 x 座標，$k$ 為頂點 y 座標。",
+                            futureTopics: "可延伸至拋物線的應用、二次方程式求根以及最大最小值問題。"
                         }
-                    ]
+                    ],
                 },
                 {
                     grade: "grade-9",
@@ -1356,28 +1393,28 @@
         // ================= 2. 動態渲染年級公式庫與手寫板 =================
         function renderDatabase() {
             const grades = ["grade-7", "grade-8", "grade-9"];
-            
+
             grades.forEach(grade => {
                 const container = document.getElementById(`${grade === 'grade-7' ? 'g7' : (grade === 'grade-8' ? 'g8' : 'g9')}-content`);
                 if (!container) return;
                 container.innerHTML = ""; // 清空
-                
+
                 // 篩選出該年級的所有單元
                 const gradeUnits = appState.database.filter(item => item.grade === grade);
-                
+
                 gradeUnits.forEach((unitData, unitIndex) => {
                     const unitId = `${grade}-unit-${unitIndex}`;
-                    
+
                     // 建立 Accordion 卡片
                     const accordion = document.createElement('div');
                     accordion.className = 'unit-accordion';
                     accordion.id = unitId;
-                    
+
                     // Header 結構
                     const header = document.createElement('button');
                     header.className = 'unit-header';
                     header.onclick = () => toggleAccordion(unitId);
-                    
+
                     header.innerHTML = `
                         <div class="unit-title-wrapper">
                             <span class="unit-icon">${unitData.icon}</span>
@@ -1386,20 +1423,20 @@
                         </div>
                         <span class="unit-arrow">▼</span>
                     `;
-                    
+
                     // Content 結構
                     const content = document.createElement('div');
                     content.className = 'unit-content';
-                    
+
                     // 填入該單元的所有公式
                     unitData.formulas.forEach((formula, formIndex) => {
                         const formulaId = `${unitId}-formula-${formIndex}`;
                         const detailId = `${formulaId}-detail`;
                         const canvasBoxId = `${formulaId}-canvas-box`;
-                        
+
                         const formulaBox = document.createElement('div');
                         formulaBox.className = 'formula-box';
-                        
+
                         // 檢查是否有練習題模板欄位
                         let templateHtml = "";
                         if (formula.template) {
@@ -1410,70 +1447,105 @@
                                 </div>
                             `;
                         }
-                        
+
                         formulaBox.innerHTML = `
-                            <div class="formula-box-header">
-                                <span class="formula-box-title">${formula.name}</span>
-                            </div>
-                            <div class="math-blackboard">
-                                <span class="math-display">$$${formula.expr}$$</span>
-                            </div>
-                            
-                            <div class="info-grid">
-                                <div class="info-block">
-                                    <div class="info-block-title">💡 公式說明</div>
-                                    <p>${formula.desc}</p>
-                                </div>
-                                <div class="info-block">
-                                    <div class="info-block-title">🔑 變數意義</div>
-                                    <p>${formula.variables}</p>
-                                </div>
-                            </div>
-                            
-                            <!-- 典型例題板塊 -->
-                            <div class="example-block">
-                                <div class="example-header">📝 典型課堂挑戰：</div>
-                                <p style="font-weight: 500; font-size:1.1em; line-height: 1.5; margin-bottom:0.8rem;">${formula.example}</p>
-                                
-                                <div style="display: flex; gap: 0.8rem;">
-                                    <button class="btn-action-large" onclick="toggleFormulaDetail('${detailId}', this)" style="background: var(--accent-green); flex: 1.3; margin-top:0;">
-                                        🔑 顯示答案與詳解
-                                    </button>
-                                    <button class="btn-action-large" onclick="toggleCanvasBox('${canvasBoxId}', this)" style="background: var(--accent-purple); flex: 1; margin-top:0;">
-                                        ✍️ 開啟黑板塗鴉板
-                                    </button>
-                                </div>
-                                
-                                <!-- 詳解摺疊 -->
-                                <div id="${detailId}" class="solution-detail">
-                                    <div class="step-item" style="border:none; padding:0; margin:0;">
-                                        <span class="step-badge">詳細解析</span>
-                                        <p style="white-space: pre-line; margin-top:0.6rem; line-height:1.6;">${formula.solution}</p>
-                                    </div>
-                                </div>
-                                
-                                <!-- 練習題產生器模板展示 -->
-                                ${templateHtml}
-                                
-                                <!-- 手手書寫塗鴉區 -->
-                                <div id="${canvasBoxId}" class="scribble-box" style="display: none;">
-                                    <div class="scribble-tools">
-                                        <span style="font-weight: bold;">🖍️ 上課隨手寫草稿區</span>
-                                        <div class="brush-colors">
-                                            <div class="brush-dot selected" style="background: #2563eb;" onclick="setBrushColor(this, '#2563eb')"></div>
-                                            <div class="brush-dot" style="background: #dc2626;" onclick="setBrushColor(this, '#dc2626')"></div>
-                                            <div class="brush-dot" style="background: #eab308;" onclick="setBrushColor(this, '#eab308')"></div>
-                                            <button class="btn-ctrl" onclick="clearCanvas('${canvasBoxId}')" style="padding: 0.2rem 0.6rem; font-size: 0.8rem; margin-left: 0.8rem;">清除畫布</button>
-                                        </div>
-                                    </div>
-                                    <canvas class="scribble-canvas"></canvas>
-                                </div>
-                            </div>
-                        `;
-                        
+    <div class="formula-box-header">
+        <span class="formula-box-title">${formula.name}</span>
+    </div>
+    <div class="math-blackboard">
+        <span class="math-display">$$${formula.expr}$$</span>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-block">
+            <div class="info-block-title">💡 公式說明</div>
+            <p>${formula.desc}</p>
+        </div>
+        <div class="info-block">
+            <div class="info-block-title">🔑 變數意義</div>
+            <p>${formula.variables}</p>
+        </div>
+    </div>
+
+    <!-- 典型例題板塊 -->
+    <div class="example-block">
+        <div class="example-header">📝 典型課堂挑戰：</div>
+        <p style="font-weight: 500; font-size:1.1em; line-height: 1.5; margin-bottom:0.8rem;">${formula.example}</p>
+
+        <div style="display: flex; gap: 0.8rem;">
+            <button class="btn-action-large" onclick="toggleFormulaDetail('${detailId}', this)" style="background: var(--accent-green); flex: 1.3; margin-top:0;">
+                🔑 顯示答案與詳解
+            </button>
+            <button class="btn-action-large" onclick="toggleCanvasBox('${canvasBoxId}', this)" style="background: var(--accent-purple); flex: 1; margin-top:0;">
+                ✍️ 開啟黑板塗鴉板
+            </button>
+        </div>
+
+        <!-- 詳解摺疊 -->
+        <div id="${detailId}" class="solution-detail">
+            <div class="step-item" style="border:none; padding:0; margin:0;">
+                <span class="step-badge">詳細解析</span>
+                <p style="white-space: pre-line; margin-top:0.6rem; line-height:1.6;">${formula.solution}</p>
+            </div>
+        </div>
+
+        <!-- 練習題產生器模板展示 -->
+        ${templateHtml}
+        ${formula.concept ? `
+        <div class="extra-section">
+            <div class="extra-title">① 前置知識</div>
+            <p>${formula.concept}</p>
+        </div>` : ''}
+        ${formula.prerequisite ? `
+        <div class="extra-section">
+            <div class="extra-title">② 核心觀念</div>
+            <p>${formula.prerequisite}</p>
+        </div>` : ''}
+        ${formula.commonMistakes ? `
+        <div class="extra-section">
+            <div class="extra-title">③ 常見錯誤</div>
+            <p>${formula.commonMistakes}</p>
+        </div>` : ''}
+        ${formula.quickReview ? `
+        <div class="extra-section">
+            <div class="extra-title">④ 一分鐘複習</div>
+            <p>${formula.quickReview}</p>
+        </div>` : ''}
+        ${formula.futureTopics ? `
+        <div class="extra-section">
+            <div class="extra-title">⑤ 延伸學習</div>
+            <p>${formula.futureTopics}</p>
+        </div>` : ''}
+
+        <!-- 手手寫寫塗鴉區 -->
+        <div id="${canvasBoxId}" class="scribble-box" style="display: none;">
+            <div class="scribble-tools">
+                <span style="font-weight: bold;">🖍️ 上課隨手寫草稿區</span>
+                <div class="brush-colors">
+                    <div class="brush-dot selected" style="background: #2563eb;" onclick="setBrushColor(this, '#2563eb')"></div>
+                    <div class="brush-dot" style="background: #dc2626;" onclick="setBrushColor(this, '#dc2626')"></div>
+                    <div class="brush-dot" style="background: #eab308;" onclick="setBrushColor(this, '#eab308')"></div>
+                    <button class="btn-ctrl" onclick="clearCanvas('${canvasBoxId}')" style="padding: 0.2rem 0.6rem; font-size: 0.8rem; margin-left: 0.8rem;">清除畫布</button>
+                </div>
+            </div>
+            <canvas class="scribble-canvas"></canvas>
+        </div>
+    </div>
+`;
+
+
                         content.appendChild(formulaBox);
-                    });
-                    
+                    }); // end formula loop
+                    // Unit-level Knowledge Map sections
+                    if (unitData.prerequisiteLinks && unitData.prerequisiteLinks.length) {
+                        content.insertAdjacentHTML('beforeend', `<div class="extra-section"><div class="extra-title">① 前置知識</div><p>${unitData.prerequisiteLinks.map(l => `<a href="#">${l}</a>`).join(', ')}</p></div>`);
+                    }
+                    if (unitData.relatedLinks && unitData.relatedLinks.length) {
+                        content.insertAdjacentHTML('beforeend', `<div class="extra-section"><div class="extra-title">② 相關單元</div><p>${unitData.relatedLinks.map(l => `<a href="#">${l}</a>`).join(', ')}</p></div>`);
+                    }
+                    if (unitData.nextLinks && unitData.nextLinks.length) {
+                        content.insertAdjacentHTML('beforeend', `<div class="extra-section"><div class="extra-title">③ 後續學習</div><p>${unitData.nextLinks.map(l => `<a href="#">${l}</a>`).join(', ')}</p></div>`);
+                    }
                     accordion.appendChild(header);
                     accordion.appendChild(content);
                     container.appendChild(accordion);
@@ -1485,8 +1557,8 @@
                 if (typeof renderMathInElement !== 'undefined') {
                     renderMathInElement(document.body, {
                         delimiters: [
-                            {left: '$$', right: '$$', display: true},
-                            {left: '$', right: '$', display: false}
+                            { left: '$$', right: '$$', display: true },
+                            { left: '$', right: '$', display: false }
                         ]
                     });
                 }
@@ -1497,7 +1569,7 @@
         function toggleAccordion(unitId) {
             const accordion = document.getElementById(unitId);
             const isActive = accordion.classList.contains('active');
-            
+
             if (isActive) {
                 accordion.classList.remove('active');
             } else {
@@ -1509,7 +1581,7 @@
         function toggleCanvasBox(canvasBoxId, btnEl) {
             const box = document.getElementById(canvasBoxId);
             const isShowing = box.style.display !== 'none';
-            
+
             if (isShowing) {
                 box.style.display = 'none';
                 btnEl.style.background = 'var(--accent-purple)';
@@ -1518,7 +1590,7 @@
                 box.style.display = 'block';
                 btnEl.style.background = 'var(--text-secondary)';
                 btnEl.textContent = '❌ 關閉塗鴉板';
-                
+
                 // 動態啟動與適配 iPad 寬度
                 setupCanvas(box.querySelector('canvas'));
             }
@@ -1528,7 +1600,7 @@
             if (!canvas) return;
             const container = canvas.parentElement;
             const rect = container.getBoundingClientRect();
-            
+
             // iPad 高清晰度配置
             canvas.width = rect.width - 4;
             canvas.height = 200;
@@ -1537,13 +1609,13 @@
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.lineWidth = 4;
-            
+
             const strokeColor = appState.theme === 'whiteboard' ? '#2563eb' : '#fdba74';
             ctx.strokeStyle = strokeColor;
 
             // 綁定觸控事件
             let drawing = false;
-            
+
             function getPos(e) {
                 const r = canvas.getBoundingClientRect();
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -1614,7 +1686,7 @@
             });
             buttonEl.classList.add('active');
             appState.currentTab = moduleId;
-            
+
             // 如果切換到輪盤頁面，重繪輪盤以適配寬度
             if (moduleId === 'module-random') {
                 setTimeout(() => drawWheel(), 100);
@@ -1624,7 +1696,7 @@
         function toggleFullscreen() {
             const doc = document.documentElement;
             const btnText = document.getElementById('fullscreen-text');
-            
+
             if (!document.fullscreenElement) {
                 doc.requestFullscreen().then(() => {
                     btnText.textContent = "退出全螢幕";
@@ -1639,7 +1711,7 @@
         function adjustFont(scaleOffset) {
             appState.fontSize = Math.max(0.75, Math.min(1.7, appState.fontSize + scaleOffset));
             document.documentElement.style.setProperty('--font-scale', appState.fontSize);
-            
+
             setTimeout(() => {
                 drawWheel();
                 document.querySelectorAll('.scribble-box').forEach(box => {
@@ -1651,7 +1723,7 @@
         function toggleTheme() {
             const body = document.body;
             const themeText = document.getElementById('theme-text');
-            
+
             if (appState.theme === 'whiteboard') {
                 body.setAttribute('data-theme', 'chalkboard');
                 appState.theme = 'chalkboard';
@@ -1661,7 +1733,7 @@
                 appState.theme = 'whiteboard';
                 themeText.textContent = '黑板模式';
             }
-            
+
             drawWheel();
             document.querySelectorAll('.scribble-box').forEach(box => {
                 if (box.style.display !== 'none') setupCanvas(box.querySelector('canvas'));
@@ -1671,7 +1743,7 @@
         function toggleFormulaDetail(detailId, btnEl) {
             const detail = document.getElementById(detailId);
             const isExpanded = btnEl.getAttribute('aria-expanded') === 'true';
-            
+
             if (isExpanded) {
                 detail.classList.remove('show');
                 btnEl.setAttribute('aria-expanded', 'false');
@@ -1708,7 +1780,7 @@
                 appState.isTimerRunning = true;
                 btn.textContent = "⏸️ 暫停計時";
                 btn.style.background = "var(--accent-orange)";
-                
+
                 appState.timerInterval = setInterval(() => {
                     if (appState.timerSeconds > 0) {
                         appState.timerSeconds--;
@@ -1739,19 +1811,19 @@
             const display = document.getElementById('student-display');
             const btn = document.getElementById('btn-pick-student');
             const maxRangeInput = document.getElementById('class-range');
-            
+
             let maxNum = parseInt(maxRangeInput.value);
             if (isNaN(maxNum) || maxNum < 2) maxNum = 40;
 
             btn.disabled = true;
             let counter = 0;
             const totalCycles = 15;
-            
+
             const timer = setInterval(() => {
                 const randNum = Math.floor(Math.random() * maxNum) + 1;
                 display.textContent = `${randNum} 號`;
                 counter++;
-                
+
                 if (counter >= totalCycles) {
                     clearInterval(timer);
                     btn.disabled = false;
@@ -1771,7 +1843,7 @@
 
                 osc1.type = 'triangle';
                 osc2.type = 'sine';
-                
+
                 osc1.frequency.setValueAtTime(523.25, ctx.currentTime);
                 osc1.frequency.exponentialRampToValueAtTime(783.99, ctx.currentTime + 0.2);
                 osc2.frequency.setValueAtTime(659.25, ctx.currentTime);
@@ -1819,7 +1891,7 @@
             for (let i = 0; i < len; i++) {
                 const angle = appState.wheelStartAngle + i * arcAngle;
                 ctx.fillStyle = colors[i % colors.length];
-                
+
                 ctx.beginPath();
                 ctx.moveTo(half, half);
                 ctx.arc(half, half, half - 10, angle, angle + arcAngle);
@@ -1837,7 +1909,7 @@
                 ctx.rotate(angle + arcAngle / 2);
                 ctx.textAlign = "right";
                 ctx.font = "bold 12px Noto Sans TC";
-                
+
                 // 截斷過長字元
                 const name = list[i].length > 10 ? list[i].substring(0, 9) + '..' : list[i];
                 ctx.fillText(name, half - 25, 4);
@@ -1854,7 +1926,7 @@
 
         function spinWheel() {
             if (appState.isSpinning) return;
-            
+
             // 抓取公式物件清單
             const formulasList = [];
             appState.database.forEach(group => {
@@ -1872,7 +1944,7 @@
 
             const spinRounds = 5 + Math.floor(Math.random() * 3);
             const targetAngle = spinRounds * 2 * Math.PI + Math.random() * 2 * Math.PI;
-            
+
             const startAngle = appState.wheelStartAngle;
             const startTime = performance.now();
             const duration = 4000;
@@ -1880,10 +1952,10 @@
             function animate(currentTime) {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                
+
                 const easeOut = 1 - Math.pow(1 - progress, 3);
                 const currentAngle = startAngle + targetAngle * easeOut;
-                
+
                 appState.wheelStartAngle = currentAngle % (2 * Math.PI);
                 drawWheel();
 
@@ -1914,12 +1986,12 @@
                     const solutionArea = document.getElementById('wheel-solution-area');
                     const solutionDetail = document.getElementById('wheel-solution-detail');
                     const btnSol = document.getElementById('btn-wheel-solution');
-                    
+
                     solutionArea.style.display = 'block';
                     solutionDetail.classList.remove('show');
                     btnSol.setAttribute('aria-expanded', 'false');
                     btnSol.textContent = "🔑 顯示此題解析與答案";
-                    
+
                     solutionDetail.innerHTML = `
                         <p style="white-space: pre-line; line-height: 1.6; font-size: 1.05em;">${item.solution}</p>
                     `;
@@ -1928,8 +2000,8 @@
                     if (typeof renderMathInElement !== 'undefined') {
                         renderMathInElement(solutionDetail, {
                             delimiters: [
-                                {left: '$$', right: '$$', display: true},
-                                {left: '$', right: '$', display: false}
+                                { left: '$$', right: '$$', display: true },
+                                { left: '$', right: '$', display: false }
                             ]
                         });
                     }
@@ -1964,4 +2036,5 @@
         });
     </script>
 </body>
+
 </html>
