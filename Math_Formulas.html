@@ -71,7 +71,9 @@
             color: var(--text-primary);
             font-family: 'Noto Sans TC', sans-serif;
             min-height: 100vh;
-            padding: 1rem;
+
+            padding: 100px 1rem 1rem 1rem;
+
             display: flex;
             justify-content: center;
             overflow-x: hidden;
@@ -96,9 +98,12 @@
             border-radius: 20px;
             padding: 0.8rem 1.5rem;
             box-shadow: var(--button-shadow);
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 1000;
+            left: 0;
+            right: 0;
+
+            z-index: 9999;
         }
 
         .title-area h1 {
@@ -1010,6 +1015,43 @@
 
     <script>
         // ================= 1. 全域公式資料庫 (大架構) =================
+        async function loadGradeData() {
+    const grades = ["grade7", "grade8", "grade9"];
+
+    let allData = [];
+
+    for (const g of grades) {
+        try {
+            const res = await fetch(`teaching-content/${g}.json`);
+            const data = await res.json();
+
+            allData.push({
+                grade: g.replace("grade", "grade-"),
+                unit: data.unit || "未分類",
+                icon: "📘",
+                formulas: [{
+                    name: data.concept || "未命名",
+                    expr: data.formula || "",
+                    desc: data.concept || "",
+                    variables: "",
+                    example: data.example || "",
+                    solution: data.solution || "",
+                    concept: data.concept || "",
+                    prerequisite: data.prerequisite || "",
+                    quickReview: data.quickReview || "",
+                    futureTopics: data.futureTopics || "",
+                    commonMistakes: data.commonMistakes || ""
+                }]
+            });
+
+        } catch (e) {
+            console.error("載入失敗:", g, e);
+        }
+    }
+
+    appState.database = allData;
+    renderDatabase();
+}
         const appState = {
             fontSize: 1.05,
             theme: 'whiteboard',
