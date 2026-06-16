@@ -1,0 +1,2241 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="國中數學教學助手 - 國中數學公式資料庫與課堂大字投影板。">
+    <title>國中數學教學助手 - 數學公式資料庫</title>
+
+    <!-- 引入高品質字型 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@600;800;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- KaTeX 數學公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        :root {
+            /* 白板高對比模式 */
+            --bg-color: #f1f5f9;
+            --container-bg: #ffffff;
+            --card-bg: #f8fafc;
+            --border-color: #cbd5e1;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --primary-color: #2563eb;
+            --primary-glow: rgba(37, 99, 235, 0.12);
+            --accent-green: #059669;
+            --accent-orange: #d97706;
+            --accent-purple: #7c3aed;
+            --button-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.08);
+            --font-scale: 1.0;
+            --canvas-bg: #ffffff;
+            --canvas-stroke: #2563eb;
+        }
+
+        /* 深色黑板投影模式 */
+        [data-theme="chalkboard"] {
+            --bg-color: #0b1614;
+            --container-bg: #10201c;
+            --card-bg: #152b25;
+            --border-color: #204037;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --primary-color: #2dd4bf;
+            --primary-glow: rgba(45, 212, 191, 0.18);
+            --accent-green: #34d399;
+            --accent-orange: #fb923c;
+            --accent-purple: #c084fc;
+            --button-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+            --canvas-bg: #19302a;
+            --canvas-stroke: #fdba74;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Noto Sans TC', sans-serif;
+            min-height: 100vh;
+
+            padding: 100px 1rem 1rem 1rem;
+
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .app-wrapper {
+            width: 100%;
+            max-width: 1366px;
+            font-size: calc(1.05rem * var(--font-scale));
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* 頂部主控面板 */
+        .control-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--container-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 0.8rem 1.5rem;
+            box-shadow: var(--button-shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            z-index: 9999;
+        }
+
+        .title-area h1 {
+            font-size: calc(1.5rem * var(--font-scale));
+            font-weight: 900;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .title-area p {
+            font-size: calc(0.85rem * var(--font-scale));
+            color: var(--text-secondary);
+            margin-top: 0.1rem;
+        }
+
+        .action-group {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .btn-ctrl {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.6rem 1rem;
+            font-size: calc(0.9rem * var(--font-scale));
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: var(--button-shadow);
+            user-select: none;
+        }
+
+        .btn-ctrl:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .btn-ctrl:active {
+            transform: scale(0.97);
+        }
+
+        .btn-fullscreen {
+            background: var(--primary-color);
+            color: #ffffff;
+            border-color: transparent;
+        }
+
+        .btn-fullscreen:hover {
+            opacity: 0.9;
+            color: #ffffff;
+        }
+
+        /* 側邊導覽 + 主顯示區雙欄佈局 */
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 1.2rem;
+            align-items: start;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            background: var(--container-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 24px;
+            padding: 1rem;
+            box-shadow: var(--button-shadow);
+        }
+
+        .nav-item {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 1rem 0.8rem;
+            font-size: calc(1.1rem * var(--font-scale));
+            font-weight: 700;
+            border-radius: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: var(--button-shadow);
+            width: 100%;
+            text-align: left;
+            user-select: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item .icon {
+            font-size: 1.4rem;
+        }
+
+        .nav-item:hover {
+            transform: translateX(4px);
+            border-color: var(--primary-color);
+        }
+
+        .nav-item.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        .main-content {
+            background: var(--container-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 28px;
+            padding: 2rem;
+            min-height: 600px;
+            box-shadow: var(--button-shadow);
+            position: relative;
+        }
+
+        .module-section {
+            display: none;
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .module-section.active-section {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================= 儀表板 ================= */
+        .welcome-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-purple) 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--button-shadow);
+        }
+
+        .welcome-card h2 {
+            font-size: calc(1.6rem * var(--font-scale));
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .dashboard-panel {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--button-shadow);
+        }
+
+        .dashboard-panel h3 {
+            font-size: calc(1.2rem * var(--font-scale));
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timer-display {
+            font-family: 'Fira Code', monospace;
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            text-align: center;
+            margin: 0.8rem 0;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+        }
+
+        [data-theme="chalkboard"] .timer-display {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .timer-presets {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-preset {
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.4rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .student-num-display {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--accent-orange);
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 12px;
+            border: 2px dashed var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        [data-theme="chalkboard"] .student-num-display {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .student-config {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .student-config input {
+            width: 70px;
+            padding: 0.4rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            text-align: center;
+            background: var(--container-bg);
+            color: var(--text-primary);
+        }
+
+        /* ================= 可展開收合單元卡片 (Accordion) ================= */
+        .unit-accordion {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+            box-shadow: var(--button-shadow);
+        }
+
+        .unit-header {
+            width: 100%;
+            background: var(--card-bg);
+            border: none;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            text-align: left;
+        }
+
+        .unit-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .unit-icon {
+            font-size: 1.8rem;
+        }
+
+        .unit-title {
+            font-size: calc(1.3rem * var(--font-scale));
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .unit-badge {
+            background: var(--primary-glow);
+            color: var(--primary-color);
+            font-size: 0.85rem;
+            font-weight: bold;
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+        }
+
+        .unit-arrow {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .unit-accordion.active .unit-arrow {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: var(--container-bg);
+            border-top: 1px solid transparent;
+        }
+
+        .unit-accordion.active .unit-content {
+            max-height: 6000px;
+            /* 大容量容許展開所有公式 */
+            border-top: 1px solid var(--border-color);
+            padding: 1.5rem;
+        }
+
+        /* ================= 公式詳細展示卡片 ================= */
+        .formula-box {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--button-shadow);
+        }
+
+        .formula-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .formula-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .formula-box-title {
+            font-size: calc(1.2rem * var(--font-scale));
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .math-blackboard {
+            background: rgba(0, 0, 0, 0.03);
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 1.8rem;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        [data-theme="chalkboard"] .math-blackboard {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .math-display {
+            font-size: calc(1.7rem * var(--font-scale));
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            font-size: 0.95em;
+        }
+
+        .info-block {
+            background: rgba(0, 0, 0, 0.01);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.8rem;
+        }
+
+        [data-theme="chalkboard"] .info-block {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .info-block-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.4rem;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        /* 典型例題板塊 */
+        .example-block {
+            border: 1px solid var(--border-color);
+            background: var(--container-bg);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .example-header {
+            font-weight: bold;
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-action-large {
+            width: 100%;
+            background: var(--primary-color);
+            color: white !important;
+            border: none;
+            padding: 0.9rem;
+            font-size: calc(1rem * var(--font-scale));
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: var(--button-shadow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4rem;
+            user-select: none;
+            margin-top: 0.8rem;
+        }
+
+        .btn-action-large:active {
+            transform: scale(0.99);
+        }
+
+        /* 答案解析 */
+        .solution-detail {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 12px;
+        }
+
+        [data-theme="chalkboard"] .solution-detail {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .solution-detail.show {
+            max-height: 1000px;
+            opacity: 1;
+            margin-top: 1rem;
+            padding: 1.2rem;
+            border: 2px solid var(--border-color);
+        }
+
+        /* 塗鴉板 */
+        .scribble-box {
+            margin-top: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--canvas-bg);
+        }
+
+        .scribble-tools {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 0.5rem 0.8rem;
+            border-bottom: 2px solid var(--border-color);
+            font-size: 0.85em;
+        }
+
+        .brush-colors {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .brush-dot {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .brush-dot.selected {
+            border-color: var(--text-primary);
+            transform: scale(1.15);
+        }
+
+        .scribble-canvas {
+            display: block;
+            width: 100%;
+            height: 200px;
+            cursor: crosshair;
+            touch-action: none;
+        }
+
+        /* ================= 課堂大輪盤 ================= */
+        .wheel-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .wheel-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .wheel-svg-wrapper {
+            position: relative;
+            width: 380px;
+            height: 380px;
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 35px solid var(--accent-orange);
+            z-index: 10;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+        }
+
+        .wheel-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(0deg);
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+        }
+
+        .btn-spin-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 4px solid var(--accent-orange);
+            color: var(--accent-orange);
+            font-size: 1.3rem;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 5;
+            user-select: none;
+        }
+
+        .btn-spin-center:active {
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+
+        .wheel-right {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--button-shadow);
+        }
+
+        .wheel-result-panel {
+            background: var(--container-bg);
+            border: 2px dashed var(--accent-orange);
+            border-radius: 15px;
+            padding: 1.2rem;
+            font-size: calc(1.05rem * var(--font-scale));
+            color: var(--text-primary);
+            min-height: 120px;
+            margin-bottom: 1rem;
+        }
+
+        /* 響應式佈局 */
+        @media (max-width: 1023px) {
+            .control-bar {
+                padding: 0.6rem 1rem;
+                border-radius: 16px;
+            }
+
+            .title-area h1 {
+                font-size: 1.1rem;
+            }
+
+            .title-area p {
+                display: none;
+            }
+
+            .btn-ctrl span {
+                display: none;
+            }
+
+            .btn-ctrl {
+                padding: 0.5rem 0.7rem;
+                border-radius: 10px;
+                white-space: nowrap;
+            }
+
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 0.6rem;
+                white-space: nowrap;
+            }
+
+            .nav-item {
+                width: auto;
+                padding: 0.8rem 1.2rem;
+                font-size: 1.05rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wheel-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ================= Teacher Mode 切換按鈕 ================= */
+        .mode-group {
+            display: flex;
+            gap: 0.3rem;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            padding: 0.3rem;
+        }
+
+        .btn-mode {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.45rem 0.85rem;
+            font-size: calc(0.85rem * var(--font-scale));
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .btn-mode.active {
+            background: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 2px 6px var(--primary-glow);
+        }
+
+        .btn-mode:hover:not(.active) {
+            background: var(--container-bg);
+            color: var(--text-primary);
+        }
+
+        /* mode 顯示控制 */
+        .formula-mode-only {
+            display: block;
+        }
+
+        .concept-mode-only {
+            display: none;
+        }
+
+        .solution-mode-only {
+            display: none;
+        }
+
+        body[data-mode="concept"] .formula-mode-only {
+            display: none;
+        }
+
+        body[data-mode="concept"] .concept-mode-only {
+            display: block;
+        }
+
+        body[data-mode="concept"] .solution-mode-only {
+            display: none;
+        }
+
+        body[data-mode="solution"] .formula-mode-only {
+            display: none;
+        }
+
+        body[data-mode="solution"] .concept-mode-only {
+            display: none;
+        }
+
+        body[data-mode="solution"] .solution-mode-only {
+            display: block;
+        }
+
+        /* extra-section 在 formula mode 下隱藏 */
+        body:not([data-mode]) .extra-section,
+        body[data-mode="formula"] .extra-section {
+            display: none;
+        }
+
+        body[data-mode="concept"] .extra-section {
+            display: block;
+        }
+
+        body[data-mode="solution"] .extra-section {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-wrapper" id="app-root">
+
+        <!-- 頂部主控面板 -->
+        <header class="control-bar">
+            <div class="title-area">
+                <h1>📐 國中數學教學助手</h1>
+                <p>國中數學公式資料庫 · iPad 投影教學板</p>
+            </div>
+            <div class="action-group">
+                <button class="btn-ctrl btn-fullscreen" onclick="toggleFullscreen()" id="btn-fullscreen" title="全螢幕教學">
+                    🖥️ <span id="fullscreen-text">全螢幕教學</span>
+                </button>
+                <button class="btn-ctrl" onclick="toggleTheme()" id="btn-theme" title="切換教學黑/白板">
+                    🎨 <span id="theme-text">黑板模式</span>
+                </button>
+                <button class="btn-ctrl" onclick="adjustFont(-0.1)" title="字型縮小">A-</button>
+                <button class="btn-ctrl" onclick="adjustFont(0.1)" title="字型放大">A+</button>
+                <div class="mode-group" id="mode-group">
+                    <button class="btn-mode active" id="btn-mode-formula" onclick="setMode('formula')" title="公式模式">📘
+                        公式</button>
+                    <button class="btn-mode" id="btn-mode-concept" onclick="setMode('concept')" title="概念模式">🧠
+                        概念</button>
+                    <button class="btn-mode" id="btn-mode-solution" onclick="setMode('solution')" title="解題模式">✏️
+                        解題</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 雙欄佈局 -->
+        <div class="layout-grid">
+
+            <!-- 觸控大導覽側邊欄 -->
+            <nav class="sidebar-nav" aria-label="年級公式單元導覽">
+                <button class="nav-item active" onclick="switchTab('module-dashboard', this)" id="nav-dashboard">
+                    <span class="icon">🏫</span>
+                    <span>首頁儀表板</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('grade-7', this)" id="nav-g7">
+                    <span class="icon">7️⃣</span>
+                    <span>七年級公式庫</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('grade-8', this)" id="nav-g8">
+                    <span class="icon">8️⃣</span>
+                    <span>八年級公式庫</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('grade-9', this)" id="nav-g9">
+                    <span class="icon">9️⃣</span>
+                    <span>九年級公式庫</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('module-random', this)" id="nav-random">
+                    <span class="icon">🎲</span>
+                    <span>隨機大輪盤</span>
+                </button>
+            </nav>
+
+            <!-- 主顯示面板 -->
+            <main class="main-content">
+
+                <!-- ================= 1. 首頁儀表板 ================= -->
+                <section id="module-dashboard" class="module-section active-section">
+                    <div class="welcome-card">
+                        <h2>國中數學公式資料庫教學板</h2>
+                        <p>本教學助手已收錄七至九年級核心數學單元。支援展開/收合單元卡片、現場粉筆草稿書寫、課堂活動大計時與號碼抽取，提供極致流暢的觸控教學體驗。</p>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <!-- 左側：計時器 -->
+                        <div class="dashboard-panel">
+                            <h3>⏱️ 課堂活動計時器</h3>
+                            <p>限時速算、小組挑戰的最佳工具。</p>
+                            <div class="timer-display" id="timer-val">02:00</div>
+                            <div class="timer-presets">
+                                <button class="btn-preset" onclick="setTimerPreset(30)">30秒</button>
+                                <button class="btn-preset" onclick="setTimerPreset(60)">1分鐘</button>
+                                <button class="btn-preset" onclick="setTimerPreset(180)">3分鐘</button>
+                                <button class="btn-preset" onclick="setTimerPreset(300)">5分鐘</button>
+                            </div>
+                            <div class="timer-controls">
+                                <button class="btn-action-large" onclick="toggleTimer()" id="btn-timer-toggle"
+                                    style="background: var(--accent-green); margin-top:0;">⏱️ 開始計時</button>
+                                <button class="btn-action-large" onclick="resetTimer()"
+                                    style="background: var(--text-secondary); flex: 0.6; margin-top:0;">重置</button>
+                            </div>
+                        </div>
+
+                        <!-- 右側：抽籤機 -->
+                        <div class="dashboard-panel">
+                            <h3>🎯 課堂隨機抽號機</h3>
+                            <p>提升師生互動！隨機抽選座號回答問題。</p>
+                            <div class="student-picker-box">
+                                <div class="student-num-display" id="student-display">-- 號</div>
+                                <div class="student-config">
+                                    <label for="class-range">學生座號範圍：1 至 </label>
+                                    <input type="number" id="class-range" value="40" min="5" max="60"
+                                        aria-label="班級最高座號"> 號
+                                </div>
+                                <button class="btn-action-large" onclick="pickStudent()" id="btn-pick-student"
+                                    style="background: var(--accent-orange); margin-top:0;">
+                                    🎰 抽出幸運座號！
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= 2. 七年級公式庫 ================= -->
+                <section id="grade-7" class="module-section">
+                    <!-- 動態渲染七年級單元 -->
+                    <div id="g7-content"></div>
+                </section>
+
+                <!-- ================= 3. 八年級公式庫 ================= -->
+                <section id="grade-8" class="module-section">
+                    <!-- 動態渲染八年級單元 -->
+                    <div id="g8-content"></div>
+                </section>
+
+                <!-- ================= 4. 九年級公式庫 ================= -->
+                <section id="grade-9" class="module-section">
+                    <!-- 動態渲染九年級單元 -->
+                    <div id="g9-content"></div>
+                </section>
+
+                <!-- ================= 5. 隨機大輪盤 ================= -->
+                <section id="module-random" class="module-section">
+                    <div class="teaching-card" style="margin-bottom: 0;">
+                        <h3>🎲 課堂大輪盤挑戰 (動態同步公式題庫)</h3>
+                        <p>旋轉幸運大輪盤！系統會自動從七、八、九年級的公式庫中，動態彙整典型例題加入轉盤，點擊即可大字投影給學生挑戰！</p>
+
+                        <div class="wheel-container">
+                            <!-- 轉盤 (左側) -->
+                            <div class="wheel-left">
+                                <div class="wheel-svg-wrapper">
+                                    <div class="wheel-pointer"></div>
+                                    <canvas id="canvas-wheel" width="380" height="380" class="wheel-svg"></canvas>
+                                    <button class="btn-spin-center" onclick="spinWheel()"
+                                        id="btn-spin-wheel">SPIN</button>
+                                </div>
+                            </div>
+
+                            <!-- 結果顯示 (右側) -->
+                            <div class="wheel-right">
+                                <h4 style="margin-bottom: 0.6rem; color: var(--accent-orange);">🎯 抽選單元與例題：</h4>
+                                <div class="wheel-result-panel" id="wheel-result-box">
+                                    點擊轉盤中心 SPIN 開始抽題！
+                                </div>
+
+                                <div id="wheel-solution-area" style="display:none; margin-top: 1rem;">
+                                    <button class="btn-action-large" id="btn-wheel-solution"
+                                        onclick="toggleWheelSolution()"
+                                        style="background: var(--accent-green); margin-top:0;">
+                                        🔑 顯示此題解析與答案
+                                    </button>
+                                    <div id="wheel-solution-detail" class="solution-detail" style="margin-top: 1rem;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // ================= 1. 全域公式資料庫 (大架構) =================
+        async function loadGradeData() {
+    const grades = ["grade7", "grade8", "grade9"];
+
+    let allData = [];
+
+    for (const g of grades) {
+        try {
+            const res = await fetch(`teaching-content/${g}.json`);
+            const data = await res.json();
+
+            allData.push({
+                grade: g.replace("grade", "grade-"),
+                unit: data.unit || "未分類",
+                icon: "📘",
+                formulas: [{
+                    name: data.concept || "未命名",
+                    expr: data.formula || "",
+                    desc: data.concept || "",
+                    variables: "",
+                    example: data.example || "",
+                    solution: data.solution || "",
+                    concept: data.concept || "",
+                    prerequisite: data.prerequisite || "",
+                    quickReview: data.quickReview || "",
+                    futureTopics: data.futureTopics || "",
+                    commonMistakes: data.commonMistakes || ""
+                }]
+            });
+
+        } catch (e) {
+            console.error("載入失敗:", g, e);
+        }
+    }
+
+    appState.database = allData;
+    renderDatabase();
+}
+        const appState = {
+            fontSize: 1.05,
+            theme: 'whiteboard',
+            currentTab: 'module-dashboard',
+            mode: 'formula', // 'formula' | 'concept' | 'solution'
+
+            // 轉盤旋轉狀態
+            isSpinning: false,
+            wheelStartAngle: 0,
+            wheelWinningItem: null,
+
+            // 計時器狀態
+            timerSeconds: 120,
+            timerInterval: null,
+            isTimerRunning: false,
+
+            // 國中數學公式資料庫 (擴充式 JSON 架構)
+            database: [
+                // ---------------- 七年級 ----------------
+                {
+                    grade: "grade-7",
+                    unit: "正負數",
+                    icon: "🔢",
+                    formulas: [
+                        {
+                            name: "絕對值與兩點距離",
+                            expr: "d = |a - b|",
+                            desc: "在數線上，任意兩點 $a$ 與 $b$ 之間的距離，等於其座標差的絕對值。絕對值代表點到原點的距離，必非負。",
+                            variables: "$a, b$：數線上的兩點座標；$d$：兩點之間的距離（$d \\ge 0$）。",
+                            example: "在數線上，若 $A$ 點的座標為 $-7$，$B$ 點的座標為 $5$，求 $A$、$B$ 兩點的距離為多少公分？",
+                            solution: "根據兩點距離公式：\n$$d = |(-7) - 5| = |-12| = 12$$\n答：$A$、$B$ 兩點距離為 12 公分。",
+                            template: "在數線上，若 A 點的座標為 {coord1}，B 點的座標為 {coord2}，求 A、B 兩點的距離為多少？\n[參數範圍限制：coord1 為負整數，coord2 為正整數]"
+                        },
+                        {
+                            name: "四則運算之分配律",
+                            expr: "a \\times (b + c) = a \\times b + a \\times c",
+                            desc: "乘法對加減法具有分配律，此法則常應用於複雜乘法的速算與項式的提取簡化。",
+                            variables: "$a, b, c$：任意數。",
+                            example: "請利用分配律計算 $99 \\times (-28)$ 的值。",
+                            solution: "將 $99$ 拆解為 $(100 - 1)$：\n$$99 \\times (-28) = (100 - 1) \\times (-28)$$\n$$= 100 \\times (-28) - 1 \\times (-28)$$\n$$= -2800 + 28 = -2772$$\n答：$-2772$。",
+                            template: "請利用分配律計算 {num1} \\times ({num2}) 的值。\n[參數範圍限制：num1 接近 100 (如 99, 101, 198)，num2 為兩位數之負整數]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-7",
+                    unit: "因數與倍數",
+                    icon: "🧩",
+                    formulas: [
+                        {
+                            name: "最大公因數與最小公倍數乘積關係",
+                            expr: "a \\times b = (a, b) \\times [a, b]",
+                            desc: "任意兩個正整數的乘積，恆等於這兩個數的最大公因數與最小公倍數的乘積。此公式常在求其中一個未知數時發揮極大功用。",
+                            variables: "$a, b$：任意兩個正整數；$(a, b)$：$a$ 與 $b$ 的最大公因數；$[a, b]$：$a$ 與 $b$ 的最小公倍數。",
+                            example: "已知兩個正整數的最大公因數為 6，最小公倍數為 120。如果其中一個數為 30，求另一個數是多少？",
+                            solution: "設另一個數為 $x$。根據乘積公式：\n$$x \\times 30 = (30, x) \\times [30, x]$$\n$$x \\times 30 = 6 \\times 120$$\n$$30x = 720 \\implies x = 24$$\n答：另一個數是 24。",
+                            template: "已知兩正整數的最大公因數為 {gcd}，最小公倍數為 {lcm}。若其中一數為 {num1}，求另一數？\n[參數限制：num1 可被 gcd 整除，且 (gcd * lcm) 可被 num1 整除]"
+                        },
+                        {
+                            name: "質因數分解與標準分解式",
+                            expr: "N = p_1^{a_1} \\times p_2^{a_2} \\times \\dots \\times p_k^{a_k}",
+                            desc: "任何大於 1 的正整數，都可以被唯一定義為多個相異質數底數的乘方相乘，且底數由小到大排列。這稱為標準分解式，是尋找因數個數的根本方法。",
+                            variables: "$N$：大於 1 的正整數；$p_1, p_2, \\dots, p_k$：由小到大且互異的質數；$a_1, a_2, \\dots, a_k$：各質因數對應的指數（相乘次數）。",
+                            example: "請將 360 寫成標準分解式，並指出其所有相異的質因數有哪些？",
+                            solution: "步驟 1：利用短除法或因數樹進行質因數分解：\n$$360 = 2^3 \\times 3^2 \\times 5^1$$\n步驟 2：標準分解式為：\n$$360 = 2^3 \\times 3^2 \\times 5$$\n步驟 3：相異的質因數即底數部分：$2, 3, 5$。\n答：標準分解式為 $2^3 \\times 3^2 \\times 5$；相異質因數為 2、3、5。",
+                            template: "請將 {num} 寫成標準分解式，並指出其相異的質因數有哪些？\n[範例參數範圍：num 為 100 到 1000 之間有較多質因數的數，如 180, 240, 504]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-7",
+                    unit: "指數律",
+                    icon: "⚡",
+                    formulas: [
+                        {
+                            name: "同底數相乘指數相加",
+                            expr: "a^m \\times a^n = a^{m+n}",
+                            desc: "底數相同且不為 0 的兩個乘方相乘時，底數不變，指數直接相加。",
+                            variables: "$a$：不為 0 的底數；$m, n$：正整數或有理數。",
+                            example: "計算 $2^3 \\times 2^4$ 的值為多少？",
+                            solution: "根據指數律相乘公式：\n$$2^3 \\times 2^4 = 2^{3+4} = 2^7$$\n$$2^7 = 128$$\n答：128。",
+                            template: "計算 {base}^{exp1} \\times {base}^{exp2} 的值為多少？\n[參數限制：base 為 2 或 3，exp1 與 exp2 為 2 到 6 之間的正整數]"
+                        },
+                        {
+                            name: "乘方的乘方",
+                            expr: "(a^m)^n = a^{m \\times n}",
+                            desc: "一個乘方再進行乘方運算時，底數保持不變，指數進行相乘。",
+                            variables: "$a$：底數；$m, n$：指數。",
+                            example: "化簡 $(3^2)^4$ 的值，並求出以 3 為底的指數為多少？",
+                            solution: "代入乘方的乘方公式：\n$$(3^2)^4 = 3^{2 \\times 4} = 3^8$$\n答：化簡結果為 $3^8$。",
+                            template: "化簡 ({base}^{exp1})^{exp2} 的值，並求出以 {base} 為底的指數為多少？\n[參數限制：base 為質數，exp1 與 exp2 為 2 到 5 之間]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-7",
+                    unit: "一元一次方程式",
+                    icon: "⚖️",
+                    formulas: [
+                        {
+                            name: "移項法則 (等量公理)",
+                            expr: "x + a = b \\implies x = b - a",
+                            desc: "在方程式的兩邊同時加上或減去同一個數，其等式依然成立。利用此法則可將變數移到等號一側求解。",
+                            variables: "$x$：未知數；$a, b$：已知數常數項。",
+                            example: "求解一元一次方程式 $3x + 8 = 29$ 的未知數 $x$。",
+                            solution: "步驟 1：利用等量減法，將 $+8$ 移項至右側：\n$$3x = 29 - 8 \\implies 3x = 21$$\n步驟 2：等號兩邊同除以 3：\n$$x = \\frac{21}{3} = 7$$\n答：$x = 7$。",
+                            template: "求解一元一次方程式 {coeff}x + {const1} = {const2} 的未知數 x。\n[參數限制：(const2 - const1) 可被 coeff 整除]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-7",
+                    unit: "一元一次不等式",
+                    icon: "⚠️",
+                    formulas: [
+                        {
+                            name: "不等式同乘除負數方向反轉性質",
+                            expr: "a > b \\text{ 且 } c < 0 \\implies ac < bc",
+                            desc: "當不等式的兩邊同乘或同除以一個『負數』時，不等號的方向必須『反轉』（即大於變小於，小於變大於）。",
+                            variables: "$a, b$：不等式兩端的數式；$c$：乘除常數，當 $c < 0$ 時方向反轉。",
+                            example: "求解一元一次不等式 $-3x + 7 < 25$ 的未知數 $x$ 範圍。",
+                            solution: "步驟 1：移項，將常數項 $+7$ 移至右邊：\n$$-3x < 25 - 7 \\implies -3x < 18$$\n步驟 2：等號兩邊同除以 $-3$。**注意：因為是除以負數，不等號方向小於 (<) 必須反轉為大於 (>)！**\n$$x > \\frac{18}{-3} \\implies x > -6$$\n答：$x > -6$。",
+                            template: "解一元一次不等式 {coeff}x + {const1} < {const2}。\n[參數限制：coeff 為負整數，(const2 - const1) 可被 coeff 整除]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-7",
+                    unit: "比與比例式",
+                    icon: "⚖️",
+                    formulas: [
+                        {
+                            name: "比例式內項相乘等於外項相乘",
+                            expr: "a : b = c : d \\implies a \\times d = b \\times c",
+                            desc: "若兩個比相等組成比例式，則其兩個外項的乘積恆等於兩個內項的乘積。",
+                            variables: "$a, b, c, d$：比例式之各項，其中內項為 $b, c$，外項為 $a, d$ ($b, d \\ne 0$）。",
+                            example: "已知比例式 $x : 6 = 10 : 3$，求未知數 $x$ 的值？",
+                            solution: "根據內項乘積等於外項乘積：\n$$x \\times 3 = 6 \\times 10$$\n$$3x = 60 \\implies x = 20$$\n答：$x = 20$。",
+                            template: "已知比例式 x : {num2} = {num3} : {num4}，求未知數 x 的值？\n[參數限制：(num2 * num3) 可被 num4 整除]"
+                        }
+                    ]
+                },
+
+                // ---------------- 八年級 ----------------
+                {
+                    grade: "grade-8",
+                    unit: "乘法公式",
+                    icon: "📐",
+                    formulas: [
+                        {
+                            name: "和平方公式 (完全平方公式)",
+                            expr: "(a + b)^2 = a^2 + 2ab + b^2",
+                            desc: "兩數相加的平方，等於各自平方的和加上兩數乘積的兩倍。是整式乘法與完全平方式的基礎。",
+                            variables: "$a, b$：任意代數項。",
+                            example: "求 $(10.2)^2$ 的值。",
+                            solution: "化為 $(10 + 0.2)^2$：\n$$(10 + 0.2)^2 = 10^2 + 2(10)(0.2) + 0.2^2$$\n$$= 100 + 4 + 0.04 = 104.04$$\n答：104.04。",
+                            template: "求 ({num1} + {num2})^2 的值。\n[參數限制：num1 為整數，num2 為一位小數]"
+                        },
+                        {
+                            name: "差平方公式 (完全平方公式)",
+                            expr: "(a - b)^2 = a^2 - 2ab + b^2",
+                            desc: "兩數相減的平方，等於各自平方的和減去兩數乘積的兩倍。",
+                            variables: "$a, b$：任意代數項。",
+                            example: "利用差平方公式計算 $99^2$ 的值。",
+                            solution: "將 $99$ 表示為 $(100 - 1)$：\n$$99^2 = (100 - 1)^2 = 100^2 - 2(100)(1) + 1^2$$\n$$= 10000 - 200 + 1 = 9801$$\n答：9801。",
+                            template: "利用差平方公式計算 {num}^2 的值。\n[參數限制：num 為接近 100 的整數]"
+                        },
+                        {
+                            name: "平方差公式",
+                            expr: "(a + b)(a - b) = a^2 - b^2",
+                            desc: "兩數和與此兩數差的乘積，剛好等於這兩數各自平方的差值。",
+                            variables: "$a, b$：任意數。",
+                            example: "計算 $103 \\times 97$ 的值。",
+                            solution: "轉化為平方差公式形式 $(100 + 3)(100 - 3)$：\n$$103 \\times 97 = (100 + 3)(100 - 3)$$\n$$= 100^2 - 3^2 = 10000 - 9 = 9991$$\n答：9991。",
+                            template: "計算 {num1} \\times {num2} 的值，請使用平方差公式。\n[參數限制：num1 = 100 + d, num2 = 100 - d]"
+                        },
+                        {
+                            name: "平方差公式延伸 (三項和平方公式)",
+                            expr: "(a + b + c)^2 = a^2 + b^2 + c^2 + 2ab + 2bc + 2ca",
+                            desc: "完全平方公式對三項代數式展開的延伸。三項和的平方，等於三項各自平方的和，加上任意兩項乘積之兩倍的總和。",
+                            variables: "$a, b, c$：任意數或代數項。",
+                            example: "展開多項式 $(x + y - 2)^2$。",
+                            solution: "視 $a = x$, $b = y$, $c = -2$，代入三項和平方公式：\n$$(x + y - 2)^2 = x^2 + y^2 + (-2)^2 + 2(x)(y) + 2(y)(-2) + 2(-2)(x)$$\n$$= x^2 + y^2 + 4 + 2xy - 4y - 4x$$\n答：展開式為 $x^2 + y^2 + 2xy - 4x - 4y + 4$。",
+                            template: "展開代數式 (x + y + {c})^2。\n[參數限制：c 為非零整數]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-8",
+                    unit: "因式分解",
+                    icon: "🧩",
+                    formulas: [
+                        {
+                            name: "提公因式法",
+                            expr: "ma + mb = m(a + b)",
+                            desc: "因式分解最基本且優先使用的方法。當多項式各項含有相同的因式（公因式）時，可利用分配律將公因式提至括號外。",
+                            variables: "$m$：各單項式中共同享有的公因式（可以是常數、變數或多項式）；$a, b$：剩下的餘項式。",
+                            example: "因式分解多項式 $3x^2y - 6xy^2$。",
+                            solution: "步驟 1：找出各單項式的最大公因式。係數 3 與 6 的最大公因數為 3；變數部分共同擁有 $x$ 與 $y$，故最大公因式為 $3xy$。\n步驟 2：提取公因式 $3xy$：\n$$3x^2y - 6xy^2 = 3xy(x - 2y)$$\n答：原式因式分解為 $3xy(x - 2y)$。",
+                            template: "因式分解 {coeff1}x^2y - {coeff2}xy^2。\n[參數限制：coeff2 可被 coeff1 整除]"
+                        },
+                        {
+                            name: "平方差因式分解",
+                            expr: "a^2 - b^2 = (a + b)(a - b)",
+                            desc: "乘法平方差公式的逆向應用。若多項式可表示為兩項各自平方的相減，則可將其分解為兩項之和與兩項之差的乘積。",
+                            variables: "$a, b$：多項式的代數基底。",
+                            example: "因式分解多項式 $9x^2 - 16$。",
+                            solution: "將各項化為完全平方的形式：\n$$9x^2 - 16 = (3x)^2 - (4)^2$$\n套用平方差公式：\n$$= (3x + 4)(3x - 4)$$\n答：因式分解為 $(3x + 4)(3x - 4)$。",
+                            template: "因式分解 {num1}x^2 - {num2}。\n[參數限制：num1 與 num2 皆為完全平方數]"
+                        },
+                        {
+                            name: "十字交乘法 (一般二次式)",
+                            expr: "acx^2 + (ad+bc)x + bd = (ax+b)(cx+d)",
+                            desc: "二次三項式因式分解的最核心方法。將二次項係數 $ac$ 與常數項 $bd$ 各自分解，使其交叉相乘的和剛好等於一次項係數 $ad+bc$。",
+                            variables: "$x$：未知數；$a, b, c, d$：整數係數。",
+                            example: "因式分解多項式 $2x^2 + 7x + 3$。",
+                            solution: "步驟 1：將二次項係數 $2$ 拆成 $1 \\times 2$；常數項 $3$ 拆成 $3 \\times 1$。\n步驟 2：十字交乘檢驗一次項：\n$$\\begin{matrix} 1x & \\nearrow & 3 \\\\ 2x & \\searrow & 1 \\end{matrix} \\implies (1x \\times 1) + (2x \\times 3) = 1x + 6x = 7x$$\n剛好等於一次項係數 7！\n步驟 3：按橫行寫出因式：\n$$2x^2 + 7x + 3 = (x + 3)(2x + 1)$$\n答：因式分解為 $(x + 3)(2x + 1)$。",
+                            template: "因式分解多項式 {a}x^2 + {b}x + {c}。\n[參數限制：二次式可透過整數十字交乘法分解]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-8",
+                    unit: "二元一次方程式",
+                    icon: "📉",
+                    formulas: [
+                        {
+                            name: "加減消去法 (聯立方程)",
+                            expr: "\\begin{cases} ax + by = c \\\\ dx + ey = f \\end{cases}",
+                            desc: "利用等量公理將方程式兩側乘以適當常數，再將兩式相加或相減以消去其中一個未知數，進而求解二元一次方程組。",
+                            variables: "$x, y$：未知數；$a, b, c, d, e, f$：常數係數。",
+                            example: "解二元一次方程組 $\\begin{cases} x + y = 7 \\\\ x - y = 3 \\end{cases}$。",
+                            solution: "步驟 1：將兩式相加：\n$$(x + y) + (x - y) = 7 + 3 \\implies 2x = 10 \\implies x = 5$$\n步驟 2：將 $x=5$ 代回第一式：\n$$5 + y = 7 \\implies y = 2$$\n答：聯立方程式的解為 $x = 5$，$y = 2$。",
+                            template: "解二元一次方程組 {sys}。\n[參數限制：設計為兩式相加或相減可消去一未知數]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-8",
+                    unit: "一次函數與直線圖形",
+                    icon: "📊",
+                    formulas: [
+                        {
+                            name: "直角坐標兩點距離公式",
+                            expr: "d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}",
+                            desc: "直角坐標平面上，任意兩點 $A(x_1, y_1)$ 與 $B(x_2, y_2)$ 之間的直線距離。此公式為畢氏定理在平面幾何上的最重要應用。",
+                            variables: "$(x_1, y_1), (x_2, y_2)$：兩點在坐標平面上的座標；$d$：兩點間直線距離。",
+                            example: "求直角坐標平面上 $A(2, -1)$ 與 $B(-2, 2)$ 兩點間的距離。",
+                            solution: "代入兩點距離公式：\n$$d = \\sqrt{((-2) - 2)^2 + (2 - (-1))^2}$$\n$$d = \\sqrt{(-4)^2 + 3^2} = \\sqrt{16 + 9} = \\sqrt{25} = 5$$\n答：兩點距離為 5。",
+                            template: "求直角座標上 A({x1}, {y1}) 與 B({x2}, {y2}) 兩點間的距離。\n[參數限制：計算出的距離值需為整數]"
+                        },
+                        {
+                            name: "一次函數與直線圖形",
+                            expr: "y = ax + b \\quad (a \\ne 0)",
+                            desc: "一次常數函數在平面坐標上的軌跡恆為一條直線。其中係數 $a$ 為直線的斜率（決定傾斜方向與陡峭度），常數 $b$ 為 $y$ 軸截距。",
+                            variables: "$x, y$：坐標點變數；$a$：斜率；$b$：直線與 $y$ 軸交點 $(0, b)$ 的常數項。",
+                            example: "若一次函數 $y = ax + b$ 通過兩點 $(1, 3)$ 與 $(3, 7)$，求此一次函數與直線方程式。",
+                            solution: "將兩點座標分別代入 $y = ax + b$ 建立聯立方程：\n$$\\begin{cases} 3 = a + b \\\\ 7 = 3a + b \\end{cases}$$\n下式減上式：\n$$4 = 2a \\implies a = 2$$\n將 $a=2$ 代入第一式得 $b=1$。\n答：此一次函數為 $y = 2x + 1$。",
+                            template: "求通過 ({x1}, {y1}) 與 ({x2}, {y2}) 兩點的直線一次函數方程式 $y = ax + b$。\n[參數限制：斜率 a 與截距 b 皆為整數]"
+                        },
+                        {
+                            name: "正比例與反比例函數",
+                            expr: "y = kx \\quad \\text{與} \\quad x \\times y = k \\quad (k \\ne 0)",
+                            desc: "描述兩個變數變動關係的基礎函數。當比值不變時稱為正比例（圖形為通過原點的直線）；當乘積不變時稱為反比例（圖形為雙曲線）。",
+                            variables: "$x, y$：變數；$k$：非零的比例常數。",
+                            example: "已知 $y$ 與 $x$ 成反比例，當 $x = 3$ 時 $y = 8$，求當 $x = 6$ 時 $y$ 的值為多少？",
+                            solution: "因為成反比，設關係式為 $x \\times y = k$：\n$$3 \\times 8 = k \\implies k = 24$$\n故反比關係式為 $x \\times y = 24$。\n當 $x = 6$ 時，代入關係式：\n$$6 \\times y = 24 \\implies y = 4$$\n答：當 $x=6$ 時，$y = 4$。",
+                            template: "已知 y 與 x 成 {type}，且當 x = {x1} 時，y = {y1}。求當 x = {x2} 時，y 的值？\n[參數限制：比例關係 type 可為：正比例、反比例]"
+                        }
+                    ]
+                },
+
+                {
+                    grade: "grade-8",
+                    unit: "多邊形與幾何全等",
+                    icon: "📐",
+                    formulas: [
+                        {
+                            name: "多邊形內角和與外角和公式",
+                            expr: "S_{內} = (n - 2) \\times 180^\\circ \\quad \\text{且} \\quad S_{外} = 360^\\circ",
+                            desc: "任意凸 $n$ 邊形的內角總和公式為 $(n - 2) \\times 180^\\circ$；而任意凸多邊形的外角總和則恆等於 $360^\\circ$，與邊數的多少完全無關。",
+                            variables: "$n$：多邊形的邊數 ($n \\ge 3$)；$S_{內}$：內角和；$S_{外}$：外角和。",
+                            example: "求正六邊形每一個內角的度數為多少？",
+                            solution: "步驟 1：求出六邊形的內角總和：\n$$S = (6 - 2) \\times 180^\\circ = 4 \\times 180^\\circ = 720^\\circ$$\n步驟 2：因為是正六邊形，每個內角度數相等，故除以 6：\n$$\\text{單一內角} = \\frac{720^\\circ}{6} = 120^\\circ$$\n答：正六邊形每一個內角為 120 度。",
+                            template: "求正 {n} 邊形的每一個內角度數是多少度？\n[參數限制：n 為 3 到 12 的整數]"
+                        },
+                        {
+                            name: "三角形全等判定性質",
+                            expr: "\\triangle ABC \\cong \\triangle DEF",
+                            desc: "判定兩個三角形完全重合（全等）的幾何性質。共有五種主要判定：$SSS$（三邊對應相等）、$SAS$（兩邊夾一角）、$ASA$（兩角夾一邊）、$AAS$（兩角與一旁邊）、$RHS$（直角三角形之斜邊與一股對應相等）。",
+                            variables: "$\\cong$：全等符號；$S$：邊長對應相等；$A$：角度對應相等；$R, H$：直角與斜邊。",
+                            example: "在 $\\triangle ABC$ 與 $\\triangle DEF$ 中，已知 $AB = DE$，$\\angle A = \\angle D$，且 $AC = DF$。請問這兩個三角形全等是根據哪一個性質？",
+                            solution: "比對已知條件：\n1. 邊長相等：$AB = DE$ (S)\n2. 夾角相等：$\\angle A = \\angle D$ (A)\n3. 邊長相等：$AC = DF$ (S)\n此為兩組對應邊及其夾角相等，符合 SAS 全等性質。\n答：根據 SAS 判定性質，$\\triangle ABC \\cong \\triangle DEF$。",
+                            template: "已知三角形對應相等條件包括兩邊及其夾角，此全等判定性質為？"
+                        },
+                        {
+                            name: "特殊四邊形幾何面積整理",
+                            expr: "Area_{梯形} = \\frac{(a + b) \\times h}{2}",
+                            desc: "整理國中常見幾何四邊形面積公式：平行四邊形面積（$底 \\times 高$）、梯形面積（$(上底+下底) \\times 高 \\div 2$）、菱形與箏形面積（$對角線相乘 \\div 2$）。",
+                            variables: "$a, b$：梯形之上下底長度；$h$：垂直高度；對角線長分別為 $d_1, d_2$。",
+                            example: "已知一個梯形的上底為 7 公分、下底為 13 公分，高為 8 公分，求此梯形的面積為多少平方公分？",
+                            solution: "直接代入梯形面積公式：\n$$Area = \\frac{(7 + 13) \\times 8}{2} = \\frac{20 \\times 8}{2} = 80$$\n答：此梯形的面積為 80 平方公分。",
+                            template: "求上底為 {top}，下底為 {bottom}，高為 {height} 的梯形面積為多少平方公分？\n[參數限制：(top + bottom) * height 為偶數]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-8",
+                    unit: "三角形內角和",
+                    icon: "📐",
+                    formulas: [
+                        {
+                            name: "三角形內角和定理",
+                            expr: "α + β + γ = 180^\\circ",
+                            desc: "任意三角形三內角之和恆等於 180 度。",
+                            variables: "$α, β, γ$: 三角形的三個內角。",
+                            example: "已知兩角分別為 50° 與 70°，求第三角度數。",
+                            solution: "根據內角和：α + β + γ = 180°, 代入已知：50° + 70° + γ = 180° ⇒ γ = 60°。",
+                            template: "已知三角形兩角為 {angle1}° 與 {angle2}°，求第三角度數？"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-8",
+                    unit: "多邊形內角和",
+                    icon: "📐",
+                    formulas: [
+                        {
+                            name: "多邊形內角和公式",
+                            expr: "S_{內} = (n - 2) \\times 180^\\circ",
+                            desc: "任意凸 n 邊形的內角總和。",
+                            variables: "$n$: 多邊形邊數 (n ≥ 3)。",
+                            example: "求正七邊形的內角總和。",
+                            solution: "代入 n=7：S = (7-2)\\times 180^\\circ = 5\\times 180^\\circ = 900^\\circ。",
+                            template: "求正 {n} 邊形的內角總和？"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-8",
+                    unit: "特殊四邊形性質",
+                    icon: "📐",
+                    formulas: [
+                        {
+                            name: "矩形對角線相等",
+                            expr: "d_{1} = d_{2}",
+                            desc: "矩形的兩條對角線長度相等。",
+                            variables: "$d_{1}, d_{2}$: 矩形的兩條對角線。",
+                            example: "已知矩形長 8 公分，寬 6 公分，求對角線長度。",
+                            solution: "對角線長 $d = \\sqrt{8^2 + 6^2} = \\sqrt{64+36}=\\sqrt{100}=10$ 公分。",
+                            template: "已知矩形長 {length} 公分，寬 {width} 公分，求對角線長度？"
+                        },
+                        {
+                            name: "正方形對角線長",
+                            expr: "d = a \\sqrt{2}",
+                            desc: "正方形邊長 a 的對角線長度。",
+                            variables: "$a$: 正方形邊長。",
+                            example: "邊長 5 公分的正方形，求對角線。",
+                            solution: "d = 5\\sqrt{2} ≈ 7.07 公分。",
+                            template: "正方形邊長為 {a} 公分，求對角線長度？"
+                        },
+                        {
+                            name: "梯形中位線長",
+                            expr: "m = \\frac{a + b}{2}",
+                            desc: "梯形兩條平行邊長 a, b 的中位線長。",
+                            variables: "$a, b$: 梯形上、下底長度。",
+                            example: "上底 4 公分，下底 10 公分，求中位線長。",
+                            solution: "m = (4+10)/2 = 7 公分。",
+                            template: "梯形上底為 {top} 公分，下底為 {bottom} 公分，求中位線長度？"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-8",
+                    unit: "面積公式整理",
+                    icon: "📐",
+                    formulas: [
+                        {
+                            name: "三角形面積",
+                            expr: "A = \\frac{1}{2} bh",
+                            desc: "底 b 與高 h 所構成的三角形面積公式。",
+                            variables: "$b$: 底長；$h$: 高度。",
+                            example: "底為 8 公分，高為 5 公分的三角形面積？",
+                            solution: "A = 0.5 * 8 * 5 = 20 平方公分。",
+                            template: "已知三角形底為 {base} 公分，高為 {height} 公分，求面積？"
+                        },
+                        {
+                            name: "矩形面積",
+                            expr: "A = lw",
+                            desc: "長方形的面積等於長乘寬。",
+                            variables: "$l$: 長；$w$: 寬。",
+                            example: "長 12 公分，寬 7 公分的矩形面積。",
+                            solution: "A = 12 * 7 = 84 平方公分。",
+                            template: "已知矩形長為 {length} 公分，寬為 {width} 公分，求面積？"
+                        },
+                        {
+                            name: "平行四邊形面積",
+                            expr: "A = bh",
+                            desc: "底 b 與高 h 所構成的平行四邊形面積公式。",
+                            variables: "$b$: 底長；$h$: 高度。",
+                            example: "底為 9 公分，高為 4 公分的平行四邊形面積。",
+                            solution: "A = 9 * 4 = 36 平方公分。",
+                            template: "已知平行四邊形底為 {base} 公分，高為 {height} 公分，求面積？"
+                        },
+                        {
+                            name: "梯形面積",
+                            expr: "A = \\frac{(a + b) h}{2}",
+                            desc: "兩底 a, b 與高 h 所構成的梯形面積公式。",
+                            variables: "$a, b$: 上、下底長度；$h$: 高度。",
+                            example: "上底 5 公分，下底 9 公分，高 3 公分的梯形面積。",
+                            solution: "A = ((5+9)*3)/2 = (14*3)/2 = 21 平方公分。",
+                            template: "已知梯形上底為 {top} 公分，下底為 {bottom} 公分，高為 {height} 公分，求面積？"
+                        },
+                        {
+                            name: "圓形面積",
+                            expr: "A = \\pi r^2",
+                            desc: "半徑為 r 的圓形面積公式。",
+                            variables: "$r$: 圓的半徑。",
+                            example: "半徑 3 公分的圓面積。",
+                            solution: "A = π * 3^2 ≈ 28.27 平方公分。",
+                            template: "已知圓半徑為 {radius} 公分，求面積？"
+                        }
+                    ]
+                },
+
+                // ---------------- 九年級 ----------------
+                {
+                    grade: "grade-9",
+                    unit: "相似形",
+                    icon: "🔍",
+                    formulas: [
+                        {
+                            name: "相似三角形面積比等於對應邊平方比",
+                            expr: "\\frac{Area_1}{Area_2} = \\left(\\frac{s_1}{s_2}\\right)^2",
+                            desc: "若兩個多邊形或三角形相似，則這兩個圖形的面積比，剛好等於對應邊長的平方比。",
+                            variables: "$Area$：圖形面積；$s$：對應邊長。",
+                            example: "若三角形 $ABC$ 相似於三角形 $DEF$，且其對應邊長比為 $2 : 3$，已知小三角形的面積為 $12$ 平方公分，求大三角形的面積？",
+                            solution: "根據面積比公式：\n$$\\frac{12}{Area_2} = \\left(\\frac{2}{3}\\right)^2 = \\frac{4}{9}$$\n$$4 \\times Area_2 = 12 \\times 9 \\implies Area_2 = 27$$\n答：大三角形的面積為 27 平方公分。",
+                            template: "若兩相似三角形對應邊長比為 {r1} : {r2}，已知小三角形面積為 {area1}，求大三角形面積？\n[參數限制：r1, r2 為整數，area1 可被 r1^2 整除]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-9",
+                    unit: "圓形幾何",
+                    icon: "⭕",
+                    formulas: [
+                        {
+                            name: "圓心角與圓周角關係",
+                            expr: "\\angle 周 = \\frac{1}{2} \\angle 心",
+                            desc: "同弧所對的圓周角，剛好等於該弧所對圓心角度數的一半。",
+                            variables: "$\\angle 心$：頂點在圓心的角；$\\angle 周$：頂點在圓周上且兩邊與圓相交的角。",
+                            example: "在圓 $O$ 中，弧 $AB$ 所對的圓心角 $\\angle AOB$ 為 $80$ 度，求同弧所對的圓周角 $\\angle ACB$ 是多少度？",
+                            solution: "代入圓周角定理：\n$$\\angle ACB = \\frac{1}{2} \\times \\angle AOB = \\frac{1}{2} \\times 80^\\circ = 40^\\circ$$\n答：圓周角 $\\angle ACB$ 為 40 度。",
+                            template: "在圓 O 中，弧 AB 所對的圓心角為 {angle} 度，求同弧所對的圓周角為多少度？\n[參數限制：angle 為偶數]"
+                        }
+                    ]
+                },
+                {
+                    grade: "grade-9",
+                    unit: "二次函數",
+                    icon: "📈",
+                    // 新增 knowledgeMap 欄位
+                    prerequisiteLinks: ["一次函數"],
+                    relatedLinks: ["拋物線應用"],
+                    nextLinks: ["二次方程式求根"],
+                    formulas: [
+                        {
+                            name: "二次函數標準式 (頂點式)",
+                            expr: "y = a(x - h)^2 + k",
+                            desc: "二次函數的頂點式，能直接讀出拋物線的頂點座標與對稱軸。二次項係數 $a$ 的正負決定開口方向。",
+                            variables: "$(h, k)$：拋物線的頂點座標；$x = h$：對稱軸方程式；$a$：控制開口大小與朝向 ($a > 0$ 開口朝上)。",
+                            example: "已知一個二次函數的方程式為 $y = -2(x - 3)^2 + 5$，求此二次函數的對稱軸與頂點座標？",
+                            solution: "比對標準頂點式 $y = a(x - h)^2 + k$ ： \n得出 $h = 3$，$k = 5$，$a = -2$。\n頂點座標為 $(3, 5)$，對稱軸為 $x = 3$。\n答：頂點為 $(3, 5)$，對稱軸為 $x = 3$（開口朝下）。",
+                            template: "已知二次函數 y = {a}(x - {h})^2 + {k}，求其對稱軸與頂點座標？\n\n[參數限制：a, h, k 為整數]",
+                            concept: "二次函數描述拋物線的形狀與頂點位置，與一次函數的直線不同，呈現對稱性。",
+                            prerequisite: "需要了解一次函數的斜率概念與平方運算的基礎。",
+                            commonMistakes: "常見錯誤包括符號錯位、忘記加負號或忽略係數 a 的正負判斷。",
+                            quickReview: "快速回顧頂點式與標準式的轉換公式，記得 $h$ 為頂點 x 座標，$k$ 為頂點 y 座標。",
+                            futureTopics: "可延伸至拋物線的應用、二次方程式求根以及最大最小值問題。"
+                        }
+                    ],
+                },
+                {
+                    grade: "grade-9",
+                    unit: "統計與機率",
+                    icon: "📊",
+                    formulas: [
+                        {
+                            name: "古典機率公式",
+                            expr: "P(A) = \\frac{n(A)}{n(S)}",
+                            desc: "當所有基本事件發生的機會均等時，事件 $A$ 發生的機率等於事件 $A$ 的樣本點數除以所有可能基本事件的總樣本點數。",
+                            variables: "$P(A)$：事件 $A$ 發生的機率；$n(A)$：事件 $A$ 所包含的結果個數；$n(S)$：所有可能結果的總個數。",
+                            example: "同時投擲兩枚公正的硬幣一次，求至少出現一枚正面的機率為多少？",
+                            solution: "步驟 1：列出所有可能的結果（樣本空間 $S$）：\n$$S = \\{(正,正), (正,反), (反,正), (反,反)\\} \\implies n(S) = 4$$\n步驟 2：找出符合「至少一枚正面」的結果（事件 $A$）：\n$$A = \\{(正,正), (正,反), (反,正)\\} \\implies n(A) = 3$$\n步驟 3：計算機率：\n$$P(A) = \\frac{3}{4}$$\n答：至少出現一枚正面的機率為 $3/4$ (或 0.75)。"
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // ================= 2. 動態渲染年級公式庫與手寫板 =================
+        function renderDatabase() {
+            const grades = ["grade-7", "grade-8", "grade-9"];
+
+            grades.forEach(grade => {
+                const container = document.getElementById(`${grade === 'grade-7' ? 'g7' : (grade === 'grade-8' ? 'g8' : 'g9')}-content`);
+                if (!container) return;
+                container.innerHTML = ""; // 清空
+
+                // 篩選出該年級的所有單元
+                const gradeUnits = appState.database.filter(item => item.grade === grade);
+
+                gradeUnits.forEach((unitData, unitIndex) => {
+                    const unitId = `${grade}-unit-${unitIndex}`;
+
+                    // 建立 Accordion 卡片
+                    const accordion = document.createElement('div');
+                    accordion.className = 'unit-accordion';
+                    accordion.id = unitId;
+
+                    // Header 結構
+                    const header = document.createElement('button');
+                    header.className = 'unit-header';
+                    header.onclick = () => toggleAccordion(unitId);
+
+                    header.innerHTML = `
+                        <div class="unit-title-wrapper">
+                            <span class="unit-icon">${unitData.icon}</span>
+                            <span class="unit-title">${unitData.unit}</span>
+                            <span class="unit-badge">${unitData.formulas.length} 個公式</span>
+                        </div>
+                        <span class="unit-arrow">▼</span>
+                    `;
+
+                    // Content 結構
+                    const content = document.createElement('div');
+                    content.className = 'unit-content';
+
+                    // 填入該單元的所有公式
+                    unitData.formulas.forEach((formula, formIndex) => {
+                        const formulaId = `${unitId}-formula-${formIndex}`;
+                        const detailId = `${formulaId}-detail`;
+                        const canvasBoxId = `${formulaId}-canvas-box`;
+
+                        const formulaBox = document.createElement('div');
+                        formulaBox.className = 'formula-box';
+
+                        // 檢查是否有練習題模板欄位
+                        let templateHtml = "";
+                        if (formula.template) {
+                            templateHtml = `
+                                <div style="margin-top: 1rem; padding: 0.6rem 0.8rem; background: rgba(0,0,0,0.02); border: 1px dashed var(--border-color); border-radius: 8px; font-size: 0.85em; color: var(--text-secondary);">
+                                    <strong style="color: var(--accent-purple);">🧩 練習題產生器模板：</strong>
+                                    <code style="font-family: 'Fira Code', monospace; display: block; margin-top: 0.2rem; white-space: pre-wrap;">${formula.template}</code>
+                                </div>
+                            `;
+                        }
+
+                        formulaBox.innerHTML = `
+    <div class="formula-box-header">
+        <span class="formula-box-title">${formula.name}</span>
+    </div>
+    <div class="math-blackboard formula-mode-only">
+        <span class="math-display">$$${formula.expr}$$</span>
+    </div>
+
+    <div class="info-grid formula-mode-only">
+        <div class="info-block">
+            <div class="info-block-title">💡 公式說明</div>
+            <p>${formula.desc}</p>
+        </div>
+        <div class="info-block">
+            <div class="info-block-title">🔑 變數意義</div>
+            <p>${formula.variables}</p>
+        </div>
+    </div>
+
+    <!-- 概念模式區塊 -->
+    <div class="concept-mode-only" style="padding: 0.2rem 0;">
+        ${formula.concept ? `
+        <div class="extra-section" style="display:block;">
+            <div class="extra-title">① 核心概念</div>
+            <p>${formula.concept}</p>
+        </div>` : ''}
+        ${formula.prerequisite ? `
+        <div class="extra-section" style="display:block;">
+            <div class="extra-title">② 先備知識</div>
+            <p>${formula.prerequisite}</p>
+        </div>` : ''}
+        ${formula.quickReview ? `
+        <div class="extra-section" style="display:block;">
+            <div class="extra-title">③ 一分鐘複習</div>
+            <p>${formula.quickReview}</p>
+        </div>` : ''}
+        ${!formula.concept && !formula.prerequisite && !formula.quickReview ? `
+        <div style="color: var(--text-secondary); font-size: 0.9em; padding: 1rem 0;">此公式尚無概念說明。</div>` : ''}
+    </div>
+
+    <!-- 解題模式區塊 -->
+    <div class="solution-mode-only" style="padding: 0.2rem 0;">
+        <div class="example-block">
+            <div class="example-header">📝 典型課堂挑戰：</div>
+            <p style="font-weight: 500; font-size:1.1em; line-height: 1.5; margin-bottom:0.8rem;">${formula.example}</p>
+
+            <div style="display: flex; gap: 0.8rem;">
+                <button class="btn-action-large" onclick="toggleFormulaDetail('${detailId}', this)" style="background: var(--accent-green); flex: 1.3; margin-top:0;">
+                    🔑 顯示答案與詳解
+                </button>
+                <button class="btn-action-large" onclick="toggleCanvasBox('${canvasBoxId}', this)" style="background: var(--accent-purple); flex: 1; margin-top:0;">
+                    ✍️ 開啟黑板塗鴉板
+                </button>
+            </div>
+
+            <!-- 詳解摺疊 -->
+            <div id="${detailId}" class="solution-detail">
+                <div class="step-item" style="border:none; padding:0; margin:0;">
+                    <span class="step-badge">詳細解析</span>
+                    <p style="white-space: pre-line; margin-top:0.6rem; line-height:1.6;">${formula.solution}</p>
+                </div>
+            </div>
+
+            ${formula.commonMistakes ? `
+            <div class="extra-section" style="display:block; margin-top:0.8rem;">
+                <div class="extra-title">⚠️ 常見錯誤</div>
+                <p>${formula.commonMistakes}</p>
+            </div>` : ''}
+            ${formula.futureTopics ? `
+            <div class="extra-section" style="display:block; margin-top:0.8rem;">
+                <div class="extra-title">⑤ 延伸學習</div>
+                <p>${formula.futureTopics}</p>
+            </div>` : ''}
+
+            <!-- 練習題模板（解題模式顯示） -->
+            ${formula.template ? `
+            <div style="margin-top: 1rem; padding: 0.6rem 0.8rem; background: rgba(0,0,0,0.02); border: 1px dashed var(--border-color); border-radius: 8px; font-size: 0.85em; color: var(--text-secondary);">
+                <strong style="color: var(--accent-purple);">🧩 練習題產生器模板：</strong>
+                <code style="font-family: 'Fira Code', monospace; display: block; margin-top: 0.2rem; white-space: pre-wrap;">${formula.template}</code>
+            </div>` : ''}
+
+            <!-- 手寫塗鴉區 -->
+            <div id="${canvasBoxId}" class="scribble-box" style="display: none;">
+                <div class="scribble-tools">
+                    <span style="font-weight: bold;">🖍️ 上課隨手寫草稿區</span>
+                    <div class="brush-colors">
+                        <div class="brush-dot selected" style="background: #2563eb;" onclick="setBrushColor(this, '#2563eb')"></div>
+                        <div class="brush-dot" style="background: #dc2626;" onclick="setBrushColor(this, '#dc2626')"></div>
+                        <div class="brush-dot" style="background: #eab308;" onclick="setBrushColor(this, '#eab308')"></div>
+                        <button class="btn-ctrl" onclick="clearCanvas('${canvasBoxId}')" style="padding: 0.2rem 0.6rem; font-size: 0.8rem; margin-left: 0.8rem;">清除畫布</button>
+                    </div>
+                </div>
+                <canvas class="scribble-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+`;
+
+
+                        content.appendChild(formulaBox);
+                    }); // end formula loop
+                    // Unit-level Knowledge Map sections
+                    if (unitData.prerequisiteLinks && unitData.prerequisiteLinks.length) {
+                        content.insertAdjacentHTML('beforeend', `<div class="extra-section"><div class="extra-title">① 前置知識</div><p>${unitData.prerequisiteLinks.map(l => `<a href="#">${l}</a>`).join(', ')}</p></div>`);
+                    }
+                    if (unitData.relatedLinks && unitData.relatedLinks.length) {
+                        content.insertAdjacentHTML('beforeend', `<div class="extra-section"><div class="extra-title">② 相關單元</div><p>${unitData.relatedLinks.map(l => `<a href="#">${l}</a>`).join(', ')}</p></div>`);
+                    }
+                    if (unitData.nextLinks && unitData.nextLinks.length) {
+                        content.insertAdjacentHTML('beforeend', `<div class="extra-section"><div class="extra-title">③ 後續學習</div><p>${unitData.nextLinks.map(l => `<a href="#">${l}</a>`).join(', ')}</p></div>`);
+                    }
+                    accordion.appendChild(header);
+                    accordion.appendChild(content);
+                    container.appendChild(accordion);
+                });
+            });
+
+            // 重新解析 KaTeX
+            setTimeout(() => {
+                if (typeof renderMathInElement !== 'undefined') {
+                    renderMathInElement(document.body, {
+                        delimiters: [
+                            { left: '$$', right: '$$', display: true },
+                            { left: '$', right: '$', display: false }
+                        ]
+                    });
+                }
+            }, 100);
+        }
+
+        // 展開/收合單元卡片
+        function toggleAccordion(unitId) {
+            const accordion = document.getElementById(unitId);
+            const isActive = accordion.classList.contains('active');
+
+            if (isActive) {
+                accordion.classList.remove('active');
+            } else {
+                accordion.classList.add('active');
+            }
+        }
+
+        // ================= 3. 塗鴉畫布引擎 (iPad 觸控最佳化) =================
+        function toggleCanvasBox(canvasBoxId, btnEl) {
+            const box = document.getElementById(canvasBoxId);
+            const isShowing = box.style.display !== 'none';
+
+            if (isShowing) {
+                box.style.display = 'none';
+                btnEl.style.background = 'var(--accent-purple)';
+                btnEl.textContent = '✍️ 開啟黑板塗鴉板';
+            } else {
+                box.style.display = 'block';
+                btnEl.style.background = 'var(--text-secondary)';
+                btnEl.textContent = '❌ 關閉塗鴉板';
+
+                // 動態啟動與適配 iPad 寬度
+                setupCanvas(box.querySelector('canvas'));
+            }
+        }
+
+        function setupCanvas(canvas) {
+            if (!canvas) return;
+            const container = canvas.parentElement;
+            const rect = container.getBoundingClientRect();
+
+            // iPad 高清晰度配置
+            canvas.width = rect.width - 4;
+            canvas.height = 200;
+
+            const ctx = canvas.getContext('2d');
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.lineWidth = 4;
+
+            const strokeColor = appState.theme === 'whiteboard' ? '#2563eb' : '#fdba74';
+            ctx.strokeStyle = strokeColor;
+
+            // 綁定觸控事件
+            let drawing = false;
+
+            function getPos(e) {
+                const r = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: clientX - r.left,
+                    y: clientY - r.top
+                };
+            }
+
+            function start(e) {
+                e.preventDefault();
+                drawing = true;
+                const p = getPos(e);
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+            }
+
+            function draw(e) {
+                if (!drawing) return;
+                e.preventDefault();
+                const p = getPos(e);
+                ctx.lineTo(p.x, p.y);
+                ctx.stroke();
+            }
+
+            function stop() {
+                drawing = false;
+            }
+
+            canvas.addEventListener('mousedown', start);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stop);
+            canvas.addEventListener('mouseleave', stop);
+
+            canvas.addEventListener('touchstart', start, { passive: false });
+            canvas.addEventListener('touchmove', draw, { passive: false });
+            canvas.addEventListener('touchend', stop);
+        }
+
+        function setBrushColor(dotEl, color) {
+            const container = dotEl.parentElement;
+            container.querySelectorAll('.brush-dot').forEach(d => d.classList.remove('selected'));
+            dotEl.classList.add('selected');
+
+            const canvas = container.parentElement.parentElement.querySelector('canvas');
+            if (canvas) {
+                canvas.getContext('2d').strokeStyle = color;
+            }
+        }
+
+        function clearCanvas(canvasBoxId) {
+            const canvas = document.getElementById(canvasBoxId).querySelector('canvas');
+            if (canvas) {
+                canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        // ================= 4. 控制列與全螢幕設定 =================
+        function switchTab(moduleId, buttonEl) {
+            document.querySelectorAll('.module-section').forEach(sec => {
+                sec.classList.remove('active-section');
+            });
+            document.getElementById(moduleId).classList.add('active-section');
+
+            document.querySelectorAll('.sidebar-nav .nav-item').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            buttonEl.classList.add('active');
+            appState.currentTab = moduleId;
+
+            // 如果切換到輪盤頁面，重繪輪盤以適配寬度
+            if (moduleId === 'module-random') {
+                setTimeout(() => drawWheel(), 100);
+            }
+        }
+
+        // ================= Teacher Mode 切換 =================
+        function setMode(mode) {
+            appState.mode = mode;
+            document.body.setAttribute('data-mode', mode);
+
+            // 更新按鈕 active 狀態
+            ['formula', 'concept', 'solution'].forEach(m => {
+                const btn = document.getElementById(`btn-mode-${m}`);
+                if (btn) btn.classList.toggle('active', m === mode);
+            });
+
+            // 重新觸發 KaTeX（切換 mode 後需重新 render 數學式）
+            if (typeof renderMathInElement !== 'undefined') {
+                setTimeout(() => {
+                    renderMathInElement(document.body, {
+                        delimiters: [
+                            { left: '$$', right: '$$', display: true },
+                            { left: '$', right: '$', display: false }
+                        ]
+                    });
+                }, 50);
+            }
+        }
+
+        function toggleFullscreen() {
+            const doc = document.documentElement;
+            const btnText = document.getElementById('fullscreen-text');
+
+            if (!document.fullscreenElement) {
+                doc.requestFullscreen().then(() => {
+                    btnText.textContent = "退出全螢幕";
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    btnText.textContent = "全螢幕教學";
+                });
+            }
+        }
+
+        function adjustFont(scaleOffset) {
+            appState.fontSize = Math.max(0.75, Math.min(1.7, appState.fontSize + scaleOffset));
+            document.documentElement.style.setProperty('--font-scale', appState.fontSize);
+
+            setTimeout(() => {
+                drawWheel();
+                document.querySelectorAll('.scribble-box').forEach(box => {
+                    if (box.style.display !== 'none') setupCanvas(box.querySelector('canvas'));
+                });
+            }, 100);
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const themeText = document.getElementById('theme-text');
+
+            if (appState.theme === 'whiteboard') {
+                body.setAttribute('data-theme', 'chalkboard');
+                appState.theme = 'chalkboard';
+                themeText.textContent = '白板模式';
+            } else {
+                body.removeAttribute('data-theme');
+                appState.theme = 'whiteboard';
+                themeText.textContent = '黑板模式';
+            }
+
+            drawWheel();
+            document.querySelectorAll('.scribble-box').forEach(box => {
+                if (box.style.display !== 'none') setupCanvas(box.querySelector('canvas'));
+            });
+        }
+
+        function toggleFormulaDetail(detailId, btnEl) {
+            const detail = document.getElementById(detailId);
+            const isExpanded = btnEl.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+                detail.classList.remove('show');
+                btnEl.setAttribute('aria-expanded', 'false');
+                btnEl.textContent = "🔑 顯示答案與詳解";
+            } else {
+                detail.classList.add('show');
+                btnEl.setAttribute('aria-expanded', 'true');
+                btnEl.textContent = "❌ 隱藏詳細解答";
+            }
+        }
+
+        // ================= 5. 課堂活動計時器 & 點籤機 =================
+        function setTimerPreset(seconds) {
+            appState.timerSeconds = seconds;
+            updateTimerDisplay();
+            if (appState.isTimerRunning) toggleTimer();
+        }
+
+        function updateTimerDisplay() {
+            const display = document.getElementById('timer-val');
+            const mins = Math.floor(appState.timerSeconds / 60);
+            const secs = appState.timerSeconds % 60;
+            display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('btn-timer-toggle');
+            if (appState.isTimerRunning) {
+                clearInterval(appState.timerInterval);
+                appState.isTimerRunning = false;
+                btn.textContent = "⏱️ 恢復計時";
+                btn.style.background = "var(--accent-green)";
+            } else {
+                appState.isTimerRunning = true;
+                btn.textContent = "⏸️ 暫停計時";
+                btn.style.background = "var(--accent-orange)";
+
+                appState.timerInterval = setInterval(() => {
+                    if (appState.timerSeconds > 0) {
+                        appState.timerSeconds--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(appState.timerInterval);
+                        appState.isTimerRunning = false;
+                        btn.textContent = "⏱️ 開始計時";
+                        btn.style.background = "var(--accent-green)";
+                        playChime();
+                        alert("🔔 時間到！準備進行課堂發表！");
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(appState.timerInterval);
+            appState.isTimerRunning = false;
+            appState.timerSeconds = 120;
+            updateTimerDisplay();
+            const btn = document.getElementById('btn-timer-toggle');
+            btn.textContent = "⏱️ 開始計時";
+            btn.style.background = "var(--accent-green)";
+        }
+
+        function pickStudent() {
+            const display = document.getElementById('student-display');
+            const btn = document.getElementById('btn-pick-student');
+            const maxRangeInput = document.getElementById('class-range');
+
+            let maxNum = parseInt(maxRangeInput.value);
+            if (isNaN(maxNum) || maxNum < 2) maxNum = 40;
+
+            btn.disabled = true;
+            let counter = 0;
+            const totalCycles = 15;
+
+            const timer = setInterval(() => {
+                const randNum = Math.floor(Math.random() * maxNum) + 1;
+                display.textContent = `${randNum} 號`;
+                counter++;
+
+                if (counter >= totalCycles) {
+                    clearInterval(timer);
+                    btn.disabled = false;
+                    const luckyNum = Math.floor(Math.random() * maxNum) + 1;
+                    display.innerHTML = `🎉 ${luckyNum} 號 🎉`;
+                    playChime();
+                }
+            }, 85);
+        }
+
+        function playChime() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc1 = ctx.createOscillator();
+                const osc2 = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc1.type = 'triangle';
+                osc2.type = 'sine';
+
+                osc1.frequency.setValueAtTime(523.25, ctx.currentTime);
+                osc1.frequency.exponentialRampToValueAtTime(783.99, ctx.currentTime + 0.2);
+                osc2.frequency.setValueAtTime(659.25, ctx.currentTime);
+                osc2.frequency.exponentialRampToValueAtTime(1046.50, ctx.currentTime + 0.2);
+
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.2);
+
+                osc1.connect(gain);
+                osc2.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc1.start();
+                osc2.start();
+                osc1.stop(ctx.currentTime + 1.2);
+                osc2.stop(ctx.currentTime + 1.2);
+            } catch (e) {
+                console.warn("聲音初始化失敗。");
+            }
+        }
+
+
+        // ================= 6. 隨機公式大輪盤 (動態公式資料庫連結) =================
+        function drawWheel() {
+            const canvas = document.getElementById('canvas-wheel');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const half = canvas.width / 2;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 動態從資料庫抓取所有公式
+            const list = [];
+            appState.database.forEach(group => {
+                group.formulas.forEach(form => {
+                    list.push(form.name);
+                });
+            });
+
+            const len = list.length;
+            if (len === 0) return;
+
+            const arcAngle = (2 * Math.PI) / len;
+            const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4', '#ef4444', '#14b8a6'];
+
+            for (let i = 0; i < len; i++) {
+                const angle = appState.wheelStartAngle + i * arcAngle;
+                ctx.fillStyle = colors[i % colors.length];
+
+                ctx.beginPath();
+                ctx.moveTo(half, half);
+                ctx.arc(half, half, half - 10, angle, angle + arcAngle);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.strokeStyle = appState.theme === 'whiteboard' ? '#ffffff' : '#10201c';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                // 畫文字
+                ctx.save();
+                ctx.fillStyle = '#ffffff';
+                ctx.translate(half, half);
+                ctx.rotate(angle + arcAngle / 2);
+                ctx.textAlign = "right";
+                ctx.font = "bold 12px Noto Sans TC";
+
+                // 截斷過長字元
+                const name = list[i].length > 10 ? list[i].substring(0, 9) + '..' : list[i];
+                ctx.fillText(name, half - 25, 4);
+                ctx.restore();
+            }
+
+            // 外圈橙色裝飾線
+            ctx.strokeStyle = '#ea580c';
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.arc(half, half, half - 10, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+
+        function spinWheel() {
+            if (appState.isSpinning) return;
+
+            // 抓取公式物件清單
+            const formulasList = [];
+            appState.database.forEach(group => {
+                group.formulas.forEach(form => {
+                    formulasList.push(form);
+                });
+            });
+
+            const len = formulasList.length;
+            if (len === 0) return;
+
+            appState.isSpinning = true;
+            const btn = document.getElementById('btn-spin-wheel');
+            btn.disabled = true;
+
+            const spinRounds = 5 + Math.floor(Math.random() * 3);
+            const targetAngle = spinRounds * 2 * Math.PI + Math.random() * 2 * Math.PI;
+
+            const startAngle = appState.wheelStartAngle;
+            const startTime = performance.now();
+            const duration = 4000;
+
+            function animate(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const currentAngle = startAngle + targetAngle * easeOut;
+
+                appState.wheelStartAngle = currentAngle % (2 * Math.PI);
+                drawWheel();
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    appState.isSpinning = false;
+                    btn.disabled = false;
+
+                    const arcAngle = (2 * Math.PI) / len;
+                    const pointerOffset = 3 * Math.PI / 2;
+                    let winningIndex = Math.floor((pointerOffset - appState.wheelStartAngle) / arcAngle) % len;
+                    if (winningIndex < 0) winningIndex += len;
+
+                    const item = formulasList[winningIndex];
+                    appState.wheelWinningItem = item;
+
+                    // 渲染輪盤中獎面板
+                    const resultBox = document.getElementById('wheel-result-box');
+                    resultBox.innerHTML = `
+                        <div style="text-align:left;">
+                            <span class="unit-badge" style="background:#ea580c; color:white; font-size:0.75em;">${item.name}</span>
+                            <p style="font-weight:700; font-size:1.15em; margin-top:0.6rem; line-height:1.5;">${item.example}</p>
+                        </div>
+                    `;
+
+                    // 重置詳解區域
+                    const solutionArea = document.getElementById('wheel-solution-area');
+                    const solutionDetail = document.getElementById('wheel-solution-detail');
+                    const btnSol = document.getElementById('btn-wheel-solution');
+
+                    solutionArea.style.display = 'block';
+                    solutionDetail.classList.remove('show');
+                    btnSol.setAttribute('aria-expanded', 'false');
+                    btnSol.textContent = "🔑 顯示此題解析與答案";
+
+                    solutionDetail.innerHTML = `
+                        <p style="white-space: pre-line; line-height: 1.6; font-size: 1.05em;">${item.solution}</p>
+                    `;
+
+                    // 重新渲染 Math
+                    if (typeof renderMathInElement !== 'undefined') {
+                        renderMathInElement(solutionDetail, {
+                            delimiters: [
+                                { left: '$$', right: '$$', display: true },
+                                { left: '$', right: '$', display: false }
+                            ]
+                        });
+                    }
+
+                    playChime();
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        function toggleWheelSolution() {
+            const detail = document.getElementById('wheel-solution-detail');
+            const btn = document.getElementById('btn-wheel-solution');
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+                detail.classList.remove('show');
+                btn.setAttribute('aria-expanded', 'false');
+                btn.textContent = "🔑 顯示此題解析與答案";
+            } else {
+                detail.classList.add('show');
+                btn.setAttribute('aria-expanded', 'true');
+                btn.textContent = "❌ 隱藏詳細解答";
+            }
+        }
+
+        // ================= 7. 初始化啟動 =================
+        window.addEventListener('load', () => {
+            renderDatabase();
+            drawWheel();
+            setMode('formula'); // 預設公式模式
+        });
+    </script>
+</body>
+
+</html>
