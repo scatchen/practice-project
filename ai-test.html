@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 數學老師測試版</title>
+
+<style>
+body{
+    font-family: "Noto Sans TC", sans-serif;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+h1{
+    text-align:center;
+}
+
+textarea{
+    width:100%;
+    min-height:120px;
+    font-size:18px;
+    padding:12px;
+}
+
+button{
+    margin-top:12px;
+    padding:12px 20px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+#response{
+    margin-top:20px;
+    padding:20px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    min-height:120px;
+    white-space:pre-wrap;
+    line-height:1.8;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🤖 AI 數學老師測試版</h1>
+
+<p>請輸入學生問題：</p>
+
+<textarea id="question" placeholder="例如：請解釋什麼是因式分解"></textarea>
+
+<br>
+
+<button onclick="askAI()">送出問題</button>
+
+<div id="response">
+等待提問...
+</div>
+
+<script>
+
+async function askAI() {
+
+    const question = document.getElementById("question").value;
+    const responseDiv = document.getElementById("response");
+
+    responseDiv.textContent = "AI 思考中...";
+
+    try {
+
+        const response = await fetch(
+            "http://192.168.2.111:1234/v1/chat/completions",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    model: "openai/gpt-oss-20b",
+                    messages: [
+                        {
+                            role: "system",
+                            content: "你是一位台灣國中數學老師。請使用繁體中文。回答不超過120字。優先用算式與例題說明。不要使用開場白、不要說同學你好、不要長篇理論。回答格式固定：【觀念】一句話。【例題】一個簡短例題。【重點】一句話總結。"
+                        },
+                        {
+                            role: "user",
+                            content: question
+                        }
+                    ],
+                    temperature: 0.3,
+                    max_tokens: 250
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+        console.log(data.choices);
+console.log(data.choices[0]);
+console.log(data.choices[0].message);
+
+        responseDiv.textContent =
+            data.choices[0].message.content;
+
+    } catch (error) {
+
+        console.error(error);
+
+        responseDiv.textContent =
+            "連線失敗，請確認 LM Studio 已啟動且模型已載入。";
+    }
+}
+
+</script>
+
+</body>
+</html>

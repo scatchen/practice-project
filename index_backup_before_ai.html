@@ -908,35 +908,10 @@
 
                 <!-- ================= 1. 首頁儀表板 ================= -->
                 <section id="module-dashboard" class="module-section active-section">
-                   <div class="welcome-card">
+                    <div class="welcome-card">
                         <h2>國中數學公式資料庫教學板</h2>
                         <p>本教學助手已收錄七至九年級核心數學單元。支援展開/收合單元卡片、現場粉筆草稿書寫、課堂活動大計時與號碼抽取，提供極致流暢的觸控教學體驗。</p>
-                    </div> 
-                    <div class="ai-teacher-card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 20px; margin-bottom: 20px; backdrop-filter: blur(10px);">
-
-    <h3 style="margin-top:0; color:white;">
-        🤖 AI數學老師
-    </h3>
-
-    <textarea
-        id="ai-question"
-        placeholder="例如：什麼是因式分解？"
-        style="width:100%; height:80px; padding:10px; border-radius:10px;">
-    </textarea>
-
-    <br><br>
-
-    <button onclick="askAITeacher()">
-        📤 送出問題
-    </button>
-
-    <div
-        id="ai-response"
-        style="margin-top:15px; padding:10px; background:rgba(0,0,0,0.2); border-radius:10px; min-height:50px;">
-        等待提問...
-    </div>
-
-</div>
+                    </div>
 
                     <div class="dashboard-grid">
                         <!-- 左側：計時器 -->
@@ -2260,48 +2235,6 @@
             drawWheel();
             setMode('formula'); // 預設公式模式
         });
-        async function askAITeacher() {
-    const questionInput = document.getElementById('ai-question');
-    const responseDiv = document.getElementById('ai-response');
-    const question = questionInput.value.trim();
-
-    if (!question) {
-        responseDiv.innerText = "請先輸入問題。";
-        return;
-    }
-
-    responseDiv.innerText = "AI 思考中...";
-
-    try {
-        const response = await fetch('http://192.168.2.111:1234/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                model: 'google/gemma-4-12b-qat',
-                messages: [
-                    {
-                        role: 'system',
-                        content: '你是一位台灣國中數學老師。請使用繁體中文。回答不超過120字。優先用算式與例題說明。不要使用開場白。不要說同學你好。不要長篇理論。回答格式固定：【觀念】一句話。【例題】一個簡短例題。【重點】一句話總結。'
-                    },
-                    {
-                        role: 'user',
-                        content: question
-                    }
-                ],
-                temperature: 0.3
-            })
-        });
-
-        const data = await response.json();
-        responseDiv.innerText = data.choices[0].message.content;
-
-    } catch (error) {
-        console.error(error);
-        responseDiv.innerText = "連線失敗，請確認 LM Studio 已啟動。";
-    }
-}
     </script>
 </body>
 
