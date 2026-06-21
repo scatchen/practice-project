@@ -24,8 +24,8 @@
     <style>
         :root {
             /* 白板高對比模式 */
-            --bg-color: #f1f5f9;
-            --container-bg: #ffffff;
+            --bg-color: #e8edf3;
+            --container-bg: #f8fafc;
             --card-bg: #f8fafc;
             --border-color: #cbd5e1;
             --text-primary: #0f172a;
@@ -167,7 +167,7 @@
         /* 側邊導覽 + 主顯示區雙欄佈局 */
         .layout-grid {
             display: grid;
-            grid-template-columns: 240px 1fr;
+            grid-template-columns: 180px 1fr;
             gap: 1.2rem;
             align-items: start;
         }
@@ -853,8 +853,7 @@
         <!-- 頂部主控面板 -->
         <header class="control-bar">
             <div class="title-area">
-                <h1>📐 國中數學教學助手</h1>
-                <p>國中數學公式資料庫 · iPad 投影教學板</p>
+                <h1>📐 📚 數學小助教教學系統</h1>
             </div>
             <div class="action-group">
                 <button class="btn-ctrl btn-fullscreen" onclick="toggleFullscreen()" id="btn-fullscreen" title="全螢幕教學">
@@ -897,10 +896,7 @@
                     <span class="icon">9️⃣</span>
                     <span>九年級公式庫</span>
                 </button>
-                <button class="nav-item" onclick="switchTab('module-random', this)" id="nav-random">
-                    <span class="icon">🎲</span>
-                    <span>隨機大輪盤</span>
-                </button>
+                
             </nav>
 
             <!-- 主顯示面板 -->
@@ -908,70 +904,72 @@
 
                 <!-- ================= 1. 首頁儀表板 ================= -->
                 <section id="module-dashboard" class="module-section active-section">
-                   <div class="welcome-card">
-                        <h2>國中數學公式資料庫教學板</h2>
-                        <p>本教學助手已收錄七至九年級核心數學單元。支援展開/收合單元卡片、現場粉筆草稿書寫、課堂活動大計時與號碼抽取，提供極致流暢的觸控教學體驗。</p>
-                    </div> 
+                  
                     <div class="ai-teacher-card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 20px; margin-bottom: 20px; backdrop-filter: blur(10px);">
 
-    <h3 style="margin-top:0; color:white;">
-        🤖 AI數學老師
+    <h3 style="margin-top:0; color:black;">
+        🤖 數學小助教
     </h3>
 
     <textarea
         id="ai-question"
-        placeholder="例如：什麼是因式分解？"
-        style="width:100%; height:80px; padding:10px; border-radius:10px;">
+        placeholder="請輸入想學習的數學問題..."
+        style="     width:100%;     height:120px;     padding:15px;     border-radius:10px;     font-size:22px;     line-height:1.6; ">
     </textarea>
 
     <br><br>
 
-    <button onclick="askAITeacher()">
-        📤 送出問題
-    </button>
-
+   <button
+    onclick="askAITeacher()"
+    style="
+        width:220px;
+        height:60px;
+        font-size:24px;
+        font-weight:bold;
+        border:none;
+        border-radius:15px;
+        background:#2563eb;
+        color:white;
+        cursor:pointer;
+    "
+>
+    📤 開始解題
+</button>
     <div
         id="ai-response"
-        style="margin-top:15px; padding:10px; background:rgba(0,0,0,0.2); border-radius:10px; min-height:50px;">
-        等待提問...
+        style="margin-top:15px; padding:20px; background:rgba(0,0,0,0.2); border-radius:10px; min-height:180px;">
+        👋 歡迎使用數學小助教，請輸入問題開始學習！
     </div>
 
 </div>
 
-                    <div class="dashboard-grid">
-                        <!-- 左側：計時器 -->
-                        <div class="dashboard-panel">
-                            <h3>⏱️ 課堂活動計時器</h3>
-                            <p>限時速算、小組挑戰的最佳工具。</p>
-                            <div class="timer-display" id="timer-val">02:00</div>
-                            <div class="timer-presets">
-                                <button class="btn-preset" onclick="setTimerPreset(30)">30秒</button>
-                                <button class="btn-preset" onclick="setTimerPreset(60)">1分鐘</button>
-                                <button class="btn-preset" onclick="setTimerPreset(180)">3分鐘</button>
-                                <button class="btn-preset" onclick="setTimerPreset(300)">5分鐘</button>
-                            </div>
-                            <div class="timer-controls">
-                                <button class="btn-action-large" onclick="toggleTimer()" id="btn-timer-toggle"
-                                    style="background: var(--accent-green); margin-top:0;">⏱️ 開始計時</button>
-                                <button class="btn-action-large" onclick="resetTimer()"
-                                    style="background: var(--text-secondary); flex: 0.6; margin-top:0;">重置</button>
-                            </div>
-                        </div>
 
-                        <!-- 右側：抽籤機 -->
-                        <div class="dashboard-panel">
-                            <h3>🎯 課堂隨機抽號機</h3>
-                            <p>提升師生互動！隨機抽選座號回答問題。</p>
-                            <div class="student-picker-box">
-                                <div class="student-num-display" id="student-display">-- 號</div>
-                                <div class="student-config">
-                                    <label for="class-range">學生座號範圍：1 至 </label>
-                                    <input type="number" id="class-range" value="40" min="5" max="60"
-                                        aria-label="班級最高座號"> 號
-                                </div>
-                                <button class="btn-action-large" onclick="pickStudent()" id="btn-pick-student"
-                                    style="background: var(--accent-orange); margin-top:0;">
-                                    🎰 抽出幸運座號！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    
                                 </button>
                             </div>
                         </div>
