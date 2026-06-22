@@ -2278,7 +2278,7 @@
             setMode('formula'); // 預設公式模式
         });
 function setQuickQuestion(question) {
-    alert("setQuickQuestion有執行");
+
 
     const input = document.getElementById("ai-question");
 
@@ -2287,14 +2287,14 @@ function setQuickQuestion(question) {
         return;
     }
 
-    alert("準備設定 input.value");
+
 
     input.value = question;
 
     askAITeacher();
 }
         async function askAITeacher() {
-            alert("askAITeacher有執行");
+
     const questionInput = document.getElementById('ai-question');
     const responseDiv = document.getElementById('ai-response');
     const question = questionInput.value.trim();
@@ -2307,7 +2307,7 @@ function setQuickQuestion(question) {
     responseDiv.innerText = "AI 思考中...";
 
     try {
-        alert("準備連線 LM Studio");
+    
         const response = await fetch('http://192.168.2.111:1234/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -2329,7 +2329,7 @@ function setQuickQuestion(question) {
                 temperature: 0.3
             })
         });
-alert("fetch完成");
+
         const data = await response.json();
         responseDiv.innerText = data.choices[0].message.content;
 
