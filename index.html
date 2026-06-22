@@ -935,6 +935,25 @@
 >
     📤 開始解題
 </button>
+<div id="quick-questions" style="margin-top:15px;">
+    <h4>⚡ 常用主題快速提問</h4>
+
+```
+<button onclick="setQuickQuestion('乘法公式')">
+    📘 乘法公式
+</button>
+
+<button onclick="setQuickQuestion('畢氏定理')">
+    📐 畢氏定理
+</button>
+
+<button onclick="setQuickQuestion('三角形三心')">
+    🔺 三角形三心
+</button>
+```
+
+</div>
+
     <div
         id="ai-response"
         style="margin-top:15px; padding:20px; background:rgba(0,0,0,0.2); border-radius:10px; min-height:180px;">
@@ -2258,7 +2277,24 @@
             drawWheel();
             setMode('formula'); // 預設公式模式
         });
+function setQuickQuestion(question) {
+    alert("setQuickQuestion有執行");
+
+    const input = document.getElementById("ai-question");
+
+    if (!input) {
+        alert("找不到 ai-question");
+        return;
+    }
+
+    alert("準備設定 input.value");
+
+    input.value = question;
+
+    askAITeacher();
+}
         async function askAITeacher() {
+            alert("askAITeacher有執行");
     const questionInput = document.getElementById('ai-question');
     const responseDiv = document.getElementById('ai-response');
     const question = questionInput.value.trim();
@@ -2271,6 +2307,7 @@
     responseDiv.innerText = "AI 思考中...";
 
     try {
+        alert("準備連線 LM Studio");
         const response = await fetch('http://192.168.2.111:1234/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -2281,7 +2318,8 @@
                 messages: [
                     {
                         role: 'system',
-                        content: '你是一位台灣國中數學老師。請使用繁體中文。回答不超過120字。優先用算式與例題說明。不要使用開場白。不要說同學你好。不要長篇理論。回答格式固定：【觀念】一句話。【例題】一個簡短例題。【重點】一句話總結。'
+                        content: '你是一位台灣國中數學老師。請使用繁體中文。回答不超過120字。不要使用LaTeX語法。不要使用$符號。不要列出太多公式。每次只講最重要的一個觀念。回答格式固定：【觀念】一句話解釋。【例題】只給一題。【重點】一句話總結。不要使用開場白。不要說同學你好。'
+
                     },
                     {
                         role: 'user',
@@ -2291,7 +2329,7 @@
                 temperature: 0.3
             })
         });
-
+alert("fetch完成");
         const data = await response.json();
         responseDiv.innerText = data.choices[0].message.content;
 
