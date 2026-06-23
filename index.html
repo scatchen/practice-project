@@ -935,6 +935,23 @@
 >
     📤 開始解題
 </button>
+<button
+    onclick="clearQuestion()"
+    style="
+        width:220px;
+        height:60px;
+        font-size:24px;
+        font-weight:bold;
+        border:none;
+        border-radius:15px;
+        background:#dc2626;
+        color:white;
+        cursor:pointer;
+        margin-left:12px;
+    "
+>
+    🗑️ 清除題目
+</button>
 <div id="quick-questions" style="margin-top:15px;">
     <h4>⚡ 常用主題快速提問</h4>
 
@@ -2120,6 +2137,10 @@ function setQuickQuestion(question) {
     input.value = question;
 
     askAITeacher();
+}
+function clearQuestion() {
+    document.getElementById("ai-question").value = "";
+    document.getElementById("ai-question").focus();
 }
         async function askAITeacher() {
 
