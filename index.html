@@ -2153,7 +2153,7 @@ function clearQuestion() {
         return;
     }
 
-    responseDiv.innerText = "AI 思考中...";
+    responseDiv.innerText = "🤔 我來想想看...";
 
     try {
     
@@ -2180,7 +2180,9 @@ function clearQuestion() {
         });
 
         const data = await response.json();
-        responseDiv.innerText = data.choices[0].message.content;
+        responseDiv.innerText = 
+        "📚 數學小助教說：\n\n" +
+        data.choices[0].message.content;
 
     } catch (error) {
         console.error(error);
