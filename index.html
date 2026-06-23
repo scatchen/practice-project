@@ -962,37 +962,6 @@
 
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </section>
 
                 <!-- ================= 2. 七年級公式庫 ================= -->
@@ -1014,43 +983,7 @@
                 </section>
 
                 <!-- ================= 5. 隨機大輪盤 ================= -->
-                <section id="module-random" class="module-section">
-                    <div class="teaching-card" style="margin-bottom: 0;">
-                        <h3>🎲 課堂大輪盤挑戰 (動態同步公式題庫)</h3>
-                        <p>旋轉幸運大輪盤！系統會自動從七、八、九年級的公式庫中，動態彙整典型例題加入轉盤，點擊即可大字投影給學生挑戰！</p>
-
-                        <div class="wheel-container">
-                            <!-- 轉盤 (左側) -->
-                            <div class="wheel-left">
-                                <div class="wheel-svg-wrapper">
-                                    <div class="wheel-pointer"></div>
-                                    <canvas id="canvas-wheel" width="380" height="380" class="wheel-svg"></canvas>
-                                    <button class="btn-spin-center" onclick="spinWheel()"
-                                        id="btn-spin-wheel">SPIN</button>
-                                </div>
-                            </div>
-
-                            <!-- 結果顯示 (右側) -->
-                            <div class="wheel-right">
-                                <h4 style="margin-bottom: 0.6rem; color: var(--accent-orange);">🎯 抽選單元與例題：</h4>
-                                <div class="wheel-result-panel" id="wheel-result-box">
-                                    點擊轉盤中心 SPIN 開始抽題！
-                                </div>
-
-                                <div id="wheel-solution-area" style="display:none; margin-top: 1rem;">
-                                    <button class="btn-action-large" id="btn-wheel-solution"
-                                        onclick="toggleWheelSolution()"
-                                        style="background: var(--accent-green); margin-top:0;">
-                                        🔑 顯示此題解析與答案
-                                    </button>
-                                    <div id="wheel-solution-detail" class="solution-detail" style="margin-top: 1rem;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
+      
             </main>
         </div>
     </div>
@@ -1904,12 +1837,11 @@
             });
             buttonEl.classList.add('active');
             appState.currentTab = moduleId;
-
-            // 如果切換到輪盤頁面，重繪輪盤以適配寬度
-            if (moduleId === 'module-random') {
-                setTimeout(() => drawWheel(), 100);
-            }
-        }
+ // 如果切換到輪盤頁面，重繪輪盤以適配寬度
+    if (moduleId === 'module-random') {
+        setTimeout(() => drawWheel(), 100);
+    }
+}
 
         // ================= Teacher Mode 切換 =================
         function setMode(mode) {
@@ -2166,111 +2098,7 @@
             ctx.stroke();
         }
 
-        function spinWheel() {
-            if (appState.isSpinning) return;
-
-            // 抓取公式物件清單
-            const formulasList = [];
-            appState.database.forEach(group => {
-                group.formulas.forEach(form => {
-                    formulasList.push(form);
-                });
-            });
-
-            const len = formulasList.length;
-            if (len === 0) return;
-
-            appState.isSpinning = true;
-            const btn = document.getElementById('btn-spin-wheel');
-            btn.disabled = true;
-
-            const spinRounds = 5 + Math.floor(Math.random() * 3);
-            const targetAngle = spinRounds * 2 * Math.PI + Math.random() * 2 * Math.PI;
-
-            const startAngle = appState.wheelStartAngle;
-            const startTime = performance.now();
-            const duration = 4000;
-
-            function animate(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-
-                const easeOut = 1 - Math.pow(1 - progress, 3);
-                const currentAngle = startAngle + targetAngle * easeOut;
-
-                appState.wheelStartAngle = currentAngle % (2 * Math.PI);
-                drawWheel();
-
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                } else {
-                    appState.isSpinning = false;
-                    btn.disabled = false;
-
-                    const arcAngle = (2 * Math.PI) / len;
-                    const pointerOffset = 3 * Math.PI / 2;
-                    let winningIndex = Math.floor((pointerOffset - appState.wheelStartAngle) / arcAngle) % len;
-                    if (winningIndex < 0) winningIndex += len;
-
-                    const item = formulasList[winningIndex];
-                    appState.wheelWinningItem = item;
-
-                    // 渲染輪盤中獎面板
-                    const resultBox = document.getElementById('wheel-result-box');
-                    resultBox.innerHTML = `
-                        <div style="text-align:left;">
-                            <span class="unit-badge" style="background:#ea580c; color:white; font-size:0.75em;">${item.name}</span>
-                            <p style="font-weight:700; font-size:1.15em; margin-top:0.6rem; line-height:1.5;">${item.example}</p>
-                        </div>
-                    `;
-
-                    // 重置詳解區域
-                    const solutionArea = document.getElementById('wheel-solution-area');
-                    const solutionDetail = document.getElementById('wheel-solution-detail');
-                    const btnSol = document.getElementById('btn-wheel-solution');
-
-                    solutionArea.style.display = 'block';
-                    solutionDetail.classList.remove('show');
-                    btnSol.setAttribute('aria-expanded', 'false');
-                    btnSol.textContent = "🔑 顯示此題解析與答案";
-
-                    solutionDetail.innerHTML = `
-                        <p style="white-space: pre-line; line-height: 1.6; font-size: 1.05em;">${item.solution}</p>
-                    `;
-
-                    // 重新渲染 Math
-                    if (typeof renderMathInElement !== 'undefined') {
-                        renderMathInElement(solutionDetail, {
-                            delimiters: [
-                                { left: '$$', right: '$$', display: true },
-                                { left: '$', right: '$', display: false }
-                            ]
-                        });
-                    }
-
-                    playChime();
-                }
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        function toggleWheelSolution() {
-            const detail = document.getElementById('wheel-solution-detail');
-            const btn = document.getElementById('btn-wheel-solution');
-            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-
-            if (isExpanded) {
-                detail.classList.remove('show');
-                btn.setAttribute('aria-expanded', 'false');
-                btn.textContent = "🔑 顯示此題解析與答案";
-            } else {
-                detail.classList.add('show');
-                btn.setAttribute('aria-expanded', 'true');
-                btn.textContent = "❌ 隱藏詳細解答";
-            }
-        }
-
+   
         // ================= 7. 初始化啟動 =================
         window.addEventListener('load', () => {
             renderDatabase();
