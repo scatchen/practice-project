@@ -1050,8 +1050,18 @@ color: #111827;
     for (const g of grades) {
         try {
             const res = await fetch(`teaching-content/${g}.json`);
-            const data = await res.json();
+          const text = await res.text();
+console.log("📦 原始回應：", text);
 
+let data;
+
+try {
+    data = JSON.parse(text);
+} catch (e) {
+    console.log("⚠️ JSON解析失敗：", text);
+    responseDiv.innerText = "AI回傳格式錯誤（不是JSON）";
+    return;
+}
             allData.push({
                 grade: g.replace("grade", "grade-"),
                 unit: data.unit || "未分類",
@@ -2177,11 +2187,30 @@ function clearQuestion() {
     document.getElementById("ai-question").value = "";
     document.getElementById("ai-question").focus();
 }
-        async function askAITeacher() {
+const diagramMap = [
+    {
+        keywords: ["外角定理", "外角"],
+        file: "triangle-exterior-angle.png",
+        alt: "外角定理圖"
+    }
+];
+function getDiagram(question) {
+    for (let item of diagramMap) {
+        if (item.keywords.some(k => question.includes(k))) {
+            return item.file;
+        }
+    }
+    return null;
+}
+   async function askAITeacher() {
+    console.log("🚀 按鈕有被點到");
 
     const questionInput = document.getElementById('ai-question');
     const responseDiv = document.getElementById('ai-response');
+
     const question = questionInput.value.trim();
+
+    console.log("📩 題目是：", question);
 
     if (!question) {
         responseDiv.innerText = "請先輸入問題。";
@@ -2191,50 +2220,64 @@ function clearQuestion() {
     responseDiv.innerText = "🤔 我來想想看...";
 
     try {
-    
+        console.log("📡 即將送出 API");
+
         const response = await fetch('http://192.168.2.111:1234/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                model: 'openai/gpt-oss-20b',
-                messages: [
-                    {
-                        role: 'system',
-      content: '你是一位台灣國中數學老師。請使用繁體中文。回答控制在150到200字。不要使用LaTeX語法。不要使用美元符號。不要出現程式碼格式。不要使用數學排版符號。所有公式都改寫成中文。例如寫「2的3次方」不要寫數學符號。不要直接講抽象比喻。先用具體數字說明題目本身的意思。禁止使用糖果、包包、盒子、累積、一次次重複包裝這類比喻。若題目是指數律，先直接說「同底數相乘，底數不變，指數相加」。優先回答使用者提問的核心概念，不要改講其他相關主題。回答格式固定：【先懂】第一句就要直接用數字說明概念，例如「3的2次方就是3乘3」；不要先講比喻。【例子】只給一題，格式固定為題目、解法、答案。解法最多三步，而且必須使用具體數字，不要使用抽象符號。【記住】只給一句最容易背的口訣。不要額外補充。不要延伸說明。不要列出其他公式。不要增加額外段落。回答必須結束於【記住】。所有數值計算必須正確。計算過程必須逐步驗證後再輸出答案。若不確定答案，請重新計算一次再回答。不要使用開場白。不要說同學你好。不要強調自己是AI。回答要像老師上課投影片上的重點整理，讓學生30秒內看懂。',
-                    },
-                    {
-                        role: 'user',
-                        content: question
-                    }
-                ],
-                temperature: 0.3
-            })
-        });
+           body: JSON.stringify({
+    model: 'openai/gpt-oss-20b',
+    messages: [
+        {
+            role: 'system',
+           content: '你是一位台灣國中數學老師。請使用台灣國中課本的教學方式回答。不要使用 LaTeX 或 Markdown 數學語法（例如 \\( \\)、\\[ \\]、\\sqrt、``` 等）。請直接使用一般文字與算式，例如：c² = a² + b²、√25 = 5。回答請固定分成三個部分：【先懂】、【例子】、【記住】，內容要簡潔、容易讓國中生理解。'
+        },
+        {
+            role: 'user',
+            content: question
+        }
+    ],
+    temperature: 0.5,
+    max_tokens: 500
+})
+});
 
-        const data = await response.json();
+        console.log("📡 API已送出，等待回應...");
 
-let answer = data.choices[0].message.content;
+        const text = await response.text();
+        console.log("📦 原始回應：", text);
 
-answer = answer
-.replace("【先懂】", "<div class='ai-card ai-understand'><h3>💡 先懂</h3><p>")
-.replace("【例子】", "</p></div><div class='ai-card ai-example'><h3>📝 例子</h3><p>")
-.replace("【記住】", "</p></div><div class='ai-card ai-remember'><h3>⭐ 記住</h3><p>")
-+ "</p></div>";
+        const data = JSON.parse(text);
 
-responseDiv.innerHTML =
-"<h2>📚 數學小助教說：</h2>" +
-"<div style='text-align:center; margin:20px 0;'>" +
-"<img src='images/triangle-exterior-angle.png' style='max-width:420px; width:100%; border-radius:10px;'>" +
-"</div>" +
-answer;
+        let answer = data.choices[0].message.content;
+
+        const img = getDiagram(question);
+
+        let diagramHTML = "";
+
+        if (img) {
+            diagramHTML =
+                "<div style='text-align:center; margin:20px 0;'>" +
+                "<img src='images/" + img + "' style='max-width:420px; width:100%; border-radius:10px;'>" +
+                "</div>";
+        }
+
+        answer = answer
+            .replace("【先懂】", "<div class='ai-card ai-understand'><h3>💡 先懂</h3><p>")
+            .replace("【例子】", "</p></div><div class='ai-card ai-example'><h3>📝 例子</h3><p>")
+            .replace("【記住】", "</p></div><div class='ai-card ai-remember'><h3>⭐ 記住</h3><p>")
+            + "</p></div>";
+
+        responseDiv.innerHTML =
+            "<h2>📚 數學小助教說：</h2>" +
+            diagramHTML +
+            answer;
+
     } catch (error) {
         console.error(error);
         responseDiv.innerText = "連線失敗，請確認 LM Studio 已啟動。";
     }
 }
-    </script>
-</body>
-
-</html>
+</script>
