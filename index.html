@@ -2224,8 +2224,11 @@ answer = answer
 + "</p></div>";
 
 responseDiv.innerHTML =
-"<h2>📚 數學小助教說：</h2>" + answer;
-
+"<h2>📚 數學小助教說：</h2>" +
+"<div style='text-align:center; margin:20px 0;'>" +
+"<img src='images/triangle-exterior-angle.png' style='max-width:420px; width:100%; border-radius:10px;'>" +
+"</div>" +
+answer;
     } catch (error) {
         console.error(error);
         responseDiv.innerText = "連線失敗，請確認 LM Studio 已啟動。";
