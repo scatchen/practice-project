@@ -2190,12 +2190,20 @@ function clearQuestion() {
 const diagramMap = [
     {
         keywords: ["外角定理", "外角"],
-        file: "triangle-exterior-angle.png",
+        file: "images/geometry/triangle-exterior-angle.png",
         alt: "外角定理圖"
-    }
+     },
+    {
+        keywords: ["畢氏定理", "勾股定理"],
+        file: "images/geometry/pythagorean.png",
+        alt: "畢氏定理圖"
+    }    
 ];
 function getDiagram(question) {
+    console.log("DEBUG question:", question);
+
     for (let item of diagramMap) {
+        console.log("DEBUG keywords:", item.keywords);
         if (item.keywords.some(k => question.includes(k))) {
             return item.file;
         }
@@ -2260,7 +2268,7 @@ function getDiagram(question) {
         if (img) {
             diagramHTML =
                 "<div style='text-align:center; margin:20px 0;'>" +
-                "<img src='images/" + img + "' style='max-width:420px; width:100%; border-radius:10px;'>" +
+                "<img src='" + img + "' style='max-width:420px; width:100%; border-radius:10px;'>" +
                 "</div>";
         }
 
