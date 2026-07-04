@@ -2190,14 +2190,22 @@ function clearQuestion() {
     document.getElementById("ai-question").focus();
 }
 function getDiagram(question) {
-    console.log("DEBUG question:", question);
 
-    for (let item of diagramMap) {
-        console.log("DEBUG keywords:", item.keywords);
-        if (item.keywords.some(k => question.includes(k))) {
+    const text = question.toLowerCase();
+
+    for (const item of diagramMap) {
+
+        const matched = item.keywords.some(keyword =>
+            text.includes(keyword.toLowerCase())
+        );
+
+        if (matched) {
+            console.log("🖼 找到圖片：", item.id);
             return item.file;
         }
     }
+
+    console.log("🖼 找不到圖片");
     return null;
 }
    async function askAITeacher() {
