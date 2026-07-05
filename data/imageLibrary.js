@@ -65,6 +65,30 @@ const diagramMap = [
     ]
 },
 {
+    id: "proportional-segments-parallel-lines",
+
+    keywords: [
+        "比例線段",
+        "平行線截線段",
+        "平行線",
+        "截線段",
+        "三條平行線",
+        "兩條截線",
+        "AB:BC",
+        "DE:EF"
+    ],
+
+    file: "images/geometry/proportional-segments-parallel-lines.png",
+
+    alt: "比例線段（平行線截線段）",
+
+    category: "geometry",
+
+    grade: 9,
+
+    concept: "平行線截線段成比例"
+},
+{
     id: "triangle-proportional-segments",
 
     keywords: [
