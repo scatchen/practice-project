@@ -2189,39 +2189,6 @@ function clearQuestion() {
     document.getElementById("ai-question").value = "";
     document.getElementById("ai-question").focus();
 }
-function getDiagram(question) {
-
-    const text = question.toLowerCase();
-
-    let bestMatch = null;
-    let bestScore = 0;
-
-    for (const item of diagramMap) {
-
-        let score = 0;
-
-        for (const keyword of item.keywords) {
-            if (text.includes(keyword.toLowerCase())) {
-                score++;
-            }
-        }
-
-        console.log(item.id, "score =", score);
-
-        if (score > bestScore) {
-            bestScore = score;
-            bestMatch = item;
-        }
-    }
-
-    if (bestMatch) {
-        console.log("🖼 最佳圖片：", bestMatch.id);
-        return bestMatch.file;
-    }
-
-    console.log("🖼 找不到圖片");
-    return null;
-}
    async function askAITeacher() {
     console.log("🚀 按鈕有被點到");
 
