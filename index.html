@@ -2240,16 +2240,21 @@ function clearQuestion() {
 
         let answer = data.choices[0].message.content;
 
-        const img = getDiagram(question);
+        const diagram = getDiagramInfo(question);
 
-        let diagramHTML = "";
+let diagramHTML = "";
 
-        if (img) {
-            diagramHTML =
-                "<div style='text-align:center; margin:20px 0;'>" +
-                "<img src='" + img + "' style='max-width:420px; width:100%; border-radius:10px;'>" +
-                "</div>";
-        }
+if (diagram) {
+
+    diagramHTML =
+        "<div style='text-align:center; margin:20px 0;'>" +
+
+        "<img src='" + diagram.file + "' " +
+        "alt='" + diagram.alt + "' " +
+        "style='max-width:420px; width:100%; border-radius:10px;'>" +
+
+        "</div>";
+}
 
         answer = answer
             .replace("【先懂】", "<div class='ai-card ai-understand'><h3>💡 先懂</h3><p>")

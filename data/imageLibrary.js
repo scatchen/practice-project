@@ -63,6 +63,25 @@ const diagramMap = [
     related: [
         "triangle-exterior-angle"
     ]
+},
+{
+    id: "triangle-proportional-segments",
+
+    keywords: [
+        "比例線段",
+        "截線段",
+        "平行線",
+        "三角形比例",
+        "相似三角形",
+        "DE平行BC"
+    ],
+
+    file: "images/geometry/triangle-proportional-segments.png",
+    alt: "三角形比例線段（平行線截線）",
+
+    category: "geometry",
+    grade: 9,
+    concept: "三角形比例線段（平行線截線）"
 }
 ];
 
