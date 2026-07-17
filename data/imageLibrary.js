@@ -1,3 +1,4 @@
+
 const diagramMap = [
     {
     id: "triangle-exterior-angle",
@@ -67,6 +68,8 @@ const diagramMap = [
 {
     id: "proportional-segments-parallel-lines",
 
+    title: "比例線段",
+
     keywords: [
         "比例線段",
         "平行線截線段",
@@ -86,7 +89,13 @@ const diagramMap = [
 
     grade: 9,
 
-    concept: "平行線截線段成比例"
+    chapter: "比例線段",
+
+    concept: "平行線截線段成比例",
+
+    difficulty: 2,
+
+    related: []
 },
 {
     id: "triangle-proportional-segments",
