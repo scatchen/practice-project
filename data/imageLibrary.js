@@ -44,7 +44,12 @@ const diagramMap = [
         "斜邊",
         "平方和",
         "3 4 5",
-        "345三角形"
+        "345三角形",
+
+        "股",
+        "弦",
+        "股平方",
+        "斜邊平方"
     ],
 
     file: "images/geometry/pythagorean.png",
@@ -100,6 +105,8 @@ const diagramMap = [
 {
     id: "triangle-proportional-segments",
 
+    title: "三角形比例線段",
+
     keywords: [
         "比例線段",
         "截線段",
@@ -114,7 +121,16 @@ const diagramMap = [
 
     category: "geometry",
     grade: 9,
-    concept: "三角形比例線段（平行線截線）"
+
+    chapter: "比例線段",
+
+    concept: "三角形比例線段（平行線截線）",
+
+    difficulty: 2,
+
+    related: [
+    "proportional-segments-parallel-lines"
+]
 }
 ];
 
