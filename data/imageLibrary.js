@@ -134,6 +134,14 @@ const diagramMap = [
 }
 ];
 
+// 讓 Node.js 工具可以讀取智慧圖庫資料
+
+if (typeof module !== "undefined") {
+
+    module.exports = diagramMap;
+
+}
+
 function getDiagram(question) {
 
     const text = question.toLowerCase();
