@@ -121,6 +121,56 @@ function checkImageFiles() {
 
 }
 
+// ================================
+// 檢查關鍵字品質
+// ================================
+
+function checkKeywords() {
+
+    let hasError = false;
+
+    imageLibrary.forEach(item => {
+
+        if (item.keywords.length === 0) {
+
+            hasError = true;
+
+            console.log("❌", item.id, "的 keywords 為空");
+
+        }
+
+        const uniqueKeywords = new Set(item.keywords);
+
+        if (uniqueKeywords.size !== item.keywords.length) {
+
+            hasError = true;
+
+            console.log("❌", item.id, "的 keywords 有重複");
+
+}
+
+        const hasEmptyKeyword = item.keywords.some(
+            keyword => keyword.trim() === ""
+        );
+
+        if (hasEmptyKeyword) {
+
+            hasError = true;
+
+            console.log("❌", item.id, "的 keywords 含有空白字串");
+
+        }
+
+    });
+
+       if (!hasError) {
+
+           console.log("✅ Keywords 檢查完成，所有圖片皆有關鍵字");
+
+    }
+
+}
+
 
 // ================================
 // 2. 驗證主程式
@@ -137,6 +187,8 @@ function validateImageLibrary() {
     checkRequiredFields();
 
     checkImageFiles();
+
+    checkKeywords();
 
 }
 
