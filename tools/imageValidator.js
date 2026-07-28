@@ -9,6 +9,7 @@
 // ================================
 
 const imageLibrary = require("../data/imageLibrary.js");
+const fs = require("fs");
 
 // ================================
 // 必要欄位定義
@@ -91,6 +92,35 @@ function checkRequiredFields() {
 
 }
 
+// ================================
+// 檢查圖片檔案是否存在
+// ================================
+
+function checkImageFiles() {
+
+    let hasError = false;
+
+    imageLibrary.forEach(item => {
+
+        if (!fs.existsSync(item.file)) {
+
+            hasError = true;
+
+            console.log("❌ 找不到圖片：");
+            console.log(item.file);
+
+        }
+
+    });
+
+    if (!hasError) {
+
+        console.log("✅ 圖片檔案檢查完成，所有圖片皆存在");
+
+    }
+
+}
+
 
 // ================================
 // 2. 驗證主程式
@@ -105,6 +135,8 @@ function validateImageLibrary() {
     checkDuplicateId();
 
     checkRequiredFields();
+
+    checkImageFiles();
 
 }
 
