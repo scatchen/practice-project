@@ -201,6 +201,41 @@ function checkGrade() {
 
 }
 
+// ================================
+// 檢查 Difficulty 合法性
+// ================================
+
+function checkDifficulty() {
+
+    let hasError = false;
+
+    const validDifficulties = [1, 2, 3, 4, 5];
+
+    imageLibrary.forEach(item => {
+
+        if (!validDifficulties.includes(item.difficulty)) {
+
+            hasError = true;
+
+            console.log(
+                "❌",
+                item.id,
+                "的 difficulty 不合法：",
+                item.difficulty
+            );
+
+        }
+
+    });
+
+    if (!hasError) {
+
+        console.log("✅ Difficulty 檢查完成，所有 difficulty 皆合法");
+
+    }
+
+}
+
 
 // ================================
 // 2. 驗證主程式
@@ -221,6 +256,8 @@ function validateImageLibrary() {
     checkKeywords();
 
     checkGrade();
+
+    checkDifficulty();
 
 }
 
