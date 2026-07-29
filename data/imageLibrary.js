@@ -140,23 +140,66 @@ const diagramMap = [
 
 function searchImage(keyword) {
 
+    keyword = keyword.trim();
+
     const results = [];
+    const scoredResults = [];
+    const finalResults = [];
 
     diagramMap.forEach(item => {
 
-        const matched = item.keywords.some(
-            word => word.includes(keyword)
-        );
+        const matched =
+            item.title.includes(keyword) ||
+            item.concept.includes(keyword) ||
+            item.keywords.some(
+                word => word.includes(keyword)
+            );
 
         if (matched) {
 
-            results.push(item);
+            let score = 0;
+
+            if (item.title.includes(keyword)) {
+
+                score += 10;
+
+            }
+
+            if (item.concept.includes(keyword)) {
+
+                score += 8;
+
+            }
+
+            if (item.keywords.some(word => word.includes(keyword))) {
+
+                score += 5;
+
+            }
+
+            scoredResults.push({
+                item: item,
+                score: score
+            });
 
         }
 
     });
 
-    return results;
+    scoredResults.sort((a, b) => b.score - a.score);
+
+    scoredResults.forEach(result => {
+
+    finalResults.push({
+        ...result.item,
+        score: result.score
+    });
+
+});
+
+    console.log(scoredResults);
+
+    return finalResults;
 
 }
 
