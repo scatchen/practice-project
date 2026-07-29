@@ -134,6 +134,34 @@ const diagramMap = [
 }
 ];
 
+// ================================
+// 智慧圖庫搜尋
+// ================================
+
+function searchImage(keyword) {
+
+    const results = [];
+
+    diagramMap.forEach(item => {
+
+        const matched = item.keywords.some(
+            word => word.includes(keyword)
+        );
+
+        if (matched) {
+
+            results.push(item);
+
+        }
+
+    });
+
+    return results;
+
+}
+
+console.log(searchImage("畢氏"));
+
 // 讓 Node.js 工具可以讀取智慧圖庫資料
 
 if (typeof module !== "undefined") {
