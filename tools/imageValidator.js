@@ -236,6 +236,47 @@ function checkDifficulty() {
 
 }
 
+// ================================
+// 檢查 Category 合法性
+// ================================
+
+function checkCategory() {
+
+    let hasError = false;
+
+    const validCategories = [
+        "geometry",
+        "algebra",
+        "statistics",
+        "probability",
+        "function"
+    ];
+
+    imageLibrary.forEach(item => {
+
+        if (!validCategories.includes(item.category)) {
+
+            hasError = true;
+
+            console.log(
+                "❌",
+                item.id,
+                "的 category 不合法：",
+                item.category
+            );
+
+        }
+
+    });
+
+    if (!hasError) {
+
+        console.log("✅ Category 檢查完成，所有 category 皆合法");
+
+    }
+
+}
+
 
 // ================================
 // 2. 驗證主程式
@@ -258,6 +299,8 @@ function validateImageLibrary() {
     checkGrade();
 
     checkDifficulty();
+
+    checkCategory();
 
 }
 
