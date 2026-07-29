@@ -277,6 +277,59 @@ function checkCategory() {
 
 }
 
+// ================================
+// 檢查 Related 關聯資料
+// ================================
+
+function checkRelated() {
+
+    let hasError = false;
+
+    const validIds = imageLibrary.map(item => item.id);
+
+    imageLibrary.forEach(item => {
+
+        if (!Array.isArray(item.related)) {
+
+            hasError = true;
+
+            console.log(
+                "❌",
+                item.id,
+                "的 related 不是陣列"
+            );
+
+        } else {
+
+            item.related.forEach(relatedId => {
+
+                if (!validIds.includes(relatedId)) {
+
+                    hasError = true;
+
+                    console.log(
+                        "❌",
+                        item.id,
+                        "的 related ID 不存在：",
+                        relatedId
+                    );
+
+                }
+
+            });
+
+        }
+
+    });
+
+    if (!hasError) {
+
+        console.log("✅ Related 檢查完成，所有關聯資料皆有效");
+
+    }
+
+}
+
 
 // ================================
 // 2. 驗證主程式
@@ -301,6 +354,8 @@ function validateImageLibrary() {
     checkDifficulty();
 
     checkCategory();
+
+    checkRelated();
 
 }
 
