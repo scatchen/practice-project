@@ -171,6 +171,36 @@ function checkKeywords() {
 
 }
 
+// ================================
+// 檢查 Grade 合法性
+// ================================
+
+function checkGrade() {
+
+    let hasError = false;
+
+    const validGrades = [7, 8, 9];
+
+    imageLibrary.forEach(item => {
+
+        if (!validGrades.includes(item.grade)) {
+
+            hasError = true;
+
+            console.log("❌", item.id, "的 grade 不合法：", item.grade);
+
+        }
+
+    });
+
+    if (!hasError) {
+
+        console.log("✅ Grade 檢查完成，所有 grade 皆合法");
+
+    }
+
+}
+
 
 // ================================
 // 2. 驗證主程式
@@ -189,6 +219,8 @@ function validateImageLibrary() {
     checkImageFiles();
 
     checkKeywords();
+
+    checkGrade();
 
 }
 
