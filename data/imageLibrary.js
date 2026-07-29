@@ -140,6 +140,9 @@ const diagramMap = [
 
 function searchImage(keyword) {
 
+    const limit = 3;
+    const minScore = 5;
+
     keyword = keyword.trim();
 
     const results = [];
@@ -190,16 +193,20 @@ function searchImage(keyword) {
 
     scoredResults.forEach(result => {
 
-    finalResults.push({
-        ...result.item,
-        score: result.score
-    });
+        if (result.score >= minScore) {
 
-});
+            finalResults.push({
+                ...result.item,
+                score: result.score
+            });
+
+        }
+
+    });
 
     console.log(scoredResults);
 
-    return finalResults;
+    return finalResults.slice(0, limit);
 
 }
 
