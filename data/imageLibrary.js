@@ -138,12 +138,28 @@ const diagramMap = [
 // 智慧圖庫搜尋
 // ================================
 
+function normalizeKeyword(keyword) {
+
+    keyword = keyword.trim();
+    keyword = keyword.replace(/\s+/g, "");
+    keyword = keyword.toLowerCase();
+
+    return keyword;
+
+}
+
 function searchImage(keyword) {
 
     const limit = 3;
     const minScore = 5;
 
-    keyword = keyword.trim();
+    keyword = normalizeKeyword(keyword);
+
+    if (!keyword) {
+
+        return [];
+
+    }
 
     const results = [];
     const scoredResults = [];
