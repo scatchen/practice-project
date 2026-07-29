@@ -330,6 +330,70 @@ function checkRelated() {
 
 }
 
+// ================================
+// 智慧圖庫統計報告
+// ================================
+
+function generateStatistics() {
+
+    console.log("");
+    console.log("📊 智慧圖庫統計報告");
+    console.log("圖片總數：", imageLibrary.length);
+
+    const gradeCount = {
+        7: 0,
+        8: 0,
+        9: 0
+    };
+
+    const categoryCount = {
+        geometry: 0,
+        algebra: 0,
+        statistics: 0,
+        probability: 0,
+        function: 0
+    };
+
+    const difficultyCount = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0
+    };
+
+    imageLibrary.forEach(item => {
+
+        gradeCount[item.grade]++;
+
+        categoryCount[item.category]++;
+
+        difficultyCount[item.difficulty]++;
+
+    });
+
+    console.log("");
+    console.log("各年級圖片數量：");
+    console.log("七年級：", gradeCount[7]);
+    console.log("八年級：", gradeCount[8]);
+    console.log("九年級：", gradeCount[9]);
+    console.log("");
+    console.log("各分類圖片數量：");
+    console.log("geometry：", categoryCount.geometry);
+    console.log("algebra：", categoryCount.algebra);
+    console.log("statistics：", categoryCount.statistics);
+    console.log("probability：", categoryCount.probability);
+    console.log("function：", categoryCount.function);
+    console.log("");
+    console.log("各難度圖片數量：");
+    console.log("Lv1：", difficultyCount[1]);
+    console.log("Lv2：", difficultyCount[2]);
+    console.log("Lv3：", difficultyCount[3]);
+    console.log("Lv4：", difficultyCount[4]);
+    console.log("Lv5：", difficultyCount[5]);
+
+}
+
 
 // ================================
 // 2. 驗證主程式
@@ -356,6 +420,8 @@ function validateImageLibrary() {
     checkCategory();
 
     checkRelated();
+
+    generateStatistics();
 
 }
 
