@@ -195,6 +195,14 @@ function filterResults(scoredResults, minScore, limit) {
 
 }
 
+function sortResults(scoredResults) {
+
+    scoredResults.sort((a, b) => b.score - a.score);
+
+    return scoredResults;
+
+}
+
 function searchImage(keyword) {
 
     const limit = 3;
@@ -233,7 +241,7 @@ function searchImage(keyword) {
 
     });
 
-    scoredResults.sort((a, b) => b.score - a.score);
+    scoredResults = sortResults(scoredResults);
 
     console.log(scoredResults);
 
