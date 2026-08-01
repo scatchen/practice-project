@@ -148,6 +148,32 @@ function normalizeKeyword(keyword) {
 
 }
 
+function calculateScore(item, keyword) {
+
+    let score = 0;
+
+    if (item.title.includes(keyword)) {
+
+    score += 10;
+
+    }
+
+    if (item.concept.includes(keyword)) {
+
+    score += 8;
+
+    }
+
+    if (item.keywords.some(word => word.includes(keyword))) {
+
+    score += 5;
+
+    }
+
+    return score;
+
+}
+
 function searchImage(keyword) {
 
     const limit = 3;
@@ -176,26 +202,8 @@ function searchImage(keyword) {
 
         if (matched) {
 
-            let score = 0;
-
-            if (item.title.includes(keyword)) {
-
-                score += 10;
-
-            }
-
-            if (item.concept.includes(keyword)) {
-
-                score += 8;
-
-            }
-
-            if (item.keywords.some(word => word.includes(keyword))) {
-
-                score += 5;
-
-            }
-
+            const score = calculateScore(item, keyword);
+            
             scoredResults.push({
                 item: item,
                 score: score
