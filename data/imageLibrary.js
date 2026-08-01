@@ -174,6 +174,27 @@ function calculateScore(item, keyword) {
 
 }
 
+function filterResults(scoredResults, minScore, limit) {
+
+    const finalResults = [];
+
+    scoredResults.forEach(result => {
+
+        if (result.score >= minScore) {
+
+            finalResults.push({
+                ...result.item,
+                score: result.score
+            });
+
+        }
+
+    });
+
+    return finalResults.slice(0, limit);
+
+}
+
 function searchImage(keyword) {
 
     const limit = 3;
@@ -189,7 +210,6 @@ function searchImage(keyword) {
 
     const results = [];
     const scoredResults = [];
-    const finalResults = [];
 
     diagramMap.forEach(item => {
 
@@ -203,7 +223,7 @@ function searchImage(keyword) {
         if (matched) {
 
             const score = calculateScore(item, keyword);
-            
+
             scoredResults.push({
                 item: item,
                 score: score
@@ -215,22 +235,13 @@ function searchImage(keyword) {
 
     scoredResults.sort((a, b) => b.score - a.score);
 
-    scoredResults.forEach(result => {
-
-        if (result.score >= minScore) {
-
-            finalResults.push({
-                ...result.item,
-                score: result.score
-            });
-
-        }
-
-    });
-
     console.log(scoredResults);
 
-    return finalResults.slice(0, limit);
+    return filterResults(
+        scoredResults,
+        minScore,
+        limit
+    );
 
 }
 
