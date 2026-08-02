@@ -942,9 +942,38 @@ color: #111827;
                   
                     <div class="ai-teacher-card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 20px; margin-bottom: 20px; backdrop-filter: blur(10px);">
 
-    <h3 style="margin-top:0; color:black;">
+    <h3 id="assistant-title" style="margin-top:0; color:black;">
         🤖 數學小助教
     </h3>
+
+<div style="margin:15px 0;">
+
+    <button
+        onclick="setSubjectMode('math')"
+        style="
+            width:180px;
+            height:50px;
+            font-size:22px;
+            border-radius:12px;
+            margin-right:10px;
+        "
+    >
+        📐 數學模式
+    </button>
+
+    <button
+        onclick="setSubjectMode('english')"
+        style="
+            width:180px;
+            height:50px;
+            font-size:22px;
+            border-radius:12px;
+        "
+    >
+        📚 英文模式
+    </button>
+
+</div>
 
     <textarea
         id="ai-question"
@@ -1009,7 +1038,7 @@ color: #111827;
     <div
         id="ai-response"
         style="margin-top:15px; padding:20px; background:rgba(0,0,0,0.2); border-radius:10px; min-height:180px; color:white;">
-        👋 歡迎使用數學小助教，請輸入問題開始學習！
+        👋 歡迎使用睿爾數學小助教，請輸入問題開始學習！
     </div>
 
 </div>
@@ -1096,6 +1125,8 @@ try {
             theme: 'whiteboard',
             currentTab: 'module-dashboard',
             mode: 'formula', // 'formula' | 'concept' | 'solution'
+
+            subjectMode: 'math', // 'math' | 'english'
 
             // 轉盤旋轉狀態
             isSpinning: false,
@@ -2189,6 +2220,42 @@ function clearQuestion() {
     document.getElementById("ai-question").value = "";
     document.getElementById("ai-question").focus();
 }
+
+function setSubjectMode(mode) {
+
+    appState.subjectMode = mode;
+
+    const title = document.getElementById("assistant-title");
+
+    const responseBox = document.getElementById("ai-response");
+
+    title.style.color = "#facc15";
+
+    const questionBox = document.getElementById("ai-question");
+
+    if (mode === "math") {
+
+        title.innerText = "🤖 睿爾數學小助教";
+
+        questionBox.placeholder = "請輸入想學習的數學問題...";
+
+        responseBox.innerText = "👋 歡迎使用睿爾數學小助教，請輸入問題開始學習！";
+
+
+    } else {
+
+        title.innerText = "🤖 睿爾英文小助教";
+
+        questionBox.placeholder = "請輸入想學習的英文問題...";
+
+        responseBox.innerText = "👋 歡迎使用睿爾英文小助教，請輸入問題開始學習！";
+
+    }
+
+    console.log("目前模式：", appState.subjectMode);
+
+}
+
    async function askAITeacher() {
     console.log("🚀 按鈕有被點到");
 
@@ -2206,6 +2273,15 @@ function clearQuestion() {
 
     responseDiv.innerText = "🤔 我來想想看...";
 
+    const mathPrompt = '你是一位台灣國中數學老師。請使用台灣國中課本的教學方式回答。不要使用 LaTeX 或 Markdown 數學語法（例如 \\( \\)、\\[ \\]、\\sqrt、``` 等）。請直接使用一般文字與算式，例如：c² = a² + b²、√25 = 5。回答請固定分成三個部分：【先懂】、【例子】、【記住】，內容要簡潔、容易讓國中生理解。';
+
+    const englishPrompt = '你是一位台灣國中英文老師。請使用清楚、簡單、容易理解的方式回答國中英文問題。';
+
+    const activePrompt =
+        appState.subjectMode === 'math'
+           ? mathPrompt
+           : englishPrompt;
+
     try {
         console.log("📡 即將送出 API");
 
@@ -2219,7 +2295,7 @@ function clearQuestion() {
     messages: [
         {
             role: 'system',
-           content: '你是一位台灣國中數學老師。請使用台灣國中課本的教學方式回答。不要使用 LaTeX 或 Markdown 數學語法（例如 \\( \\)、\\[ \\]、\\sqrt、``` 等）。請直接使用一般文字與算式，例如：c² = a² + b²、√25 = 5。回答請固定分成三個部分：【先懂】、【例子】、【記住】，內容要簡潔、容易讓國中生理解。'
+            content: activePrompt
         },
         {
             role: 'user',
