@@ -131,7 +131,38 @@ const diagramMap = [
     related: [
     "proportional-segments-parallel-lines"
 ]
-}
+},
+{
+    id: "triangle-angle-sum",
+
+    title: "三角形內角和",
+
+    keywords: [
+        "三角形",
+        "內角和",
+        "三角形內角和",
+        "角度",
+        "180度",
+        "三角形角度",
+        "已知兩角求第三角"
+    ],
+
+    file: "images/geometry/triangle-angle-sum.png",
+
+    alt: "三角形三個內角 A、B、C 的和為 180 度",
+
+    category: "geometry",
+
+    grade: 7,
+
+    chapter: "三角形",
+
+    concept: "三角形內角和",
+
+    difficulty: 1,
+
+    related: []
+},
 ];
 
 // ================================
