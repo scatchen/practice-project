@@ -163,6 +163,39 @@ const diagramMap = [
 
     related: []
 },
+{
+    id: "parallel-lines-transversal-angles",
+
+    title: "平行線與截線的角關係",
+
+    keywords: [
+        "平行線",
+        "截線",
+        "平行線與截線",
+        "同位角",
+        "內錯角",
+        "同側內角",
+        "角關係",
+        "平行線判定",
+        "兩直線平行"
+    ],
+
+    file: "images/geometry/parallel-lines-transversal-angles.png",
+
+    alt: "兩條平行線被一條截線所截，顯示同位角、內錯角與同側內角的關係",
+
+    category: "geometry",
+
+    grade: 7,
+
+    chapter: "線與角",
+
+    concept: "平行線與截線的角關係",
+
+    difficulty: 2,
+
+    related: []
+},
 ];
 
 // ================================
