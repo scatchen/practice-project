@@ -196,6 +196,42 @@ const diagramMap = [
 
     related: []
 },
+{
+    id: "triangle-congruence",
+
+    title: "三角形全等",
+
+    keywords: [
+        "三角形全等",
+        "全等三角形",
+        "全等",
+        "SSS",
+        "SAS",
+        "ASA",
+        "AAS",
+        "HL",
+        "對應邊",
+        "對應角",
+        "全等判定",
+        "三角形全等判定"
+    ],
+
+    file: "images/geometry/triangle-congruence.png",
+
+    alt: "三角形全等及全等三角形判定條件",
+
+    category: "geometry",
+
+    grade: 8,
+
+    chapter: "幾何與尺規作圖",
+
+    concept: "三角形全等與全等判定",
+
+    difficulty: 2,
+
+    related: []
+},
 ];
 
 // ================================
