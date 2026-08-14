@@ -232,6 +232,43 @@ const diagramMap = [
 
     related: []
 },
+{
+    id: "triangle-similarity",
+
+    title: "三角形相似",
+
+    keywords: [
+        "三角形相似",
+        "相似三角形",
+        "相似",
+        "相似三角形判定",
+        "AA",
+        "SAS",
+        "SSS",
+        "對應角",
+        "對應邊",
+        "對應邊成比例",
+        "相似比"
+    ],
+
+    file: "images/geometry/triangle-similarity.png",
+
+    alt: "三角形相似，顯示對應角相等與對應邊成比例",
+
+    category: "geometry",
+
+    grade: 8,
+
+    chapter: "幾何與尺規作圖",
+
+    concept: "三角形相似與相似判定",
+
+    difficulty: 2,
+
+    related: [
+        "triangle-congruence"
+    ]
+},
 ];
 
 // ================================
