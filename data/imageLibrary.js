@@ -71,6 +71,42 @@ const diagramMap = [
     ]
 },
 {
+    id: "pythagorean-theorem-2",
+
+    title: "畢氏定理（完整教學）",
+
+    keywords: [
+        "畢氏定理",
+        "畢氏",
+        "勾股定理",
+        "勾股",
+        "直角三角形",
+        "斜邊",
+        "兩股",
+        "畢氏數",
+        "3 4 5",
+        "三角形是直角三角形"
+    ],
+
+    file: "images/geometry/pythagorean-theorem-2.png",
+
+    alt: "畢氏定理完整教學圖，包含公式、直角三角形、三四五範例與常見畢氏數",
+
+    category: "geometry",
+
+    grade: 8,
+
+    chapter: "幾何與尺規作圖",
+
+    concept: "畢氏定理",
+
+    difficulty: 2,
+
+    related: [
+        "pythagorean"
+    ]
+},
+{
     id: "proportional-segments-parallel-lines",
 
     title: "比例線段",
@@ -354,7 +390,7 @@ function searchImage(keyword) {
     }
 
     const results = [];
-    const scoredResults = [];
+    let scoredResults = [];
 
     diagramMap.forEach(item => {
 
@@ -380,7 +416,7 @@ function searchImage(keyword) {
 
     scoredResults = sortResults(scoredResults);
 
-    console.log(scoredResults);
+    console.log("🔎 畢氏定理搜尋結果：", scoredResults);
 
     return filterResults(
         scoredResults,
@@ -400,62 +436,39 @@ if (typeof module !== "undefined") {
 
 }
 
-function getDiagram(question) {
-
-    const text = question.toLowerCase();
-
-    let bestMatch = null;
-    let bestScore = 0;
-
-    for (const item of diagramMap) {
-
-        let score = 0;
-
-        for (const keyword of item.keywords) {
-            if (text.includes(keyword.toLowerCase())) {
-                score++;
-            }
-        }
-
-        console.log(item.id, "score =", score);
-
-        if (score > bestScore) {
-            bestScore = score;
-            bestMatch = item;
-        }
-    }
-
-    if (bestMatch) {
-        console.log("🖼 最佳圖片：", bestMatch.id);
-        return bestMatch.file;
-    }
-
-    console.log("🖼 找不到圖片");
-    return null;
-}
-
 function getDiagramInfo(question) {
 
     const text = question.toLowerCase();
 
-    let bestItem = null;
-    let bestScore = 0;
+    const results = [];
 
     for (const item of diagramMap) {
 
         let score = 0;
 
         for (const keyword of item.keywords) {
+
             if (text.includes(keyword.toLowerCase())) {
                 score++;
             }
+
         }
 
-        if (score > bestScore) {
-            bestScore = score;
-            bestItem = item;
+        if (score > 0) {
+
+            results.push({
+                item: item,
+                score: score
+            });
+
         }
     }
 
-    return bestItem;
+    results.sort((a, b) => b.score - a.score);
+
+    console.log("🖼 圖片搜尋結果：", results);
+
+    return results
+        .slice(0, 3)
+        .map(result => result.item);
 }

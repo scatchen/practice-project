@@ -2778,18 +2778,20 @@ function setSubjectMode(mode) {
 
         let answer = data.choices[0].message.content;
 
-        const diagram = getDiagramInfo(question);
+const diagrams = getDiagramInfo(question);
 
 let diagramHTML = "";
 
-if (diagram) {
+if (diagrams && diagrams.length > 0) {
 
     diagramHTML =
         "<div style='text-align:center; margin:20px 0;'>" +
 
-        "<img src='" + diagram.file + "' " +
-        "alt='" + diagram.alt + "' " +
-        "style='max-width:840px; width:100%; border-radius:10px;'>" +
+        diagrams.map(diagram =>
+            "<img src='" + diagram.file + "' " +
+            "alt='" + diagram.alt + "' " +
+            "style='max-width:840px; width:100%; border-radius:10px; margin-bottom:20px;'>"
+        ).join("") +
 
         "</div>";
 }
