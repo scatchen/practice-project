@@ -2894,6 +2894,13 @@ console.log("🎨 Canvas 尺寸：", canvas.width, canvas.height);
 
 const ctx = canvas.getContext("2d");
 
+// 🎨 預設畫筆設定
+
+ctx.strokeStyle = "red";
+ctx.lineWidth = 5;
+ctx.lineCap = "round";
+ctx.lineJoin = "round";
+
 let drawing = false;
 
 ctx.lineWidth = 5;
@@ -2913,6 +2920,14 @@ function resizeAnnotationCanvas(){
 
     canvas.style.width = rect.width + "px";
     canvas.style.height = rect.height + "px";
+
+
+    // 🎨 保持畫筆設定
+
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
 
 }
 
