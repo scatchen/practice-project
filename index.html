@@ -983,6 +983,8 @@ color: #111827;
 
     <br><br>
 
+    <div style="display:flex; gap:15px; align-items:center;">
+
    <button
     onclick="askAITeacher()"
     style="
@@ -999,23 +1001,45 @@ color: #111827;
 >
     📤 開始解題
 </button>
-<button
+
+<button 
+    class="btn-ctrl"
     onclick="clearQuestion()"
     style="
         width:220px;
         height:60px;
         font-size:24px;
         font-weight:bold;
+        background:#6b7280;
+        color:white;
         border:none;
         border-radius:15px;
-        background:#dc2626;
-        color:white;
         cursor:pointer;
-        margin-left:12px;
     "
 >
     🗑️ 清除題目
 </button>
+
+<button 
+    class="btn-ctrl"
+    onclick="clearAnnotation()"
+    style="
+    width:220px;
+    height:60px;
+    font-size:24px;
+    font-weight:bold;
+    background:#dc2626;
+    color:white;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+"
+>
+    🧹 清除標註
+</button>
+
+</div>
+
 <div id="quick-questions" style="margin-top:15px;">
     <h4>⚡ 常用主題快速提問</h4>
 
@@ -1033,13 +1057,28 @@ color: #111827;
 </button>
 ```
 
-</div>
+<div id="annotation-container"
+      style="position:relative;">
 
     <div
         id="ai-response"
         style="margin-top:15px; padding:20px; background:rgba(0,0,0,0.2); border-radius:10px; min-height:180px; color:white;">
         👋 歡迎使用睿爾數學小助教，請輸入問題開始學習！
+
     </div>
+
+    <canvas
+        id="annotation-canvas"
+        style="
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            pointer-events:none;
+            z-index:10;
+          ">
+</canvas>
 
 </div>
 
@@ -2822,9 +2861,146 @@ if (diagrams && diagrams.length > 0) {
             diagramHTML +
             answer;
 
+
+            // 更新標註畫布尺寸
+            setTimeout(() => {
+
+                resizeAnnotationCanvas();
+
+            }, 500);
+
     } catch (error) {
         console.error(error);
         responseDiv.innerText = "連線失敗，請確認 LM Studio 已啟動。";
     }
 }
+
+const canvas = document.getElementById("annotation-canvas");
+const responseBox = document.getElementById("ai-response");
+
+const rect = responseBox.getBoundingClientRect();
+
+canvas.width = rect.width;
+canvas.height = rect.height;
+
+canvas.style.width = rect.width + "px";
+canvas.style.height = rect.height + "px";
+
+console.log("🎨 Canvas 尺寸：", canvas.width, canvas.height);
+
+// ============================
+// Annotation Tool - Step 1-12
+// ============================
+
+const ctx = canvas.getContext("2d");
+
+let drawing = false;
+
+ctx.lineWidth = 5;
+ctx.lineCap = "round";
+ctx.strokeStyle = "red";
+ctx.globalAlpha = 1;
+
+
+canvas.style.pointerEvents = "auto";
+
+function resizeAnnotationCanvas(){
+
+    const rect = responseBox.getBoundingClientRect();
+
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
+    canvas.style.width = rect.width + "px";
+    canvas.style.height = rect.height + "px";
+
+}
+
+
+// ============================
+// 清除標註
+// ============================
+
+function clearAnnotation(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    drawing = false;
+
+    console.log("🧹 已清除標註");
+
+}
+
+
+canvas.addEventListener("pointerdown", function(e){
+
+    canvas.setPointerCapture(e.pointerId);
+
+    console.log("🎨 開始畫線", e.clientX, e.clientY);
+
+    drawing = true;
+
+    const rect = canvas.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(x, y);
+
+});
+
+
+canvas.addEventListener("pointermove", function(e){
+
+    console.log("🖐 pointermove 進入");
+
+    if (!drawing) return;
+
+
+    const rect = canvas.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+
+    console.log("✏️ 移動", x, y);
+
+
+    ctx.lineTo(x, y);
+
+    ctx.stroke();
+
+});
+
+
+canvas.addEventListener("pointerup", function(e){
+
+    drawing = false;
+
+    canvas.releasePointerCapture(e.pointerId);
+
+});
+
+
+canvas.addEventListener("pointerup", function() {
+
+    drawing = false;
+
+});
+
+
+canvas.addEventListener("pointerleave", function() {
+
+    drawing = false;
+
+});
+
 </script>
