@@ -305,6 +305,43 @@ const diagramMap = [
         "triangle-congruence"
     ]
 },
+{
+    id: "quadratic-function",
+
+    title: "二次函數",
+
+    keywords: [
+        "二次函數",
+        "拋物線",
+        "二次函數圖形",
+        "頂點",
+        "對稱軸",
+        "開口方向",
+        "開口向上",
+        "開口向下",
+        "y=ax²+bx+c",
+        "二次函數頂點",
+        "二次函數對稱軸"
+    ],
+
+    file: "images/function/quadratic-function.png",
+
+    alt: "二次函數的拋物線圖形，顯示頂點、對稱軸與開口方向",
+
+    category: "function",
+
+    grade: 9,
+
+    chapter: "二次函數",
+
+    concept: "二次函數的圖形與基本性質",
+
+    difficulty: 2,
+
+    related: [
+        "linear-function"
+    ]
+},
 ];
 
 // ================================
