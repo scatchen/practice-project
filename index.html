@@ -128,6 +128,7 @@
             display: flex;
             gap: 0.6rem;
             align-items: center;
+            min-width: 0;
         }
 
         .btn-ctrl {
@@ -1002,6 +1003,24 @@ color: #111827;
                 "
                 >
                 🟢 螢光筆
+                </button>
+
+
+                <button 
+                class="btn-ctrl"
+                onclick="setDrawMode('eraser')"
+                style="
+                background:#6b7280;
+                color:white;
+                width:120px;
+                height:60px;
+                font-size:20px;
+                font-weight:bold;
+                border-radius:15px;
+                white-space:nowrap;
+                "
+                >
+                🧽 橡皮擦
                 </button>
 
 
@@ -3017,7 +3036,7 @@ function setDrawMode(mode){
     console.log("🎨目前模式:", drawMode);
 
 
-    if(drawMode === "pen" || drawMode === "pen-blue" || drawMode === "highlighter" || drawMode === "highlighter-green"){
+    if(drawMode === "pen" || drawMode === "pen-blue" || drawMode === "highlighter" || drawMode === "highlighter-green" || drawMode === "eraser"){
 
         canvas.style.pointerEvents = "auto";
         canvas.style.touchAction = "none";
@@ -3147,6 +3166,14 @@ canvas.addEventListener("pointerdown", function(e){
 
     }
 
+    if(drawMode === "eraser"){
+
+        ctx.lineWidth = 25;
+        ctx.globalAlpha = 1;
+        ctx.globalCompositeOperation = "destination-out";
+
+    }
+
 
 
     const rect = canvas.getBoundingClientRect();
@@ -3155,7 +3182,7 @@ canvas.addEventListener("pointerdown", function(e){
     const y = e.clientY - rect.top;
 
 
-if(drawMode === "pen" || drawMode === "pen-blue"){
+if(drawMode === "pen" || drawMode === "pen-blue" || drawMode === "eraser"){
 
     ctx.beginPath();
     ctx.moveTo(x,y);
