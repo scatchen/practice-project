@@ -342,6 +342,42 @@ const diagramMap = [
         "linear-function"
     ]
 },
+{
+    id: "linear-function",
+
+    title: "一次函數",
+
+    keywords: [
+        "一次函數",
+        "一次函數圖形",
+        "直線",
+        "線性函數",
+        "斜率",
+        "正斜率",
+        "負斜率",
+        "y截距",
+        "x截距",
+        "y=ax+b"
+    ],
+
+    file: "images/function/linear-function.png",
+
+    alt: "一次函數的直線圖形，顯示斜率、x截距、y截距與直線升降方向",
+
+    category: "function",
+
+    grade: 9,
+
+    chapter: "一次函數",
+
+    concept: "一次函數的圖形、斜率與截距",
+
+    difficulty: 2,
+
+    related: [
+        "quadratic-function"
+    ]
+},
 ];
 
 // ================================
