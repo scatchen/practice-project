@@ -2148,6 +2148,7 @@ try {
             document.documentElement.style.setProperty('--font-scale', appState.fontSize);
 
             setTimeout(() => {
+                resizeAnnotationCanvas();
                 drawWheel();
                 document.querySelectorAll('.scribble-box').forEach(box => {
                     if (box.style.display !== 'none') setupCanvas(box.querySelector('canvas'));
@@ -2956,7 +2957,8 @@ if (diagrams && diagrams.length > 0) {
         diagrams.map(diagram =>
             "<img src='" + diagram.file + "' " +
             "alt='" + diagram.alt + "' " +
-            "style='max-width:840px; width:100%; border-radius:10px; margin-bottom:20px;'>"
+            "style='max-width:840px; width:100%; border-radius:10px; margin-bottom:20px;' " +
+            "onload='resizeAnnotationCanvas()'>"
         ).join("") +
 
         "</div>";
