@@ -343,6 +343,42 @@ const diagramMap = [
     ]
 },
 {
+    id: "quadratic-function-vertex-form",
+
+    title: "二次函數頂點式",
+
+    keywords: [
+        "二次函數",
+        "二次函數頂點式",
+        "頂點式",
+        "y=a(x-h)^2+k",
+        "拋物線",
+        "頂點",
+        "對稱軸",
+        "開口方向",
+        "平移",
+        "h k"
+    ],
+
+    file: "images/function/quadratic-function-vertex-form.png",
+
+    alt: "二次函數頂點式 y=a(x-h)^2+k 的拋物線圖形，包含頂點、對稱軸、開口方向與截距",
+
+    category: "function",
+
+    grade: 9,
+
+    chapter: "二次函數",
+
+    concept: "二次函數頂點式、頂點與圖形平移",
+
+    difficulty: 2,
+
+    related: [
+        "quadratic-function"
+    ]
+},
+{
     id: "linear-function",
 
     title: "一次函數",
