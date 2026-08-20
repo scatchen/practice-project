@@ -379,6 +379,50 @@ const diagramMap = [
     ]
 },
 {
+    id: "quadratic-function-graph-parameters",
+
+    title: "二次函數圖形判讀：a、h、k 的影響",
+
+    keywords: [
+        "二次函數",
+        "二次函數圖形",
+        "頂點式",
+        "y=a(x-h)^2+k",
+        "a h k",
+        "a的影響",
+        "h的影響",
+        "k的影響",
+        "開口方向",
+        "開口大小",
+        "寬窄",
+        "左右平移",
+        "上下平移",
+        "頂點",
+        "對稱軸",
+        "拋物線",
+        "圖形判讀"
+    ],
+
+    file: "images/function/quadratic-function-graph-parameters.png",
+
+    alt: "二次函數頂點式 y=a(x-h)^2+k 中 a、h、k 對拋物線開口方向、寬窄與平移影響的教學圖",
+
+    category: "function",
+
+    grade: 9,
+
+    chapter: "二次函數",
+
+    concept: "二次函數頂點式中 a、h、k 對圖形的影響",
+
+    difficulty: 2,
+
+    related: [
+        "quadratic-function",
+        "quadratic-function-vertex-form"
+    ]
+},
+{
     id: "linear-function",
 
     title: "一次函數",
