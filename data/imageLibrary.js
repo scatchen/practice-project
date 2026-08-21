@@ -423,6 +423,57 @@ const diagramMap = [
     ]
 },
 {
+    id: "quadratic-function-roots-discriminant",
+
+    title: "二次函數與 x 軸的交點、根與判別式",
+
+    keywords: [
+        "二次函數",
+        "二次函數圖形",
+        "二次方程式",
+        "判別式",
+        "Δ",
+        "判別式Δ",
+        "b²-4ac",
+        "b^2-4ac",
+        "x軸交點",
+        "x 軸交點",
+        "根",
+        "實數根",
+        "實根",
+        "兩個交點",
+        "一個交點",
+        "沒有交點",
+        "兩個實數根",
+        "一個重根",
+        "沒有實數根",
+        "拋物線",
+        "相切",
+        "二次方程式的根",
+        "根的個數"
+    ],
+
+    file: "images/function/quadratic-function-roots-discriminant.png",
+
+    alt: "二次函數與 x 軸交點、方程式的根與判別式 Δ=b²-4ac 的關係，包含兩個交點、一個交點與沒有交點三種情況",
+
+    category: "function",
+
+    grade: 9,
+
+    chapter: "二次函數",
+
+    concept: "二次函數與 x 軸的交點、方程式的根與判別式",
+
+    difficulty: 2,
+
+    related: [
+        "quadratic-function",
+        "quadratic-function-vertex-form",
+        "quadratic-function-graph-parameters"
+    ]
+},
+{
     id: "linear-function",
 
     title: "一次函數",
