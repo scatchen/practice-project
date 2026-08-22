@@ -200,6 +200,48 @@ const diagramMap = [
     related: []
 },
 {
+    id: "number-line-basics",
+
+    title: "數線基本概念",
+
+    keywords: [
+        "數線",
+        "數線基本概念",
+        "原點",
+        "0",
+        "正方向",
+        "正數",
+        "負數",
+        "單位長度",
+        "數線上的點",
+        "數線上的數",
+        "大小比較",
+        "數線大小比較",
+        "數線距離",
+        "距離",
+        "絕對值",
+        "區間",
+        "整數",
+        "有理數"
+    ],
+
+    file: "images/number-line/number-line-basics.png",
+
+    alt: "數線基本概念教學圖，包含原點、正方向、單位長度、數線上的點、數值大小比較、區間與絕對值",
+
+    category: "coordinate",
+
+    grade: 7,
+
+    chapter: "數與數線",
+
+    concept: "數線、原點、正方向、大小比較、距離與絕對值",
+
+    difficulty: 1,
+
+    related: []
+},
+{
     id: "parallel-lines-transversal-angles",
 
     title: "平行線與截線的角關係",
