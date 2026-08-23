@@ -239,7 +239,64 @@ const diagramMap = [
 
     difficulty: 1,
 
-    related: []
+    related: [
+        "coordinate-plane-basics"
+    ]
+},
+{
+    id: "coordinate-plane-basics",
+
+    title: "座標平面基本概念",
+
+    keywords: [
+        "座標平面",
+        "平面座標",
+        "直角座標平面",
+        "笛卡兒座標平面",
+        "座標軸",
+        "x軸",
+        "x 軸",
+        "y軸",
+        "y 軸",
+        "原點",
+        "O(0,0)",
+        "座標",
+        "座標點",
+        "點的座標",
+        "有序對",
+        "x座標",
+        "y座標",
+        "第一象限",
+        "第二象限",
+        "第三象限",
+        "第四象限",
+        "四個象限",
+        "象限",
+        "正半軸",
+        "負半軸",
+        "座標位置",
+        "數線",
+        "兩點距離",
+        "座標距離"
+    ],
+
+    file: "images/coordinate/coordinate-plane-basics.png",
+
+    alt: "座標平面基本概念教學圖，包含 x 軸、y 軸、原點、四個象限、點的座標、特殊位置與兩點距離",
+
+    category: "coordinate",
+
+    grade: 7,
+
+    chapter: "座標與數線",
+
+    concept: "座標平面、座標軸、原點、象限與點的座標",
+
+    difficulty: 1,
+
+    related: [
+        "number-line-basics"
+    ]
 },
 {
     id: "parallel-lines-transversal-angles",
