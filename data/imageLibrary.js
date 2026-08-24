@@ -573,6 +573,54 @@ const diagramMap = [
     ]
 },
 {
+    id: "exponent-laws-basics",
+
+    title: "指數律基本公式",
+
+    keywords: [
+        "指數",
+        "指數律",
+        "指數法則",
+        "指數運算",
+        "次方",
+        "冪",
+        "冪次",
+        "同底數相乘",
+        "同底數相除",
+        "次方的次方",
+        "積的次方",
+        "商的次方",
+        "零次方",
+        "負指數",
+        "分數指數",
+        "指數公式",
+        "a的m次方",
+        "a的n次方",
+        "a^m",
+        "a^n",
+        "a^m乘a^n",
+        "a^m除以a^n",
+        "指數律整理",
+        "指數律總整理"
+    ],
+
+    file: "images/algebra/exponent-laws-basics.png",
+
+    alt: "指數律基本公式總整理，包含同底數相乘、同底數相除、次方的次方、積與商的次方、零次方、負指數與分數指數",
+
+    category: "algebra",
+
+    grade: 8,
+
+    chapter: "指數律",
+
+    concept: "指數律基本公式與指數運算",
+
+    difficulty: 2,
+
+    related: []
+},
+{
     id: "linear-function",
 
     title: "一次函數",
