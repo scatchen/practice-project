@@ -208,7 +208,6 @@ const diagramMap = [
         "數線",
         "數線基本概念",
         "原點",
-        "0",
         "正方向",
         "正數",
         "負數",
@@ -275,7 +274,6 @@ const diagramMap = [
         "正半軸",
         "負半軸",
         "座標位置",
-        "數線",
         "兩點距離",
         "座標距離"
     ],
@@ -619,6 +617,60 @@ const diagramMap = [
     difficulty: 2,
 
     related: []
+},
+{
+    id: "multiplication-formulas-basics",
+
+    title: "乘法公式基本公式",
+
+    keywords: [
+        "乘法公式",
+        "乘法公式基本公式",
+        "和的平方",
+        "和的平方公式",
+        "差的平方",
+        "差的平方公式",
+        "平方差",
+        "平方差公式",
+        "完全平方公式",
+        "(a+b)^2",
+        "(a-b)^2",
+        "(a+b)²",
+        "(a-b)²",
+        "a+b的平方",
+        "a-b的平方",
+        "a²+2ab+b²",
+        "a²-2ab+b²",
+        "a²-b²",
+        "兩數和的平方",
+        "兩數差的平方",
+        "兩數平方差",
+        "乘法公式展開",
+        "乘法公式應用",
+        "代數乘法公式",
+        "平方公式",
+        "平方差怎麼算",
+        "和的平方怎麼算",
+        "差的平方怎麼算"
+    ],
+
+    file: "images/algebra/multiplication-formulas-basics.png",
+
+    alt: "國中乘法公式教學圖，包含和的平方、差的平方與平方差公式，並搭配簡單算式與展開示例",
+
+    category: "algebra",
+
+    grade: 8,
+
+    chapter: "乘法公式",
+
+    concept: "和的平方、差的平方與平方差公式",
+
+    difficulty: 2,
+
+    related: [
+        "exponent-laws-basics"
+    ]
 },
 {
     id: "linear-function",
