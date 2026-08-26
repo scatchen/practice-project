@@ -673,6 +673,55 @@ const diagramMap = [
     ]
 },
 {
+    id: "distributive-law-basics",
+
+    title: "分配律與逆分配律",
+
+    keywords: [
+        "分配律",
+        "分配律公式",
+        "分配法則",
+        "乘法分配律",
+        "乘法的分配律",
+        "逆分配律",
+        "提公因數",
+        "提出公因數",
+        "公因數",
+        "括號",
+        "去括號",
+        "乘開括號",
+        "括號展開",
+        "分配律展開",
+        "分配律應用",
+        "負數分配律",
+        "正負號",
+        "符號變化",
+        "負號乘括號",
+        "負數乘括號",
+        "兩個括號",
+        "兩括號展開",
+        "因式分解"
+    ],
+
+    file: "images/algebra/distributive-law-basics.png",
+
+    alt: "國中分配律與逆分配律教學圖，包含負數乘括號、兩個括號展開、正負號變化與提公因數",
+
+    category: "algebra",
+
+    grade: 8,
+
+    chapter: "乘法公式與多項式",
+
+    concept: "分配律、逆分配律、括號展開、正負號與提公因數",
+
+    difficulty: 2,
+
+    related: [
+        "multiplication-formulas-basics"
+    ]
+},
+{
     id: "linear-function",
 
     title: "一次函數",
