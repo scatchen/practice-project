@@ -580,7 +580,6 @@ const diagramMap = [
         "指數律",
         "指數法則",
         "指數運算",
-        "次方",
         "冪",
         "冪次",
         "同底數相乘",
@@ -719,6 +718,63 @@ const diagramMap = [
 
     related: [
         "multiplication-formulas-basics"
+    ]
+},
+{
+    id: "commutative-associative-laws-and-equation-solving",
+
+    title: "交換律、結合律與等式解未知數",
+
+    keywords: [
+        "交換律",
+        "交換律公式",
+        "加法交換律",
+        "乘法交換律",
+        "交換法則",
+        "結合律",
+        "結合律公式",
+        "加法結合律",
+        "乘法結合律",
+        "結合法則",
+        "交換律與結合律",
+        "交換結合律",
+        "等式",
+        "等式解未知數",
+        "解未知數",
+        "解方程式",
+        "解一元一次方程式",
+        "一次方程式",
+        "移項",
+        "移項法",
+        "等式移項",
+        "移項解方程式",
+        "未知數",
+        "求未知數",
+        "去括號解方程式",
+        "方程式移項",
+        "等式兩邊",
+        "等式性質",
+        "加減等式性質",
+        "乘除等式性質",
+        "驗算"
+    ],
+
+    file: "images/algebra/commutative-associative-laws-and-equation-solving.png",
+
+    alt: "國中交換律、結合律與等式解未知數教學圖，包含加法與乘法交換律、結合律，以及利用移項法解一元一次方程式的步驟與驗算",
+
+    category: "algebra",
+
+    grade: 8,
+
+    chapter: "代數運算與一元一次方程式",
+
+    concept: "交換律、結合律、等式性質與移項法解未知數",
+
+    difficulty: 2,
+
+    related: [
+        "distributive-law-basics"
     ]
 },
 {
