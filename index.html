@@ -1169,12 +1169,28 @@ color: #111827;
     <h4>⚡ 常用主題快速提問</h4>
 
 ```
+<button onclick="setQuickQuestion('指數律')">
+    📊 指數律
+</button>
+
+<button onclick="setQuickQuestion('分配律')">
+    🧮 分配律
+</button>
+
 <button onclick="setQuickQuestion('乘法公式')">
     📘 乘法公式
 </button>
 
 <button onclick="setQuickQuestion('畢氏定理')">
     📐 畢氏定理
+</button>
+
+<button onclick="setQuickQuestion('外角定理')">
+    📐 外角定理
+</button>
+
+<button onclick="setQuickQuestion('平行線截線')">
+    📏 平行線截線
 </button>
 
 <button onclick="setQuickQuestion('三角形三心')">
@@ -2957,7 +2973,7 @@ if (diagrams && diagrams.length > 0) {
         diagrams.map(diagram =>
             "<img src='" + diagram.file + "' " +
             "alt='" + diagram.alt + "' " +
-            "style='max-width:840px; width:100%; border-radius:10px; margin-bottom:20px;' " +
+            "style='max-width:1200px; width:100%; border-radius:10px; margin-bottom:20px;' " +
             "onload='resizeAnnotationCanvas()'>"
         ).join("") +
 
