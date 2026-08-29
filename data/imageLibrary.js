@@ -698,8 +698,7 @@ const diagramMap = [
         "負號乘括號",
         "負數乘括號",
         "兩個括號",
-        "兩括號展開",
-        "因式分解"
+        "兩括號展開"
     ],
 
     file: "images/algebra/distributive-law-basics.png",
@@ -776,6 +775,39 @@ const diagramMap = [
     related: [
         "distributive-law-basics"
     ]
+},
+{
+    id: "cross-multiplication-factoring",
+
+    title: "十字交乘法因式分解",
+
+    keywords: [
+        "十字交乘法",
+        "十字交乘",
+        "十字相乘法",
+        "十字交乘法因式分解",
+        "十字交乘法分解",
+        "二次三項式因式分解",
+        "二次三項式",
+        "因式分解十字交乘法",
+        "十字法因式分解"
+    ],
+
+    file: "images/algebra/a_colorful_educational_infographic_poster_about_fa.png",
+
+    alt: "國中因式分解十字交乘法教學圖，說明二次項與常數項的拆解、正負號關係、交叉相乘後相加，以及完整因式分解步驟",
+
+    category: "algebra",
+
+    grade: 8,
+
+    chapter: "因式分解",
+
+    concept: "十字交乘法因式分解二次三項式",
+
+    difficulty: 3,
+
+    related: []
 },
 {
     id: "linear-function",
