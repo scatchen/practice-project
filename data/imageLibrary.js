@@ -32,6 +32,47 @@ const diagramMap = [
         "pythagorean"
     ]
 },
+{
+    id: "triangle-centers",
+
+    title: "三角形三心：外心、內心、重心",
+
+    keywords: [
+        "三角形三心",
+        "三心",
+        "外心",
+        "外心定義",
+        "外心性質",
+        "外接圓",
+        "內心",
+        "內心定義",
+        "內心性質",
+        "內切圓",
+        "重心",
+        "重心定義",
+        "重心性質",
+        "三中線",
+        "中線交點",
+        "角平分線交點",
+        "垂直平分線交點"
+    ],
+
+    file: "images/geometry/a_clean_educational_infographic_poster_in_chinese.png",
+
+    alt: "國中三角形三心教學圖，介紹外心、內心與重心的定義、作法、性質、外接圓、內切圓與重心二比一的分點關係",
+
+    category: "geometry",
+
+    grade: 8,
+
+    chapter: "三角形",
+
+    concept: "外心、內心與重心",
+
+    difficulty: 2,
+
+    related: []
+},
     {
     id: "pythagorean",
 
@@ -174,7 +215,6 @@ const diagramMap = [
     title: "三角形內角和",
 
     keywords: [
-        "三角形",
         "內角和",
         "三角形內角和",
         "角度",
