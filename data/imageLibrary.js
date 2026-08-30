@@ -693,6 +693,38 @@ const diagramMap = [
     related: []
 },
 {
+    id: "continued-proportion-basics",
+
+    title: "連比例",
+
+    keywords: [
+        "連比例",
+        "連比例觀念",
+        "連比例式",
+        "連比例表示法",
+        "連比例關係",
+        "連比",
+        "a:b:c",
+        "a:b=b:c"
+    ],
+
+    file: "images/algebra/continued-proportion-basics.png",
+
+    alt: "國中連比例觀念教學圖，說明連比例的表示方式、三個量之間的比例關係，以及利用相同倍數理解連比例",
+
+    category: "algebra",
+
+    grade: 9,
+
+    chapter: "比例與連比例",
+
+    concept: "連比例的基本觀念與表示法",
+
+    difficulty: 2,
+
+    related: []
+},
+{
     id: "multiplication-formulas-basics",
 
     title: "乘法公式基本公式",
