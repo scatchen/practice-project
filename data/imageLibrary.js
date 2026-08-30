@@ -658,6 +658,41 @@ const diagramMap = [
     related: []
 },
 {
+    id: "science-notation-basics",
+
+    title: "科學記號",
+
+    keywords: [
+        "科學記號",
+        "科學記號表示法",
+        "科學記號寫法",
+        "科學記號表示",
+        "用科學記號表示",
+        "數字的科學記號",
+        "科學記號轉換",
+        "科學記號換算",
+        "科學記號大小",
+        "正指數科學記號",
+        "負指數科學記號"
+    ],
+
+    file: "images/algebra/science-notation-basics.png",
+
+    alt: "國中科學記號教學圖，說明科學記號的表示法、正負指數、小數點移動方向、數字轉換與基本運算",
+
+    category: "algebra",
+
+    grade: 8,
+
+    chapter: "數與數線",
+
+    concept: "科學記號",
+
+    difficulty: 2,
+
+    related: []
+},
+{
     id: "multiplication-formulas-basics",
 
     title: "乘法公式基本公式",
