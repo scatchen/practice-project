@@ -567,7 +567,6 @@ const diagramMap = [
     keywords: [
         "二次函數",
         "二次函數圖形",
-        "二次方程式",
         "判別式",
         "Δ",
         "判別式Δ",
@@ -608,6 +607,47 @@ const diagramMap = [
         "quadratic-function-vertex-form",
         "quadratic-function-graph-parameters"
     ]
+},
+{
+    id: "quadratic-equation-methods-basics",
+
+    title: "配方法與公式解",
+
+    keywords: [
+        "配方法",
+        "配方法解方程式",
+        "配方法解二次方程式",
+        "完全平方",
+        "完全平方形式",
+        "配成完全平方",
+        "公式解",
+        "公式解法",
+        "公式解方程式",
+        "二次公式",
+        "公式解二次方程式",
+        "負b加減根號",
+        "-b加減根號",
+        "b平方減4ac",
+        "b²-4ac",
+        "根號b平方減4ac",
+        "2a"
+    ],
+
+    file: "images/algebra/quadratic-equation-completing-square-formula.png",
+
+    alt: "國中二次方程式配方法與公式解教學圖，包含配方法的步驟、公式解 x 等於負 b 加減根號 b 平方減 4ac 除以 2a，以及判別式的基本概念",
+
+    category: "algebra",
+
+    grade: 9,
+
+    chapter: "二次方程式",
+
+    concept: "二次方程式的配方法與公式解",
+
+    difficulty: 3,
+
+    related: []
 },
 {
     id: "exponent-laws-basics",
