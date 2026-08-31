@@ -575,7 +575,6 @@ const diagramMap = [
         "b^2-4ac",
         "x軸交點",
         "x 軸交點",
-        "根",
         "實數根",
         "實根",
         "兩個交點",
@@ -721,6 +720,48 @@ const diagramMap = [
     concept: "連比例的基本觀念與表示法",
 
     difficulty: 2,
+
+    related: []
+},
+{
+    id: "radical-operations-basics",
+
+    title: "根式的加減乘除與四則運算",
+
+    keywords: [
+        "根式",
+        "根式運算",
+        "根式四則運算",
+        "根式的四則運算",
+        "根式加法",
+        "根式減法",
+        "根式乘法",
+        "根式除法",
+        "根式的加減",
+        "根式的乘除",
+        "根式加減乘除",
+        "根式化簡",
+        "根式同類項",
+        "同類根式",
+        "根式相加",
+        "根式相減",
+        "根式相乘",
+        "根式相除"
+    ],
+
+    file: "images/algebra/radical-operations-basics.png",
+
+    alt: "國中根式的加減乘除與四則運算教學圖，說明根式化簡、同類根式的加減，以及根式乘法與除法的基本運算方法",
+
+    category: "algebra",
+
+    grade: 9,
+
+    chapter: "根式的運算",
+
+    concept: "根式的加法、減法、乘法、除法與四則運算",
+
+    difficulty: 3,
 
     related: []
 },
