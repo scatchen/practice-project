@@ -741,10 +741,7 @@ const diagramMap = [
         "連比例觀念",
         "連比例式",
         "連比例表示法",
-        "連比例關係",
-        "連比",
-        "a:b:c",
-        "a:b=b:c"
+        "連比例關係"
     ],
 
     file: "images/algebra/continued-proportion-basics.png",
@@ -762,6 +759,55 @@ const diagramMap = [
     difficulty: 2,
 
     related: []
+},
+{
+    id: "ratio-and-continued-proportion-basics",
+
+    title: "比例式與連比的觀念",
+
+    keywords: [
+        "比例式",
+        "比例式觀念",
+        "比例式性質",
+        "比例式化簡",
+        "比例關係",
+        "連比觀念",
+        "連比化簡",
+        "連比性質",
+        "連比相等",
+        "比例式與連比",
+        "比例與連比",
+        "x:y:z=a:b:c",
+        "x:y:z = a:b:c",
+        "x比y比z等於a比b比c",
+        "x/y=z",
+        "x/a=y/b=z/c",
+        "x除以a等於y除以b等於z除以c",
+        "x比a等於y比b",
+        "y比b等於z比c",
+        "x比a等於z比c",
+        "各比相等",
+        "同一個比值",
+        "連比化為比例式"
+    ],
+
+    file: "images/algebra/ratio-and-continued-proportion-basics-v2.png",
+
+    alt: "國中比例式與連比教學圖，說明比例式、連比相等、x比y比z等於a比b比c，以及x除以a等於y除以b等於z除以c等各種等值與化簡形式",
+
+    category: "algebra",
+
+    grade: 9,
+
+    chapter: "比例與連比例",
+
+    concept: "比例式與連比的觀念、化簡與等值形式",
+
+    difficulty: 2,
+
+    related: [
+        "continued-proportion-basics"
+    ]
 },
 {
     id: "radical-operations-basics",
