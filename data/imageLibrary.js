@@ -810,6 +810,60 @@ const diagramMap = [
     ]
 },
 {
+    id: "direct-and-inverse-proportion-basics",
+
+    title: "正比與反比",
+
+    keywords: [
+        "正比",
+        "正比例",
+        "正比關係",
+        "正比觀念",
+        "正比例關係",
+        "y=kx",
+        "y = kx",
+        "y除以x等於k",
+        "y比x等於k",
+        "比例常數",
+        "正比圖形",
+        "通過原點的直線",
+        "反比",
+        "反比例",
+        "反比關係",
+        "反比觀念",
+        "反比例關係",
+        "xy=k",
+        "xy = k",
+        "y=k/x",
+        "y = k/x",
+        "x乘以y等於k",
+        "x與y的乘積一定",
+        "反比圖形",
+        "雙曲線",
+        "正比與反比",
+        "正比反比比較",
+        "正反比"
+    ],
+
+    file: "images/algebra/direct-and-inverse-proportion-basics.png",
+
+    alt: "國中正比與反比觀念教學圖，說明正比 y=kx、y除以x等於k，以及反比 xy=k、y=k除以x，並比較兩者的圖形、比例常數、變化關係與常見應用",
+
+    category: "algebra",
+
+    grade: 8,
+
+    chapter: "正比與反比",
+
+    concept: "正比與反比的基本觀念、關係式、比例常數、圖形與應用",
+
+    difficulty: 2,
+
+    related: [
+        "ratio-and-continued-proportion-basics"
+    ]
+},
+{
     id: "radical-operations-basics",
 
     title: "根式的加減乘除與四則運算",
