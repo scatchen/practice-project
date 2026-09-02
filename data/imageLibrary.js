@@ -1,6 +1,56 @@
 
 const diagramMap = [
     {
+    id: "daily-life-basics",
+
+    title: "Daily Life 日常生活",
+
+    keywords: [
+        "日常生活",
+        "日常",
+        "生活",
+        "日常作息",
+        "生活作息",
+        "日常活動",
+        "每天做什麼",
+        "daily life",
+        "daily routine",
+        "routine",
+        "everyday life",
+        "everyday activities",
+        "daily activities",
+        "get up",
+        "wake up",
+        "brush my teeth",
+        "have breakfast",
+        "eat breakfast",
+        "go to school",
+        "go home",
+        "after school",
+        "do homework",
+        "have dinner",
+        "go to bed",
+        "morning routine",
+        "evening routine"
+    ],
+
+    file: "images/english/daily-life-basics.png",
+
+    alt: "Daily Life 日常生活英文教學圖，呈現起床、早餐、上學、放學、寫作業、晚餐與睡覺等日常情境，並搭配常用英文對話與中文提示",
+
+    category: "english",
+
+    grade: 7,
+
+    chapter: "Daily Life 日常生活",
+
+    concept: "日常生活、日常作息、常見生活活動與基本英文對話",
+
+    difficulty: 1,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
