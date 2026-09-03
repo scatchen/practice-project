@@ -51,6 +51,62 @@ const diagramMap = [
     related: []
 },
 {
+    id: "people-introduction-basics",
+
+    title: "People & Introduction 人物與自我介紹",
+
+    keywords: [
+        "人物",
+        "人物介紹",
+        "自我介紹",
+        "自我介紹英文",
+        "姓名",
+        "年齡",
+        "來自哪裡",
+        "個人資料",
+        "家庭",
+        "朋友",
+        "打招呼",
+        "問候",
+        "你好",
+        "你叫什麼名字",
+        "幾歲",
+        "來自哪裡",
+        "people",
+        "introduction",
+        "self introduction",
+        "introduce yourself",
+        "personal information",
+        "name",
+        "age",
+        "where are you from",
+        "greeting",
+        "hello",
+        "hi",
+        "nice to meet you",
+        "my name is",
+        "I'm from Taiwan",
+        "this is my family",
+        "these are my friends"
+    ],
+
+    file: "images/english/people-introduction-basics.png",
+
+    alt: "People & Introduction 人物與自我介紹英文教學圖，呈現打招呼、姓名與年齡、個人資訊、自我介紹以及家人朋友等常見英文情境",
+
+    category: "english",
+
+    grade: 7,
+
+    chapter: "People & Introduction 人物與自我介紹",
+
+    concept: "人物介紹、自我介紹、個人基本資料、打招呼與常見英文對話",
+
+    difficulty: 1,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
@@ -1294,7 +1350,6 @@ function searchImage(keyword) {
 
     scoredResults = sortResults(scoredResults);
 
-    console.log("🔎 畢氏定理搜尋結果：", scoredResults);
 
     return filterResults(
         scoredResults,
@@ -1304,7 +1359,6 @@ function searchImage(keyword) {
 
 }
 
-console.log(searchImage("畢氏"));
 
 // 讓 Node.js 工具可以讀取智慧圖庫資料
 
@@ -1344,7 +1398,6 @@ function getDiagramInfo(question) {
 
     results.sort((a, b) => b.score - a.score);
 
-    console.log("🖼 圖片搜尋結果：", results);
 
     return results
         .slice(0, 3)
