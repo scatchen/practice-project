@@ -107,6 +107,57 @@ const diagramMap = [
     related: []
 },
 {
+    id: "hobbies-interests-basics",
+
+    title: "Hobbies & Interests 興趣與愛好",
+
+    keywords: [
+        "興趣",
+        "興趣愛好",
+        "愛好",
+        "休閒",
+        "休閒活動",
+        "嗜好",
+        "閱讀",
+        "聽音樂",
+        "運動",
+        "畫畫",
+        "興趣英文",
+        "hobbies",
+        "hobby",
+        "interests",
+        "free time",
+        "reading",
+        "listen to music",
+        "listening to music",
+        "playing sports",
+        "sports",
+        "drawing",
+        "I like reading",
+        "I like listening to music",
+        "I like playing sports",
+        "I like drawing",
+        "What do you like to do",
+        "What are your hobbies"
+    ],
+
+    file: "images/english/hobbies-interests-basics.png",
+
+    alt: "Hobbies & Interests 興趣與愛好英文教學圖，呈現閱讀、聽音樂、運動與畫畫等常見休閒活動",
+
+    category: "english",
+
+    grade: 7,
+
+    chapter: "Hobbies & Interests 興趣與愛好",
+
+    concept: "興趣、愛好、休閒活動與表達喜好的常用英文",
+
+    difficulty: 1,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
