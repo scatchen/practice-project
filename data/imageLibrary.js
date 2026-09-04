@@ -158,6 +158,29 @@ const diagramMap = [
     related: []
 },
 {
+    id: "school-life-basics",
+    title: "School Life 學校生活",
+    keywords: [
+        "學校生活", "學校", "校園生活", "上學", "上課", "課堂",
+        "學習", "讀書", "教室", "同學", "老師", "小組活動",
+        "小組合作", "課後活動", "社團活動", "學校英文",
+        "school life", "school", "class", "classroom", "study",
+        "studying", "learn", "learning", "student", "students",
+        "teacher", "classmates", "group work", "study together",
+        "after school", "school activities", "school club",
+        "What do you do at school", "I study at school",
+        "I am in class", "Let's study together"
+    ],
+    file: "images/english/school-life-basics.png",
+    alt: "School Life 學校生活英文教學圖，呈現上課、學習、小組活動與課後活動等常見校園情境",
+    category: "english",
+    grade: 7,
+    chapter: "School Life 學校生活",
+    concept: "學校生活、課堂學習、小組活動、同學互動與常見校園英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
