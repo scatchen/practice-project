@@ -181,6 +181,27 @@ const diagramMap = [
     related: []
 },
 {
+    id: "family-basics",
+    title: "Family 家庭與家人",
+    keywords: [
+        "家庭", "家人", "家庭成員", "爸爸", "媽媽", "父親", "母親",
+        "哥哥", "弟弟", "姐姐", "妹妹", "兄弟姊妹", "寵物",
+        "家庭生活", "家人介紹", "介紹家人",
+        "family", "family life", "family members", "father", "dad",
+        "mother", "mom", "brother", "sister", "parents", "parent",
+        "pet", "family introduction", "introduce my family",
+        "this is my family", "I love my family", "I live with my family"
+    ],
+    file: "images/english/family-basics.png",
+    alt: "Family 家庭與家人英文教學圖，呈現介紹家人、家庭成員、家庭互動與常用英文句型等情境",
+    category: "english",
+    grade: 7,
+    chapter: "Family 家庭與家人",
+    concept: "家庭、家人、家庭成員、介紹家人與表達家庭關係的常用英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
