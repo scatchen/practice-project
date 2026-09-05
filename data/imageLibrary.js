@@ -202,6 +202,31 @@ const diagramMap = [
     related: []
 },
 {
+    id: "food-drinks-basics",
+    title: "Food and Drinks 食物與飲料",
+    keywords: [
+        "食物", "飲料", "吃東西", "喝東西", "食物英文", "飲料英文",
+        "早餐", "午餐", "晚餐", "漢堡", "三明治", "披薩", "沙拉",
+        "米飯", "麵條", "蘋果", "香蕉", "蛋糕", "水", "牛奶",
+        "果汁", "茶", "咖啡", "汽水", "口渴", "餐桌禮儀",
+        "food", "foods", "drinks", "drink", "breakfast", "lunch",
+        "dinner", "hamburger", "sandwich", "pizza", "salad", "rice",
+        "noodles", "apple", "banana", "cake", "water", "milk", "juice",
+        "tea", "coffee", "soda", "thirsty", "table manners",
+        "What do you like", "What do you want to drink",
+        "I like hamburgers", "I like juice", "Can I have some water",
+        "Let's eat", "It's delicious", "I'm full"
+    ],
+    file: "images/english/food-drinks-basics.png",
+    alt: "Food and Drinks 食物與飲料英文教學圖，呈現常見食物、飲料、餐桌禮儀與日常點餐對話等情境",
+    category: "english",
+    grade: 7,
+    chapter: "Food and Drinks 食物與飲料",
+    concept: "常見食物與飲料、表達喜好、點餐、口渴與餐桌禮儀的英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
