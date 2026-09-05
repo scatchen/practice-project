@@ -227,6 +227,31 @@ const diagramMap = [
     related: []
 },
 {
+    id: "shopping-basics",
+    title: "Shopping 購物",
+    keywords: [
+        "購物", "買東西", "逛街", "商店", "店員", "商品", "價格",
+        "多少錢", "付款", "信用卡", "收據", "折扣", "特價", "衣服",
+        "褲子", "鞋子", "包包", "帽子", "手錶", "書", "玩具",
+        "購物英文", "購物對話",
+        "shopping", "shop", "go shopping", "store", "shop assistant",
+        "customer", "product", "price", "cost", "sale", "discount",
+        "shirt", "pants", "shoes", "bag", "hat", "watch", "book", "toy",
+        "pay", "credit card", "receipt", "How much is it",
+        "How much is this", "Can I pay by credit card",
+        "I like this one", "Do you have another color", "I'll take it",
+        "Compare prices", "Check the quality", "Keep the receipt"
+    ],
+    file: "images/english/shopping-basics.png",
+    alt: "Shopping 購物英文教學圖，呈現常見購物商品、詢問價格、付款方式、購物對話與購物小貼士等情境",
+    category: "english",
+    grade: 7,
+    chapter: "Shopping 購物",
+    concept: "購物、詢問價格、商品選擇、付款、購物對話與常用購物英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
