@@ -252,6 +252,29 @@ const diagramMap = [
     related: []
 },
 {
+    id: "weather-basics",
+    title: "Weather 天氣",
+    keywords: [
+        "天氣", "天氣預報", "天氣狀況", "晴天", "陰天", "下雨",
+        "下雪", "有風", "雷雨", "暴風雨", "炎熱", "寒冷", "起霧",
+        "彩虹", "局部多雲", "天氣英文", "天氣對話",
+        "weather", "weather forecast", "weather conditions", "sunny",
+        "cloudy", "rainy", "snowy", "windy", "thunderstorm", "stormy",
+        "hot", "cold", "foggy", "rainbow", "partly cloudy",
+        "What's the weather like today", "It's sunny", "It's cloudy",
+        "It's going to rain", "Is it going to rain", "It's very hot today",
+        "I like this weather", "Take an umbrella"
+    ],
+    file: "images/english/weather-basics.png",
+    alt: "Weather 天氣英文教學圖，呈現晴天、多雲、下雨、下雪、有風、雷雨、炎熱、寒冷、起霧、彩虹與暴風雨等常見天氣情境，並搭配常用英文對話與句子",
+    category: "english",
+    grade: 7,
+    chapter: "Weather 天氣",
+    concept: "常見天氣狀況、天氣描述、天氣預報與詢問天氣的英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
