@@ -275,6 +275,36 @@ const diagramMap = [
     related: []
 },
 {
+    id: "time-date-basics",
+    title: "Time & Date 時間與日期",
+    keywords: [
+        "時間", "日期", "時間與日期", "幾點", "現在幾點",
+        "星期", "星期幾", "月份", "生日", "今天", "明天",
+        "時間英文", "日期英文", "時間日期英文",
+        "time", "date", "time and date", "what time",
+        "what time is it", "o'clock", "half past",
+        "quarter past", "quarter to", "morning", "afternoon",
+        "evening", "night", "day", "weekday", "weekend",
+        "day of the week", "Monday", "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday", "Sunday",
+        "month", "January", "February", "March", "April", "May",
+        "June", "July", "August", "September", "October",
+        "November", "December", "birthday", "today", "tomorrow",
+        "What date is it", "What's the date", "What day is it",
+        "What's today", "When is your birthday",
+        "What time do you get up", "It's three o'clock",
+        "It's half past three", "It's on August 12th"
+    ],
+    file: "images/english/time-date-basics.png",
+    alt: "Time & Date 時間與日期英文教學圖，呈現詢問時間、日期、星期與月份，以及生日和日常時間表達等常見英文情境",
+    category: "english",
+    grade: 7,
+    chapter: "Time & Date 時間與日期",
+    concept: "時間、日期、星期、月份、生日與詢問時間日期的常用英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
