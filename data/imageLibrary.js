@@ -305,6 +305,33 @@ const diagramMap = [
     related: []
 },
 {
+    id: "transportation-travel-basics",
+    title: "Transportation & Travel 交通與旅行",
+    keywords: [
+        "交通", "旅行", "旅遊", "交通工具", "搭車", "公車", "火車",
+        "飛機", "機場", "車站", "旅行英文", "交通英文", "旅遊英文",
+        "公車站", "火車站", "搭飛機", "觀光", "行程", "地圖",
+        "transportation", "travel", "trip", "journey", "transport",
+        "bus", "bus stop", "train", "train station", "airport",
+        "airplane", "plane", "taxi", "car", "bike", "bicycle",
+        "subway", "metro", "ticket", "station", "map", "tourist",
+        "sightseeing", "vacation", "go on a trip", "take the bus",
+        "take the train", "take a taxi", "catch a train",
+        "Where is the station", "How can I get there",
+        "How do I get to the airport", "Where can I buy a ticket",
+        "What time is the train", "I'm going on a trip",
+        "Let's take the bus", "The train is coming"
+    ],
+    file: "images/english/transportation-travel-basics.png",
+    alt: "Transportation & Travel 交通與旅行英文教學圖，呈現搭公車、搭飛機、搭火車與旅行觀光等常見交通與旅遊情境",
+    category: "english",
+    grade: 7,
+    chapter: "Transportation & Travel 交通與旅行",
+    concept: "交通工具、旅行、搭車、機場、車站、觀光與常用交通旅遊英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
