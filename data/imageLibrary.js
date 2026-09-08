@@ -360,6 +360,35 @@ const diagramMap = [
     related: []
 },
 {
+    id: "places-directions-basics",
+    title: "Places & Directions 場所與方向",
+    keywords: [
+        "場所", "方向", "場所與方向", "地點", "位置", "問路", "指路",
+        "附近", "旁邊", "對面", "之間", "直走", "左轉", "右轉", "迴轉",
+        "學校", "公園", "商店", "醫院", "圖書館", "郵局", "餐廳", "家",
+        "場所英文", "方向英文", "問路英文", "指路英文",
+        "places", "directions", "place", "location", "where",
+        "asking for directions", "giving directions", "school", "park",
+        "store", "hospital", "library", "post office", "restaurant", "home",
+        "go straight", "turn left", "turn right", "turn around",
+        "across from", "next to", "between", "near",
+        "Where is the park", "Where is the school",
+        "How can I get there", "How do I get to the park",
+        "Go straight, then turn left",
+        "Go straight, then turn right",
+        "It's next to the school",
+        "The restaurant is across from the library"
+    ],
+    file: "images/english/places-directions-basics.png",
+    alt: "Places & Directions 場所與方向英文教學圖，呈現常見場所、問路與指路、方向用語、位置關係及實用英文句型等情境",
+    category: "english",
+    grade: 7,
+    chapter: "Places & Directions 場所與方向",
+    concept: "常見場所、問路、指路、方向、位置關係與生活中常用的英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
