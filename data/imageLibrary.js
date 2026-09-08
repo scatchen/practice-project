@@ -389,6 +389,47 @@ const diagramMap = [
     related: []
 },
 {
+    id: "animals-wildlife-basics",
+    title: "Animals & Wildlife 動物與野生生物",
+    keywords: [
+        "動物", "野生動物", "野生生物", "動物世界", "動物棲息地",
+        "棲息地", "森林動物", "海洋動物", "農場動物", "鳥類",
+        "昆蟲", "哺乳類", "爬蟲類", "魚類", "動物生存",
+        "動物適應", "生態系", "北極熊", "海龜", "海豚",
+        "鯨魚", "章魚", "熊", "鹿", "狐狸", "大象", "長頸鹿",
+        "斑馬", "獅子", "牛", "羊", "豬", "雞", "老鷹",
+        "蝴蝶", "蜜蜂",
+
+        "animals", "animal", "wildlife", "wild animals",
+        "animal habitat", "habitat", "forest animals",
+        "ocean animals", "farm animals", "birds", "insects",
+        "mammals", "reptiles", "fish", "survival",
+        "adaptation", "ecosystem", "environment",
+        "polar bear", "Arctic", "sea turtle", "dolphin",
+        "whale", "octopus", "bear", "deer", "fox",
+        "elephant", "giraffe", "zebra", "lion",
+        "cow", "sheep", "pig", "chicken", "eagle",
+        "butterfly", "bee", "feathers",
+
+        "Where do polar bears live",
+        "They live in the Arctic",
+        "Why do birds have feathers",
+        "Feathers help them fly and keep warm",
+        "What does a sea turtle eat",
+        "It eats seaweed and small animals",
+        "How do animals survive in the wild",
+        "They find food, water and shelter"
+    ],
+    file: "images/english/animals-wildlife-basics.png",
+    alt: "Animals & Wildlife 動物與野生生物英文教學圖，呈現森林、海洋、農場、野生動物、鳥類與昆蟲等情境，並搭配動物棲息地、生存與科普英文問答",
+    category: "english",
+    grade: 7,
+    chapter: "Animals & Wildlife 動物與野生生物",
+    concept: "動物、野生生物、動物棲息地、動物特徵、生存方式與基礎科普英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
