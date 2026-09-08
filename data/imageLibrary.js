@@ -332,6 +332,34 @@ const diagramMap = [
     related: []
 },
 {
+    id: "body-health-basics",
+    title: "Body & Health 身體與健康",
+    keywords: [
+        "身體", "健康", "身體健康", "身體部位", "身體不舒服",
+        "生病", "看醫生", "醫生", "症狀", "頭痛", "咳嗽",
+        "喉嚨痛", "肚子痛", "發燒", "健康生活", "健康飲食",
+        "運動", "睡眠", "喝水", "身體英文", "健康英文",
+        "body", "health", "body parts", "healthy", "healthy life",
+        "feel sick", "feel ill", "not feel well", "sick", "ill",
+        "doctor", "see a doctor", "hospital", "symptom", "symptoms",
+        "head", "arm", "leg", "hand", "foot", "eye", "ear", "nose",
+        "mouth", "headache", "cough", "sore throat", "stomachache",
+        "fever", "healthy food", "eat healthy food", "exercise",
+        "sleep well", "drink water", "I have a fever",
+        "I don't feel well", "I have a headache", "I have a cough",
+        "I have a sore throat", "I have a stomachache",
+        "Let's take your temperature", "A healthy life makes you happy"
+    ],
+    file: "images/english/body-health-basics.png",
+    alt: "Body & Health 身體與健康英文教學圖，呈現身體部位、身體不舒服、常見症狀、看醫生與健康生活等情境",
+    category: "english",
+    grade: 7,
+    chapter: "Body & Health 身體與健康",
+    concept: "身體部位、健康、常見症狀、看醫生與健康生活的常用英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
