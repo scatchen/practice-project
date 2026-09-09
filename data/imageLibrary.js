@@ -430,6 +430,43 @@ const diagramMap = [
     related: []
 },
 {
+    id: "plants-nature-basics",
+    title: "Plants & Nature 植物與自然",
+    keywords: [
+        "植物", "自然", "植物與自然", "大自然", "自然環境",
+        "樹", "樹木", "花", "花朵", "葉子", "根", "莖",
+        "種子", "果實", "森林", "草地", "山", "湖泊",
+        "植物生長", "種植", "澆水", "園藝", "環境保護",
+        "綠色環境", "愛護自然",
+
+        "plants", "plant", "nature", "natural environment",
+        "trees", "tree", "flowers", "flower", "leaves", "leaf",
+        "roots", "root", "stem", "seeds", "seed", "fruit",
+        "forest", "grass", "grassland", "mountain", "lake",
+        "garden", "gardening", "grow", "grow plants",
+        "plant growth", "water plants", "take care of plants",
+        "protect nature", "protect the environment",
+        "green environment", "a greener future",
+
+        "What do plants need to grow",
+        "Plants need sunlight and water",
+        "Why are plants important",
+        "Plants make our world more beautiful",
+        "How do plants help the environment",
+        "Plants give us oxygen",
+        "How do you take care of plants",
+        "I water the plants every day"
+    ],
+    file: "images/english/plants-nature-basics.png",
+    alt: "Plants & Nature 植物與自然英文教學圖，呈現植物、樹木、花朵、自然環境、種植與愛護自然等情境，並搭配常見英文詞彙與生活科普概念",
+    category: "english",
+    grade: 7,
+    chapter: "Plants & Nature 植物與自然",
+    concept: "植物、自然環境、植物生長、園藝、環境保護與基礎科普英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
