@@ -2439,6 +2439,26 @@ function formatEnglishAnswer(answer) {
         "\n\n⑥"
     );
 
+    answer = answer.replace(
+        /7\./g,
+        "\n\n⑦"
+    );
+
+    answer = answer.replace(
+        /8\./g,
+        "\n\n⑧"
+    );
+
+    answer = answer.replace(
+        /9\./g,
+        "\n\n⑨"
+    );
+
+    answer = answer.replace(
+        /10\./g,
+        "\n\n⑩"
+    );
+
     return answer;
 }
 
@@ -2835,7 +2855,6 @@ function setSubjectMode(mode) {
 
      3. 中英文例句
 
-     English:
      英文句子
 
      中文:
@@ -2893,10 +2912,9 @@ function setSubjectMode(mode) {
 
      3. 中英文例句
 
-     English:
+     
      The environment is important for all living things.
 
-     Chinese:
      環境對所有生物都很重要.
 
 
