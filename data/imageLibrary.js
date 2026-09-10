@@ -506,6 +506,42 @@ const diagramMap = [
     related: []
 },
 {
+    id: "space-solar-system-basics",
+    title: "Space & the Solar System 太空與太陽系",
+    keywords: [
+        "太空", "宇宙", "太陽系", "太陽", "行星", "月亮", "月球",
+        "地球", "火星", "木星", "土星", "天王星", "海王星",
+        "水星", "金星", "恆星", "銀河系", "星球",
+        "八大行星", "太空探索", "宇宙探索",
+
+        "space", "outer space", "universe", "solar system",
+        "sun", "planet", "planets", "moon", "Earth",
+        "Mercury", "Venus", "Mars", "Jupiter", "Saturn",
+        "Uranus", "Neptune", "star", "stars", "galaxy",
+        "Milky Way", "eight planets", "space exploration",
+        "explore space",
+
+        "What is the solar system",
+        "The solar system is made up of the Sun, planets, moons, and more",
+        "How many planets are there in the solar system",
+        "There are eight planets in the solar system",
+        "Which planet do we live on",
+        "We live on Earth",
+        "What is the biggest planet",
+        "Jupiter is the biggest planet",
+        "What is Earth's natural satellite",
+        "The moon is Earth's natural satellite"
+    ],
+    file: "images/english/space-solar-system-basics.png",
+    alt: "Space & the Solar System 太空與太陽系英文教學圖，呈現太陽、八大行星、月球、地球、銀河系與太空探索等情境，並搭配常見英文詞彙、句型與科普知識",
+    category: "english",
+    grade: 7,
+    chapter: "Space & the Solar System 太空與太陽系",
+    concept: "太空、太陽系、太陽、行星、月球、銀河系與基礎太空科普英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
