@@ -467,6 +467,45 @@ const diagramMap = [
     related: []
 },
 {
+    id: "earth-environment-basics",
+    title: "Earth & Environment 地球與環境",
+    keywords: [
+        "地球", "環境", "地球環境", "環境保護", "自然環境",
+        "污染", "空氣污染", "水污染", "垃圾", "回收",
+        "資源回收", "自然資源", "再利用", "減量",
+        "清潔能源", "再生能源", "風力", "太陽能",
+        "保護地球", "保護環境", "綠色生活", "氣候",
+        "海洋", "森林", "河流", "水資源",
+
+        "earth", "environment", "natural environment",
+        "pollution", "air pollution", "water pollution",
+        "trash", "garbage", "recycling", "reuse", "reduce",
+        "natural resources", "clean energy", "renewable energy",
+        "wind power", "solar energy", "protect the Earth",
+        "protect the environment", "green living", "climate",
+        "ocean", "forest", "river", "water resources",
+
+        "What is the environment",
+        "The environment is the world around us",
+        "How can we protect the Earth",
+        "We can reduce, reuse and recycle",
+        "Why is recycling important",
+        "Recycling helps reduce waste",
+        "What causes air pollution",
+        "Cars and factories can cause air pollution",
+        "What is clean energy",
+        "Solar and wind power are clean energy"
+    ],
+    file: "images/english/earth-environment-basics.png",
+    alt: "Earth & Environment 地球與環境英文教學圖，呈現地球、自然環境、污染、資源回收、自然資源、清潔能源與保護地球等情境，並搭配常見英文詞彙與科普概念",
+    category: "english",
+    grade: 7,
+    chapter: "Earth & Environment 地球與環境",
+    concept: "地球、環境、污染、資源回收、自然資源、清潔能源與環境保護等基礎科普英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
