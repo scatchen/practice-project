@@ -583,6 +583,46 @@ const diagramMap = [
     related: []
 },
 {
+    id: "simple-physics-basics",
+    title: "Simple Physics 基礎物理",
+    keywords: [
+        "基礎物理", "物理", "力", "力量", "運動", "速度", "重力",
+        "光", "聲音", "熱", "能量", "推", "拉", "推力", "拉力",
+        "移動", "距離", "時間", "溫度", "日常物理",
+        "物理現象", "物理原理",
+
+        "simple physics", "physics", "force", "motion", "speed",
+        "gravity", "light", "sound", "heat", "energy",
+        "push", "pull", "movement", "distance", "time",
+        "temperature", "daily physics", "physical phenomenon",
+
+        "What is force",
+        "A force can move or stop an object",
+        "What is motion",
+        "Motion means an object is moving",
+        "What is speed",
+        "Speed tells us how fast something moves",
+        "What is gravity",
+        "Gravity pulls objects toward the Earth",
+        "What is light",
+        "Light helps us see the world around us",
+        "What is sound",
+        "Sound is a form of energy",
+        "What is heat",
+        "Heat moves from hot to cold",
+        "Where can we see physics",
+        "Physics is everywhere in our daily life"
+    ],
+    file: "images/english/simple-physics-basics.png",
+    alt: "Simple Physics 基礎物理英文教學圖，呈現力、運動、速度、重力、光、聲音、熱與日常生活中的物理現象，並搭配常見英文詞彙與基礎科普概念",
+    category: "english",
+    grade: 8,
+    chapter: "Simple Physics 基礎物理",
+    concept: "力、運動、速度、重力、光、聲音、熱、能量與日常生活中的基礎物理英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
