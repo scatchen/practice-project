@@ -542,6 +542,47 @@ const diagramMap = [
     related: []
 },
 {
+    id: "human-body-how-it-works-basics",
+    title: "Human Body & How the Body Works 人體與身體運作",
+    keywords: [
+        "人體", "身體", "人體構造", "身體運作", "身體系統",
+        "器官", "大腦", "心臟", "肺", "胃", "骨骼", "肌肉",
+        "神經系統", "循環系統", "呼吸系統", "消化系統",
+        "肌肉系統", "骨骼系統", "健康", "運動", "睡眠",
+        "營養", "喝水", "食物", "消化", "呼吸", "血液",
+        
+        "human body", "body", "body systems", "organs",
+        "brain", "heart", "lungs", "stomach", "bones", "muscles",
+        "nervous system", "circulatory system", "respiratory system",
+        "digestive system", "muscular system", "skeletal system",
+        "health", "exercise", "sleep", "nutrition", "water",
+        "food", "digestion", "breathing", "blood",
+        
+        "How does the human body work",
+        "How does the body work",
+        "What are the main body systems",
+        "The body has many systems that work together",
+        "What does the brain do",
+        "The brain helps us think and learn",
+        "What does the heart do",
+        "The heart pumps blood around the body",
+        "What do the lungs do",
+        "The lungs help us breathe and get oxygen",
+        "How does the digestive system work",
+        "The digestive system breaks down food and gives us energy",
+        "How can we keep our body healthy",
+        "We can eat healthy food, exercise and get enough sleep"
+    ],
+    file: "images/english/human-body-how-it-works-basics.png",
+    alt: "Human Body & How the Body Works 人體與身體運作英文教學圖，呈現人體主要系統、器官、身體運作、飲食、運動、睡眠與健康習慣等情境，並搭配常見英文詞彙與基礎科普概念",
+    category: "english",
+    grade: 7,
+    chapter: "Human Body & How the Body Works 人體與身體運作",
+    concept: "人體主要器官、身體系統、身體運作、健康習慣與基礎人體科普英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
