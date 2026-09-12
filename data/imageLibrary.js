@@ -707,6 +707,47 @@ const diagramMap = [
     related: []
 },
 {
+    id: "water-cycle-basics",
+    title: "Water Cycle 水循環",
+    keywords: [
+        "水循環", "水的循環", "水循環過程", "蒸發", "凝結",
+        "降水", "集水", "水蒸氣", "水滴", "雲", "雨",
+        "雪", "冰雹", "雨水", "海洋", "湖泊", "河流",
+        "地下水", "太陽", "水的三態", "液態", "氣態",
+        "固態", "自然循環", "水循環的重要性",
+
+        "water cycle", "water cycles", "evaporation", "condensation",
+        "precipitation", "collection", "water vapor", "water vapour",
+        "water droplets", "cloud", "clouds", "rain", "snow",
+        "hail", "sleet", "ocean", "oceans", "lake", "lakes",
+        "river", "rivers", "groundwater", "sun", "sunlight",
+        "liquid", "gas", "solid", "natural cycle",
+
+        "What is the water cycle",
+        "The water cycle is the continuous movement of water on Earth",
+        "What is evaporation",
+        "Evaporation happens when the sun heats water and changes it into water vapor",
+        "What is condensation",
+        "Condensation happens when water vapor cools and forms tiny water droplets",
+        "What is precipitation",
+        "Precipitation is water that falls to Earth as rain, snow, sleet, or hail",
+        "What is collection",
+        "Water collects in oceans, lakes, rivers, and underground",
+        "Where does the energy for the water cycle come from",
+        "The sun provides energy for the water cycle",
+        "Why is the water cycle important",
+        "The water cycle moves water around Earth and supports life"
+    ],
+    file: "images/english/water-cycle-basics.png",
+    alt: "Water Cycle 水循環英文教學圖，呈現蒸發、凝結、降水與集水等水循環階段，並搭配水蒸氣、雲、雨、雪、地下水與太陽能等基礎科普英文",
+    category: "english",
+    grade: 7,
+    chapter: "Water Cycle 水循環",
+    concept: "水循環、蒸發、凝結、降水、集水、水蒸氣與自然循環等基礎科普英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
@@ -1976,15 +2017,22 @@ function getDiagramInfo(question) {
 
     for (const item of diagramMap) {
 
-        let score = 0;
+    let score = 0;
 
-        for (const keyword of item.keywords) {
+    for (const keyword of item.keywords) {
 
-            if (text.includes(keyword.toLowerCase())) {
-                score++;
+        const normalizedKeyword = keyword.toLowerCase();
+
+        if (text.includes(normalizedKeyword)) {
+            score++;
+
+            // 完整命中較長的主題詞，給予額外權重
+            if (normalizedKeyword.length >= 2) {
+                score += normalizedKeyword.length;
             }
-
         }
+
+    }
 
         if (score > 0) {
 
