@@ -623,6 +623,47 @@ const diagramMap = [
     related: []
 },
 {
+    id: "simple-chemistry-basics",
+    title: "Simple Chemistry 基礎化學",
+    keywords: [
+        "化學", "基礎化學", "物質", "原子", "分子", "元素",
+        "化學元素", "化合物", "混合物", "化學反應", "化學變化",
+        "固體", "液體", "氣體", "燃燒", "生鏽", "熔化",
+        "結冰", "科學", "實驗", "物質變化",
+
+        "simple chemistry", "chemistry", "matter", "atom", "atoms",
+        "molecule", "molecules", "element", "chemical element",
+        "compound", "mixture", "chemical reaction", "chemical change",
+        "solid", "liquid", "gas", "burning", "rust", "melting",
+        "freezing", "science", "experiment", "matter changes",
+
+        "What is chemistry",
+        "Chemistry helps us understand the world around us",
+        "What is an atom",
+        "Atoms are the building blocks of matter",
+        "What is an element",
+        "An element is made of only one kind of atom",
+        "What is a molecule",
+        "A molecule is made of two or more atoms",
+        "What is a chemical change",
+        "A chemical change forms a new substance",
+        "What happens when something burns",
+        "Burning is a chemical change",
+        "What are the three states of matter",
+        "Matter can be solid, liquid, or gas",
+        "What happens when water freezes",
+        "Water changes from a liquid to a solid"
+    ],
+    file: "images/english/simple-chemistry-basics.png",
+    alt: "Simple Chemistry 基礎化學英文教學圖，呈現原子、元素、分子、化學變化與物質等基礎化學概念，並搭配常見英文詞彙與生活科普情境",
+    category: "english",
+    grade: 8,
+    chapter: "Simple Chemistry 基礎化學",
+    concept: "原子、元素、分子、物質、化學變化與基礎化學科普英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
