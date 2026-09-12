@@ -664,6 +664,49 @@ const diagramMap = [
     related: []
 },
 {
+    id: "ecosystems-food-chains-basics",
+    title: "Ecosystems & Food Chains 生態系與食物鏈",
+    keywords: [
+        "生態系", "生態系統", "食物鏈", "食物網", "生產者",
+        "消費者", "初級消費者", "次級消費者", "三級消費者",
+        "草食動物", "肉食動物", "掠食者", "獵物", "能量",
+        "能量流動", "陽光", "植物", "動物", "生物", "環境",
+        "生物與環境", "生態平衡", "自然平衡", "生物之間的關係",
+
+        "ecosystem", "ecosystems", "food chain", "food chains",
+        "food web", "producer", "producers", "consumer", "consumers",
+        "primary consumer", "secondary consumer", "tertiary consumer",
+        "herbivore", "carnivore", "predator", "prey", "energy",
+        "energy flow", "sunlight", "plants", "animals", "living things",
+        "environment", "ecosystem balance", "nature", "interdependence",
+
+        "What is an ecosystem",
+        "An ecosystem is a community of living things and their environment",
+        "What is a food chain",
+        "A food chain shows how energy moves from one living thing to another",
+        "What is a producer",
+        "Plants are producers because they make their own food",
+        "What is a consumer",
+        "Consumers get energy by eating other living things",
+        "What is a predator",
+        "A predator is an animal that hunts other animals",
+        "What is prey",
+        "Prey is an animal that is hunted by another animal",
+        "Where does energy in a food chain come from",
+        "Energy comes from the sun",
+        "Why are ecosystems important",
+        "Healthy ecosystems keep nature balanced"
+    ],
+    file: "images/english/ecosystems-food-chains-basics.png",
+    alt: "Ecosystems & Food Chains 生態系與食物鏈英文教學圖，呈現生產者、消費者、掠食者、獵物、能量流動與生態系等基礎科普概念",
+    category: "english",
+    grade: 8,
+    chapter: "Ecosystems & Food Chains 生態系與食物鏈",
+    concept: "生態系、食物鏈、生產者、消費者、掠食者、獵物、能量流動與生態平衡等基礎科普英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
