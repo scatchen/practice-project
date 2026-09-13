@@ -748,6 +748,44 @@ const diagramMap = [
     related: []
 },
 {
+    id: "water-cycle-stages",
+    title: "Water Cycle Stages 水循環階段",
+    keywords: [
+        "水循環", "水循環階段", "水循環過程", "水循環步驟",
+        "蒸發", "凝結", "降水", "集水", "水蒸氣",
+        "水滴", "雲", "雨", "雪", "海洋", "湖泊",
+        "河流", "地下水", "太陽", "自然循環",
+
+        "water cycle", "water cycle stages", "water cycle process",
+        "water cycle steps", "evaporation", "condensation",
+        "precipitation", "collection", "water vapor", "water vapour",
+        "water droplets", "cloud", "clouds", "rain", "snow",
+        "ocean", "lake", "river", "groundwater", "sun",
+        "natural cycle",
+
+        "What is the water cycle",
+        "What are the stages of the water cycle",
+        "What is evaporation",
+        "What is condensation",
+        "What is precipitation",
+        "What is collection",
+        "How does the water cycle work",
+        "How does water move around Earth",
+        "How does evaporation happen",
+        "How does condensation happen",
+        "How does precipitation happen",
+        "Where does collected water go"
+    ],
+    file: "images/english/water-cycle-stages.png",
+    alt: "Water Cycle Stages 水循環階段英文教學圖，詳細呈現蒸發、凝結、降水與集水等水循環階段，並搭配太陽、水蒸氣、雲、雨、雪、河流與湖泊等英文科普內容",
+    category: "english",
+    grade: 7,
+    chapter: "Water Cycle 水循環",
+    concept: "水循環各階段、蒸發、凝結、降水、集水與水循環過程等基礎科普英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
