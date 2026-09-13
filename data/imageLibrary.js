@@ -786,6 +786,49 @@ const diagramMap = [
     related: []
 },
 {
+    id: "climate-global-environment-basics",
+    title: "Climate & Global Environment 氣候與全球環境",
+    keywords: [
+        "氣候", "全球環境", "全球暖化", "氣候變遷", "氣候變化",
+        "溫室氣體", "溫室效應", "二氧化碳", "碳排放", "環境保護",
+        "保護地球", "節約能源", "減少浪費", "再生能源", "清潔能源",
+        "植樹", "地球暖化", "永續", "環境",
+
+        "climate", "global environment", "global warming",
+        "climate change", "greenhouse gases", "greenhouse effect",
+        "carbon dioxide", "CO2", "carbon emissions",
+        "environmental protection", "protect our planet",
+        "save energy", "reduce waste", "clean energy",
+        "renewable energy", "plant trees", "sustainable",
+        "environment", "healthy planet",
+
+        "What is climate",
+        "Climate is the long-term pattern of weather in a place",
+        "What is global warming",
+        "The Earth is getting warmer because of more greenhouse gases",
+        "What is climate change",
+        "Climate change means long-term changes in Earth's climate",
+        "What are greenhouse gases",
+        "Greenhouse gases trap heat in Earth's atmosphere",
+        "What causes global warming",
+        "Human activities produce greenhouse gases",
+        "How can we protect the planet",
+        "We can save energy, reduce waste, use clean energy, and plant trees",
+        "Why is climate important",
+        "Climate affects people, animals, plants, and the environment",
+        "Why should we protect the environment",
+        "A healthy environment supports life on Earth"
+    ],
+    file: "images/english/climate-global-environment-basics.png",
+    alt: "Climate & Global Environment 氣候與全球環境英文教學圖，呈現氣候、全球暖化、溫室氣體、環境保護、節約能源、減少浪費、清潔能源與植樹等基礎科普概念",
+    category: "english",
+    grade: 8,
+    chapter: "Climate & Global Environment 氣候與全球環境",
+    concept: "氣候、全球暖化、氣候變遷、溫室氣體、環境保護與永續生活等基礎科普英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
