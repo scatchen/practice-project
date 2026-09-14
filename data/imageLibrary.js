@@ -874,6 +874,46 @@ const diagramMap = [
     related: []
 },
 {
+    id: "how-things-work-basics",
+    title: "How Things Work 事物如何運作",
+    keywords: [
+        "事物如何運作", "如何運作", "運作原理", "工作原理",
+        "原理", "機制", "系統", "零件", "部件",
+        "力量", "力", "能量", "電力", "動力",
+        "機器", "機械", "裝置", "功能",
+
+        "how things work", "how something works", "how it works",
+        "how does it work", "how do things work",
+        "working principle", "principle", "mechanism",
+        "system", "parts", "components", "force", "energy",
+        "electricity", "power", "machine", "machines",
+        "mechanical", "device", "devices", "function",
+
+        "What is a force",
+        "A force can make an object move or change",
+        "What is energy",
+        "Energy makes things happen and can change from one form to another",
+        "How do parts work together",
+        "Different parts work together to make a system function",
+        "How does a machine work",
+        "A machine uses parts and energy to perform a useful task",
+        "Why do things move",
+        "Things move when a force acts on them",
+        "How do simple machines work",
+        "Simple machines help people use force more easily",
+        "What makes a system work",
+        "A system works when its parts interact and perform their jobs"
+    ],
+    file: "images/english/how-things-work-basics.png",
+    alt: "How Things Work 事物如何運作英文教學圖，呈現力量、能量、零件合作、機器與系統運作等基礎概念",
+    category: "english",
+    grade: 8,
+    chapter: "How Things Work 事物如何運作",
+    concept: "力量、能量、零件合作、機器、系統與事物運作原理等基礎英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
