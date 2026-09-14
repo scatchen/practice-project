@@ -829,6 +829,51 @@ const diagramMap = [
     related: []
 },
 {
+    id: "technology-inventions-basics",
+    title: "Technology & Inventions 科技與發明",
+    keywords: [
+        "科技", "科技與發明", "發明", "創新", "科技發展",
+        "資訊科技", "電腦", "手機", "智慧型手機", "網路",
+        "網際網路", "人工智慧", "AI", "機器人", "電子產品",
+        "電動車", "風力發電", "再生能源", "清潔能源",
+        "現代科技", "科學與科技",
+
+        "technology", "technologies", "invention", "inventions",
+        "innovation", "computer", "computers", "smartphone",
+        "smartphones", "internet", "artificial intelligence",
+        "AI", "robot", "robots", "electric car", "electric cars",
+        "wind turbine", "renewable energy", "clean energy",
+        "modern technology", "science and technology",
+
+        "What is technology",
+        "Technology helps people solve problems and make life easier",
+        "What is an invention",
+        "An invention is something new that people create to solve a problem",
+        "What is innovation",
+        "Innovation means creating new ideas or improving existing things",
+        "How do computers help us",
+        "Computers help us find information, learn, work, and communicate",
+        "What can smartphones do",
+        "Smartphones help us communicate, get information, take photos, and use apps",
+        "What is artificial intelligence",
+        "Artificial intelligence helps computers learn from information and perform tasks",
+        "What is a robot",
+        "A robot is a machine that can perform tasks automatically",
+        "What is renewable energy",
+        "Renewable energy comes from natural sources such as sunlight and wind",
+        "How does technology change our lives",
+        "Technology helps people communicate, travel, learn, and work more efficiently"
+    ],
+    file: "images/english/technology-inventions-basics.png",
+    alt: "Technology & Inventions 科技與發明英文教學圖，呈現電腦、智慧型手機、風力發電、電動車、人工智慧與創新等基礎科技英文概念",
+    category: "english",
+    grade: 8,
+    chapter: "Technology & Inventions 科技與發明",
+    concept: "科技、發明、創新、電腦、智慧型手機、人工智慧、機器人、再生能源與現代科技等基礎英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
