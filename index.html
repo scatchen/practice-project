@@ -662,6 +662,10 @@ color: #111827;
             touch-action: none;
         }
 
+        .ai-answer-text {
+            font-size: 1.5em;
+        } 
+
         /* ================= 課堂大輪盤 ================= */
         .wheel-container {
             display: grid;
@@ -3051,7 +3055,9 @@ if (diagrams && diagrams.length > 0) {
             (appState.subjectMode === 'english' ? "英文" : "數學") +
             "小助教說：</h2>" +
             diagramHTML +
-            answer;
+            "<div class=\"ai-answer-text\">" +
+            answer +
+            "</div>";
 
 
             // 更新標註畫布尺寸（立即）
