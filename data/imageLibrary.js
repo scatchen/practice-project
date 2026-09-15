@@ -51,6 +51,40 @@ const diagramMap = [
     related: []
 },
 {
+    id: "daily-life-routines-basics",
+    title: "Daily Life & Routines 日常生活與作息",
+    keywords: [
+        "日常生活", "生活作息", "日常作息", "作息",
+        "起床", "早餐", "上學", "上床睡覺", "睡覺",
+        "早晨", "晚上", "每天", "每日",
+        "日常活動", "生活習慣",
+
+        "daily life", "daily routine", "daily routines",
+        "routine", "routines", "everyday life",
+        "everyday routine", "morning routine",
+        "evening routine", "get up", "wake up",
+        "have breakfast", "go to school", "go to bed",
+        "sleep", "morning", "evening", "every day",
+        "daily activities", "daily habits",
+
+        "What do you do every day",
+        "What is a daily routine",
+        "My daily routine",
+        "What do you do in the morning",
+        "What do you do after school",
+        "What time do you get up",
+        "What time do you go to bed"
+    ],
+    file: "images/english/daily-life-routines-basics.png",
+    alt: "Daily Life & Routines 日常生活與作息英文教學圖，呈現起床、上學、吃早餐與睡覺等日常作息情境",
+    category: "english",
+    grade: 7,
+    chapter: "Daily Life & Routines 日常生活與作息",
+    concept: "起床、早餐、上學、睡覺、日常活動與生活作息等基礎英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "people-introduction-basics",
 
     title: "People & Introduction 人物與自我介紹",
