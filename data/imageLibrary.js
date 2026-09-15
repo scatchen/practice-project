@@ -617,6 +617,36 @@ const diagramMap = [
     related: []
 },
 {
+    id: "weather-natural-phenomena-basics",
+    title: "Weather & Natural Phenomena 天氣與自然現象",
+    keywords: [
+        "天氣", "天氣現象", "自然現象", "天氣與自然現象",
+        "晴天", "多雲", "下雨", "下雪", "大風", "暴風雨",
+        "雷雨", "雷暴", "閃電", "雷聲", "颱風", "洪水", "彩虹",
+        "weather", "weather conditions", "natural phenomena",
+        "sunny", "cloudy", "rainy", "windy", "storm",
+        "thunderstorm", "lightning", "thunder", "heavy rain",
+        "strong winds", "typhoon", "flood", "flooding", "rainbow",
+        "What is weather",
+        "What are natural phenomena",
+        "What is a thunderstorm",
+        "What causes a rainbow",
+        "What is lightning",
+        "What is thunder",
+        "What is a typhoon",
+        "What causes flooding",
+        "Why does it rain"
+    ],
+    file: "images/english/weather-natural-phenomena-basics.png",
+    alt: "Weather & Natural Phenomena 天氣與自然現象英文教學圖，呈現日常天氣、雷雨、颱風與洪水，以及彩虹等自然現象，並搭配常見英文詞彙與基礎科普概念",
+    category: "english",
+    grade: 7,
+    chapter: "Weather & Natural Phenomena 天氣與自然現象",
+    concept: "日常天氣、雷雨、閃電、雷聲、颱風、洪水、彩虹與常見自然現象英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
