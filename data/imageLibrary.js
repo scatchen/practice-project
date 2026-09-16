@@ -647,6 +647,33 @@ const diagramMap = [
     related: []
 },
 {
+    id: "oceans-and-marine-life-basics",
+    title: "Oceans & Marine Life 海洋與海洋生物",
+    keywords: [
+        "海洋", "海洋生物", "海洋動物", "海洋生態",
+        "鯨魚", "海豚", "海龜", "魚", "章魚", "魟魚", "海星",
+        "海洋環境", "保護海洋", "海洋污染",
+        "ocean", "oceans", "marine life", "marine animals",
+        "whale", "dolphin", "sea turtle", "fish", "octopus",
+        "manta ray", "starfish", "ocean ecosystem",
+        "marine ecosystem", "ocean environment",
+        "protect the ocean", "ocean pollution",
+        "What is an ocean",
+        "What is marine life",
+        "What animals live in the ocean",
+        "Why are oceans important",
+        "How can we protect the ocean"
+    ],
+    file: "images/english/oceans-and-marine-life-basics.png",
+    alt: "Oceans & Marine Life 海洋與海洋生物英文教學圖，呈現鯨魚、海豚、海龜、魚、章魚、魟魚與海星等海洋生物，以及海洋生態與保護海洋等基礎科普概念",
+    category: "english",
+    grade: 7,
+    chapter: "Oceans & Marine Life 海洋與海洋生物",
+    concept: "海洋、海洋生物、海洋生態、常見海洋動物、海洋環境與保護海洋英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
