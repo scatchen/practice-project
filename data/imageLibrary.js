@@ -704,6 +704,36 @@ const diagramMap = [
     related: []
 },
 {
+    id: "animals-and-adaptation-basics",
+    title: "Animals & Adaptation 動物與適應",
+    keywords: [
+        "動物", "動物適應", "動物的適應", "適應", "生物適應",
+        "棲息地", "環境適應", "生存", "保護色", "偽裝",
+        "厚毛", "駝峰", "腳蹼", "速度",
+        "animal", "animals", "adaptation", "animal adaptation",
+        "adapt", "adapt to", "habitat", "environment",
+        "survival", "camouflage", "protective coloring",
+        "thick fur", "hump", "flippers", "speed",
+        "How do animals adapt",
+        "What is adaptation",
+        "What is animal adaptation",
+        "How do animals survive",
+        "Why do animals adapt",
+        "How do animals adapt to their environment",
+        "What is camouflage",
+        "How do polar bears survive in cold places",
+        "How do camels survive in the desert"
+    ],
+    file: "images/english/animals-and-adaptation-basics.png",
+    alt: "Animals & Adaptation 動物與適應英文教學圖，呈現北極熊、駱駝、海龜與獵豹如何透過特殊構造與特徵適應不同環境，並搭配適應、棲息地、生存與偽裝等基礎科普概念",
+    category: "english",
+    grade: 7,
+    chapter: "Animals & Adaptation 動物與適應",
+    concept: "動物適應、棲息地、環境、生存、保護色與動物特殊構造及功能英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
