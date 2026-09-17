@@ -674,6 +674,36 @@ const diagramMap = [
     related: []
 },
 {
+    id: "plants-and-photosynthesis-basics",
+    title: "Plants & Photosynthesis 植物與光合作用",
+    keywords: [
+        "植物", "植物生長", "光合作用", "植物的光合作用",
+        "葉子", "根", "莖", "花", "植物細胞",
+        "陽光", "水", "二氧化碳", "氧氣", "葡萄糖",
+        "植物食物", "植物的重要性", "保護植物",
+        "plant", "plants", "plant growth", "photosynthesis",
+        "leaf", "leaves", "root", "roots", "stem", "flower",
+        "sunlight", "water", "carbon dioxide", "oxygen",
+        "glucose", "plant food",
+        "Why do plants need sunlight",
+        "What is photosynthesis",
+        "How does photosynthesis work",
+        "What do plants need for photosynthesis",
+        "Why are plants important",
+        "What do roots do",
+        "What do leaves do",
+        "What does the stem do"
+    ],
+    file: "images/english/plants-and-photosynthesis-basics.png",
+    alt: "Plants & Photosynthesis 植物與光合作用英文教學圖，呈現植物、光合作用、陽光、水、二氧化碳、氧氣與葡萄糖，以及根、莖、葉與花等植物構造與功能，並搭配植物對環境的重要性等基礎科普概念",
+    category: "english",
+    grade: 7,
+    chapter: "Plants & Photosynthesis 植物與光合作用",
+    concept: "植物構造、植物功能、光合作用、陽光、水、二氧化碳、氧氣、葡萄糖與植物的重要性英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
@@ -2280,7 +2310,13 @@ function getDiagramInfo(question) {
 
         const normalizedKeyword = keyword.toLowerCase();
 
-        if (text.includes(normalizedKeyword)) {
+        const isSingleEnglishWord = /^[a-z]+$/.test(normalizedKeyword);
+
+        const isMatch = isSingleEnglishWord
+            ? new RegExp(`\\b${normalizedKeyword}\\b`).test(text)
+            : text.includes(normalizedKeyword);
+
+        if (isMatch) {
             score++;
 
             // 完整命中較長的主題詞，給予額外權重
