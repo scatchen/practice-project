@@ -734,6 +734,38 @@ const diagramMap = [
     related: []
 },
 {
+    id: "human-health-and-nutrition-basics",
+    title: "Human Health & Nutrition 人類健康與營養",
+    keywords: [
+        "健康", "人類健康", "健康生活", "營養", "健康與營養",
+        "均衡飲食", "健康飲食", "營養素", "食物", "水果", "蔬菜",
+        "全穀類", "蛋白質", "水", "運動", "睡眠", "休息",
+        "健康習慣", "生活習慣", "身體健康",
+        "health", "human health", "healthy", "healthy lifestyle",
+        "nutrition", "healthy nutrition", "balanced diet", "healthy diet",
+        "nutrients", "food", "fruits", "vegetables", "whole grains",
+        "protein", "water", "exercise", "sleep", "rest",
+        "healthy habits", "healthy lifestyle",
+        "Why is healthy food important",
+        "What is nutrition",
+        "What are nutrients",
+        "What is a balanced diet",
+        "Why do we need exercise",
+        "Why is sleep important",
+        "How can we stay healthy",
+        "How can we keep our body healthy",
+        "What foods are good for our health"
+    ],
+    file: "images/english/human-health-and-nutrition-basics.png",
+    alt: "Human Health & Nutrition 人類健康與營養英文教學圖，呈現健康飲食、規律運動、充足睡眠與健康生活習慣，以及水果、蔬菜、全穀類與蛋白質等基礎營養概念",
+    category: "english",
+    grade: 7,
+    chapter: "Human Health & Nutrition 人類健康與營養",
+    concept: "健康飲食、均衡營養、營養素、運動、睡眠、休息與健康生活習慣英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
