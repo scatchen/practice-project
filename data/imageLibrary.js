@@ -802,6 +802,37 @@ const diagramMap = [
     related: []
 },
 {
+    id: "forces-and-motion-basics",
+    title: "Forces & Motion 力與運動",
+    keywords: [
+        "力", "運動", "力與運動", "推力", "拉力",
+        "重力", "摩擦力", "速度", "加速度",
+        "移動", "方向", "改變速度", "物體運動",
+        "forces", "force", "motion", "push", "pull",
+        "gravity", "friction", "speed", "acceleration",
+        "move", "movement", "direction", "change speed",
+        "What is force",
+        "What are forces",
+        "What is motion",
+        "How do forces affect motion",
+        "What is gravity",
+        "What is friction",
+        "What is speed",
+        "What is acceleration",
+        "How does gravity affect objects",
+        "How does friction affect motion",
+        "How can a force change motion"
+    ],
+    file: "images/english/forces-and-motion-basics.png",
+    alt: "Forces & Motion 力與運動英文教學圖，呈現推力、拉力、重力、摩擦力、速度與加速度，以及力如何使物體開始、停止、改變方向或改變速度等基礎物理概念",
+    category: "english",
+    grade: 7,
+    chapter: "Forces & Motion 力與運動",
+    concept: "力、推力、拉力、重力、摩擦力、速度、加速度與力對運動的影響英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
