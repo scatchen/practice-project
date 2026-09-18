@@ -766,6 +766,42 @@ const diagramMap = [
     related: []
 },
 {
+    id: "human-brain-and-nervous-system-basics",
+    title: "The Human Brain & Nervous System 人類大腦與神經系統",
+    keywords: [
+        "大腦", "人類大腦", "腦部", "腦", "神經系統",
+        "中樞神經系統", "周邊神經系統", "神經", "脊髓",
+        "腦葉", "額葉", "頂葉", "顳葉", "枕葉",
+        "小腦", "腦幹", "記憶", "思考", "視覺", "聽覺",
+        "平衡", "協調", "感覺", "訊號",
+        "brain", "human brain", "nervous system", "nervous",
+        "central nervous system", "CNS", "peripheral nervous system", "PNS",
+        "nerve", "nerves", "spinal cord", "brain regions",
+        "frontal lobe", "parietal lobe", "temporal lobe", "occipital lobe",
+        "cerebellum", "brainstem", "memory", "thinking",
+        "vision", "hearing", "balance", "coordination",
+        "sensory organs", "signals",
+        "What is the brain",
+        "What does the brain do",
+        "What is the nervous system",
+        "How does the nervous system work",
+        "What are the parts of the brain",
+        "What does the brain control",
+        "What is the spinal cord",
+        "What are nerves",
+        "How does the brain receive information",
+        "How does the brain control the body"
+    ],
+    file: "images/english/human-brain-and-nervous-system-basics.png",
+    alt: "The Human Brain & Nervous System 人類大腦與神經系統英文教學圖，呈現大腦主要區域、中樞與周邊神經系統，以及感覺、訊息處理、訊號傳遞與身體反應等基礎科普概念",
+    category: "english",
+    grade: 7,
+    chapter: "The Human Brain & Nervous System 人類大腦與神經系統",
+    concept: "大腦主要區域、神經系統、中樞神經系統、周邊神經系統、脊髓、神經與訊息傳遞英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
