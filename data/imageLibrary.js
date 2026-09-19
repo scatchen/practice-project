@@ -833,6 +833,37 @@ const diagramMap = [
     related: []
 },
 {
+    id: "light-sound-and-waves-basics",
+    title: "Light, Sound & Waves 光、聲音與波",
+    keywords: [
+        "光", "光線", "光的反射", "光的折射", "光譜",
+        "聲音", "聲波", "振動", "波", "波動",
+        "光與聲音", "光聲波",
+        "light", "lights", "light ray", "reflection", "refraction",
+        "spectrum", "colors", "sound", "sound wave", "vibration",
+        "waves", "wave", "water waves", "energy waves",
+        "What is light",
+        "How does light travel",
+        "What is reflection",
+        "What is refraction",
+        "What is sound",
+        "How does sound travel",
+        "What is a vibration",
+        "What are waves",
+        "How do waves move",
+        "What do waves carry",
+        "What is a sound wave"
+    ],
+    file: "images/english/light-sound-and-waves-basics.png",
+    alt: "Light, Sound & Waves 光、聲音與波英文教學圖，呈現光的傳播、反射與折射、聲音與振動，以及波如何傳遞能量等基礎科學概念",
+    category: "english",
+    grade: 7,
+    chapter: "Light, Sound & Waves 光、聲音與波",
+    concept: "光、反射、折射、聲音、振動、波與能量傳遞等基礎英文科學概念",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
