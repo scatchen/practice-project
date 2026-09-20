@@ -897,6 +897,41 @@ const diagramMap = [
     related: []
 },
 {
+    id: "matter-and-states-of-matter-basics",
+    title: "Matter & States of Matter 物質與物質狀態",
+    keywords: [
+        "物質", "物質狀態", "固體", "液體", "氣體", "電漿",
+        "固態", "液態", "氣態", "電漿態",
+        "粒子", "分子", "原子", "能量",
+        "熔化", "凝固", "蒸發", "沸騰", "凝結",
+        "matter", "states of matter", "state of matter",
+        "solid", "solids", "liquid", "liquids",
+        "gas", "gases", "plasma", "particles",
+        "molecules", "atoms", "energy",
+        "melting", "freezing", "evaporation", "boiling",
+        "condensation",
+        "What is matter",
+        "What are the states of matter",
+        "What is a solid",
+        "What is a liquid",
+        "What is a gas",
+        "What is plasma",
+        "What are particles",
+        "How are solids and liquids different",
+        "How are liquids and gases different",
+        "How does matter change state",
+        "What happens when matter is heated"
+    ],
+    file: "images/english/matter-and-states-of-matter-basics.png",
+    alt: "Matter & States of Matter 物質與物質狀態英文教學圖，呈現固體、液體、氣體與電漿的特徵、粒子排列，以及物質因能量改變而發生狀態變化等基礎科學概念",
+    category: "english",
+    grade: 7,
+    chapter: "Matter & States of Matter 物質與物質狀態",
+    concept: "物質、固體、液體、氣體、電漿、粒子、能量與物質狀態變化英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
