@@ -864,6 +864,39 @@ const diagramMap = [
     related: []
 },
 {
+    id: "electricity-and-magnetism-basics",
+    title: "Electricity & Magnetism 電與磁",
+    keywords: [
+        "電", "電力", "電與磁", "電學", "電流",
+        "電荷", "電子", "電路", "電池", "燈泡",
+        "磁", "磁力", "磁性", "磁鐵", "磁場",
+        "指南針", "揚聲器", "冰箱磁鐵",
+        "electricity", "electric", "electric charge", "electric current",
+        "electron", "electrons", "circuit", "battery", "light bulb",
+        "magnetism", "magnetic", "magnet", "magnetic force",
+        "magnetic field", "compass", "speaker", "refrigerator magnet",
+        "What is electricity",
+        "What is electric current",
+        "What is an electric circuit",
+        "How does electricity work",
+        "What is magnetism",
+        "What is a magnet",
+        "What is magnetic force",
+        "What is a magnetic field",
+        "How do magnets work",
+        "How is electricity used",
+        "How are magnets used"
+    ],
+    file: "images/english/electricity-and-magnetism-basics.png",
+    alt: "Electricity & Magnetism 電與磁英文教學圖，呈現電流、電子、電路、電池與燈泡，以及磁鐵、磁力、磁場、指南針與日常生活中的電磁應用等基礎科學概念",
+    category: "english",
+    grade: 7,
+    chapter: "Electricity & Magnetism 電與磁",
+    concept: "電力、電流、電子、電路、磁鐵、磁力、磁場與日常生活中的電磁應用英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
