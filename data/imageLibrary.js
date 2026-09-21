@@ -932,6 +932,42 @@ const diagramMap = [
     related: []
 },
 {
+    id: "chemical-reactions-basics",
+    title: "Chemical Reactions 化學反應",
+    keywords: [
+        "化學反應", "化學變化", "反應物", "生成物",
+        "新物質", "物質變化", "化學反應的跡象",
+        "氣泡", "產生氣體", "顏色改變", "溫度改變",
+        "放熱", "吸熱", "沉澱", "燃燒",
+        "醋", "小蘇打",
+        "chemical reaction", "chemical reactions",
+        "chemical change", "reactant", "reactants",
+        "product", "products", "new substance",
+        "chemical change", "bubbles", "gas",
+        "color change", "temperature change",
+        "heat", "light", "precipitate", "burning",
+        "vinegar", "baking soda",
+        "What is a chemical reaction",
+        "What are chemical reactions",
+        "What is a chemical change",
+        "What are reactants",
+        "What are products",
+        "What is a new substance",
+        "How can we tell if a chemical reaction happens",
+        "What are the signs of a chemical reaction",
+        "Why do bubbles form in a chemical reaction",
+        "What happens when vinegar and baking soda react"
+    ],
+    file: "images/english/chemical-reactions-basics.png",
+    alt: "Chemical Reactions 化學反應英文教學圖，呈現反應物、生成物、新物質、燃燒、醋與小蘇打反應，以及氣泡、溫度改變、顏色改變與沉澱等常見化學反應跡象",
+    category: "english",
+    grade: 7,
+    chapter: "Chemical Reactions 化學反應",
+    concept: "化學反應、反應物、生成物、新物質、燃燒與常見化學反應跡象英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
