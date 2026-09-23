@@ -1118,6 +1118,43 @@ const diagramMap = [
     related: []
 },
 {
+    id: "stars-and-galaxies-basics",
+    title: "Stars & Galaxies 恆星與星系",
+    keywords: [
+        "恆星", "星星", "星系", "銀河系",
+        "宇宙", "星空", "恆星形成", "恆星生命週期",
+        "太陽是恆星", "銀河",
+        "螺旋星系", "橢圓星系", "不規則星系",
+        "star", "stars", "galaxy", "galaxies",
+        "Milky Way", "the Milky Way",
+        "universe", "star formation", "stellar life cycle",
+        "spiral galaxy", "spiral galaxies",
+        "elliptical galaxy", "elliptical galaxies",
+        "irregular galaxy", "irregular galaxies",
+        "What is a star",
+        "What are stars",
+        "What is a galaxy",
+        "What are galaxies",
+        "What is the Milky Way",
+        "What is the universe",
+        "Is the Sun a star",
+        "How are stars formed",
+        "What are galaxies made of",
+        "What are the types of galaxies",
+        "What is a spiral galaxy",
+        "What is an elliptical galaxy",
+        "What is an irregular galaxy"
+    ],
+    file: "images/english/stars-and-galaxies-basics.png",
+    alt: "Stars & Galaxies 恆星與星系英文教學圖，呈現恆星、太陽、銀河系，以及螺旋星系、橢圓星系與不規則星系的基本概念",
+    category: "english",
+    grade: 7,
+    chapter: "Stars & Galaxies 恆星與星系",
+    concept: "恆星、銀河系、星系、星系類型與宇宙基本概念英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "earthquakes-basics",
     title: "Earthquakes 地震",
     keywords: [
