@@ -1190,6 +1190,42 @@ const diagramMap = [
     related: []
 },
 {
+    id: "fossils-and-dinosaurs-basics",
+    title: "Fossils & Dinosaurs 化石與恐龍",
+    keywords: [
+        "化石", "恐龍", "古生物", "史前生物",
+        "恐龍化石", "化石形成", "化石證據",
+        "恐龍時代", "恐龍滅絕", "恐龍骨骼",
+        "暴龍", "霸王龍", "三葉蟲",
+        "fossil", "fossils", "dinosaur", "dinosaurs",
+        "prehistoric life", "prehistoric animals",
+        "dinosaur fossils", "fossil formation",
+        "fossil evidence", "dinosaur extinction",
+        "dinosaur bones", "fossil record",
+        "Tyrannosaurus rex", "T. rex", "trilobite",
+        "What is a fossil",
+        "What are fossils",
+        "What is a dinosaur",
+        "What are dinosaurs",
+        "How are fossils formed",
+        "How do fossils form",
+        "What can fossils tell us",
+        "Why are fossils important",
+        "How do we learn about dinosaurs",
+        "When did dinosaurs live",
+        "Why did dinosaurs become extinct",
+        "What is the fossil record"
+    ],
+    file: "images/english/fossils-and-dinosaurs-basics.png",
+    alt: "Fossils & Dinosaurs 化石與恐龍英文教學圖，呈現化石、恐龍、化石形成過程、恐龍骨骼，以及化石如何幫助我們了解地球上的古代生命",
+    category: "english",
+    grade: 7,
+    chapter: "Fossils & Dinosaurs 化石與恐龍",
+    concept: "化石、恐龍、化石形成、恐龍滅絕與化石證據英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "earthquakes-basics",
     title: "Earthquakes 地震",
     keywords: [
