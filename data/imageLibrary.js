@@ -1155,6 +1155,41 @@ const diagramMap = [
     related: []
 },
 {
+    id: "gravity-and-orbits-basics",
+    title: "Gravity & Orbits 重力與軌道",
+    keywords: [
+        "重力", "萬有引力", "引力", "軌道",
+        "行星軌道", "月球軌道", "衛星軌道",
+        "太陽引力", "重力作用", "重力與軌道",
+        "重力場", "人造衛星",
+        "gravity", "gravitation", "gravitational force",
+        "orbit", "orbits", "orbital motion",
+        "planetary orbit", "planetary orbits",
+        "moon orbit", "moon orbits",
+        "satellite orbit", "satellite orbits",
+        "gravity and orbits", "gravitational pull",
+        "What is gravity",
+        "What is an orbit",
+        "What are orbits",
+        "How does gravity work",
+        "How does gravity keep planets in orbit",
+        "Why do planets orbit the Sun",
+        "Why does the Moon orbit Earth",
+        "How do satellites stay in orbit",
+        "What is gravitational force",
+        "What is orbital motion",
+        "How does gravity affect orbits"
+    ],
+    file: "images/english/gravity-and-orbits-basics.png",
+    alt: "Gravity & Orbits 重力與軌道英文教學圖，呈現重力、行星繞太陽運行、月球繞地球運行，以及人造衛星軌道的基本概念",
+    category: "english",
+    grade: 7,
+    chapter: "Gravity & Orbits 重力與軌道",
+    concept: "重力、萬有引力、行星軌道、月球軌道與衛星軌道英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "earthquakes-basics",
     title: "Earthquakes 地震",
     keywords: [
