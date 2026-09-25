@@ -2415,11 +2415,21 @@ function clearQuestion() {
 
 function highlightEnglishKeywords(answer, question) {
 
-const coreWord = question
+const cleanedQuestion = question
     .toLowerCase()
     .replace(/^(what does|what is|define|meaning of)\s+/i, "")
     .replace(/\s+(mean|meaning)\??$/i, "")
     .trim();
+
+const englishWords = cleanedQuestion.match(/\b[a-z]+\b/gi);
+
+const coreWord = englishWords
+    ? englishWords[englishWords.length - 1].toLowerCase()
+    : "";
+
+const phrasePattern = englishWords
+    ? englishWords.join(" ")
+    : "";
 
 const wordPattern = new RegExp(`\\b${coreWord}(s|ed|ing)?\\b`, "gi");
 
@@ -2441,23 +2451,28 @@ const wordPattern = new RegExp(`\\b${coreWord}(s|ed|ing)?\\b`, "gi");
         "protect the team"
     ];
 
-    answer = answer.replace(
-        wordPattern,
-        '<span class="english-keyword">$&</span>'
-    );
+    if (phrasePattern.includes(" ")) {
+    keywords.unshift(phrasePattern);
+    }
 
     for (const keyword of keywords) {
 
-        const regex = new RegExp(`\\b${keyword}\\b`, "gi");
+    const regex = new RegExp(`\\b${keyword}\\b`, "gi");
 
-        answer = answer.replace(
-            regex,
-            `<span class="english-keyword">${keyword}</span>`
-        );
+    answer = answer.replace(
+        regex,
+        '<span class="english-keyword">$&</span>'
+    );
 
-    }
+}
 
-    return answer;
+answer = answer.replace(
+    wordPattern,
+    '<span class="english-keyword">$&</span>'
+);
+
+return answer;
+
 }
 
 function formatEnglishAnswer(answer) {
@@ -2597,6 +2612,8 @@ function setSubjectMode(mode) {
 
     ①【英英解釋（English Definition）】
     請使用自然、清楚且符合學生程度的英文進行解釋。
+    英英解釋中，必須自然地包含學生正在查詢的完整英文單字或片語至少一次。
+    如果學生查詢的是完整片語，請在英英解釋中自然地使用完整片語，不要只使用其中一個單字或改用同義詞取代。
 
     若為兒童或國小程度，請使用簡單、容易理解的英文。
     若為國中程度，請提供簡潔但完整的英文定義。
