@@ -666,6 +666,11 @@ color: #111827;
             font-size: 1.5em;
         } 
 
+        .english-keyword {
+            color: #facc15;
+            font-weight: 700;
+        }
+
         /* ================= 課堂大輪盤 ================= */
         .wheel-container {
             display: grid;
@@ -2408,6 +2413,53 @@ function clearQuestion() {
     document.getElementById("ai-question").focus();
 }
 
+function highlightEnglishKeywords(answer, question) {
+
+const coreWord = question
+    .toLowerCase()
+    .replace(/^(what does|what is|define|meaning of)\s+/i, "")
+    .replace(/\s+(mean|meaning)\??$/i, "")
+    .trim();
+
+const wordPattern = new RegExp(`\\b${coreWord}(s|ed|ing)?\\b`, "gi");
+
+    const keywords = [
+        "protecting",
+        "keep",
+        "safe",
+        "harm",
+        "danger",
+        "protect against theft",
+        "protect yourself",
+        "protect the environment",
+        "protect against",
+        "protect from",
+        "protect a child",
+        "protect the rights",
+        "protect the data",
+        "protect a secret",
+        "protect the team"
+    ];
+
+    answer = answer.replace(
+        wordPattern,
+        '<span class="english-keyword">$&</span>'
+    );
+
+    for (const keyword of keywords) {
+
+        const regex = new RegExp(`\\b${keyword}\\b`, "gi");
+
+        answer = answer.replace(
+            regex,
+            `<span class="english-keyword">${keyword}</span>`
+        );
+
+    }
+
+    return answer;
+}
+
 function formatEnglishAnswer(answer) {
 
     answer = answer.replace(/\*\*/g, "");
@@ -3044,6 +3096,7 @@ if (diagrams && diagrams.length > 0) {
 
         if (appState.subjectMode === 'english') {
             answer = formatEnglishAnswer(answer);
+            answer = highlightEnglishKeywords(answer, question);
         }
 
         answer = answer.replace(/\n/g, "<br>");
