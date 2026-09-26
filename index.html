@@ -2431,7 +2431,8 @@ const phrasePattern = englishWords
     ? englishWords.join(" ")
     : "";
 
-const wordPattern = new RegExp(`\\b${coreWord}(s|ed|ing)?\\b`, "gi");
+const singularCoreWord = coreWord.endsWith("s") ? coreWord.slice(0, -1) : coreWord;
+const wordPattern = new RegExp(`\\b${singularCoreWord}(s|ed|ing)?\\b`, "gi");
 
     const keywords = [
         "protecting",
