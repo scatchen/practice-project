@@ -1258,6 +1258,38 @@ const diagramMap = [
     related: []
 },
 {
+    id: "genetics-and-heredity-2",
+    title: "Genetics & Heredity 遺傳與基因（完整教學）",
+    keywords: [
+        "遺傳", "基因", "遺傳學", "遺傳特徵",
+        "DNA", "染色體", "基因型", "表現型",
+        "親代", "子代",
+        "顯性", "隱性", "顯性基因", "隱性基因",
+        "基因遺傳", "家庭特徵", "生物特徵",
+        "genetics", "genetic", "heredity", "hereditary",
+        "gene", "genes", "DNA", "chromosome",
+        "traits", "genetic traits", "inherited traits",
+        "inherit", "inheritance", "parents", "offspring",
+        "dominant", "recessive", "dominant gene",
+        "recessive gene", "family traits",
+        "What is genetics",
+        "What is heredity",
+        "What are genes",
+        "How are traits inherited",
+        "What is DNA",
+        "What is a chromosome",
+        "dominant and recessive traits"
+    ],
+    file: "images/english/genetics-and-heredity-2.png",
+    alt: "Genetics & Heredity 遺傳與基因完整英文教學圖，進一步呈現基因、DNA、遺傳特徵、親代與子代，以及顯性與隱性特徵",
+    category: "english",
+    grade: 7,
+    chapter: "Genetics & Heredity 遺傳與基因",
+    concept: "遺傳、基因、DNA、親代與子代、顯性與隱性特徵英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "cells-and-microorganisms-basics",
     title: "Cells & Microorganisms 細胞與微生物",
     keywords: [
