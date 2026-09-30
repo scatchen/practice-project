@@ -1006,6 +1006,43 @@ const diagramMap = [
     related: []
 },
 {
+    id: "renewable-energy-basics",
+    title: "Renewable Energy 再生能源",
+    keywords: [
+        "再生能源", "再生能源來源", "清潔能源", "永續能源",
+        "太陽能", "風能", "水力發電",
+        "能源轉型", "綠色能源",
+
+        "renewable energy", "renewable energy sources",
+        "clean energy", "clean energy sources",
+        "sustainable energy", "green energy",
+        "solar energy", "solar power",
+        "wind energy", "wind power",
+        "hydropower", "hydroelectric power",
+        "sunlight", "wind",
+
+        "What is renewable energy",
+        "What are renewable energy sources",
+        "What is clean energy",
+        "What is solar energy",
+        "What is solar power",
+        "What is wind energy",
+        "What is wind power",
+        "What is hydropower",
+        "Why is renewable energy important",
+        "Why is clean energy important",
+        "Where does renewable energy come from"
+    ],
+    file: "images/english/renewable-energy-basics.png",
+    alt: "Renewable Energy 再生能源英文教學圖，呈現太陽能、風能、水力發電與清潔能源等常見再生能源，以及利用自然資源產生能源的基礎英文概念",
+    category: "english",
+    grade: 7,
+    chapter: "Renewable Energy 再生能源",
+    concept: "再生能源、太陽能、風能、水力發電、清潔能源與永續能源等基礎英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "rocks-and-minerals-basics",
     title: "Rocks & Minerals 岩石與礦物",
     keywords: [
