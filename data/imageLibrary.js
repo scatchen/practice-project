@@ -1006,6 +1006,44 @@ const diagramMap = [
     related: []
 },
 {
+    id: "recycling-basics",
+    title: "Recycling 回收",
+    keywords: [
+        "回收", "資源回收", "垃圾分類",
+        "分類", "再利用", "減量",
+        "回收桶", "回收物", "再生材料",
+        "新產品", "環境保護", "清潔環境",
+
+        "recycling", "recycle",
+        "recycling bins", "recycle bin",
+        "sort", "sort waste",
+        "reuse", "reduce",
+        "recyclable", "recycled materials",
+        "new products",
+        "environment", "environmental protection",
+
+        "What is recycling",
+        "What does recycle mean",
+        "What can we recycle",
+        "How does recycling work",
+        "How can we recycle",
+        "How do we sort recycling",
+        "Why is recycling important",
+        "Why should we recycle",
+        "What are recyclable materials",
+        "What happens after recycling",
+        "How does recycling help the environment"
+    ],
+    file: "images/english/recycling-basics.png",
+    alt: "Recycling 回收英文教學圖，透過垃圾分類、再利用、資源回收與再生材料製成新產品等情境，呈現回收的基礎英文概念",
+    category: "english",
+    grade: 7,
+    chapter: "Recycling 回收",
+    concept: "垃圾分類、再利用、資源回收、再生材料與環境保護等基礎英文",
+    difficulty: 1,
+    related: ["pollution-and-waste-basics"]
+},
+{
     id: "pollution-and-waste-basics",
     title: "Pollution & Waste 污染與廢棄物",
     keywords: [
