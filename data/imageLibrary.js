@@ -1006,6 +1006,46 @@ const diagramMap = [
     related: []
 },
 {
+    id: "pollution-and-waste-basics",
+    title: "Pollution & Waste 污染與廢棄物",
+    keywords: [
+        "污染", "環境污染", "空氣污染", "水污染",
+        "土地污染", "廢棄物", "垃圾", "垃圾污染",
+        "減量", "再利用", "回收", "環境保護",
+        "清潔環境", "永續生活",
+
+        "pollution", "air pollution",
+        "water pollution", "land pollution",
+        "waste", "waste pollution",
+        "trash", "garbage",
+        "reduce", "reuse", "recycle",
+        "reduce reuse recycle",
+        "environment", "environmental protection",
+        "clean environment", "cleaner future",
+
+        "What is pollution",
+        "What is air pollution",
+        "What is water pollution",
+        "What is waste",
+        "Why is pollution harmful",
+        "Why is waste a problem",
+        "How can we reduce waste",
+        "How can we reuse things",
+        "What does recycle mean",
+        "How can we protect the environment",
+        "How can we keep our environment clean",
+        "Why are reduce reuse and recycle important"
+    ],
+    file: "images/english/pollution-and-waste-basics.png",
+    alt: "Pollution & Waste 污染與廢棄物英文教學圖，透過污染、日常廢棄物、減量再利用回收與清潔環境等情境，呈現環境保護的基礎英文概念",
+    category: "english",
+    grade: 7,
+    chapter: "Pollution & Waste 污染與廢棄物",
+    concept: "污染、廢棄物、減量、再利用、回收與環境保護等基礎英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "wind-energy-basics",
     title: "Wind Energy 風能",
     keywords: [
