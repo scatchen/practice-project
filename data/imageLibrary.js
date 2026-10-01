@@ -1006,6 +1006,46 @@ const diagramMap = [
     related: []
 },
 {
+    id: "natural-resources-basics",
+    title: "Natural Resources 自然資源",
+    keywords: [
+        "自然資源", "天然資源", "資源",
+        "水資源", "水", "森林", "木材",
+        "礦物", "礦產", "化石燃料",
+        "煤", "石油", "天然氣",
+        "能源", "自然環境", "地球資源",
+
+        "natural resources", "natural resource",
+        "water", "water resources",
+        "forests", "forest", "wood",
+        "minerals", "mineral resources",
+        "fossil fuels", "coal", "oil",
+        "natural gas", "energy",
+        "Earth's resources",
+
+        "What are natural resources",
+        "What is a natural resource",
+        "What are water resources",
+        "Why are natural resources important",
+        "What resources come from forests",
+        "What are minerals",
+        "What are fossil fuels",
+        "What is coal",
+        "What is oil",
+        "What is natural gas",
+        "How do we use natural resources",
+        "Why should we protect natural resources"
+    ],
+    file: "images/english/natural-resources-basics.png",
+    alt: "Natural Resources 自然資源英文教學圖，透過水、森林、礦物與化石燃料等情境，呈現自然資源及其日常生活用途的基礎英文概念",
+    category: "english",
+    grade: 7,
+    chapter: "Natural Resources 自然資源",
+    concept: "水、森林、礦物、化石燃料與自然資源用途等基礎英文",
+    difficulty: 1,
+    related: ["conservation-and-biodiversity-basics", "renewable-energy-basics"]
+},
+{
     id: "conservation-and-biodiversity-basics",
     title: "Conservation & Biodiversity 自然保育與生物多樣性",
     keywords: [
