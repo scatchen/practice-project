@@ -1006,6 +1006,46 @@ const diagramMap = [
     related: []
 },
 {
+    id: "conservation-and-biodiversity-basics",
+    title: "Conservation & Biodiversity 自然保育與生物多樣性",
+    keywords: [
+        "自然保育", "生態保育", "環境保育",
+        "生物多樣性", "生物多樣性保育",
+        "保護動物", "保護棲地", "棲地",
+        "野生動物", "森林", "河流", "海洋",
+        "濕地", "生態系", "健康的地球",
+
+        "conservation", "nature conservation",
+        "environmental conservation",
+        "biodiversity", "biological diversity",
+        "protect animals", "protect wildlife",
+        "protect habitats", "habitat",
+        "wildlife", "forest", "rivers",
+        "oceans", "wetlands", "ecosystem",
+        "healthy planet",
+
+        "What is conservation",
+        "What is biodiversity",
+        "What is a habitat",
+        "Why is conservation important",
+        "Why is biodiversity important",
+        "Why should we protect animals",
+        "How can we protect wildlife",
+        "How can we protect habitats",
+        "How can we protect biodiversity",
+        "What does biodiversity mean",
+        "How does conservation help the planet"
+    ],
+    file: "images/english/conservation-and-biodiversity-basics.png",
+    alt: "Conservation & Biodiversity 自然保育與生物多樣性英文教學圖，透過保護動物、保護棲地、生物多樣性與健康地球等情境，呈現自然保育的基礎英文概念",
+    category: "english",
+    grade: 7,
+    chapter: "Conservation & Biodiversity 自然保育與生物多樣性",
+    concept: "自然保育、生物多樣性、動物保護、棲地保護、生態系與健康地球等基礎英文",
+    difficulty: 1,
+    related: ["pollution-and-waste-basics", "recycling-basics"]
+},
+{
     id: "recycling-basics",
     title: "Recycling 回收",
     keywords: [
