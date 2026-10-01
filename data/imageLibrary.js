@@ -1006,6 +1006,41 @@ const diagramMap = [
     related: []
 },
 {
+    id: "wind-energy-basics",
+    title: "Wind Energy 風能",
+    keywords: [
+        "風能", "風力", "風力發電",
+        "風力發電機", "風力渦輪機",
+        "葉片", "發電機", "電力",
+        "清潔能源", "再生能源",
+
+        "wind energy", "wind power",
+        "wind turbine", "wind turbines",
+        "wind farm",
+        "blades", "turbine blades",
+        "generator", "electricity",
+        "clean energy", "renewable energy",
+
+        "What is wind energy",
+        "What is wind power",
+        "What is a wind turbine",
+        "How does wind energy work",
+        "How does a wind turbine work",
+        "How do wind turbines make electricity",
+        "What are turbine blades",
+        "What does a generator do",
+        "Why is wind energy important"
+    ],
+    file: "images/english/wind-energy-basics.png",
+    alt: "Wind Energy 風能英文教學圖，透過風、風力發電機葉片、發電機與電力輸送等情境，呈現風能產生電力的基礎英文概念",
+    category: "english",
+    grade: 7,
+    chapter: "Wind Energy 風能",
+    concept: "風能、風力發電機、葉片、發電機、電力與清潔能源等基礎英文",
+    difficulty: 1,
+    related: ["renewable-energy-basics"]
+},
+{
     id: "solar-energy-basics",
     title: "Solar Energy 太陽能",
     keywords: [
