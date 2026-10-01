@@ -1006,6 +1006,38 @@ const diagramMap = [
     related: []
 },
 {
+    id: "solar-energy-basics",
+    title: "Solar Energy 太陽能",
+    keywords: [
+        "太陽能", "太陽能板", "太陽能發電",
+        "陽光", "太陽光", "電力", "清潔能源",
+        "再生能源",
+
+        "solar energy", "solar power",
+        "solar panels", "solar panel",
+        "sunlight", "electricity",
+        "clean energy", "renewable energy",
+
+        "What is solar energy",
+        "What is solar power",
+        "What are solar panels",
+        "How do solar panels work",
+        "How does solar energy work",
+        "How does solar power work",
+        "How do solar panels make electricity",
+        "How is solar energy used",
+        "Why is solar energy important"
+    ],
+    file: "images/english/solar-energy-basics.png",
+    alt: "Solar Energy 太陽能英文教學圖，透過太陽、太陽能板、電力與家庭使用情境，呈現太陽能產生電力的基礎英文概念",
+    category: "english",
+    grade: 7,
+    chapter: "Solar Energy 太陽能",
+    concept: "太陽能、陽光、太陽能板、電力與清潔能源等基礎英文",
+    difficulty: 1,
+    related: ["renewable-energy-basics"]
+},
+{
     id: "renewable-energy-basics",
     title: "Renewable Energy 再生能源",
     keywords: [
