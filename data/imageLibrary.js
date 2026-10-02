@@ -576,6 +576,41 @@ const diagramMap = [
     related: []
 },
 {
+    id: "moon-phases-basics",
+    title: "Moon Phases 月相",
+    keywords: [
+        "月相", "月球相位", "月亮盈虧",
+        "新月", "上弦月", "滿月", "下弦月",
+        "月相變化", "月球的相位",
+        "月亮的形狀", "月亮為什麼會變化",
+        "為什麼月亮會有不同的形狀",
+        "月亮為什麼有不同的形狀",
+        "moon phases", "moon phase",
+        "lunar phases", "lunar phase",
+        "phases of the Moon", "phases of Moon",
+        "Moon's phases", "lunar cycle",
+        "new moon", "first quarter",
+        "full moon", "last quarter",
+        "crescent moon", "gibbous moon",
+        "What are the phases of the Moon",
+        "What is a new moon",
+        "What is a first quarter moon",
+        "What is a full moon",
+        "What is a last quarter moon",
+        "Why does the Moon change shape",
+        "Why does the Moon have phases",
+        "How do moon phases work"
+    ],
+    file: "images/english/moon-phases-basics.png",
+    alt: "Moon Phases 月相英文教學圖，呈現新月、上弦月、滿月與下弦月，以及太陽、地球與月球的位置關係和月相變化原理",
+    category: "english",
+    grade: 7,
+    chapter: "Moon Phases 月相",
+    concept: "月相、新月、上弦月、滿月、下弦月，以及太陽地球月球位置關係英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "human-body-how-it-works-basics",
     title: "Human Body & How the Body Works 人體與身體運作",
     keywords: [
