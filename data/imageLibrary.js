@@ -2264,6 +2264,40 @@ const diagramMap = [
     related: []
 },
 {
+    id: "immune-system-basics",
+    title: "Immune System 免疫系統",
+    keywords: [
+        "免疫系統", "免疫", "人體免疫", "人體防禦",
+        "免疫細胞", "白血球", "白血球細胞",
+        "免疫反應", "免疫記憶", "免疫防禦",
+        "抵抗病原體", "對抗病原體",
+        "身體防禦系統",
+        "immune system", "immunity", "immune",
+        "immune cells", "white blood cells",
+        "immune response", "immune defense",
+        "immune memory", "body defense system",
+        "defense system", "body's defense",
+        "fight germs", "fight harmful germs",
+        "recognize germs", "immune cells fight",
+        "How does the immune system work",
+        "What is the immune system",
+        "What does the immune system do",
+        "How does the body fight germs",
+        "How do white blood cells fight germs",
+        "What are immune cells",
+        "What is immunity",
+        "What is immune memory"
+    ],
+    file: "images/english/immune-system-basics.png",
+    alt: "Immune System 免疫系統英文教學圖，呈現病原體進入人體、免疫系統辨識、免疫細胞對抗病原體，以及免疫記憶與較快再次反應的基本概念",
+    category: "english",
+    grade: 7,
+    chapter: "Immune System 免疫系統",
+    concept: "免疫系統、免疫細胞、白血球、免疫反應、人體防禦與免疫記憶英文",
+    difficulty: 2,
+    related: []
+},
+{
     id: "human-body-systems-basics",
     title: "Human Body Systems 人體系統",
     keywords: [
