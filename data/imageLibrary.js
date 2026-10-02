@@ -2437,6 +2437,42 @@ const diagramMap = [
     related: []
 },
 {
+    id: "layers-of-the-earth-basics",
+    title: "Layers of the Earth 地球內部構造",
+    keywords: [
+        "地球內部", "地球內部構造", "地球構造",
+        "地球的構造", "地球分層", "地球內部各層",
+        "地球內部構造是什麼", "地球的內部構造是什麼",
+        "地球有哪些構造", "地球內部有哪些層",
+        "地球分成哪幾層", "地球內部有哪幾層",
+        "地殼", "地函", "外核", "內核",
+        "什麼是地球內核", "什麼是地球的內核",
+        "地核", "地球核心",
+        "layers of the Earth", "Earth's layers",
+        "Earth layers", "Earth's interior",
+        "Earth interior", "inner Earth",
+        "crust", "Earth's crust",
+        "mantle", "Earth's mantle",
+        "outer core", "inner core",
+        "Earth's outer core", "Earth's inner core",
+        "core of the Earth",
+        "What are the layers of the Earth",
+        "What is the Earth's crust",
+        "What is the mantle",
+        "What is the outer core",
+        "What is the inner core",
+        "What are the layers inside the Earth"
+    ],
+    file: "images/english/layers-of-the-earth-basics.png",
+    alt: "Layers of the Earth 地球內部構造英文教學圖，呈現地球、地殼、地函、外核與內核的基本結構與位置",
+    category: "english",
+    grade: 7,
+    chapter: "Layers of the Earth 地球內部構造",
+    concept: "地球內部構造、地殼、地函、外核與內核英文",
+    difficulty: 1,
+    related: []
+},
+{
     id: "earthquakes-basics",
     title: "Earthquakes 地震",
     keywords: [
