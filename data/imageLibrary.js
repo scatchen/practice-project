@@ -734,6 +734,35 @@ const diagramMap = [
     related: []
 },
 {
+    id: "evolution-and-natural-selection-basics",
+    title: "Evolution & Natural Selection 演化與自然選擇",
+    keywords: [
+        "演化", "物種演化", "自然選擇", "天擇",
+        "變異", "族群變化", "世代", "後代",
+        "生存與繁殖", "選擇壓力", "同一物種",
+        "evolution", "evolutionary", "natural selection",
+        "variation", "selection pressure",
+        "survival", "reproduction", "offspring",
+        "generations", "population change", "species",
+        "same species",
+        "How does evolution happen",
+        "What is evolution",
+        "What is natural selection",
+        "How does natural selection work",
+        "What is variation",
+        "Why do some animals survive",
+        "How do populations change over generations"
+    ],
+    file: "images/english/evolution-and-natural-selection-basics.png",
+    alt: "Evolution & Natural Selection 演化與自然選擇英文教學圖，透過同一物種的個體變異、環境中的選擇壓力、生存與繁殖，以及多個世代的族群變化，呈現自然選擇導致演化的基本概念",
+    category: "english",
+    grade: 7,
+    chapter: "Evolution & Natural Selection 演化與自然選擇",
+    concept: "個體變異、自然選擇、選擇壓力、生存與繁殖、後代、世代與族群變化英文",
+    difficulty: 2,
+    related: []
+},
+{
     id: "human-health-and-nutrition-basics",
     title: "Human Health & Nutrition 人類健康與營養",
     keywords: [
