@@ -1179,6 +1179,48 @@ const diagramMap = [
     related: []
 },
 {
+    id: "static-electricity-basics",
+    title: "Static Electricity 靜電",
+    keywords: [
+        "靜電", "靜電現象", "靜電荷",
+        "帶電", "帶電體", "電荷累積",
+        "摩擦起電", "電荷轉移",
+        "電荷吸引", "電荷排斥",
+        "異種電荷", "同種電荷",
+        "靜電放電", "放電",
+
+        "static electricity", "static electric",
+        "electric charges", "charged object",
+        "electric charge transfer",
+        "charge transfer", "charge buildup",
+        "charging by friction",
+        "friction charging",
+        "opposite charges", "like charges",
+        "charges attract", "charges repel",
+        "static discharge", "electrostatic discharge",
+
+        "What is static electricity",
+        "What is static electric charge",
+        "How does static electricity work",
+        "How does friction create static electricity",
+        "How does rubbing create electric charges",
+        "Why do charged objects attract",
+        "Why do charged objects repel",
+        "What are opposite charges",
+        "What are like charges",
+        "What is static discharge",
+        "What happens when static electricity discharges"
+    ],
+    file: "images/english/static-electricity-basics.png",
+    alt: "Static Electricity 靜電英文教學圖，透過摩擦氣球、電荷吸引與排斥，以及靜電放電等情境，介紹摩擦起電、電荷轉移、同種與異種電荷及靜電放電等基礎科學概念",
+    category: "english",
+    grade: 7,
+    chapter: "Static Electricity 靜電",
+    concept: "靜電、摩擦起電、電荷轉移、同種與異種電荷的吸引與排斥，以及靜電放電英文",
+    difficulty: 1,
+    related: ["electricity-and-magnetism-basics"]
+},
+{
     id: "matter-and-states-of-matter-basics",
     title: "Matter & States of Matter 物質與物質狀態",
     keywords: [
