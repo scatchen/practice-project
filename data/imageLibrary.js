@@ -1032,6 +1032,58 @@ const diagramMap = [
     related: []
 },
 {
+    id: "pressure-and-buoyancy-basics",
+    title: "Pressure & Buoyancy 壓力與浮力",
+    keywords: [
+        "壓力", "壓力的概念", "物理壓力",
+        "液體中的壓力", "液體壓力",
+        "大氣壓力", "水中壓力",
+        "浮力", "浮力的概念",
+        "漂浮", "下沉", "浮沉",
+        "物體漂浮", "物體下沉",
+        "密度與浮力", "密度與浮沉",
+        "壓力與浮力",
+        "壓力和浮力",
+
+        "pressure", "pressure in physics",
+        "pressure in liquids", "liquid pressure",
+        "water pressure", "air pressure",
+        "atmospheric pressure",
+        "buoyancy", "buoyant force",
+        "floating", "sinking",
+        "float", "sink",
+        "floating and sinking",
+        "density and buoyancy",
+        "density and floating",
+        "pressure and buoyancy",
+
+        "What is pressure",
+        "What is pressure in physics",
+        "What is liquid pressure",
+        "Why does pressure increase with depth",
+        "What is air pressure",
+        "What is buoyancy",
+        "What is buoyant force",
+        "Why do objects float",
+        "Why do objects sink",
+        "What makes an object float",
+        "What makes an object sink",
+        "How does buoyancy work",
+        "What is the relationship between density and buoyancy",
+        "What is the difference between floating and sinking"
+    ],
+    file: "images/english/pressure-and-buoyancy-basics.png",
+    alt: "Pressure & Buoyancy 壓力與浮力英文教學圖，呈現壓力、液體深度與壓力、浮力，以及密度與物體漂浮或下沉的基本概念",
+    category: "english",
+    grade: 7,
+    chapter: "Pressure & Buoyancy 壓力與浮力",
+    concept: "壓力、液體中的壓力、浮力、浮沉，以及密度與浮力關係英文",
+    difficulty: 1,
+    related: [
+        "forces-and-motion-basics"
+    ]
+},
+{
     id: "energy-and-energy-sources-basics",
     title: "Energy & Energy Sources 能量與能源",
     keywords: [
