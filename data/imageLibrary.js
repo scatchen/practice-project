@@ -4598,6 +4598,51 @@ const diagramMap = [
     ]
 },
 {
+    id: "valleys-basics",
+    title: "Valleys 山谷",
+    keywords: [
+        "山谷", "谷地", "山谷地形", "山谷底部", "山谷底",
+        "河谷", "山間谷地",
+
+        "valley", "valleys",
+        "mountain valley",
+        "mountain valleys",
+        "valley floor",
+        "river valley",
+        "river valleys",
+
+        "What is a valley",
+        "What are valleys",
+        "What is a mountain valley",
+        "What is a valley floor",
+        "What is a river valley",
+        "What does a valley look like",
+        "What is the bottom of a valley",
+        "What is the land between mountains called",
+        "What is the land between hills called",
+
+        "什麼是山谷",
+        "什麼是谷地",
+        "什麼是山谷底部",
+        "什麼是河谷",
+        "山谷是什麼",
+        "山谷底部是什麼",
+        "山脈之間的低地叫什麼",
+        "山和山之間的低地叫什麼",
+        "河流可以流過山谷嗎"
+    ],
+    file: "images/english/valleys-basics.png",
+    alt: "Valleys 山谷英文教學圖，透過一般山谷、山間谷地、山谷底部與河谷四個情境，介紹 valley、mountain valley、valley floor 與 river valley 等國中基礎英文地形詞彙",
+    category: "english",
+    grade: 7,
+    chapter: "Landforms & Landscapes 地形與地貌",
+    concept: "山谷、山間谷地、山谷底部與河谷的基本英文詞彙及地形概念",
+    difficulty: 1,
+    related: [
+        "mountains-and-mountain-ranges-basics"
+    ]
+},
+{
     id: "waves-and-sound-basics",
     title: "Waves & Sound 波與聲音",
     keywords: [
