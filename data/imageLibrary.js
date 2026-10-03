@@ -1169,6 +1169,50 @@ const diagramMap = [
     related: []
 },
 {
+    id: "energy-transformations-basics",
+    title: "Energy Transformations 能量轉換",
+    keywords: [
+        "能量轉換", "能量轉化", "能量變化",
+        "能量轉換形式", "能量形式轉換",
+        "化學能", "動能", "電能", "光能", "熱能", "聲能",
+        "化學能轉動能", "電能轉光能", "電能轉熱能", "電能轉聲能",
+
+        "energy transformation", "energy transformations",
+        "energy conversion", "energy changes",
+        "chemical energy", "motion energy",
+        "electrical energy", "light energy",
+        "heat energy", "sound energy",
+        "change energy", "change from one form to another",
+
+        "What is energy transformation",
+        "What are energy transformations",
+        "How does energy change",
+        "How does energy transform",
+        "How can energy change from one form to another",
+        "What is chemical energy",
+        "How does chemical energy change into motion energy",
+        "How does electrical energy change into light energy",
+        "How does electrical energy change into heat energy",
+        "How does electrical energy change into sound energy",
+        "What happens to energy in a flashlight",
+        "What happens to energy in a rice cooker",
+        "What happens to energy in a radio",
+        "How does a battery provide energy"
+    ],
+    file: "images/english/energy-transformations-basics.png",
+    alt: "Energy Transformations 能量轉換英文教學圖，呈現食物中的化學能轉換為動能、電池中的電能轉換為光能，以及電能轉換為熱能與聲能等基礎科學概念",
+    category: "english",
+    grade: 7,
+    chapter: "Energy Transformations 能量轉換",
+    concept: "化學能、動能、電能、光能、熱能與聲能之間的基本能量轉換",
+    difficulty: 1,
+    related: [
+        "energy-and-energy-sources-basics",
+        "simple-physics-basics",
+        "how-things-work-basics"
+    ]
+},
+{
     id: "agriculture-and-food-science-basics",
     title: "Agriculture & Food Science 農業與食品科學",
     keywords: [
