@@ -722,6 +722,58 @@ const diagramMap = [
     ]
 },
 {
+    id: "skeletal-system-and-bones-basics",
+    title: "The Skeletal System & Bones 骨骼系統",
+    keywords: [
+        "骨骼系統", "骨骼", "骨頭", "骨架",
+        "頭骨", "肋骨", "脊椎", "骨盆",
+        "關節", "支撐", "保護器官",
+        "身體支撐", "骨骼保護", "骨骼運動",
+
+        "skeletal system", "skeleton", "bones",
+        "skull", "rib cage", "spine", "pelvis",
+        "joints", "joint", "support", "protect organs",
+        "support the body", "protect important organs",
+
+        "What is the skeletal system",
+        "What is the skeleton",
+        "What are bones",
+        "What does the skeletal system do",
+        "What does the skeleton do",
+        "Why do we need bones",
+        "What are joints",
+        "How do joints help us move",
+        "How do bones support the body",
+        "What does the skeleton protect",
+        "How does the skeletal system support the body",
+        "How does the skeletal system protect organs",
+
+        "什麼是骨骼系統",
+        "什麼是骨骼",
+        "骨頭有什麼功能",
+        "骨骼系統有什麼功能",
+        "為什麼我們需要骨頭",
+        "什麼是關節",
+        "關節如何幫助我們運動",
+        "骨頭如何支撐身體",
+        "骨骼保護哪些器官",
+        "骨骼系統如何支撐身體",
+        "骨骼系統如何保護器官"
+    ],
+    file: "images/english/skeletal-system-and-bones-basics.png",
+    alt: "The Skeletal System & Bones 骨骼系統英文教學圖，介紹骨骼、骨頭、關節，以及骨骼系統對身體的支撐、保護與運動功能",
+    category: "english",
+    grade: 7,
+    chapter: "The Skeletal System & Bones 骨骼系統",
+    concept: "骨骼、骨頭、頭骨、肋骨、脊椎、骨盆、關節，以及骨骼系統的支撐、保護與運動功能英文",
+    difficulty: 1,
+    related: [
+        "human-body-how-it-works-basics",
+        "human-body-basics",
+        "human-body-systems-basics"
+    ]
+},
+{
     id: "weather-natural-phenomena-basics",
     title: "Weather & Natural Phenomena 天氣與自然現象",
     keywords: [
