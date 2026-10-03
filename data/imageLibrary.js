@@ -2896,6 +2896,53 @@ const diagramMap = [
     ]
 },
 {
+    id: "work-and-mechanical-energy-basics",
+    title: "Work & Mechanical Energy 功與機械能",
+    keywords: [
+        "功", "做功", "機械能", "動能", "位能",
+        "什麼是動能", "動能是什麼", "什麼是位能", "位能是什麼",
+        "力", "位移", "能量", "機械能量",
+
+        "work", "mechanical work",
+        "mechanical energy",
+        "force", "displacement",
+        "kinetic energy", "potential energy",
+        "energy of motion", "energy of position",
+        "work and energy",
+        "work and mechanical energy",
+
+        "What is work",
+        "What is mechanical work",
+        "What is mechanical energy",
+        "What is kinetic energy",
+        "What is potential energy",
+        "What is the difference between kinetic and potential energy",
+        "What is the difference between kinetic energy and potential energy",
+        "How does force do work",
+        "How does work depend on force",
+        "How does work depend on distance",
+        "What factors affect work",
+        "How are work and energy related",
+        "How does potential energy change into kinetic energy",
+        "How does kinetic energy change into potential energy",
+        "What happens to energy when an object moves",
+        "What is the energy of motion",
+        "What is the energy of position"
+    ],
+    file: "images/english/work-and-mechanical-energy-basics.png",
+    alt: "Work & Mechanical Energy 功與機械能英文教學圖，呈現力與位移造成的功、力與距離對做功的影響、機械能中的動能與位能，以及物體運動過程中的能量變化",
+    category: "english",
+    grade: 8,
+    chapter: "Work & Mechanical Energy 功與機械能",
+    concept: "功、力、位移、機械能、動能、位能，以及做功與能量變化之間的英文科學概念",
+    difficulty: 1,
+    related: [
+        "energy-transformations-basics",
+        "pressure-and-buoyancy-basics",
+        "temperature-and-heat-basics"
+    ]
+},
+{
     id: "acids-and-bases-basics",
     title: "Acids & Bases 酸與鹼",
     keywords: [
