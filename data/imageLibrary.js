@@ -4552,6 +4552,52 @@ const diagramMap = [
     ]
 },
 {
+    id: "mountains-and-mountain-ranges-basics",
+    title: "Mountains & Mountain Ranges 山地與山脈",
+    keywords: [
+        "山", "山地", "山脈", "山峰", "山頂", "山坡",
+        "高山", "群山", "連綿山脈",
+
+        "mountain", "mountains",
+        "mountain range", "mountain ranges",
+        "peak", "mountain peak",
+        "slope", "mountain slope",
+        "high land", "highlands",
+
+        "What is a mountain",
+        "What are mountains",
+        "What is a mountain range",
+        "What are mountain ranges",
+        "What is a mountain peak",
+        "What is a peak",
+        "What is a mountain slope",
+        "What is the top of a mountain",
+        "What is the difference between a mountain and a mountain range",
+        "What do mountains look like",
+
+        "什麼是山",
+        "什麼是山脈",
+        "什麼是山峰",
+        "什麼是山頂",
+        "什麼是山坡",
+        "山脈是什麼",
+        "山和山脈有什麼不同",
+        "山脈有很多座山嗎",
+        "山的最高處叫什麼",
+        "山坡是什麼"
+    ],
+    file: "images/english/mountains-and-mountain-ranges-basics.png",
+    alt: "Mountains & Mountain Ranges 山地與山脈英文教學圖，透過山、山峰、山坡與山脈四個情境，介紹 mountain、peak、slope 與 mountain range 等國中基礎英文地形詞彙",
+    category: "english",
+    grade: 7,
+    chapter: "Landforms & Landscapes 地形與地貌",
+    concept: "山、山峰、山坡與山脈的基本英文詞彙及地形概念",
+    difficulty: 1,
+    related: [
+        "plate-tectonics-basics"
+    ]
+},
+{
     id: "waves-and-sound-basics",
     title: "Waves & Sound 波與聲音",
     keywords: [
