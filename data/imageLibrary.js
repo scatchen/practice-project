@@ -2943,6 +2943,56 @@ const diagramMap = [
     ]
 },
 {
+    id: "simple-machines-basics",
+    title: "Simple Machines 簡單機械",
+    keywords: [
+        "簡單機械", "簡單機器", "機械",
+        "槓桿", "支點", "力臂", "負載",
+        "滑輪", "繩輪",
+        "斜面", "輪軸",
+        "省力", "改變力的方向",
+
+        "simple machine", "simple machines",
+        "lever", "fulcrum", "load",
+        "pulley", "rope",
+        "inclined plane",
+        "wheel and axle",
+        "force", "less force",
+        "change the direction of force",
+        "make work easier",
+
+        "What is a simple machine",
+        "What are simple machines",
+        "How do simple machines help us",
+        "How do simple machines make work easier",
+        "What is a lever",
+        "How does a lever work",
+        "What is a fulcrum",
+        "What is a load",
+        "What is a pulley",
+        "How does a pulley work",
+        "How does a pulley make work easier",
+        "What is an inclined plane",
+        "How does an inclined plane work",
+        "What is a wheel and axle",
+        "How does a wheel and axle work",
+        "How do simple machines change force",
+        "How can a simple machine reduce force"
+    ],
+    file: "images/english/simple-machines-basics.png",
+    alt: "Simple Machines 簡單機械英文教學圖，呈現簡單機械的基本概念，以及槓桿、滑輪、斜面與輪軸如何幫助人們做功與改變力的大小或方向",
+    category: "english",
+    grade: 7,
+    chapter: "Simple Machines 簡單機械",
+    concept: "簡單機械、槓桿、支點、負載、滑輪、斜面、輪軸，以及利用機械改變力的大小或方向等英文科學概念",
+    difficulty: 1,
+    related: [
+        "work-and-mechanical-energy-basics",
+        "energy-transformations-basics",
+        "pressure-and-buoyancy-basics"
+    ]
+},
+{
     id: "acids-and-bases-basics",
     title: "Acids & Bases 酸與鹼",
     keywords: [
