@@ -1084,6 +1084,53 @@ const diagramMap = [
     ]
 },
 {
+    id: "temperature-and-heat-basics",
+    title: "Temperature & Heat 溫度與熱",
+    keywords: [
+        "溫度", "熱", "熱量", "熱能",
+        "溫度與熱", "溫度和熱",
+        "熱傳遞", "熱傳導",
+        "冷熱程度", "熱的傳遞",
+        "熱從高溫傳向低溫",
+        "冰融化", "冰會融化", "冰為什麼會融化", "加熱",
+
+        "temperature", "heat",
+        "temperature and heat", "heat transfer",
+        "thermal energy", "hotter", "cooler",
+        "temperature difference",
+        "heat moves", "heat moves from hot to cold",
+        "transfer heat", "heat transfer from one object to another",
+        "ice melts", "melting ice",
+
+        "What is temperature",
+        "What is heat",
+        "What is temperature and heat",
+        "What is the difference between heat and temperature",
+        "What is the difference between temperature and heat",
+        "How does heat transfer",
+        "How does heat move",
+        "Why does heat move from hot to cold",
+        "How does heat move from hot to cold",
+        "Can heat move from one object to another",
+        "Why does a metal spoon become hot",
+        "Why does ice melt",
+        "What happens when ice is heated",
+        "How does heat make ice melt"
+    ],
+    file: "images/english/temperature-and-heat-basics.png",
+    alt: "Temperature & Heat 溫度與熱英文教學圖，呈現溫度代表物體的冷熱程度、熱從較熱物體傳向較冷物體、熱可以在物體之間傳遞，以及熱使冰融化等基礎科學概念",
+    category: "english",
+    grade: 7,
+    chapter: "Temperature & Heat 溫度與熱",
+    concept: "溫度、熱、熱傳遞、熱從高溫傳向低溫，以及加熱造成冰融化的基礎英文科學概念",
+    difficulty: 1,
+    related: [
+        "simple-physics-basics",
+        "energy-and-energy-sources-basics",
+        "chemical-reactions-basics"
+    ]
+},
+{
     id: "energy-and-energy-sources-basics",
     title: "Energy & Energy Sources 能量與能源",
     keywords: [
