@@ -1450,6 +1450,50 @@ const diagramMap = [
     related: ["scientific-method-basics", "cause-and-effect-in-science-basics"]
 },
 {
+    id: "variables-basics",
+    title: "Variables 變因",
+    keywords: [
+        "變因", "變數", "科學變因",
+        "自變因", "獨立變因",
+        "應變因", "依變因",
+        "控制變因", "控制變數",
+        "公平測試", "公平實驗",
+        "一次改變一個變因",
+        "實驗變因",
+        "independent variable", "dependent variable",
+        "controlled variable", "controlled variables",
+        "control variable", "control variables",
+        "variables in an experiment",
+        "scientific variables",
+        "experimental variables",
+        "fair test",
+        "fair experiment",
+        "change one variable",
+        "change only one variable",
+        "What is an independent variable",
+        "What is a dependent variable",
+        "What are controlled variables",
+        "What is a fair test",
+        "What are variables in an experiment",
+        "What is the independent variable",
+        "What is the dependent variable",
+        "How do you control variables",
+        "Why do we control variables"
+    ],
+    file: "images/english/variables-basics.png",
+    alt: "Variables 變因英文教學圖，透過植物生長實驗呈現自變因、應變因、控制變因與公平測試的基本概念",
+    category: "english",
+    grade: 7,
+    chapter: "Variables 變因",
+    concept: "自變因、應變因、控制變因、公平測試與科學實驗英文",
+    difficulty: 1,
+    related: [
+        "scientific-method-basics",
+        "experiments-and-observation-basics",
+        "cause-and-effect-in-science-basics"
+    ]
+},
+{
     id: "cause-and-effect-in-science-basics",
     title: "Cause and Effect in Science 科學中的因果關係",
     keywords: [
