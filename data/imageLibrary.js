@@ -2520,6 +2520,66 @@ const diagramMap = [
     related: []
 },
 {
+    id: "cells-and-cell-organelles-basics",
+    title: "Cells & Cell Organelles 細胞與胞器",
+    keywords: [
+        "胞器", "細胞胞器", "胞器功能",
+        "植物細胞", "動物細胞",
+        "植物細胞與動物細胞",
+        "植物細胞和動物細胞",
+        "植物細胞與動物細胞比較",
+        "細胞壁", "葉綠體", "液泡",
+        "中央液泡",
+        "植物細胞結構", "動物細胞結構",
+
+        "cell organelle", "cell organelles",
+        "organelle", "organelles",
+        "functions of organelles",
+        "organelle functions",
+        "cell organelle functions",
+        "plant cell", "animal cell",
+        "plant and animal cells",
+        "plant cell vs animal cell",
+        "plant cells and animal cells",
+        "cell wall", "chloroplast",
+        "chloroplasts", "vacuole",
+        "vacuoles", "large central vacuole",
+        "plant cell organelles", "animal cell organelles",
+
+        "What are cell organelles",
+        "What do cell organelles do",
+        "What are organelles",
+        "What is the function of the cell membrane",
+        "What is the function of the nucleus",
+        "What is the function of mitochondria",
+        "What is the function of chloroplasts",
+        "What is the function of the cell wall",
+        "What is the function of the vacuole",
+        "What is the difference between plant and animal cells",
+        "How are plant cells and animal cells different",
+
+        "什麼是胞器",
+        "胞器有什麼功能",
+        "細胞膜的功能",
+        "細胞核的功能",
+        "粒線體的功能",
+        "葉綠體的功能",
+        "細胞壁的功能",
+        "液泡的功能",
+        "植物細胞和動物細胞有什麼不同"
+    ],
+    file: "images/english/cells-and-cell-organelles-basics.png",
+    alt: "Cells & Cell Organelles 細胞與胞器英文教學圖，呈現細胞膜與細胞質、細胞核、粒線體，以及植物細胞與動物細胞的主要差異，包括細胞壁、葉綠體與液泡",
+    category: "english",
+    grade: 7,
+    chapter: "Cells & Cell Organelles 細胞與胞器",
+    concept: "胞器功能、植物細胞與動物細胞比較，以及細胞壁、葉綠體與液泡等細胞結構英文",
+    difficulty: 1,
+    related: [
+        "cells-and-microorganisms-basics"
+    ]
+},
+{
     id: "bacteria-and-viruses-basics",
     title: "Bacteria & Viruses 細菌與病毒",
     keywords: [
