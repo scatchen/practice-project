@@ -2993,6 +2993,55 @@ const diagramMap = [
     ]
 },
 {
+    id: "why-we-see-colors-basics",
+    title: "Why We See Colors 為什麼看得到顏色",
+    keywords: [
+        "顏色", "色彩", "光的顏色", "白光", "彩虹",
+        "光譜", "反射", "吸收", "紅色", "綠色",
+        "物體顏色", "看到顏色",
+        "為什麼蘋果是紅色的",
+        "為什麼葉子看起來是綠色的",
+        "光照到物體會發生什麼事",
+
+        "color", "colors", "colour", "colours",
+        "white light", "spectrum", "rainbow",
+        "reflection", "reflect", "reflected light",
+        "absorption", "absorb", "absorbs",
+        "red light", "green light",
+        "object color", "see colors",
+
+        "Why do we see colors",
+        "Why do we see colours",
+        "Why can we see colors",
+        "Why can we see colours",
+        "Why does an object have a color",
+        "Why does an object have a colour",
+        "Why is an apple red",
+        "Why does a leaf look green",
+        "What happens when light hits an object",
+        "What colors are in white light",
+        "What colours are in white light",
+        "How do we see colors",
+        "How do we see colours",
+        "How does light create color",
+        "How does light create colour",
+        "What determines the color of an object",
+        "What determines the colour of an object"
+    ],
+    file: "images/english/why-we-see-colors-basics.png",
+    alt: "Why We See Colors 為什麼看得到顏色英文教學圖，呈現白光包含多種顏色、物體吸收與反射不同顏色的光，以及反射光進入眼睛並由大腦辨認顏色的原理",
+    category: "english",
+    grade: 8,
+    chapter: "Why We See Colors 為什麼看得到顏色",
+    concept: "白光、光譜、光的吸收與反射、物體顏色，以及眼睛與大腦如何接收與辨認顏色等英文科學概念",
+    difficulty: 1,
+    related: [
+        "light-sound-and-waves-basics",
+        "energy-transformations-basics",
+        "temperature-and-heat-basics"
+    ]
+},
+{
     id: "acids-and-bases-basics",
     title: "Acids & Bases 酸與鹼",
     keywords: [
