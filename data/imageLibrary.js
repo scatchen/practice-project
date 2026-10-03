@@ -4643,6 +4643,52 @@ const diagramMap = [
     ]
 },
 {
+    id: "canyons-and-gorges-basics",
+    title: "Canyons & Gorges 峽谷",
+    keywords: [
+        "峽谷", "峽谷地形", "深谷", "狹長峽谷",
+        "峽谷岩壁", "峽谷壁", "河流峽谷",
+
+        "canyon", "canyons",
+        "gorge", "gorges",
+        "canyon wall", "canyon walls",
+        "river canyon",
+
+        "What is a canyon",
+        "What are canyons",
+        "What is a gorge",
+        "What are gorges",
+        "What is a canyon wall",
+        "What are canyon walls",
+        "What is a river canyon",
+        "What does a canyon look like",
+        "What does a gorge look like",
+        "What is a deep narrow valley",
+        "What is a narrow valley with steep sides",
+
+        "什麼是峽谷",
+        "什麼是峽谷地形",
+        "什麼是深谷",
+        "什麼是峽谷岩壁",
+        "什麼是河流峽谷",
+        "峽谷是什麼",
+        "峽谷的岩壁是什麼",
+        "峽谷為什麼很深",
+        "峽谷為什麼很陡",
+        "狹窄的深谷叫什麼"
+    ],
+    file: "images/english/canyons-and-gorges-basics.png",
+    alt: "Canyons & Gorges 峽谷英文教學圖，透過峽谷、峽谷岩壁、狹窄陡峭的峽谷與河流峽谷四個情境，介紹 canyon、gorge、canyon walls 與 river canyon 等國中基礎英文地形詞彙",
+    category: "english",
+    grade: 7,
+    chapter: "Landforms & Landscapes 地形與地貌",
+    concept: "峽谷、峽谷岩壁、狹窄陡峭谷地與河流峽谷的基本英文詞彙及地形概念",
+    difficulty: 1,
+    related: [
+        "valleys-basics"
+    ]
+},
+{
     id: "waves-and-sound-basics",
     title: "Waves & Sound 波與聲音",
     keywords: [
