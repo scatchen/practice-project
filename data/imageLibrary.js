@@ -3042,6 +3042,63 @@ const diagramMap = [
     ]
 },
 {
+    id: "earthquakes-and-seismic-waves-basics",
+    title: "Earthquakes & Seismic Waves 地震與地震波",
+    keywords: [
+        "地震", "地震波", "震源", "震央",
+        "斷層", "板塊", "地震能量",
+        "P波", "S波", "P 波", "S 波",
+        "地震儀", "地震圖",
+        "地震是怎麼發生的",
+        "什麼是地震波",
+        "什麼是震源",
+        "什麼是震央",
+        "什麼是斷層",
+
+        "earthquake", "earthquakes",
+        "seismic wave", "seismic waves",
+        "focus", "epicenter", "fault",
+        "tectonic plate", "tectonic plates",
+        "P wave", "P waves",
+        "S wave", "S waves",
+        "seismograph", "seismogram",
+        "earthquake energy",
+        "What is an earthquake",
+        "What is the focus of an earthquake",
+        "What is a fault",
+
+        "What causes an earthquake",
+        "What is an earthquake",
+        "What are seismic waves",
+        "What is a seismic wave",
+        "What is the focus of an earthquake",
+        "What is the epicenter",
+        "What is an epicenter",
+        "What is a fault",
+        "How do tectonic plates cause earthquakes",
+        "What are P waves",
+        "What are S waves",
+        "What is the difference between P waves and S waves",
+        "How do seismic waves travel",
+        "How does a seismograph work",
+        "How are earthquakes measured",
+        "What does a seismograph record",
+        "What is a seismogram"
+    ],
+    file: "images/english/earthquakes-and-seismic-waves-basics.png",
+    alt: "Earthquakes & Seismic Waves 地震與地震波英文教學圖，呈現斷層與板塊移動造成地震、震源與震央的位置、P波與S波，以及地震儀如何記錄地震波",
+    category: "english",
+    grade: 8,
+    chapter: "Earthquakes & Seismic Waves 地震與地震波",
+    concept: "地震成因、斷層、板塊運動、震源、震央、地震波、P波、S波、地震儀與地震圖等英文科學概念",
+    difficulty: 1,
+    related: [
+        "layers-of-the-earth-basics",
+        "pressure-and-buoyancy-basics",
+        "energy-transformations-basics"
+    ]
+},
+{
     id: "acids-and-bases-basics",
     title: "Acids & Bases 酸與鹼",
     keywords: [
