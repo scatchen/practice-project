@@ -2850,6 +2850,56 @@ const diagramMap = [
     related: []
 },
 {
+    id: "acids-and-bases-basics",
+    title: "Acids & Bases 酸與鹼",
+    keywords: [
+        "酸", "酸性", "酸性物質", "鹼", "鹼性", "鹼性物質",
+        "酸鹼", "酸與鹼", "酸鹼值", "pH值", "pH",
+        "中性", "中和", "中和反應",
+        "檸檬汁", "柳橙汁", "醋", "肥皂", "小蘇打", "氨",
+
+        "acid", "acids", "acidic",
+        "base", "bases", "basic",
+        "acids and bases", "acid and base",
+        "acidic and basic", "pH", "pH scale",
+        "neutral", "neutralization",
+        "neutralization reaction",
+        "lemon juice", "orange juice", "vinegar",
+        "soap", "baking soda", "ammonia",
+
+        "What is an acid",
+        "What are acids",
+        "What is a base",
+        "What are bases",
+        "What are acids and bases",
+        "What is the pH scale",
+        "What is pH",
+        "What does pH mean",
+        "What is a neutral substance",
+        "What is neutralization",
+        "What happens when an acid and a base react",
+        "How do acids and bases react",
+        "What are examples of acids",
+        "What are examples of bases",
+        "Is lemon juice acidic",
+        "Is vinegar acidic",
+        "Is soap basic",
+        "Is baking soda basic"
+    ],
+    file: "images/english/acids-and-bases-basics.png",
+    alt: "Acids & Bases 酸與鹼英文教學圖，呈現酸性物質、鹼性物質、pH值、酸鹼中和，以及檸檬汁、醋、肥皂與小蘇打等生活中的酸鹼例子",
+    category: "english",
+    grade: 8,
+    chapter: "Acids & Bases 酸與鹼",
+    concept: "酸、鹼、酸鹼性、pH值、中性、中和反應與生活中的酸鹼物質英文科學概念",
+    difficulty: 1,
+    related: [
+        "simple-chemistry-basics",
+        "chemical-reactions-basics",
+        "matter-and-states-of-matter-basics"
+    ]
+},
+{
     id: "ecosystems-food-chains-basics",
     title: "Ecosystems & Food Chains 生態系與食物鏈",
     keywords: [
