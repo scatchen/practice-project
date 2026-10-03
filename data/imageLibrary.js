@@ -652,6 +652,67 @@ const diagramMap = [
     related: []
 },
 {
+    id: "muscular-system-and-muscles-basics",
+    title: "The Muscular System & Muscles 肌肉系統與肌肉",
+    keywords: [
+        "肌肉系統", "肌肉", "肌肉組織",
+        "手臂肌肉", "胸肌", "腿部肌肉",
+        "肌肉收縮", "肌肉放鬆", "肌肉運動",
+        "肌腱", "骨骼", "關節", "身體運動",
+        "肌肉與骨骼", "肌肉與關節",
+
+        "muscular system", "muscles", "muscle",
+        "muscle tissue", "arm muscle", "chest muscle",
+        "leg muscle", "muscle contraction", "contracted muscle",
+        "relaxed muscle", "contract", "relax",
+        "tendon", "bone", "bones", "joint", "joints",
+        "movement", "muscles and bones",
+
+        "What is the muscular system",
+        "What are muscles",
+        "What do muscles do",
+        "How do muscles work",
+        "How do muscles help us move",
+        "How do muscles move the body",
+        "What happens when a muscle contracts",
+        "What happens when muscles contract",
+        "What is muscle contraction",
+        "What is a tendon",
+        "How do muscles work with bones",
+        "How do muscles work with bones and joints",
+        "How do muscles move bones",
+        "How do muscles help move joints",
+        "Why are muscles important",
+
+        "什麼是肌肉系統",
+        "什麼是肌肉",
+        "肌肉有什麼功能",
+        "肌肉如何運作",
+        "肌肉如何幫助我們運動",
+        "肌肉如何讓身體移動",
+        "肌肉收縮時會發生什麼",
+        "什麼是肌肉收縮",
+        "什麼是肌腱",
+        "肌肉如何與骨骼合作",
+        "肌肉如何與骨骼和關節合作",
+        "肌肉如何帶動骨頭",
+        "肌肉如何幫助關節運動",
+        "為什麼肌肉很重要"
+    ],
+    file: "images/english/muscular-system-and-muscles-basics.png",
+    alt: "The Muscular System & Muscles 肌肉系統與肌肉英文教學圖，介紹肌肉、肌肉收縮與放鬆、肌腱，以及肌肉如何與骨骼和關節合作產生身體運動",
+    category: "english",
+    grade: 7,
+    chapter: "The Muscular System & Muscles 肌肉系統與肌肉",
+    concept: "肌肉、肌肉收縮與放鬆、肌腱、骨骼、關節，以及肌肉與骨骼合作產生身體運動英文",
+    difficulty: 1,
+    related: [
+        "skeletal-system-and-bones-basics",
+        "human-body-how-it-works-basics",
+        "human-body-systems-basics"
+    ]
+},
+{
     id: "circulatory-system-basics",
     title: "Circulatory System 循環系統",
     keywords: [
