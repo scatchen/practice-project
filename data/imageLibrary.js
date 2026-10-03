@@ -1610,6 +1610,68 @@ const diagramMap = [
     related: []
 },
 {
+    id: "heat-transfer-basics",
+    title: "Heat Transfer 熱傳遞",
+    keywords: [
+        "熱傳遞", "熱傳導", "對流", "熱對流", "熱輻射",
+        "傳導", "輻射",
+        "熱如何傳遞", "三種熱傳遞方式",
+        "熱從高溫傳向低溫",
+
+        "heat transfer", "thermal transfer",
+        "conduction", "heat conduction",
+        "convection", "heat convection",
+        "radiation", "thermal radiation",
+
+        "heat moves through a material",
+        "heat travels through a material",
+        "warm fluid rises",
+        "cool fluid sinks",
+        "heat can travel through space",
+        "electromagnetic waves",
+
+        "What is heat transfer",
+        "What are the three ways heat is transferred",
+        "What are the three ways heat transfers",
+        "What is conduction",
+        "What is convection",
+        "What is radiation",
+        "How does conduction transfer heat",
+        "How does convection transfer heat",
+        "How does radiation transfer heat",
+        "How does heat move through a material",
+        "Why does warm fluid rise",
+        "Why does cool fluid sink",
+        "Can heat travel through space",
+        "How does the Sun transfer heat to Earth",
+        "What is the difference between conduction convection and radiation",
+
+        "什麼是熱傳遞",
+        "熱傳遞有哪三種方式",
+        "什麼是熱傳導",
+        "什麼是對流",
+        "什麼是熱輻射",
+        "熱如何透過物質傳遞",
+        "為什麼熱流體會上升",
+        "為什麼冷流體會下沉",
+        "熱可以在真空中傳遞嗎",
+        "太陽如何把熱傳到地球",
+        "傳導對流和輻射有什麼不同"
+    ],
+    file: "images/english/heat-transfer-basics.png",
+    alt: "Heat Transfer 熱傳遞英文教學圖，介紹熱傳遞的三種方式：傳導、對流與輻射，以及熱如何透過物質、流體與電磁波傳遞",
+    category: "english",
+    grade: 7,
+    chapter: "Heat Transfer 熱傳遞",
+    concept: "傳導、對流、輻射三種熱傳遞方式，以及熱透過物質、流體與電磁波傳遞的基本英文科學概念",
+    difficulty: 1,
+    related: [
+        "temperature-and-heat-basics",
+        "energy-transformations-basics",
+        "how-refrigerators-work-basics"
+    ]
+},
+{
     id: "energy-transformations-basics",
     title: "Energy Transformations 能量轉換",
     keywords: [
