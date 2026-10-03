@@ -2850,6 +2850,52 @@ const diagramMap = [
     related: []
 },
 {
+    id: "periodic-table-basics",
+    title: "Periodic Table 元素週期表",
+    keywords: [
+        "元素週期表", "週期表", "元素", "化學元素",
+        "元素符號", "原子序", "原子序號", "原子量",
+        "週期", "族", "金屬", "非金屬", "類金屬",
+
+        "periodic table", "periodic table of the elements",
+        "elements", "chemical elements",
+        "element symbol", "atomic number", "atomic mass",
+        "period", "periods", "group", "groups",
+        "metals", "nonmetals", "nonmetals", "metalloids",
+
+        "What is the periodic table",
+        "What is the periodic table of the elements",
+        "What are chemical elements",
+        "How is the periodic table organized",
+        "How are elements arranged in the periodic table",
+        "What are periods in the periodic table",
+        "What are groups in the periodic table",
+        "What are metals",
+        "What are nonmetals",
+        "What are metalloids",
+        "What is atomic number",
+        "What is atomic mass",
+        "What is an element symbol",
+        "How do you read the periodic table",
+        "How do you read an element",
+        "What does the atomic number mean",
+        "What does the element symbol mean",
+        "What information is on the periodic table"
+    ],
+    file: "images/english/periodic-table-basics.png",
+    alt: "Periodic Table 元素週期表英文教學圖，呈現元素週期表的排列方式、Periods 與 Groups、金屬非金屬與類金屬分類，以及如何閱讀元素的原子序、元素符號、元素名稱與原子量",
+    category: "english",
+    grade: 8,
+    chapter: "Periodic Table 元素週期表",
+    concept: "元素週期表、元素排列、Periods、Groups、金屬、非金屬、類金屬、原子序、元素符號與原子量等英文科學概念",
+    difficulty: 1,
+    related: [
+        "simple-chemistry-basics",
+        "matter-and-states-of-matter-basics",
+        "acids-and-bases-basics"
+    ]
+},
+{
     id: "acids-and-bases-basics",
     title: "Acids & Bases 酸與鹼",
     keywords: [
