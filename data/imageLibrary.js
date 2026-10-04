@@ -4731,6 +4731,50 @@ const diagramMap = [
     ]
 },
 {
+    id: "plains-basics",
+    title: "Plains 平原",
+    keywords: [
+        "平原", "平地", "平原地形", "平坦土地",
+        "草原平原", "農業平原",
+
+        "plain", "plains",
+        "wide flat land",
+        "wide and flat",
+        "grassland plain",
+        "farmland plain",
+
+        "What is a plain",
+        "What are plains",
+        "What is a grassland plain",
+        "What is a farmland plain",
+        "What does a plain look like",
+        "What do plains look like",
+        "Why are plains flat",
+        "Can people live on plains",
+        "What grows on plains",
+
+        "什麼是平原",
+        "什麼是平地",
+        "什麼是平原地形",
+        "平原是什麼",
+        "平原為什麼是平的",
+        "平原上可以種植什麼",
+        "人可以住在平原上嗎",
+        "平原上會有草嗎"
+    ],
+    file: "images/english/plains-basics.png",
+    alt: "Plains 平原英文教學圖，透過寬廣平坦的土地、平原景觀、草地與人類居住四個情境，介紹 plain、plains、wide and flat、grassland plain 等國中基礎英文地形詞彙",
+    category: "english",
+    grade: 7,
+    chapter: "Landforms & Landscapes 地形與地貌",
+    concept: "平原、寬廣平坦土地、草地與人類居住的基本英文詞彙及地形概念",
+    difficulty: 1,
+    related: [
+        "plateaus-basics",
+        "valleys-basics"
+    ]
+},
+{
     id: "waves-and-sound-basics",
     title: "Waves & Sound 波與聲音",
     keywords: [
