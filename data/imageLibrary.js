@@ -4775,6 +4775,51 @@ const diagramMap = [
     ]
 },
 {
+    id: "hills-basics",
+    title: "Hills 丘陵",
+    keywords: [
+        "丘陵", "小山丘", "丘陵地形", "山丘",
+        "丘陵頂部", "起伏丘陵", "連綿丘陵",
+
+        "hill", "hills",
+        "hilltop",
+        "rolling hills",
+        "low and rounded",
+        "lower and more rounded",
+
+        "What is a hill",
+        "What are hills",
+        "What is a hilltop",
+        "What are rolling hills",
+        "What does a hill look like",
+        "What do hills look like",
+        "How is a hill different from a mountain",
+        "What is the difference between a hill and a mountain",
+        "Are hills lower than mountains",
+
+        "什麼是丘陵",
+        "什麼是山丘",
+        "什麼是小山丘",
+        "什麼是丘陵頂部",
+        "什麼是起伏丘陵",
+        "丘陵是什麼",
+        "丘陵和山有什麼不同",
+        "丘陵比山低嗎",
+        "山丘的頂部叫什麼"
+    ],
+    file: "images/english/hills-basics.png",
+    alt: "Hills 丘陵英文教學圖，透過丘陵、丘陵與山的高度及形狀比較、hilltop 與 rolling hills 四個情境，介紹 hill、hilltop 與 rolling hills 等國中基礎英文地形詞彙",
+    category: "english",
+    grade: 7,
+    chapter: "Landforms & Landscapes 地形與地貌",
+    concept: "丘陵、丘陵頂部、起伏丘陵，以及丘陵與山地基本差異的英文詞彙及地形概念",
+    difficulty: 1,
+    related: [
+        "mountains-and-mountain-ranges-basics",
+        "plains-basics"
+    ]
+},
+{
     id: "waves-and-sound-basics",
     title: "Waves & Sound 波與聲音",
     keywords: [
