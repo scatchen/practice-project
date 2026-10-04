@@ -4870,6 +4870,53 @@ const diagramMap = [
     ]
 },
 {
+    id: "river-landforms-basics",
+    title: "River Landforms 河流地形",
+    keywords: [
+        "河流", "河川", "河流地形", "河川地形",
+        "河道", "河流源頭", "河流發源地", "河口",
+        "支流", "主要河流", "河流入海",
+        "river", "rivers",
+        "river landform", "river landforms",
+        "river source", "source of a river",
+        "river channel", "river channels",
+        "tributary", "tributaries",
+        "river mouth", "river mouths",
+        "larger river", "smaller river",
+        "river flows into the sea",
+        "What is a river landform",
+        "What are river landforms",
+        "What is a river source",
+        "Where does a river begin",
+        "What is a river channel",
+        "What is a tributary",
+        "What is a river mouth",
+        "Where does a river flow into the sea",
+        "How does a tributary join a river",
+        "什麼是河流地形",
+        "什麼是河川地形",
+        "什麼是河流源頭",
+        "河流從哪裡開始",
+        "什麼是河道",
+        "什麼是支流",
+        "什麼是河口",
+        "河流最後流到哪裡",
+        "支流如何匯入河流"
+    ],
+    file: "images/english/river-landforms-basics.png",
+    alt: "River Landforms 河流地形英文教學圖，透過河流源頭、河道、支流與河口四個情境，介紹 river source、river channel、tributary 與 river mouth 等國中基礎英文地形詞彙",
+    category: "english",
+    grade: 7,
+    chapter: "Landforms & Landscapes 地形與地貌",
+    concept: "河流源頭、河道、支流與河口的基本英文詞彙及河流地形概念",
+    difficulty: 1,
+    related: [
+        "valleys-basics",
+        "canyons-and-gorges-basics",
+        "water-cycle-basics"
+    ]
+},
+{
     id: "waves-and-sound-basics",
     title: "Waves & Sound 波與聲音",
     keywords: [
