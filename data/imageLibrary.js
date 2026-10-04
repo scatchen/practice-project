@@ -4689,6 +4689,48 @@ const diagramMap = [
     ]
 },
 {
+    id: "plateaus-basics",
+    title: "Plateaus 高原",
+    keywords: [
+        "高原", "高原地形", "台地", "高地", "平頂高地",
+        "高原頂部", "高原邊緣", "高原陡坡",
+
+        "plateau", "plateaus",
+        "flat top",
+        "steep sides",
+        "plateau landscape",
+
+        "What is a plateau",
+        "What are plateaus",
+        "What is a flat top",
+        "What is a plateau landscape",
+        "What does a plateau look like",
+        "What is the top of a plateau like",
+        "Why is a plateau flat",
+        "Can people live on plateaus",
+
+        "什麼是高原",
+        "什麼是台地",
+        "什麼是高原地形",
+        "高原是什麼",
+        "高原的頂部是什麼樣子",
+        "高原為什麼是平的",
+        "高原的邊緣是什麼樣子",
+        "人可以住在高原上嗎"
+    ],
+    file: "images/english/plateaus-basics.png",
+    alt: "Plateaus 高原英文教學圖，透過高原、平坦頂部、陡峭側面與高原景觀四個情境，介紹 plateau、flat top、steep sides 與 plateau landscape 等國中基礎英文地形詞彙",
+    category: "english",
+    grade: 7,
+    chapter: "Landforms & Landscapes 地形與地貌",
+    concept: "高原、平坦頂部、陡峭側面與高原景觀的基本英文詞彙及地形概念",
+    difficulty: 1,
+    related: [
+        "mountains-and-mountain-ranges-basics",
+        "canyons-and-gorges-basics"
+    ]
+},
+{
     id: "waves-and-sound-basics",
     title: "Waves & Sound 波與聲音",
     keywords: [
