@@ -4820,6 +4820,56 @@ const diagramMap = [
     ]
 },
 {
+    id: "basins-and-depressions-basics",
+    title: "Basins & Depressions 盆地與窪地",
+    keywords: [
+        "盆地", "窪地", "盆地地形", "窪地地形",
+        "盆地底部", "盆地底", "盆地低地",
+        "周圍較高的低地",
+
+        "basin", "basins",
+        "depression", "depressions",
+        "basin floor",
+        "low land surrounded by higher land",
+        "life in a basin",
+
+        "What is a basin",
+        "What are basins",
+        "What is a basin floor",
+        "What is a depression",
+        "What are depressions",
+        "What is a land depression",
+        "What is the basin floor",
+        "What does a basin look like",
+        "What does a depression look like",
+        "What is low land surrounded by higher land",
+        "Can people live in a basin",
+
+        "什麼是盆地",
+        "什麼是窪地",
+        "什麼是盆地底部",
+        "什麼是盆地地形",
+        "什麼是窪地地形",
+        "盆地是什麼",
+        "窪地是什麼",
+        "盆地底部是什麼",
+        "周圍較高中間較低的地形叫什麼",
+        "人可以住在盆地嗎"
+    ],
+    file: "images/english/basins-and-depressions-basics.png",
+    alt: "Basins & Depressions 盆地與窪地英文教學圖，透過盆地、盆地底部、窪地與盆地生活四個情境，介紹 basin、basin floor、depression 與 life in a basin 等國中基礎英文地形詞彙",
+    category: "english",
+    grade: 7,
+    chapter: "Landforms & Landscapes 地形與地貌",
+    concept: "盆地、盆地底部、窪地與盆地生活的基本英文詞彙及地形概念",
+    difficulty: 1,
+    related: [
+        "valleys-basics",
+        "plains-basics",
+        "plateaus-basics"
+    ]
+},
+{
     id: "waves-and-sound-basics",
     title: "Waves & Sound 波與聲音",
     keywords: [
