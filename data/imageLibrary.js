@@ -5022,6 +5022,62 @@ const diagramMap = [
     ]
 },
 {
+    id: "river-deltas-basics",
+    title: "River Deltas 河流三角洲",
+    keywords: [
+        "三角洲", "河流三角洲", "河口三角洲", "三角洲地形",
+        "泥沙", "沉積", "河流沉積", "河流分流",
+        "分流河道", "三角洲河道",
+
+        "river delta", "river deltas",
+        "delta", "deltas",
+        "sediment", "sediments",
+        "sediment deposition", "deposition",
+        "river mouth", "river mouths",
+        "distributary", "distributaries",
+        "delta channels",
+
+        "What is a river delta",
+        "What is a delta",
+        "What are river deltas",
+        "How does a river delta form",
+        "How do river deltas form",
+        "What is sediment",
+        "How does a river carry sediment",
+        "What is deposition",
+        "How does deposition form a delta",
+        "What are distributaries",
+        "What is a distributary",
+        "How does a river form distributaries",
+        "Where does a river form a delta",
+
+        "什麼是三角洲",
+        "什麼是河流三角洲",
+        "什麼是三角洲地形",
+        "三角洲如何形成",
+        "河流三角洲如何形成",
+        "什麼是泥沙",
+        "河流如何攜帶泥沙",
+        "什麼是沉積",
+        "沉積如何形成三角洲",
+        "什麼是分流河道",
+        "河流如何形成分流",
+        "三角洲在哪裡形成"
+    ],
+    file: "images/english/river-deltas-basics.png",
+    alt: "River Deltas 河流三角洲英文教學圖，透過河流入海形成三角洲、河流攜帶泥沙、流水變慢造成沉積，以及三角洲上的分流河道四個情境，介紹 river delta、sediment、deposition 與 distributaries 等國中基礎英文地形詞彙",
+    category: "english",
+    grade: 7,
+    chapter: "Landforms & Landscapes 地形與地貌",
+    concept: "河流入海、泥沙、沉積、三角洲形成與分流河道的基本英文詞彙及地形概念",
+    difficulty: 2,
+    related: [
+        "river-landforms-basics",
+        "meanders-basics",
+        "waterfalls-basics"
+    ]
+},
+{
     id: "waves-and-sound-basics",
     title: "Waves & Sound 波與聲音",
     keywords: [
