@@ -4252,6 +4252,44 @@ const diagramMap = [
     ]
 },
 {
+    id: "steam-engine-james-watt-basics",
+    title: "The Steam Engine — James Watt 詹姆斯·瓦特與蒸汽機",
+    keywords: [
+        "蒸汽機", "蒸汽動力", "瓦特", "詹姆斯·瓦特",
+        "蒸汽機發明", "工業革命", "蒸汽引擎",
+
+        "steam engine",
+        "James Watt",
+        "Watt",
+        "steam power",
+        "steam-powered machine",
+        "steam machine",
+        "improved steam engine",
+        "history of the steam engine",
+        "steam engine invention",
+
+        "Who was James Watt",
+        "What did James Watt improve",
+        "What is a steam engine",
+        "How did a steam engine work",
+        "How does a steam engine work",
+        "Why was the steam engine important",
+        "How did steam power change industry",
+        "How did the steam engine change transportation"
+    ],
+    file: "images/english/steam-engine-james-watt-basics.png",
+    alt: "The Steam Engine — James Watt 英文教學圖，呈現蒸汽機出現前的動力來源、James Watt 改良蒸汽機、蒸汽推動活塞產生機械運動，以及蒸汽動力對工廠、火車與工業的影響",
+    category: "english",
+    grade: 8,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "James Watt、蒸汽機改良、蒸汽推動活塞產生機械運動，以及蒸汽動力對工業與交通的影響",
+    difficulty: 2,
+    related: [
+        "simple-physics-basics",
+        "energy-and-energy-sources-basics"
+    ]
+},
+{
     id: "light-bulb-thomas-edison-basics",
     title: "The Light Bulb — Thomas Edison 愛迪生與電燈泡",
     keywords: [
