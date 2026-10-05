@@ -4256,6 +4256,41 @@ const diagramMap = [
     ]
 },
 {
+    id: "airplane-wright-brothers-basics",
+    title: "The Airplane — Wright Brothers 萊特兄弟與飛機",
+    keywords: [
+        "萊特兄弟", "威爾伯·萊特", "奧維爾·萊特",
+        "飛機發明", "飛機", "航空史", "第一次飛行",
+
+        "Wright brothers",
+        "Wilbur Wright",
+        "Orville Wright",
+        "Wright Brothers",
+        "first airplane",
+        "first flight",
+        "invention of the airplane",
+        "history of aviation",
+        "early airplane",
+
+        "Who invented the airplane",
+        "Who were the Wright brothers",
+        "What did the Wright brothers invent",
+        "How did the first airplane work",
+        "What was the first airplane",
+        "Why was the airplane important"
+    ],
+    file: "images/english/airplane-wright-brothers-basics.png",
+    alt: "The Airplane — Wright Brothers 英文教學圖，呈現人類飛行夢想、萊特兄弟測試早期飛機、第一次成功飛行，以及飛機如何改變現代旅行",
+    category: "english",
+    grade: 7,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "萊特兄弟、早期飛機、第一次成功飛行、航空發展與飛機對現代旅行的影響",
+    difficulty: 2,
+    related: [
+        "simple-physics-basics"
+    ]
+},
+{
     id: "simple-physics-basics",
     title: "Simple Physics 基礎物理",
     keywords: [
