@@ -4252,6 +4252,48 @@ const diagramMap = [
     ]
 },
 {
+    id: "radio-guglielmo-marconi-basics",
+    title: "The Radio — Guglielmo Marconi 馬可尼與無線電",
+    keywords: [
+        "無線電", "無線電發明", "馬可尼", "古列爾莫·馬可尼",
+        "無線通訊", "無線電波", "無線電通信", "無線電史",
+
+        "radio",
+        "Guglielmo Marconi",
+        "Marconi",
+        "wireless communication",
+        "wireless telegraphy",
+        "wireless telegraph",
+        "radio signals",
+        "radio waves",
+        "early radio",
+        "radio invention",
+        "invention of radio",
+        "history of radio",
+
+        "Who invented the radio",
+        "Who was Guglielmo Marconi",
+        "What did Guglielmo Marconi invent",
+        "What is wireless telegraphy",
+        "How did early radio work",
+        "How does radio communication work",
+        "How do radio waves carry information",
+        "Why was the radio important",
+        "How did radio change communication"
+    ],
+    file: "images/english/radio-guglielmo-marconi-basics.png",
+    alt: "The Radio — Guglielmo Marconi 英文教學圖，呈現有線通訊、馬可尼研究無線電報、無線電波傳遞訊息，以及無線電如何改變遠距離通訊與家庭生活",
+    category: "english",
+    grade: 8,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "Guglielmo Marconi、無線電報、無線電波傳遞訊息，以及無線電對遠距離通訊與大眾傳播的影響",
+    difficulty: 2,
+    related: [
+        "telephone-alexander-graham-bell-basics",
+        "automobile-karl-benz-basics"
+    ]
+},
+{
     id: "automobile-karl-benz-basics",
     title: "The Automobile — Karl Benz 卡爾·本茨與汽車",
     keywords: [
