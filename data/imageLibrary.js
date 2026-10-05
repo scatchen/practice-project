@@ -4252,6 +4252,51 @@ const diagramMap = [
     ]
 },
 {
+    id: "automobile-karl-benz-basics",
+    title: "The Automobile — Karl Benz 卡爾·本茨與汽車",
+    keywords: [
+        "汽車", "汽車發明", "卡爾·本茨", "本茨",
+        "汽車史", "早期汽車", "內燃機汽車", "汽車發展",
+
+        "automobile",
+        "automobiles",
+        "car",
+        "cars",
+        "Karl Benz",
+        "Benz",
+        "early automobile",
+        "early car",
+        "first automobile",
+        "first car",
+        "automobile invention",
+        "invention of the automobile",
+        "history of the automobile",
+        "history of the car",
+        "automobile technology",
+
+        "Who invented the automobile",
+        "Who was Karl Benz",
+        "What did Karl Benz invent",
+        "What was the first automobile",
+        "How did the first automobile work",
+        "How did an automobile work",
+        "Why was the automobile important",
+        "How did the automobile change transportation",
+        "How did cars change people's lives"
+    ],
+    file: "images/english/automobile-karl-benz-basics.png",
+    alt: "The Automobile — Karl Benz 英文教學圖，呈現汽車出現前的馬車、Karl Benz 與早期汽車、燃料與引擎如何提供動力，以及汽車如何改變現代交通",
+    category: "english",
+    grade: 7,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "Karl Benz、早期汽車、燃料與引擎提供動力的基本原理，以及汽車對現代交通與生活的影響",
+    difficulty: 2,
+    related: [
+        "steam-engine-james-watt-basics",
+        "simple-physics-basics"
+    ]
+},
+{
     id: "steam-engine-james-watt-basics",
     title: "The Steam Engine — James Watt 詹姆斯·瓦特與蒸汽機",
     keywords: [
