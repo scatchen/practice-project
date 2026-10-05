@@ -2616,9 +2616,7 @@ const diagramMap = [
         "Newton", "Newton's gravity",
         "penicillin", "antibiotic", "antibiotics",
         "Alexander Fleming",
-        "electric light bulb", "light bulb",
-        "electricity", "Edison",
-        "Thomas Edison",
+        "electricity",
         "vaccine", "vaccines",
         "medical discovery", "medical discoveries",
         "medicine", "health", "disease",
@@ -2632,8 +2630,6 @@ const diagramMap = [
         "What is gravity",
         "Who discovered penicillin",
         "What is penicillin",
-        "Who invented the light bulb",
-        "How did the light bulb change our lives",
         "What are vaccines",
         "How do vaccines help people",
         "What are important medical discoveries",
@@ -4253,6 +4249,46 @@ const diagramMap = [
         "deserts-sand-dunes-basics",
         "alluvial-fans-basics",
         "islands-archipelagos-basics"
+    ]
+},
+{
+    id: "light-bulb-thomas-edison-basics",
+    title: "The Light Bulb — Thomas Edison 愛迪生與電燈泡",
+    keywords: [
+        "電燈泡", "燈泡", "電燈", "電燈發明",
+        "愛迪生", "湯瑪斯·愛迪生", "照明", "電力照明",
+
+        "light bulb",
+        "lightbulb",
+        "electric light bulb",
+        "Thomas Edison",
+        "Edison",
+        "electric light",
+        "electric lighting",
+        "practical light bulb",
+        "light bulb invention",
+        "invention of the light bulb",
+        "history of the light bulb",
+
+        "Who invented the light bulb",
+        "Who was Thomas Edison",
+        "What did Thomas Edison invent",
+        "How did the light bulb work",
+        "How does an electric light bulb work",
+        "Why was the light bulb important",
+        "How did the light bulb change our lives",
+        "How did electric lighting change daily life"
+    ],
+    file: "images/english/light-bulb-thomas-edison-basics.png",
+    alt: "The Light Bulb — Thomas Edison 英文教學圖，呈現蠟燭與油燈、愛迪生研究實用電燈泡、電流加熱燈絲產生光，以及電燈如何改善夜間生活",
+    category: "english",
+    grade: 7,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "Thomas Edison、實用電燈泡、電流與燈絲發光原理，以及電力照明對家庭、街道與夜間生活的影響",
+    difficulty: 2,
+    related: [
+        "scientific-discoveries-basics",
+        "simple-physics-basics"
     ]
 },
 {
