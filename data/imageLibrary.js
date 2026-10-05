@@ -4256,6 +4256,42 @@ const diagramMap = [
     ]
 },
 {
+    id: "printing-press-johannes-gutenberg-basics",
+    title: "The Printing Press — Johannes Gutenberg 古騰堡與印刷術",
+    keywords: [
+        "印刷術", "印刷機", "活字印刷", "古騰堡",
+        "約翰尼斯·古騰堡", "印刷發明", "活字",
+
+        "printing press",
+        "Johannes Gutenberg",
+        "Gutenberg",
+        "movable type",
+        "movable metal type",
+        "early printing",
+        "printing invention",
+        "invention of printing",
+        "history of printing",
+        "printing technology",
+
+        "Who invented the printing press",
+        "Who was Johannes Gutenberg",
+        "What did Gutenberg invent",
+        "What is movable type",
+        "How did the printing press work",
+        "What was the printing press",
+        "Why was the printing press important",
+        "How did printing change the world"
+    ],
+    file: "images/english/printing-press-johannes-gutenberg-basics.png",
+    alt: "The Printing Press — Johannes Gutenberg 英文教學圖，呈現早期手抄書、古騰堡與活字印刷機、排字上墨壓印的過程，以及印刷術如何讓書籍與知識更容易傳播",
+    category: "english",
+    grade: 7,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "Johannes Gutenberg、活字印刷、早期印刷機、印刷流程，以及印刷術對知識與教育傳播的影響",
+    difficulty: 2,
+    related: []
+},
+{
     id: "telephone-alexander-graham-bell-basics",
     title: "The Telephone — Alexander Graham Bell 貝爾與電話",
     keywords: [
