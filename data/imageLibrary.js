@@ -4252,6 +4252,49 @@ const diagramMap = [
     ]
 },
 {
+    id: "telegraph-samuel-morse-basics",
+    title: "The Telegraph — Samuel Morse 塞繆爾·摩斯與電報",
+    keywords: [
+        "電報", "電報發明", "塞繆爾·摩斯", "摩斯",
+        "摩斯電碼", "有線通訊", "電報通信", "電報史",
+
+        "telegraph",
+        "telegraphy",
+        "Samuel Morse",
+        "Morse",
+        "Morse code",
+        "Morse Code",
+        "electric telegraph",
+        "telegraph system",
+        "early telegraph",
+        "telegraph invention",
+        "invention of the telegraph",
+        "history of the telegraph",
+        "wired communication",
+
+        "Who invented the telegraph",
+        "Who was Samuel Morse",
+        "What did Samuel Morse invent",
+        "What is Morse code",
+        "How did the telegraph work",
+        "How did a telegraph work",
+        "How did Morse code work",
+        "Why was the telegraph important",
+        "How did the telegraph change communication"
+    ],
+    file: "images/english/telegraph-samuel-morse-basics.png",
+    alt: "The Telegraph — Samuel Morse 英文教學圖，呈現電報出現前的遠距離訊息傳遞、Samuel Morse 與電報及摩斯電碼、電訊號透過電線傳遞點與劃，以及電報如何加速遠距離通訊",
+    category: "english",
+    grade: 8,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "Samuel Morse、電報系統、摩斯電碼、電訊號透過電線傳遞文字，以及電報對遠距離通訊的影響",
+    difficulty: 2,
+    related: [
+        "radio-guglielmo-marconi-basics",
+        "telephone-alexander-graham-bell-basics"
+    ]
+},
+{
     id: "radio-guglielmo-marconi-basics",
     title: "The Radio — Guglielmo Marconi 馬可尼與無線電",
     keywords: [
