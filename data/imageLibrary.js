@@ -4256,6 +4256,43 @@ const diagramMap = [
     ]
 },
 {
+    id: "telephone-alexander-graham-bell-basics",
+    title: "The Telephone — Alexander Graham Bell 貝爾與電話",
+    keywords: [
+        "電話", "電話發明", "貝爾", "亞歷山大·格拉漢姆·貝爾",
+        "通訊", "遠距離通訊",
+
+        "telephone",
+        "Alexander Graham Bell",
+        "Alexander Graham",
+        "Bell",
+        "early telephone",
+        "first telephone",
+        "telephone invention",
+        "invention of the telephone",
+        "history of the telephone",
+        "long distance communication",
+
+        "Who invented the telephone",
+        "Who was Alexander Graham Bell",
+        "What did Alexander Graham Bell invent",
+        "How did the telephone work",
+        "What was the first telephone",
+        "Why was the telephone important",
+        "How did the telephone change communication"
+    ],
+    file: "images/english/telephone-alexander-graham-bell-basics.png",
+    alt: "The Telephone — Alexander Graham Bell 英文教學圖，呈現人們需要遠距離通訊、貝爾研究早期電話、聲音透過電訊號傳遞，以及電話如何改變世界通訊",
+    category: "english",
+    grade: 7,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "Alexander Graham Bell、早期電話、聲音透過電訊號傳遞、遠距離通訊與電話對現代生活的影響",
+    difficulty: 2,
+    related: [
+        "simple-physics-basics"
+    ]
+},
+{
     id: "airplane-wright-brothers-basics",
     title: "The Airplane — Wright Brothers 萊特兄弟與飛機",
     keywords: [
