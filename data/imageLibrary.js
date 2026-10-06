@@ -4252,6 +4252,48 @@ const diagramMap = [
     ]
 },
 {
+    id: "battery-alessandro-volta-basics",
+    title: "The Battery — Alessandro Volta 伏打與早期電池",
+    keywords: [
+        "電池", "電池發明", "亞歷山德羅·伏打", "伏打",
+        "阿萊山德羅·伏打", "伏打電堆", "早期電池",
+        "電池史", "電池發展",
+
+        "Alessandro Volta",
+        "Volta",
+        "voltaic pile",
+        "voltaic battery",
+        "early battery",
+        "first battery",
+        "history of the battery",
+        "battery invention",
+        "invention of the battery",
+        "development of the battery",
+
+        "Who invented the battery",
+        "Who was Alessandro Volta",
+        "What did Alessandro Volta invent",
+        "What is the voltaic pile",
+        "What was the first battery",
+        "How did the first battery work",
+        "How did Volta's battery work",
+        "Why was the battery important",
+        "How did the battery change science and technology"
+    ],
+    file: "images/english/battery-alessandro-volta-basics.png",
+    alt: "The Battery — Alessandro Volta 英文教學圖，呈現早期科學家對穩定電流來源的需求、Alessandro Volta 與伏打電堆、化學反應產生電流，以及電池對後續科學與電氣科技發展的影響",
+    category: "english",
+    grade: 8,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "Alessandro Volta、伏打電堆、早期電池、化學反應產生電流，以及電池對科學與電氣科技發展的影響",
+    difficulty: 2,
+    related: [
+        "telegraph-samuel-morse-basics",
+        "radio-guglielmo-marconi-basics",
+        "voltage-current-and-resistance-basics"
+    ]
+},
+{
     id: "telegraph-samuel-morse-basics",
     title: "The Telegraph — Samuel Morse 塞繆爾·摩斯與電報",
     keywords: [
