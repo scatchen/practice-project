@@ -4252,6 +4252,52 @@ const diagramMap = [
     ]
 },
 {
+    id: "x-ray-wilhelm-rontgen-basics",
+    title: "X-rays — Wilhelm Röntgen 威廉·倫琴與X射線",
+    keywords: [
+        "X射線", "X光", "X光片", "X光檢查",
+        "X射線發現", "X光發現", "倫琴",
+        "威廉·倫琴", "威廉·康拉德·倫琴",
+        "X-ray",
+        "X-rays",
+        "x ray",
+        "x rays",
+        "Wilhelm Röntgen",
+        "Wilhelm Roentgen",
+        "Röntgen",
+        "Roentgen",
+        "X-ray discovery",
+        "discovery of X-rays",
+        "history of X-rays",
+        "early X-rays",
+        "X-ray imaging",
+        "medical X-ray",
+        "X-ray technology",
+        "Who discovered X-rays",
+        "Who was Wilhelm Röntgen",
+        "What did Wilhelm Röntgen discover",
+        "What are X-rays",
+        "How do X-rays work",
+        "How do X-rays make images of bones",
+        "How are X-rays used in medicine",
+        "Why are X-rays important",
+        "How did X-rays change medicine",
+        "How did X-rays improve medical diagnosis"
+    ],
+    file: "images/english/x-ray-wilhelm-rontgen-basics.png",
+    alt: "X-rays — Wilhelm Röntgen 英文教學圖，呈現X光發現前的醫學診斷、Wilhelm Röntgen 發現X射線、X射線如何形成骨骼影像，以及X光如何改變醫學診斷",
+    category: "english",
+    grade: 8,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "Wilhelm Röntgen、X射線的發現、X射線穿透不同物質的特性、骨骼影像，以及X光對現代醫學診斷的重要影響",
+    difficulty: 2,
+    related: [
+        "microscope-early-development-basics",
+        "telescope-galileo-early-development-basics",
+        "scientific-discoveries-basics"
+    ]
+},
+{
     id: "telescope-galileo-early-development-basics",
     title: "The Telescope — Galileo Galilei 伽利略與早期望遠鏡",
     keywords: [
