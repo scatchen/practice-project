@@ -4252,6 +4252,48 @@ const diagramMap = [
     ]
 },
 {
+    id: "microscope-early-development-basics",
+    title: "The Microscope — Early Development 顯微鏡的早期發展",
+    keywords: [
+        "顯微鏡", "顯微鏡發明", "早期顯微鏡",
+        "顯微鏡發展", "顯微鏡史", "顯微觀察",
+        "放大鏡片", "透鏡",
+
+        "microscope",
+        "microscopy",
+        "microscopic",
+        "early microscope",
+        "first microscope",
+        "microscope development",
+        "microscope invention",
+        "history of the microscope",
+        "early microscopy",
+        "magnifying lens",
+        "magnification",
+
+        "What is a microscope",
+        "What did early microscopes do",
+        "How did the microscope work",
+        "How does a microscope work",
+        "How did early microscopes work",
+        "What could scientists see with a microscope",
+        "Why was the microscope important",
+        "How did microscopes change science",
+        "How did the microscope help scientists"
+    ],
+    file: "images/english/microscope-early-development-basics.png",
+    alt: "The Microscope — Early Development 英文教學圖，呈現顯微鏡出現前的觀察、早期透鏡與顯微鏡發展、顯微鏡放大微小物體，以及顯微鏡如何幫助科學家研究細胞與微生物",
+    category: "english",
+    grade: 7,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "顯微鏡的早期發展、透鏡放大原理、微小物體的觀察，以及顯微鏡對細胞與微生物研究的重要性",
+    difficulty: 2,
+    related: [
+        "cells-and-microorganisms-basics",
+        "scientific-discoveries-basics"
+    ]
+},
+{
     id: "battery-alessandro-volta-basics",
     title: "The Battery — Alessandro Volta 伏打與早期電池",
     keywords: [
