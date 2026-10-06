@@ -4252,6 +4252,47 @@ const diagramMap = [
     ]
 },
 {
+    id: "telescope-galileo-early-development-basics",
+    title: "The Telescope — Galileo Galilei 伽利略與早期望遠鏡",
+    keywords: [
+        "望遠鏡", "望遠鏡發明", "早期望遠鏡",
+        "望遠鏡發展", "望遠鏡史", "天文觀測",
+        "伽利略", "伽利略·伽利萊", "伽利略望遠鏡",
+        "Telescope",
+        "telescopes",
+        "Galileo Galilei",
+        "Galileo",
+        "early telescope",
+        "first telescope",
+        "telescope development",
+        "telescope invention",
+        "history of the telescope",
+        "early astronomy",
+        "astronomical observation",
+        "Galileo telescope",
+        "What is a telescope",
+        "Who was Galileo Galilei",
+        "What did Galileo observe with a telescope",
+        "How did the early telescope work",
+        "How did Galileo use the telescope",
+        "What did Galileo discover with a telescope",
+        "Why was the telescope important",
+        "How did the telescope change astronomy",
+        "How did telescopes change our understanding of the universe"
+    ],
+    file: "images/english/telescope-galileo-early-development-basics.png",
+    alt: "The Telescope — Galileo Galilei 英文教學圖，呈現望遠鏡出現前的肉眼觀星、Galileo 使用早期望遠鏡觀察天空、月球與木星及其衛星，以及望遠鏡如何改變人類對宇宙的理解",
+    category: "english",
+    grade: 8,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "Galileo Galilei、早期望遠鏡、天文觀測、月球與木星衛星的觀察，以及望遠鏡對天文學發展的重要影響",
+    difficulty: 2,
+    related: [
+        "microscope-early-development-basics",
+        "scientific-discoveries-basics"
+    ]
+},
+{
     id: "microscope-early-development-basics",
     title: "The Microscope — Early Development 顯微鏡的早期發展",
     keywords: [
