@@ -7329,6 +7329,44 @@ const diagramMap = [
     related: []
 },
 {
+    id: "camping-basics",
+    title: "Camping 露營",
+    keywords: [
+        "露營", "露營活動", "露營旅行",
+        "camping", "camp",
+        "tent", "campsite", "campfire",
+        "put up a tent", "go camping", "go camping together",
+        "cook food", "sit around the campfire",
+        "enjoy nature", "outdoors",
+
+        "What is camping",
+        "What is camping about",
+        "What do people do when they go camping",
+        "What do people do when camping",
+        "What do you do when you go camping",
+        "What do people need for camping",
+        "What do you need for camping",
+        "Where do people go camping",
+        "Where can people go camping",
+        "Where do people sleep when camping",
+        "What is a campsite",
+        "What is a tent",
+        "What is a campfire",
+        "How do people put up a tent",
+        "What do people do around a campfire",
+        "Why do people enjoy camping",
+        "Why do people go camping"
+    ],
+    file: "images/english/camping-basics.png",
+    alt: "Camping 露營英文教學圖，呈現抵達露營地、搭帳篷、在營火旁煮食物，以及一起享受大自然等露營情境",
+    category: "english",
+    grade: 7,
+    chapter: "Human Activities / Everyday Activities 人類常做的活動",
+    concept: "露營活動、露營地、帳篷、營火、戶外活動，以及人們在露營時常做的事情",
+    difficulty: 2,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
