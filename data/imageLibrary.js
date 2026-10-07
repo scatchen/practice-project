@@ -7786,6 +7786,35 @@ const diagramMap = [
     related: []
 },
 {
+    id: "venice-carnival-basics",
+    title: "Venice Carnival 威尼斯嘉年華",
+    keywords: [
+        "威尼斯嘉年華","威尼斯狂歡節","威尼斯面具","義大利嘉年華",
+        "義大利文化","venice carnival","Venetian carnival",
+        "Carnival of Venice","Venice Carnival","Venetian mask",
+        "Venetian masks","Venice masks","traditional Venetian masks",
+        "Venetian costumes","carnival costumes","beautiful costumes",
+        "carnival in Venice","Venice celebration","carnival celebration",
+        "masks and costumes","carnival music","carnival in Italy",
+        "What is Venice Carnival","What is the Venice Carnival",
+        "What is the Carnival of Venice","What do people do at Venice Carnival",
+        "What do people wear at Venice Carnival",
+        "What are Venetian masks","What are Venetian costumes",
+        "Where is Venice Carnival","Where is the Carnival of Venice",
+        "Why do people wear masks at Venice Carnival",
+        "What do people do during the Venice Carnival",
+        "What are Venice Carnival traditions"
+    ],
+    file: "images/english/venice-carnival-basics.png",
+    alt: "Venice Carnival 威尼斯嘉年華英文教學圖，呈現戴傳統威尼斯面具、穿著華麗服裝、在威尼斯參加嘉年華，以及欣賞面具、音樂與慶祝活動的文化情境",
+    category: "english",
+    grade: 7,
+    chapter: "Representative Cultural Activities / Culture & Traditions 歐美紐澳代表性文化活動",
+    concept: "威尼斯嘉年華、威尼斯面具、華麗服裝、義大利文化、音樂與節慶慶祝活動",
+    difficulty: 2,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
