@@ -7693,6 +7693,37 @@ const diagramMap = [
     related: []
 },
 {
+    id: "oktoberfest-basics",
+    title: "Oktoberfest 慕尼黑啤酒節",
+    keywords: [
+        "慕尼黑啤酒節","啤酒節","德國啤酒節","德國節慶","德國文化",
+        "Oktoberfest","Munich Oktoberfest","Munich beer festival",
+        "German beer festival","German festival","Bavarian culture",
+        "Bavarian tradition","traditional clothes","traditional food",
+        "festival tents","large festival tents","festival music",
+        "celebrate together","people at Oktoberfest",
+        "What is Oktoberfest","What is the Oktoberfest",
+        "Where is Oktoberfest","Where is Oktoberfest held",
+        "What do people do at Oktoberfest",
+        "What do people wear at Oktoberfest",
+        "What food do people eat at Oktoberfest",
+        "What is served at Oktoberfest",
+        "What are Oktoberfest traditions",
+        "What is German festival culture",
+        "What is Bavarian culture",
+        "Why is Oktoberfest famous",
+        "Why do people celebrate Oktoberfest"
+    ],
+    file: "images/english/oktoberfest-basics.png",
+    alt: "Oktoberfest 慕尼黑啤酒節英文教學圖，呈現穿著巴伐利亞傳統服飾、聚集在大型節慶帳篷、享用傳統食物與音樂，以及一起慶祝節慶的文化情境",
+    category: "english",
+    grade: 7,
+    chapter: "Representative Cultural Activities / Culture & Traditions 歐美紐澳代表性文化活動",
+    concept: "Oktoberfest、慕尼黑啤酒節、德國文化、巴伐利亞傳統服飾、節慶帳篷、傳統食物、音樂與慶祝活動",
+    difficulty: 2,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
