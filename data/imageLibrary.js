@@ -7815,6 +7815,38 @@ const diagramMap = [
     related: []
 },
 {
+    id: "ice-hockey-culture-basics",
+    title: "Ice Hockey Culture 冰上曲棍球文化",
+    keywords: [
+        "冰上曲棍球","冰球","冰球文化","加拿大冰球","加拿大曲棍球",
+        "加拿大文化","冰上曲棍球文化",
+        "ice hockey","hockey","ice hockey culture","hockey culture",
+        "Canadian hockey","Canada hockey","Canadian hockey culture",
+        "Canadian culture","hockey players","hockey team",
+        "hockey game","play ice hockey","skate on the ice",
+        "move the puck","hockey fans","cheer for the team",
+        "winter sports","ice sport",
+        "What is ice hockey","What is hockey",
+        "What do hockey players do",
+        "What do hockey players do on the ice",
+        "How do people play ice hockey",
+        "What do hockey fans do","Why is hockey popular in Canada",
+        "Why is ice hockey important in Canada",
+        "Why is hockey important to Canadian culture",
+        "What sports are popular in Canada",
+        "What is Canadian hockey culture",
+        "Where do people play ice hockey"
+    ],
+    file: "images/english/ice-hockey-culture-basics.png",
+    alt: "Ice Hockey Culture 冰上曲棍球文化英文教學圖，呈現球員在冰上準備比賽、滑冰控制冰球、觀眾為球隊加油，以及冰上曲棍球與加拿大文化的連結",
+    category: "english",
+    grade: 7,
+    chapter: "Representative Cultural Activities / Culture & Traditions 歐美紐澳代表性文化活動",
+    concept: "冰上曲棍球、加拿大冰球文化、冰上運動、球員、球隊、球迷與加拿大文化",
+    difficulty: 2,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
