@@ -7724,6 +7724,37 @@ const diagramMap = [
     related: []
 },
 {
+    id: "german-christmas-markets-basics",
+    title: "German Christmas Markets 德國聖誕市集",
+    keywords: [
+        "德國聖誕市集","聖誕市集","德國耶誕市集","耶誕市集",
+        "德國聖誕節","德國文化","German Christmas market",
+        "German Christmas markets","Christmas market","Christmas markets",
+        "German market","German Christmas","Christmas market in Germany",
+        "Christmas decorations","Christmas lights","traditional crafts",
+        "handmade gifts","Christmas gifts","traditional food","warm drinks",
+        "winter market","visit a Christmas market","Christmas market stalls",
+        "What is a Christmas market","What is a German Christmas market",
+        "What do people do at a Christmas market",
+        "What do people buy at a Christmas market",
+        "What food is sold at a Christmas market",
+        "What can people buy at a Christmas market",
+        "What do people drink at a Christmas market",
+        "Where are German Christmas markets",
+        "When do German Christmas markets open",
+        "Why are German Christmas markets famous",
+        "What are German Christmas market traditions"
+    ],
+    file: "images/english/german-christmas-markets-basics.png",
+    alt: "German Christmas Markets 德國聖誕市集英文教學圖，呈現冬季參觀聖誕市集、欣賞燈飾與裝飾、享用傳統食物與熱飲，以及購買手工禮物與聖誕裝飾的文化情境",
+    category: "english",
+    grade: 7,
+    chapter: "Representative Cultural Activities / Culture & Traditions 歐美紐澳代表性文化活動",
+    concept: "德國聖誕市集、冬季文化、聖誕燈飾、傳統食物、熱飲、手工藝品與節慶購物",
+    difficulty: 2,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
