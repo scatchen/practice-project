@@ -7755,6 +7755,37 @@ const diagramMap = [
     related: []
 },
 {
+    id: "thanksgiving-basics",
+    title: "Thanksgiving 感恩節",
+    keywords: [
+        "感恩節","感恩節活動","美國感恩節","美國感恩節文化",
+        "thanksgiving","Thanksgiving","Thanksgiving Day","American Thanksgiving",
+        "Thanksgiving culture","Thanksgiving tradition","Thanksgiving traditions",
+        "Thanksgiving meal","Thanksgiving dinner","turkey dinner",
+        "Thanksgiving turkey","family gathering","family dinner",
+        "give thanks","give thanks for family and friends",
+        "What is Thanksgiving","What is Thanksgiving Day",
+        "When is Thanksgiving","What do people do on Thanksgiving",
+        "What do families do on Thanksgiving",
+        "What do people eat on Thanksgiving",
+        "What do people eat for Thanksgiving dinner",
+        "What is a Thanksgiving meal","What is Thanksgiving dinner",
+        "Why do people celebrate Thanksgiving",
+        "Why is Thanksgiving important",
+        "What are Thanksgiving traditions",
+        "Who celebrates Thanksgiving",
+        "How do families celebrate Thanksgiving"
+    ],
+    file: "images/english/thanksgiving-basics.png",
+    alt: "Thanksgiving 感恩節英文教學圖，呈現家人準備感恩節餐點、一起享用火雞大餐、聚在一起吃飯聊天，以及為家人與朋友表達感謝的文化情境",
+    category: "english",
+    grade: 7,
+    chapter: "Representative Cultural Activities / Culture & Traditions 歐美紐澳代表性文化活動",
+    concept: "Thanksgiving、感恩節、家庭聚餐、火雞大餐、家庭團聚、感謝與美國節慶文化",
+    difficulty: 2,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
