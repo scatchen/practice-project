@@ -7847,6 +7847,53 @@ const diagramMap = [
     related: []
 },
 {
+    id: "changing-of-the-guard-basics",
+    title: "Changing of the Guard 皇家衛兵交接",
+    keywords: [
+        "皇家衛兵",
+        "衛兵交接",
+        "英國皇家衛兵",
+        "英國衛兵",
+        "白金漢宮",
+        "皇家衛兵交接儀式",
+
+        "changing of the guard",
+        "Changing of the Guard",
+        "change of the guard",
+        "guard changing ceremony",
+        "guard ceremony",
+        "Buckingham Palace",
+        "Buckingham Palace guards",
+        "Queen's Guard",
+        "British guards",
+        "royal guards",
+        "royal guard ceremony",
+        "guards in uniform",
+        "guards march",
+        "marching guards",
+        "traditional ceremony",
+
+        "What is the Changing of the Guard",
+        "What is Changing of the Guard",
+        "What do the guards do at Buckingham Palace",
+        "What do the guards wear",
+        "Where can people see the Changing of the Guard",
+        "Where is the Changing of the Guard",
+        "Why do tourists watch the Changing of the Guard",
+        "Why is the Changing of the Guard important",
+        "What happens during the Changing of the Guard",
+        "How do the guards march"
+    ],
+    file: "images/english/changing-of-the-guard-basics.png",
+    alt: "Changing of the Guard 皇家衛兵交接英文教學圖，呈現白金漢宮、穿著傳統制服的皇家衛兵、衛兵列隊行進，以及新舊衛兵進行正式交接的英國文化情境",
+    category: "english",
+    grade: 7,
+    chapter: "Representative Cultural Activities / Culture & Traditions 歐美紐澳代表性文化活動",
+    concept: "Changing of the Guard、皇家衛兵、白金漢宮、傳統制服、衛兵行進與英國王室文化儀式",
+    difficulty: 2,
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
