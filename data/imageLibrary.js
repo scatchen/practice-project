@@ -11381,9 +11381,11 @@ const diagramMap = [
         "出差報銷",
         "費用報銷",
         "報銷申請",
+        "報銷進度",
         "報銷流程",
         "費用報告",
         "差旅費用報告",
+        "差旅收據",
         "收據",
         "交通費",
         "住宿費",
@@ -11398,6 +11400,8 @@ const diagramMap = [
         "business trip expenses",
         "travel expense reimbursement",
         "expense reimbursement",
+        "reimbursement status",
+        "check reimbursement status",
         "reimbursement",
         "reimburse",
         "reimbursed",
@@ -11429,6 +11433,7 @@ const diagramMap = [
         "business trip costs",
         "expense documentation",
         "travel receipts",
+        "travel expense receipts",
         "receipts",
         "keep your receipts",
         "save your receipts",
@@ -11480,6 +11485,16 @@ const diagramMap = [
         "Employees must submit an expense report.",
         "Please attach your receipts to the report.",
         "The finance department reviews expense claims."
+    ],
+    images: [
+        {
+            file: "images/english/business-travel-expenses-and-reimbursement-basics.png",
+            alt: "Business Travel Expenses & Reimbursement 商務差旅費用與報銷英文教學圖，呈現收集收據、製作差旅費用報告、提交報銷申請及收到報銷款項四種情境"
+        },
+        {
+            file: "images/english/travel-expenses-and-reimbursements-basics.png",
+            alt: "Travel Expenses & Reimbursements 差旅費用與報銷英文教學圖，呈現保留收據、提交費用報銷單、查詢報銷進度及收到報銷款項四種情境"
+        }
     ],
     file: "images/english/business-travel-expenses-and-reimbursement-basics.png",
     alt: "Business Travel Expenses & Reimbursement 商務差旅費用與報銷英文教學圖，呈現收集收據、製作差旅費用報告、提交報銷申請及收到報銷款項四種情境",

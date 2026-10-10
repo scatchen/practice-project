@@ -2808,12 +2808,25 @@ if (diagrams && diagrams.length > 0) {
     diagramHTML =
         "<div style='text-align:center; margin:20px 0;'>" +
 
-        diagrams.map(diagram =>
-            "<img src='" + diagram.file + "' " +
-            "alt='" + diagram.alt + "' " +
-            "style='max-width:1200px; width:100%; border-radius:10px; margin-bottom:20px;' " +
-            "onload='resizeAnnotationCanvas()'>"
-        ).join("") +
+        diagrams.map(diagram => {
+            const validImages = Array.isArray(diagram.images)
+                ? diagram.images.filter(image =>
+                    image &&
+                    typeof image.file === "string" && image.file.trim() &&
+                    typeof image.alt === "string" && image.alt.trim()
+                )
+                : [];
+            const imagesToRender = validImages.length > 0
+                ? validImages
+                : [{ file: diagram.file, alt: diagram.alt }];
+
+            return imagesToRender.map(image =>
+                "<img src='" + image.file + "' " +
+                "alt='" + image.alt + "' " +
+                "style='max-width:1200px; width:100%; border-radius:10px; margin-bottom:20px;' " +
+                "onload='resizeAnnotationCanvas()'>"
+            ).join("");
+        }).join("") +
 
         "</div>";
 }
