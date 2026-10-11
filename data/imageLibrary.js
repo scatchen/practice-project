@@ -12114,6 +12114,82 @@ const diagramMap = [
     related: []
 },
 {
+    id: "the-lord-of-the-rings-basics",
+
+    title: "The Lord of the Rings《魔戒》",
+
+    keywords: [
+        "The Lord of the Rings",
+        "Lord of the Rings",
+        "J. R. R. Tolkien",
+        "Tolkien",
+        "Middle-earth",
+        "Fantasy Literature",
+        "Fantasy Adventure",
+        "hobbit",
+        "ring",
+        "wizard",
+        "elf",
+        "dwarf",
+        "Fellowship",
+        "quest",
+        "journey",
+        "dark lord",
+        "adventure",
+        "challenge",
+        "challenges",
+        "overcome obstacles",
+        "bravery",
+        "friendship",
+        "teamwork",
+        "perseverance",
+        "temptation",
+        "sacrifice",
+        "final battle",
+        "hope",
+        "a better future",
+        "power",
+        "魔戒",
+        "魔戒小說",
+        "托爾金",
+        "中土世界",
+        "奇幻文學",
+        "奇幻冒險",
+        "哈比人",
+        "巫師",
+        "精靈",
+        "矮人",
+        "旅程",
+        "使命",
+        "勇氣",
+        "友誼",
+        "團隊合作",
+        "克服困難",
+        "堅持不放棄",
+        "誘惑",
+        "犧牲",
+        "最終戰役",
+        "希望",
+        "更好的未來"
+    ],
+
+    file: "images/english/the-lord-of-the-rings-basics.png",
+
+    alt: "The Lord of the Rings《魔戒》英文奇幻文學教學長圖，分初級、中級與中高級三個程度區塊，介紹哈比人、魔戒、巫師、精靈與矮人，並呈現旅程、使命、克服挑戰、勇氣、友誼、團隊合作、堅持、誘惑、犧牲、最終戰役與希望等主題",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "J. R. R. Tolkien 的奇幻文學作品 The Lord of the Rings：透過初級、中級與中高級分級，學習哈比人、魔戒、魔法角色、旅程與使命，以及克服困難、勇氣、友誼、團隊合作、堅持、誘惑、犧牲和希望。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
