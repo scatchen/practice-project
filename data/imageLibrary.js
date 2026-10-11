@@ -13675,6 +13675,93 @@ const diagramMap = [
     related: []
 },
 {
+    id: "the-handmaids-tale-margaret-atwood-basics",
+
+    title: "The Handmaid’s Tale — Margaret Atwood《使女的故事》",
+
+    keywords: [
+        "The Handmaid’s Tale",
+        "thehandmaid’stale",
+        "Handmaids Tale",
+        "handmaidstale",
+        "The Handmaid's Tale",
+        "thehandmaid'stale",
+        "Margaret Atwood",
+        "margaret atwood",
+        "margaretatwood",
+        "Atwood",
+        "atwood",
+        "Offred",
+        "offred",
+        "Gilead",
+        "gilead",
+        "Commander",
+        "commander",
+        "Serena Joy",
+        "serena joy",
+        "serenajoy",
+        "Aunt Lydia",
+        "aunt lydia",
+        "auntlydia",
+        "Ofglen",
+        "ofglen",
+        "Nick",
+        "nick",
+        "handmaid",
+        "red cloak",
+        "redcloak",
+        "white bonnet",
+        "whitebonnet",
+        "totalitarian society",
+        "totalitariansociety",
+        "reproductive rights",
+        "reproductiverights",
+        "oppression",
+        "propaganda",
+        "resistance",
+        "freedom",
+        "identity",
+        "human rights",
+        "humanrights",
+        "power",
+        "control",
+        "hope",
+        "使女的故事",
+        "瑪格麗特·愛特伍",
+        "瑪格麗特愛特伍",
+        "奧芙弗雷德",
+        "基列國",
+        "使女",
+        "極權社會",
+        "生育權",
+        "壓迫",
+        "宣傳",
+        "反抗",
+        "自由",
+        "身分",
+        "人權",
+        "權力",
+        "控制",
+        "希望"
+    ],
+
+    file: "images/english/the-handmaids-tale-margaret-atwood-basics.png",
+
+    alt: "The Handmaid’s Tale — Margaret Atwood《使女的故事》英文文學教學長圖，分 Beginner、Intermediate 與 Upper-Intermediate 三個程度，以 12 格連貫故事呈現 Offred 在基列國成為使女、回憶過去、建立友誼並以微小行動反抗的經歷，探討自由、人權、權力與控制。",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "Margaret Atwood 的 The Handmaid’s Tale《使女的故事》描寫 Offred 生活在女性權利極受限制的極權社會基列國，被迫成為使女。她透過回憶、友誼與希望保存自我認同，並以微小行動反抗；故事探討自由、人權、權力與控制。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "the-hunger-games-suzanne-collins-basics",
 
     title: "The Hunger Games — Suzanne Collins《飢餓遊戲》",
