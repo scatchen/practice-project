@@ -12525,6 +12525,88 @@ const diagramMap = [
     related: []
 },
 {
+    id: "romeo-and-juliet-basics",
+
+    title: "Romeo and Juliet — William Shakespeare《羅密歐與茱麗葉》",
+
+    keywords: [
+        "Romeo and Juliet",
+        "William Shakespeare",
+        "Shakespeare",
+        "Romeo",
+        "Juliet",
+        "Montague",
+        "Capulet",
+        "Mercutio",
+        "Tybalt",
+        "Verona",
+        "family conflict",
+        "family feud",
+        "Montagues and Capulets",
+        "forbidden love",
+        "young love",
+        "true love",
+        "secret marriage",
+        "balcony scene",
+        "Romeo and Juliet meet",
+        "Tybalt and Mercutio",
+        "Romeo is banished",
+        "banished from Verona",
+        "sleeping potion",
+        "Juliet pretends to be dead",
+        "misunderstanding",
+        "tragic ending",
+        "fate",
+        "forgiveness",
+        "loyalty",
+        "sacrifice",
+        "《羅密歐與茱麗葉》",
+        "羅密歐與茱麗葉",
+        "莎士比亞",
+        "羅密歐",
+        "茱麗葉",
+        "蒙太古家族",
+        "凱普萊特家族",
+        "維洛納",
+        "家族衝突",
+        "家族世仇",
+        "蒙太古與凱普萊特家族",
+        "禁忌之愛",
+        "青春愛情",
+        "真愛",
+        "秘密婚姻",
+        "陽台場景",
+        "羅密歐與茱麗葉相遇",
+        "提伯特與茂丘西奧",
+        "羅密歐被放逐",
+        "羅密歐被放逐出維洛納",
+        "假死藥",
+        "茱麗葉假裝死亡",
+        "誤會",
+        "悲劇結局",
+        "命運",
+        "寬恕",
+        "忠誠",
+        "犧牲"
+    ],
+
+    file: "images/english/romeo-and-juliet-basics.png",
+
+    alt: "Romeo and Juliet — William Shakespeare《羅密歐與茱麗葉》英文文學教學長圖，分初級、中級與中高級三個程度區塊，介紹蒙太古與凱普萊特家族世仇、羅密歐與茱麗葉相遇及秘密婚姻、提伯特與茂丘西奧衝突、羅密歐被放逐、茱麗葉服用假死藥與悲劇結局，並探討愛情、家族衝突、命運及寬恕",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "William Shakespeare 的悲劇 Romeo and Juliet：透過初級、中級與中高級分級，認識兩大家族的世仇、羅密歐與茱麗葉的禁忌之愛與秘密婚姻、羅密歐被放逐、茱麗葉的假死計畫與悲劇結局，並探討家族衝突、命運、誤會、犧牲與寬恕。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
