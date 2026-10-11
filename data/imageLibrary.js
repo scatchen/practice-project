@@ -12693,6 +12693,86 @@ const diagramMap = [
     related: []
 },
 {
+    id: "the-little-prince-basics",
+
+    title: "The Little Prince — Antoine de Saint-Exupéry《小王子》",
+
+    keywords: [
+        "The Little Prince",
+        "Antoine de Saint-Exupéry",
+        "little prince",
+        "pilot",
+        "rose",
+        "fox",
+        "asteroid B-612",
+        "B-612",
+        "friendship",
+        "responsibility",
+        "imagination",
+        "loneliness",
+        "connection",
+        "innocence",
+        "growing up",
+        "appearance vs reality",
+        "essence",
+        "tame",
+        "invisible to the eye",
+        "what is essential is invisible to the eye",
+        "meaning of life",
+        "love and care",
+        "friendship and responsibility",
+        "meets pilot in desert",
+        "travels to planets",
+        "visits different planets",
+        "meets the fox",
+        "the fox's lesson",
+        "responsible for his rose",
+        "says goodbye to the pilot",
+        "小王子",
+        "聖修伯里",
+        "安東尼聖修伯里",
+        "飛行員",
+        "玫瑰",
+        "狐狸",
+        "B-612小行星",
+        "B-612 小行星",
+        "友誼",
+        "責任",
+        "想像力",
+        "孤獨",
+        "愛與關懷",
+        "友誼與責任",
+        "連結",
+        "純真",
+        "成長",
+        "外表與本質",
+        "馴養",
+        "眼睛看不見的重要事物",
+        "生命意義",
+        "沙漠中遇見飛行員",
+        "探訪不同星球",
+        "遇見狐狸",
+        "狐狸的教導",
+        "對玫瑰負責"
+    ],
+
+    file: "images/english/the-little-prince-basics.png",
+
+    alt: "The Little Prince — Antoine de Saint-Exupéry《小王子》英文文學教學長圖，分初級、中級與中高級三個程度區塊，介紹飛行員在沙漠遇見來自 B-612 小行星的小王子、小王子珍惜自己的玫瑰並探訪不同星球，以及他在地球遇見狐狸、學習馴養、友誼與責任；內容也呈現真正重要的事物不能只用眼睛看見，以及小王子與飛行員道別",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "Antoine de Saint-Exupéry 的 The Little Prince：透過初級、中級與中高級分級，認識飛行員在沙漠遇見來自 B-612 的小王子、小王子珍惜自己的玫瑰並旅行到不同星球，以及他在地球遇見狐狸後理解馴養、友誼、連結與責任。故事探討想像力、成長、外表與本質，以及真正重要的事物不能只用眼睛看見；結尾描寫小王子與飛行員道別，保留作品結尾的神祕與開放性。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
