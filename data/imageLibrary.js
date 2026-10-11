@@ -14082,6 +14082,87 @@ const diagramMap = [
     related: []
 },
 {
+    id: "macbeth-william-shakespeare-basics",
+
+    title: "Macbeth — William Shakespeare《麥克白》",
+
+    keywords: [
+        "Macbeth",
+        "macbeth",
+        "William Shakespeare",
+        "william shakespeare",
+        "williamshakespeare",
+        "Shakespeare",
+        "shakespeare",
+        "Lady Macbeth",
+        "lady macbeth",
+        "ladymacbeth",
+        "Duncan",
+        "King Duncan",
+        "king duncan",
+        "kingduncan",
+        "Banquo",
+        "banquo",
+        "Banquo's ghost",
+        "banquosghost",
+        "Macduff",
+        "macduff",
+        "Malcolm",
+        "malcolm",
+        "three witches",
+        "threewitches",
+        "prophecy",
+        "prophecies",
+        "ambition",
+        "guilt",
+        "betrayal",
+        "tyranny",
+        "paranoia",
+        "conscience",
+        "murder",
+        "sleepwalking",
+        "consequences",
+        "moral choices",
+        "moralchoices",
+        "麥克白",
+        "馬克白",
+        "威廉·莎士比亞",
+        "莎士比亞",
+        "麥克白夫人",
+        "鄧肯",
+        "班柯",
+        "麥克德夫",
+        "馬爾康",
+        "三女巫",
+        "預言",
+        "野心",
+        "罪惡感",
+        "背叛",
+        "暴政",
+        "偏執",
+        "良知",
+        "謀殺",
+        "夢遊",
+        "行為後果"
+    ],
+
+    file: "images/english/macbeth-william-shakespeare-basics.png",
+
+    alt: "Macbeth — William Shakespeare《麥克白》英文文學教學長圖，分 Beginner、Intermediate 與 Upper-Intermediate 三個程度，以 12 格呈現 Macbeth 從戰勝後聽見女巫預言、在 Lady Macbeth 鼓動下謀殺 Duncan，到因罪惡感、猜疑與暴政走向孤立和敗亡；故事也呈現 Lady Macbeth 的崩潰、Macduff 的復仇及 Malcolm 重建秩序。",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "William Shakespeare 的 Macbeth《麥克白》描寫蘇格蘭將領 Macbeth 戰勝後遇見三位女巫，聽見自己將成為國王、Banquo 的後代將成為國王的預言。Lady Macbeth 鼓勵他奪位，Macbeth 遂謀殺熟睡中的 Duncan 並登上王位；罪惡感與恐懼使他猜疑 Banquo，安排殺害他，並受其鬼魂困擾。Lady Macbeth 因罪惡感夢遊、試圖洗去想像中的血跡，後來死亡。Macbeth 再問女巫，卻把含糊且誤導的預言當成安全保證，統治日益殘暴並逐漸孤立。最終戰役中，Macduff 殺死 Macbeth，Malcolm 成為新王。作品探討野心、說服與操控、背叛、罪惡感、良知、暴政，以及選擇所帶來的悲劇性後果。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "matilda-roald-dahl-basics",
 
     title: "Matilda — Roald Dahl《瑪蒂達》",
