@@ -13211,6 +13211,68 @@ const diagramMap = [
     related: []
 },
 {
+    id: "the-catcher-in-the-rye-basics",
+
+    title: "The Catcher in the Rye — J. D. Salinger《麥田捕手》",
+
+    keywords: [
+        "The Catcher in the Rye",
+        "thecatcherintherye",
+        "Catcher in the Rye",
+        "catcherintherye",
+        "J. D. Salinger",
+        "j.d.salinger",
+        "Holden Caulfield",
+        "holden caulfield",
+        "holdencaulfield",
+        "Holden",
+        "holden",
+        "Phoebe",
+        "phoebe",
+        "Sally",
+        "sally",
+        "Mr. Antolini",
+        "mr. antolini",
+        "mr.antolini",
+        "New York",
+        "new york",
+        "newyork",
+        "expelled",
+        "lonely",
+        "alienation",
+        "innocence",
+        "growing up",
+        "growingup",
+        "《麥田捕手》",
+        "麥田捕手",
+        "沙林傑",
+        "霍爾頓",
+        "菲比",
+        "莎莉",
+        "紐約",
+        "孤獨",
+        "疏離",
+        "純真",
+        "成長"
+    ],
+
+    file: "images/english/the-catcher-in-the-rye-basics.png",
+
+    alt: "The Catcher in the Rye — J. D. Salinger《麥田捕手》英文文學教學長圖，分 Beginner、Intermediate 與 Upper-Intermediate 三個程度，以 12 格呈現 Holden Caulfield 被退學後在紐約的經歷、與 Sally、Mr. Antolini 和妹妹 Phoebe 的互動，以及他對孤獨、純真、成長與成人世界的感受。",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "J. D. Salinger 的 The Catcher in the Rye《麥田捕手》：少年 Holden Caulfield 被學校退學後在紐約度過幾天，與 Sally、Mr. Antolini 及妹妹 Phoebe 等人互動。他感到孤獨與疏離，對成人世界感到不安，也珍惜童年的純真。作品探討身份認同、孤獨、疏離、純真與成長。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
