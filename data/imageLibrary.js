@@ -13142,6 +13142,75 @@ const diagramMap = [
     related: []
 },
 {
+    id: "lord-of-the-flies-basics",
+
+    title: "Lord of the Flies — William Golding《蠅王》",
+
+    keywords: [
+        "Lord of the Flies",
+        "lordoftheflies",
+        "William Golding",
+        "williamgolding",
+        "Ralph",
+        "ralph",
+        "Piggy",
+        "piggy",
+        "Jack",
+        "jack",
+        "Simon",
+        "simon",
+        "conch shell",
+        "conchshell",
+        "signal fire",
+        "signalfire",
+        "deserted island",
+        "desertedisland",
+        "human nature",
+        "humannature",
+        "civilization",
+        "fear",
+        "power",
+        "plane crash",
+        "rescue",
+        "hunting",
+        "the loss of rules",
+        "《蠅王》",
+        "蠅王",
+        "威廉·高汀",
+        "威廉高汀",
+        "拉爾夫",
+        "豬豬",
+        "傑克",
+        "賽門",
+        "海螺",
+        "信號火",
+        "荒島",
+        "人性",
+        "文明",
+        "恐懼",
+        "權力",
+        "規則",
+        "獲救",
+        "狩獵"
+    ],
+
+    file: "images/english/lord-of-the-flies-basics.png",
+
+    alt: "Lord of the Flies — William Golding《蠅王》英文文學教學長圖，分 Beginner、Intermediate 與 Upper-Intermediate 三個程度，以 12 格呈現男孩們在荒島墜機後建立秩序、使用海螺與維持信號火，接著因權力、恐懼與暴力而分裂，最後由海軍軍官救援，並探討人性與文明。",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "William Golding 的 Lord of the Flies《蠅王》：一群男孩在荒島墜機後，Ralph 嘗試建立規則並維持信號火，Jack 則帶領狩獵團體爭奪權力；隨著恐懼、衝突與暴力升高，男孩們逐漸失去文明與理性，最後由海軍軍官救援。作品探討人性、文明、權力、恐懼、規則與群體行為。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
