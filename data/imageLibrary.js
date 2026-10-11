@@ -12273,6 +12273,85 @@ const diagramMap = [
     related: []
 },
 {
+    id: "1984-george-orwell-basics",
+
+    title: "1984 — George Orwell《1984》（一九八四）",
+
+    keywords: [
+        "1984",
+        "Nineteen Eighty-Four",
+        "George Orwell",
+        "Winston Smith",
+        "Julia",
+        "Big Brother",
+        "Big Brother is watching you",
+        "dystopian fiction",
+        "dystopia",
+        "totalitarianism",
+        "surveillance",
+        "propaganda",
+        "censorship",
+        "privacy",
+        "freedom",
+        "truth",
+        "independent thinking",
+        "oppression",
+        "psychological control",
+        "manipulation",
+        "brainwashing",
+        "controlled society",
+        "thought control",
+        "thoughtcrime",
+        "diary",
+        "Ministry of Love",
+        "Julia and Winston",
+        "《1984》",
+        "一九八四",
+        "喬治・歐威爾",
+        "喬治·歐威爾",
+        "喬治歐威爾",
+        "溫斯頓",
+        "溫斯頓史密斯",
+        "茱莉亞",
+        "老大哥",
+        "反烏托邦",
+        "極權統治",
+        "監視",
+        "宣傳",
+        "審查制度",
+        "隱私",
+        "自由",
+        "真相",
+        "獨立思考",
+        "壓迫",
+        "思想控制",
+        "心理控制",
+        "操控",
+        "洗腦",
+        "被監控的社會",
+        "思想犯罪",
+        "日記",
+        "愛情部",
+        "溫斯頓與茱莉亞"
+    ],
+
+    file: "images/english/1984-george-orwell-basics.png",
+
+    alt: "1984 — George Orwell《1984》（一九八四）英文反烏托邦文學教學長圖，分初級、中級與中高級三個程度區塊，介紹 Winston Smith、Julia 與 Big Brother，並說明監視、宣傳、日記、獨立思考、思想控制、Ministry of Love、審查、隱私、真相、自由與壓迫等主題",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "George Orwell 的反烏托邦小說 1984：透過初級、中級與中高級分級，認識 Winston Smith、Julia、Big Brother 與 Ministry of Love，探討極權統治、監視、宣傳、審查、思想控制、隱私、真相、自由與心理操控。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
