@@ -11985,6 +11985,69 @@ const diagramMap = [
     related: []
 },
 {
+    id: "the-raven-basics",
+
+    title: "The Raven — Edgar Allan Poe《烏鴉》",
+
+    keywords: [
+        "The Raven",
+        "Edgar Allan Poe",
+        "Gothic Poetry",
+        "Narrative Poem",
+        "Gothic Literature",
+        "raven",
+        "Nevermore",
+        "symbolism",
+        "symbolism of the raven",
+        "what does the raven symbolize",
+        "repetition",
+        "atmosphere",
+        "grief",
+        "grief and loss",
+        "mystery",
+        "despair",
+        "love and loss",
+        "themes of The Raven",
+        "詩人愛倫坡",
+        "愛倫坡",
+        "愛倫坡的烏鴉",
+        "烏鴉",
+        "哥德式詩歌",
+        "哥德文學",
+        "敘事詩",
+        "文學象徵",
+        "烏鴉的象徵",
+        "重複手法",
+        "文學氛圍",
+        "悲傷",
+        "悲傷與失落",
+        "神秘感",
+        "絕望",
+        "愛與失落",
+        "象徵悲傷",
+        "文學作品",
+        "失去摯愛",
+        "英文詩",
+        "失去摯愛的英文詩"
+    ],
+
+    file: "images/english/the-raven-basics.png",
+
+    alt: "The Raven《烏鴉》英文文學教學長圖，分初級、中級與中高級三個程度區塊，介紹愛倫坡的哥德式敘事詩、故事背景、烏鴉象徵、Nevermore 重複手法、悲傷、神秘、絕望與失去摯愛等主題",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "Edgar Allan Poe's Gothic Narrative Poem The Raven：透過初級、中級與中高級分級，學習故事背景、哥德式氛圍、烏鴉的象徵、Nevermore 的重複手法，以及 grief、mystery、despair 與 love and loss 等主題。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
