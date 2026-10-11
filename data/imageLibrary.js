@@ -13675,6 +13675,78 @@ const diagramMap = [
     related: []
 },
 {
+    id: "matilda-roald-dahl-basics",
+
+    title: "Matilda — Roald Dahl《瑪蒂達》",
+
+    keywords: [
+        "Matilda",
+        "matilda",
+        "Matilda Wormwood",
+        "matilda wormwood",
+        "matildawormwood",
+        "Roald Dahl",
+        "roald dahl",
+        "roalddahl",
+        "Miss Honey",
+        "miss honey",
+        "misshoney",
+        "Miss Trunchbull",
+        "miss trunchbull",
+        "misstrunchbull",
+        "library",
+        "telekinesis",
+        "special powers",
+        "specialpowers",
+        "books",
+        "reading",
+        "clever girl",
+        "clevergirl",
+        "courage",
+        "injustice",
+        "stand up for what is right",
+        "standupforwhatisright",
+        "independence",
+        "kindness",
+        "justice",
+        "potential",
+        "school",
+        "teacher",
+        "gifted child",
+        "giftedchild",
+        "瑪蒂達",
+        "羅爾德·達爾",
+        "羅爾德達爾",
+        "蜜小姐",
+        "特朗奇布爾",
+        "圖書館",
+        "閱讀",
+        "念力",
+        "特殊能力",
+        "勇氣",
+        "不公平",
+        "正義",
+        "獨立思考",
+        "善良"
+    ],
+
+    file: "images/english/matilda-roald-dahl-basics.png",
+
+    alt: "Matilda — Roald Dahl《瑪蒂達》英文文學教學長圖，分 Beginner、Intermediate 與 Upper-Intermediate 三個程度，以 12 格連貫故事呈現 Matilda 熱愛閱讀、在學校遇見 Miss Honey、發現念力並幫助老師對抗不公，最後找到支持與歸屬的經歷。",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "Matilda Wormwood is an exceptionally intelligent girl who loves reading and learning. Despite facing unfair treatment at home and school, she discovers extraordinary abilities and finds support in Miss Honey. Her story explores courage, independent thinking, kindness, justice, resilience, and the importance of standing up against injustice.",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "charlottes-web-e-b-white-basics",
 
     title: "Charlotte’s Web — E. B. White《夏綠蒂的網》",
