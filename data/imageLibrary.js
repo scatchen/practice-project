@@ -13675,6 +13675,91 @@ const diagramMap = [
     related: []
 },
 {
+    id: "charlottes-web-e-b-white-basics",
+
+    title: "Charlotte’s Web — E. B. White《夏綠蒂的網》",
+
+    keywords: [
+        "Charlotte’s Web",
+        "charlotte’s web",
+        "charlotte’sweb",
+        "Charlottes Web",
+        "charlottes web",
+        "charlottesweb",
+        "E. B. White",
+        "e. b. white",
+        "e.b.white",
+        "EB White",
+        "eb white",
+        "ebwhite",
+        "Wilbur",
+        "wilbur",
+        "Charlotte A. Cavatica",
+        "charlotte a. cavatica",
+        "charlotte.a.cavatica",
+        "Charlotte",
+        "charlotte",
+        "Templeton",
+        "templeton",
+        "Fern Arable",
+        "fern arable",
+        "fernarable",
+        "Fern",
+        "fern",
+        "Zuckerman’s barn",
+        "zuckerman’s barn",
+        "zuckerman’sbarn",
+        "Zuckerman's barn",
+        "zuckerman's barn",
+        "zuckerman'sbarn",
+        "spider web",
+        "spiderweb",
+        "barn",
+        "word in the web",
+        "wordintheweb",
+        "friendship",
+        "loyalty",
+        "kindness",
+        "promise",
+        "gratitude",
+        "life and death",
+        "lifeanddeath",
+        "sacrifice",
+        "courage",
+        "夏綠蒂的網",
+        "E·B·懷特",
+        "韋伯",
+        "夏綠蒂",
+        "坦普頓",
+        "芬恩",
+        "蜘蛛網",
+        "友誼",
+        "忠誠",
+        "善良",
+        "承諾",
+        "感恩",
+        "生命",
+        "犧牲",
+        "勇氣"
+    ],
+
+    file: "images/english/charlottes-web-e-b-white-basics.png",
+
+    alt: "Charlotte’s Web — E. B. White《夏綠蒂的網》英文文學教學長圖，分 Beginner、Intermediate 與 Upper-Intermediate 三個程度，以 12 格連貫故事呈現小豬 Wilbur 與蜘蛛 Charlotte 的友誼、Charlotte 用織在網上的文字幫助 Wilbur 脫離危險，以及他們對承諾、犧牲與生命的體會。",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "E. B. White 的 Charlotte’s Web《夏綠蒂的網》描寫小豬 Wilbur 與聰明的蜘蛛 Charlotte 建立特別的友誼。Wilbur 面臨危險時，Charlotte 在蜘蛛網上織出文字幫助拯救他。故事探討友誼、忠誠、善良、承諾、犧牲、感恩與生命的意義。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "holes-louis-sachar-basics",
 
     title: "Holes — Louis Sachar《洞》",
