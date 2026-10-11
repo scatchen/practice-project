@@ -12773,6 +12773,91 @@ const diagramMap = [
     related: []
 },
 {
+    id: "alice-in-wonderland-basics",
+
+    title: "Alice’s Adventures in Wonderland — Lewis Carroll《愛麗絲夢遊仙境》",
+
+    keywords: [
+        "Alice’s Adventures in Wonderland",
+        "Alice's Adventures in Wonderland",
+        "Alice in Wonderland",
+        "Lewis Carroll",
+        "Alice",
+        "White Rabbit",
+        "Cheshire Cat",
+        "Mad Hatter",
+        "March Hare",
+        "Queen of Hearts",
+        "Caterpillar",
+        "Dormouse",
+        "rabbit hole",
+        "follows the White Rabbit",
+        "falls down the rabbit hole",
+        "grows bigger and smaller",
+        "Mad Tea Party",
+        "mad tea party with the Mad Hatter",
+        "croquet game",
+        "court trial",
+        "wakes up from a dream",
+        "Wonderland is full of imagination, not logic",
+        "Alice wakes up and remembers the adventure",
+        "curiosity",
+        "imagination",
+        "nonsense",
+        "adventure",
+        "strange world",
+        "perspective",
+        "identity",
+        "愛麗絲夢遊仙境",
+        "愛麗絲",
+        "路易斯卡羅",
+        "路易斯·卡羅",
+        "白兔",
+        "柴郡貓",
+        "瘋帽客",
+        "三月兔",
+        "紅心皇后",
+        "毛毛蟲",
+        "睡鼠",
+        "兔子洞",
+        "追逐白兔",
+        "掉進兔子洞",
+        "變大變小",
+        "瘋狂茶會",
+        "瘋帽客的茶會",
+        "紅心皇后的槌球遊戲",
+        "槌球遊戲",
+        "法庭審判",
+        "從夢中醒來",
+        "醒來發現這是一場夢",
+        "愛麗絲最後發生了什麼事",
+        "好奇心",
+        "想像力",
+        "荒誕",
+        "冒險",
+        "夢境",
+        "奇幻世界",
+        "觀點",
+        "自我認同"
+    ],
+
+    file: "images/english/alice-in-wonderland-basics.png",
+
+    alt: "Alice’s Adventures in Wonderland — Lewis Carroll《愛麗絲夢遊仙境》英文文學教學長圖，以 Beginner、Intermediate、Upper-Intermediate 分級呈現 12 格連續故事：愛麗絲在公園閱讀、遇見並追逐白兔後掉進兔子洞，進入有大小不同門的奇幻世界，遇見毛毛蟲、柴郡貓、瘋帽客、三月兔與紅心皇后，經歷荒誕法庭審判後從夢中醒來，回想冒險與想像力帶來的啟發",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "Lewis Carroll 的 Alice’s Adventures in Wonderland：依 Beginner（第 1～4 格）、Intermediate（第 5～8 格）與 Upper-Intermediate（第 9～12 格）呈現愛麗絲從公園追逐白兔、掉進兔子洞並進入奇幻世界的冒險；她遇見毛毛蟲、柴郡貓、瘋帽客、三月兔與紅心皇后，經歷荒誕的法庭審判，最後醒來並回顧這場夢境冒險所帶來的想像力啟發。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
