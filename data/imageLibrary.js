@@ -12441,6 +12441,90 @@ const diagramMap = [
     related: []
 },
 {
+    id: "the-great-gatsby-basics",
+
+    title: "The Great Gatsby — F. Scott Fitzgerald《大亨小傳》",
+
+    keywords: [
+        "The Great Gatsby",
+        "Great Gatsby",
+        "F. Scott Fitzgerald",
+        "Fitzgerald",
+        "Jay Gatsby",
+        "Gatsby",
+        "Nick Carraway",
+        "Daisy Buchanan",
+        "Tom Buchanan",
+        "the American Dream",
+        "American Dream",
+        "wealth",
+        "ambition",
+        "illusion",
+        "reality",
+        "social class",
+        "love and loss",
+        "jealousy",
+        "corruption",
+        "status",
+        "rich and poor",
+        "the Roaring Twenties",
+        "1920s America",
+        "mysterious millionaire",
+        "lavish parties",
+        "Gatsby's dream",
+        "Gatsby and Daisy",
+        "West Egg",
+        "East Egg",
+        "recreate the past",
+        "dream falls apart",
+        "《大亨小傳》",
+        "大亨小傳",
+        "《了不起的蓋茨比》",
+        "了不起的蓋茨比",
+        "費茲傑羅",
+        "蓋茨比",
+        "傑伊蓋茨比",
+        "尼克卡拉威",
+        "黛西布坎南",
+        "湯姆布坎南",
+        "美國夢",
+        "財富",
+        "野心",
+        "幻象",
+        "現實",
+        "社會階級",
+        "愛情與失落",
+        "嫉妒",
+        "腐敗",
+        "地位",
+        "貧富差距",
+        "爵士年代",
+        "二十世紀二十年代的美國",
+        "神祕富豪",
+        "奢華派對",
+        "蓋茨比的夢想",
+        "蓋茨比與黛西",
+        "重現過去",
+        "夢想破滅"
+    ],
+
+    file: "images/english/the-great-gatsby-basics.png",
+
+    alt: "The Great Gatsby — F. Scott Fitzgerald《大亨小傳》英文文學教學長圖，分初級、中級與中高級三個程度區塊，介紹 Jay Gatsby、Nick Carraway 與 Daisy Buchanan，並探討美國夢、財富、社會階級、爵士年代、奢華派對、重現過去與夢想破滅",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "F. Scott Fitzgerald 的小說 The Great Gatsby：透過初級、中級與中高級分級，認識 Jay Gatsby、Nick Carraway 與 Daisy Buchanan，探討美國夢、財富、野心、幻象與現實、社會階級、爵士年代，以及 Gatsby 試圖重現過去而夢想破滅的故事。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
