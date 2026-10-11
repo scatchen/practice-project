@@ -12966,6 +12966,91 @@ const diagramMap = [
     related: []
 },
 {
+    id: "to-kill-a-mockingbird",
+
+    title: "To Kill a Mockingbird — Harper Lee《梅岡城故事》",
+
+    keywords: [
+        "To Kill a Mockingbird",
+        "To Kill a Mockingbird novel",
+        "Mockingbird",
+        "Harper Lee",
+        "Scout Finch",
+        "Jem Finch",
+        "Atticus Finch",
+        "Boo Radley",
+        "Tom Robinson",
+        "Dill",
+        "Maycomb",
+        "Radley house",
+        "tree gifts",
+        "courtroom trial",
+        "Tom Robinson's trial",
+        "unfair trial",
+        "jury",
+        "unfair verdict",
+        "Halloween attack",
+        "racial prejudice",
+        "racial discrimination",
+        "racism",
+        "injustice",
+        "justice and injustice",
+        "empathy",
+        "understanding others",
+        "see things from another's perspective",
+        "courage to do what is right",
+        "kindness",
+        "mockingbird symbolism",
+        "《梅岡城故事》",
+        "梅岡城故事",
+        "殺死一隻知更鳥",
+        "哈波李",
+        "哈珀李",
+        "史考特芬奇",
+        "傑姆芬奇",
+        "阿提克斯芬奇",
+        "布雷德利",
+        "布雷德利先生",
+        "湯姆羅賓森",
+        "迪兒",
+        "梅岡鎮",
+        "拉德利宅邸",
+        "樹洞禮物",
+        "法庭審判",
+        "湯姆羅賓森的審判",
+        "陪審團",
+        "不公平的判決",
+        "萬聖節襲擊",
+        "種族歧視",
+        "種族偏見",
+        "種族不平等",
+        "司法不公",
+        "正義與不公",
+        "同理心",
+        "理解他人",
+        "換位思考",
+        "勇敢做正確的事",
+        "善良",
+        "知更鳥象徵"
+    ],
+
+    file: "images/english/to-kill-a-mockingbird-basics.png",
+
+    alt: "To Kill a Mockingbird — Harper Lee《梅岡城故事》英文文學教學圖，介紹 Scout Finch、Jem Finch、Atticus Finch、Boo Radley 與 Tom Robinson，並呈現 Maycomb 的生活、Tom Robinson 的審判及作品對偏見、司法不公、同理心與勇氣的探討",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "Harper Lee 的 To Kill a Mockingbird：透過 Scout Finch 的成長經驗認識 Maycomb、Atticus Finch、Jem Finch、Boo Radley 與 Tom Robinson，理解 Tom Robinson 審判中的種族偏見與司法不公，並探討同理心、換位思考、勇氣，以及知更鳥象徵無辜者的意涵。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
