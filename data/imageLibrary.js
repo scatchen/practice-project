@@ -12190,6 +12190,89 @@ const diagramMap = [
     related: []
 },
 {
+    id: "frankenstein-basics",
+
+    title: "Frankenstein — Mary Shelley《科學怪人》",
+
+    keywords: [
+        "Frankenstein",
+        "Frankenstein novel",
+        "Mary Shelley",
+        "Gothic Literature",
+        "Gothic Fiction",
+        "Science and Literature",
+        "Victor Frankenstein",
+        "creator",
+        "creature",
+        "creator and creature",
+        "scientist",
+        "creation",
+        "create a living being",
+        "the creature comes to life",
+        "loneliness",
+        "lonely",
+        "rejection",
+        "reject",
+        "fear",
+        "guilt",
+        "understanding",
+        "friendship",
+        "broken promise",
+        "tragic",
+        "tragedy",
+        "sorrow",
+        "responsibility",
+        "moral responsibility",
+        "consequences",
+        "ambition",
+        "prejudice",
+        "science and ethics",
+        "科學怪人",
+        "瑪麗雪萊",
+        "經典文學",
+        "哥德式小說",
+        "哥德文學",
+        "維克多弗蘭肯斯坦",
+        "創造者",
+        "創造者和被創造的生物",
+        "被創造的生物",
+        "生物感到孤獨",
+        "科學家",
+        "創造生命",
+        "孤獨",
+        "排斥",
+        "排斥這個生物",
+        "恐懼",
+        "愧疚",
+        "理解",
+        "友誼",
+        "破碎的承諾",
+        "責任",
+        "道德責任",
+        "後果",
+        "雄心",
+        "偏見",
+        "科學與倫理",
+        "悲劇"
+    ],
+
+    file: "images/english/frankenstein-basics.png",
+
+    alt: "Frankenstein《科學怪人》英文哥德文學教學長圖，分初級、中級與中高級三個程度區塊；Victor Frankenstein 是創造者與年輕科學家，被創造的生物則經歷孤獨、排斥與尋求理解，內容並探討愧疚、承諾、責任、雄心、偏見與悲劇",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "Mary Shelley 的哥德小說 Frankenstein：Victor Frankenstein 是創造者與科學家，被創造的生物是另一個角色。故事探討創造生命、孤獨、排斥、愧疚、理解、承諾、責任、雄心、偏見、科學與倫理，以及悲劇後果。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
