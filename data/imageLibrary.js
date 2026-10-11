@@ -12048,6 +12048,72 @@ const diagramMap = [
     related: []
 },
 {
+    id: "the-adventures-of-sherlock-holmes-basics",
+
+    title: "The Adventures of Sherlock Holmes — Sherlock Holmes《福爾摩斯探案》",
+
+    keywords: [
+        "The Adventures of Sherlock Holmes",
+        "Sherlock Holmes",
+        "Arthur Conan Doyle",
+        "Detective Fiction",
+        "Detective Story",
+        "Classic Literature",
+        "mystery solving",
+        "detective",
+        "clue",
+        "suspect",
+        "solve a mystery",
+        "find a clue",
+        "question a suspect",
+        "evidence",
+        "examine the evidence",
+        "analyze the clues",
+        "careful observation",
+        "logical reasoning",
+        "logic",
+        "logical conclusion",
+        "motive",
+        "alibi",
+        "reveal the truth",
+        "unexpected twist",
+        "福爾摩斯",
+        "福爾摩斯探案",
+        "夏洛克福爾摩斯",
+        "柯南道爾",
+        "經典偵探小說",
+        "偵探小說",
+        "偵探故事",
+        "推理小說",
+        "偵探",
+        "線索",
+        "證據",
+        "嫌疑犯",
+        "邏輯推理",
+        "邏輯",
+        "動機",
+        "不在場證明",
+        "意外轉折",
+        "真相"
+    ],
+
+    file: "images/english/the-adventures-of-sherlock-holmes-basics.png",
+
+    alt: "The Adventures of Sherlock Holmes《福爾摩斯探案》英文經典文學教學長圖，分初級、中級與中高級三個程度區塊，介紹偵探如何尋找線索、詢問嫌疑犯、檢視證據、運用觀察與邏輯，並理解動機、不在場證明、意外轉折與揭露真相",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "Arthur Conan Doyle 的 Sherlock Holmes 偵探故事：透過初級、中級與中高級分級，學習尋找線索、詢問嫌疑犯、檢視證據、仔細觀察與邏輯推理，以及動機、不在場證明、意外轉折和揭露真相。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
