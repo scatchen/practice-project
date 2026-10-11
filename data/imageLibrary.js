@@ -12607,6 +12607,92 @@ const diagramMap = [
     related: []
 },
 {
+    id: "a-christmas-carol-basics",
+
+    title: "A Christmas Carol — Charles Dickens《小氣財神》",
+
+    keywords: [
+        "A Christmas Carol",
+        "Charles Dickens",
+        "Ebenezer Scrooge",
+        "Scrooge",
+        "Bob Cratchit",
+        "Tiny Tim",
+        "Ghost of Christmas Past",
+        "Ghost of Christmas Present",
+        "Ghost of Christmas Future",
+        "Ghost of Christmas Yet to Come",
+        "three Christmas ghosts",
+        "Scrooge's past",
+        "Scrooge changes",
+        "Scrooge becomes generous",
+        "greedy",
+        "greed and generosity",
+        "selfishness",
+        "loneliness",
+        "kindness and generosity",
+        "compassion",
+        "charity",
+        "forgiveness",
+        "redemption",
+        "regret",
+        "transformation",
+        "second chance",
+        "Christmas spirit",
+        "hope",
+        "《小氣財神》",
+        "小氣財神",
+        "《聖誕頌歌》",
+        "聖誕頌歌",
+        "查爾斯・狄更斯",
+        "查爾斯·狄更斯",
+        "查爾斯狄更斯",
+        "史克魯奇",
+        "艾比尼澤史克魯奇",
+        "鮑伯克拉奇特",
+        "小提姆",
+        "聖誕過去之靈",
+        "聖誕現在之靈",
+        "聖誕未來之靈",
+        "三個聖誕幽靈",
+        "過去、現在與未來",
+        "史克魯奇的過去",
+        "史克魯奇改變",
+        "史克魯奇變得慷慨",
+        "貪婪與慷慨",
+        "貪婪",
+        "自私",
+        "孤獨",
+        "善良",
+        "慷慨",
+        "同情心",
+        "慈善",
+        "寬恕",
+        "救贖",
+        "後悔",
+        "改變",
+        "重新開始",
+        "聖誕精神",
+        "希望"
+    ],
+
+    file: "images/english/a-christmas-carol-basics.png",
+
+    alt: "A Christmas Carol — Charles Dickens《小氣財神》英文文學教學長圖，分初級、中級與中高級三個程度區塊，介紹吝嗇孤獨的 Scrooge 與三位聖誕幽靈帶他看見過去、現在和未來，並呈現他改變、變得善良慷慨及關於寬恕、希望與重新開始的主題",
+
+    category: "english",
+
+    grade: 9,
+
+    chapter: "Classic Literature & Influential Works 經典文學與代表性作品",
+
+    concept: "Charles Dickens 的 A Christmas Carol：透過初級、中級與中高級分級，認識 Ebenezer Scrooge、Bob Cratchit、Tiny Tim 與三位聖誕幽靈，理解 Scrooge 如何回顧過去、看見現在與未來，並從貪婪孤獨轉變為善良慷慨，探討同情、慈善、寬恕、救贖與希望。",
+
+    difficulty: 3,
+
+    related: []
+},
+{
     id: "triangle-exterior-angle",
 
     title: "外角定理",
