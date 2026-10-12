@@ -10705,6 +10705,39 @@ const diagramMap = [
     related: []
 },
 {
+    id: "making-a-hotel-reservation-and-checking-in-basics",
+    title: "Making a Hotel Reservation and Checking In 預訂飯店與辦理入住",
+    keywords: [
+        "預訂飯店", "訂飯店", "飯店訂房", "預訂旅館", "飯店入住", "辦理入住",
+        "飯店櫃檯", "飯店接待", "飯店訂房確認", "訂房確認信", "訂房資料", "訂房紀錄",
+        "特大床房", "飯店房價", "房價包含早餐", "早餐是否包含", "訂房資料不符",
+        "訂房資料有誤", "核對訂房資料", "核對飯店訂房資料", "更正訂房資料", "更正飯店訂房紀錄",
+        "信用卡預授權", "飯店附帶費用", "房卡", "辦理入住領取房卡", "每晚房價",
+        "訂房電子郵件", "兩晚住宿", "預訂兩晚特大床房", "早餐是否包含在房價", "房價是否包含早餐",
+        "飯店系統顯示只有房間", "系統顯示只有房間", "確認信顯示含早餐",
+
+        "making a hotel reservation", "hotel reservation", "booking a hotel room", "hotel booking",
+        "checking in at a hotel", "hotel check-in", "hotel front desk", "hotel receptionist",
+        "king room", "room rate", "reservation details", "booking confirmation", "confirmation email",
+        "breakfast included", "is breakfast included", "room only", "booking discrepancy",
+        "verify reservation", "update booking record", "incidental charges", "card hold", "key card",
+        "book a room for two nights", "reserve a king room", "hotel reservation details",
+        "hotel rate includes breakfast", "breakfast is included", "breakfast is included in the room rate",
+        "hotel system says room only", "check hotel booking confirmation", "hotel credit card hold",
+        "reserve a hotel room", "book a room and check in", "hotel booking by email",
+        "confirm a hotel booking by email", "verify my reservation", "update the booking record",
+        "verify my reservation and update the booking record", "key card when checking in"
+    ],
+    file: "images/english/making-a-hotel-reservation-and-checking-in-basics.png",
+    alt: "Making a Hotel Reservation and Checking In 預訂飯店與辦理入住英文教學圖，以 Emma 和飯店櫃檯人員 Alex 的 12 格連續對話練習預訂兩晚特大床房、確認每晚房價與早餐方案、比對訂房確認信和飯店記錄、更新早餐資料、了解信用卡預授權並完成入住；分為 Beginner、Intermediate 與 Upper-Intermediate 三個程度。",
+    category: "english",
+    grade: 9,
+    chapter: "Real-Life Situations 真實生活情境",
+    concept: "Making a Hotel Reservation and Checking In：練習一般旅客預訂飯店、確認日期與房型房價、比對訂房確認信、處理早餐方案顯示差異、了解本故事飯店的附帶費用預授權說明，並完成櫃檯入住。",
+    difficulty: 3,
+    related: ["hotel-check-in-and-business-hotel-basics"]
+},
+{
     id: "job-posting-and-recruitment-basics",
     title: "Job Posting & Recruitment 職缺與招募",
     keywords: [
