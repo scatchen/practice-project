@@ -1,0 +1,2433 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-13T13:46:20.773Z",
+  "gitCommitSha": "c75002ce7b8d27ec80f69b06e30b6dbf2a26a8fb",
+  "nodeVersion": "v26.5.0",
+  "diagramCount": 287,
+  "testCasesSha256": "7743e74583d2019b832019b8a4d6aeda178faee4d24e7ced3d1f60164dda4511",
+  "testCount": 200,
+  "summary": {
+    "overall": {
+      "count": 200,
+      "top1": 32,
+      "top3": 37,
+      "noResult": 59
+    },
+    "english": {
+      "count": 100,
+      "top1": 16,
+      "top3": 19,
+      "noResult": 23
+    },
+    "traditionalChinese": {
+      "count": 100,
+      "top1": 16,
+      "top3": 18,
+      "noResult": 36
+    }
+  },
+  "performance": {
+    "sampleCount": 200,
+    "averageMs": 1.059846075,
+    "medianMs": 1.0577914999999791,
+    "p95Ms": 1.2469580000000065,
+    "maxMs": 1.3986250000000098,
+    "warmupCalls": 25
+  },
+  "results": [
+    {
+      "testId": "RLS-01-EN-01",
+      "topicId": "making-plans-with-friends-basics",
+      "language": "en",
+      "expectedImageId": "making-plans-with-friends-basics",
+      "actualTop3": [
+        "making-plans-with-friends-basics",
+        "time-date-basics",
+        "simple-physics-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-01-EN-02",
+      "topicId": "making-plans-with-friends-basics",
+      "language": "en",
+      "expectedImageId": "making-plans-with-friends-basics",
+      "actualTop3": [
+        "making-plans-with-friends-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-01-EN-03",
+      "topicId": "making-plans-with-friends-basics",
+      "language": "en",
+      "expectedImageId": "making-plans-with-friends-basics",
+      "actualTop3": [
+        "time-date-basics",
+        "transportation-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-01-EN-04",
+      "topicId": "making-plans-with-friends-basics",
+      "language": "en",
+      "expectedImageId": "making-plans-with-friends-basics",
+      "actualTop3": [
+        "time-date-basics",
+        "simple-physics-basics",
+        "work-and-mechanical-energy-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-01-EN-05",
+      "topicId": "making-plans-with-friends-basics",
+      "language": "en",
+      "expectedImageId": "making-plans-with-friends-basics",
+      "actualTop3": [
+        "cause-and-effect-in-science-basics",
+        "family-basics",
+        "food-drinks-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-01-ZH-01",
+      "topicId": "making-plans-with-friends-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-plans-with-friends-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-01-ZH-02",
+      "topicId": "making-plans-with-friends-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-plans-with-friends-basics",
+      "actualTop3": [
+        "time-date-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-01-ZH-03",
+      "topicId": "making-plans-with-friends-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-plans-with-friends-basics",
+      "actualTop3": [
+        "people-introduction-basics",
+        "family-basics",
+        "food-drinks-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-01-ZH-04",
+      "topicId": "making-plans-with-friends-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-plans-with-friends-basics",
+      "actualTop3": [
+        "time-date-basics",
+        "simple-physics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-01-ZH-05",
+      "topicId": "making-plans-with-friends-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-plans-with-friends-basics",
+      "actualTop3": [
+        "people-introduction-basics",
+        "plants-nature-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-02-EN-01",
+      "topicId": "ordering-at-a-restaurant-basics",
+      "language": "en",
+      "expectedImageId": "ordering-at-a-restaurant-basics",
+      "actualTop3": [
+        "making-plans-with-friends-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-02-EN-02",
+      "topicId": "ordering-at-a-restaurant-basics",
+      "language": "en",
+      "expectedImageId": "ordering-at-a-restaurant-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-02-EN-03",
+      "topicId": "ordering-at-a-restaurant-basics",
+      "language": "en",
+      "expectedImageId": "ordering-at-a-restaurant-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-02-EN-04",
+      "topicId": "ordering-at-a-restaurant-basics",
+      "language": "en",
+      "expectedImageId": "ordering-at-a-restaurant-basics",
+      "actualTop3": [
+        "human-health-and-nutrition-basics",
+        "agriculture-and-food-science-basics",
+        "making-plans-with-friends-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-02-EN-05",
+      "topicId": "ordering-at-a-restaurant-basics",
+      "language": "en",
+      "expectedImageId": "ordering-at-a-restaurant-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-02-ZH-01",
+      "topicId": "ordering-at-a-restaurant-basics",
+      "language": "zh-TW",
+      "expectedImageId": "ordering-at-a-restaurant-basics",
+      "actualTop3": [
+        "ordering-at-a-restaurant-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-02-ZH-02",
+      "topicId": "ordering-at-a-restaurant-basics",
+      "language": "zh-TW",
+      "expectedImageId": "ordering-at-a-restaurant-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-02-ZH-03",
+      "topicId": "ordering-at-a-restaurant-basics",
+      "language": "zh-TW",
+      "expectedImageId": "ordering-at-a-restaurant-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-02-ZH-04",
+      "topicId": "ordering-at-a-restaurant-basics",
+      "language": "zh-TW",
+      "expectedImageId": "ordering-at-a-restaurant-basics",
+      "actualTop3": [
+        "simple-physics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-02-ZH-05",
+      "topicId": "ordering-at-a-restaurant-basics",
+      "language": "zh-TW",
+      "expectedImageId": "ordering-at-a-restaurant-basics",
+      "actualTop3": [
+        "human-health-and-nutrition-basics",
+        "agriculture-and-food-science-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-03-EN-01",
+      "topicId": "dealing-with-a-wrong-order-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-wrong-order-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-03-EN-02",
+      "topicId": "dealing-with-a-wrong-order-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-wrong-order-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-03-EN-03",
+      "topicId": "dealing-with-a-wrong-order-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-wrong-order-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-03-EN-04",
+      "topicId": "dealing-with-a-wrong-order-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-wrong-order-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-03-EN-05",
+      "topicId": "dealing-with-a-wrong-order-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-wrong-order-basics",
+      "actualTop3": [
+        "places-directions-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-03-ZH-01",
+      "topicId": "dealing-with-a-wrong-order-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-wrong-order-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-03-ZH-02",
+      "topicId": "dealing-with-a-wrong-order-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-wrong-order-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-03-ZH-03",
+      "topicId": "dealing-with-a-wrong-order-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-wrong-order-basics",
+      "actualTop3": [
+        "places-directions-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-03-ZH-04",
+      "topicId": "dealing-with-a-wrong-order-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-wrong-order-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-03-ZH-05",
+      "topicId": "dealing-with-a-wrong-order-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-wrong-order-basics",
+      "actualTop3": [
+        "places-directions-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-04-EN-01",
+      "topicId": "asking-for-directions-and-help-basics",
+      "language": "en",
+      "expectedImageId": "asking-for-directions-and-help-basics",
+      "actualTop3": [
+        "asking-for-directions-and-help-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-04-EN-02",
+      "topicId": "asking-for-directions-and-help-basics",
+      "language": "en",
+      "expectedImageId": "asking-for-directions-and-help-basics",
+      "actualTop3": [
+        "asking-for-directions-and-help-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-04-EN-03",
+      "topicId": "asking-for-directions-and-help-basics",
+      "language": "en",
+      "expectedImageId": "asking-for-directions-and-help-basics",
+      "actualTop3": [
+        "asking-for-directions-and-help-basics",
+        "places-directions-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-04-EN-04",
+      "topicId": "asking-for-directions-and-help-basics",
+      "language": "en",
+      "expectedImageId": "asking-for-directions-and-help-basics",
+      "actualTop3": [
+        "places-directions-basics",
+        "asking-for-directions-and-help-basics",
+        "matilda-roald-dahl-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-04-EN-05",
+      "topicId": "asking-for-directions-and-help-basics",
+      "language": "en",
+      "expectedImageId": "asking-for-directions-and-help-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-04-ZH-01",
+      "topicId": "asking-for-directions-and-help-basics",
+      "language": "zh-TW",
+      "expectedImageId": "asking-for-directions-and-help-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-04-ZH-02",
+      "topicId": "asking-for-directions-and-help-basics",
+      "language": "zh-TW",
+      "expectedImageId": "asking-for-directions-and-help-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-04-ZH-03",
+      "topicId": "asking-for-directions-and-help-basics",
+      "language": "zh-TW",
+      "expectedImageId": "asking-for-directions-and-help-basics",
+      "actualTop3": [
+        "places-directions-basics",
+        "matilda-roald-dahl-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-04-ZH-04",
+      "topicId": "asking-for-directions-and-help-basics",
+      "language": "zh-TW",
+      "expectedImageId": "asking-for-directions-and-help-basics",
+      "actualTop3": [
+        "places-directions-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-04-ZH-05",
+      "topicId": "asking-for-directions-and-help-basics",
+      "language": "zh-TW",
+      "expectedImageId": "asking-for-directions-and-help-basics",
+      "actualTop3": [
+        "places-directions-basics",
+        "forces-and-motion-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-05-EN-01",
+      "topicId": "shopping-for-clothes-basics",
+      "language": "en",
+      "expectedImageId": "shopping-for-clothes-basics",
+      "actualTop3": [
+        "shopping-for-clothes-basics",
+        "light-sound-and-waves-basics",
+        "why-we-see-colors-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-05-EN-02",
+      "topicId": "shopping-for-clothes-basics",
+      "language": "en",
+      "expectedImageId": "shopping-for-clothes-basics",
+      "actualTop3": [
+        "weather-basics",
+        "weather-natural-phenomena-basics",
+        "shopping-for-clothes-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-05-EN-03",
+      "topicId": "shopping-for-clothes-basics",
+      "language": "en",
+      "expectedImageId": "shopping-for-clothes-basics",
+      "actualTop3": [
+        "returns-and-refunds-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-05-EN-04",
+      "topicId": "shopping-for-clothes-basics",
+      "language": "en",
+      "expectedImageId": "shopping-for-clothes-basics",
+      "actualTop3": [
+        "time-date-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-05-EN-05",
+      "topicId": "shopping-for-clothes-basics",
+      "language": "en",
+      "expectedImageId": "shopping-for-clothes-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-05-ZH-01",
+      "topicId": "shopping-for-clothes-basics",
+      "language": "zh-TW",
+      "expectedImageId": "shopping-for-clothes-basics",
+      "actualTop3": [
+        "shopping-for-clothes-basics",
+        "weather-basics",
+        "weather-natural-phenomena-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-05-ZH-02",
+      "topicId": "shopping-for-clothes-basics",
+      "language": "zh-TW",
+      "expectedImageId": "shopping-for-clothes-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-05-ZH-03",
+      "topicId": "shopping-for-clothes-basics",
+      "language": "zh-TW",
+      "expectedImageId": "shopping-for-clothes-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-05-ZH-04",
+      "topicId": "shopping-for-clothes-basics",
+      "language": "zh-TW",
+      "expectedImageId": "shopping-for-clothes-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-05-ZH-05",
+      "topicId": "shopping-for-clothes-basics",
+      "language": "zh-TW",
+      "expectedImageId": "shopping-for-clothes-basics",
+      "actualTop3": [
+        "why-we-see-colors-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-06-EN-01",
+      "topicId": "making-a-doctors-appointment-basics",
+      "language": "en",
+      "expectedImageId": "making-a-doctors-appointment-basics",
+      "actualTop3": [
+        "body-health-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-06-EN-02",
+      "topicId": "making-a-doctors-appointment-basics",
+      "language": "en",
+      "expectedImageId": "making-a-doctors-appointment-basics",
+      "actualTop3": [
+        "time-date-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-06-EN-03",
+      "topicId": "making-a-doctors-appointment-basics",
+      "language": "en",
+      "expectedImageId": "making-a-doctors-appointment-basics",
+      "actualTop3": [
+        "body-health-basics",
+        "making-a-doctors-appointment-basics",
+        "at-the-pharmacy-asking-about-medicine-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-06-EN-04",
+      "topicId": "making-a-doctors-appointment-basics",
+      "language": "en",
+      "expectedImageId": "making-a-doctors-appointment-basics",
+      "actualTop3": [
+        "making-plans-with-friends-basics",
+        "school-life-basics",
+        "time-date-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-06-EN-05",
+      "topicId": "making-a-doctors-appointment-basics",
+      "language": "en",
+      "expectedImageId": "making-a-doctors-appointment-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-06-ZH-01",
+      "topicId": "making-a-doctors-appointment-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-a-doctors-appointment-basics",
+      "actualTop3": [
+        "making-a-doctors-appointment-basics",
+        "at-the-pharmacy-asking-about-medicine-basics",
+        "body-health-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-06-ZH-02",
+      "topicId": "making-a-doctors-appointment-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-a-doctors-appointment-basics",
+      "actualTop3": [
+        "body-health-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-06-ZH-03",
+      "topicId": "making-a-doctors-appointment-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-a-doctors-appointment-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-06-ZH-04",
+      "topicId": "making-a-doctors-appointment-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-a-doctors-appointment-basics",
+      "actualTop3": [
+        "the-outsiders-s-e-hinton-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-06-ZH-05",
+      "topicId": "making-a-doctors-appointment-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-a-doctors-appointment-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-07-EN-01",
+      "topicId": "returning-or-exchanging-an-item-basics",
+      "language": "en",
+      "expectedImageId": "returning-or-exchanging-an-item-basics",
+      "actualTop3": [
+        "returning-or-exchanging-an-item-basics",
+        "shopping-basics",
+        "returns-and-refunds-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-07-EN-02",
+      "topicId": "returning-or-exchanging-an-item-basics",
+      "language": "en",
+      "expectedImageId": "returning-or-exchanging-an-item-basics",
+      "actualTop3": [
+        "returning-or-exchanging-an-item-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-07-EN-03",
+      "topicId": "returning-or-exchanging-an-item-basics",
+      "language": "en",
+      "expectedImageId": "returning-or-exchanging-an-item-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-07-EN-04",
+      "topicId": "returning-or-exchanging-an-item-basics",
+      "language": "en",
+      "expectedImageId": "returning-or-exchanging-an-item-basics",
+      "actualTop3": [
+        "making-plans-with-friends-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-07-EN-05",
+      "topicId": "returning-or-exchanging-an-item-basics",
+      "language": "en",
+      "expectedImageId": "returning-or-exchanging-an-item-basics",
+      "actualTop3": [
+        "customer-service-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-07-ZH-01",
+      "topicId": "returning-or-exchanging-an-item-basics",
+      "language": "zh-TW",
+      "expectedImageId": "returning-or-exchanging-an-item-basics",
+      "actualTop3": [
+        "returning-or-exchanging-an-item-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-07-ZH-02",
+      "topicId": "returning-or-exchanging-an-item-basics",
+      "language": "zh-TW",
+      "expectedImageId": "returning-or-exchanging-an-item-basics",
+      "actualTop3": [
+        "returning-or-exchanging-an-item-basics",
+        "shopping-basics",
+        "invoices-and-payments-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-07-ZH-03",
+      "topicId": "returning-or-exchanging-an-item-basics",
+      "language": "zh-TW",
+      "expectedImageId": "returning-or-exchanging-an-item-basics",
+      "actualTop3": [
+        "returning-or-exchanging-an-item-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-07-ZH-04",
+      "topicId": "returning-or-exchanging-an-item-basics",
+      "language": "zh-TW",
+      "expectedImageId": "returning-or-exchanging-an-item-basics",
+      "actualTop3": [
+        "returning-or-exchanging-an-item-basics",
+        "customer-service-basics",
+        "returns-and-refunds-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-07-ZH-05",
+      "topicId": "returning-or-exchanging-an-item-basics",
+      "language": "zh-TW",
+      "expectedImageId": "returning-or-exchanging-an-item-basics",
+      "actualTop3": [
+        "shopping-for-clothes-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-08-EN-01",
+      "topicId": "reporting-a-lost-item-basics",
+      "language": "en",
+      "expectedImageId": "reporting-a-lost-item-basics",
+      "actualTop3": [
+        "reporting-a-lost-item-basics",
+        "space-solar-system-basics",
+        "stars-and-galaxies-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-08-EN-02",
+      "topicId": "reporting-a-lost-item-basics",
+      "language": "en",
+      "expectedImageId": "reporting-a-lost-item-basics",
+      "actualTop3": [
+        "reporting-a-lost-item-basics",
+        "time-date-basics",
+        "places-directions-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-08-EN-03",
+      "topicId": "reporting-a-lost-item-basics",
+      "language": "en",
+      "expectedImageId": "reporting-a-lost-item-basics",
+      "actualTop3": [
+        "reporting-a-lost-item-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-08-EN-04",
+      "topicId": "reporting-a-lost-item-basics",
+      "language": "en",
+      "expectedImageId": "reporting-a-lost-item-basics",
+      "actualTop3": [
+        "shopping-basics",
+        "transportation-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-08-EN-05",
+      "topicId": "reporting-a-lost-item-basics",
+      "language": "en",
+      "expectedImageId": "reporting-a-lost-item-basics",
+      "actualTop3": [
+        "office-and-workplace-basics",
+        "shopping-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-08-ZH-01",
+      "topicId": "reporting-a-lost-item-basics",
+      "language": "zh-TW",
+      "expectedImageId": "reporting-a-lost-item-basics",
+      "actualTop3": [
+        "reporting-a-lost-item-basics",
+        "stars-and-galaxies-basics",
+        "why-we-see-colors-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-08-ZH-02",
+      "topicId": "reporting-a-lost-item-basics",
+      "language": "zh-TW",
+      "expectedImageId": "reporting-a-lost-item-basics",
+      "actualTop3": [
+        "reporting-a-lost-item-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-08-ZH-03",
+      "topicId": "reporting-a-lost-item-basics",
+      "language": "zh-TW",
+      "expectedImageId": "reporting-a-lost-item-basics",
+      "actualTop3": [
+        "shopping-basics",
+        "transportation-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-08-ZH-04",
+      "topicId": "reporting-a-lost-item-basics",
+      "language": "zh-TW",
+      "expectedImageId": "reporting-a-lost-item-basics",
+      "actualTop3": [
+        "time-date-basics",
+        "transportation-travel-basics",
+        "places-directions-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-08-ZH-05",
+      "topicId": "reporting-a-lost-item-basics",
+      "language": "zh-TW",
+      "expectedImageId": "reporting-a-lost-item-basics",
+      "actualTop3": [
+        "shopping-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-09-EN-01",
+      "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+      "language": "en",
+      "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+      "actualTop3": [
+        "making-a-hotel-reservation-and-checking-in-basics",
+        "food-drinks-basics",
+        "hotel-check-in-and-business-hotel-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-09-EN-02",
+      "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+      "language": "en",
+      "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+      "actualTop3": [
+        "time-date-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-09-EN-03",
+      "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+      "language": "en",
+      "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+      "actualTop3": [
+        "making-plans-with-friends-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-09-EN-04",
+      "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+      "language": "en",
+      "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-09-EN-05",
+      "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+      "language": "en",
+      "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-09-ZH-01",
+      "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-09-ZH-02",
+      "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-09-ZH-03",
+      "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+      "actualTop3": [
+        "daily-life-routines-basics",
+        "food-drinks-basics",
+        "how-things-work-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-09-ZH-04",
+      "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+      "actualTop3": [
+        "hotel-check-in-and-business-hotel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-09-ZH-05",
+      "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+      "language": "zh-TW",
+      "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+      "actualTop3": [
+        "hotel-check-in-and-business-hotel-basics",
+        "making-a-hotel-reservation-and-checking-in-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-10-EN-01",
+      "topicId": "at-the-airport-checking-in-and-boarding-basics",
+      "language": "en",
+      "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+      "actualTop3": [
+        "at-the-airport-checking-in-and-boarding-basics",
+        "office-reception-and-visitors-basics",
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-10-EN-02",
+      "topicId": "at-the-airport-checking-in-and-boarding-basics",
+      "language": "en",
+      "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-10-EN-03",
+      "topicId": "at-the-airport-checking-in-and-boarding-basics",
+      "language": "en",
+      "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+      "actualTop3": [
+        "dealing-with-lost-luggage-basics",
+        "shopping-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-10-EN-04",
+      "topicId": "at-the-airport-checking-in-and-boarding-basics",
+      "language": "en",
+      "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics",
+        "business-travel-and-transportation-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-10-EN-05",
+      "topicId": "at-the-airport-checking-in-and-boarding-basics",
+      "language": "en",
+      "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-10-ZH-01",
+      "topicId": "at-the-airport-checking-in-and-boarding-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-10-ZH-02",
+      "topicId": "at-the-airport-checking-in-and-boarding-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-10-ZH-03",
+      "topicId": "at-the-airport-checking-in-and-boarding-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-10-ZH-04",
+      "topicId": "at-the-airport-checking-in-and-boarding-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics",
+        "at-the-airport-checking-in-and-boarding-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-10-ZH-05",
+      "topicId": "at-the-airport-checking-in-and-boarding-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-11-EN-01",
+      "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+      "language": "en",
+      "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+      "actualTop3": [
+        "at-the-pharmacy-asking-about-medicine-basics",
+        "places-directions-basics",
+        "shipping-and-logistics-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-11-EN-02",
+      "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+      "language": "en",
+      "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+      "actualTop3": [
+        "making-plans-with-friends-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-11-EN-03",
+      "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+      "language": "en",
+      "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-11-EN-04",
+      "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+      "language": "en",
+      "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+      "actualTop3": [
+        "cause-and-effect-in-science-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-11-EN-05",
+      "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+      "language": "en",
+      "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+      "actualTop3": [
+        "biotechnology-basics",
+        "time-date-basics",
+        "simple-physics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-11-ZH-01",
+      "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+      "actualTop3": [
+        "at-the-pharmacy-asking-about-medicine-basics",
+        "agriculture-and-food-science-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-11-ZH-02",
+      "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+      "actualTop3": [
+        "simple-physics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-11-ZH-03",
+      "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-11-ZH-04",
+      "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-11-ZH-05",
+      "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-12-EN-01",
+      "topicId": "dealing-with-a-flight-delay-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-flight-delay-basics",
+      "actualTop3": [
+        "business-travel-and-transportation-basics",
+        "at-the-airport-checking-in-and-boarding-basics",
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-12-EN-02",
+      "topicId": "dealing-with-a-flight-delay-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-flight-delay-basics",
+      "actualTop3": [
+        "transportation-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-12-EN-03",
+      "topicId": "dealing-with-a-flight-delay-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-flight-delay-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics",
+        "business-travel-and-transportation-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-12-EN-04",
+      "topicId": "dealing-with-a-flight-delay-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-flight-delay-basics",
+      "actualTop3": [
+        "business-travel-and-transportation-basics",
+        "places-directions-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-12-EN-05",
+      "topicId": "dealing-with-a-flight-delay-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-flight-delay-basics",
+      "actualTop3": [
+        "the-little-prince-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-12-ZH-01",
+      "topicId": "dealing-with-a-flight-delay-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-flight-delay-basics",
+      "actualTop3": [
+        "at-the-airport-checking-in-and-boarding-basics",
+        "time-date-basics",
+        "simple-physics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-12-ZH-02",
+      "topicId": "dealing-with-a-flight-delay-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-flight-delay-basics",
+      "actualTop3": [
+        "transportation-travel-basics",
+        "airplane-wright-brothers-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-12-ZH-03",
+      "topicId": "dealing-with-a-flight-delay-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-flight-delay-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-12-ZH-04",
+      "topicId": "dealing-with-a-flight-delay-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-flight-delay-basics",
+      "actualTop3": [
+        "transportation-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-12-ZH-05",
+      "topicId": "dealing-with-a-flight-delay-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-flight-delay-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-13-EN-01",
+      "topicId": "dealing-with-lost-luggage-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-lost-luggage-basics",
+      "actualTop3": [
+        "dealing-with-lost-luggage-basics",
+        "places-directions-basics",
+        "shopping-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-13-EN-02",
+      "topicId": "dealing-with-lost-luggage-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-lost-luggage-basics",
+      "actualTop3": [
+        "dealing-with-lost-luggage-basics",
+        "apologies-and-handling-complaints-basics",
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-13-EN-03",
+      "topicId": "dealing-with-lost-luggage-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-lost-luggage-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-13-EN-04",
+      "topicId": "dealing-with-lost-luggage-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-lost-luggage-basics",
+      "actualTop3": [
+        "hotel-check-in-and-business-hotel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-13-EN-05",
+      "topicId": "dealing-with-lost-luggage-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-lost-luggage-basics",
+      "actualTop3": [
+        "shopping-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-13-ZH-01",
+      "topicId": "dealing-with-lost-luggage-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-lost-luggage-basics",
+      "actualTop3": [
+        "dealing-with-lost-luggage-basics",
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-13-ZH-02",
+      "topicId": "dealing-with-lost-luggage-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-lost-luggage-basics",
+      "actualTop3": [
+        "dealing-with-lost-luggage-basics",
+        "airport-and-business-travel-basics",
+        "hotel-check-in-and-business-hotel-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-13-ZH-03",
+      "topicId": "dealing-with-lost-luggage-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-lost-luggage-basics",
+      "actualTop3": [
+        "dealing-with-lost-luggage-basics",
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-13-ZH-04",
+      "topicId": "dealing-with-lost-luggage-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-lost-luggage-basics",
+      "actualTop3": [
+        "dealing-with-lost-luggage-basics",
+        "project-management-and-deadlines-basics",
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-13-ZH-05",
+      "topicId": "dealing-with-lost-luggage-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-lost-luggage-basics",
+      "actualTop3": [
+        "airport-and-business-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-14-EN-01",
+      "topicId": "dealing-with-a-hotel-room-problem-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+      "actualTop3": [
+        "how-refrigerators-work-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-14-EN-02",
+      "topicId": "dealing-with-a-hotel-room-problem-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-14-EN-03",
+      "topicId": "dealing-with-a-hotel-room-problem-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+      "actualTop3": [
+        "making-plans-with-friends-basics",
+        "daily-life-routines-basics",
+        "human-body-how-it-works-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-14-EN-04",
+      "topicId": "dealing-with-a-hotel-room-problem-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-14-EN-05",
+      "topicId": "dealing-with-a-hotel-room-problem-basics",
+      "language": "en",
+      "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+      "actualTop3": [
+        "cause-and-effect-in-science-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-14-ZH-01",
+      "topicId": "dealing-with-a-hotel-room-problem-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-14-ZH-02",
+      "topicId": "dealing-with-a-hotel-room-problem-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-14-ZH-03",
+      "topicId": "dealing-with-a-hotel-room-problem-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+      "actualTop3": [
+        "daily-life-routines-basics",
+        "temperature-and-heat-basics",
+        "simple-physics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-14-ZH-04",
+      "topicId": "dealing-with-a-hotel-room-problem-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-14-ZH-05",
+      "topicId": "dealing-with-a-hotel-room-problem-basics",
+      "language": "zh-TW",
+      "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+      "actualTop3": [
+        "plants-nature-basics",
+        "plants-and-photosynthesis-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-15-EN-01",
+      "topicId": "at-the-bank-opening-an-account-basics",
+      "language": "en",
+      "expectedImageId": "at-the-bank-opening-an-account-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-15-EN-02",
+      "topicId": "at-the-bank-opening-an-account-basics",
+      "language": "en",
+      "expectedImageId": "at-the-bank-opening-an-account-basics",
+      "actualTop3": [
+        "work-and-mechanical-energy-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-15-EN-03",
+      "topicId": "at-the-bank-opening-an-account-basics",
+      "language": "en",
+      "expectedImageId": "at-the-bank-opening-an-account-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-15-EN-04",
+      "topicId": "at-the-bank-opening-an-account-basics",
+      "language": "en",
+      "expectedImageId": "at-the-bank-opening-an-account-basics",
+      "actualTop3": [
+        "human-brain-and-nervous-system-basics",
+        "shopping-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-15-EN-05",
+      "topicId": "at-the-bank-opening-an-account-basics",
+      "language": "en",
+      "expectedImageId": "at-the-bank-opening-an-account-basics",
+      "actualTop3": [
+        "job-interview-basics",
+        "alice-in-wonderland-basics",
+        "wonder-r-j-palacio-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-15-ZH-01",
+      "topicId": "at-the-bank-opening-an-account-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-bank-opening-an-account-basics",
+      "actualTop3": [
+        "daily-life-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-15-ZH-02",
+      "topicId": "at-the-bank-opening-an-account-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-bank-opening-an-account-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-15-ZH-03",
+      "topicId": "at-the-bank-opening-an-account-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-bank-opening-an-account-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-15-ZH-04",
+      "topicId": "at-the-bank-opening-an-account-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-bank-opening-an-account-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-15-ZH-05",
+      "topicId": "at-the-bank-opening-an-account-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-bank-opening-an-account-basics",
+      "actualTop3": [
+        "the-handmaids-tale-margaret-atwood-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-16-EN-01",
+      "topicId": "at-the-post-office-sending-a-package-basics",
+      "language": "en",
+      "expectedImageId": "at-the-post-office-sending-a-package-basics",
+      "actualTop3": [
+        "shipping-and-logistics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-16-EN-02",
+      "topicId": "at-the-post-office-sending-a-package-basics",
+      "language": "en",
+      "expectedImageId": "at-the-post-office-sending-a-package-basics",
+      "actualTop3": [
+        "places-directions-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-16-EN-03",
+      "topicId": "at-the-post-office-sending-a-package-basics",
+      "language": "en",
+      "expectedImageId": "at-the-post-office-sending-a-package-basics",
+      "actualTop3": [
+        "shipping-and-logistics-basics",
+        "shopping-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-16-EN-04",
+      "topicId": "at-the-post-office-sending-a-package-basics",
+      "language": "en",
+      "expectedImageId": "at-the-post-office-sending-a-package-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-16-EN-05",
+      "topicId": "at-the-post-office-sending-a-package-basics",
+      "language": "en",
+      "expectedImageId": "at-the-post-office-sending-a-package-basics",
+      "actualTop3": [
+        "shipping-and-logistics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-16-ZH-01",
+      "topicId": "at-the-post-office-sending-a-package-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-post-office-sending-a-package-basics",
+      "actualTop3": [
+        "at-the-post-office-sending-a-package-basics",
+        "shipping-and-logistics-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-16-ZH-02",
+      "topicId": "at-the-post-office-sending-a-package-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-post-office-sending-a-package-basics",
+      "actualTop3": [
+        "people-introduction-basics",
+        "shipping-and-logistics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-16-ZH-03",
+      "topicId": "at-the-post-office-sending-a-package-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-post-office-sending-a-package-basics",
+      "actualTop3": [
+        "shopping-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-16-ZH-04",
+      "topicId": "at-the-post-office-sending-a-package-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-post-office-sending-a-package-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-16-ZH-05",
+      "topicId": "at-the-post-office-sending-a-package-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-post-office-sending-a-package-basics",
+      "actualTop3": [
+        "shipping-and-logistics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-17-EN-01",
+      "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "language": "en",
+      "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "actualTop3": [
+        "transportation-travel-basics",
+        "places-directions-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-17-EN-02",
+      "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "language": "en",
+      "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "actualTop3": [
+        "hotel-check-in-and-business-hotel-basics",
+        "transportation-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-17-EN-03",
+      "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "language": "en",
+      "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "actualTop3": [
+        "time-date-basics",
+        "simple-physics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-17-EN-04",
+      "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "language": "en",
+      "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "actualTop3": [
+        "the-little-prince-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-17-EN-05",
+      "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "language": "en",
+      "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "actualTop3": [
+        "plants-nature-basics",
+        "plants-and-photosynthesis-basics",
+        "transportation-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-17-ZH-01",
+      "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-17-ZH-02",
+      "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-17-ZH-03",
+      "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "actualTop3": [
+        "time-date-basics",
+        "transportation-travel-basics",
+        "simple-physics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-17-ZH-04",
+      "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "actualTop3": [
+        "time-date-basics",
+        "simple-physics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-17-ZH-05",
+      "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-18-EN-01",
+      "topicId": "at-the-library-borrowing-and-returning-books-basics",
+      "language": "en",
+      "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+      "actualTop3": [
+        "time-date-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-18-EN-02",
+      "topicId": "at-the-library-borrowing-and-returning-books-basics",
+      "language": "en",
+      "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+      "actualTop3": [
+        "shopping-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-18-EN-03",
+      "topicId": "at-the-library-borrowing-and-returning-books-basics",
+      "language": "en",
+      "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-18-EN-04",
+      "topicId": "at-the-library-borrowing-and-returning-books-basics",
+      "language": "en",
+      "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+      "actualTop3": [
+        "shopping-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-18-EN-05",
+      "topicId": "at-the-library-borrowing-and-returning-books-basics",
+      "language": "en",
+      "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-18-ZH-01",
+      "topicId": "at-the-library-borrowing-and-returning-books-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+      "actualTop3": [
+        "at-the-library-borrowing-and-returning-books-basics"
+      ],
+      "top1Pass": true,
+      "top3Pass": true,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-18-ZH-02",
+      "topicId": "at-the-library-borrowing-and-returning-books-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+      "actualTop3": [
+        "time-date-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-18-ZH-03",
+      "topicId": "at-the-library-borrowing-and-returning-books-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-18-ZH-04",
+      "topicId": "at-the-library-borrowing-and-returning-books-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-18-ZH-05",
+      "topicId": "at-the-library-borrowing-and-returning-books-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-19-EN-01",
+      "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "language": "en",
+      "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "actualTop3": [
+        "transportation-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-19-EN-02",
+      "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "language": "en",
+      "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "actualTop3": [
+        "places-directions-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-19-EN-03",
+      "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "language": "en",
+      "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "actualTop3": [
+        "transportation-travel-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-19-EN-04",
+      "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "language": "en",
+      "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "actualTop3": [
+        "customer-service-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-19-EN-05",
+      "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "language": "en",
+      "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-19-ZH-01",
+      "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-19-ZH-02",
+      "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "actualTop3": [
+        "places-directions-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-19-ZH-03",
+      "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-19-ZH-04",
+      "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-19-ZH-05",
+      "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+      "actualTop3": [],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": true
+    },
+    {
+      "testId": "RLS-20-EN-01",
+      "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "language": "en",
+      "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "actualTop3": [
+        "food-drinks-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-20-EN-02",
+      "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "language": "en",
+      "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "actualTop3": [
+        "light-sound-and-waves-basics",
+        "chemical-reactions-basics",
+        "simple-physics-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-20-EN-03",
+      "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "language": "en",
+      "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "actualTop3": [
+        "shopping-basics",
+        "weather-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-20-EN-04",
+      "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "language": "en",
+      "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "actualTop3": [
+        "food-drinks-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-20-EN-05",
+      "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "language": "en",
+      "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "actualTop3": [
+        "returning-or-exchanging-an-item-basics",
+        "shopping-basics",
+        "returns-and-refunds-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-20-ZH-01",
+      "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "actualTop3": [
+        "food-drinks-basics",
+        "plants-nature-basics",
+        "plants-and-photosynthesis-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-20-ZH-02",
+      "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "actualTop3": [
+        "glaciers-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-20-ZH-03",
+      "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "actualTop3": [
+        "shopping-basics",
+        "magnetism-and-electromagnets-basics",
+        "glaciers-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-20-ZH-04",
+      "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "actualTop3": [
+        "food-drinks-basics",
+        "animals-wildlife-basics",
+        "agriculture-and-food-science-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    },
+    {
+      "testId": "RLS-20-ZH-05",
+      "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "language": "zh-TW",
+      "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+      "actualTop3": [
+        "returning-or-exchanging-an-item-basics",
+        "shopping-basics",
+        "invoices-and-payments-basics"
+      ],
+      "top1Pass": false,
+      "top3Pass": false,
+      "noResult": false
+    }
+  ]
+}

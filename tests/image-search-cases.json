@@ -1,0 +1,1802 @@
+[
+  {
+    "testId": "RLS-01-EN-01",
+    "topicId": "making-plans-with-friends-basics",
+    "language": "en",
+    "question": "Can we set another time to hang out?",
+    "expectedImageId": "making-plans-with-friends-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-01-EN-02",
+    "topicId": "making-plans-with-friends-basics",
+    "language": "en",
+    "question": "How do I politely invite a friend to an activity?",
+    "expectedImageId": "making-plans-with-friends-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-01-EN-03",
+    "topicId": "making-plans-with-friends-basics",
+    "language": "en",
+    "question": "Could you join me for a day trip this weekend?",
+    "expectedImageId": "making-plans-with-friends-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-01-EN-04",
+    "topicId": "making-plans-with-friends-basics",
+    "language": "en",
+    "question": "What time would work for us to meet on Saturday?",
+    "expectedImageId": "making-plans-with-friends-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-01-EN-05",
+    "topicId": "making-plans-with-friends-basics",
+    "language": "en",
+    "question": "I need to move our lunch because of a family obligation.",
+    "expectedImageId": "making-plans-with-friends-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-01-ZH-01",
+    "topicId": "making-plans-with-friends-basics",
+    "language": "zh-TW",
+    "question": "這週末要不要一起出去走走？",
+    "expectedImageId": "making-plans-with-friends-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-01-ZH-02",
+    "topicId": "making-plans-with-friends-basics",
+    "language": "zh-TW",
+    "question": "星期六幾點見面比較方便？",
+    "expectedImageId": "making-plans-with-friends-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-01-ZH-03",
+    "topicId": "making-plans-with-friends-basics",
+    "language": "zh-TW",
+    "question": "我臨時有家庭安排，午餐可以改天嗎？",
+    "expectedImageId": "making-plans-with-friends-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-01-ZH-04",
+    "topicId": "making-plans-with-friends-basics",
+    "language": "zh-TW",
+    "question": "我們能不能重新約一個時間碰面？",
+    "expectedImageId": "making-plans-with-friends-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-01-ZH-05",
+    "topicId": "making-plans-with-friends-basics",
+    "language": "zh-TW",
+    "question": "想邀請朋友參加活動，英文怎麼開口比較自然？",
+    "expectedImageId": "making-plans-with-friends-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-02-EN-01",
+    "topicId": "ordering-at-a-restaurant-basics",
+    "language": "en",
+    "question": "Could I see what meals are available?",
+    "expectedImageId": "ordering-at-a-restaurant-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-02-EN-02",
+    "topicId": "ordering-at-a-restaurant-basics",
+    "language": "en",
+    "question": "Does this dish contain any nuts?",
+    "expectedImageId": "ordering-at-a-restaurant-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-02-EN-03",
+    "topicId": "ordering-at-a-restaurant-basics",
+    "language": "en",
+    "question": "What would you recommend for someone who avoids meat?",
+    "expectedImageId": "ordering-at-a-restaurant-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-02-EN-04",
+    "topicId": "ordering-at-a-restaurant-basics",
+    "language": "en",
+    "question": "Could the vegetables come instead of fries?",
+    "expectedImageId": "ordering-at-a-restaurant-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-02-EN-05",
+    "topicId": "ordering-at-a-restaurant-basics",
+    "language": "en",
+    "question": "How do I politely repeat my meal choices before ordering?",
+    "expectedImageId": "ordering-at-a-restaurant-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-02-ZH-01",
+    "topicId": "ordering-at-a-restaurant-basics",
+    "language": "zh-TW",
+    "question": "點完菜後如何用英文再次確認餐點？",
+    "expectedImageId": "ordering-at-a-restaurant-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-02-ZH-02",
+    "topicId": "ordering-at-a-restaurant-basics",
+    "language": "zh-TW",
+    "question": "可以讓我看看有哪些主餐嗎？",
+    "expectedImageId": "ordering-at-a-restaurant-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-02-ZH-03",
+    "topicId": "ordering-at-a-restaurant-basics",
+    "language": "zh-TW",
+    "question": "這道料理裡面有堅果嗎？",
+    "expectedImageId": "ordering-at-a-restaurant-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-02-ZH-04",
+    "topicId": "ordering-at-a-restaurant-basics",
+    "language": "zh-TW",
+    "question": "不吃肉的話，服務人員會推薦什麼？",
+    "expectedImageId": "ordering-at-a-restaurant-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-02-ZH-05",
+    "topicId": "ordering-at-a-restaurant-basics",
+    "language": "zh-TW",
+    "question": "可以把薯條換成蔬菜嗎？",
+    "expectedImageId": "ordering-at-a-restaurant-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-03-EN-01",
+    "topicId": "dealing-with-a-wrong-order-basics",
+    "language": "en",
+    "question": "The plate you brought isn't what I asked for.",
+    "expectedImageId": "dealing-with-a-wrong-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-03-EN-02",
+    "topicId": "dealing-with-a-wrong-order-basics",
+    "language": "en",
+    "question": "My meal arrived without the side I selected.",
+    "expectedImageId": "dealing-with-a-wrong-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-03-EN-03",
+    "topicId": "dealing-with-a-wrong-order-basics",
+    "language": "en",
+    "question": "How can I explain politely that the kitchen made a mistake?",
+    "expectedImageId": "dealing-with-a-wrong-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-03-EN-04",
+    "topicId": "dealing-with-a-wrong-order-basics",
+    "language": "en",
+    "question": "Could you check my original request before replacing this dish?",
+    "expectedImageId": "dealing-with-a-wrong-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-03-EN-05",
+    "topicId": "dealing-with-a-wrong-order-basics",
+    "language": "en",
+    "question": "What can I say when a restaurant serves me the wrong meal?",
+    "expectedImageId": "dealing-with-a-wrong-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-03-ZH-01",
+    "topicId": "dealing-with-a-wrong-order-basics",
+    "language": "zh-TW",
+    "question": "送來的餐點和我剛才點的不一樣。",
+    "expectedImageId": "dealing-with-a-wrong-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-03-ZH-02",
+    "topicId": "dealing-with-a-wrong-order-basics",
+    "language": "zh-TW",
+    "question": "我的主餐有送到，但配菜不是我選的。",
+    "expectedImageId": "dealing-with-a-wrong-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-03-ZH-03",
+    "topicId": "dealing-with-a-wrong-order-basics",
+    "language": "zh-TW",
+    "question": "如何有禮貌地告訴餐廳餐點出了差錯？",
+    "expectedImageId": "dealing-with-a-wrong-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-03-ZH-04",
+    "topicId": "dealing-with-a-wrong-order-basics",
+    "language": "zh-TW",
+    "question": "可以先幫我確認原本點的內容再更換嗎？",
+    "expectedImageId": "dealing-with-a-wrong-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-03-ZH-05",
+    "topicId": "dealing-with-a-wrong-order-basics",
+    "language": "zh-TW",
+    "question": "餐廳送錯餐時，我可以怎麼用英文反映？",
+    "expectedImageId": "dealing-with-a-wrong-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-04-EN-01",
+    "topicId": "asking-for-directions-and-help-basics",
+    "language": "en",
+    "question": "I'm trying to get to the city museum. Which way should I go?",
+    "expectedImageId": "asking-for-directions-and-help-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-04-EN-02",
+    "topicId": "asking-for-directions-and-help-basics",
+    "language": "en",
+    "question": "Is the museum a long walk from here?",
+    "expectedImageId": "asking-for-directions-and-help-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-04-EN-03",
+    "topicId": "asking-for-directions-and-help-basics",
+    "language": "en",
+    "question": "The path by the park is blocked; is there another way?",
+    "expectedImageId": "asking-for-directions-and-help-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-04-EN-04",
+    "topicId": "asking-for-directions-and-help-basics",
+    "language": "en",
+    "question": "I can see the library, but I'm not sure where to cross.",
+    "expectedImageId": "asking-for-directions-and-help-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-04-EN-05",
+    "topicId": "asking-for-directions-and-help-basics",
+    "language": "en",
+    "question": "How do I ask a passerby to explain a route more clearly?",
+    "expectedImageId": "asking-for-directions-and-help-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-04-ZH-01",
+    "topicId": "asking-for-directions-and-help-basics",
+    "language": "zh-TW",
+    "question": "我正在找市立博物館，請問該往哪邊走？",
+    "expectedImageId": "asking-for-directions-and-help-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-04-ZH-02",
+    "topicId": "asking-for-directions-and-help-basics",
+    "language": "zh-TW",
+    "question": "從這裡走到博物館會很遠嗎？",
+    "expectedImageId": "asking-for-directions-and-help-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-04-ZH-03",
+    "topicId": "asking-for-directions-and-help-basics",
+    "language": "zh-TW",
+    "question": "我看到圖書館了，但不確定該在哪裡過馬路。",
+    "expectedImageId": "asking-for-directions-and-help-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-04-ZH-04",
+    "topicId": "asking-for-directions-and-help-basics",
+    "language": "zh-TW",
+    "question": "公園旁的路被封住了，還有其他走法嗎？",
+    "expectedImageId": "asking-for-directions-and-help-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-04-ZH-05",
+    "topicId": "asking-for-directions-and-help-basics",
+    "language": "zh-TW",
+    "question": "要怎麼請路人把方向說得更清楚？",
+    "expectedImageId": "asking-for-directions-and-help-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-05-EN-01",
+    "topicId": "shopping-for-clothes-basics",
+    "language": "en",
+    "question": "How can I compare two colors and choose a versatile outfit?",
+    "expectedImageId": "shopping-for-clothes-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-05-EN-02",
+    "topicId": "shopping-for-clothes-basics",
+    "language": "en",
+    "question": "I'm looking for a jacket for cooler weather.",
+    "expectedImageId": "shopping-for-clothes-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-05-EN-03",
+    "topicId": "shopping-for-clothes-basics",
+    "language": "en",
+    "question": "Do you have this coat in a smaller size?",
+    "expectedImageId": "shopping-for-clothes-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-05-EN-04",
+    "topicId": "shopping-for-clothes-basics",
+    "language": "en",
+    "question": "May I try this one on before deciding?",
+    "expectedImageId": "shopping-for-clothes-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-05-EN-05",
+    "topicId": "shopping-for-clothes-basics",
+    "language": "en",
+    "question": "The sleeves feel loose and the shoulders are too wide.",
+    "expectedImageId": "shopping-for-clothes-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-05-ZH-01",
+    "topicId": "shopping-for-clothes-basics",
+    "language": "zh-TW",
+    "question": "我想找一件天氣變冷時可以穿的外套。",
+    "expectedImageId": "shopping-for-clothes-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-05-ZH-02",
+    "topicId": "shopping-for-clothes-basics",
+    "language": "zh-TW",
+    "question": "這件大衣還有小一號的嗎？",
+    "expectedImageId": "shopping-for-clothes-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-05-ZH-03",
+    "topicId": "shopping-for-clothes-basics",
+    "language": "zh-TW",
+    "question": "我可以先試穿再決定嗎？",
+    "expectedImageId": "shopping-for-clothes-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-05-ZH-04",
+    "topicId": "shopping-for-clothes-basics",
+    "language": "zh-TW",
+    "question": "袖子有點鬆，肩膀也太寬了。",
+    "expectedImageId": "shopping-for-clothes-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-05-ZH-05",
+    "topicId": "shopping-for-clothes-basics",
+    "language": "zh-TW",
+    "question": "如何比較兩種顏色，選一套比較百搭的穿搭？",
+    "expectedImageId": "shopping-for-clothes-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-06-EN-01",
+    "topicId": "making-a-doctors-appointment-basics",
+    "language": "en",
+    "question": "I'd like to arrange a visit with a doctor next week.",
+    "expectedImageId": "making-a-doctors-appointment-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-06-EN-02",
+    "topicId": "making-a-doctors-appointment-basics",
+    "language": "en",
+    "question": "Is there an opening later in the afternoon?",
+    "expectedImageId": "making-a-doctors-appointment-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-06-EN-03",
+    "topicId": "making-a-doctors-appointment-basics",
+    "language": "en",
+    "question": "I have a sore throat and have been coughing.",
+    "expectedImageId": "making-a-doctors-appointment-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-06-EN-04",
+    "topicId": "making-a-doctors-appointment-basics",
+    "language": "en",
+    "question": "That time overlaps with my class; is another slot available?",
+    "expectedImageId": "making-a-doctors-appointment-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-06-EN-05",
+    "topicId": "making-a-doctors-appointment-basics",
+    "language": "en",
+    "question": "What details should I repeat to make sure the visit is booked?",
+    "expectedImageId": "making-a-doctors-appointment-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-06-ZH-01",
+    "topicId": "making-a-doctors-appointment-basics",
+    "language": "zh-TW",
+    "question": "我喉嚨痛，而且一直咳嗽。",
+    "expectedImageId": "making-a-doctors-appointment-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-06-ZH-02",
+    "topicId": "making-a-doctors-appointment-basics",
+    "language": "zh-TW",
+    "question": "我想安排下週去看醫生。",
+    "expectedImageId": "making-a-doctors-appointment-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-06-ZH-03",
+    "topicId": "making-a-doctors-appointment-basics",
+    "language": "zh-TW",
+    "question": "下午晚一點還有空檔嗎？",
+    "expectedImageId": "making-a-doctors-appointment-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-06-ZH-04",
+    "topicId": "making-a-doctors-appointment-basics",
+    "language": "zh-TW",
+    "question": "那個時段和我的課衝突了，還有別的時段嗎？",
+    "expectedImageId": "making-a-doctors-appointment-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-06-ZH-05",
+    "topicId": "making-a-doctors-appointment-basics",
+    "language": "zh-TW",
+    "question": "我要重述哪些資訊才能確認看診已經預約好？",
+    "expectedImageId": "making-a-doctors-appointment-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-07-EN-01",
+    "topicId": "returning-or-exchanging-an-item-basics",
+    "language": "en",
+    "question": "I still have the receipt and the tags are attached.",
+    "expectedImageId": "returning-or-exchanging-an-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-07-EN-02",
+    "topicId": "returning-or-exchanging-an-item-basics",
+    "language": "en",
+    "question": "Is there a price difference if I choose another size?",
+    "expectedImageId": "returning-or-exchanging-an-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-07-EN-03",
+    "topicId": "returning-or-exchanging-an-item-basics",
+    "language": "en",
+    "question": "I bought this coat recently, but it doesn't fit.",
+    "expectedImageId": "returning-or-exchanging-an-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-07-EN-04",
+    "topicId": "returning-or-exchanging-an-item-basics",
+    "language": "en",
+    "question": "Could I swap this for a medium instead?",
+    "expectedImageId": "returning-or-exchanging-an-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-07-EN-05",
+    "topicId": "returning-or-exchanging-an-item-basics",
+    "language": "en",
+    "question": "How can I ask about getting my money back rather than an exchange?",
+    "expectedImageId": "returning-or-exchanging-an-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-07-ZH-01",
+    "topicId": "returning-or-exchanging-an-item-basics",
+    "language": "zh-TW",
+    "question": "可以幫我換成中號嗎？",
+    "expectedImageId": "returning-or-exchanging-an-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-07-ZH-02",
+    "topicId": "returning-or-exchanging-an-item-basics",
+    "language": "zh-TW",
+    "question": "收據還在，吊牌也沒有拆。",
+    "expectedImageId": "returning-or-exchanging-an-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-07-ZH-03",
+    "topicId": "returning-or-exchanging-an-item-basics",
+    "language": "zh-TW",
+    "question": "換成另一個尺寸需要補價差嗎？",
+    "expectedImageId": "returning-or-exchanging-an-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-07-ZH-04",
+    "topicId": "returning-or-exchanging-an-item-basics",
+    "language": "zh-TW",
+    "question": "如果不換貨而想把錢退回來，該怎麼詢問？",
+    "expectedImageId": "returning-or-exchanging-an-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-07-ZH-05",
+    "topicId": "returning-or-exchanging-an-item-basics",
+    "language": "zh-TW",
+    "question": "我最近買了這件外套，不過尺寸不合。",
+    "expectedImageId": "returning-or-exchanging-an-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-08-EN-01",
+    "topicId": "reporting-a-lost-item-basics",
+    "language": "en",
+    "question": "It is dark green and has a yellow star on the front.",
+    "expectedImageId": "reporting-a-lost-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-08-EN-02",
+    "topicId": "reporting-a-lost-item-basics",
+    "language": "en",
+    "question": "I last remember seeing it on my ride home this afternoon.",
+    "expectedImageId": "reporting-a-lost-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-08-EN-03",
+    "topicId": "reporting-a-lost-item-basics",
+    "language": "en",
+    "question": "There is a notebook and a folding umbrella inside.",
+    "expectedImageId": "reporting-a-lost-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-08-EN-04",
+    "topicId": "reporting-a-lost-item-basics",
+    "language": "en",
+    "question": "I can't find the bag I had with me on the bus.",
+    "expectedImageId": "reporting-a-lost-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-08-EN-05",
+    "topicId": "reporting-a-lost-item-basics",
+    "language": "en",
+    "question": "How can I prove the bag at the desk belongs to me?",
+    "expectedImageId": "reporting-a-lost-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-08-ZH-01",
+    "topicId": "reporting-a-lost-item-basics",
+    "language": "zh-TW",
+    "question": "它是深綠色的，正面有一顆黃色星星。",
+    "expectedImageId": "reporting-a-lost-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-08-ZH-02",
+    "topicId": "reporting-a-lost-item-basics",
+    "language": "zh-TW",
+    "question": "裡面有筆記本和一把摺疊傘。",
+    "expectedImageId": "reporting-a-lost-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-08-ZH-03",
+    "topicId": "reporting-a-lost-item-basics",
+    "language": "zh-TW",
+    "question": "我在公車上找不到剛才帶著的包包。",
+    "expectedImageId": "reporting-a-lost-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-08-ZH-04",
+    "topicId": "reporting-a-lost-item-basics",
+    "language": "zh-TW",
+    "question": "我今天下午搭車回家時最後一次看到它。",
+    "expectedImageId": "reporting-a-lost-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-08-ZH-05",
+    "topicId": "reporting-a-lost-item-basics",
+    "language": "zh-TW",
+    "question": "櫃檯找到的包包要怎麼核對是不是我的？",
+    "expectedImageId": "reporting-a-lost-item-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-09-EN-01",
+    "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+    "language": "en",
+    "question": "My email says breakfast is included, but the screen shows otherwise.",
+    "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-09-EN-02",
+    "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+    "language": "en",
+    "question": "Do you have a room for two nights in October?",
+    "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-09-EN-03",
+    "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+    "language": "en",
+    "question": "Is a larger bed available at that rate?",
+    "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-09-EN-04",
+    "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+    "language": "en",
+    "question": "Could you check the booking details against this confirmation?",
+    "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-09-EN-05",
+    "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+    "language": "en",
+    "question": "What should I ask before I accept the room key?",
+    "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-09-ZH-01",
+    "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+    "language": "zh-TW",
+    "question": "十月有可以住兩晚的房間嗎？",
+    "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-09-ZH-02",
+    "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+    "language": "zh-TW",
+    "question": "這個房價有包含大床房嗎？",
+    "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-09-ZH-03",
+    "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+    "language": "zh-TW",
+    "question": "確認信寫有早餐，但櫃檯系統顯示不一樣。",
+    "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-09-ZH-04",
+    "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+    "language": "zh-TW",
+    "question": "可以用這封確認信核對一下訂房內容嗎？",
+    "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-09-ZH-05",
+    "topicId": "making-a-hotel-reservation-and-checking-in-basics",
+    "language": "zh-TW",
+    "question": "拿房卡之前，我還應該確認哪些入住事項？",
+    "expectedImageId": "making-a-hotel-reservation-and-checking-in-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-10-EN-01",
+    "topicId": "at-the-airport-checking-in-and-boarding-basics",
+    "language": "en",
+    "question": "Where should I go to check in for my international flight?",
+    "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-10-EN-02",
+    "topicId": "at-the-airport-checking-in-and-boarding-basics",
+    "language": "en",
+    "question": "Could you weigh this suitcase for me?",
+    "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-10-EN-03",
+    "topicId": "at-the-airport-checking-in-and-boarding-basics",
+    "language": "en",
+    "question": "What happens if my checked bag is above the free limit?",
+    "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-10-EN-04",
+    "topicId": "at-the-airport-checking-in-and-boarding-basics",
+    "language": "en",
+    "question": "I can't find the departure gate shown on my pass.",
+    "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-10-EN-05",
+    "topicId": "at-the-airport-checking-in-and-boarding-basics",
+    "language": "en",
+    "question": "How do I confirm which gate I should proceed to?",
+    "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-10-ZH-01",
+    "topicId": "at-the-airport-checking-in-and-boarding-basics",
+    "language": "zh-TW",
+    "question": "我要搭國際線，應該去哪裡辦理報到？",
+    "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-10-ZH-02",
+    "topicId": "at-the-airport-checking-in-and-boarding-basics",
+    "language": "zh-TW",
+    "question": "可以幫我量一下這個行李箱的重量嗎？",
+    "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-10-ZH-03",
+    "topicId": "at-the-airport-checking-in-and-boarding-basics",
+    "language": "zh-TW",
+    "question": "托運行李超過免費額度時會怎麼處理？",
+    "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-10-ZH-04",
+    "topicId": "at-the-airport-checking-in-and-boarding-basics",
+    "language": "zh-TW",
+    "question": "我找不到登機證上寫的出發登機門。",
+    "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-10-ZH-05",
+    "topicId": "at-the-airport-checking-in-and-boarding-basics",
+    "language": "zh-TW",
+    "question": "我該怎麼確認現在要前往哪個登機門？",
+    "expectedImageId": "at-the-airport-checking-in-and-boarding-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-11-EN-01",
+    "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+    "language": "en",
+    "question": "How can I ask the pharmacist to explain the package directions?",
+    "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-11-EN-02",
+    "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+    "language": "en",
+    "question": "Could you recommend something available without a prescription?",
+    "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-11-EN-03",
+    "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+    "language": "en",
+    "question": "What does the label say about how often to take it?",
+    "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-11-EN-04",
+    "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+    "language": "en",
+    "question": "Should I be concerned about any unwanted effects?",
+    "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-11-EN-05",
+    "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+    "language": "en",
+    "question": "Can these two medicines be used at the same time?",
+    "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-11-ZH-01",
+    "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+    "language": "zh-TW",
+    "question": "怎麼請藥師解釋包裝上的用藥說明？",
+    "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-11-ZH-02",
+    "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+    "language": "zh-TW",
+    "question": "有沒有不需要處方就能買的藥可以推薦？",
+    "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-11-ZH-03",
+    "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+    "language": "zh-TW",
+    "question": "標籤上寫要多久服用一次？",
+    "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-11-ZH-04",
+    "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+    "language": "zh-TW",
+    "question": "這種藥可能會有什麼不舒服的反應嗎？",
+    "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-11-ZH-05",
+    "topicId": "at-the-pharmacy-asking-about-medicine-basics",
+    "language": "zh-TW",
+    "question": "這兩種藥可以同時使用嗎？",
+    "expectedImageId": "at-the-pharmacy-asking-about-medicine-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-12-EN-01",
+    "topicId": "dealing-with-a-flight-delay-basics",
+    "language": "en",
+    "question": "The departure time on the screen has moved back.",
+    "expectedImageId": "dealing-with-a-flight-delay-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-12-EN-02",
+    "topicId": "dealing-with-a-flight-delay-basics",
+    "language": "en",
+    "question": "What are my options if this delay makes me miss the next plane?",
+    "expectedImageId": "dealing-with-a-flight-delay-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-12-EN-03",
+    "topicId": "dealing-with-a-flight-delay-basics",
+    "language": "en",
+    "question": "Could the airline put me on a later departure?",
+    "expectedImageId": "dealing-with-a-flight-delay-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-12-EN-04",
+    "topicId": "dealing-with-a-flight-delay-basics",
+    "language": "en",
+    "question": "Where can I get the newest information about my itinerary?",
+    "expectedImageId": "dealing-with-a-flight-delay-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-12-EN-05",
+    "topicId": "dealing-with-a-flight-delay-basics",
+    "language": "en",
+    "question": "How do I ask the carrier to arrange a different connection?",
+    "expectedImageId": "dealing-with-a-flight-delay-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-12-ZH-01",
+    "topicId": "dealing-with-a-flight-delay-basics",
+    "language": "zh-TW",
+    "question": "螢幕上的起飛時間往後延了。",
+    "expectedImageId": "dealing-with-a-flight-delay-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-12-ZH-02",
+    "topicId": "dealing-with-a-flight-delay-basics",
+    "language": "zh-TW",
+    "question": "如果延誤害我趕不上下一班飛機，有哪些處理方式？",
+    "expectedImageId": "dealing-with-a-flight-delay-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-12-ZH-03",
+    "topicId": "dealing-with-a-flight-delay-basics",
+    "language": "zh-TW",
+    "question": "航空公司能不能幫我改搭晚一點的班機？",
+    "expectedImageId": "dealing-with-a-flight-delay-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-12-ZH-04",
+    "topicId": "dealing-with-a-flight-delay-basics",
+    "language": "zh-TW",
+    "question": "我要去哪裡查行程的最新資訊？",
+    "expectedImageId": "dealing-with-a-flight-delay-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-12-ZH-05",
+    "topicId": "dealing-with-a-flight-delay-basics",
+    "language": "zh-TW",
+    "question": "如何請航空公司安排另一段轉機航班？",
+    "expectedImageId": "dealing-with-a-flight-delay-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-13-EN-01",
+    "topicId": "dealing-with-lost-luggage-basics",
+    "language": "en",
+    "question": "Where do I report a checked bag that didn't arrive?",
+    "expectedImageId": "dealing-with-lost-luggage-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-13-EN-02",
+    "topicId": "dealing-with-lost-luggage-basics",
+    "language": "en",
+    "question": "How do I follow up on a delayed baggage report?",
+    "expectedImageId": "dealing-with-lost-luggage-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-13-EN-03",
+    "topicId": "dealing-with-lost-luggage-basics",
+    "language": "en",
+    "question": "My suitcase never came around on the baggage belt.",
+    "expectedImageId": "dealing-with-lost-luggage-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-13-EN-04",
+    "topicId": "dealing-with-lost-luggage-basics",
+    "language": "en",
+    "question": "Can the airline deliver my suitcase to the hotel?",
+    "expectedImageId": "dealing-with-lost-luggage-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-13-EN-05",
+    "topicId": "dealing-with-lost-luggage-basics",
+    "language": "en",
+    "question": "Which number on this tag can be used to locate my bag?",
+    "expectedImageId": "dealing-with-lost-luggage-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-13-ZH-01",
+    "topicId": "dealing-with-lost-luggage-basics",
+    "language": "zh-TW",
+    "question": "托運行李沒到時要去哪裡申報？",
+    "expectedImageId": "dealing-with-lost-luggage-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-13-ZH-02",
+    "topicId": "dealing-with-lost-luggage-basics",
+    "language": "zh-TW",
+    "question": "航空公司可以把行李送到飯店嗎？",
+    "expectedImageId": "dealing-with-lost-luggage-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-13-ZH-03",
+    "topicId": "dealing-with-lost-luggage-basics",
+    "language": "zh-TW",
+    "question": "行李標籤上的哪個號碼可以用來查詢？",
+    "expectedImageId": "dealing-with-lost-luggage-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-13-ZH-04",
+    "topicId": "dealing-with-lost-luggage-basics",
+    "language": "zh-TW",
+    "question": "行李延誤報告送出後要怎麼追蹤進度？",
+    "expectedImageId": "dealing-with-lost-luggage-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-13-ZH-05",
+    "topicId": "dealing-with-lost-luggage-basics",
+    "language": "zh-TW",
+    "question": "行李轉盤一直沒有出現我的行李箱。",
+    "expectedImageId": "dealing-with-lost-luggage-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-14-EN-01",
+    "topicId": "dealing-with-a-hotel-room-problem-basics",
+    "language": "en",
+    "question": "The air conditioner in my room isn't cooling the room.",
+    "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-14-EN-02",
+    "topicId": "dealing-with-a-hotel-room-problem-basics",
+    "language": "en",
+    "question": "Could someone take a look at the broken unit?",
+    "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-14-EN-03",
+    "topicId": "dealing-with-a-hotel-room-problem-basics",
+    "language": "en",
+    "question": "It's too warm to sleep comfortably; is another room available?",
+    "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-14-EN-04",
+    "topicId": "dealing-with-a-hotel-room-problem-basics",
+    "language": "en",
+    "question": "How long might the repair take?",
+    "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-14-EN-05",
+    "topicId": "dealing-with-a-hotel-room-problem-basics",
+    "language": "en",
+    "question": "Could you arrange a room change if the repair takes too long?",
+    "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-14-ZH-01",
+    "topicId": "dealing-with-a-hotel-room-problem-basics",
+    "language": "zh-TW",
+    "question": "房間的冷氣沒有辦法降溫。",
+    "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-14-ZH-02",
+    "topicId": "dealing-with-a-hotel-room-problem-basics",
+    "language": "zh-TW",
+    "question": "可以請人來檢查故障的設備嗎？",
+    "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-14-ZH-03",
+    "topicId": "dealing-with-a-hotel-room-problem-basics",
+    "language": "zh-TW",
+    "question": "房裡太熱了，沒辦法好好睡覺，還有別的房間嗎？",
+    "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-14-ZH-04",
+    "topicId": "dealing-with-a-hotel-room-problem-basics",
+    "language": "zh-TW",
+    "question": "維修可能需要多久？",
+    "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-14-ZH-05",
+    "topicId": "dealing-with-a-hotel-room-problem-basics",
+    "language": "zh-TW",
+    "question": "如果修理花太久，可以協助換房嗎？",
+    "expectedImageId": "dealing-with-a-hotel-room-problem-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-15-EN-01",
+    "topicId": "at-the-bank-opening-an-account-basics",
+    "language": "en",
+    "question": "I'd like to start a personal account for everyday use.",
+    "expectedImageId": "at-the-bank-opening-an-account-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-15-EN-02",
+    "topicId": "at-the-bank-opening-an-account-basics",
+    "language": "en",
+    "question": "Which account would work best for regular purchases?",
+    "expectedImageId": "at-the-bank-opening-an-account-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-15-EN-03",
+    "topicId": "at-the-bank-opening-an-account-basics",
+    "language": "en",
+    "question": "What paperwork should I bring to apply?",
+    "expectedImageId": "at-the-bank-opening-an-account-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-15-EN-04",
+    "topicId": "at-the-bank-opening-an-account-basics",
+    "language": "en",
+    "question": "Is there a minimum balance or a monthly cost?",
+    "expectedImageId": "at-the-bank-opening-an-account-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-15-EN-05",
+    "topicId": "at-the-bank-opening-an-account-basics",
+    "language": "en",
+    "question": "Could you explain how you check an applicant's identity?",
+    "expectedImageId": "at-the-bank-opening-an-account-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-15-ZH-01",
+    "topicId": "at-the-bank-opening-an-account-basics",
+    "language": "zh-TW",
+    "question": "我想開一個日常使用的個人帳戶。",
+    "expectedImageId": "at-the-bank-opening-an-account-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-15-ZH-02",
+    "topicId": "at-the-bank-opening-an-account-basics",
+    "language": "zh-TW",
+    "question": "哪種帳戶比較適合平常消費？",
+    "expectedImageId": "at-the-bank-opening-an-account-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-15-ZH-03",
+    "topicId": "at-the-bank-opening-an-account-basics",
+    "language": "zh-TW",
+    "question": "申請時我應該帶哪些文件？",
+    "expectedImageId": "at-the-bank-opening-an-account-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-15-ZH-04",
+    "topicId": "at-the-bank-opening-an-account-basics",
+    "language": "zh-TW",
+    "question": "帳戶有最低餘額或每月費用嗎？",
+    "expectedImageId": "at-the-bank-opening-an-account-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-15-ZH-05",
+    "topicId": "at-the-bank-opening-an-account-basics",
+    "language": "zh-TW",
+    "question": "可以說明你們如何核實申請人的身分嗎？",
+    "expectedImageId": "at-the-bank-opening-an-account-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-16-EN-01",
+    "topicId": "at-the-post-office-sending-a-package-basics",
+    "language": "en",
+    "question": "I need to mail a parcel to a friend overseas.",
+    "expectedImageId": "at-the-post-office-sending-a-package-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-16-EN-02",
+    "topicId": "at-the-post-office-sending-a-package-basics",
+    "language": "en",
+    "question": "What is the difference between the slower and faster service?",
+    "expectedImageId": "at-the-post-office-sending-a-package-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-16-EN-03",
+    "topicId": "at-the-post-office-sending-a-package-basics",
+    "language": "en",
+    "question": "How much would each shipping method cost?",
+    "expectedImageId": "at-the-post-office-sending-a-package-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-16-EN-04",
+    "topicId": "at-the-post-office-sending-a-package-basics",
+    "language": "en",
+    "question": "The recipient's street number is missing; can I update it first?",
+    "expectedImageId": "at-the-post-office-sending-a-package-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-16-EN-05",
+    "topicId": "at-the-post-office-sending-a-package-basics",
+    "language": "en",
+    "question": "Will I get a number to follow the parcel after posting it?",
+    "expectedImageId": "at-the-post-office-sending-a-package-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-16-ZH-01",
+    "topicId": "at-the-post-office-sending-a-package-basics",
+    "language": "zh-TW",
+    "question": "一般寄送和快速寄送有什麼差別？",
+    "expectedImageId": "at-the-post-office-sending-a-package-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-16-ZH-02",
+    "topicId": "at-the-post-office-sending-a-package-basics",
+    "language": "zh-TW",
+    "question": "我想寄一個包裹給住在國外的朋友。",
+    "expectedImageId": "at-the-post-office-sending-a-package-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-16-ZH-03",
+    "topicId": "at-the-post-office-sending-a-package-basics",
+    "language": "zh-TW",
+    "question": "不同的寄件方式各要多少錢？",
+    "expectedImageId": "at-the-post-office-sending-a-package-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-16-ZH-04",
+    "topicId": "at-the-post-office-sending-a-package-basics",
+    "language": "zh-TW",
+    "question": "收件地址少了門牌號碼，可以先補完整再寄嗎？",
+    "expectedImageId": "at-the-post-office-sending-a-package-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-16-ZH-05",
+    "topicId": "at-the-post-office-sending-a-package-basics",
+    "language": "zh-TW",
+    "question": "寄出後會拿到可以追蹤包裹的編號嗎？",
+    "expectedImageId": "at-the-post-office-sending-a-package-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-17-EN-01",
+    "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "language": "en",
+    "question": "Where can I buy a ticket to the next city?",
+    "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-17-EN-02",
+    "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "language": "en",
+    "question": "Does this train require a seat reservation?",
+    "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-17-EN-03",
+    "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "language": "en",
+    "question": "How much time do I have to transfer at the central stop?",
+    "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-17-EN-04",
+    "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "language": "en",
+    "question": "My connection is tight; is there another service I could take?",
+    "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-17-EN-05",
+    "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "language": "en",
+    "question": "How do I ask which platform the connecting train leaves from?",
+    "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-17-ZH-01",
+    "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "language": "zh-TW",
+    "question": "我要去哪裡買到下一個城市的車票？",
+    "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-17-ZH-02",
+    "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "language": "zh-TW",
+    "question": "這班車需要先預訂座位嗎？",
+    "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-17-ZH-03",
+    "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "language": "zh-TW",
+    "question": "在中央車站轉車有多少時間？",
+    "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-17-ZH-04",
+    "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "language": "zh-TW",
+    "question": "轉車時間很緊，還有別的班次可以搭嗎？",
+    "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-17-ZH-05",
+    "topicId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "language": "zh-TW",
+    "question": "要怎麼詢問轉乘的車會從哪個月台發車？",
+    "expectedImageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-18-EN-01",
+    "topicId": "at-the-library-borrowing-and-returning-books-basics",
+    "language": "en",
+    "question": "Can I borrow this novel today?",
+    "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-18-EN-02",
+    "topicId": "at-the-library-borrowing-and-returning-books-basics",
+    "language": "en",
+    "question": "When should I bring this book back?",
+    "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-18-EN-03",
+    "topicId": "at-the-library-borrowing-and-returning-books-basics",
+    "language": "en",
+    "question": "Someone else has requested the title; can I renew it?",
+    "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-18-EN-04",
+    "topicId": "at-the-library-borrowing-and-returning-books-basics",
+    "language": "en",
+    "question": "I returned the book yesterday, but my account still shows it out.",
+    "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-18-EN-05",
+    "topicId": "at-the-library-borrowing-and-returning-books-basics",
+    "language": "en",
+    "question": "How can I ask whether a late return has a fee?",
+    "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-18-ZH-01",
+    "topicId": "at-the-library-borrowing-and-returning-books-basics",
+    "language": "zh-TW",
+    "question": "逾期還書會不會產生費用？",
+    "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-18-ZH-02",
+    "topicId": "at-the-library-borrowing-and-returning-books-basics",
+    "language": "zh-TW",
+    "question": "我今天可以借這本小說嗎？",
+    "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-18-ZH-03",
+    "topicId": "at-the-library-borrowing-and-returning-books-basics",
+    "language": "zh-TW",
+    "question": "這本書最晚什麼時候要還？",
+    "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-18-ZH-04",
+    "topicId": "at-the-library-borrowing-and-returning-books-basics",
+    "language": "zh-TW",
+    "question": "有人也預約了這本書，我還能續借嗎？",
+    "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-18-ZH-05",
+    "topicId": "at-the-library-borrowing-and-returning-books-basics",
+    "language": "zh-TW",
+    "question": "我昨天已經還書，但帳戶仍顯示借閱中。",
+    "expectedImageId": "at-the-library-borrowing-and-returning-books-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-19-EN-01",
+    "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "language": "en",
+    "question": "How can I buy a ticket for tonight's film?",
+    "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-19-EN-02",
+    "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "language": "en",
+    "question": "Are there any seats together near the center?",
+    "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-19-EN-03",
+    "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "language": "en",
+    "question": "The seat number on my ticket is already occupied.",
+    "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-19-EN-04",
+    "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "language": "en",
+    "question": "Can I exchange these tickets for the later show?",
+    "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-19-EN-05",
+    "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "language": "en",
+    "question": "What should I say if someone is sitting in my assigned seat?",
+    "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-19-ZH-01",
+    "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "language": "zh-TW",
+    "question": "今晚的電影票要怎麼買？",
+    "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-19-ZH-02",
+    "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "language": "zh-TW",
+    "question": "中間附近還有連在一起的座位嗎？",
+    "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-19-ZH-03",
+    "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "language": "zh-TW",
+    "question": "票上的座位號碼已經有人坐了。",
+    "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-19-ZH-04",
+    "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "language": "zh-TW",
+    "question": "可以把票改成晚一點的場次嗎？",
+    "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-19-ZH-05",
+    "topicId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "language": "zh-TW",
+    "question": "如果有人坐在我指定的座位上，該怎麼說？",
+    "expectedImageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-20-EN-01",
+    "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "language": "en",
+    "question": "What non-dairy choices can I add to an iced espresso drink?",
+    "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-20-EN-02",
+    "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "language": "en",
+    "question": "Can the sweetness be reduced and the ice kept light?",
+    "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-20-EN-03",
+    "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "language": "en",
+    "question": "How much does the largest cold latte cost?",
+    "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-20-EN-04",
+    "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "language": "en",
+    "question": "The sticker on my cup lists a different milk than I requested.",
+    "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-20-EN-05",
+    "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "language": "en",
+    "question": "Would you mind comparing the receipt with the cup sticker and remaking it?",
+    "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-20-ZH-01",
+    "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "language": "zh-TW",
+    "question": "冰咖啡可以改用哪些植物奶？",
+    "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-20-ZH-02",
+    "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "language": "zh-TW",
+    "question": "甜度可以調低，冰塊也少放一點嗎？",
+    "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-20-ZH-03",
+    "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "language": "zh-TW",
+    "question": "最大杯的冰拿鐵要多少錢？",
+    "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-20-ZH-04",
+    "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "language": "zh-TW",
+    "question": "杯子貼紙上的牛奶和我點的不一樣。",
+    "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  },
+  {
+    "testId": "RLS-20-ZH-05",
+    "topicId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "language": "zh-TW",
+    "question": "可以幫我比對收據和杯貼，然後重新製作嗎？",
+    "expectedImageId": "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+    "queryType": "unclassified",
+    "suite": "real-life-200"
+  }
+]
