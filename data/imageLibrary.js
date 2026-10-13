@@ -279,6 +279,38 @@ const diagramMap = [
     related: []
 },
 {
+    id: "at-the-airport-checking-in-and-boarding-basics",
+    title: "At the Airport — Checking In and Boarding 機場報到與登機",
+    keywords: [
+        "機場報到", "機場辦理報到", "機場報到英文", "航空公司報到", "機場報到櫃檯", "航班報到", "出國報到", "護照查驗",
+        "登機證", "國際航班", "行李托運", "託運行李", "托運行李超重", "託運行李超重",
+        "行李超重", "行李重量限制", "行李重量限額", "行李超重費", "超重行李費用",
+        "手提行李", "隨身行李", "重新整理行李", "行李秤重", "行李秤", "登機門變更",
+        "登機門更改", "登機門異動", "航班登機門變更", "登機門通知", "查詢登機門",
+        "確認登機門", "登機門變更時", "新登機門資訊", "核實航班資訊", "尋找登機門", "登機時間", "起飛時間", "飛機登機",
+        "辦理登機", "機場登機流程",
+
+        "airport check-in", "checking in at the airport", "airline check-in counter", "check-in counter",
+        "international flight", "flight check-in", "passport at check-in", "flight reservation", "boarding pass",
+        "checked baggage", "checking a bag", "check my bag", "baggage allowance", "checked-baggage allowance",
+        "baggage weight limit", "baggage within the weight limit", "baggage is within the weight limit", "baggage is overweight", "overweight baggage", "excess baggage", "excess baggage fee",
+        "additional baggage fee", "carry-on luggage", "carry-on baggage", "rearrange luggage",
+        "move items to carry-on", "move items to my carry-on", "baggage weight", "luggage scale",
+        "boarding gate", "boarding gate change", "boarding gate changed", "gate change", "gate change notification", "flight gate changed",
+        "updated gate information", "verify flight information", "designated boarding gate",
+        "airport gate directions", "find the boarding gate", "verify the new gate", "new gate information",
+        "boarding time", "what time is boarding", "departure time", "flight departure", "boarding a plane", "proceed to boarding"
+    ],
+    file: "images/english/at-the-airport-checking-in-and-boarding-basics.png",
+    alt: "At the Airport — Checking In and Boarding 機場報到與登機英文教學圖，以 Emma 的 12 格連續旅程練習尋找報到櫃檯、辦理國際航班報到、處理託運行李超重並重新分裝、取得登機證，以及核實登機門變更和登機時間；分為 Beginner、Intermediate 與 Upper-Intermediate 三個程度。",
+    category: "english",
+    grade: 9,
+    chapter: "Real-Life Situations 真實生活情境",
+    concept: "At the Airport — Checking In and Boarding：練習尋找航空公司報到櫃檯、出示護照並確認航班、了解本故事航班的託運行李限額、處理行李超重與重新分裝、取得登機證、核實登機門異動並確認登機資訊；包含 Beginner、Intermediate 與 Upper-Intermediate 分級內容。",
+    difficulty: 3,
+    related: ["airport-and-business-travel-basics"]
+},
+{
     id: "people-introduction-basics",
 
     title: "People & Introduction 人物與自我介紹",
