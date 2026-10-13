@@ -135,10 +135,12 @@ const diagramMap = [
     keywords: [
         "餐點出錯", "餐點送錯", "餐廳客訴", "餐點錯誤", "更換餐點",
         "重新製作餐點", "退款英文", "核對訂單", "處理客訴", "餐點與訂單不符",
+        "點的不一樣", "配菜不是我選的", "餐點出了差錯", "原本點的內容", "送錯餐",
         "wrong order", "wrong dish", "incorrect food order", "restaurant complaint",
         "food complaint", "replace a dish", "replacement", "remake an order",
         "refund", "verify an order", "customer service", "restaurant mistake",
-        "restaurant problem", "incorrect order"
+        "restaurant problem", "incorrect order", "what I asked for", "without the side",
+        "kitchen made a mistake", "check my original request", "wrong meal"
     ],
     file: "images/english/dealing-with-a-wrong-order-basics.png",
     alt: "Dealing with a Wrong Order 餐點出錯與客訴英文教學圖，以 12 格連續情境呈現發現餐點與訂單不符、禮貌說明問題、核對訂單、討論重新製作或退款，並確認處理方式；分為 Beginner、Intermediate 與 Upper-Intermediate 三個程度。",
@@ -2363,7 +2365,7 @@ const diagramMap = [
     id: "electricity-and-magnetism-basics",
     title: "Electricity & Magnetism 電與磁",
     keywords: [
-        "電力", "電與磁", "電學", "電流",
+        "電力", "電與磁", "電和磁", "電磁關係", "電學", "電流",
         "電荷", "電子", "電子移動", "電路", "電池", "燈泡",
         "磁", "磁力", "磁性", "磁鐵", "磁場",
         "指南針", "揚聲器", "冰箱磁鐵",
@@ -16795,53 +16797,118 @@ if (typeof module !== "undefined") {
 
 }
 
-function getDiagramInfo(question) {
+// Search-only index: source image-library records and their keywords stay untouched.
+const imageSearchIrregularForms = new Map([
+    ["brought", "bring"], ["bought", "buy"], ["made", "make"],
+]);
+const imageSearchRegularForms = new Map([
+    ["dishes", "dish"],
+    ["orders", "order"], ["ordered", "order"],
+    ["brings", "bring"], ["serves", "serve"], ["served", "serve"],
+    ["replaces", "replace"], ["replaced", "replace"],
+    ["returns", "return"], ["returned", "return"],
+    ["books", "book"], ["buys", "buy"], ["makes", "make"],
+]);
+const imageSearchContractions = new Map([
+    ["isn't", "is not"], ["doesn't", "does not"], ["don't", "do not"],
+    ["can't", "can not"], ["cannot", "can not"], ["won't", "will not"],
+    ["didn't", "did not"],
+]);
+const imageSearchEnglishKeywordPattern = /^[\p{Script=Latin}\p{N}\s'’\-]+$/u;
+const imageSearchSingleHanPattern = /^\p{Script=Han}$/u;
+let imageSearchIndex = null;
 
-    const text = question.toLowerCase();
+function normalizeImageSearchEnglish(text) {
+    const expanded = text.normalize("NFC").toLowerCase()
+        .replace(/[’‘]/g, "'")
+        .replace(/\b(isn't|doesn't|don't|can't|cannot|won't|didn't)\b/gi,
+            (word) => imageSearchContractions.get(word.toLowerCase()) || word);
+    return (expanded.match(/[\p{Script=Latin}\p{N}]+/gu) || []).map((token) => {
+        if (imageSearchIrregularForms.has(token)) return imageSearchIrregularForms.get(token);
+        return imageSearchRegularForms.get(token) || token;
+    });
+}
 
-    const results = [];
-
-    for (const item of diagramMap) {
-
-    let score = 0;
-
-    for (const keyword of item.keywords) {
-
-        const normalizedKeyword = keyword.toLowerCase();
-
-        const isSingleEnglishWord = /^[a-z]+$/.test(normalizedKeyword);
-
-        const isMatch = normalizedKeyword === "電子"
-            ? text === normalizedKeyword
-            : isSingleEnglishWord
-                ? new RegExp(`\\b${normalizedKeyword}\\b`).test(text)
-                : text.includes(normalizedKeyword);
-
-        if (isMatch) {
-            score++;
-
-            // 完整命中較長的主題詞，給予額外權重
-            if (normalizedKeyword.length >= 2) {
-                score += normalizedKeyword.length;
+function buildImageSearchIndex(diagrams) {
+    return diagrams.map((item, itemIndex) => {
+        const chineseKeywords = [];
+        const englishGroups = new Map();
+        for (let ordinal = 0; ordinal < item.keywords.length; ordinal += 1) {
+            const keyword = item.keywords[ordinal];
+            const normalized = keyword.normalize("NFC").toLowerCase();
+            if (imageSearchEnglishKeywordPattern.test(keyword)) {
+                const tokens = normalizeImageSearchEnglish(keyword);
+                if (!tokens.length || (tokens.length === 1 && tokens[0] === "return")) continue;
+                const key = tokens.join(" ");
+                const rawTokens = normalized.match(/[\p{Script=Latin}\p{N}]+/gu) || [];
+                const originalWeight = 1 + (normalized.length >= 2 ? normalized.length : 0);
+                const canonicalWeight = 1 + key.length;
+                const weight = JSON.stringify(tokens) === JSON.stringify(rawTokens)
+                    ? originalWeight
+                    : canonicalWeight;
+                const existing = englishGroups.get(key);
+                if (existing) {
+                    existing.variants.push(keyword);
+                    if (weight > existing.weight) existing.weight = weight;
+                } else {
+                    englishGroups.set(key, { tokens, weight, variants: [keyword] });
+                }
+            } else {
+                chineseKeywords.push({
+                    keyword,
+                    normalized,
+                    weight: 1 + (normalized.length >= 2 ? normalized.length : 0),
+                    singleHan: imageSearchSingleHanPattern.test(normalized),
+                });
             }
         }
+        return { item, itemIndex, chineseKeywords, englishGroups: [...englishGroups.values()] };
+    });
+}
 
+function imageSearchTokenSequenceIncludes(queryTokens, keywordTokens) {
+    if (!keywordTokens.length || keywordTokens.length > queryTokens.length) return false;
+    outer: for (let start = 0; start <= queryTokens.length - keywordTokens.length; start += 1) {
+        for (let offset = 0; offset < keywordTokens.length; offset += 1) {
+            if (queryTokens[start + offset] !== keywordTokens[offset]) continue outer;
+        }
+        return true;
     }
+    return false;
+}
 
-        if (score > 0) {
+function getDiagramInfo(question) {
+    if (!imageSearchIndex) imageSearchIndex = buildImageSearchIndex(diagramMap);
 
-            results.push({
-                item: item,
-                score: score
-            });
+    const text = question.normalize("NFC").toLowerCase();
+    const queryTokens = normalizeImageSearchEnglish(question);
+    const isExactSingleHanQuery = imageSearchSingleHanPattern.test(question.trim());
+    const results = [];
 
+    for (const record of imageSearchIndex) {
+        let score = 0;
+        let hasValidMultiCharacterHit = false;
+
+        for (const entry of record.chineseKeywords) {
+            const isMatch = entry.normalized === "電子"
+                ? text === entry.normalized
+                : text.includes(entry.normalized);
+            if (!isMatch) continue;
+            score += entry.weight;
+            if (!entry.singleHan) hasValidMultiCharacterHit = true;
+        }
+
+        for (const group of record.englishGroups) {
+            if (!imageSearchTokenSequenceIncludes(queryTokens, group.tokens)) continue;
+            score += group.weight;
+            hasValidMultiCharacterHit = true;
+        }
+
+        if (score > 0 && (isExactSingleHanQuery || hasValidMultiCharacterHit)) {
+            results.push({ item: record.item, score, itemIndex: record.itemIndex });
         }
     }
 
-    results.sort((a, b) => b.score - a.score);
-
-
-    return results
-        .slice(0, 3)
-        .map(result => result.item);
+    results.sort((a, b) => b.score - a.score || a.itemIndex - b.itemIndex);
+    return results.slice(0, 3).map((result) => result.item);
 }

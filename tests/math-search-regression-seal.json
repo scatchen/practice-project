@@ -1,0 +1,28 @@
+{
+  "suite": "phase4g9d-chinese-math-regression",
+  "sha256": "bd4ec8778bf5d7ef1db983193995ca53662f996d48445decf41665a42e99a8f8",
+  "cases": 40,
+  "createdAt": "2026-10-13T18:39:38.793Z",
+  "gitHead": "f29f46bcfbbdbbf7f223a18061aa8f5d8eaa442a",
+  "languageCounts": {
+    "zh-TW": 38,
+    "zh-TW-en-mixed": 2
+  },
+  "categoryCounts": {
+    "geometry": 10,
+    "coordinate": 2,
+    "function": 5,
+    "algebra": 11,
+    "algebra-symbols": 3,
+    "geometry-symbols": 3,
+    "mixed-language": 1,
+    "short-query": 4,
+    "coordinate-symbols": 1
+  },
+  "mathImageCount": 28,
+  "mathImagesCovered": 28,
+  "expectedImageIdsValidated": true,
+  "caseIdsUnique": true,
+  "noExpectedImageCount": 1,
+  "notice": "New Phase 4G-9D regression suite; it does not reconstruct or claim to be the unsaved earlier 28-case set."
+}
