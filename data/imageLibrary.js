@@ -16818,6 +16818,34 @@ const imageSearchEnglishKeywordPattern = /^[\p{Script=Latin}\p{N}\s'’\-]+$/u;
 const imageSearchSingleHanPattern = /^\p{Script=Han}$/u;
 let imageSearchIndex = null;
 
+// English-only sparse retrieval. The vocabulary and thresholds mirror the
+// PHASE 4G-10B prototype; this index is built once, on the first English query.
+const imageSearchSparseParams = Object.freeze({
+    titleWeight: 2.5,
+    keywordWeight: 1.5,
+    conceptWeight: 0.5,
+    bonusMultiplier: 1.8,
+    bonusCap: 18,
+    minimumDistinctTerms: 2,
+    minimumStrongTerms: 2,
+    rareDocumentFrequency: 30,
+    minimumQueryCoverage: 0.35,
+    minimumSparseScore: 4,
+});
+const imageSearchSparseStopWords = new Set((
+    "a an and are as at be been before but by can cannot could did do does for from had has have " +
+    "he her his how i in into is it its let me my of on or our please she should so than that " +
+    "the their them there these they this those to was we were what when where which who why will " +
+    "with would you your because need needs want wants make makes made help helps show tell say says " +
+    "ask asking use uses using something anything another one two three some any get got just really " +
+    "only later back check"
+).split(/\s+/));
+const imageSearchSparseAmbiguousTerms = new Set(
+    "book ice balance return light current charge bank order water problem item change fit side food meal".split(" ")
+);
+const imageSearchSparseLatinPattern = /\p{Script=Latin}/u;
+let imageSearchSparseIndex = null;
+
 function normalizeImageSearchEnglish(text) {
     const expanded = text.normalize("NFC").toLowerCase()
         .replace(/[’‘]/g, "'")
@@ -16877,7 +16905,41 @@ function imageSearchTokenSequenceIncludes(queryTokens, keywordTokens) {
     return false;
 }
 
-function getDiagramInfo(question) {
+function imageSearchSparseContentTerms(text) {
+    return new Set(normalizeImageSearchEnglish(text)
+        .filter((term) => term.length >= 3 && !imageSearchSparseStopWords.has(term)));
+}
+
+function buildImageSearchSparseIndex(diagrams) {
+    const records = diagrams.map((item, itemIndex) => ({ item, itemIndex }))
+        .filter(({ item }) => item.category === "english")
+        .map(({ item, itemIndex }) => {
+            const fields = new Map();
+            const addField = (text, weight) => {
+                for (const term of imageSearchSparseContentTerms(text)) {
+                    fields.set(term, Math.max(fields.get(term) || 0, weight));
+                }
+            };
+            for (const keyword of item.keywords) {
+                if (imageSearchSparseLatinPattern.test(keyword)) {
+                    addField(keyword, imageSearchSparseParams.keywordWeight);
+                }
+            }
+            addField(item.title, imageSearchSparseParams.titleWeight);
+            addField(item.concept, imageSearchSparseParams.conceptWeight);
+            return { item, itemIndex, fields };
+        });
+
+    const documentFrequency = new Map();
+    for (const record of records) {
+        for (const term of record.fields.keys()) {
+            documentFrequency.set(term, (documentFrequency.get(term) || 0) + 1);
+        }
+    }
+    return { records, documentFrequency };
+}
+
+function getImageSearchExactCandidates(question) {
     if (!imageSearchIndex) imageSearchIndex = buildImageSearchIndex(diagramMap);
 
     const text = question.normalize("NFC").toLowerCase();
@@ -16910,5 +16972,79 @@ function getDiagramInfo(question) {
     }
 
     results.sort((a, b) => b.score - a.score || a.itemIndex - b.itemIndex);
-    return results.slice(0, 3).map((result) => result.item);
+    return results;
+}
+
+function getDiagramInfo(question) {
+    const exactResults = getImageSearchExactCandidates(question);
+
+    // Preserve D exactly for Chinese and mixed Chinese-English queries.
+    if (/\p{Script=Han}/u.test(question)) {
+        return exactResults.slice(0, 3).map((result) => result.item);
+    }
+
+    const byId = new Map(exactResults.map((result) => [result.item.id, {
+        ...result,
+        exactScore: result.score,
+        sparseScore: 0,
+    }]));
+    const queryTerms = imageSearchSparseContentTerms(question);
+    if (queryTerms.size < imageSearchSparseParams.minimumDistinctTerms) {
+        return exactResults.slice(0, 3).map((result) => result.item);
+    }
+
+    if (!imageSearchSparseIndex) imageSearchSparseIndex = buildImageSearchSparseIndex(diagramMap);
+
+    const { records, documentFrequency } = imageSearchSparseIndex;
+    for (const record of records) {
+        let matchedCount = 0;
+        let strongMatchedCount = 0;
+        let sparseScore = 0;
+        let hasRareAnchor = false;
+
+        for (const term of queryTerms) {
+            const fieldWeight = record.fields.get(term);
+            if (!fieldWeight) continue;
+
+            const frequency = documentFrequency.get(term) || records.length;
+            const idf = Math.min(3, Math.log(1 + (records.length + 1) / (frequency + 1)));
+            sparseScore += fieldWeight * idf;
+            matchedCount += 1;
+
+            if (!imageSearchSparseAmbiguousTerms.has(term)) strongMatchedCount += 1;
+            if (frequency <= imageSearchSparseParams.rareDocumentFrequency &&
+                !imageSearchSparseAmbiguousTerms.has(term)) {
+                hasRareAnchor = true;
+            }
+        }
+
+        if (matchedCount < imageSearchSparseParams.minimumDistinctTerms ||
+            strongMatchedCount < imageSearchSparseParams.minimumStrongTerms ||
+            !hasRareAnchor ||
+            matchedCount / queryTerms.size < imageSearchSparseParams.minimumQueryCoverage ||
+            sparseScore < imageSearchSparseParams.minimumSparseScore) {
+            continue;
+        }
+
+        const bonus = Math.min(imageSearchSparseParams.bonusCap,
+            sparseScore * imageSearchSparseParams.bonusMultiplier);
+        const existing = byId.get(record.item.id);
+        if (existing) {
+            existing.score += bonus;
+            existing.sparseScore = sparseScore;
+        } else {
+            byId.set(record.item.id, {
+                item: record.item,
+                itemIndex: record.itemIndex,
+                score: bonus,
+                exactScore: 0,
+                sparseScore,
+            });
+        }
+    }
+
+    return [...byId.values()]
+        .sort((a, b) => b.score - a.score || a.itemIndex - b.itemIndex)
+        .slice(0, 3)
+        .map((result) => result.item);
 }
