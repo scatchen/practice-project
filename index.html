@@ -672,6 +672,221 @@ color: #111827;
             font-weight: 700;
         }
 
+        .english-tts-auto-controls {
+            display: inline-flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+            margin: 3px 6px;
+            vertical-align: middle;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .english-tts-auto-control {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
+            padding: 6px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 9px;
+            background: #1d4ed8;
+            color: #ffffff;
+            font: inherit;
+            font-size: 0.72em;
+            font-weight: 700;
+            line-height: 1.2;
+            cursor: pointer;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .english-tts-auto-control:focus-visible {
+            outline: 3px solid #facc15;
+            outline-offset: 2px;
+        }
+
+        .english-tts-auto-sentences {
+            display: inline-flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .english-tts-auto-sentences[hidden] {
+            display: none;
+        }
+
+        .english-tts-panel {
+            margin: 12px 0 18px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.22);
+        }
+
+        .english-tts-panel[hidden] {
+            display: none;
+        }
+
+        .english-tts-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .english-tts-panel button,
+        .english-tts-panel select,
+        .english-tts-settings summary {
+            min-height: 46px;
+            border-radius: 9px;
+            font: inherit;
+        }
+
+        .english-tts-panel button,
+        .english-tts-panel select {
+            padding: 8px 12px;
+        }
+
+        .english-tts-panel button {
+            cursor: pointer;
+        }
+
+        #english-tts-speak-selection {
+            display: none;
+            position: fixed;
+            z-index: 12000;
+            min-width: 112px;
+            min-height: 48px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-radius: 10px;
+            background: #1d4ed8;
+            color: #ffffff;
+            font: inherit;
+            font-weight: 700;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+            touch-action: manipulation;
+        }
+
+        #english-tts-speak-selection.is-floating {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #english-tts-speak-selection:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        #english-tts-floating-stop {
+            --english-tts-safe-top: env(safe-area-inset-top, 0px);
+            --english-tts-safe-right: env(safe-area-inset-right, 0px);
+            --english-tts-safe-bottom: env(safe-area-inset-bottom, 0px);
+            --english-tts-safe-left: env(safe-area-inset-left, 0px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            z-index: 11900;
+            left: auto;
+            right: auto;
+            top: min(65vh, calc(100vh - env(safe-area-inset-bottom, 0px) - 32px));
+            transform: none;
+            min-width: min(144px, calc(100vw - 32px - env(safe-area-inset-right, 0px) - env(safe-area-inset-left, 0px)));
+            min-height: 52px;
+            max-width: calc(100vw - 32px - env(safe-area-inset-right, 0px) - env(safe-area-inset-left, 0px));
+            padding: 10px 14px;
+            border: 1px solid rgba(254, 202, 202, 0.8);
+            border-radius: 12px;
+            background: rgba(127, 29, 29, 0.96);
+            color: #ffffff;
+            font: inherit;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32);
+            cursor: pointer;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        #english-tts-floating-stop[hidden] {
+            display: none;
+        }
+
+        #english-tts-floating-stop:focus-visible {
+            outline: 3px solid #facc15;
+            outline-offset: 3px;
+        }
+
+        @supports (height: 100dvh) {
+            #english-tts-floating-stop {
+                top: min(65dvh, calc(100dvh - env(safe-area-inset-bottom, 0px) - 32px));
+            }
+        }
+
+        .english-tts-panel button:disabled,
+        .english-tts-panel select:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .english-tts-settings {
+            margin-top: 10px;
+        }
+
+        .english-tts-settings summary {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        .english-tts-settings-body {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            gap: 10px;
+            padding: 10px 0 2px;
+        }
+
+        .english-tts-setting {
+            display: grid;
+            gap: 5px;
+        }
+
+        .english-tts-status {
+            min-height: 1.5em;
+            margin: 8px 0 0;
+            line-height: 1.5;
+        }
+
+        .english-tts-hint {
+            margin: 4px 0 0;
+            font-size: 0.92em;
+            line-height: 1.5;
+            opacity: 0.85;
+        }
+
+        @media (max-width: 600px) {
+            .english-tts-panel button,
+            .english-tts-panel select {
+                font-size: 16px;
+            }
+
+            .english-tts-setting,
+            .english-tts-setting select {
+                width: 100%;
+            }
+        }
+
         /* ================= 課堂大輪盤 ================= */
         .wheel-container {
             display: grid;
@@ -1234,6 +1449,50 @@ color: #111827;
 </canvas>
 
 </div>
+
+<div id="english-tts-panel" class="english-tts-panel" hidden>
+    <div class="english-tts-row">
+        <button id="english-tts-speak-selection" type="button" aria-label="朗讀選取英文" disabled>
+            🔊 朗讀
+        </button>
+        <button id="english-tts-stop" type="button" disabled>
+            ⏹ 停止朗讀
+        </button>
+    </div>
+
+    <details class="english-tts-settings">
+        <summary>⚙️ 英文發音設定</summary>
+        <div class="english-tts-settings-body">
+            <label class="english-tts-setting" for="english-tts-voice">
+                英文聲線
+                <select id="english-tts-voice" disabled>
+                    <option value="">正在載入本機英文聲線…</option>
+                </select>
+            </label>
+            <button id="english-tts-preview" type="button" disabled>
+                ▶ 試聽聲線
+            </button>
+            <label class="english-tts-setting" for="english-tts-rate">
+                語速
+                <select id="english-tts-rate">
+                    <option value="1">正常（1.0）</option>
+                    <option value="0.8">慢速（0.8）</option>
+                </select>
+            </label>
+        </div>
+    </details>
+
+    <p id="english-tts-status" class="english-tts-status" role="status" aria-live="polite">
+        請在英文回答中選取一段連續英文，再按「朗讀選取英文」。
+    </p>
+    <p class="english-tts-hint">
+        若畫布正使用畫筆、螢光筆或橡皮擦，請先切換至「選取模式」再選字。含中文或跨行選取會被拒絕。
+    </p>
+</div>
+
+<button id="english-tts-floating-stop" type="button" aria-label="停止目前的英文朗讀" hidden>
+    ⏹ 停止朗讀
+</button>
 
                 </section>
 
@@ -2598,6 +2857,9 @@ function setSubjectMode(mode) {
 
     if (mode === "math") {
 
+        stopEnglishSpeech();
+        clearEnglishTTSSelection("數學模式不提供英文朗讀。");
+
         title.innerText = "🤖 睿爾數學小助教";
 
         questionBox.placeholder = "請輸入想學習的數學問題...";
@@ -2615,8 +2877,1608 @@ function setSubjectMode(mode) {
 
     }
 
+    const ttsPanel = document.getElementById("english-tts-panel");
+    if (ttsPanel) {
+        ttsPanel.hidden = mode !== "english";
+    }
+
     console.log("目前模式：", appState.subjectMode);
 
+}
+
+const englishTTSState = {
+    initialized: false,
+    supported: false,
+    synthesis: null,
+    voices: [],
+    selectedVoiceKey: "",
+    preferredVoiceKey: "",
+    rate: 1,
+    lastSelectionText: "",
+    lastSelectionRange: null,
+    positionFrame: 0,
+    positionTimer: 0,
+    selectionButtonPointerActive: false,
+    selectionButtonPointerTimer: 0,
+    collapsedSelectionTimer: 0,
+    buttonHomeParent: null,
+    buttonHomeNextSibling: null,
+    activeUtterance: null,
+    activeSpeechTrigger: null,
+    activeSpeechTriggerRect: null,
+    stopPositionFrame: 0,
+    responseObserver: null,
+    collocationReplayTimer: 0,
+    collocationReplayGeneration: 0,
+    observedAnswerRoot: null
+};
+
+const ENGLISH_TTS_VOICE_KEY = "practiceProject.englishTTS.voice";
+const ENGLISH_TTS_RATE_KEY = "practiceProject.englishTTS.rate";
+const ENGLISH_TTS_SAMPLE = "Could you help me?";
+const ENGLISH_TTS_MAX_SELECTION_CHARS = 1200;
+
+function getEnglishTTSVoiceKey(voice) {
+    return [voice.voiceURI || "", voice.lang || "", voice.name || ""]
+        .map(value => encodeURIComponent(value))
+        .join("|");
+}
+
+function readEnglishTTSPreference(key) {
+    try {
+        return window.localStorage.getItem(key) || "";
+    } catch (error) {
+        return "";
+    }
+}
+
+function saveEnglishTTSPreference(key, value) {
+    try {
+        window.localStorage.setItem(key, value);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+function setEnglishTTSStatus(message) {
+    const status = document.getElementById("english-tts-status");
+    if (status) {
+        status.textContent = message;
+    }
+}
+
+function clearEnglishTTSSelection(message) {
+    if (englishTTSState.collapsedSelectionTimer) {
+        window.clearTimeout(englishTTSState.collapsedSelectionTimer);
+        englishTTSState.collapsedSelectionTimer = 0;
+    }
+    englishTTSState.lastSelectionText = "";
+    englishTTSState.lastSelectionRange = null;
+    hideEnglishFloatingButton();
+    const button = document.getElementById("english-tts-speak-selection");
+    if (button) {
+        button.disabled = true;
+    }
+    if (message) {
+        setEnglishTTSStatus(message);
+    }
+}
+
+function hideEnglishFloatingButton() {
+    if (englishTTSState.positionTimer) {
+        window.clearTimeout(englishTTSState.positionTimer);
+        englishTTSState.positionTimer = 0;
+    }
+    if (englishTTSState.positionFrame) {
+        window.cancelAnimationFrame(englishTTSState.positionFrame);
+        englishTTSState.positionFrame = 0;
+    }
+    const button = document.getElementById("english-tts-speak-selection");
+    if (button) {
+        button.classList.remove("is-floating");
+        button.style.visibility = "";
+        button.style.left = "";
+        button.style.top = "";
+        button.setAttribute("aria-hidden", "true");
+        if (englishTTSState.buttonHomeParent && button.parentNode !== englishTTSState.buttonHomeParent) {
+            const nextSibling = englishTTSState.buttonHomeNextSibling;
+            const insertBefore = nextSibling && nextSibling.parentNode === englishTTSState.buttonHomeParent
+                ? nextSibling
+                : null;
+            englishTTSState.buttonHomeParent.insertBefore(button, insertBefore);
+        }
+    }
+    positionEnglishTTSFloatingStopButton();
+}
+
+function scheduleEnglishFloatingButtonPosition() {
+    if (!englishTTSState.lastSelectionText || englishTTSState.selectionButtonPointerActive) {
+        return;
+    }
+    const button = document.getElementById("english-tts-speak-selection");
+    if (button && button.classList.contains("is-floating")) {
+        // Keep the control away from Safari's selection handles while the user adjusts the range.
+        button.style.visibility = "hidden";
+    }
+    if (englishTTSState.positionTimer) {
+        window.clearTimeout(englishTTSState.positionTimer);
+    }
+    englishTTSState.positionTimer = window.setTimeout(() => {
+        englishTTSState.positionTimer = 0;
+        if (englishTTSState.positionFrame) {
+            window.cancelAnimationFrame(englishTTSState.positionFrame);
+        }
+        englishTTSState.positionFrame = window.requestAnimationFrame(() => {
+            englishTTSState.positionFrame = 0;
+            positionEnglishFloatingButton();
+        });
+    }, 160);
+}
+
+function positionEnglishFloatingButton() {
+    const button = document.getElementById("english-tts-speak-selection");
+    if (!button || appState.subjectMode !== "english" || !englishTTSState.lastSelectionText) {
+        hideEnglishFloatingButton();
+        return;
+    }
+
+    if (button.parentNode !== document.body) {
+        document.body.appendChild(button);
+    }
+    button.classList.add("is-floating");
+    button.style.visibility = "hidden";
+    button.setAttribute("aria-hidden", "false");
+
+    const buttonRect = button.getBoundingClientRect();
+    const visualViewport = window.visualViewport;
+    const viewportLeft = visualViewport ? visualViewport.offsetLeft : 0;
+    const viewportTop = visualViewport ? visualViewport.offsetTop : 0;
+    const viewportWidth = visualViewport ? visualViewport.width : window.innerWidth;
+    const viewportHeight = visualViewport ? visualViewport.height : window.innerHeight;
+    const viewportRight = viewportLeft + viewportWidth;
+    const viewportBottom = viewportTop + viewportHeight;
+    const margin = 12;
+    const gap = 12;
+    const width = buttonRect.width || 112;
+    const height = buttonRect.height || 48;
+    const minLeft = viewportLeft + margin;
+    const minTop = viewportTop + margin;
+    const maxLeft = Math.max(minLeft, viewportRight - width - margin);
+    const maxTop = Math.max(minTop, viewportBottom - height - margin);
+    let selectedBounds = null;
+    let selectionLineRects = [];
+    let anchorRect = null;
+
+    try {
+        if (englishTTSState.lastSelectionRange) {
+            const rangeRect = englishTTSState.lastSelectionRange.getBoundingClientRect();
+            const coordinateOffsetLeft = visualViewport ? visualViewport.offsetLeft : 0;
+            const coordinateOffsetTop = visualViewport ? visualViewport.offsetTop : 0;
+            selectedBounds = {
+                left: rangeRect.left + coordinateOffsetLeft,
+                right: rangeRect.right + coordinateOffsetLeft,
+                top: rangeRect.top + coordinateOffsetTop,
+                bottom: rangeRect.bottom + coordinateOffsetTop,
+                width: rangeRect.width,
+                height: rangeRect.height
+            };
+            const rangeClientRects = typeof englishTTSState.lastSelectionRange.getClientRects === "function"
+                ? englishTTSState.lastSelectionRange.getClientRects()
+                : [];
+            const clientRects = Array.from(rangeClientRects)
+                .filter(rect => rect.width > 0 && rect.height > 0)
+                .map(rect => ({
+                    left: rect.left + coordinateOffsetLeft,
+                    right: rect.right + coordinateOffsetLeft,
+                    top: rect.top + coordinateOffsetTop,
+                    bottom: rect.bottom + coordinateOffsetTop,
+                    width: rect.width,
+                    height: rect.height
+                }));
+            if (clientRects.length) {
+                selectionLineRects = clientRects;
+                anchorRect = clientRects[clientRects.length - 1];
+            } else {
+                anchorRect = selectedBounds;
+                selectionLineRects = selectedBounds ? [selectedBounds] : [];
+            }
+        }
+    } catch (error) {
+        selectedBounds = null;
+        selectionLineRects = [];
+        anchorRect = null;
+    }
+
+    const selectedBoundsAreUsable = selectedBounds &&
+        Number.isFinite(selectedBounds.left) &&
+        Number.isFinite(selectedBounds.top) &&
+        selectedBounds.width > 0 &&
+        selectedBounds.height > 0 &&
+        selectedBounds.width <= viewportWidth * 0.95 &&
+        selectedBounds.height <= viewportHeight * 0.8;
+
+    let left;
+    let top;
+
+    if (selectedBoundsAreUsable && anchorRect) {
+        const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum);
+        const candidates = [
+            { left: clamp(anchorRect.right - width, minLeft, maxLeft), top: anchorRect.bottom + gap },
+            { left: anchorRect.right + gap, top: clamp(anchorRect.top + (anchorRect.height - height) / 2, minTop, maxTop) },
+            { left: anchorRect.left - width - gap, top: clamp(anchorRect.top + (anchorRect.height - height) / 2, minTop, maxTop) },
+            { left: clamp(anchorRect.right - width, minLeft, maxLeft), top: anchorRect.top - height - gap }
+        ];
+        const fitsAndAvoidsSelection = candidate =>
+            candidate.left >= minLeft &&
+            candidate.left + width <= viewportRight - margin &&
+            candidate.top >= minTop &&
+            candidate.top + height <= viewportBottom - margin &&
+            selectionLineRects.every(rect =>
+                candidate.left + width <= rect.left ||
+                candidate.left >= rect.right ||
+                candidate.top + height <= rect.top ||
+                candidate.top >= rect.bottom
+            );
+        const nearbyPosition = candidates.find(fitsAndAvoidsSelection);
+
+        if (nearbyPosition) {
+            left = nearbyPosition.left;
+            top = nearbyPosition.top;
+        }
+    }
+
+    if (!Number.isFinite(left) || !Number.isFinite(top)) {
+        // Large or unavailable ranges use a viewport corner opposite the selection.
+        const centerX = selectedBoundsAreUsable
+            ? selectedBounds.left + selectedBounds.width / 2
+            : viewportLeft + viewportWidth / 2;
+        const centerY = selectedBoundsAreUsable
+            ? selectedBounds.top + selectedBounds.height / 2
+            : viewportTop + viewportHeight / 2;
+        left = centerX < viewportLeft + viewportWidth / 2 ? maxLeft : minLeft;
+        top = centerY < viewportTop + viewportHeight / 2 ? maxTop : minTop;
+        left = Math.min(Math.max(left, minLeft), maxLeft);
+        top = Math.min(Math.max(top, minTop), maxTop);
+    }
+
+    button.style.left = `${left}px`;
+    button.style.top = `${top}px`;
+    button.style.visibility = "visible";
+    positionEnglishTTSFloatingStopButton();
+}
+
+function getSelectedLocalEnglishVoice() {
+    return englishTTSState.voices.find(
+        voice => getEnglishTTSVoiceKey(voice) === englishTTSState.selectedVoiceKey
+    ) || null;
+}
+
+function rememberEnglishSpeechTrigger(trigger) {
+    englishTTSState.activeSpeechTrigger = trigger && typeof trigger.getBoundingClientRect === "function"
+        ? trigger
+        : null;
+    englishTTSState.activeSpeechTriggerRect = null;
+
+    if (!englishTTSState.activeSpeechTrigger) {
+        return;
+    }
+
+    try {
+        const rect = englishTTSState.activeSpeechTrigger.getBoundingClientRect();
+        if (!rect || !rect.width || !rect.height) {
+            return;
+        }
+        const viewport = window.visualViewport;
+        englishTTSState.activeSpeechTriggerRect = {
+            left: rect.left + (viewport ? viewport.offsetLeft : 0),
+            right: rect.right + (viewport ? viewport.offsetLeft : 0),
+            top: rect.top + (viewport ? viewport.offsetTop : 0),
+            bottom: rect.bottom + (viewport ? viewport.offsetTop : 0),
+            width: rect.width,
+            height: rect.height,
+            visualOffsetLeft: viewport ? viewport.offsetLeft : 0,
+            visualOffsetTop: viewport ? viewport.offsetTop : 0
+        };
+    } catch (error) {
+        englishTTSState.activeSpeechTriggerRect = null;
+    }
+}
+
+function scheduleEnglishTTSFloatingStopPosition() {
+    if (englishTTSState.stopPositionFrame) {
+        return;
+    }
+    const requestFrame = window.requestAnimationFrame || (callback => window.setTimeout(callback, 16));
+    englishTTSState.stopPositionFrame = requestFrame(() => {
+        englishTTSState.stopPositionFrame = 0;
+        positionEnglishTTSFloatingStopButton();
+    });
+}
+
+function updateEnglishTTSControls() {
+    const voiceSelect = document.getElementById("english-tts-voice");
+    const previewButton = document.getElementById("english-tts-preview");
+    const speakButton = document.getElementById("english-tts-speak-selection");
+    const stopButton = document.getElementById("english-tts-stop");
+    const floatingStopButton = document.getElementById("english-tts-floating-stop");
+    const hasVoice = Boolean(getSelectedLocalEnglishVoice());
+    const canSpeak = englishTTSState.supported && hasVoice && appState.subjectMode === "english";
+
+    if (voiceSelect) {
+        voiceSelect.disabled = !englishTTSState.supported || !englishTTSState.voices.length;
+    }
+    if (previewButton) {
+        previewButton.disabled = !canSpeak;
+    }
+    if (speakButton) {
+        speakButton.disabled = !canSpeak || !englishTTSState.lastSelectionText;
+    }
+    if (stopButton) {
+        stopButton.disabled = !englishTTSState.activeUtterance && !englishTTSState.collocationReplayTimer;
+    }
+    if (floatingStopButton) {
+        const shouldShowStop = appState.subjectMode === "english" &&
+            Boolean(englishTTSState.activeUtterance || englishTTSState.collocationReplayTimer);
+        floatingStopButton.hidden = !shouldShowStop;
+        if (shouldShowStop) {
+            if (floatingStopButton.parentNode !== document.body) {
+                document.body.appendChild(floatingStopButton);
+            }
+            positionEnglishTTSFloatingStopButton();
+        }
+    }
+}
+
+function positionEnglishTTSFloatingStopButton() {
+    const button = document.getElementById("english-tts-floating-stop");
+    if (!button || button.hidden || appState.subjectMode !== "english") {
+        return;
+    }
+
+    // Keep the one floating stop control outside answer containers that may clip fixed descendants.
+    if (button.parentNode !== document.body) {
+        document.body.appendChild(button);
+    }
+
+    const viewport = window.visualViewport;
+    const viewportLeft = viewport ? viewport.offsetLeft : 0;
+    const viewportTop = viewport ? viewport.offsetTop : 0;
+    const viewportWidth = viewport ? viewport.width : window.innerWidth;
+    const viewportHeight = viewport ? viewport.height : window.innerHeight;
+    const margin = 12;
+    const gap = 10;
+    const readSafeInset = name => {
+        try {
+            return parseFloat(window.getComputedStyle(button).getPropertyValue(name)) || 0;
+        } catch (error) {
+            return 0;
+        }
+    };
+    const safeTop = readSafeInset("--english-tts-safe-top");
+    const safeRight = readSafeInset("--english-tts-safe-right");
+    const safeBottom = readSafeInset("--english-tts-safe-bottom");
+    const safeLeft = readSafeInset("--english-tts-safe-left");
+    const minLeft = viewportLeft + safeLeft + margin;
+    const maxRight = viewportLeft + viewportWidth - safeRight - margin;
+    const minTop = viewportTop + safeTop + margin;
+    const maxBottom = viewportTop + viewportHeight - safeBottom - margin;
+
+    button.style.visibility = "hidden";
+    const availableWidth = Math.max(48, maxRight - minLeft);
+    button.style.maxWidth = `${availableWidth}px`;
+    const measured = button.getBoundingClientRect();
+    const buttonWidth = Math.min(measured.width || 144, availableWidth);
+    const buttonHeight = measured.height || 52;
+    const maxLeft = Math.max(minLeft, maxRight - buttonWidth);
+    const maxTop = Math.max(minTop, maxBottom - buttonHeight);
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+    const place = (left, top) => {
+        button.style.right = "auto";
+        button.style.left = `${clamp(left, minLeft, maxLeft)}px`;
+        button.style.top = `${clamp(top, minTop, maxTop)}px`;
+        button.style.transform = "none";
+        button.style.visibility = "visible";
+    };
+    const isAnchorVisible = rect => rect && rect.width > 0 && rect.height > 0 &&
+        rect.right > viewportLeft + safeLeft && rect.left < viewportLeft + viewportWidth - safeRight &&
+        rect.bottom > viewportTop + safeTop && rect.top < viewportTop + viewportHeight - safeBottom;
+
+    let anchorRect = null;
+    const trigger = englishTTSState.activeSpeechTrigger;
+    if (trigger && trigger.isConnected !== false) {
+        const isSelectionTrigger = trigger.id === "english-tts-speak-selection";
+        let triggerIsVisible = false;
+        try {
+            const style = window.getComputedStyle(trigger);
+            triggerIsVisible = style.display !== "none" && style.visibility !== "hidden";
+        } catch (error) {
+            triggerIsVisible = false;
+        }
+
+        if (triggerIsVisible) {
+            try {
+                const rect = trigger.getBoundingClientRect();
+                if (rect && rect.width && rect.height) {
+                    anchorRect = {
+                        left: rect.left + (viewport ? viewport.offsetLeft : 0),
+                        right: rect.right + (viewport ? viewport.offsetLeft : 0),
+                        top: rect.top + (viewport ? viewport.offsetTop : 0),
+                        bottom: rect.bottom + (viewport ? viewport.offsetTop : 0),
+                        width: rect.width,
+                        height: rect.height
+                    };
+                    englishTTSState.activeSpeechTriggerRect = {
+                        ...anchorRect,
+                        visualOffsetLeft: viewport ? viewport.offsetLeft : 0,
+                        visualOffsetTop: viewport ? viewport.offsetTop : 0
+                    };
+                }
+            } catch (error) {
+                anchorRect = null;
+            }
+        }
+
+        // The selection speaker may hide after playback starts; retain its last valid viewport position.
+        if (!anchorRect && isSelectionTrigger && englishTTSState.activeSpeechTriggerRect) {
+            const saved = englishTTSState.activeSpeechTriggerRect;
+            const offsetLeftDelta = (viewport ? viewport.offsetLeft : 0) - (saved.visualOffsetLeft || 0);
+            const offsetTopDelta = (viewport ? viewport.offsetTop : 0) - (saved.visualOffsetTop || 0);
+            anchorRect = {
+                left: saved.left + offsetLeftDelta,
+                right: saved.right + offsetLeftDelta,
+                top: saved.top + offsetTopDelta,
+                bottom: saved.bottom + offsetTopDelta,
+                width: saved.width,
+                height: saved.height
+            };
+        }
+    }
+
+    if (isAnchorVisible(anchorRect)) {
+        const alignedTop = clamp(
+            anchorRect.top + (anchorRect.height - buttonHeight) / 2,
+            minTop,
+            maxTop
+        );
+        const rightLeft = anchorRect.right + gap;
+        if (rightLeft + buttonWidth <= maxRight) {
+            place(rightLeft, alignedTop);
+            return;
+        }
+
+        const leftLeft = anchorRect.left - gap - buttonWidth;
+        if (leftLeft >= minLeft) {
+            place(leftLeft, alignedTop);
+            return;
+        }
+
+        const belowTop = anchorRect.bottom + gap;
+        const belowLeft = clamp(anchorRect.left + (anchorRect.width - buttonWidth) / 2, minLeft, maxLeft);
+        if (belowTop + buttonHeight <= maxBottom) {
+            place(belowLeft, belowTop);
+            return;
+        }
+
+        const aboveTop = anchorRect.top - gap - buttonHeight;
+        if (aboveTop >= minTop) {
+            place(belowLeft, aboveTop);
+            return;
+        }
+
+        // On very narrow screens, keep the control reachable even if a non-overlapping side is impossible.
+        place(anchorRect.right <= viewportLeft + viewportWidth / 2 ? maxLeft : minLeft, alignedTop);
+        return;
+    }
+
+    // A scrolled-out or removed trigger docks at a safe visible position until playback ends.
+    const dockTops = [0.65, 0.35, 0.82, 0.18].map(ratio =>
+        clamp(viewportTop + viewportHeight * ratio - buttonHeight / 2, minTop, maxTop)
+    );
+    const selectionButton = document.getElementById("english-tts-speak-selection");
+    const panel = document.getElementById("english-tts-panel");
+    const avoidRects = [];
+    const addAvoidRect = element => {
+        if (!element || (element === panel && element.hidden)) {
+            return;
+        }
+        const rect = element.getBoundingClientRect();
+        if (rect && rect.width && rect.height) {
+            avoidRects.push({
+                left: rect.left + (viewport ? viewport.offsetLeft : 0),
+                right: rect.right + (viewport ? viewport.offsetLeft : 0),
+                top: rect.top + (viewport ? viewport.offsetTop : 0),
+                bottom: rect.bottom + (viewport ? viewport.offsetTop : 0)
+            });
+        }
+    };
+    if (selectionButton && selectionButton.classList.contains("is-floating") &&
+        selectionButton.style.visibility !== "hidden") {
+        addAvoidRect(selectionButton);
+    }
+    addAvoidRect(panel);
+    const dockTop = dockTops.map(top => {
+        const candidate = { left: maxLeft, right: maxLeft + buttonWidth, top, bottom: top + buttonHeight };
+        const overlap = avoidRects.reduce((total, rect) => {
+            const width = Math.max(0, Math.min(candidate.right, rect.right) - Math.max(candidate.left, rect.left));
+            const height = Math.max(0, Math.min(candidate.bottom, rect.bottom) - Math.max(candidate.top, rect.top));
+            return total + width * height;
+        }, 0);
+        return { top, overlap };
+    }).sort((a, b) => a.overlap - b.overlap || a.top - b.top)[0].top;
+    place(maxLeft, dockTop);
+}
+
+function refreshLocalEnglishVoices() {
+    const voiceSelect = document.getElementById("english-tts-voice");
+    if (!englishTTSState.supported || !voiceSelect) {
+        updateEnglishTTSControls();
+        return;
+    }
+
+    let availableVoices = [];
+    try {
+        availableVoices = englishTTSState.synthesis.getVoices();
+    } catch (error) {
+        availableVoices = [];
+    }
+
+    englishTTSState.voices = availableVoices
+        .filter(voice => voice && voice.localService === true && /^en(?:-|$)/i.test(voice.lang || ""))
+        .sort((a, b) => {
+            const aScore = (/^en-US$/i.test(a.lang) ? 4 : 0) + (a.default ? 2 : 0);
+            const bScore = (/^en-US$/i.test(b.lang) ? 4 : 0) + (b.default ? 2 : 0);
+            return bScore - aScore || a.name.localeCompare(b.name);
+        });
+
+    while (voiceSelect.firstChild) {
+        voiceSelect.removeChild(voiceSelect.firstChild);
+    }
+
+    if (!englishTTSState.voices.length) {
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "沒有可用的本機英文聲線";
+        voiceSelect.appendChild(option);
+        englishTTSState.selectedVoiceKey = "";
+        updateEnglishTTSControls();
+        setEnglishTTSStatus("找不到本機英文聲線。請在 iPad 設定中下載英文語音後重新載入；此功能不會使用遠端聲線。");
+        return;
+    }
+
+    englishTTSState.voices.forEach(voice => {
+        const option = document.createElement("option");
+        option.value = getEnglishTTSVoiceKey(voice);
+        option.textContent = `${voice.name} (${voice.lang})${voice.default ? " · 系統預設" : ""}`;
+        voiceSelect.appendChild(option);
+    });
+
+    const preferredVoice = englishTTSState.voices.find(
+        voice => getEnglishTTSVoiceKey(voice) === englishTTSState.preferredVoiceKey
+    );
+    const previouslySelected = englishTTSState.voices.find(
+        voice => getEnglishTTSVoiceKey(voice) === englishTTSState.selectedVoiceKey
+    );
+    const fallbackVoice = englishTTSState.voices.find(voice => /^en-US$/i.test(voice.lang) && voice.default)
+        || englishTTSState.voices.find(voice => /^en-US$/i.test(voice.lang))
+        || englishTTSState.voices.find(voice => voice.default)
+        || englishTTSState.voices[0];
+    const selectedVoice = preferredVoice || previouslySelected || fallbackVoice;
+
+    englishTTSState.selectedVoiceKey = getEnglishTTSVoiceKey(selectedVoice);
+    voiceSelect.value = englishTTSState.selectedVoiceKey;
+    updateEnglishTTSControls();
+
+    if (!preferredVoice && englishTTSState.preferredVoiceKey) {
+        setEnglishTTSStatus("原先選擇的聲線目前不可用，已改用本機英文聲線。可稍後重新載入查看聲線是否恢復。");
+    } else {
+        setEnglishTTSStatus("已載入本機英文聲線。請選取英文回答中的一段連續文字，再按朗讀。");
+    }
+}
+
+function cancelEnglishCollocationReplay() {
+    if (englishTTSState.collocationReplayTimer) {
+        window.clearTimeout(englishTTSState.collocationReplayTimer);
+        englishTTSState.collocationReplayTimer = 0;
+    }
+    englishTTSState.collocationReplayGeneration += 1;
+}
+
+function speakEnglishCollocationSequence(phrases) {
+    const sequence = Array.isArray(phrases)
+        ? phrases.map(phrase => getEnglishTTSUnitText(phrase)).filter(Boolean)
+        : [];
+    if (!sequence.length) {
+        return false;
+    }
+
+    cancelEnglishCollocationReplay();
+    const generation = englishTTSState.collocationReplayGeneration;
+    let phraseIndex = 0;
+    let playIndex = 0;
+
+    const finishSequence = () => {
+        if (generation !== englishTTSState.collocationReplayGeneration) {
+            return;
+        }
+        cancelEnglishCollocationReplay();
+        setEnglishTTSStatus("Common Collocations 搭配詞已朗讀完成。");
+        updateEnglishTTSControls();
+    };
+
+    const playNext = () => {
+        if (generation !== englishTTSState.collocationReplayGeneration || appState.subjectMode !== "english") {
+            updateEnglishTTSControls();
+            return false;
+        }
+
+        const phrase = sequence[phraseIndex];
+        const started = speakEnglishText(phrase, () => {
+            if (generation !== englishTTSState.collocationReplayGeneration || appState.subjectMode !== "english") {
+                return;
+            }
+
+            if (playIndex === 0) {
+                playIndex = 1;
+            } else {
+                playIndex = 0;
+                phraseIndex += 1;
+                if (phraseIndex >= sequence.length) {
+                    finishSequence();
+                    return;
+                }
+            }
+
+            englishTTSState.collocationReplayTimer = window.setTimeout(() => {
+                englishTTSState.collocationReplayTimer = 0;
+                if (generation !== englishTTSState.collocationReplayGeneration || appState.subjectMode !== "english") {
+                    updateEnglishTTSControls();
+                    return;
+                }
+                playNext();
+            }, 500);
+            setEnglishTTSStatus("搭配詞依序朗讀中，兩次播放之間會短暫停頓。");
+            updateEnglishTTSControls();
+        }, true, () => {
+            if (generation === englishTTSState.collocationReplayGeneration) {
+                cancelEnglishCollocationReplay();
+                setEnglishTTSStatus("搭配詞連續朗讀已停止。請重新點擊播放。");
+                updateEnglishTTSControls();
+            }
+        });
+
+        if (!started && generation === englishTTSState.collocationReplayGeneration) {
+            cancelEnglishCollocationReplay();
+            updateEnglishTTSControls();
+        }
+        return started;
+    };
+
+    return playNext();
+}
+
+function speakEnglishCollocationTwice(text) {
+    return speakEnglishCollocationSequence([text]);
+}
+
+function speakEnglishText(text, onComplete = null, preserveCollocationReplay = false, onError = null) {
+    if (!preserveCollocationReplay) {
+        cancelEnglishCollocationReplay();
+    }
+    if (appState.subjectMode !== "english") {
+        setEnglishTTSStatus("請先切換至英文模式。");
+        return false;
+    }
+    if (!englishTTSState.supported || !englishTTSState.synthesis) {
+        setEnglishTTSStatus("此瀏覽器不支援語音合成。");
+        return false;
+    }
+
+    const voice = getSelectedLocalEnglishVoice();
+    if (!voice) {
+        setEnglishTTSStatus("沒有可用的本機英文聲線，未開始朗讀。");
+        updateEnglishTTSControls();
+        return false;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.lang = voice.lang || "en-US";
+    utterance.rate = englishTTSState.rate;
+    utterance.onstart = () => {
+        if (englishTTSState.activeUtterance === utterance) {
+            setEnglishTTSStatus("正在朗讀英文…");
+            updateEnglishTTSControls();
+        }
+    };
+    utterance.onend = () => {
+        if (englishTTSState.activeUtterance === utterance) {
+            englishTTSState.activeUtterance = null;
+            setEnglishTTSStatus("朗讀完成。");
+            updateEnglishTTSControls();
+            if (typeof onComplete === "function") {
+                onComplete();
+            }
+            if (!englishTTSState.activeUtterance && !englishTTSState.collocationReplayTimer) {
+                englishTTSState.activeSpeechTrigger = null;
+                englishTTSState.activeSpeechTriggerRect = null;
+            }
+        }
+    };
+    utterance.onerror = event => {
+        if (englishTTSState.activeUtterance === utterance) {
+            englishTTSState.activeUtterance = null;
+            const reason = event && event.error ? `（${event.error}）` : "";
+            setEnglishTTSStatus(`語音播放失敗${reason}。請重新試聽或選擇其他聲線。`);
+            updateEnglishTTSControls();
+            if (typeof onError === "function") {
+                onError(event);
+            }
+            if (!englishTTSState.activeUtterance && !englishTTSState.collocationReplayTimer) {
+                englishTTSState.activeSpeechTrigger = null;
+                englishTTSState.activeSpeechTriggerRect = null;
+            }
+        }
+    };
+
+    try {
+        // Invalidate the previous utterance before cancel(): some engines may dispatch
+        // its onend/onerror synchronously. Keep the newly recorded trigger intact.
+        englishTTSState.activeUtterance = null;
+        englishTTSState.synthesis.cancel();
+        englishTTSState.activeUtterance = utterance;
+        updateEnglishTTSControls();
+        englishTTSState.synthesis.speak(utterance);
+        return true;
+    } catch (error) {
+        englishTTSState.activeUtterance = null;
+        englishTTSState.activeSpeechTrigger = null;
+        englishTTSState.activeSpeechTriggerRect = null;
+        setEnglishTTSStatus("無法開始語音播放。請確認裝置語音設定後再試一次。");
+        updateEnglishTTSControls();
+        return false;
+    }
+}
+
+function stopEnglishSpeech() {
+    cancelEnglishCollocationReplay();
+    englishTTSState.activeUtterance = null;
+    englishTTSState.activeSpeechTrigger = null;
+    englishTTSState.activeSpeechTriggerRect = null;
+    if (englishTTSState.synthesis) {
+        try {
+            englishTTSState.synthesis.cancel();
+        } catch (error) {
+            // Keep the page usable even if the browser speech engine is unavailable.
+        }
+    }
+    updateEnglishTTSControls();
+}
+
+function normalizeEnglishTTSSelectionText(text) {
+    return String(text)
+        .replace(/\r\n?/g, "\n")
+        .replace(/[^\S\n]+/g, " ")
+        .replace(/ *\n */g, "\n")
+        .replace(/\n{3,}/g, "\n\n")
+        .replace(/[ \t]+([,.;!?])/g, "$1")
+        .trim();
+}
+
+function validateEnglishSelection(text) {
+    const candidate = normalizeEnglishTTSSelectionText(text);
+    if (!candidate) {
+        return { valid: false, reason: "請先選取英文回答中的單字、片語或句子。" };
+    }
+    if ([...candidate].length > ENGLISH_TTS_MAX_SELECTION_CHARS) {
+        return { valid: false, reason: `選取內容超過 ${ENGLISH_TTS_MAX_SELECTION_CHARS} 個字元。請分段選取一般教學段落後再朗讀。` };
+    }
+    const allowedEnglishText = /^[\p{Script=Latin}\p{M}\p{N}\s.,!?;:'"“”‘’()[\]{}\-–—…/]+$/u;
+    if (!allowedEnglishText.test(candidate) || !/\p{Script=Latin}/u.test(candidate)) {
+        return { valid: false, reason: "選取內容含有中文或非英文文字，為避免誤讀，已拒絕朗讀。" };
+    }
+    return { valid: true, text: candidate };
+}
+
+function extractEnglishRangeText(range) {
+    if (!range || typeof range.cloneContents !== "function") {
+        return { valid: false, reason: "無法讀取選取範圍，請重新選取英文文字。" };
+    }
+
+    let fragment;
+    try {
+        fragment = range.cloneContents();
+    } catch (error) {
+        return { valid: false, reason: "無法安全讀取這段選取內容，請重新選取英文文字。" };
+    }
+
+    const parts = [];
+    let containsInterfaceText = false;
+    const blockTags = new Set(["P", "DIV", "LI", "BLOCKQUOTE", "PRE", "H1", "H2", "H3", "H4", "H5", "H6"]);
+    const forbiddenTags = new Set(["BUTTON", "INPUT", "SELECT", "TEXTAREA", "CANVAS", "SVG", "SCRIPT", "STYLE"]);
+
+    function visit(node) {
+        if (!node || containsInterfaceText) {
+            return;
+        }
+        if (node.nodeType === 3) {
+            parts.push(node.nodeValue || "");
+            return;
+        }
+        if (node.nodeType === 11) {
+            Array.from(node.childNodes || []).forEach(visit);
+            return;
+        }
+        if (node.nodeType !== 1) {
+            return;
+        }
+
+        const tagName = String(node.tagName || "").toUpperCase();
+        if (typeof node.matches === "function" && node.matches("[data-english-tts-control='true']")) {
+            return;
+        }
+        if (forbiddenTags.has(tagName) || (typeof node.matches === "function" &&
+            node.matches("[hidden], [aria-hidden='true'], [role='button'], .english-tts-panel, #english-tts-speak-selection"))) {
+            containsInterfaceText = true;
+            return;
+        }
+        // Image alt text is metadata, not selected English answer text.
+        if (tagName === "IMG") {
+            return;
+        }
+        if (tagName === "BR") {
+            parts.push("\n");
+            return;
+        }
+
+        const isBlock = blockTags.has(tagName);
+        if (isBlock) {
+            parts.push("\n\n");
+        }
+        Array.from(node.childNodes || []).forEach(visit);
+        if (isBlock) {
+            parts.push("\n\n");
+        }
+    }
+
+    visit(fragment);
+    if (containsInterfaceText) {
+        return { valid: false, reason: "選取範圍包含介面控制項或隱藏文字。請只選取英文回答內容。" };
+    }
+    return validateEnglishSelection(parts.join(""));
+}
+
+function protectEnglishTTSAbbreviationPeriods(text) {
+    const marker = "\uE000";
+    const protectedText = String(text)
+        .replace(/\b(?:Mr|Mrs|Ms|Dr|Prof|e\.g|i\.e|U\.S|U\.K)\./gi, match => match.replace(/\./g, marker))
+        .replace(/(\d)\.(?=\d)/g, `$1${marker}`);
+    return { text: protectedText, marker };
+}
+
+function splitEnglishTTSSentences(text) {
+    const protectedValue = protectEnglishTTSAbbreviationPeriods(text);
+    let rawSegments = [];
+    let usedIntlSegmenter = false;
+
+    if (typeof Intl !== "undefined" && typeof Intl.Segmenter === "function") {
+        try {
+            rawSegments = Array.from(
+                new Intl.Segmenter("en", { granularity: "sentence" }).segment(protectedValue.text),
+                item => item.segment
+            );
+            usedIntlSegmenter = rawSegments.length > 0;
+        } catch (error) {
+            rawSegments = [];
+        }
+    }
+
+    if (!rawSegments.length) {
+        const source = protectedValue.text;
+        let start = 0;
+        let index = 0;
+        while (index < source.length) {
+            if (source[index] === protectedValue.marker) {
+                index += 1;
+                continue;
+            }
+            if (!".!?".includes(source[index])) {
+                index += 1;
+                continue;
+            }
+
+            let end = index + 1;
+            while (end < source.length && ".!?".includes(source[end])) {
+                end += 1;
+            }
+            while (end < source.length && "\"'”’)]}".includes(source[end])) {
+                end += 1;
+            }
+            if (end === source.length || /\s/.test(source[end])) {
+                rawSegments.push(source.slice(start, end));
+                start = end;
+                while (start < source.length && /\s/.test(source[start])) {
+                    start += 1;
+                }
+                index = start;
+            } else {
+                index = end;
+            }
+        }
+        if (start < source.length) {
+            rawSegments.push(source.slice(start));
+        }
+        if (!rawSegments.length && source.trim()) {
+            rawSegments.push(source);
+        }
+    }
+
+    const sentences = rawSegments
+        .map(segment => segment.split(protectedValue.marker).join("."))
+        .map(segment => normalizeEnglishTTSSelectionText(segment))
+        .filter(Boolean);
+    return {
+        sentences,
+        reliable: sentences.length > 0,
+        usedIntlSegmenter
+    };
+}
+
+function splitEnglishTTSTokensAtParagraphBreaks(tokens, owner) {
+    const blocks = [];
+    let current = [];
+
+    function flush() {
+        if (current.some(token => token.type === "text" && token.text.trim())) {
+            blocks.push({ owner, tokens: current });
+        }
+        current = [];
+    }
+
+    for (let index = 0; index < tokens.length;) {
+        if (tokens[index].type === "br") {
+            let end = index + 1;
+            while (end < tokens.length && tokens[end].type === "br") {
+                end += 1;
+            }
+            if (end - index >= 2) {
+                flush();
+                index = end;
+                continue;
+            }
+        }
+        current.push(tokens[index]);
+        index += 1;
+    }
+    flush();
+    return blocks;
+}
+
+function collectEnglishTTSBlocks(root) {
+    const blocks = [];
+    const blockTags = new Set(["P", "DIV", "LI", "BLOCKQUOTE", "PRE", "UL", "OL"]);
+    const skippedTags = new Set(["H1", "H2", "H3", "H4", "H5", "H6", "IMG", "BUTTON", "INPUT", "SELECT", "TEXTAREA", "CANVAS", "SVG", "SCRIPT", "STYLE"]);
+
+    function walkContainer(container) {
+        const flowTokens = [];
+
+        function flushFlow() {
+            blocks.push(...splitEnglishTTSTokensAtParagraphBreaks(flowTokens.splice(0), container));
+        }
+
+        function visit(node) {
+            if (!node) {
+                return;
+            }
+            if (node.nodeType === 3) {
+                flowTokens.push({ type: "text", node, text: node.nodeValue || "" });
+                return;
+            }
+            if (node.nodeType !== 1) {
+                return;
+            }
+
+            const tagName = String(node.tagName || "").toUpperCase();
+            if (typeof node.matches === "function" && node.matches("[data-english-tts-control='true']")) {
+                flushFlow();
+                return;
+            }
+            if (skippedTags.has(tagName) || (typeof node.matches === "function" &&
+                node.matches("[hidden], [aria-hidden='true'], [role='button']"))) {
+                flushFlow();
+                return;
+            }
+            if (tagName === "BR") {
+                flowTokens.push({ type: "br", node });
+                return;
+            }
+            if (blockTags.has(tagName)) {
+                flushFlow();
+                walkContainer(node);
+                return;
+            }
+            Array.from(node.childNodes || []).forEach(visit);
+        }
+
+        Array.from(container.childNodes || []).forEach(visit);
+        flushFlow();
+    }
+
+    walkContainer(root);
+    return blocks;
+}
+
+function englishTTSTokensToText(tokens) {
+    return tokens.map(token => token.type === "br" ? "\n" : token.text).join("");
+}
+
+function splitEnglishTTSTokensAtLineBreaks(tokens) {
+    const lines = [];
+    let current = [];
+    tokens.forEach(token => {
+        if (token.type === "br") {
+            if (current.length) {
+                lines.push(current);
+                current = [];
+            }
+        } else {
+            current.push(token);
+        }
+    });
+    if (current.length) {
+        lines.push(current);
+    }
+    return lines;
+}
+
+function getEnglishTTSUnitText(text) {
+    const candidate = normalizeEnglishTTSSelectionText(text);
+    const allowedEnglishText = /^[\p{Script=Latin}\p{M}\p{N}\s.,!?;:'"“”‘’()[\]{}\-–—…/]+$/u;
+    if (!candidate || !allowedEnglishText.test(candidate) || !/\p{Script=Latin}/u.test(candidate)) {
+        return null;
+    }
+
+    return candidate;
+}
+
+function classifyEnglishTTSUnit(text) {
+    const normalized = getEnglishTTSUnitText(text);
+    if (!normalized) {
+        return null;
+    }
+
+    const words = normalized.match(/[A-Za-zÀ-ÖØ-öø-ÿ]+(?:['’][A-Za-zÀ-ÖØ-öø-ÿ]+)*(?:-[A-Za-zÀ-ÖØ-öø-ÿ]+)*/g) || [];
+    const hasEndingPunctuation = /[.!?]["'”’)]*$/.test(normalized);
+    if (words.length === 1 && /^[\p{Script=Latin}\p{M}0-9'’\-]+[.!?]?["'”’)]*$/u.test(normalized)) {
+        return { kind: "word", text: normalized, sentences: [normalized] };
+    }
+    if (words.length >= 2 && words.length <= 8 && !hasEndingPunctuation && normalized.length <= 90) {
+        return { kind: "phrase", text: normalized, sentences: [normalized] };
+    }
+
+    const segmentation = splitEnglishTTSSentences(normalized);
+    if (segmentation.sentences.length > 1 && segmentation.reliable) {
+        return { kind: "paragraph", text: normalized, sentences: segmentation.sentences };
+    }
+    if (!hasEndingPunctuation && words.length > 8) {
+        return { kind: "paragraph", text: normalized, sentences: [] };
+    }
+    return { kind: "sentence", text: normalized, sentences: [normalized] };
+}
+
+function createEnglishTTSAutoButton(label, ariaLabel, speechText, onSpeak = null) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "english-tts-auto-control";
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("aria-label", ariaLabel);
+    button.textContent = label;
+    button._englishTtsText = speechText;
+    button.addEventListener("click", () => {
+        rememberEnglishSpeechTrigger(button);
+        if (typeof onSpeak === "function") {
+            onSpeak(button._englishTtsText);
+        } else {
+            speakEnglishText(button._englishTtsText);
+        }
+    });
+    return button;
+}
+
+function createEnglishTTSParagraphControls(unit) {
+    const controls = document.createElement("span");
+    controls.className = "english-tts-auto-controls";
+    controls.setAttribute("data-english-tts-control", "true");
+    controls.setAttribute("role", "group");
+    controls.setAttribute("aria-label", "段落英文朗讀控制");
+    controls.appendChild(createEnglishTTSAutoButton("🔊 朗讀整段", "朗讀整段英文", unit.text));
+
+    if (unit.sentences.length > 1) {
+        const toggle = document.createElement("button");
+        toggle.type = "button";
+        toggle.className = "english-tts-auto-control";
+        toggle.setAttribute("data-english-tts-control", "true");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.textContent = "單句";
+
+        const sentenceControls = document.createElement("span");
+        sentenceControls.className = "english-tts-auto-sentences";
+        sentenceControls.setAttribute("data-english-tts-control", "true");
+        sentenceControls.hidden = true;
+
+        toggle.addEventListener("click", () => {
+            if (sentenceControls.hidden) {
+                if (sentenceControls.dataset.ready !== "true") {
+                    unit.sentences.forEach((sentence, index) => {
+                        sentenceControls.appendChild(createEnglishTTSAutoButton(
+                            `🔊 第 ${index + 1} 句`,
+                            `朗讀第 ${index + 1} 句英文`,
+                            sentence
+                        ));
+                    });
+                    sentenceControls.dataset.ready = "true";
+                }
+                sentenceControls.hidden = false;
+                toggle.setAttribute("aria-expanded", "true");
+            } else {
+                sentenceControls.hidden = true;
+                toggle.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        controls.appendChild(toggle);
+        controls.appendChild(sentenceControls);
+    }
+    return controls;
+}
+
+function insertEnglishTTSControlAfterBlock(block, control, lastToken) {
+    const node = lastToken.node;
+    if (!node || !node.parentNode) {
+        return false;
+    }
+    if (lastToken.type === "br") {
+        node.parentNode.insertBefore(control, node.nextSibling);
+        return true;
+    }
+
+    let anchor = node;
+    while (anchor && anchor.parentNode !== block.owner) {
+        anchor = anchor.parentNode;
+    }
+    if (!anchor || anchor.parentNode !== block.owner) {
+        return false;
+    }
+    block.owner.insertBefore(control, anchor.nextSibling);
+    return true;
+}
+
+function addEnglishTTSControlForTokens(block, tokens, unit) {
+    if (!unit || !tokens.length) {
+        return false;
+    }
+    let control;
+    if (unit.kind === "paragraph") {
+        control = createEnglishTTSParagraphControls(unit);
+    } else {
+        const labels = {
+            word: "朗讀英文單字",
+            phrase: "朗讀英文片語",
+            sentence: "朗讀英文句子"
+        };
+        control = createEnglishTTSAutoButton("🔊", labels[unit.kind], unit.text);
+    }
+    return insertEnglishTTSControlAfterBlock(block, control, tokens[tokens.length - 1]);
+}
+
+function enhanceEnglishAnswerForTTS(answerRoot) {
+    if (!answerRoot || appState.subjectMode !== "english" || !englishTTSState.supported ||
+        answerRoot.dataset.englishTtsEnhanced === "true") {
+        return 0;
+    }
+    answerRoot.dataset.englishTtsEnhanced = "true";
+    let added = 0;
+
+    collectEnglishTTSBlocks(answerRoot).forEach(block => {
+        const fullText = englishTTSTokensToText(block.tokens);
+        if (isEnglishCollocationsHeading(fullText.trim())) {
+            return;
+        }
+        const fullUnit = classifyEnglishTTSUnit(fullText);
+        const lines = splitEnglishTTSTokensAtLineBreaks(block.tokens);
+
+        if (fullUnit) {
+            const lineUnits = lines.map(tokens => ({
+                tokens,
+                unit: classifyEnglishTTSUnit(englishTTSTokensToText(tokens))
+            }));
+            const separatedShortItems = lineUnits.length > 1 &&
+                lineUnits.every(item => item.unit && (item.unit.kind === "word" || item.unit.kind === "phrase"));
+
+            if (separatedShortItems) {
+                lineUnits.forEach(item => {
+                    if (addEnglishTTSControlForTokens(block, item.tokens, item.unit)) {
+                        added += 1;
+                    }
+                });
+            } else if (addEnglishTTSControlForTokens(block, block.tokens, fullUnit)) {
+                added += 1;
+            }
+            return;
+        }
+
+        // In bilingual answers, only explicitly separated pure-English lines are eligible.
+        lines.forEach(tokens => {
+            if (isEnglishCollocationsHeading(englishTTSTokensToText(tokens).trim())) {
+                return;
+            }
+            const unit = classifyEnglishTTSUnit(englishTTSTokensToText(tokens));
+            if (unit && addEnglishTTSControlForTokens(block, tokens, unit)) {
+                added += 1;
+            }
+        });
+    });
+
+    return added;
+}
+
+function parseEnglishCollocationLine(text) {
+    const match = String(text).match(/^\s*(?:[①②③④⑤⑥⑦⑧⑨⑩]|[1-9]\d{0,1}[.)])\s+(.+?)\s+(?:—|–|-)\s+(.+?)\s*$/u);
+    if (!match || !/\p{Script=Han}/u.test(match[2])) {
+        return null;
+    }
+
+    const phrase = getEnglishTTSUnitText(match[1]);
+    if (!phrase || phrase.split(/\s+/).length > 12) {
+        return null;
+    }
+    return { phrase };
+}
+
+function isEnglishCollocationsHeading(text) {
+    return /^\s*Common Collocations\s*[:：]?\s*$/i.test(text);
+}
+
+function isEnglishCollocationsSectionEnd(text) {
+    return /^\s*(?:Example Sentences\b|(?:\d+[.)]\s*)?GEPT Common\b|(?:\d+[.)]\s*)?Part of Speech\b|(?:\d+[.)]\s*)?KK Phonetic Transcription\b)/i.test(text);
+}
+
+function enhanceEnglishCollocationsForTTS(answerRoot) {
+    if (!answerRoot || appState.subjectMode !== "english" || !englishTTSState.supported ||
+        answerRoot.dataset.englishCollocationsTtsEnhanced === "true") {
+        return 0;
+    }
+    answerRoot.dataset.englishCollocationsTtsEnhanced = "true";
+
+    const sections = [];
+    let currentSection = null;
+    let added = 0;
+    collectEnglishTTSBlocks(answerRoot).forEach(block => {
+        splitEnglishTTSTokensAtLineBreaks(block.tokens).forEach(lineTokens => {
+            const lineText = englishTTSTokensToText(lineTokens).trim();
+            if (isEnglishCollocationsHeading(lineText)) {
+                currentSection = { heading: { block, lastToken: lineTokens[lineTokens.length - 1] }, items: [] };
+                sections.push(currentSection);
+                return;
+            }
+            if (!currentSection || !lineText) {
+                return;
+            }
+            if (isEnglishCollocationsSectionEnd(lineText)) {
+                currentSection = null;
+                return;
+            }
+
+            const collocation = parseEnglishCollocationLine(lineText);
+            if (!collocation || !lineTokens.length) {
+                return;
+            }
+            currentSection.items.push({ block, lastToken: lineTokens[lineTokens.length - 1], phrase: collocation.phrase });
+        });
+    });
+
+    sections.forEach(section => {
+        const phrases = section.items.map(item => item.phrase);
+        if (!phrases.length || !section.heading.lastToken) {
+            return;
+        }
+
+        // Keep one answer-scoped snapshot for both the heading control and row controls.
+        section.phrases = phrases.slice();
+        const sequenceButton = createEnglishTTSAutoButton(
+            "🔊",
+            "依序朗讀所有 Common Collocations 搭配詞",
+            "",
+            () => speakEnglishCollocationSequence(section.phrases)
+        );
+        sequenceButton.classList.add("english-tts-collocation-sequence");
+        if (insertEnglishTTSControlAfterBlock(section.heading.block, sequenceButton, section.heading.lastToken)) {
+            answerRoot._englishCollocationSections = answerRoot._englishCollocationSections || [];
+            answerRoot._englishCollocationSections.push(section.phrases);
+            added += 1;
+        }
+
+        section.items.forEach(item => {
+            const button = createEnglishTTSAutoButton(
+                "🔊",
+                `朗讀搭配詞：${item.phrase}`,
+                item.phrase,
+                speakEnglishCollocationTwice
+            );
+            if (insertEnglishTTSControlAfterBlock(item.block, button, item.lastToken)) {
+                added += 1;
+            }
+        });
+    });
+
+    return added;
+}
+
+function getSelectionAnswerElement(node) {
+    if (!node) {
+        return null;
+    }
+    const element = node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+    if (!element) {
+        return null;
+    }
+    const answerElement = element.closest(".ai-answer-text");
+    const response = document.getElementById("ai-response");
+    return answerElement && response && response.contains(answerElement) ? answerElement : null;
+}
+
+function getSelectionAnswerCard(node) {
+    if (!node) {
+        return null;
+    }
+    const element = node.nodeType === 1 ? node : node.parentElement;
+    return element && typeof element.closest === "function" ? element.closest(".ai-card") : null;
+}
+
+function selectionStaysInOneAnswerCard(startNode, endNode) {
+    return getSelectionAnswerCard(startNode) === getSelectionAnswerCard(endNode);
+}
+
+function captureEnglishAnswerSelection() {
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed || selection.rangeCount !== 1) {
+        return { changed: false, collapsed: Boolean(!selection || selection.isCollapsed) };
+    }
+
+    const range = selection.getRangeAt(0);
+    const startAnswer = getSelectionAnswerElement(range.startContainer);
+    const endAnswer = getSelectionAnswerElement(range.endContainer);
+    if (!startAnswer || startAnswer !== endAnswer ||
+        !selectionStaysInOneAnswerCard(range.startContainer, range.endContainer) ||
+        appState.subjectMode !== "english") {
+        clearEnglishTTSSelection("朗讀範圍只限英文模式的 AI 英文回答。");
+        return { changed: true, valid: false };
+    }
+
+    const result = extractEnglishRangeText(range);
+    if (!result.valid) {
+        clearEnglishTTSSelection(result.reason);
+        return { changed: true, valid: false };
+    }
+
+    if (englishTTSState.collapsedSelectionTimer) {
+        window.clearTimeout(englishTTSState.collapsedSelectionTimer);
+        englishTTSState.collapsedSelectionTimer = 0;
+    }
+    englishTTSState.lastSelectionText = result.text;
+    englishTTSState.lastSelectionRange = range.cloneRange();
+    updateEnglishTTSControls();
+    setEnglishTTSStatus(`已保存選取文字（${result.text.length} 個字元）。`);
+    scheduleEnglishFloatingButtonPosition();
+    return { changed: true, valid: true };
+}
+
+function initializeEnglishTTS() {
+    if (englishTTSState.initialized) {
+        return;
+    }
+    englishTTSState.initialized = true;
+
+    const panel = document.getElementById("english-tts-panel");
+    const voiceSelect = document.getElementById("english-tts-voice");
+    const rateSelect = document.getElementById("english-tts-rate");
+    const previewButton = document.getElementById("english-tts-preview");
+    const speakButton = document.getElementById("english-tts-speak-selection");
+    const stopButton = document.getElementById("english-tts-stop");
+    const floatingStopButton = document.getElementById("english-tts-floating-stop");
+    const response = document.getElementById("ai-response");
+
+    if (panel) {
+        panel.hidden = appState.subjectMode !== "english";
+    }
+    if (floatingStopButton && floatingStopButton.parentNode !== document.body) {
+        document.body.appendChild(floatingStopButton);
+    }
+    if (speakButton && !englishTTSState.buttonHomeParent) {
+        englishTTSState.buttonHomeParent = speakButton.parentNode;
+        englishTTSState.buttonHomeNextSibling = speakButton.nextSibling;
+    }
+
+    const savedRate = readEnglishTTSPreference(ENGLISH_TTS_RATE_KEY);
+    englishTTSState.rate = savedRate === "0.8" ? 0.8 : 1;
+    if (rateSelect) {
+        rateSelect.value = String(englishTTSState.rate);
+        rateSelect.addEventListener("change", () => {
+            englishTTSState.rate = rateSelect.value === "0.8" ? 0.8 : 1;
+            saveEnglishTTSPreference(ENGLISH_TTS_RATE_KEY, String(englishTTSState.rate));
+            setEnglishTTSStatus(`語速已設為${englishTTSState.rate === 1 ? "正常" : "慢速"}。`);
+        });
+    }
+
+    englishTTSState.preferredVoiceKey = readEnglishTTSPreference(ENGLISH_TTS_VOICE_KEY);
+    englishTTSState.supported = Boolean(
+        window.speechSynthesis && typeof window.SpeechSynthesisUtterance === "function"
+    );
+
+    if (!englishTTSState.supported) {
+        if (voiceSelect) {
+            voiceSelect.disabled = true;
+        }
+        setEnglishTTSStatus("此瀏覽器沒有可用的 speechSynthesis 英文語音功能。");
+    } else {
+        englishTTSState.synthesis = window.speechSynthesis;
+        if (typeof englishTTSState.synthesis.addEventListener === "function") {
+            englishTTSState.synthesis.addEventListener("voiceschanged", refreshLocalEnglishVoices);
+        } else {
+            englishTTSState.synthesis.onvoiceschanged = refreshLocalEnglishVoices;
+        }
+        refreshLocalEnglishVoices();
+        window.setTimeout(refreshLocalEnglishVoices, 300);
+    }
+
+    if (voiceSelect) {
+        voiceSelect.addEventListener("change", () => {
+            const selected = englishTTSState.voices.find(
+                voice => getEnglishTTSVoiceKey(voice) === voiceSelect.value
+            );
+            if (!selected) {
+                return;
+            }
+            englishTTSState.selectedVoiceKey = getEnglishTTSVoiceKey(selected);
+            englishTTSState.preferredVoiceKey = englishTTSState.selectedVoiceKey;
+            saveEnglishTTSPreference(ENGLISH_TTS_VOICE_KEY, englishTTSState.preferredVoiceKey);
+            updateEnglishTTSControls();
+            setEnglishTTSStatus(`已選擇 ${selected.name}（${selected.lang}）。可按「試聽聲線」確認發音。`);
+        });
+    }
+
+    if (previewButton) {
+        previewButton.addEventListener("click", () => {
+            rememberEnglishSpeechTrigger(previewButton);
+            speakEnglishText(ENGLISH_TTS_SAMPLE);
+        });
+    }
+
+    if (stopButton) {
+        stopButton.addEventListener("click", () => {
+            stopEnglishSpeech();
+            setEnglishTTSStatus("已停止朗讀。");
+        });
+    }
+
+    if (floatingStopButton) {
+        floatingStopButton.addEventListener("click", () => {
+            stopEnglishSpeech();
+            setEnglishTTSStatus("已停止朗讀。");
+        });
+    }
+
+    if (speakButton) {
+        speakButton.addEventListener("pointerdown", () => {
+            englishTTSState.selectionButtonPointerActive = true;
+            if (englishTTSState.collapsedSelectionTimer) {
+                window.clearTimeout(englishTTSState.collapsedSelectionTimer);
+                englishTTSState.collapsedSelectionTimer = 0;
+            }
+            if (englishTTSState.selectionButtonPointerTimer) {
+                window.clearTimeout(englishTTSState.selectionButtonPointerTimer);
+            }
+            captureEnglishAnswerSelection();
+            englishTTSState.selectionButtonPointerTimer = window.setTimeout(() => {
+                englishTTSState.selectionButtonPointerActive = false;
+                englishTTSState.selectionButtonPointerTimer = 0;
+                const currentSelection = window.getSelection();
+                if (!currentSelection || currentSelection.isCollapsed) {
+                    clearEnglishTTSSelection("選取已解除，請重新選取英文文字。");
+                }
+            }, 1500);
+        });
+        speakButton.addEventListener("pointercancel", () => {
+            englishTTSState.selectionButtonPointerActive = false;
+            if (englishTTSState.selectionButtonPointerTimer) {
+                window.clearTimeout(englishTTSState.selectionButtonPointerTimer);
+                englishTTSState.selectionButtonPointerTimer = 0;
+            }
+            const currentSelection = window.getSelection();
+            if (!currentSelection || currentSelection.isCollapsed) {
+                clearEnglishTTSSelection("選取已解除，請重新選取英文文字。");
+            }
+        });
+        speakButton.addEventListener("click", () => {
+            if (!englishTTSState.lastSelectionText) {
+                captureEnglishAnswerSelection();
+            }
+            if (englishTTSState.lastSelectionText) {
+                // Save the button's visible position before the selection UI can hide or move it.
+                rememberEnglishSpeechTrigger(speakButton);
+                speakEnglishText(englishTTSState.lastSelectionText);
+            } else {
+                setEnglishTTSStatus("目前沒有有效的英文選取內容。請在英文回答中重新選取文字。");
+            }
+            englishTTSState.selectionButtonPointerActive = false;
+            if (englishTTSState.selectionButtonPointerTimer) {
+                window.clearTimeout(englishTTSState.selectionButtonPointerTimer);
+                englishTTSState.selectionButtonPointerTimer = 0;
+            }
+            const currentSelection = window.getSelection();
+            if (!currentSelection || currentSelection.isCollapsed) {
+                hideEnglishFloatingButton();
+            } else {
+                scheduleEnglishFloatingButtonPosition();
+            }
+        });
+    }
+
+    document.addEventListener("selectionchange", () => {
+        const selection = window.getSelection();
+        if (!selection) {
+            clearEnglishTTSSelection("無法取得選取範圍，請重新選取英文文字。");
+            return;
+        }
+        if (selection.isCollapsed) {
+            if (!englishTTSState.selectionButtonPointerActive) {
+                if (englishTTSState.collapsedSelectionTimer) {
+                    window.clearTimeout(englishTTSState.collapsedSelectionTimer);
+                }
+                englishTTSState.collapsedSelectionTimer = window.setTimeout(() => {
+                    englishTTSState.collapsedSelectionTimer = 0;
+                    const currentSelection = window.getSelection();
+                    if (!englishTTSState.selectionButtonPointerActive &&
+                        (!currentSelection || currentSelection.isCollapsed)) {
+                        clearEnglishTTSSelection("選取已解除，請重新選取英文文字。");
+                    }
+                }, 250);
+            }
+            return;
+        }
+        captureEnglishAnswerSelection();
+    });
+
+    window.addEventListener("scroll", scheduleEnglishFloatingButtonPosition, true);
+    window.addEventListener("resize", scheduleEnglishFloatingButtonPosition);
+    window.addEventListener("scroll", scheduleEnglishTTSFloatingStopPosition, true);
+    window.addEventListener("resize", scheduleEnglishTTSFloatingStopPosition);
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener("scroll", scheduleEnglishFloatingButtonPosition);
+        window.visualViewport.addEventListener("resize", scheduleEnglishFloatingButtonPosition);
+        window.visualViewport.addEventListener("scroll", scheduleEnglishTTSFloatingStopPosition);
+        window.visualViewport.addEventListener("resize", scheduleEnglishTTSFloatingStopPosition);
+    }
+
+    if (response && typeof MutationObserver === "function") {
+        englishTTSState.observedAnswerRoot = response.querySelector(".ai-answer-text");
+        englishTTSState.responseObserver = new MutationObserver(() => {
+            const currentAnswerRoot = response.querySelector(".ai-answer-text");
+            if (currentAnswerRoot !== englishTTSState.observedAnswerRoot) {
+                englishTTSState.observedAnswerRoot = currentAnswerRoot;
+                stopEnglishSpeech();
+            }
+            clearEnglishTTSSelection("回答內容已更新，請重新選取英文文字。");
+            scheduleEnglishTTSFloatingStopPosition();
+        });
+        englishTTSState.responseObserver.observe(response, {
+            childList: true,
+            subtree: true,
+            characterData: true
+        });
+    }
+
+    updateEnglishTTSControls();
 }
 
    async function askAITeacher() {
@@ -2634,6 +4496,7 @@ function setSubjectMode(mode) {
         return;
     }
 
+    stopEnglishSpeech();
     responseDiv.innerText = "🤔 我來想想看...";
 
     const mathPrompt = '你是一位台灣國中數學老師。請使用台灣國中課本的教學方式回答。不要使用 LaTeX 或 Markdown 數學語法（例如 \\( \\)、\\[ \\]、\\sqrt、\\frac、\\quad、^{ }、``` 等）。請直接使用一般文字與國中慣用的算式，例如：c² = a² + b²、√25 = 5。算式請按照國中課本與紙筆計算的習慣呈現，複雜的計算過程要一步一步分行書寫，每一個重要的等式變形都單獨一行，不要把多個計算步驟擠在同一行。不要使用方括號 [ ]、圓括號 ( ) 或其他符號包住整個算式，也不要使用 Markdown 表格或程式碼格式排列算式。遇到分數時，使用一般文字方式表示，例如：1/2、(b/2)，不要使用 \\frac。遇到次方時使用一般文字的上標形式，例如：x²、b²，不要使用 ^{ }。回答請固定分成三個部分：【先懂】、【例子】、【記住】，內容要簡潔、容易讓國中生理解。';
@@ -2866,6 +4729,12 @@ answer = answer.replace(/\n{3,}/g, "\n\n");
             "<div class=\"ai-answer-text\">" +
             answer +
             "</div>";
+
+        if (appState.subjectMode === "english") {
+            const answerRoot = responseDiv.querySelector(".ai-answer-text");
+            enhanceEnglishAnswerForTTS(answerRoot);
+            enhanceEnglishCollocationsForTTS(answerRoot);
+        }
 
 
             // 更新標註畫布尺寸（立即）
@@ -3171,5 +5040,7 @@ canvas.addEventListener("pointerleave", function() {
     drawing = false;
 
 });
+
+initializeEnglishTTS();
 
 </script>
