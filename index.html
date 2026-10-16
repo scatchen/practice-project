@@ -3658,6 +3658,7 @@ function stopEnglishSpeech() {
 function normalizeEnglishTTSSelectionText(text) {
     return String(text)
         .replace(/\r\n?/g, "\n")
+        .replace(/\u2011/g, "-")
         .replace(/[^\S\n]+/g, " ")
         .replace(/ *\n */g, "\n")
         .replace(/\n{3,}/g, "\n\n")
@@ -3883,6 +3884,28 @@ function collectEnglishTTSBlocks(root) {
                 flushFlow();
                 return;
             }
+            if (/^H[1-6]$/.test(tagName)) {
+                flushFlow();
+                const headingTokens = [];
+                const collectHeadingText = headingNode => {
+                    if (headingNode.nodeType === 3) {
+                        headingTokens.push({ type: "text", node: headingNode, text: headingNode.nodeValue || "" });
+                        return;
+                    }
+                    if (headingNode.nodeType !== 1 ||
+                        (typeof headingNode.matches === "function" &&
+                            headingNode.matches("[data-english-tts-control='true'], [hidden], [aria-hidden='true'], [role='button']"))) {
+                        return;
+                    }
+                    Array.from(headingNode.childNodes || []).forEach(collectHeadingText);
+                };
+                collectHeadingText(node);
+                if (headingTokens.length) {
+                    blocks.push({ owner: container, tokens: headingTokens, headingOnly: true });
+                }
+                flushFlow();
+                return;
+            }
             if (skippedTags.has(tagName) || (typeof node.matches === "function" &&
                 node.matches("[hidden], [aria-hidden='true'], [role='button']"))) {
                 flushFlow();
@@ -3956,7 +3979,9 @@ function classifyEnglishTTSUnit(text) {
         return { kind: "phrase", text: normalized, sentences: [normalized] };
     }
 
-    const segmentation = splitEnglishTTSSentences(normalized);
+    // A BR may be a display line break inside one sentence. Use whitespace for
+    // sentence boundaries while keeping the original text for paragraph speech.
+    const segmentation = splitEnglishTTSSentences(normalized.replace(/[ \t]*\n[ \t]*/g, " "));
     if (segmentation.sentences.length > 1 && segmentation.reliable) {
         return { kind: "paragraph", text: normalized, sentences: segmentation.sentences };
     }
@@ -3985,7 +4010,7 @@ function createEnglishTTSAutoButton(label, ariaLabel, speechText, onSpeak = null
     return button;
 }
 
-function createEnglishTTSParagraphControls(unit) {
+function createEnglishTTSParagraphControls(unit, options = {}) {
     const controls = document.createElement("span");
     controls.className = "english-tts-auto-controls";
     controls.setAttribute("data-english-tts-control", "true");
@@ -3993,7 +4018,7 @@ function createEnglishTTSParagraphControls(unit) {
     controls.setAttribute("aria-label", "段落英文朗讀控制");
     controls.appendChild(createEnglishTTSAutoButton("🔊 朗讀整段", "朗讀整段英文", unit.text));
 
-    if (unit.sentences.length > 1) {
+    if (unit.sentences.length > 1 || options.alwaysShowSentenceToggle) {
         const toggle = document.createElement("button");
         toggle.type = "button";
         toggle.className = "english-tts-auto-control";
@@ -4053,13 +4078,13 @@ function insertEnglishTTSControlAfterBlock(block, control, lastToken) {
     return true;
 }
 
-function addEnglishTTSControlForTokens(block, tokens, unit) {
+function addEnglishTTSControlForTokens(block, tokens, unit, options = {}) {
     if (!unit || !tokens.length) {
         return false;
     }
     let control;
     if (unit.kind === "paragraph") {
-        control = createEnglishTTSParagraphControls(unit);
+        control = createEnglishTTSParagraphControls(unit, options);
     } else {
         const labels = {
             word: "朗讀英文單字",
@@ -4071,6 +4096,23 @@ function addEnglishTTSControlForTokens(block, tokens, unit) {
     return insertEnglishTTSControlAfterBlock(block, control, tokens[tokens.length - 1]);
 }
 
+function normalizeEnglishTTSHeading(text) {
+    return String(text)
+        .replace(/^\s*(?:(?:[①②③④⑤⑥⑦⑧⑨⑩])|(?:\d{1,2}[.)]))\s*/, "")
+        .trim();
+}
+
+function isEnglishDefinitionHeading(text) {
+    return /^English\s+Definition\s*[:：]?$/i.test(normalizeEnglishTTSHeading(text));
+}
+
+function isEnglishTTSSectionHeading(text) {
+    const heading = normalizeEnglishTTSHeading(text);
+    return isEnglishDefinitionHeading(heading) ||
+        isEnglishCollocationsHeading(heading) ||
+        /^(?:Example(?:\s+Sentences)?|GEPT\s+Common(?:\s*\/\s*Exam\s+Meanings)?|Part\s+of\s+Speech|KK\s+Phonetic\s+Transcription)\s*[:：]?$/i.test(heading);
+}
+
 function enhanceEnglishAnswerForTTS(answerRoot) {
     if (!answerRoot || appState.subjectMode !== "english" || !englishTTSState.supported ||
         answerRoot.dataset.englishTtsEnhanced === "true") {
@@ -4079,44 +4121,116 @@ function enhanceEnglishAnswerForTTS(answerRoot) {
     answerRoot.dataset.englishTtsEnhanced = "true";
     let added = 0;
 
-    collectEnglishTTSBlocks(answerRoot).forEach(block => {
-        const fullText = englishTTSTokensToText(block.tokens);
-        if (isEnglishCollocationsHeading(fullText.trim())) {
-            return;
+    const blocks = collectEnglishTTSBlocks(answerRoot);
+    const blockLines = blocks.map(block => ({
+        block,
+        lines: splitEnglishTTSTokensAtLineBreaks(block.tokens).map(tokens => ({
+            block,
+            tokens,
+            text: englishTTSTokensToText(tokens)
+        }))
+    }));
+    const allLines = blockLines.flatMap(item => item.lines);
+    const handledLines = new Set();
+
+    // Treat the definition heading and its following English-only lines as one unit.
+    // Stop at the next known section heading so definitions never absorb collocations or examples.
+    for (let index = 0; index < allLines.length; index += 1) {
+        if (!isEnglishDefinitionHeading(allLines[index].text)) {
+            continue;
         }
-        const fullUnit = classifyEnglishTTSUnit(fullText);
-        const lines = splitEnglishTTSTokensAtLineBreaks(block.tokens);
 
-        if (fullUnit) {
-            const lineUnits = lines.map(tokens => ({
-                tokens,
-                unit: classifyEnglishTTSUnit(englishTTSTokensToText(tokens))
-            }));
-            const separatedShortItems = lineUnits.length > 1 &&
-                lineUnits.every(item => item.unit && (item.unit.kind === "word" || item.unit.kind === "phrase"));
-
-            if (separatedShortItems) {
-                lineUnits.forEach(item => {
-                    if (addEnglishTTSControlForTokens(block, item.tokens, item.unit)) {
-                        added += 1;
-                    }
-                });
-            } else if (addEnglishTTSControlForTokens(block, block.tokens, fullUnit)) {
-                added += 1;
+        const definitionBodyLines = [];
+        const definitionLines = [];
+        let nextIndex = index + 1;
+        while (nextIndex < allLines.length && !isEnglishTTSSectionHeading(allLines[nextIndex].text)) {
+            if (allLines[nextIndex].text.trim()) {
+                const line = allLines[nextIndex];
+                definitionBodyLines.push(line);
+                // A separate Chinese translation belongs to the section visually but not to
+                // its spoken definition. Mixed English/Chinese lines remain conservatively excluded.
+                if (getEnglishTTSUnitText(line.text)) {
+                    definitionLines.push(line);
+                }
             }
-            return;
+            nextIndex += 1;
         }
 
-        // In bilingual answers, only explicitly separated pure-English lines are eligible.
-        lines.forEach(tokens => {
-            if (isEnglishCollocationsHeading(englishTTSTokensToText(tokens).trim())) {
+        if (definitionLines.length) {
+            const definitionText = getEnglishTTSUnitText(
+                definitionLines.map(line => line.text).join("\n")
+            );
+            if (definitionText) {
+                const segmentation = splitEnglishTTSSentences(
+                    definitionText.replace(/[ \t]*\n[ \t]*/g, " ")
+                );
+                const unit = {
+                    kind: "paragraph",
+                    text: definitionText,
+                    sentences: segmentation.sentences.length ? segmentation.sentences : [definitionText]
+                };
+                const lastLine = definitionLines[definitionLines.length - 1];
+                if (addEnglishTTSControlForTokens(
+                    lastLine.block,
+                    lastLine.tokens,
+                    unit,
+                    { alwaysShowSentenceToggle: true }
+                )) {
+                    handledLines.add(allLines[index]);
+                    definitionBodyLines.forEach(line => handledLines.add(line));
+                    added += 1;
+                }
+            }
+        }
+        index = nextIndex - 1;
+    }
+
+    // Scan contiguous English-only lines independently. A bilingual translation line must
+    // break the run, not invalidate the surrounding English examples and later sections.
+    blockLines.forEach(({ block, lines }) => {
+        let run = [];
+        const flushRun = () => {
+            if (!run.length) {
                 return;
             }
-            const unit = classifyEnglishTTSUnit(englishTTSTokensToText(tokens));
-            if (unit && addEnglishTTSControlForTokens(block, tokens, unit)) {
-                added += 1;
+            const runText = run.map(line => line.text).join("\n");
+            const unit = classifyEnglishTTSUnit(runText);
+            if (unit) {
+                const lineUnits = run.map(line => ({
+                    ...line,
+                    unit: classifyEnglishTTSUnit(line.text)
+                }));
+                const separatedShortItems = lineUnits.length > 1 &&
+                    lineUnits.every(item => item.unit && (item.unit.kind === "word" || item.unit.kind === "phrase"));
+
+                if (separatedShortItems) {
+                    lineUnits.forEach(item => {
+                        if (addEnglishTTSControlForTokens(item.block, item.tokens, item.unit)) {
+                            added += 1;
+                        }
+                    });
+                } else {
+                    const lastLine = run[run.length - 1];
+                    if (addEnglishTTSControlForTokens(lastLine.block, lastLine.tokens, unit)) {
+                        added += 1;
+                    }
+                }
+            }
+            run = [];
+        };
+
+        lines.forEach(line => {
+            if (line.block.headingOnly || handledLines.has(line) || isEnglishTTSSectionHeading(line.text)) {
+                flushRun();
+                return;
+            }
+            if (classifyEnglishTTSUnit(line.text)) {
+                run.push(line);
+            } else {
+                flushRun();
             }
         });
+        flushRun();
     });
 
     return added;
