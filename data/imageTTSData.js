@@ -1096,5 +1096,125 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/frankenstein-basics.png": {
+        imageId: "frankenstein-basics",
+        assetFile: "images/english/frankenstein-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "a curious young scientist",
+                sentences: ["a curious young scientist"],
+                bounds: { xPct: 2.1484, yPct: 11.6536, widthPct: 46.9727, heightPct: 12.4349 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "study the secret of life",
+                sentences: ["study the secret of life"],
+                bounds: { xPct: 50.6836, yPct: 11.6536, widthPct: 48.3398, heightPct: 12.4349 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "create a living being",
+                sentences: ["create a living being"],
+                bounds: { xPct: 2.1484, yPct: 25.1302, widthPct: 46.9727, heightPct: 11.9792 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "the creature comes to life",
+                sentences: ["the creature comes to life"],
+                bounds: { xPct: 50.6836, yPct: 25.1302, widthPct: 48.3398, heightPct: 11.9792 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "a different and lonely creature",
+                sentences: ["a different and lonely creature"],
+                bounds: { xPct: 2.1484, yPct: 42.1224, widthPct: 46.9727, heightPct: 11.3932 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "people are afraid of him",
+                sentences: ["people are afraid of him"],
+                bounds: { xPct: 50.6836, yPct: 42.1224, widthPct: 48.3398, heightPct: 11.3932 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "the scientist feels guilty",
+                sentences: ["the scientist feels guilty"],
+                bounds: { xPct: 2.1484, yPct: 54.4922, widthPct: 46.9727, heightPct: 12.5651 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "the creature asks for understanding",
+                sentences: ["the creature asks for understanding"],
+                bounds: { xPct: 50.6836, yPct: 54.4922, widthPct: 48.3398, heightPct: 12.5651 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "a request and a broken promise",
+                sentences: ["a request and a broken promise"],
+                bounds: { xPct: 2.1484, yPct: 71.8099, widthPct: 46.9727, heightPct: 10.8073 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "a tragic pursuit",
+                sentences: ["a tragic pursuit"],
+                bounds: { xPct: 50.6836, yPct: 71.8099, widthPct: 48.3398, heightPct: 10.8073 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "the death of the creator",
+                sentences: ["the death of the creator"],
+                bounds: { xPct: 2.1484, yPct: 83.5286, widthPct: 46.9727, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "important themes",
+                sentences: ["important themes"],
+                bounds: { xPct: 50.6836, yPct: 83.5286, widthPct: 48.3398, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
