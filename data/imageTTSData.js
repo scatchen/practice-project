@@ -2192,5 +2192,140 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/brave-new-world-aldous-huxley-basics.png": {
+        imageId: "brave-new-world-aldous-huxley-basics",
+        assetFile: "images/english/brave-new-world-aldous-huxley-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "In this future society, babies are created in laboratories. The Bokanovsky Process produces many identical embryos for lower castes.",
+                sentences: [
+                    "In this future society, babies are created in laboratories.",
+                    "The Bokanovsky Process produces many identical embryos for lower castes."
+                ],
+                bounds: { xPct: 16.1133, yPct: 12.2396, widthPct: 41.5039, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Bernard Marx feels different from other people. He does not enjoy the same happy and carefree life as Lenina.",
+                sentences: [
+                    "Bernard Marx feels different from other people.",
+                    "He does not enjoy the same happy and carefree life as Lenina."
+                ],
+                bounds: { xPct: 58.9844, yPct: 12.2396, widthPct: 40.4297, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "People take Soma, a drug that makes them feel happy and not worry about problems.",
+                sentences: ["People take Soma, a drug that makes them feel happy and not worry about problems."],
+                bounds: { xPct: 16.1133, yPct: 27.1484, widthPct: 41.5039, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "The government uses entertainment, consumerism, and technology to keep people controlled and obedient.",
+                sentences: ["The government uses entertainment, consumerism, and technology to keep people controlled and obedient."],
+                bounds: { xPct: 58.9844, yPct: 27.1484, widthPct: 40.4297, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Bernard and Lenina visit the reservation, where people live a simpler and more traditional life.",
+                sentences: ["Bernard and Lenina visit the reservation, where people live a simpler and more traditional life."],
+                bounds: { xPct: 16.1133, yPct: 41.8620, widthPct: 41.5039, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "They meet John, who was raised in the reservation. John loves books, especially the works of Shakespeare.",
+                sentences: [
+                    "They meet John, who was raised in the reservation.",
+                    "John loves books, especially the works of Shakespeare."
+                ],
+                bounds: { xPct: 58.9844, yPct: 41.8620, widthPct: 40.4297, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "John is shocked by modern society. He cannot accept the shallow happiness and lack of real emotions.",
+                sentences: [
+                    "John is shocked by modern society.",
+                    "He cannot accept the shallow happiness and lack of real emotions."
+                ],
+                bounds: { xPct: 16.1133, yPct: 56.6406, widthPct: 41.5039, heightPct: 13.0859 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Lenina and others do not understand John’s ideas. They prefer pleasure, comfort, and stability over truth and deep feelings.",
+                sentences: [
+                    "Lenina and others do not understand John’s ideas.",
+                    "They prefer pleasure, comfort, and stability over truth and deep feelings."
+                ],
+                bounds: { xPct: 58.9844, yPct: 56.6406, widthPct: 40.4297, heightPct: 13.0859 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "John feels lonely because he cannot belong to either the modern world or the reservation.",
+                sentences: ["John feels lonely because he cannot belong to either the modern world or the reservation."],
+                bounds: { xPct: 16.1133, yPct: 70.8333, widthPct: 41.5039, heightPct: 12.5000 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "John speaks about freedom, individuality, and the importance of truth, but the society does not accept his ideas.",
+                sentences: ["John speaks about freedom, individuality, and the importance of truth, but the society does not accept his ideas."],
+                bounds: { xPct: 58.9844, yPct: 70.8333, widthPct: 40.4297, heightPct: 12.5000 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "In the end, the society continues to choose easy happiness over real knowledge, independent thinking, and true freedom.",
+                sentences: ["In the end, the society continues to choose easy happiness over real knowledge, independent thinking, and true freedom."],
+                bounds: { xPct: 16.1133, yPct: 84.4401, widthPct: 41.5039, heightPct: 14.9089 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Brave New World shows the dangers of losing our freedom, individuality, and humanity in the search for a perfect and easy life.",
+                sentences: ["Brave New World shows the dangers of losing our freedom, individuality, and humanity in the search for a perfect and easy life."],
+                bounds: { xPct: 58.9844, yPct: 84.4401, widthPct: 40.4297, heightPct: 14.9089 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
