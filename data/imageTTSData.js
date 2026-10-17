@@ -594,5 +594,125 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/romeo-and-juliet-basics.png": {
+        imageId: "romeo-and-juliet-basics",
+        assetFile: "images/english/romeo-and-juliet-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Two powerful families in Verona.",
+                sentences: ["Two powerful families in Verona."],
+                bounds: { x: 20, y: 192, width: 486, height: 195, xPct: 1.9531, yPct: 12.5000, widthPct: 47.4609, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Romeo goes to a party at the Capulets’ house.",
+                sentences: ["Romeo goes to a party at the Capulets’ house."],
+                bounds: { x: 518, y: 192, width: 486, height: 195, xPct: 50.5859, yPct: 12.5000, widthPct: 47.4609, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Romeo and Juliet meet.",
+                sentences: ["Romeo and Juliet meet."],
+                bounds: { x: 20, y: 395, width: 486, height: 200, xPct: 1.9531, yPct: 25.7161, widthPct: 47.4609, heightPct: 13.0208 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "They fall in love, but their families are enemies.",
+                sentences: ["They fall in love, but their families are enemies."],
+                bounds: { x: 518, y: 395, width: 486, height: 200, xPct: 50.5859, yPct: 25.7161, widthPct: 47.4609, heightPct: 13.0208 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Romeo and Juliet secretly marry.",
+                sentences: ["Romeo and Juliet secretly marry."],
+                bounds: { x: 20, y: 656, width: 486, height: 178, xPct: 1.9531, yPct: 42.7083, widthPct: 47.4609, heightPct: 11.5885 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Tybalt fights with Mercutio, and Mercutio is killed.",
+                sentences: ["Tybalt fights with Mercutio, and Mercutio is killed."],
+                bounds: { x: 518, y: 656, width: 486, height: 178, xPct: 50.5859, yPct: 42.7083, widthPct: 47.4609, heightPct: 11.5885 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Romeo kills Tybalt and is punished.",
+                sentences: ["Romeo kills Tybalt and is punished."],
+                bounds: { x: 20, y: 842, width: 486, height: 177, xPct: 1.9531, yPct: 54.8177, widthPct: 47.4609, heightPct: 11.5234 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Romeo must leave Verona.",
+                sentences: ["Romeo must leave Verona."],
+                bounds: { x: 518, y: 842, width: 486, height: 177, xPct: 50.5859, yPct: 54.8177, widthPct: 47.4609, heightPct: 11.5234 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Juliet takes a sleeping potion.",
+                sentences: ["Juliet takes a sleeping potion."],
+                bounds: { x: 20, y: 1082, width: 486, height: 174, xPct: 1.9531, yPct: 70.4427, widthPct: 47.4609, heightPct: 11.3281 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Romeo thinks Juliet is dead.",
+                sentences: ["Romeo thinks Juliet is dead."],
+                bounds: { x: 518, y: 1082, width: 486, height: 174, xPct: 50.5859, yPct: 70.4427, widthPct: 47.4609, heightPct: 11.3281 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Romeo and Juliet both die.",
+                sentences: ["Romeo and Juliet both die."],
+                bounds: { x: 20, y: 1266, width: 486, height: 260, xPct: 1.9531, yPct: 82.4219, widthPct: 47.4609, heightPct: 16.9271 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Important themes in Romeo and Juliet.",
+                sentences: ["Important themes in Romeo and Juliet."],
+                bounds: { x: 518, y: 1266, width: 486, height: 260, xPct: 50.5859, yPct: 82.4219, widthPct: 47.4609, heightPct: 16.9271 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
