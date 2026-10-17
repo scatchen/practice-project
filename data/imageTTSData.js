@@ -1336,5 +1336,125 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/the-adventures-of-sherlock-holmes-basics.png": {
+        imageId: "the-adventures-of-sherlock-holmes-basics",
+        assetFile: "images/english/the-adventures-of-sherlock-holmes-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "find a clue",
+                sentences: ["find a clue"],
+                bounds: { xPct: 2.3438, yPct: 12.6302, widthPct: 46.5820, heightPct: 11.9141 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "think and guess",
+                sentences: ["think and guess"],
+                bounds: { xPct: 51.1719, yPct: 12.6302, widthPct: 46.4844, heightPct: 11.9141 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "question a suspect",
+                sentences: ["question a suspect"],
+                bounds: { xPct: 2.3438, yPct: 25.7812, widthPct: 46.5820, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "solve the mystery",
+                sentences: ["solve the mystery"],
+                bounds: { xPct: 51.1719, yPct: 25.7812, widthPct: 46.4844, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "examine the evidence",
+                sentences: ["examine the evidence"],
+                bounds: { xPct: 2.3438, yPct: 44.5964, widthPct: 46.5820, heightPct: 12.4349 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "analyze the clues",
+                sentences: ["analyze the clues"],
+                bounds: { xPct: 51.1719, yPct: 44.5964, widthPct: 46.4844, heightPct: 12.4349 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "consider different possibilities",
+                sentences: ["consider different possibilities"],
+                bounds: { xPct: 2.3438, yPct: 58.3333, widthPct: 46.5820, heightPct: 12.4349 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "draw a logical conclusion",
+                sentences: ["draw a logical conclusion"],
+                bounds: { xPct: 51.1719, yPct: 58.3333, widthPct: 46.4844, heightPct: 12.4349 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "a mysterious case",
+                sentences: ["a mysterious case"],
+                bounds: { xPct: 2.3438, yPct: 76.5625, widthPct: 46.5820, heightPct: 9.7005 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "follow the trail",
+                sentences: ["follow the trail"],
+                bounds: { xPct: 51.1719, yPct: 76.5625, widthPct: 46.4844, heightPct: 9.7005 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "face a surprising twist",
+                sentences: ["face a surprising twist"],
+                bounds: { xPct: 2.3438, yPct: 87.5000, widthPct: 46.5820, heightPct: 11.2630 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "reveal the truth",
+                sentences: ["reveal the truth"],
+                bounds: { xPct: 51.1719, yPct: 87.5000, widthPct: 46.4844, heightPct: 11.2630 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
