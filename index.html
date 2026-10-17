@@ -772,6 +772,92 @@ color: #111827;
             opacity: 0.72;
         }
 
+        .image-tts-story-panel-hit-area {
+            position: absolute;
+            z-index: 9;
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 4px;
+            background: transparent;
+            cursor: pointer;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .image-tts-story-panel-hit-area:focus-visible {
+            outline: 3px solid #facc15;
+            outline-offset: -3px;
+        }
+
+        .image-tts-story-panel-hit-area:disabled {
+            cursor: default;
+        }
+
+        .english-image-story-controls {
+            box-sizing: border-box;
+            position: fixed;
+            z-index: 12100;
+            width: min(280px, calc(100vw - 20px));
+            max-height: min(55vh, 420px);
+            overflow: auto;
+            margin: 0;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.96);
+            color: #ffffff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.48);
+            overscroll-behavior: contain;
+        }
+
+        .english-image-story-controls[hidden] {
+            display: none;
+        }
+
+        .english-image-story-controls-title {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .english-image-story-controls-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .english-image-story-controls button {
+            min-width: 44px;
+            min-height: 44px;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            background: #1e40af;
+            color: #ffffff;
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .english-image-story-controls button:focus-visible {
+            outline: 3px solid #facc15;
+            outline-offset: 2px;
+        }
+
+        .english-image-story-sentences[hidden] {
+            display: none;
+        }
+
+        .english-image-story-sentences {
+            display: grid;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
         .english-image-tts-menu {
             position: fixed;
             z-index: 12100;
@@ -816,7 +902,8 @@ color: #111827;
         }
 
         @supports (height: 100dvh) {
-            .english-image-tts-menu {
+            .english-image-tts-menu,
+            .english-image-story-controls {
                 max-height: min(55dvh, 420px);
             }
         }
@@ -3021,6 +3108,8 @@ const englishImageTTSOverlayState = {
     initialized: false,
     menu: null,
     activeTrigger: null,
+    activeStoryControls: null,
+    storyControlsSequence: 0,
     layoutFrame: 0,
     menuPositionFrame: 0
 };
@@ -4450,12 +4539,54 @@ function getEnglishImageTTSRecord(assetFile) {
     if (!record || record.assetFile !== assetFile ||
         record.transcriptStatus !== "verified" ||
         record.coordinateStatus !== "calibrated" ||
-        !Array.isArray(record.panels) || record.panels.length !== 4) {
+        !Array.isArray(record.panels)) {
         return null;
     }
 
+    const isValidBounds = bounds => {
+        if (!bounds) {
+            return false;
+        }
+        const values = [bounds.xPct, bounds.yPct, bounds.widthPct, bounds.heightPct];
+        return values.every(value => Number.isFinite(value) && value >= 0 && value <= 100) &&
+            bounds.widthPct > 0 && bounds.heightPct > 0 &&
+            bounds.xPct + bounds.widthPct <= 100.01 &&
+            bounds.yPct + bounds.heightPct <= 100.01;
+    };
+
     const panelIds = new Set();
     const orderedPanels = record.panels.slice().sort((left, right) => left.readingOrder - right.readingOrder);
+
+    if (record.contentType === "story") {
+        if (record.layout !== "2x6" || orderedPanels.length !== 12) {
+            return null;
+        }
+
+        for (let index = 0; index < orderedPanels.length; index += 1) {
+            const panel = orderedPanels[index];
+            if (!panel || !Number.isInteger(panel.panelId) || panelIds.has(panel.panelId) ||
+                panel.readingOrder !== index + 1 ||
+                typeof panel.text !== "string" || !getEnglishTTSUnitText(panel.text) ||
+                !Array.isArray(panel.sentences) || panel.sentences.length === 0 ||
+                !panel.sentences.every(sentence => typeof sentence === "string" && getEnglishTTSUnitText(sentence)) ||
+                !isValidBounds(panel.bounds)) {
+                return null;
+            }
+            panelIds.add(panel.panelId);
+        }
+
+        return { ...record, panels: orderedPanels };
+    }
+
+    // Legacy records without contentType are the existing Business Email format.
+    // Explicit unknown types fail closed instead of being treated as email.
+    if (record.contentType !== undefined && record.contentType !== "business-email") {
+        return null;
+    }
+    if (orderedPanels.length !== 4) {
+        return null;
+    }
+
     for (let index = 0; index < orderedPanels.length; index += 1) {
         const panel = orderedPanels[index];
         const bounds = panel && panel.bounds;
@@ -4548,6 +4679,58 @@ function createEnglishImageTTSPanelSpeaker(wrapper, panel) {
     return button;
 }
 
+function createEnglishImageTTSStoryPanelHitArea(wrapper, panel, controls) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-story-panel-hit-area";
+    button.textContent = "";
+    button.setAttribute("aria-label", `第 ${panel.panelId} 格故事，選擇英文朗讀方式`);
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", controls.id);
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.style.left = `${panel.bounds.xPct}%`;
+    button.style.top = `${panel.bounds.yPct}%`;
+    button.style.width = `${panel.bounds.widthPct}%`;
+    button.style.height = `${panel.bounds.heightPct}%`;
+    button._englishImageTTSPanel = panel;
+    button._englishImageTTSStoryControls = controls;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+            return;
+        }
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.activeStoryControls === controls && !controls.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishImageTTSStoryControls(button, panel, controls);
+    });
+
+    wrapper.appendChild(button);
+    return button;
+}
+
+function createEnglishImageTTSStoryControls(wrapper, record) {
+    if (!wrapper || !wrapper.parentNode || !record || !record.imageId) {
+        return null;
+    }
+    const controls = document.createElement("section");
+    englishImageTTSOverlayState.storyControlsSequence += 1;
+    controls.id = `english-image-story-controls-${record.imageId}-${englishImageTTSOverlayState.storyControlsSequence}`;
+    controls.className = "english-image-story-controls";
+    controls.hidden = true;
+    controls.setAttribute("role", "group");
+    controls.setAttribute("aria-label", "英文故事圖片朗讀選項");
+    controls.addEventListener("click", event => event.stopPropagation());
+    controls._englishImageTTSOriginParent = wrapper.parentNode;
+    controls._englishImageTTSOriginNextSibling = wrapper.nextSibling;
+    wrapper.parentNode.insertBefore(controls, wrapper.nextSibling);
+    return controls;
+}
+
 function enhanceEnglishImageTTSOverlays(responseRoot) {
     if (!responseRoot || typeof responseRoot.querySelectorAll !== "function") {
         return 0;
@@ -4573,6 +4756,30 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
 
         const record = getEnglishImageTTSRecord(assetFile);
         if (!record) {
+            return;
+        }
+
+        if (record.contentType === "story") {
+            if (image.complete && image.naturalWidth === 0) {
+                return;
+            }
+            const controls = createEnglishImageTTSStoryControls(wrapper, record);
+            if (!controls) {
+                return;
+            }
+            record.panels.forEach(panel => {
+                createEnglishImageTTSStoryPanelHitArea(wrapper, panel, controls);
+                added += 1;
+            });
+            image.addEventListener("error", () => {
+                wrapper.querySelectorAll(".image-tts-story-panel-hit-area").forEach(button => {
+                    button.hidden = true;
+                });
+                controls.hidden = true;
+                if (englishImageTTSOverlayState.activeStoryControls === controls) {
+                    closeEnglishImageTTSMenu();
+                }
+            }, { once: true });
             return;
         }
 
@@ -4676,9 +4883,23 @@ function syncEnglishImageTTSDrawingMode() {
         button.style.pointerEvents = isDrawing ? "none" : "auto";
         button.setAttribute("aria-disabled", String(isDrawing));
     });
+    document.querySelectorAll("#ai-response .image-tts-story-panel-hit-area").forEach(button => {
+        button.disabled = isDrawing;
+        button.style.pointerEvents = isDrawing ? "none" : "auto";
+        button.setAttribute("aria-disabled", String(isDrawing));
+    });
 }
 
 function buildEnglishImageTTSPanelText(panel) {
+    if (panel && typeof panel.text === "string" && Array.isArray(panel.sentences)) {
+        const fullText = getEnglishTTSUnitText(panel.text);
+        const sentences = panel.sentences.map(sentence => getEnglishTTSUnitText(sentence));
+        if (!fullText || !sentences.length || sentences.some(sentence => !sentence)) {
+            return null;
+        }
+        return { fullText, sentences };
+    }
+
     const parts = [panel.subject, panel.salutation, ...panel.bodySentences];
     if (panel.closing) {
         parts.push(panel.closing);
@@ -4782,9 +5003,173 @@ function openEnglishImageTTSMenu(trigger, panel) {
     }
 }
 
+function openEnglishImageTTSStoryControls(trigger, panel, controls) {
+    if (!trigger || !panel || !controls || appState.subjectMode !== "english" ||
+        isEnglishImageTTSDrawingMode()) {
+        return;
+    }
+    const content = buildEnglishImageTTSPanelText(panel);
+    if (!content || !content.sentences.length || content.sentences.some(sentence => !sentence)) {
+        setEnglishTTSStatus("這格故事圖片的英文資料不完整，暫時無法朗讀。");
+        return;
+    }
+
+    closeEnglishImageTTSMenu();
+    englishImageTTSOverlayState.activeTrigger = trigger;
+    englishImageTTSOverlayState.activeStoryControls = controls;
+    trigger.setAttribute("aria-expanded", "true");
+
+    while (controls.firstChild) {
+        controls.removeChild(controls.firstChild);
+    }
+
+    const heading = document.createElement("h3");
+    heading.className = "english-image-story-controls-title";
+    heading.textContent = `第 ${panel.panelId} 格・故事朗讀`;
+    controls.setAttribute("aria-label", `第 ${panel.panelId} 格故事英文朗讀選項`);
+
+    const actions = document.createElement("div");
+    actions.className = "english-image-story-controls-actions";
+    actions.appendChild(createEnglishImageTTSMenuButton(
+        "🔊 朗讀整段",
+        `朗讀第 ${panel.panelId} 格完整英文故事`,
+        () => speakEnglishImageTTSFromPanel(trigger, content.fullText)
+    ));
+
+    const sentenceToggle = createEnglishImageTTSMenuButton(
+        "單句",
+        `展開第 ${panel.panelId} 格英文故事單句`,
+        () => {
+            const sentenceList = controls.querySelector(".english-image-story-sentences");
+            if (!sentenceList) {
+                return;
+            }
+            sentenceList.hidden = !sentenceList.hidden;
+            sentenceToggle.setAttribute("aria-expanded", String(!sentenceList.hidden));
+            scheduleEnglishImageTTSMenuPosition();
+        }
+    );
+    sentenceToggle.setAttribute("aria-expanded", "false");
+    actions.appendChild(sentenceToggle);
+    actions.appendChild(createEnglishImageTTSMenuButton(
+        "關閉",
+        `關閉第 ${panel.panelId} 格故事朗讀選單`,
+        () => closeEnglishImageTTSMenu(true)
+    ));
+
+    const sentenceList = document.createElement("div");
+    sentenceList.className = "english-image-story-sentences";
+    sentenceList.hidden = true;
+    content.sentences.forEach((sentence, index) => {
+        sentenceList.appendChild(createEnglishImageTTSMenuButton(
+            `🔊 朗讀第 ${index + 1} 句`,
+            `朗讀第 ${panel.panelId} 格第 ${index + 1} 句英文故事`,
+            () => speakEnglishImageTTSFromPanel(trigger, sentence)
+        ));
+    });
+
+    controls.appendChild(heading);
+    controls.appendChild(actions);
+    controls.appendChild(sentenceList);
+    moveEnglishImageTTSStoryControlsToFloatingLayer(controls);
+    controls.hidden = false;
+    controls.style.visibility = "hidden";
+    positionEnglishImageTTSStoryControls(trigger, controls);
+}
+
+function moveEnglishImageTTSStoryControlsToFloatingLayer(controls) {
+    if (!controls || !document.body || controls.parentNode === document.body) {
+        return;
+    }
+    document.body.appendChild(controls);
+}
+
+function restoreEnglishImageTTSStoryControls(controls) {
+    if (!controls) {
+        return;
+    }
+    const parent = controls._englishImageTTSOriginParent;
+    const nextSibling = controls._englishImageTTSOriginNextSibling;
+    controls.style.left = "";
+    controls.style.top = "";
+    controls.style.maxWidth = "";
+    controls.style.maxHeight = "";
+    controls.style.visibility = "";
+    if (parent && parent.isConnected) {
+        parent.insertBefore(controls, nextSibling && nextSibling.parentNode === parent ? nextSibling : null);
+    } else if (controls.parentNode) {
+        controls.parentNode.removeChild(controls);
+    }
+}
+
+function positionEnglishImageTTSStoryControls(trigger, controls) {
+    if (!trigger || !controls || controls.hidden || trigger.isConnected === false) {
+        return;
+    }
+    const triggerRect = trigger.getBoundingClientRect();
+    if (!triggerRect.width || !triggerRect.height) {
+        return;
+    }
+
+    const viewport = window.visualViewport;
+    const viewportLeft = viewport ? viewport.offsetLeft : 0;
+    const viewportTop = viewport ? viewport.offsetTop : 0;
+    const viewportWidth = viewport ? viewport.width : window.innerWidth;
+    const viewportHeight = viewport ? viewport.height : window.innerHeight;
+    const margin = 10;
+    const gap = 8;
+    const maxWidth = Math.max(44, viewportWidth - margin * 2);
+    const maxHeight = Math.max(44, viewportHeight - margin * 2);
+    const triggerLeft = triggerRect.left + viewportLeft;
+    const triggerRight = triggerRect.right + viewportLeft;
+    const triggerTop = triggerRect.top + viewportTop;
+    const triggerBottom = triggerRect.bottom + viewportTop;
+    const minTop = viewportTop + margin;
+    const maxTop = viewportTop + viewportHeight - margin;
+    const roomAbove = Math.max(0, triggerTop - gap - minTop);
+    const roomBelow = Math.max(0, maxTop - triggerBottom - gap);
+
+    controls.style.maxWidth = `${Math.min(280, maxWidth)}px`;
+    controls.style.maxHeight = `${Math.min(
+        maxHeight,
+        viewportHeight * 0.55,
+        420,
+        Math.max(44, roomAbove, roomBelow)
+    )}px`;
+    controls.style.visibility = "hidden";
+    const controlsRect = controls.getBoundingClientRect();
+    const width = Math.min(controlsRect.width || 280, maxWidth);
+    const height = Math.min(controlsRect.height || 150, maxHeight);
+    const minLeft = viewportLeft + margin;
+    const maxLeft = viewportLeft + viewportWidth - width - margin;
+    const maxMenuTop = maxTop - height;
+    const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), Math.max(minimum, maximum));
+    const centeredLeft = clamp(triggerLeft + (triggerRect.width - width) / 2, minLeft, maxLeft);
+    const candidates = [
+        { left: centeredLeft, top: triggerBottom + gap, placement: "below" },
+        { left: centeredLeft, top: triggerTop - height - gap, placement: "above" },
+        { left: triggerRight + gap, top: clamp(triggerTop, minTop, maxMenuTop), placement: "right" },
+        { left: triggerLeft - width - gap, top: clamp(triggerTop, minTop, maxMenuTop), placement: "left" }
+    ];
+    const fits = candidate => candidate.left >= minLeft && candidate.left <= maxLeft &&
+        candidate.top >= minTop && candidate.top <= maxMenuTop;
+    let placement = candidates.find(fits);
+    if (!placement) {
+        placement = candidates[0];
+    }
+    controls.style.left = `${clamp(placement.left, minLeft, maxLeft)}px`;
+    controls.style.top = `${clamp(placement.top, minTop, maxTop)}px`;
+    controls.dataset.placement = placement.placement;
+    controls.style.visibility = "visible";
+}
+
 function positionEnglishImageTTSMenu() {
     const menu = englishImageTTSOverlayState.menu;
     const trigger = englishImageTTSOverlayState.activeTrigger;
+    const storyControls = englishImageTTSOverlayState.activeStoryControls;
+    if (storyControls && !storyControls.hidden) {
+        positionEnglishImageTTSStoryControls(trigger, storyControls);
+    }
     if (!menu || menu.hidden || !trigger || trigger.isConnected === false) {
         return;
     }
@@ -4829,7 +5214,10 @@ function positionEnglishImageTTSMenu() {
 }
 
 function scheduleEnglishImageTTSMenuPosition() {
-    if (englishImageTTSOverlayState.menuPositionFrame || !englishImageTTSOverlayState.menu || englishImageTTSOverlayState.menu.hidden) {
+    const menuVisible = englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden;
+    const storyVisible = englishImageTTSOverlayState.activeStoryControls &&
+        !englishImageTTSOverlayState.activeStoryControls.hidden;
+    if (englishImageTTSOverlayState.menuPositionFrame || (!menuVisible && !storyVisible)) {
         return;
     }
     const requestFrame = window.requestAnimationFrame || (callback => window.setTimeout(callback, 16));
@@ -4842,6 +5230,7 @@ function scheduleEnglishImageTTSMenuPosition() {
 function closeEnglishImageTTSMenu(restoreFocus = false) {
     const menu = englishImageTTSOverlayState.menu;
     const trigger = englishImageTTSOverlayState.activeTrigger;
+    const storyControls = englishImageTTSOverlayState.activeStoryControls;
     if (trigger && trigger.isConnected !== false) {
         trigger.setAttribute("aria-expanded", "false");
     }
@@ -4852,12 +5241,25 @@ function closeEnglishImageTTSMenu(restoreFocus = false) {
             menu.removeChild(menu.firstChild);
         }
     }
+    if (storyControls) {
+        storyControls.hidden = true;
+        while (storyControls.firstChild) {
+            storyControls.removeChild(
+                storyControls.firstChild
+            );
+        }
+        storyControls.setAttribute("aria-label", "英文故事圖片朗讀選項");
+        restoreEnglishImageTTSStoryControls(storyControls);
+    }
+    englishImageTTSOverlayState.activeStoryControls = null;
     englishImageTTSOverlayState.activeTrigger = null;
     if (restoreFocus && trigger && trigger.isConnected !== false) {
         try {
             trigger.focus({ preventScroll: true });
         } catch (error) {
-            trigger.focus();
+            if (!storyControls) {
+                trigger.focus();
+            }
         }
     }
 }
@@ -4879,18 +5281,21 @@ function initializeEnglishImageTTSOverlayControls() {
     englishImageTTSOverlayState.menu = menu;
 
     document.addEventListener("click", event => {
-        if (menu.hidden) {
+        const storyControls = englishImageTTSOverlayState.activeStoryControls;
+        if (menu.hidden && (!storyControls || storyControls.hidden)) {
             return;
         }
         const target = event.target;
         if (menu.contains(target) ||
+            (storyControls && storyControls.contains(target)) ||
             (englishImageTTSOverlayState.activeTrigger && englishImageTTSOverlayState.activeTrigger.contains(target))) {
             return;
         }
         closeEnglishImageTTSMenu();
     });
     document.addEventListener("keydown", event => {
-        if (event.key === "Escape" && !menu.hidden) {
+        const storyControls = englishImageTTSOverlayState.activeStoryControls;
+        if (event.key === "Escape" && (!menu.hidden || (storyControls && !storyControls.hidden))) {
             event.preventDefault();
             closeEnglishImageTTSMenu(true);
         }

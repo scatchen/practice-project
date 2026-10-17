@@ -99,5 +99,125 @@ const imageTTSData = {
                 speakerPlacementStatus: "top-right-clear"
             }
         ]
+    },
+    "images/english/harry-potter-philosophers-stone-basics.png": {
+        imageId: "harry-potter-philosophers-stone-basics",
+        assetFile: "images/english/harry-potter-philosophers-stone-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Harry Potter is a boy who lives with his unkind aunt and uncle.",
+                sentences: ["Harry Potter is a boy who lives with his unkind aunt and uncle."],
+                bounds: { xPct: 15.6250, yPct: 10.6120, widthPct: 42.1875, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "On his 11th birthday, he receives a letter from Hogwarts, a school of magic.",
+                sentences: ["On his 11th birthday, he receives a letter from Hogwarts, a school of magic."],
+                bounds: { xPct: 59.0820, yPct: 10.6120, widthPct: 40.0391, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Harry goes to Diagon Alley to buy school supplies.",
+                sentences: ["Harry goes to Diagon Alley to buy school supplies."],
+                bounds: { xPct: 15.6250, yPct: 25.1302, widthPct: 42.1875, heightPct: 14.1276 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Harry takes the Hogwarts Express to Hogwarts and meets Ron and Hermione.",
+                sentences: ["Harry takes the Hogwarts Express to Hogwarts and meets Ron and Hermione."],
+                bounds: { xPct: 59.0820, yPct: 25.1302, widthPct: 40.0391, heightPct: 14.1276 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Harry, Ron, and Hermione learn different classes at Hogwarts, such as Potions, Charms, and Flying.",
+                sentences: ["Harry, Ron, and Hermione learn different classes at Hogwarts, such as Potions, Charms, and Flying."],
+                bounds: { xPct: 15.6250, yPct: 40.1693, widthPct: 42.1875, heightPct: 13.5417 },
+                contentReviewStatus: "needs-editorial-review"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "They become good friends and help each other.",
+                sentences: ["They become good friends and help each other."],
+                bounds: { xPct: 59.0820, yPct: 40.1693, widthPct: 40.0391, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "They also face many challenges, including a scary three-headed dog.",
+                sentences: ["They also face many challenges, including a scary three-headed dog."],
+                bounds: { xPct: 15.6250, yPct: 54.4271, widthPct: 42.1875, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Harry and his friends solve puzzles to protect the Philosopher’s Stone.",
+                sentences: ["Harry and his friends solve puzzles to protect the Philosopher’s Stone."],
+                bounds: { xPct: 59.0820, yPct: 54.4271, widthPct: 40.0391, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Harry discovers that Professor Quirrell is working with the evil wizard Voldemort.",
+                sentences: ["Harry discovers that Professor Quirrell is working with the evil wizard Voldemort."],
+                bounds: { xPct: 15.6250, yPct: 69.2057, widthPct: 42.1875, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "In the final challenge, Harry must get the Philosopher’s Stone before Quirrell.",
+                sentences: ["In the final challenge, Harry must get the Philosopher’s Stone before Quirrell."],
+                bounds: { xPct: 59.0820, yPct: 69.2057, widthPct: 40.0391, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "With courage and the help of his friends, Harry stops Quirrell and protects the stone.",
+                sentences: ["With courage and the help of his friends, Harry stops Quirrell and protects the stone."],
+                bounds: { xPct: 15.6250, yPct: 83.7891, widthPct: 42.1875, heightPct: 15.5599 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Harry returns home for the summer, but he knows that this is only the beginning of many more adventures.",
+                sentences: ["Harry returns home for the summer, but he knows that this is only the beginning of many more adventures."],
+                bounds: { xPct: 59.0820, yPct: 83.7891, widthPct: 40.0391, heightPct: 15.5599 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
