@@ -345,5 +345,134 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/alice-in-wonderland-basics.png": {
+        imageId: "alice-in-wonderland-basics",
+        assetFile: "images/english/alice-in-wonderland-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Alice is reading a book in the park on a warm day.",
+                sentences: ["Alice is reading a book in the park on a warm day."],
+                bounds: { x: 162, y: 7, width: 416, height: 234, xPct: 15.8203, yPct: 0.4557, widthPct: 40.6250, heightPct: 15.2344 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "She sees a white rabbit in a hurry.",
+                sentences: ["She sees a white rabbit in a hurry."],
+                bounds: { x: 594, y: 7, width: 420, height: 234, xPct: 58.0078, yPct: 0.4557, widthPct: 41.0156, heightPct: 15.2344 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Alice follows the rabbit and falls down a deep hole.",
+                sentences: ["Alice follows the rabbit and falls down a deep hole."],
+                bounds: { x: 162, y: 255, width: 416, height: 245, xPct: 15.8203, yPct: 16.6016, widthPct: 40.6250, heightPct: 15.9505 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "She finds a strange room with doors of different sizes.",
+                sentences: ["She finds a strange room with doors of different sizes."],
+                bounds: { x: 594, y: 255, width: 420, height: 245, xPct: 58.0078, yPct: 16.6016, widthPct: 41.0156, heightPct: 15.9505 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Alice meets a blue caterpillar, who gives her some advice. Who are you?",
+                sentences: [
+                    "Alice meets a blue caterpillar, who gives her some advice.",
+                    "Who are you?"
+                ],
+                bounds: { x: 162, y: 516, width: 416, height: 241, xPct: 15.8203, yPct: 33.5938, widthPct: 40.6250, heightPct: 15.6901 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "She meets the Cheshire Cat, who can appear and disappear. Where are you?",
+                sentences: [
+                    "She meets the Cheshire Cat, who can appear and disappear.",
+                    "Where are you?"
+                ],
+                bounds: { x: 594, y: 516, width: 420, height: 241, xPct: 58.0078, yPct: 33.5938, widthPct: 41.0156, heightPct: 15.6901 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Alice joins a mad tea party with the Mad Hatter and the March Hare.",
+                sentences: ["Alice joins a mad tea party with the Mad Hatter and the March Hare."],
+                bounds: { x: 162, y: 773, width: 416, height: 253, xPct: 15.8203, yPct: 50.3255, widthPct: 40.6250, heightPct: 16.4714 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "She meets the Queen of Hearts, who is angry and gives strange orders. Off with their heads!",
+                sentences: [
+                    "She meets the Queen of Hearts, who is angry and gives strange orders.",
+                    "Off with their heads!"
+                ],
+                bounds: { x: 594, y: 773, width: 420, height: 253, xPct: 58.0078, yPct: 50.3255, widthPct: 41.0156, heightPct: 16.4714 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Alice is brought to a court trial, but everything is confused and silly.",
+                sentences: ["Alice is brought to a court trial, but everything is confused and silly."],
+                bounds: { x: 162, y: 1041, width: 416, height: 246, xPct: 15.8203, yPct: 67.7734, widthPct: 40.6250, heightPct: 16.0156 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Alice realizes that Wonderland is full of imagination, not logic.",
+                sentences: ["Alice realizes that Wonderland is full of imagination, not logic."],
+                bounds: { x: 594, y: 1041, width: 420, height: 246, xPct: 58.0078, yPct: 67.7734, widthPct: 41.0156, heightPct: 16.0156 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Alice wakes up and finds that it was all a dream.",
+                sentences: ["Alice wakes up and finds that it was all a dream."],
+                bounds: { x: 162, y: 1302, width: 416, height: 225, xPct: 15.8203, yPct: 84.7656, widthPct: 40.6250, heightPct: 14.6484 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Alice keeps the memories of this amazing adventure and looks at the world with new eyes.",
+                sentences: ["Alice keeps the memories of this amazing adventure and looks at the world with new eyes."],
+                bounds: { x: 594, y: 1302, width: 420, height: 225, xPct: 58.0078, yPct: 84.7656, widthPct: 41.0156, heightPct: 14.6484 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
