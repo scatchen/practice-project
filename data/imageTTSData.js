@@ -964,5 +964,137 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/1984-george-orwell-basics.png": {
+        imageId: "1984-george-orwell-basics",
+        assetFile: "images/english/1984-george-orwell-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Winston lives in a controlled society.",
+                sentences: ["Winston lives in a controlled society."],
+                bounds: { xPct: 1.7578, yPct: 12.5651, widthPct: 47.6563, heightPct: 12.7604 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "The government uses surveillance.",
+                sentences: ["The government uses surveillance."],
+                bounds: { xPct: 50.5859, yPct: 12.5651, widthPct: 47.6563, heightPct: 12.7604 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "People receive constant propaganda. BIG BROTHER IS WATCHING YOU. WAR IS PEACE. FREEDOM IS SLAVERY. IGNORANCE IS STRENGTH.",
+                sentences: [
+                    "People receive constant propaganda.",
+                    "BIG BROTHER IS WATCHING YOU",
+                    "WAR IS PEACE",
+                    "FREEDOM IS SLAVERY",
+                    "IGNORANCE IS STRENGTH"
+                ],
+                bounds: { xPct: 1.7578, yPct: 25.9766, widthPct: 47.6563, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Winston begins to question the truth. Is this the truth?",
+                sentences: [
+                    "Winston begins to question the truth.",
+                    "Is this the truth?"
+                ],
+                bounds: { xPct: 50.5859, yPct: 25.9766, widthPct: 47.6563, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Winston secretly keeps a diary.",
+                sentences: ["Winston secretly keeps a diary."],
+                bounds: { xPct: 1.7578, yPct: 43.4896, widthPct: 47.6563, heightPct: 11.5885 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Winston meets Julia and finds hope. A PRIVATE THOUGHT IS A DANGEROUS THING.",
+                sentences: [
+                    "Winston meets Julia and finds hope.",
+                    "A PRIVATE THOUGHT IS A DANGEROUS THING"
+                ],
+                bounds: { xPct: 50.5859, yPct: 43.4896, widthPct: 47.6563, heightPct: 11.5885 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "They try to live freely and share ideas.",
+                sentences: ["They try to live freely and share ideas."],
+                bounds: { xPct: 1.7578, yPct: 55.5990, widthPct: 47.6563, heightPct: 11.6536 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "They know they are in danger.",
+                sentences: ["They know they are in danger."],
+                bounds: { xPct: 50.5859, yPct: 55.5990, widthPct: 47.6563, heightPct: 11.6536 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Winston is captured and taken to the Ministry.",
+                sentences: ["Winston is captured and taken to the Ministry."],
+                bounds: { xPct: 1.7578, yPct: 71.4193, widthPct: 47.6563, heightPct: 11.7839 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Winston is forced to give up his beliefs.",
+                sentences: ["Winston is forced to give up his beliefs."],
+                bounds: { xPct: 50.5859, yPct: 71.4193, widthPct: 47.6563, heightPct: 11.7839 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Winston finally loves Big Brother.",
+                sentences: ["Winston finally loves Big Brother."],
+                bounds: { xPct: 1.7578, yPct: 83.9844, widthPct: 47.6563, heightPct: 14.4531 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Important themes in 1984.",
+                sentences: ["Important themes in 1984."],
+                bounds: { xPct: 50.5859, yPct: 83.9844, widthPct: 47.6563, heightPct: 14.4531 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
