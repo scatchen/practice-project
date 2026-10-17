@@ -1216,5 +1216,125 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/the-lord-of-the-rings-basics.png": {
+        imageId: "the-lord-of-the-rings-basics",
+        assetFile: "images/english/the-lord-of-the-rings-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "a hobbit and a special ring",
+                sentences: ["a hobbit and a special ring"],
+                bounds: { xPct: 1.9531, yPct: 11.9141, widthPct: 47.2656, heightPct: 12.9557 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "meet new friends",
+                sentences: ["meet new friends"],
+                bounds: { xPct: 50.7813, yPct: 11.9141, widthPct: 47.3633, heightPct: 12.9557 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "start a journey",
+                sentences: ["start a journey"],
+                bounds: { xPct: 1.9531, yPct: 25.9115, widthPct: 47.2656, heightPct: 12.4349 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "face a great challenge",
+                sentences: ["face a great challenge"],
+                bounds: { xPct: 50.7813, yPct: 25.9115, widthPct: 47.3633, heightPct: 12.4349 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "a dangerous quest",
+                sentences: ["a dangerous quest"],
+                bounds: { xPct: 1.9531, yPct: 43.3594, widthPct: 47.2656, heightPct: 12.7604 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "overcome obstacles",
+                sentences: ["overcome obstacles"],
+                bounds: { xPct: 50.7813, yPct: 43.3594, widthPct: 47.3633, heightPct: 12.7604 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "friendship and teamwork",
+                sentences: ["friendship and teamwork"],
+                bounds: { xPct: 1.9531, yPct: 56.6406, widthPct: 47.2656, heightPct: 12.9557 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "never give up",
+                sentences: ["never give up"],
+                bounds: { xPct: 50.7813, yPct: 56.6406, widthPct: 47.3633, heightPct: 12.9557 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "temptation of the ring",
+                sentences: ["temptation of the ring"],
+                bounds: { xPct: 1.9531, yPct: 74.6094, widthPct: 47.2656, heightPct: 10.4167 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "sacrifice for a greater good",
+                sentences: ["sacrifice for a greater good"],
+                bounds: { xPct: 50.7813, yPct: 74.6094, widthPct: 47.3633, heightPct: 10.4167 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "the final battle",
+                sentences: ["the final battle"],
+                bounds: { xPct: 1.9531, yPct: 86.0677, widthPct: 47.2656, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "hope and a better future",
+                sentences: ["hope and a better future"],
+                bounds: { xPct: 50.7813, yPct: 86.0677, widthPct: 47.3633, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
