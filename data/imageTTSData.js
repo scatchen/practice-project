@@ -219,5 +219,131 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/the-little-prince-basics.png": {
+        imageId: "the-little-prince-basics",
+        assetFile: "images/english/the-little-prince-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "A pilot has a problem in the desert.",
+                sentences: ["A pilot has a problem in the desert."],
+                bounds: { x: 19, y: 191, width: 490, height: 194, xPct: 1.8555, yPct: 12.4349, widthPct: 47.8516, heightPct: 12.6302 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "The pilot meets a little prince.",
+                sentences: ["The pilot meets a little prince."],
+                bounds: { x: 517, y: 191, width: 490, height: 194, xPct: 50.4883, yPct: 12.4349, widthPct: 47.8516, heightPct: 12.6302 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "The little prince lives on a small planet.",
+                sentences: ["The little prince lives on a small planet."],
+                bounds: { x: 19, y: 389, width: 490, height: 211, xPct: 1.8555, yPct: 25.3255, widthPct: 47.8516, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "He takes care of his rose.",
+                sentences: ["He takes care of his rose."],
+                bounds: { x: 517, y: 389, width: 490, height: 211, xPct: 50.4883, yPct: 25.3255, widthPct: 47.8516, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "He meets a king who only wants power.",
+                sentences: ["He meets a king who only wants power."],
+                bounds: { x: 19, y: 656, width: 490, height: 186, xPct: 1.8555, yPct: 42.7083, widthPct: 47.8516, heightPct: 12.1094 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "He meets a businessman who only counts stars.",
+                sentences: ["He meets a businessman who only counts stars."],
+                bounds: { x: 517, y: 656, width: 490, height: 186, xPct: 50.4883, yPct: 42.7083, widthPct: 47.8516, heightPct: 12.1094 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "He meets other unusual adults.",
+                sentences: ["He meets other unusual adults."],
+                bounds: { x: 19, y: 847, width: 490, height: 186, xPct: 1.8555, yPct: 55.1432, widthPct: 47.8516, heightPct: 12.1094 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "On Earth, he meets a fox.",
+                sentences: ["On Earth, he meets a fox."],
+                bounds: { x: 517, y: 847, width: 490, height: 186, xPct: 50.4883, yPct: 55.1432, widthPct: 47.8516, heightPct: 12.1094 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "The fox teaches him an important lesson. You become responsible for what you have tamed.",
+                sentences: [
+                    "The fox teaches him an important lesson.",
+                    "You become responsible for what you have tamed."
+                ],
+                bounds: { x: 19, y: 1087, width: 490, height: 180, xPct: 1.8555, yPct: 70.7682, widthPct: 47.8516, heightPct: 11.7188 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "The little prince understands what really matters.",
+                sentences: ["The little prince understands what really matters."],
+                bounds: { x: 517, y: 1087, width: 490, height: 180, xPct: 50.4883, yPct: 70.7682, widthPct: 47.8516, heightPct: 11.7188 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "The little prince says goodbye to the pilot.",
+                sentences: ["The little prince says goodbye to the pilot."],
+                bounds: { x: 19, y: 1271, width: 490, height: 251, xPct: 1.8555, yPct: 82.7474, widthPct: 47.8516, heightPct: 16.3411 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Important themes in The Little Prince. The most important things are invisible to the eyes.",
+                sentences: [
+                    "Important themes in The Little Prince.",
+                    "The most important things are invisible to the eyes."
+                ],
+                bounds: { x: 517, y: 1271, width: 490, height: 251, xPct: 50.4883, yPct: 82.7474, widthPct: 47.8516, heightPct: 16.3411 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
