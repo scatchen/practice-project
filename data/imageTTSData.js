@@ -834,5 +834,135 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/animal-farm-george-orwell-basics.png": {
+        imageId: "animal-farm-george-orwell-basics",
+        assetFile: "images/english/animal-farm-george-orwell-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "The animals are unhappy with the farmer.",
+                sentences: ["The animals are unhappy with the farmer."],
+                bounds: { xPct: 1.9531, yPct: 12.3698, widthPct: 47.4609, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "The animals have a dream of a better farm. ALL ANIMALS ARE EQUAL.",
+                sentences: [
+                    "The animals have a dream of a better farm.",
+                    "ALL ANIMALS ARE EQUAL"
+                ],
+                bounds: { xPct: 50.5859, yPct: 12.3698, widthPct: 47.4609, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "The animals drive the farmer away.",
+                sentences: ["The animals drive the farmer away."],
+                bounds: { xPct: 1.9531, yPct: 25.4557, widthPct: 47.4609, heightPct: 12.8906 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "The animals build their own farm, Animal Farm.",
+                sentences: ["The animals build their own farm, Animal Farm."],
+                bounds: { xPct: 50.5859, yPct: 25.4557, widthPct: 47.4609, heightPct: 12.8906 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "The pigs become the leaders.",
+                sentences: ["The pigs become the leaders."],
+                bounds: { xPct: 1.9531, yPct: 42.1224, widthPct: 47.4609, heightPct: 11.9141 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "The pigs use propaganda to control the other animals. FOUR LEGS GOOD. TWO LEGS BAD.",
+                sentences: [
+                    "The pigs use propaganda to control the other animals.",
+                    "FOUR LEGS GOOD. TWO LEGS BAD."
+                ],
+                bounds: { xPct: 50.5859, yPct: 42.1224, widthPct: 47.4609, heightPct: 11.9141 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "The rules are changed over time. ALL ANIMALS ARE EQUAL. BUT SOME ANIMALS ARE MORE EQUAL THAN OTHERS.",
+                sentences: [
+                    "The rules are changed over time.",
+                    "ALL ANIMALS ARE EQUAL",
+                    "BUT SOME ANIMALS ARE MORE EQUAL THAN OTHERS"
+                ],
+                bounds: { xPct: 1.9531, yPct: 54.4271, widthPct: 47.4609, heightPct: 11.9792 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "The other animals begin to doubt and feel fear.",
+                sentences: ["The other animals begin to doubt and feel fear."],
+                bounds: { xPct: 50.5859, yPct: 54.4271, widthPct: 47.4609, heightPct: 11.9792 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "The pigs live like the humans they used to hate.",
+                sentences: ["The pigs live like the humans they used to hate."],
+                bounds: { xPct: 1.9531, yPct: 70.2474, widthPct: 47.4609, heightPct: 11.5885 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "The other animals realize the truth.",
+                sentences: ["The other animals realize the truth."],
+                bounds: { xPct: 50.5859, yPct: 70.2474, widthPct: 47.4609, heightPct: 11.5885 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "The animals are still not truly free.",
+                sentences: ["The animals are still not truly free."],
+                bounds: { xPct: 1.9531, yPct: 82.2266, widthPct: 47.4609, heightPct: 16.6667 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Important themes in Animal Farm.",
+                sentences: ["Important themes in Animal Farm."],
+                bounds: { xPct: 50.5859, yPct: 82.2266, widthPct: 47.4609, heightPct: 16.6667 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
