@@ -1608,5 +1608,152 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/to-kill-a-mockingbird-basics.png": {
+        imageId: "to-kill-a-mockingbird",
+        assetFile: "images/english/to-kill-a-mockingbird-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Scout Finch lives in the small town of Maycomb in Alabama.",
+                sentences: ["Scout Finch lives in the small town of Maycomb in Alabama."],
+                bounds: { xPct: 16.7969, yPct: 11.0677, widthPct: 41.0156, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "During the summer, Scout and Jem meet a new friend, Dill. The three friends have fun together.",
+                sentences: [
+                    "During the summer, Scout and Jem meet a new friend, Dill.",
+                    "The three friends have fun together."
+                ],
+                bounds: { xPct: 59.5703, yPct: 11.0677, widthPct: 39.0625, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "The children hear strange stories about Boo Radley, who rarely leaves his house.",
+                sentences: ["The children hear strange stories about Boo Radley, who rarely leaves his house."],
+                bounds: { xPct: 16.7969, yPct: 25.3906, widthPct: 41.0156, heightPct: 12.5000 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "One day, Jem finds small gifts hidden in a tree near the Radley house. The children wonder if Boo is different.",
+                sentences: [
+                    "One day, Jem finds small gifts hidden in a tree near the Radley house.",
+                    "The children wonder if Boo is different."
+                ],
+                bounds: { xPct: 59.5703, yPct: 25.3906, widthPct: 39.0625, heightPct: 12.5000 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Atticus Finch agrees to defend Tom Robinson, a Black man accused of a crime.",
+                sentences: ["Atticus Finch agrees to defend Tom Robinson, a Black man accused of a crime."],
+                bounds: { xPct: 16.7969, yPct: 39.2578, widthPct: 41.0156, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Some townspeople criticize Atticus for defending Tom. Scout and Jem begin to see how prejudice affects people in their town.",
+                sentences: [
+                    "Some townspeople criticize Atticus for defending Tom.",
+                    "Scout and Jem begin to see how prejudice affects people in their town."
+                ],
+                bounds: { xPct: 59.5703, yPct: 39.2578, widthPct: 39.0625, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "During the trial, Atticus questions the witnesses and examines the evidence. His questions show that Tom is innocent.",
+                sentences: [
+                    "During the trial, Atticus questions the witnesses and examines the evidence.",
+                    "His questions show that Tom is innocent."
+                ],
+                bounds: { xPct: 16.7969, yPct: 54.6224, widthPct: 41.0156, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Although the evidence is strong, the jury still finds Tom guilty. Scout and Jem are confused and upset.",
+                sentences: [
+                    "Although the evidence is strong, the jury still finds Tom guilty.",
+                    "Scout and Jem are confused and upset."
+                ],
+                bounds: { xPct: 59.5703, yPct: 54.6224, widthPct: 39.0625, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Tom’s story ends tragically. Scout and Jem have many questions about fairness and justice.",
+                sentences: [
+                    "Tom’s story ends tragically.",
+                    "Scout and Jem have many questions about fairness and justice."
+                ],
+                bounds: { xPct: 16.7969, yPct: 70.0521, widthPct: 41.0156, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "On Halloween night, Scout and Jem are attacked by Bob Ewell, a mean man. They are in a frightening situation.",
+                sentences: [
+                    "On Halloween night, Scout and Jem are attacked by Bob Ewell, a mean man.",
+                    "They are in a frightening situation."
+                ],
+                bounds: { xPct: 59.5703, yPct: 70.0521, widthPct: 39.0625, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Boo Radley rescues the children and brings them to safety. Scout finally sees that the quiet neighbor is kind.",
+                sentences: [
+                    "Boo Radley rescues the children and brings them to safety.",
+                    "Scout finally sees that the quiet neighbor is kind."
+                ],
+                bounds: { xPct: 16.7969, yPct: 85.1563, widthPct: 41.0156, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "As Scout walks Boo home, she learns an important lesson. She understands that empathy means seeing the world from another person’s point of view.",
+                sentences: [
+                    "As Scout walks Boo home, she learns an important lesson.",
+                    "She understands that empathy means seeing the world from another person’s point of view."
+                ],
+                bounds: { xPct: 59.5703, yPct: 85.1563, widthPct: 39.0625, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
