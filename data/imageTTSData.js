@@ -1755,5 +1755,165 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/of-mice-and-men-basics.png": {
+        imageId: "of-mice-and-men-basics",
+        assetFile: "images/english/of-mice-and-men-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "George and Lennie travel together during the Great Depression. They look for a new job on a ranch.",
+                sentences: [
+                    "George and Lennie travel together during the Great Depression.",
+                    "They look for a new job on a ranch."
+                ],
+                bounds: { xPct: 16.0156, yPct: 11.7839, widthPct: 40.5273, heightPct: 15.5599 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Lennie is a kind man with great strength. He loves to touch soft things, like a small rabbit.",
+                sentences: [
+                    "Lennie is a kind man with great strength.",
+                    "He loves to touch soft things, like a small rabbit."
+                ],
+                bounds: { xPct: 57.8125, yPct: 11.7839, widthPct: 41.2109, heightPct: 15.5599 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "George and Lennie have a dream. They want to buy a small farm and live on their own someday.",
+                sentences: [
+                    "George and Lennie have a dream.",
+                    "They want to buy a small farm and live on their own someday."
+                ],
+                bounds: { xPct: 16.0156, yPct: 27.6693, widthPct: 40.5273, heightPct: 15.2995 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "They arrive at the ranch and meet the boss. The boss gives them jobs. George and Lennie are happy to have work and a place to stay.",
+                sentences: [
+                    "They arrive at the ranch and meet the boss.",
+                    "The boss gives them jobs.",
+                    "George and Lennie are happy to have work and a place to stay."
+                ],
+                bounds: { xPct: 57.8125, yPct: 27.6693, widthPct: 41.2109, heightPct: 15.2995 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Lennie meets Candy, an old man, and Curley’s wife, who is friendly but lonely. She talks to Lennie and likes his kindness.",
+                sentences: [
+                    "Lennie meets Candy, an old man, and Curley’s wife, who is friendly but lonely.",
+                    "She talks to Lennie and likes his kindness."
+                ],
+                bounds: { xPct: 16.0156, yPct: 43.8802, widthPct: 40.5273, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Curley is angry and jealous because Lennie is so big and strong. He often looks for a fight with Lennie.",
+                sentences: [
+                    "Curley is angry and jealous because Lennie is so big and strong.",
+                    "He often looks for a fight with Lennie."
+                ],
+                bounds: { xPct: 57.8125, yPct: 43.8802, widthPct: 41.2109, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Curley’s wife feels lonely and dreams of a different life. She is unhappy on the ranch and wants more freedom.",
+                sentences: [
+                    "Curley’s wife feels lonely and dreams of a different life.",
+                    "She is unhappy on the ranch and wants more freedom."
+                ],
+                bounds: { xPct: 16.0156, yPct: 59.6354, widthPct: 40.5273, heightPct: 12.0443 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Curley’s wife lets Lennie touch her hair, but she becomes frightened. Trying to silence her, Lennie accidentally kills her and runs away.",
+                sentences: [
+                    "Curley’s wife lets Lennie touch her hair, but she becomes frightened.",
+                    "Trying to silence her, Lennie accidentally kills her and runs away."
+                ],
+                bounds: { xPct: 57.8125, yPct: 59.6354, widthPct: 41.2109, heightPct: 12.0443 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Lennie hides by the river. He does not understand what happened. He just wants to go back to the farm and live a simple life.",
+                sentences: [
+                    "Lennie hides by the river.",
+                    "He does not understand what happened.",
+                    "He just wants to go back to the farm and live a simple life."
+                ],
+                bounds: { xPct: 16.0156, yPct: 72.6562, widthPct: 40.5273, heightPct: 12.6302 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "George finds Lennie and talks to him. He knows Lennie may get into more trouble. George makes a difficult decision.",
+                sentences: [
+                    "George finds Lennie and talks to him.",
+                    "He knows Lennie may get into more trouble.",
+                    "George makes a difficult decision."
+                ],
+                bounds: { xPct: 57.8125, yPct: 72.6562, widthPct: 41.2109, heightPct: 12.6302 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "George tells Lennie about their dream. He knows Lennie cannot have the life they wanted. He shows his friendship and kindness in a painful moment.",
+                sentences: [
+                    "George tells Lennie about their dream.",
+                    "He knows Lennie cannot have the life they wanted.",
+                    "He shows his friendship and kindness in a painful moment."
+                ],
+                bounds: { xPct: 16.0156, yPct: 86.0026, widthPct: 40.5273, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "George ends Lennie’s life to protect him from a worse future. Their friendship shows the power of loyalty, kindness, and love, even in a very sad ending.",
+                sentences: [
+                    "George ends Lennie’s life to protect him from a worse future.",
+                    "Their friendship shows the power of loyalty, kindness, and love, even in a very sad ending."
+                ],
+                bounds: { xPct: 57.8125, yPct: 86.0026, widthPct: 41.2109, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
