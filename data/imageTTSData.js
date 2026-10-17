@@ -1915,5 +1915,162 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/lord-of-the-flies-basics.png": {
+        imageId: "lord-of-the-flies-basics",
+        assetFile: "images/english/lord-of-the-flies-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "A group of boys survives a plane crash and is stranded on a deserted island.",
+                sentences: ["A group of boys survives a plane crash and is stranded on a deserted island."],
+                bounds: { xPct: 15.7227, yPct: 11.4583, widthPct: 41.5039, heightPct: 14.5182 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Ralph finds a conch shell. The boys use it to hold meetings and take turns to speak.",
+                sentences: [
+                    "Ralph finds a conch shell.",
+                    "The boys use it to hold meetings and take turns to speak."
+                ],
+                bounds: { xPct: 57.8125, yPct: 11.4583, widthPct: 41.4062, heightPct: 14.5182 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Ralph is smart and gives good ideas. He wants to build a signal fire so that someone can rescue them.",
+                sentences: [
+                    "Ralph is smart and gives good ideas.",
+                    "He wants to build a signal fire so that someone can rescue them."
+                ],
+                bounds: { xPct: 15.7227, yPct: 26.4974, widthPct: 41.5039, heightPct: 14.8438 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Jack likes hunting and wants to be the leader. He is strong and confident, but he does not always follow the rules.",
+                sentences: [
+                    "Jack likes hunting and wants to be the leader.",
+                    "He is strong and confident, but he does not always follow the rules."
+                ],
+                bounds: { xPct: 57.8125, yPct: 26.4974, widthPct: 41.4062, heightPct: 14.8438 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "The boys work hard to keep the signal fire alive. They hope it will bring help, but it is not easy to maintain the fire.",
+                sentences: [
+                    "The boys work hard to keep the signal fire alive.",
+                    "They hope it will bring help, but it is not easy to maintain the fire."
+                ],
+                bounds: { xPct: 15.7227, yPct: 41.8620, widthPct: 41.5039, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Jack and his group spend more time hunting. They enjoy the power and begin to ignore Ralph’s rules. The group becomes divided.",
+                sentences: [
+                    "Jack and his group spend more time hunting.",
+                    "They enjoy the power and begin to ignore Ralph’s rules.",
+                    "The group becomes divided."
+                ],
+                bounds: { xPct: 57.8125, yPct: 41.8620, widthPct: 41.4062, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "The boys have many conflicts. Jack becomes more aggressive and tries to control the others. Ralph still believes in reason and wants to keep the peace.",
+                sentences: [
+                    "The boys have many conflicts.",
+                    "Jack becomes more aggressive and tries to control the others.",
+                    "Ralph still believes in reason and wants to keep the peace."
+                ],
+                bounds: { xPct: 15.7227, yPct: 56.7708, widthPct: 41.5039, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Over time, the boys change. They paint their faces and act like savages. They lose their sense of civilization and become more violent.",
+                sentences: [
+                    "Over time, the boys change.",
+                    "They paint their faces and act like savages.",
+                    "They lose their sense of civilization and become more violent."
+                ],
+                bounds: { xPct: 57.8125, yPct: 56.7708, widthPct: 41.4062, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "During a conflict, Piggy is tragically killed when a large rock is pushed down the mountain. The boys become even more afraid and lose their last voice of reason.",
+                sentences: [
+                    "During a conflict, Piggy is tragically killed when a large rock is pushed down the mountain.",
+                    "The boys become even more afraid and lose their last voice of reason."
+                ],
+                bounds: { xPct: 15.7227, yPct: 71.6146, widthPct: 41.5039, heightPct: 14.7786 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Jack and his group hunt Ralph. Ralph runs for his life, feeling alone and frightened. The island, which was once a place of hope, now feels dark and dangerous.",
+                sentences: [
+                    "Jack and his group hunt Ralph.",
+                    "Ralph runs for his life, feeling alone and frightened.",
+                    "The island, which was once a place of hope, now feels dark and dangerous."
+                ],
+                bounds: { xPct: 57.8125, yPct: 71.6146, widthPct: 41.4062, heightPct: 14.7786 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "In the end, Ralph is rescued by a naval officer. The boys are saved, but the officer does not understand what happened on the island.",
+                sentences: [
+                    "In the end, Ralph is rescued by a naval officer.",
+                    "The boys are saved, but the officer does not understand what happened on the island."
+                ],
+                bounds: { xPct: 15.7227, yPct: 86.9792, widthPct: 41.5039, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Lord of the Flies shows how fear, power, and the loss of rules can change people. It makes us think about human nature and the importance of kindness, reason, and civilization.",
+                sentences: [
+                    "Lord of the Flies shows how fear, power, and the loss of rules can change people.",
+                    "It makes us think about human nature and the importance of kindness, reason, and civilization."
+                ],
+                bounds: { xPct: 57.8125, yPct: 86.9792, widthPct: 41.4062, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
