@@ -720,6 +720,107 @@ color: #111827;
             display: none;
         }
 
+        .image-tts-overlay-wrapper {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 20px;
+        }
+
+        .image-tts-overlay-wrapper > img {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .image-tts-panel-speaker {
+            position: absolute;
+            z-index: 11;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            min-height: 44px;
+            padding: 0;
+            border: 2px solid rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            background: #1d4ed8;
+            color: #ffffff;
+            font: inherit;
+            font-size: 22px;
+            line-height: 1;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+            cursor: pointer;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .image-tts-panel-speaker:focus-visible,
+        .english-image-tts-menu button:focus-visible {
+            outline: 3px solid #facc15;
+            outline-offset: 2px;
+        }
+
+        .image-tts-panel-speaker:disabled {
+            cursor: default;
+            opacity: 0.72;
+        }
+
+        .english-image-tts-menu {
+            position: fixed;
+            z-index: 12100;
+            width: min(260px, calc(100vw - 20px));
+            max-height: min(55vh, 420px);
+            overflow: auto;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 12px;
+            background: #0f172a;
+            color: #ffffff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.48);
+            overscroll-behavior: contain;
+        }
+
+        .english-image-tts-menu[hidden] {
+            display: none;
+        }
+
+        .english-image-tts-menu button {
+            display: block;
+            width: 100%;
+            min-height: 44px;
+            margin: 4px 0;
+            padding: 8px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            background: #1e40af;
+            color: #ffffff;
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .english-image-tts-menu button:hover {
+            background: #1d4ed8;
+        }
+
+        .english-image-tts-sentences[hidden] {
+            display: none;
+        }
+
+        @supports (height: 100dvh) {
+            .english-image-tts-menu {
+                max-height: min(55dvh, 420px);
+            }
+        }
+
         .english-tts-panel {
             margin: 12px 0 18px;
             padding: 12px;
@@ -1522,6 +1623,7 @@ color: #111827;
 
 <script src="data/imageLibrary.js"></script>
 <script src="data/englishCollocations.js"></script>
+<script src="data/imageTTSData.js"></script>
 
     <script>
         // ================= 1. 全域公式資料庫 (大架構) =================
@@ -2845,6 +2947,8 @@ function formatEnglishAnswer(answer) {
 
 function setSubjectMode(mode) {
 
+    closeEnglishImageTTSMenu();
+
     appState.subjectMode = mode;
 
     const title = document.getElementById("assistant-title");
@@ -2911,6 +3015,14 @@ const englishTTSState = {
     collocationReplayTimer: 0,
     collocationReplayGeneration: 0,
     observedAnswerRoot: null
+};
+
+const englishImageTTSOverlayState = {
+    initialized: false,
+    menu: null,
+    activeTrigger: null,
+    layoutFrame: 0,
+    menuPositionFrame: 0
 };
 
 const ENGLISH_TTS_VOICE_KEY = "practiceProject.englishTTS.voice";
@@ -4328,6 +4440,470 @@ function enhanceEnglishCollocationsForTTS(answerRoot) {
     return added;
 }
 
+function getEnglishImageTTSRecord(assetFile) {
+    if (typeof imageTTSData === "undefined" || !imageTTSData ||
+        typeof imageTTSData !== "object" || !assetFile) {
+        return null;
+    }
+
+    const record = imageTTSData[assetFile];
+    if (!record || record.assetFile !== assetFile ||
+        record.transcriptStatus !== "verified" ||
+        record.coordinateStatus !== "calibrated" ||
+        !Array.isArray(record.panels) || record.panels.length !== 4) {
+        return null;
+    }
+
+    const panelIds = new Set();
+    const orderedPanels = record.panels.slice().sort((left, right) => left.readingOrder - right.readingOrder);
+    for (let index = 0; index < orderedPanels.length; index += 1) {
+        const panel = orderedPanels[index];
+        const bounds = panel && panel.bounds;
+        const anchor = panel && panel.speakerAnchor;
+        const percentages = bounds && anchor
+            ? [bounds.xPct, bounds.yPct, bounds.widthPct, bounds.heightPct, anchor.xPct, anchor.yPct]
+            : [];
+        if (!panel || !Number.isInteger(panel.panelId) || panelIds.has(panel.panelId) ||
+            panel.readingOrder !== index + 1 || percentages.length !== 6 ||
+            !percentages.every(value => Number.isFinite(value) && value >= 0 && value <= 100) ||
+            bounds.xPct + bounds.widthPct > 100.01 ||
+            bounds.yPct + bounds.heightPct > 100.01 ||
+            anchor.xPct < bounds.xPct || anchor.xPct > bounds.xPct + bounds.widthPct ||
+            anchor.yPct < bounds.yPct || anchor.yPct > bounds.yPct + bounds.heightPct ||
+            typeof panel.subject !== "string" || !getEnglishTTSUnitText(panel.subject) ||
+            typeof panel.salutation !== "string" || !getEnglishTTSUnitText(panel.salutation) ||
+            !Array.isArray(panel.bodySentences) || panel.bodySentences.length === 0 ||
+            !panel.bodySentences.every(sentence => typeof sentence === "string" && getEnglishTTSUnitText(sentence)) ||
+            (panel.closing !== null && (typeof panel.closing !== "string" || !getEnglishTTSUnitText(panel.closing)))) {
+            return null;
+        }
+        panelIds.add(panel.panelId);
+    }
+
+    return { ...record, panels: orderedPanels };
+}
+
+function wrapEnglishImageForTTS(image) {
+    if (!image || !image.parentNode) {
+        return null;
+    }
+    if (image.parentElement && image.parentElement.classList.contains("image-tts-overlay-wrapper")) {
+        return image.parentElement;
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "image-tts-overlay-wrapper";
+    wrapper.style.position = "relative";
+    wrapper.style.display = "block";
+    wrapper.style.width = "100%";
+    wrapper.style.maxWidth = "1200px";
+    wrapper.style.margin = "0 auto 20px";
+
+    image.parentNode.insertBefore(wrapper, image);
+    wrapper.appendChild(image);
+    // Move the original spacing to the wrapper so the image keeps its original
+    // width, max-width, aspect ratio, border radius, and gap from following content.
+    image.style.display = "block";
+    image.style.width = "100%";
+    image.style.maxWidth = "1200px";
+    image.style.height = "auto";
+    image.style.margin = "0 auto";
+
+    return wrapper;
+}
+
+function createEnglishImageTTSPanelSpeaker(wrapper, panel) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-panel-speaker";
+    button.textContent = "🔊";
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("aria-label", `第 ${panel.panelId} 格：${panel.subject}，開啟英文朗讀選項`);
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.hidden = true;
+    button.style.left = `${panel.speakerAnchor.xPct}%`;
+    button.style.top = `${panel.speakerAnchor.yPct}%`;
+    button.style.transform = "translate(-50%, -50%)";
+    button._englishImageTTSPlacement = {
+        anchor: { ...panel.speakerAnchor },
+        bounds: { ...panel.bounds }
+    };
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (button.disabled || isEnglishImageTTSDrawingMode()) {
+            return;
+        }
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishImageTTSMenu(button, panel);
+    });
+
+    wrapper.appendChild(button);
+    return button;
+}
+
+function enhanceEnglishImageTTSOverlays(responseRoot) {
+    if (!responseRoot || typeof responseRoot.querySelectorAll !== "function") {
+        return 0;
+    }
+
+    const images = Array.from(responseRoot.querySelectorAll("img"));
+    let added = 0;
+    images.forEach(image => {
+        const wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper) {
+            return;
+        }
+        if (wrapper.dataset.englishImageTtsEnhanced === "true") {
+            return;
+        }
+        wrapper.dataset.englishImageTtsEnhanced = "true";
+
+        const assetFile = image.getAttribute("src");
+        wrapper.dataset.imageTtsAssetFile = assetFile || "";
+        if (appState.subjectMode !== "english" || !englishTTSState.supported || !assetFile) {
+            return;
+        }
+
+        const record = getEnglishImageTTSRecord(assetFile);
+        if (!record) {
+            return;
+        }
+
+        record.panels.forEach(panel => {
+            createEnglishImageTTSPanelSpeaker(wrapper, panel);
+            added += 1;
+        });
+
+        image.addEventListener("load", () => layoutEnglishImageTTSPanelSpeakers(wrapper), { once: true });
+        image.addEventListener("error", () => {
+            wrapper.querySelectorAll(".image-tts-panel-speaker").forEach(button => {
+                button.hidden = true;
+            });
+        }, { once: true });
+        if (image.complete) {
+            if (image.naturalWidth > 0) {
+                layoutEnglishImageTTSPanelSpeakers(wrapper);
+            } else {
+                wrapper.querySelectorAll(".image-tts-panel-speaker").forEach(button => {
+                    button.hidden = true;
+                });
+            }
+        } else {
+            scheduleEnglishImageTTSLayout();
+        }
+    });
+
+    syncEnglishImageTTSDrawingMode();
+    return added;
+}
+
+function layoutEnglishImageTTSPanelSpeakers(wrapper) {
+    if (!wrapper || !wrapper.isConnected) {
+        return;
+    }
+    const image = wrapper.querySelector("img");
+    if (!image) {
+        return;
+    }
+
+    const imageRect = image.getBoundingClientRect();
+    const wrapperRect = wrapper.getBoundingClientRect();
+    if (!imageRect.width || !imageRect.height || !wrapperRect.width || !wrapperRect.height) {
+        return;
+    }
+
+    const imageLeft = imageRect.left - wrapperRect.left;
+    const imageTop = imageRect.top - wrapperRect.top;
+    wrapper.querySelectorAll(".image-tts-panel-speaker").forEach(button => {
+        const placement = button._englishImageTTSPlacement;
+        if (!placement) {
+            button.hidden = true;
+            return;
+        }
+        const buttonRect = button.getBoundingClientRect();
+        const buttonWidth = buttonRect.width || 44;
+        const buttonHeight = buttonRect.height || 44;
+        const bounds = placement.bounds;
+        const panelLeft = imageLeft + imageRect.width * bounds.xPct / 100;
+        const panelTop = imageTop + imageRect.height * bounds.yPct / 100;
+        const panelRight = panelLeft + imageRect.width * bounds.widthPct / 100;
+        const panelBottom = panelTop + imageRect.height * bounds.heightPct / 100;
+
+        if (panelRight - panelLeft < buttonWidth || panelBottom - panelTop < buttonHeight) {
+            button.hidden = true;
+            return;
+        }
+
+        const desiredLeft = imageLeft + imageRect.width * placement.anchor.xPct / 100 - buttonWidth / 2;
+        const desiredTop = imageTop + imageRect.height * placement.anchor.yPct / 100 - buttonHeight / 2;
+        const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum);
+        button.style.left = `${clamp(desiredLeft, panelLeft, panelRight - buttonWidth)}px`;
+        button.style.top = `${clamp(desiredTop, panelTop, panelBottom - buttonHeight)}px`;
+        button.style.transform = "none";
+        button.hidden = false;
+    });
+}
+
+function scheduleEnglishImageTTSLayout() {
+    if (englishImageTTSOverlayState.layoutFrame) {
+        return;
+    }
+    const requestFrame = window.requestAnimationFrame || (callback => window.setTimeout(callback, 16));
+    englishImageTTSOverlayState.layoutFrame = requestFrame(() => {
+        englishImageTTSOverlayState.layoutFrame = 0;
+        document.querySelectorAll("#ai-response .image-tts-overlay-wrapper").forEach(layoutEnglishImageTTSPanelSpeakers);
+    });
+}
+
+function isEnglishImageTTSDrawingMode() {
+    return ["pen", "pen-blue", "highlighter", "highlighter-green", "eraser"].includes(drawMode);
+}
+
+function syncEnglishImageTTSDrawingMode() {
+    const isDrawing = isEnglishImageTTSDrawingMode();
+    if (isDrawing) {
+        closeEnglishImageTTSMenu();
+    }
+    document.querySelectorAll("#ai-response .image-tts-panel-speaker").forEach(button => {
+        button.disabled = isDrawing;
+        button.style.pointerEvents = isDrawing ? "none" : "auto";
+        button.setAttribute("aria-disabled", String(isDrawing));
+    });
+}
+
+function buildEnglishImageTTSPanelText(panel) {
+    const parts = [panel.subject, panel.salutation, ...panel.bodySentences];
+    if (panel.closing) {
+        parts.push(panel.closing);
+    }
+    const validated = parts.map(part => getEnglishTTSUnitText(part));
+    if (validated.some(part => !part)) {
+        return null;
+    }
+    return {
+        fullText: validated.join("\n"),
+        sentences: panel.bodySentences.map(sentence => getEnglishTTSUnitText(sentence))
+    };
+}
+
+function createEnglishImageTTSMenuButton(label, ariaLabel, onClick) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = label;
+    button.setAttribute("aria-label", ariaLabel);
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        onClick();
+    });
+    return button;
+}
+
+function speakEnglishImageTTSFromPanel(trigger, text) {
+    const safeText = getEnglishTTSUnitText(text);
+    closeEnglishImageTTSMenu(true);
+    if (!safeText) {
+        setEnglishTTSStatus("這格圖片的英文資料不完整，未開始朗讀。");
+        return false;
+    }
+    rememberEnglishSpeechTrigger(trigger);
+    return speakEnglishText(safeText);
+}
+
+function openEnglishImageTTSMenu(trigger, panel) {
+    if (!trigger || !panel || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+        return;
+    }
+    const content = buildEnglishImageTTSPanelText(panel);
+    if (!content || !content.sentences.length || content.sentences.some(sentence => !sentence)) {
+        setEnglishTTSStatus("這格圖片的英文資料不完整，暫時無法朗讀。");
+        return;
+    }
+
+    closeEnglishImageTTSMenu();
+    const menu = englishImageTTSOverlayState.menu;
+    if (!menu) {
+        return;
+    }
+    englishImageTTSOverlayState.activeTrigger = trigger;
+    trigger.setAttribute("aria-expanded", "true");
+    menu.setAttribute("aria-label", `第 ${panel.panelId} 格英文朗讀選項`);
+    while (menu.firstChild) {
+        menu.removeChild(menu.firstChild);
+    }
+
+    const wholePanelButton = createEnglishImageTTSMenuButton(
+        "🔊 朗讀整段",
+        `朗讀第 ${panel.panelId} 格完整英文郵件`,
+        () => speakEnglishImageTTSFromPanel(trigger, content.fullText)
+    );
+    const sentenceToggle = createEnglishImageTTSMenuButton(
+        "單句",
+        `展開第 ${panel.panelId} 格正文單句`,
+        () => {
+            const sentenceList = menu.querySelector(".english-image-tts-sentences");
+            if (!sentenceList) {
+                return;
+            }
+            sentenceList.hidden = !sentenceList.hidden;
+            sentenceToggle.setAttribute("aria-expanded", String(!sentenceList.hidden));
+            scheduleEnglishImageTTSMenuPosition();
+        }
+    );
+    sentenceToggle.setAttribute("aria-expanded", "false");
+
+    const sentenceList = document.createElement("div");
+    sentenceList.className = "english-image-tts-sentences";
+    sentenceList.hidden = true;
+    content.sentences.forEach((sentence, index) => {
+        sentenceList.appendChild(createEnglishImageTTSMenuButton(
+            `🔊 第 ${index + 1} 句`,
+            `朗讀第 ${index + 1} 句英文正文`,
+            () => speakEnglishImageTTSFromPanel(trigger, sentence)
+        ));
+    });
+
+    menu.appendChild(wholePanelButton);
+    menu.appendChild(sentenceToggle);
+    menu.appendChild(sentenceList);
+    menu.hidden = false;
+    menu.style.visibility = "hidden";
+    positionEnglishImageTTSMenu();
+    try {
+        wholePanelButton.focus({ preventScroll: true });
+    } catch (error) {
+        wholePanelButton.focus();
+    }
+}
+
+function positionEnglishImageTTSMenu() {
+    const menu = englishImageTTSOverlayState.menu;
+    const trigger = englishImageTTSOverlayState.activeTrigger;
+    if (!menu || menu.hidden || !trigger || trigger.isConnected === false) {
+        return;
+    }
+    const triggerRect = trigger.getBoundingClientRect();
+    if (!triggerRect.width || !triggerRect.height) {
+        closeEnglishImageTTSMenu();
+        return;
+    }
+
+    const viewport = window.visualViewport;
+    const viewportLeft = viewport ? viewport.offsetLeft : 0;
+    const viewportTop = viewport ? viewport.offsetTop : 0;
+    const viewportWidth = viewport ? viewport.width : window.innerWidth;
+    const viewportHeight = viewport ? viewport.height : window.innerHeight;
+    const margin = 10;
+    const gap = 8;
+    menu.style.visibility = "hidden";
+    const menuRect = menu.getBoundingClientRect();
+    const width = Math.min(menuRect.width || 260, Math.max(44, viewportWidth - margin * 2));
+    const height = Math.min(menuRect.height || 120, Math.max(44, viewportHeight - margin * 2));
+    menu.style.maxWidth = `${width}px`;
+    const minLeft = viewportLeft + margin;
+    const maxLeft = viewportLeft + viewportWidth - width - margin;
+    const minTop = viewportTop + margin;
+    const maxTop = viewportTop + viewportHeight - height - margin;
+    const triggerLeft = triggerRect.left + (viewport ? viewport.offsetLeft : 0);
+    const triggerRight = triggerRect.right + (viewport ? viewport.offsetLeft : 0);
+    const triggerTop = triggerRect.top + (viewport ? viewport.offsetTop : 0);
+    const triggerBottom = triggerRect.bottom + (viewport ? viewport.offsetTop : 0);
+    let left = triggerRight - width;
+    if (left < minLeft) {
+        left = triggerLeft;
+    }
+    let top = triggerBottom + gap;
+    if (top + height > viewportTop + viewportHeight - margin) {
+        top = triggerTop - height - gap;
+    }
+    const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), Math.max(minimum, maximum));
+    menu.style.left = `${clamp(left, minLeft, maxLeft)}px`;
+    menu.style.top = `${clamp(top, minTop, maxTop)}px`;
+    menu.style.visibility = "visible";
+}
+
+function scheduleEnglishImageTTSMenuPosition() {
+    if (englishImageTTSOverlayState.menuPositionFrame || !englishImageTTSOverlayState.menu || englishImageTTSOverlayState.menu.hidden) {
+        return;
+    }
+    const requestFrame = window.requestAnimationFrame || (callback => window.setTimeout(callback, 16));
+    englishImageTTSOverlayState.menuPositionFrame = requestFrame(() => {
+        englishImageTTSOverlayState.menuPositionFrame = 0;
+        positionEnglishImageTTSMenu();
+    });
+}
+
+function closeEnglishImageTTSMenu(restoreFocus = false) {
+    const menu = englishImageTTSOverlayState.menu;
+    const trigger = englishImageTTSOverlayState.activeTrigger;
+    if (trigger && trigger.isConnected !== false) {
+        trigger.setAttribute("aria-expanded", "false");
+    }
+    if (menu) {
+        menu.hidden = true;
+        menu.style.visibility = "";
+        while (menu.firstChild) {
+            menu.removeChild(menu.firstChild);
+        }
+    }
+    englishImageTTSOverlayState.activeTrigger = null;
+    if (restoreFocus && trigger && trigger.isConnected !== false) {
+        try {
+            trigger.focus({ preventScroll: true });
+        } catch (error) {
+            trigger.focus();
+        }
+    }
+}
+
+function initializeEnglishImageTTSOverlayControls() {
+    if (englishImageTTSOverlayState.initialized) {
+        return;
+    }
+    englishImageTTSOverlayState.initialized = true;
+
+    const menu = document.createElement("div");
+    menu.id = "english-image-tts-menu";
+    menu.className = "english-image-tts-menu";
+    menu.hidden = true;
+    menu.setAttribute("role", "group");
+    menu.setAttribute("aria-label", "圖片英文朗讀選項");
+    menu.addEventListener("click", event => event.stopPropagation());
+    document.body.appendChild(menu);
+    englishImageTTSOverlayState.menu = menu;
+
+    document.addEventListener("click", event => {
+        if (menu.hidden) {
+            return;
+        }
+        const target = event.target;
+        if (menu.contains(target) ||
+            (englishImageTTSOverlayState.activeTrigger && englishImageTTSOverlayState.activeTrigger.contains(target))) {
+            return;
+        }
+        closeEnglishImageTTSMenu();
+    });
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && !menu.hidden) {
+            event.preventDefault();
+            closeEnglishImageTTSMenu(true);
+        }
+    });
+    window.addEventListener("resize", scheduleEnglishImageTTSLayout);
+    window.addEventListener("scroll", scheduleEnglishImageTTSMenuPosition, true);
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", scheduleEnglishImageTTSLayout);
+        window.visualViewport.addEventListener("resize", scheduleEnglishImageTTSMenuPosition);
+        window.visualViewport.addEventListener("scroll", scheduleEnglishImageTTSMenuPosition);
+    }
+}
+
 function getSelectionAnswerElement(node) {
     if (!node) {
         return null;
@@ -4580,6 +5156,7 @@ function initializeEnglishTTS() {
             const currentAnswerRoot = response.querySelector(".ai-answer-text");
             if (currentAnswerRoot !== englishTTSState.observedAnswerRoot) {
                 englishTTSState.observedAnswerRoot = currentAnswerRoot;
+                closeEnglishImageTTSMenu();
                 stopEnglishSpeech();
             }
             clearEnglishTTSSelection("回答內容已更新，請重新選取英文文字。");
@@ -4610,6 +5187,7 @@ function initializeEnglishTTS() {
         return;
     }
 
+    closeEnglishImageTTSMenu();
     stopEnglishSpeech();
     responseDiv.innerText = "🤔 我來想想看...";
 
@@ -4844,6 +5422,8 @@ answer = answer.replace(/\n{3,}/g, "\n\n");
             answer +
             "</div>";
 
+        enhanceEnglishImageTTSOverlays(responseDiv);
+
         if (appState.subjectMode === "english") {
             const answerRoot = responseDiv.querySelector(".ai-answer-text");
             enhanceEnglishAnswerForTTS(answerRoot);
@@ -4894,6 +5474,8 @@ let drawMode = null;
 function setDrawMode(mode){
 
     drawMode = mode;
+
+    syncEnglishImageTTSDrawingMode();
 
     console.log("🎨目前模式:", drawMode);
 
@@ -5156,5 +5738,6 @@ canvas.addEventListener("pointerleave", function() {
 });
 
 initializeEnglishTTS();
+initializeEnglishImageTTSOverlayControls();
 
 </script>
