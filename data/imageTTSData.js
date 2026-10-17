@@ -714,5 +714,125 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/the-great-gatsby-basics.png": {
+        imageId: "the-great-gatsby-basics",
+        assetFile: "images/english/the-great-gatsby-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Nick moves to a new neighborhood.",
+                sentences: ["Nick moves to a new neighborhood."],
+                bounds: { x: 19, y: 190, width: 488, height: 195, xPct: 1.8555, yPct: 12.3698, widthPct: 47.6563, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Nick meets Gatsby, a mysterious and wealthy man.",
+                sentences: ["Nick meets Gatsby, a mysterious and wealthy man."],
+                bounds: { x: 518, y: 190, width: 488, height: 195, xPct: 50.5859, yPct: 12.3698, widthPct: 47.6563, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Gatsby throws amazing parties.",
+                sentences: ["Gatsby throws amazing parties."],
+                bounds: { x: 19, y: 392, width: 488, height: 201, xPct: 1.8555, yPct: 25.5208, widthPct: 47.6563, heightPct: 13.0859 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Nick meets Daisy, a beautiful woman.",
+                sentences: ["Nick meets Daisy, a beautiful woman."],
+                bounds: { x: 518, y: 392, width: 488, height: 201, xPct: 50.5859, yPct: 25.5208, widthPct: 47.6563, heightPct: 13.0859 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Gatsby and Daisy meet again.",
+                sentences: ["Gatsby and Daisy meet again."],
+                bounds: { x: 19, y: 653, width: 488, height: 179, xPct: 1.8555, yPct: 42.5130, widthPct: 47.6563, heightPct: 11.6536 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Gatsby wants to recreate the past.",
+                sentences: ["Gatsby wants to recreate the past."],
+                bounds: { x: 518, y: 653, width: 488, height: 179, xPct: 50.5859, yPct: 42.5130, widthPct: 47.6563, heightPct: 11.6536 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "There are problems and jealousy.",
+                sentences: ["There are problems and jealousy."],
+                bounds: { x: 19, y: 838, width: 488, height: 179, xPct: 1.8555, yPct: 54.5573, widthPct: 47.6563, heightPct: 11.6536 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Gatsby’s dream begins to fall apart.",
+                sentences: ["Gatsby’s dream begins to fall apart."],
+                bounds: { x: 518, y: 838, width: 488, height: 179, xPct: 50.5859, yPct: 54.5573, widthPct: 47.6563, heightPct: 11.6536 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Gatsby is killed.",
+                sentences: ["Gatsby is killed."],
+                bounds: { x: 19, y: 1080, width: 488, height: 174, xPct: 1.8555, yPct: 70.3125, widthPct: 47.6563, heightPct: 11.3281 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Daisy cannot escape her life.",
+                sentences: ["Daisy cannot escape her life."],
+                bounds: { x: 518, y: 1080, width: 488, height: 174, xPct: 50.5859, yPct: 70.3125, widthPct: 47.6563, heightPct: 11.3281 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Gatsby’s dream ends.",
+                sentences: ["Gatsby’s dream ends."],
+                bounds: { x: 19, y: 1262, width: 488, height: 260, xPct: 1.8555, yPct: 82.1615, widthPct: 47.6563, heightPct: 16.9271 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Important themes in The Great Gatsby.",
+                sentences: ["Important themes in The Great Gatsby."],
+                bounds: { x: 518, y: 1262, width: 488, height: 260, xPct: 50.5859, yPct: 82.1615, widthPct: 47.6563, heightPct: 16.9271 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
