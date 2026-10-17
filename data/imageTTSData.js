@@ -474,5 +474,125 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/a-christmas-carol-basics.png": {
+        imageId: "a-christmas-carol-basics",
+        assetFile: "images/english/a-christmas-carol-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Scrooge is a greedy man.",
+                sentences: ["Scrooge is a greedy man."],
+                bounds: { x: 20, y: 192, width: 488, height: 195, xPct: 1.9531, yPct: 12.5000, widthPct: 47.6563, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "He is cold and unkind to others.",
+                sentences: ["He is cold and unkind to others."],
+                bounds: { x: 518, y: 192, width: 488, height: 195, xPct: 50.5859, yPct: 12.5000, widthPct: 47.6563, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Scrooge refuses to celebrate Christmas.",
+                sentences: ["Scrooge refuses to celebrate Christmas."],
+                bounds: { x: 20, y: 395, width: 488, height: 197, xPct: 1.9531, yPct: 25.7161, widthPct: 47.6563, heightPct: 12.8255 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "He lives a lonely life.",
+                sentences: ["He lives a lonely life."],
+                bounds: { x: 518, y: 395, width: 488, height: 197, xPct: 50.5859, yPct: 25.7161, widthPct: 47.6563, heightPct: 12.8255 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "The Ghost of Christmas Past shows his memories.",
+                sentences: ["The Ghost of Christmas Past shows his memories."],
+                bounds: { x: 20, y: 650, width: 488, height: 188, xPct: 1.9531, yPct: 42.3177, widthPct: 47.6563, heightPct: 12.2396 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "The Ghost of Christmas Present shows people today.",
+                sentences: ["The Ghost of Christmas Present shows people today."],
+                bounds: { x: 518, y: 650, width: 488, height: 188, xPct: 50.5859, yPct: 42.3177, widthPct: 47.6563, heightPct: 12.2396 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "The Ghost of Christmas Future shows a sad future.",
+                sentences: ["The Ghost of Christmas Future shows a sad future."],
+                bounds: { x: 20, y: 846, width: 488, height: 177, xPct: 1.9531, yPct: 55.0781, widthPct: 47.6563, heightPct: 11.5234 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Scrooge is deeply changed.",
+                sentences: ["Scrooge is deeply changed."],
+                bounds: { x: 518, y: 846, width: 488, height: 177, xPct: 50.5859, yPct: 55.0781, widthPct: 47.6563, heightPct: 11.5234 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Scrooge wakes up on Christmas morning.",
+                sentences: ["Scrooge wakes up on Christmas morning."],
+                bounds: { x: 20, y: 1082, width: 488, height: 176, xPct: 1.9531, yPct: 70.4427, widthPct: 47.6563, heightPct: 11.4583 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "He becomes kind and generous.",
+                sentences: ["He becomes kind and generous."],
+                bounds: { x: 518, y: 1082, width: 488, height: 176, xPct: 50.5859, yPct: 70.4427, widthPct: 47.6563, heightPct: 11.4583 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "He celebrates Christmas with others.",
+                sentences: ["He celebrates Christmas with others."],
+                bounds: { x: 20, y: 1266, width: 488, height: 260, xPct: 1.9531, yPct: 82.4219, widthPct: 47.6563, heightPct: 16.9271 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "A brighter future for everyone.",
+                sentences: ["A brighter future for everyone."],
+                bounds: { x: 518, y: 1266, width: 488, height: 260, xPct: 50.5859, yPct: 82.4219, widthPct: 47.6563, heightPct: 16.9271 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
