@@ -2072,5 +2072,125 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/fahrenheit-451-ray-bradbury-basics.png": {
+        imageId: "fahrenheit-451-ray-bradbury-basics",
+        assetFile: "images/english/fahrenheit-451-ray-bradbury-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Guy Montag is a firefighter. His job is to burn books because they are considered dangerous in this society.",
+                sentences: ["Guy Montag is a firefighter.", "His job is to burn books because they are considered dangerous in this society."],
+                bounds: { xPct: 15.9180, yPct: 11.9141, widthPct: 41.8945, heightPct: 14.6484 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Montag and his team go to people’s homes and burn any books they find. They must follow the rules.",
+                sentences: ["Montag and his team go to people’s homes and burn any books they find.", "They must follow the rules."],
+                bounds: { xPct: 58.6914, yPct: 11.9141, widthPct: 40.9180, heightPct: 14.6484 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "One day, Montag secretly keeps a book. He becomes curious and wonders why books are banned.",
+                sentences: ["One day, Montag secretly keeps a book.", "He becomes curious and wonders why books are banned."],
+                bounds: { xPct: 15.9180, yPct: 27.0833, widthPct: 41.8945, heightPct: 14.4531 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Montag meets Clarisse, a curious girl who asks questions about the world. She helps him see things in a new way.",
+                sentences: ["Montag meets Clarisse, a curious girl who asks questions about the world.", "She helps him see things in a new way."],
+                bounds: { xPct: 58.6914, yPct: 27.0833, widthPct: 40.9180, heightPct: 14.4531 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Clarisse says people should notice beauty, think for themselves, and be kind. Her words make Montag think more deeply.",
+                sentences: ["Clarisse says people should notice beauty, think for themselves, and be kind.", "Her words make Montag think more deeply."],
+                bounds: { xPct: 15.9180, yPct: 42.0573, widthPct: 41.8945, heightPct: 14.7135 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Montag’s wife, Mildred, spends all her time watching TV shows. She does not care about books or real conversations.",
+                sentences: ["Montag’s wife, Mildred, spends all her time watching TV shows.", "She does not care about books or real conversations."],
+                bounds: { xPct: 58.6914, yPct: 42.0573, widthPct: 40.9180, heightPct: 14.7135 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Montag becomes more critical of the empty life around him. He sees that people are controlled by entertainment and do not think for themselves.",
+                sentences: ["Montag becomes more critical of the empty life around him.", "He sees that people are controlled by entertainment and do not think for themselves."],
+                bounds: { xPct: 15.9180, yPct: 57.3568, widthPct: 41.8945, heightPct: 12.9557 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Montag reads more books and feels that they give him new ideas and hope. He wants to learn the truth.",
+                sentences: ["Montag reads more books and feels that they give him new ideas and hope.", "He wants to learn the truth."],
+                bounds: { xPct: 58.6914, yPct: 57.3568, widthPct: 40.9180, heightPct: 12.9557 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Montag decides to run away because he does not want to keep burning books. He chooses freedom over fear.",
+                sentences: ["Montag decides to run away because he does not want to keep burning books.", "He chooses freedom over fear."],
+                bounds: { xPct: 15.9180, yPct: 70.8333, widthPct: 41.8945, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Montag meets a group of people who memorize books and preserve their contents in their minds. They work to preserve knowledge.",
+                sentences: ["Montag meets a group of people who memorize books and preserve their contents in their minds.", "They work to preserve knowledge."],
+                bounds: { xPct: 58.6914, yPct: 70.8333, widthPct: 40.9180, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "The group believes that books contain important ideas about humanity. They hope that one day people will read freely again.",
+                sentences: ["The group believes that books contain important ideas about humanity.", "They hope that one day people will read freely again."],
+                bounds: { xPct: 15.9180, yPct: 84.5703, widthPct: 41.8945, heightPct: 15.2995 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Fahrenheit 451 is a story about censorship, freedom, and the power of books. It shows how one person can change and find hope through reading and independent thinking.",
+                sentences: ["Fahrenheit 451 is a story about censorship, freedom, and the power of books.", "It shows how one person can change and find hope through reading and independent thinking."],
+                bounds: { xPct: 58.6914, yPct: 84.5703, widthPct: 40.9180, heightPct: 15.2995 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
