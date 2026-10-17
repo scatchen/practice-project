@@ -1456,5 +1456,157 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/the-raven-basics.png": {
+        imageId: "the-raven-basics",
+        assetFile: "images/english/the-raven-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "It is a dark and lonely night.",
+                sentences: ["It is a dark and lonely night."],
+                bounds: { xPct: 0.8789, yPct: 4.4271, widthPct: 48.2422, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "A raven enters the room and keeps saying “Nevermore.”",
+                sentences: ["A raven enters the room and keeps saying “Nevermore.”"],
+                bounds: { xPct: 50.6836, yPct: 4.4271, widthPct: 48.2422, heightPct: 13.1510 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "The raven becomes a symbol of grief and mystery.",
+                sentences: ["The raven becomes a symbol of grief and mystery."],
+                bounds: { xPct: 0.8789, yPct: 18.6849, widthPct: 48.2422, heightPct: 12.9557 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "love and loss grief memory despair",
+                sentences: ["love and loss", "grief", "memory", "despair"],
+                bounds: { xPct: 50.6836, yPct: 18.6849, widthPct: 48.2422, heightPct: 12.9557 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "The poem takes place on a cold, dark night in a quiet room. The gloomy atmosphere creates a feeling of unease.",
+                sentences: [
+                    "The poem takes place on a cold, dark night in a quiet room.",
+                    "The gloomy atmosphere creates a feeling of unease."
+                ],
+                bounds: { xPct: 0.8789, yPct: 37.1745, widthPct: 48.2422, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "A raven enters and perches above the door. It keeps saying “Nevermore.” The repeated word makes the speaker feel more desperate.",
+                sentences: [
+                    "A raven enters and perches above the door.",
+                    "It keeps saying “Nevermore.”",
+                    "The repeated word makes the speaker feel more desperate."
+                ],
+                bounds: { xPct: 50.6836, yPct: 37.1745, widthPct: 48.2422, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Symbolism – the raven represents grief and death. Repetition – “Nevermore” creates a sense of hopelessness. Imagery – dark and haunting images build a gothic atmosphere.",
+                sentences: [
+                    "Symbolism – the raven represents grief and death.",
+                    "Repetition – “Nevermore” creates a sense of hopelessness.",
+                    "Imagery – dark and haunting images build a gothic atmosphere."
+                ],
+                bounds: { xPct: 0.8789, yPct: 52.6693, widthPct: 48.2422, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "deep sadness after losing a loved one the struggle with grief the power of memory the feeling of despair that will not go away",
+                sentences: [
+                    "deep sadness after losing a loved one",
+                    "the struggle with grief",
+                    "the power of memory",
+                    "the feeling of despair that will not go away"
+                ],
+                bounds: { xPct: 50.6836, yPct: 52.6693, widthPct: 48.2422, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Published in 1845. A famous work of American Gothic literature. Known for its dark atmosphere, musical language, and psychological depth.",
+                sentences: [
+                    "Published in 1845.",
+                    "A famous work of American Gothic literature.",
+                    "Known for its dark atmosphere, musical language, and psychological depth."
+                ],
+                bounds: { xPct: 0.8789, yPct: 71.6797, widthPct: 48.2422, heightPct: 13.2161 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "A man, filled with grief after losing his beloved Lenore, is visited by a raven. The raven repeatedly says “Nevermore.” The single word makes the speaker feel even more isolated and desperate.",
+                sentences: [
+                    "A man, filled with grief after losing his beloved Lenore, is visited by a raven.",
+                    "The raven repeatedly says “Nevermore.”",
+                    "The single word makes the speaker feel even more isolated and desperate."
+                ],
+                bounds: { xPct: 50.6836, yPct: 71.6797, widthPct: 48.2422, heightPct: 13.2161 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "The raven is often seen as a symbol of death, loss, and the speaker’s unending grief. It may also represent the speaker’s inner thoughts, a haunting memory, or the feeling that the past cannot be changed.",
+                sentences: [
+                    "The raven is often seen as a symbol of death, loss, and the speaker’s unending grief.",
+                    "It may also represent the speaker’s inner thoughts, a haunting memory, or the feeling that the past cannot be changed."
+                ],
+                bounds: { xPct: 0.8789, yPct: 86.3932, widthPct: 48.2422, heightPct: 12.8255 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Gothic atmosphere and vivid, haunting imagery. Musical and rhythmic language. Repetition of “Nevermore.” Exploration of the human mind and emotion.",
+                sentences: [
+                    "Gothic atmosphere and vivid, haunting imagery.",
+                    "Musical and rhythmic language.",
+                    "Repetition of “Nevermore.”",
+                    "Exploration of the human mind and emotion."
+                ],
+                bounds: { xPct: 50.6836, yPct: 86.3932, widthPct: 48.2422, heightPct: 12.8255 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
