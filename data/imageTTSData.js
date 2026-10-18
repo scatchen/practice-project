@@ -2482,5 +2482,159 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/the-hunger-games-suzanne-collins-basics.png": {
+        imageId: "the-hunger-games-suzanne-collins-basics",
+        assetFile: "images/english/the-hunger-games-suzanne-collins-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Katniss Everdeen lives in District 12, a poor mining area. She helps her family by hunting and providing food.",
+                sentences: [
+                    "Katniss Everdeen lives in District 12, a poor mining area.",
+                    "She helps her family by hunting and providing food."
+                ],
+                bounds: { xPct: 15.9180, yPct: 11.8490, widthPct: 41.4063, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "When Prim’s name is chosen in the reaping, Katniss volunteers to take her place in the Hunger Games.",
+                sentences: [
+                    "When Prim’s name is chosen in the reaping, Katniss volunteers to take her place in the Hunger Games."
+                ],
+                bounds: { xPct: 58.9844, yPct: 11.8490, widthPct: 40.4297, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Katniss meets Peeta Mellark, the other tribute from District 12. They train and prepare for the Hunger Games.",
+                sentences: [
+                    "Katniss meets Peeta Mellark, the other tribute from District 12.",
+                    "They train and prepare for the Hunger Games."
+                ],
+                bounds: { xPct: 15.9180, yPct: 26.8229, widthPct: 41.4063, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Katniss and Peeta travel to the Capitol. They appear on TV and meet people from different districts.",
+                sentences: [
+                    "Katniss and Peeta travel to the Capitol.",
+                    "They appear on TV and meet people from different districts."
+                ],
+                bounds: { xPct: 58.9844, yPct: 26.8229, widthPct: 40.4297, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "The Hunger Games begin. Katniss uses her bow and arrow to hunt for food.",
+                sentences: [
+                    "The Hunger Games begin.",
+                    "Katniss uses her bow and arrow to hunt for food."
+                ],
+                bounds: { xPct: 15.9180, yPct: 41.6016, widthPct: 41.4063, heightPct: 14.1276 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Katniss and another tribute work together to survive in the arena. They make a plan and help one another.",
+                sentences: [
+                    "Katniss and another tribute work together to survive in the arena.",
+                    "They make a plan and help one another."
+                ],
+                bounds: { xPct: 58.9844, yPct: 41.6016, widthPct: 40.4297, heightPct: 14.1276 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "A fire spreads through the arena. Katniss faces another danger as she tries to survive.",
+                sentences: [
+                    "A fire spreads through the arena.",
+                    "Katniss faces another danger as she tries to survive."
+                ],
+                bounds: { xPct: 15.9180, yPct: 56.3151, widthPct: 41.4063, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Katniss and Peeta share food and look after each other. Their growing trust helps them survive in the arena.",
+                sentences: [
+                    "Katniss and Peeta share food and look after each other.",
+                    "Their growing trust helps them survive in the arena."
+                ],
+                bounds: { xPct: 58.9844, yPct: 56.3151, widthPct: 40.4297, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "The Capitol uses the Hunger Games as entertainment. People watch on TV, and Katniss becomes a symbol of hope.",
+                sentences: [
+                    "The Capitol uses the Hunger Games as entertainment.",
+                    "People watch on TV, and Katniss becomes a symbol of hope."
+                ],
+                bounds: { xPct: 15.9180, yPct: 70.5078, widthPct: 41.4063, heightPct: 13.4766 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Katniss and Peeta make a bold choice that challenges the rules. They show courage and refuse to be just pawns.",
+                sentences: [
+                    "Katniss and Peeta make a bold choice that challenges the rules.",
+                    "They show courage and refuse to be just pawns."
+                ],
+                bounds: { xPct: 58.9844, yPct: 70.5078, widthPct: 40.4297, heightPct: 13.4766 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Katniss's defiance challenges the Capitol. Her actions become a symbol of hope for the districts.",
+                sentences: [
+                    "Katniss's defiance challenges the Capitol.",
+                    "Her actions become a symbol of hope for the districts."
+                ],
+                bounds: { xPct: 15.9180, yPct: 84.6354, widthPct: 41.4063, heightPct: 14.9740 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "The Hunger Games show us the importance of freedom, choice, kindness, and standing up for what is right.",
+                sentences: [
+                    "The Hunger Games show us the importance of freedom, choice, kindness, and standing up for what is right."
+                ],
+                bounds: { xPct: 58.9844, yPct: 84.6354, widthPct: 40.4297, heightPct: 14.9740 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
