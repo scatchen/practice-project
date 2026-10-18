@@ -3097,5 +3097,158 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/holes-louis-sachar-basics.png": {
+        imageId: "holes-louis-sachar-basics",
+        assetFile: "images/english/holes-louis-sachar-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Stanley Yelnats is wrongly accused of stealing a pair of sneakers and sent to Camp Green Lake.",
+                sentences: ["Stanley Yelnats is wrongly accused of stealing a pair of sneakers and sent to Camp Green Lake."],
+                bounds: { xPct: 15.8203, yPct: 11.5234, widthPct: 41.5039, heightPct: 15.2344 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "At Camp Green Lake, the boys have to dig a hole every day in the hot sun. They learn to be strong and never give up.",
+                sentences: [
+                    "At Camp Green Lake, the boys have to dig a hole every day in the hot sun.",
+                    "They learn to be strong and never give up."
+                ],
+                bounds: { xPct: 57.8125, yPct: 11.5234, widthPct: 41.7969, heightPct: 15.2344 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Stanley meets Zero, a quiet boy. At first they are different, but they become good friends.",
+                sentences: [
+                    "Stanley meets Zero, a quiet boy.",
+                    "At first they are different, but they become good friends."
+                ],
+                bounds: { xPct: 15.8203, yPct: 26.9531, widthPct: 41.5039, heightPct: 14.4531 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Yellow-spotted lizards live in holes at Camp Green Lake. They become important later in Stanley’s story.",
+                sentences: [
+                    "Yellow-spotted lizards live in holes at Camp Green Lake.",
+                    "They become important later in Stanley’s story."
+                ],
+                bounds: { xPct: 57.8125, yPct: 26.9531, widthPct: 41.7969, heightPct: 14.4531 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Stanley and Zero help each other. They show kindness, loyalty, and trust, even in difficult times.",
+                sentences: [
+                    "Stanley and Zero help each other.",
+                    "They show kindness, loyalty, and trust, even in difficult times."
+                ],
+                bounds: { xPct: 15.8203, yPct: 41.5365, widthPct: 41.5039, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Katherine Barlow was a teacher who loved Sam. After his murder, she became the outlaw Kissin’ Kate Barlow.",
+                sentences: [
+                    "Katherine Barlow was a teacher who loved Sam.",
+                    "After his murder, she became the outlaw Kissin’ Kate Barlow."
+                ],
+                bounds: { xPct: 57.8125, yPct: 41.5365, widthPct: 41.7969, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Elya, Stanley’s great-great-grandfather, failed to keep a promise to Madame Zeroni. She warned that his family would suffer bad luck.",
+                sentences: [
+                    "Elya, Stanley’s great-great-grandfather, failed to keep a promise to Madame Zeroni.",
+                    "She warned that his family would suffer bad luck."
+                ],
+                bounds: { xPct: 15.8203, yPct: 56.0547, widthPct: 41.5039, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "After Stanley and Zero return to Camp Green Lake, they find Kate Barlow’s buried suitcase. The name on it links the treasure to Stanley’s family.",
+                sentences: [
+                    "After Stanley and Zero return to Camp Green Lake, they find Kate Barlow’s buried suitcase.",
+                    "The name on it links the treasure to Stanley’s family."
+                ],
+                bounds: { xPct: 57.8125, yPct: 56.0547, widthPct: 41.7969, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Although Stanley is cleared of the charges, he refuses to abandon Zero. Consequently, both boys are released together.",
+                sentences: [
+                    "Although Stanley is cleared of the charges, he refuses to abandon Zero.",
+                    "Consequently, both boys are released together."
+                ],
+                bounds: { xPct: 15.8203, yPct: 70.4427, widthPct: 41.5039, heightPct: 12.8906 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "After a century of drought, rain finally reaches the dry lakebed. It symbolizes hope and renewal.",
+                sentences: [
+                    "After a century of drought, rain finally reaches the dry lakebed.",
+                    "It symbolizes hope and renewal."
+                ],
+                bounds: { xPct: 57.8125, yPct: 70.4427, widthPct: 41.7969, heightPct: 12.8906 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Stanley returns home and is reunited with his family. By carrying Zero up the mountain, he unknowingly fulfills Elya’s promise to Madame Zeroni.",
+                sentences: [
+                    "Stanley returns home and is reunited with his family.",
+                    "By carrying Zero up the mountain, he unknowingly fulfills Elya’s promise to Madame Zeroni."
+                ],
+                bounds: { xPct: 15.8203, yPct: 83.5938, widthPct: 41.5039, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Holes shows us that everyone’s actions can have a big impact. It teaches us about responsibility, justice, and the power to change.",
+                sentences: [
+                    "Holes shows us that everyone’s actions can have a big impact.",
+                    "It teaches us about responsibility, justice, and the power to change."
+                ],
+                bounds: { xPct: 57.8125, yPct: 83.5938, widthPct: 41.7969, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
