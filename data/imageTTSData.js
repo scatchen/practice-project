@@ -2790,5 +2790,160 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/the-outsiders-s-e-hinton-basics.png": {
+        imageId: "the-outsiders-s-e-hinton-basics",
+        assetFile: "images/english/the-outsiders-s-e-hinton-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Ponyboy Curtis is a Greaser. He lives in a small town with his two brothers, Darry and Sodapop.",
+                sentences: [
+                    "Ponyboy Curtis is a Greaser.",
+                    "He lives in a small town with his two brothers, Darry and Sodapop."
+                ],
+                bounds: { xPct: 15.9180, yPct: 11.7839, widthPct: 41.7969, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Ponyboy is close to his brother Sodapop and his friends Johnny and Dally. They look out for one another.",
+                sentences: [
+                    "Ponyboy is close to his brother Sodapop and his friends Johnny and Dally.",
+                    "They look out for one another."
+                ],
+                bounds: { xPct: 58.3984, yPct: 11.7839, widthPct: 41.2109, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "The Greasers often have conflicts with the Socs, who are richer and from a different social class.",
+                sentences: [
+                    "The Greasers often have conflicts with the Socs, who are richer and from a different social class."
+                ],
+                bounds: { xPct: 15.9180, yPct: 26.6927, widthPct: 41.7969, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Ponyboy meets Cherry, a Soc. They have a good conversation and start to see that people are not all the same.",
+                sentences: [
+                    "Ponyboy meets Cherry, a Soc.",
+                    "They have a good conversation and start to see that people are not all the same."
+                ],
+                bounds: { xPct: 58.3984, yPct: 26.6927, widthPct: 41.2109, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "One night, Socs attack Ponyboy and Johnny. Johnny kills Bob to save Ponyboy from drowning.",
+                sentences: [
+                    "One night, Socs attack Ponyboy and Johnny.",
+                    "Johnny kills Bob to save Ponyboy from drowning."
+                ],
+                bounds: { xPct: 15.9180, yPct: 41.5365, widthPct: 41.7969, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Johnny and Ponyboy run away and hide in an abandoned church. They try to stay safe and support each other.",
+                sentences: [
+                    "Johnny and Ponyboy run away and hide in an abandoned church.",
+                    "They try to stay safe and support each other."
+                ],
+                bounds: { xPct: 58.3984, yPct: 41.5365, widthPct: 41.2109, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "When the church catches fire, Ponyboy and Johnny rescue children. Johnny is badly injured when the roof collapses.",
+                sentences: [
+                    "When the church catches fire, Ponyboy and Johnny rescue children.",
+                    "Johnny is badly injured when the roof collapses."
+                ],
+                bounds: { xPct: 15.9180, yPct: 56.0547, widthPct: 41.7969, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Johnny dies from his injuries, leaving Ponyboy devastated. Overwhelmed by grief, Dally later dies after confronting the police.",
+                sentences: [
+                    "Johnny dies from his injuries, leaving Ponyboy devastated.",
+                    "Overwhelmed by grief, Dally later dies after confronting the police."
+                ],
+                bounds: { xPct: 58.3984, yPct: 56.0547, widthPct: 41.2109, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Ponyboy realizes that there are good and bad people in every group. People should be understood for who they are, not judged by their social class.",
+                sentences: [
+                    "Ponyboy realizes that there are good and bad people in every group.",
+                    "People should be understood for who they are, not judged by their social class."
+                ],
+                bounds: { xPct: 15.9180, yPct: 70.4427, widthPct: 41.7969, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Ponyboy learns to appreciate his family and friends. Their support helps him get through difficult times.",
+                sentences: [
+                    "Ponyboy learns to appreciate his family and friends.",
+                    "Their support helps him get through difficult times."
+                ],
+                bounds: { xPct: 58.3984, yPct: 70.4427, widthPct: 41.2109, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Ponyboy writes about his experiences for English class. He hopes others will understand troubled teens.",
+                sentences: [
+                    "Ponyboy writes about his experiences for English class.",
+                    "He hopes others will understand troubled teens."
+                ],
+                bounds: { xPct: 15.9180, yPct: 84.7005, widthPct: 41.7969, heightPct: 14.8438 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "The Outsiders shows the importance of empathy, acceptance, and looking beyond differences. It reminds us to be kind and try to see the world from other people’s perspectives.",
+                sentences: [
+                    "The Outsiders shows the importance of empathy, acceptance, and looking beyond differences.",
+                    "It reminds us to be kind and try to see the world from other people’s perspectives."
+                ],
+                bounds: { xPct: 58.3984, yPct: 84.7005, widthPct: 41.2109, heightPct: 14.8438 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
