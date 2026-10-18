@@ -3250,5 +3250,161 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/charlottes-web-e-b-white-basics.png": {
+        imageId: "charlottes-web-e-b-white-basics",
+        assetFile: "images/english/charlottes-web-e-b-white-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Fern saves a little pig named Wilbur. She takes care of him with love.",
+                sentences: [
+                    "Fern saves a little pig named Wilbur.",
+                    "She takes care of him with love."
+                ],
+                bounds: { xPct: 13.3789, yPct: 10.8724, widthPct: 42.5781, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Wilbur moves to a new farm. He feels lonely until he meets Charlotte, a kind spider.",
+                sentences: [
+                    "Wilbur moves to a new farm.",
+                    "He feels lonely until he meets Charlotte, a kind spider."
+                ],
+                bounds: { xPct: 56.9336, yPct: 10.8724, widthPct: 42.4805, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Charlotte wants to save Wilbur. She writes ‘Some Pig’ in her web.",
+                sentences: [
+                    "Charlotte wants to save Wilbur.",
+                    "She writes ‘Some Pig’ in her web."
+                ],
+                bounds: { xPct: 13.3789, yPct: 25.7813, widthPct: 42.5781, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "People are amazed by the words in the web. Wilbur begins to feel hopeful.",
+                sentences: [
+                    "People are amazed by the words in the web.",
+                    "Wilbur begins to feel hopeful."
+                ],
+                bounds: { xPct: 56.9336, yPct: 25.7813, widthPct: 42.4805, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Charlotte asks Templeton, a clever rat, to find words for her web. Together, they try to protect Wilbur.",
+                sentences: [
+                    "Charlotte asks Templeton, a clever rat, to find words for her web.",
+                    "Together, they try to protect Wilbur."
+                ],
+                bounds: { xPct: 13.3789, yPct: 40.1042, widthPct: 42.5781, heightPct: 13.6068 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Charlotte weaves ‘Terrific’ and ‘Radiant’ into her web. The extraordinary messages attract widespread attention.",
+                sentences: [
+                    "Charlotte weaves ‘Terrific’ and ‘Radiant’ into her web.",
+                    "The extraordinary messages attract widespread attention."
+                ],
+                bounds: { xPct: 56.9336, yPct: 40.1042, widthPct: 42.4805, heightPct: 13.6068 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "At the county fair, Charlotte weaves her final message, ‘Humble.’ Wilbur receives a special award, and his future becomes secure.",
+                sentences: [
+                    "At the county fair, Charlotte weaves her final message, ‘Humble.’",
+                    "Wilbur receives a special award, and his future becomes secure."
+                ],
+                bounds: { xPct: 13.3789, yPct: 54.1667, widthPct: 42.5781, heightPct: 15.6250 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Exhausted after laying her eggs, Charlotte grows weak. Before dying, she leaves behind an egg sac containing hundreds of spiderlings.",
+                sentences: [
+                    "Exhausted after laying her eggs, Charlotte grows weak.",
+                    "Before dying, she leaves behind an egg sac containing hundreds of spiderlings."
+                ],
+                bounds: { xPct: 56.9336, yPct: 54.1667, widthPct: 42.4805, heightPct: 15.6250 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Although Wilbur is devastated by Charlotte’s approaching death, he remains determined to safeguard her offspring. With Templeton’s reluctant assistance, he retrieves the egg sac and brings it back to the barn.",
+                sentences: [
+                    "Although Wilbur is devastated by Charlotte’s approaching death, he remains determined to safeguard her offspring.",
+                    "With Templeton’s reluctant assistance, he retrieves the egg sac and brings it back to the barn."
+                ],
+                bounds: { xPct: 13.3789, yPct: 70.3125, widthPct: 42.5781, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "When the spiderlings eventually hatch, most disperse on the wind. Nevertheless, three of Charlotte’s daughters choose to remain, offering Wilbur companionship and renewed hope.",
+                sentences: [
+                    "When the spiderlings eventually hatch, most disperse on the wind.",
+                    "Nevertheless, three of Charlotte’s daughters choose to remain, offering Wilbur companionship and renewed hope."
+                ],
+                bounds: { xPct: 56.9336, yPct: 70.3125, widthPct: 42.4805, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Charlotte’s selfless devotion has transformed Wilbur’s understanding of loyalty and sacrifice. Even after her death, the enduring influence of her friendship continues to shape his life.",
+                sentences: [
+                    "Charlotte’s selfless devotion has transformed Wilbur’s understanding of loyalty and sacrifice.",
+                    "Even after her death, the enduring influence of her friendship continues to shape his life."
+                ],
+                bounds: { xPct: 13.3789, yPct: 85.2214, widthPct: 42.5781, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Charlotte’s Web illustrates how compassion can transcend differences and how genuine friendship can leave a lasting legacy. Through Charlotte’s extraordinary sacrifice, Wilbur discovers that love and kindness endure beyond loss.",
+                sentences: [
+                    "Charlotte’s Web illustrates how compassion can transcend differences and how genuine friendship can leave a lasting legacy.",
+                    "Through Charlotte’s extraordinary sacrifice, Wilbur discovers that love and kindness endure beyond loss."
+                ],
+                bounds: { xPct: 56.9336, yPct: 85.2214, widthPct: 42.4805, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
