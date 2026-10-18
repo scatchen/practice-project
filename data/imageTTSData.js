@@ -2636,5 +2636,159 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/the-handmaids-tale-margaret-atwood-basics.png": {
+        imageId: "the-handmaids-tale-margaret-atwood-basics",
+        assetFile: "images/english/the-handmaids-tale-margaret-atwood-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Offred lives in Gilead, a totalitarian society where women have very few rights.",
+                sentences: [
+                    "Offred lives in Gilead, a totalitarian society where women have very few rights."
+                ],
+                bounds: { xPct: 16.1133, yPct: 11.9792, widthPct: 41.2109, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Handmaids wear red cloaks and white bonnets. They must follow strict rules in their daily lives.",
+                sentences: [
+                    "Handmaids wear red cloaks and white bonnets.",
+                    "They must follow strict rules in their daily lives."
+                ],
+                bounds: { xPct: 58.6914, yPct: 11.9792, widthPct: 40.7227, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Gilead controls women who can have children. Handmaids must have babies for powerful families.",
+                sentences: [
+                    "Gilead controls women who can have children.",
+                    "Handmaids must have babies for powerful families."
+                ],
+                bounds: { xPct: 16.1133, yPct: 26.6276, widthPct: 41.2109, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Offred lives in the Commander’s house with his Wife. She must be polite and follow many rules.",
+                sentences: [
+                    "Offred lives in the Commander’s house with his Wife.",
+                    "She must be polite and follow many rules."
+                ],
+                bounds: { xPct: 58.6914, yPct: 26.6276, widthPct: 40.7227, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Gilead uses propaganda to control people. Signs, ceremonies, and symbols remind everyone to obey.",
+                sentences: [
+                    "Gilead uses propaganda to control people.",
+                    "Signs, ceremonies, and symbols remind everyone to obey."
+                ],
+                bounds: { xPct: 16.1133, yPct: 41.6667, widthPct: 41.2109, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Offred secretly meets Ofglen, another handmaid. They share their thoughts and support each other in small but important ways.",
+                sentences: [
+                    "Offred secretly meets Ofglen, another handmaid.",
+                    "They share their thoughts and support each other in small but important ways."
+                ],
+                bounds: { xPct: 58.6914, yPct: 41.6667, widthPct: 40.7227, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Offred keeps her memories and thoughts alive in her mind. Remembering the past gives her strength.",
+                sentences: [
+                    "Offred keeps her memories and thoughts alive in her mind.",
+                    "Remembering the past gives her strength."
+                ],
+                bounds: { xPct: 16.1133, yPct: 56.3802, widthPct: 41.2109, heightPct: 13.4766 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Offred develops a close relationship with Nick. Their connection gives her hope in a difficult and dangerous world.",
+                sentences: [
+                    "Offred develops a close relationship with Nick.",
+                    "Their connection gives her hope in a difficult and dangerous world."
+                ],
+                bounds: { xPct: 58.6914, yPct: 56.3802, widthPct: 40.7227, heightPct: 13.4766 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Even in a controlled society, people find ways to resist. Small acts can be powerful.",
+                sentences: [
+                    "Even in a controlled society, people find ways to resist.",
+                    "Small acts can be powerful."
+                ],
+                bounds: { xPct: 16.1133, yPct: 70.6380, widthPct: 41.2109, heightPct: 13.3464 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Those who break the rules face severe punishments. Gilead uses fear to keep people under control.",
+                sentences: [
+                    "Those who break the rules face severe punishments.",
+                    "Gilead uses fear to keep people under control."
+                ],
+                bounds: { xPct: 58.6914, yPct: 70.6380, widthPct: 40.7227, heightPct: 13.3464 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Offred continues to hope for a different future. Her story shows the importance of freedom, identity, and the right to make choices.",
+                sentences: [
+                    "Offred continues to hope for a different future.",
+                    "Her story shows the importance of freedom, identity, and the right to make choices."
+                ],
+                bounds: { xPct: 16.1133, yPct: 84.8307, widthPct: 41.2109, heightPct: 14.4531 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "The Handmaid’s Tale reminds us to question unfair systems, value human rights, and stand up for what is right.",
+                sentences: [
+                    "The Handmaid’s Tale reminds us to question unfair systems, value human rights, and stand up for what is right."
+                ],
+                bounds: { xPct: 58.6914, yPct: 84.8307, widthPct: 40.7227, heightPct: 14.4531 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
