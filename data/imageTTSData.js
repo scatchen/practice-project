@@ -2945,5 +2945,157 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/wonder-r-j-palacio-basics.png": {
+        imageId: "wonder-r-j-palacio-basics",
+        assetFile: "images/english/wonder-r-j-palacio-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Auggie Pullman is a kind and brave boy. He was born with a facial difference.",
+                sentences: [
+                    "Auggie Pullman is a kind and brave boy.",
+                    "He was born with a facial difference."
+                ],
+                bounds: { xPct: 16.0156, yPct: 11.9792, widthPct: 41.3086, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Auggie starts at Beecher Prep, a new school. He is nervous, but he hopes to make friends.",
+                sentences: [
+                    "Auggie starts at Beecher Prep, a new school.",
+                    "He is nervous, but he hopes to make friends."
+                ],
+                bounds: { xPct: 58.5938, yPct: 11.9792, widthPct: 40.7227, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Some classmates are curious about Auggie, but many are friendly and welcoming.",
+                sentences: [
+                    "Some classmates are curious about Auggie, but many are friendly and welcoming."
+                ],
+                bounds: { xPct: 16.0156, yPct: 27.0182, widthPct: 41.3086, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Auggie also faces unkind words and teasing from some students. He tries to stay strong.",
+                sentences: [
+                    "Auggie also faces unkind words and teasing from some students.",
+                    "He tries to stay strong."
+                ],
+                bounds: { xPct: 58.5938, yPct: 27.0182, widthPct: 40.7227, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Jack becomes one of Auggie’s good friends. He treats Auggie with kindness and respect.",
+                sentences: [
+                    "Jack becomes one of Auggie’s good friends.",
+                    "He treats Auggie with kindness and respect."
+                ],
+                bounds: { xPct: 16.0156, yPct: 41.7318, widthPct: 41.3086, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Auggie shows his strengths, such as his creativity, humor, and love of science.",
+                sentences: [
+                    "Auggie shows his strengths, such as his creativity, humor, and love of science."
+                ],
+                bounds: { xPct: 58.5938, yPct: 41.7318, widthPct: 40.7227, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Auggie’s family always supports him. Their love gives him confidence to face difficult days.",
+                sentences: [
+                    "Auggie’s family always supports him.",
+                    "Their love gives him confidence to face difficult days."
+                ],
+                bounds: { xPct: 16.0156, yPct: 56.25, widthPct: 41.3086, heightPct: 13.2813 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Auggie’s sister, Via, also faces challenges. She learns to find her own identity and voice.",
+                sentences: [
+                    "Auggie’s sister, Via, also faces challenges.",
+                    "She learns to find her own identity and voice."
+                ],
+                bounds: { xPct: 58.5938, yPct: 56.25, widthPct: 40.7227, heightPct: 13.2813 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Auggie finds a place where he belongs. He feels accepted for who he is, and his friends stand by him.",
+                sentences: [
+                    "Auggie finds a place where he belongs.",
+                    "He feels accepted for who he is, and his friends stand by him."
+                ],
+                bounds: { xPct: 16.0156, yPct: 70.5729, widthPct: 41.3086, heightPct: 13.0859 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Auggie’s story reminds us that small acts of kindness can make a big difference.",
+                sentences: [
+                    "Auggie’s story reminds us that small acts of kindness can make a big difference."
+                ],
+                bounds: { xPct: 58.5938, yPct: 70.5729, widthPct: 40.7227, heightPct: 13.0859 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Auggie grows more confident and courageous. He shows that we can all overcome challenges with kindness and support.",
+                sentences: [
+                    "Auggie grows more confident and courageous.",
+                    "He shows that we can all overcome challenges with kindness and support."
+                ],
+                bounds: { xPct: 16.0156, yPct: 84.5703, widthPct: 41.3086, heightPct: 14.6484 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Wonder teaches us to be kind, to accept differences, and to see the world from other people’s perspectives.",
+                sentences: [
+                    "Wonder teaches us to be kind, to accept differences, and to see the world from other people’s perspectives."
+                ],
+                bounds: { xPct: 58.5938, yPct: 84.5703, widthPct: 40.7227, heightPct: 14.6484 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
