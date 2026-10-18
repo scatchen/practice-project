@@ -2327,5 +2327,160 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/the-giver-lois-lowry-basics.png": {
+        imageId: "the-giver-lois-lowry-basics",
+        assetFile: "images/english/the-giver-lois-lowry-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Jonas lives in a community where everything is carefully controlled. People are protected from war, hunger, and most forms of suffering.",
+                sentences: [
+                    "Jonas lives in a community where everything is carefully controlled.",
+                    "People are protected from war, hunger, and most forms of suffering."
+                ],
+                bounds: { xPct: 16.2109, yPct: 12.2396, widthPct: 41.3086, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Jonas is chosen to be the next Receiver of Memory. He begins his training with the Giver.",
+                sentences: [
+                    "Jonas is chosen to be the next Receiver of Memory.",
+                    "He begins his training with the Giver."
+                ],
+                bounds: { xPct: 59.1797, yPct: 12.2396, widthPct: 40.1367, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Babies are born to women called Birthmothers. Nurturers care for them before they are assigned to families.",
+                sentences: [
+                    "Babies are born to women called Birthmothers.",
+                    "Nurturers care for them before they are assigned to families."
+                ],
+                bounds: { xPct: 16.2109, yPct: 27.1484, widthPct: 41.3086, heightPct: 13.6068 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "People enjoy a safe and peaceful life. They take the same medicine, follow the same rules, and do not make their own choices.",
+                sentences: [
+                    "People enjoy a safe and peaceful life.",
+                    "They take the same medicine, follow the same rules, and do not make their own choices."
+                ],
+                bounds: { xPct: 59.1797, yPct: 27.1484, widthPct: 40.1367, heightPct: 13.6068 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Jonas tells the Giver about an apple he once saw change color. The Giver explains that Jonas is beginning to see red.",
+                sentences: [
+                    "Jonas tells the Giver about an apple he once saw change color.",
+                    "The Giver explains that Jonas is beginning to see red."
+                ],
+                bounds: { xPct: 16.2109, yPct: 41.6667, widthPct: 41.3086, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Jonas receives his first memory: a sled ride down a snowy hill. He feels the cold snow and the thrill of the ride.",
+                sentences: [
+                    "Jonas receives his first memory: a sled ride down a snowy hill.",
+                    "He feels the cold snow and the thrill of the ride."
+                ],
+                bounds: { xPct: 59.1797, yPct: 41.6667, widthPct: 40.1367, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Jonas experiences a memory of love. He learns about family, friendship, and deep emotions that people in his community do not experience.",
+                sentences: [
+                    "Jonas experiences a memory of love.",
+                    "He learns about family, friendship, and deep emotions that people in his community do not experience."
+                ],
+                bounds: { xPct: 16.2109, yPct: 56.5755, widthPct: 41.3086, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "He also receives the memory of pain, war, and death. Jonas realizes that even the difficult memories are part of real life.",
+                sentences: [
+                    "He also receives the memory of pain, war, and death.",
+                    "Jonas realizes that even the difficult memories are part of real life."
+                ],
+                bounds: { xPct: 59.1797, yPct: 56.5755, widthPct: 40.1367, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Jonas learns the truth: people who do not fit the community are “released.” This means they are sent away and do not live anymore.",
+                sentences: [
+                    "Jonas learns the truth: people who do not fit the community are “released.”",
+                    "This means they are sent away and do not live anymore."
+                ],
+                bounds: { xPct: 16.2109, yPct: 71.2891, widthPct: 41.3086, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Jonas understands that the community sacrifices freedom, love, and individuality to keep everything the same.",
+                sentences: [
+                    "Jonas understands that the community sacrifices freedom, love, and individuality to keep everything the same."
+                ],
+                bounds: { xPct: 59.1797, yPct: 71.2891, widthPct: 40.1367, heightPct: 12.6953 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Jonas decides to leave the community to give Gabriel a chance for a different life. It is a brave and risky decision.",
+                sentences: [
+                    "Jonas decides to leave the community to give Gabriel a chance for a different life.",
+                    "It is a brave and risky decision."
+                ],
+                bounds: { xPct: 16.2109, yPct: 85.0911, widthPct: 41.3086, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "The Giver shows us the importance of memory, freedom, and humanity. It reminds us to value our choices and what it means to be truly human.",
+                sentences: [
+                    "The Giver shows us the importance of memory, freedom, and humanity.",
+                    "It reminds us to value our choices and what it means to be truly human."
+                ],
+                bounds: { xPct: 59.1797, yPct: 85.0911, widthPct: 40.1367, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
