@@ -3934,5 +3934,161 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/wuthering-heights-emily-bronte-basics.png": {
+        imageId: "wuthering-heights-emily-bronte-basics",
+        assetFile: "images/english/wuthering-heights-emily-bronte-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Mr. Earnshaw brings an orphan boy named Heathcliff to Wuthering Heights. Some family members welcome him, but others treat him unkindly.",
+                sentences: [
+                    "Mr. Earnshaw brings an orphan boy named Heathcliff to Wuthering Heights.",
+                    "Some family members welcome him, but others treat him unkindly."
+                ],
+                bounds: { xPct: 15.5273, yPct: 6.1198, widthPct: 41.8945, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Heathcliff and Catherine Earnshaw grow up together and become close friends. They love exploring the wild moors, where they feel happy and free.",
+                sentences: [
+                    "Heathcliff and Catherine Earnshaw grow up together and become close friends.",
+                    "They love exploring the wild moors, where they feel happy and free."
+                ],
+                bounds: { xPct: 58.1055, yPct: 6.1198, widthPct: 41.4063, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "After Mr. Earnshaw dies, Hindley treats Heathcliff cruelly. Heathcliff feels lonely and angry, but Catherine remains his closest friend.",
+                sentences: [
+                    "After Mr. Earnshaw dies, Hindley treats Heathcliff cruelly.",
+                    "Heathcliff feels lonely and angry, but Catherine remains his closest friend."
+                ],
+                bounds: { xPct: 15.5273, yPct: 20.2474, widthPct: 41.8945, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Catherine meets Edgar Linton when she is young, and they become close as they grow older. She decides to marry Edgar, although she still deeply loves Heathcliff.",
+                sentences: [
+                    "Catherine meets Edgar Linton when she is young, and they become close as they grow older.",
+                    "She decides to marry Edgar, although she still deeply loves Heathcliff."
+                ],
+                bounds: { xPct: 58.1055, yPct: 20.2474, widthPct: 41.4063, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "After overhearing Catherine say that marrying him would lower her social standing, Heathcliff leaves Wuthering Heights without hearing her declaration of love. When he returns years later with considerable wealth, his unresolved resentment begins to fuel a desire for revenge.",
+                sentences: [
+                    "After overhearing Catherine say that marrying him would lower her social standing, Heathcliff leaves Wuthering Heights without hearing her declaration of love.",
+                    "When he returns years later with considerable wealth, his unresolved resentment begins to fuel a desire for revenge."
+                ],
+                bounds: { xPct: 15.5273, yPct: 34.3750, widthPct: 41.8945, heightPct: 14.7135 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Determined to hurt Edgar Linton, Heathcliff marries Edgar’s sister Isabella despite having no genuine affection for her. His calculated decision reveals how deeply bitterness and resentment have begun to shape his actions.",
+                sentences: [
+                    "Determined to hurt Edgar Linton, Heathcliff marries Edgar’s sister Isabella despite having no genuine affection for her.",
+                    "His calculated decision reveals how deeply bitterness and resentment have begun to shape his actions."
+                ],
+                bounds: { xPct: 58.1055, yPct: 34.3750, widthPct: 41.4063, heightPct: 14.7135 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "As Catherine’s physical and emotional condition deteriorates, she reunites with Heathcliff in a painful confrontation filled with love and accusations. She later gives birth to a daughter, Cathy, and dies shortly afterward, leaving Heathcliff overwhelmed by grief.",
+                sentences: [
+                    "As Catherine’s physical and emotional condition deteriorates, she reunites with Heathcliff in a painful confrontation filled with love and accusations.",
+                    "She later gives birth to a daughter, Cathy, and dies shortly afterward, leaving Heathcliff overwhelmed by grief."
+                ],
+                bounds: { xPct: 15.5273, yPct: 49.6094, widthPct: 41.8945, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Years later, Heathcliff manipulates young Cathy Linton into marrying his sickly son, Linton Heathcliff, to secure control over the Linton family’s property. Meanwhile, he keeps Hareton Earnshaw uneducated and dependent, extending his revenge to the next generation.",
+                sentences: [
+                    "Years later, Heathcliff manipulates young Cathy Linton into marrying his sickly son, Linton Heathcliff, to secure control over the Linton family’s property.",
+                    "Meanwhile, he keeps Hareton Earnshaw uneducated and dependent, extending his revenge to the next generation."
+                ],
+                bounds: { xPct: 58.1055, yPct: 49.6094, widthPct: 41.4063, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Unable to reconcile himself to Catherine’s death, Heathcliff becomes increasingly consumed by an obsession that blurs the boundaries between enduring love and self-destructive vengeance. His relentless pursuit of retribution devastates those around him, demonstrating how unresolved emotional suffering can perpetuate cycles of cruelty across generations.",
+                sentences: [
+                    "Unable to reconcile himself to Catherine’s death, Heathcliff becomes increasingly consumed by an obsession that blurs the boundaries between enduring love and self-destructive vengeance.",
+                    "His relentless pursuit of retribution devastates those around him, demonstrating how unresolved emotional suffering can perpetuate cycles of cruelty across generations."
+                ],
+                bounds: { xPct: 15.5273, yPct: 64.6484, widthPct: 41.8945, heightPct: 17.3828 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Despite the hostility and manipulation that have shaped their childhoods, young Cathy and Hareton gradually develop a relationship founded on patience, education, and mutual respect. As Cathy helps Hareton learn to read, their growing affection challenges the inherited prejudices and inequalities that once divided their families.",
+                sentences: [
+                    "Despite the hostility and manipulation that have shaped their childhoods, young Cathy and Hareton gradually develop a relationship founded on patience, education, and mutual respect.",
+                    "As Cathy helps Hareton learn to read, their growing affection challenges the inherited prejudices and inequalities that once divided their families."
+                ],
+                bounds: { xPct: 58.1055, yPct: 64.6484, widthPct: 41.4063, heightPct: 17.3828 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "As Heathcliff becomes increasingly preoccupied with Catherine’s memory, his desire to maintain control over others gradually gives way to an overwhelming longing for reunion with her. Following his death, local stories suggest that their spirits continue to wander the moors, preserving the novel’s unsettling ambiguity between supernatural belief and psychological haunting.",
+                sentences: [
+                    "As Heathcliff becomes increasingly preoccupied with Catherine’s memory, his desire to maintain control over others gradually gives way to an overwhelming longing for reunion with her.",
+                    "Following his death, local stories suggest that their spirits continue to wander the moors, preserving the novel’s unsettling ambiguity between supernatural belief and psychological haunting."
+                ],
+                bounds: { xPct: 15.5273, yPct: 82.6172, widthPct: 41.8945, heightPct: 16.3411 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "By choosing compassion over retaliation, young Cathy and Hareton demonstrate that the destructive legacy of resentment need not determine the fate of future generations. Their decision to marry and begin a new life at Thrushcross Grange offers a hopeful resolution, suggesting that reconciliation and personal growth can emerge even from a history of profound suffering.",
+                sentences: [
+                    "By choosing compassion over retaliation, young Cathy and Hareton demonstrate that the destructive legacy of resentment need not determine the fate of future generations.",
+                    "Their decision to marry and begin a new life at Thrushcross Grange offers a hopeful resolution, suggesting that reconciliation and personal growth can emerge even from a history of profound suffering."
+                ],
+                bounds: { xPct: 58.1055, yPct: 82.6172, widthPct: 41.4063, heightPct: 16.3411 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
