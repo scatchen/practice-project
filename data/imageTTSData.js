@@ -4717,4 +4717,158 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/making-plans-with-friends-basics.png": {
+        imageId: "making-plans-with-friends-basics",
+        assetFile: "images/english/making-plans-with-friends-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Hey, do you want to hang out this Saturday?",
+                sentences: ["Hey, do you want to hang out this Saturday?"],
+                bounds: { xPct: 28.8086, yPct: 0.6510, widthPct: 36.1328, heightPct: 16.6667 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "That sounds good! What do you have in mind?",
+                sentences: [
+                    "That sounds good!",
+                    "What do you have in mind?"
+                ],
+                bounds: { xPct: 66.8945, yPct: 0.6510, widthPct: 32.2266, heightPct: 16.6667 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "I'm thinking we could go to a new café downtown. The reviews are great!",
+                sentences: [
+                    "I'm thinking we could go to a new café downtown.",
+                    "The reviews are great!"
+                ],
+                bounds: { xPct: 28.8086, yPct: 18.9453, widthPct: 36.1328, heightPct: 15.6250 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Nice! What time should we meet?",
+                sentences: [
+                    "Nice!",
+                    "What time should we meet?"
+                ],
+                bounds: { xPct: 66.8945, yPct: 18.9453, widthPct: 32.2266, heightPct: 15.6250 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "I'd love to, but I'm not available in the morning.",
+                sentences: ["I'd love to, but I'm not available in the morning."],
+                bounds: { xPct: 28.8086, yPct: 35.8724, widthPct: 36.1328, heightPct: 15.4948 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "No problem. How about we meet in the afternoon instead?",
+                sentences: [
+                    "No problem.",
+                    "How about we meet in the afternoon instead?"
+                ],
+                bounds: { xPct: 66.8945, yPct: 35.8724, widthPct: 32.2266, heightPct: 15.4948 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "That could work! We can grab some lunch and then check out the café.",
+                sentences: [
+                    "That could work!",
+                    "We can grab some lunch and then check out the café."
+                ],
+                bounds: { xPct: 28.8086, yPct: 52.7995, widthPct: 36.1328, heightPct: 15.3646 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Great! Let's meet at 1 p.m. at the station. Does that work for you?",
+                sentences: [
+                    "Great!",
+                    "Let's meet at 1 p.m. at the station.",
+                    "Does that work for you?"
+                ],
+                bounds: { xPct: 66.8945, yPct: 52.7995, widthPct: 32.2266, heightPct: 15.3646 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Actually, something just came up. I have a family commitment at 1 p.m.",
+                sentences: [
+                    "Actually, something just came up.",
+                    "I have a family commitment at 1 p.m."
+                ],
+                bounds: { xPct: 28.8086, yPct: 69.7266, widthPct: 36.1328, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "I see. We'll need to reschedule then. What's another time that works for you?",
+                sentences: [
+                    "I see.",
+                    "We'll need to reschedule then.",
+                    "What's another time that works for you?"
+                ],
+                bounds: { xPct: 66.8945, yPct: 69.7266, widthPct: 32.2266, heightPct: 14.1927 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "How about we meet at 4 p.m. instead? That gives me enough time, and we can still enjoy the café.",
+                sentences: [
+                    "How about we meet at 4 p.m. instead?",
+                    "That gives me enough time, and we can still enjoy the café."
+                ],
+                bounds: { xPct: 28.8086, yPct: 85.4818, widthPct: 36.1328, heightPct: 13.6719 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Perfect! Let's go with 4 p.m. I'll see you at the station! Looking forward to it!",
+                sentences: [
+                    "Perfect!",
+                    "Let's go with 4 p.m.",
+                    "I'll see you at the station!",
+                    "Looking forward to it!"
+                ],
+                bounds: { xPct: 66.8945, yPct: 85.4818, widthPct: 32.2266, heightPct: 13.6719 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    },
 };
