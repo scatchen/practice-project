@@ -4717,6 +4717,154 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/ordering-at-a-restaurant-basics.png": {
+        imageId: "ordering-at-a-restaurant-basics",
+        assetFile: "images/english/ordering-at-a-restaurant-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Good evening! A table for two?",
+                sentences: ["Good evening!", "A table for two?"],
+                bounds: { xPct: 28.9063, yPct: 0.5208, widthPct: 36.5234, heightPct: 16.9271 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Could we see the menu, please?",
+                sentences: ["Could we see the menu, please?"],
+                bounds: { xPct: 67.3828, yPct: 0.5208, widthPct: 32.0313, heightPct: 16.9271 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "What is the chicken pasta? It’s pasta with chicken and tomato sauce.",
+                sentences: [
+                    "What is the chicken pasta?",
+                    "It’s pasta with chicken and tomato sauce."
+                ],
+                bounds: { xPct: 28.9063, yPct: 18.8151, widthPct: 36.5234, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "That sounds good! I think I’ll try it.",
+                sentences: [
+                    "That sounds good!",
+                    "I think I’ll try it."
+                ],
+                bounds: { xPct: 67.3828, yPct: 18.8151, widthPct: 32.0313, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "What comes with the fish? It comes with vegetables and a creamy sauce.",
+                sentences: [
+                    "What comes with the fish?",
+                    "It comes with vegetables and a creamy sauce."
+                ],
+                bounds: { xPct: 28.9063, yPct: 34.5052, widthPct: 36.5234, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Does the sauce contain dairy? Yes. It contains cream.",
+                sentences: [
+                    "Does the sauce contain dairy?",
+                    "Yes.",
+                    "It contains cream."
+                ],
+                bounds: { xPct: 67.3828, yPct: 34.5052, widthPct: 32.0313, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "I avoid dairy. What do you recommend instead? We can leave off the sauce.",
+                sentences: [
+                    "I avoid dairy.",
+                    "What do you recommend instead?",
+                    "We can leave off the sauce."
+                ],
+                bounds: { xPct: 28.9063, yPct: 50.0651, widthPct: 36.5234, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Then I’ll have the fish with the vegetables, and iced tea, please.",
+                sentences: ["Then I’ll have the fish with the vegetables, and iced tea, please."],
+                bounds: { xPct: 67.3828, yPct: 50.0651, widthPct: 32.0313, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Could you confirm how the fish is prepared? It’s grilled with olive oil.",
+                sentences: [
+                    "Could you confirm how the fish is prepared?",
+                    "It’s grilled with olive oil."
+                ],
+                bounds: { xPct: 28.9063, yPct: 66.4063, widthPct: 36.5234, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Could the vegetables be prepared without butter? I’m afraid we can’t guarantee that adjustment.",
+                sentences: [
+                    "Could the vegetables be prepared without butter?",
+                    "I’m afraid we can’t guarantee that adjustment."
+                ],
+                bounds: { xPct: 67.3828, yPct: 66.4063, widthPct: 32.0313, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Could I have a substitution — plain rice instead, provided that it can be prepared without butter?",
+                sentences: ["Could I have a substitution — plain rice instead, provided that it can be prepared without butter?"],
+                bounds: { xPct: 28.9063, yPct: 82.3568, widthPct: 36.5234, heightPct: 17.0573 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "The kitchen has confirmed the rice is prepared without butter. Fish with rice, and iced tea — is that correct? Yes, exactly. Thank you!",
+                sentences: [
+                    "The kitchen has confirmed the rice is prepared without butter.",
+                    "Fish with rice, and iced tea — is that correct?",
+                    "Yes, exactly.",
+                    "Thank you!"
+                ],
+                bounds: { xPct: 67.3828, yPct: 82.3568, widthPct: 32.0313, heightPct: 17.0573 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    },
     "images/english/making-plans-with-friends-basics.png": {
         imageId: "making-plans-with-friends-basics",
         assetFile: "images/english/making-plans-with-friends-basics.png",
