@@ -4407,4 +4407,159 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/the-catcher-in-the-rye-basics.png": {
+        imageId: "the-catcher-in-the-rye-basics",
+        assetFile: "images/english/the-catcher-in-the-rye-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Holden Caulfield is a high school boy. He is expelled from his school because he does not study hard.",
+                sentences: [
+                    "Holden Caulfield is a high school boy.",
+                    "He is expelled from his school because he does not study hard."
+                ],
+                bounds: { xPct: 16.5039, yPct: 11.7188, widthPct: 39.8438, heightPct: 13.6719 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Holden leaves school and goes to New York City. He feels lonely and is not sure what to do next.",
+                sentences: [
+                    "Holden leaves school and goes to New York City.",
+                    "He feels lonely and is not sure what to do next."
+                ],
+                bounds: { xPct: 58.7891, yPct: 11.7188, widthPct: 39.8438, heightPct: 13.6719 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Holden thinks many people around him are fake. He gets bored easily and does not like the adult world.",
+                sentences: [
+                    "Holden thinks many people around him are fake.",
+                    "He gets bored easily and does not like the adult world."
+                ],
+                bounds: { xPct: 16.5039, yPct: 26.9531, widthPct: 39.8438, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Holden meets Sally, a girl from his school. They go out together, but Holden feels unhappy and does not really belong.",
+                sentences: [
+                    "Holden meets Sally, a girl from his school.",
+                    "They go out together, but Holden feels unhappy and does not really belong."
+                ],
+                bounds: { xPct: 58.7891, yPct: 26.9531, widthPct: 39.8438, heightPct: 13.7370 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Holden goes to a club with Sally. He feels uncomfortable because the people there seem shallow and only care about money and fun.",
+                sentences: [
+                    "Holden goes to a club with Sally.",
+                    "He feels uncomfortable because the people there seem shallow and only care about money and fun."
+                ],
+                bounds: { xPct: 16.5039, yPct: 42.2526, widthPct: 39.8438, heightPct: 13.2161 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Holden meets Mr. Antolini, a kind teacher. They have a deep conversation, and Mr. Antolini gives him some good advice.",
+                sentences: [
+                    "Holden meets Mr. Antolini, a kind teacher.",
+                    "They have a deep conversation, and Mr. Antolini gives him some good advice."
+                ],
+                bounds: { xPct: 58.7891, yPct: 42.2526, widthPct: 39.8438, heightPct: 13.2161 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Holden stays at a hotel by himself. He feels lonely, confused, and worried about his future.",
+                sentences: [
+                    "Holden stays at a hotel by himself.",
+                    "He feels lonely, confused, and worried about his future."
+                ],
+                bounds: { xPct: 16.5039, yPct: 57.1615, widthPct: 39.8438, heightPct: 12.8255 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Holden spends time with his younger sister, Phoebe. He cares about her a lot, and she makes him feel better.",
+                sentences: [
+                    "Holden spends time with his younger sister, Phoebe.",
+                    "He cares about her a lot, and she makes him feel better."
+                ],
+                bounds: { xPct: 58.7891, yPct: 57.1615, widthPct: 39.8438, heightPct: 12.8255 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Holden watches a little girl on a carousel. He thinks about how children are innocent and pure, and he wants to protect them from the difficult adult world.",
+                sentences: [
+                    "Holden watches a little girl on a carousel.",
+                    "He thinks about how children are innocent and pure, and he wants to protect them from the difficult adult world."
+                ],
+                bounds: { xPct: 16.5039, yPct: 71.5495, widthPct: 39.8438, heightPct: 12.8255 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Holden imagines himself as the “catcher in the rye.” He wants to catch children before they fall into the adult world and lose their innocence.",
+                sentences: [
+                    "Holden imagines himself as the “catcher in the rye.”",
+                    "He wants to catch children before they fall into the adult world and lose their innocence."
+                ],
+                bounds: { xPct: 58.7891, yPct: 71.5495, widthPct: 39.8438, heightPct: 12.8255 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "In the end, Holden feels very tired. He realizes that growing up is difficult and that the world is not perfect.",
+                sentences: [
+                    "In the end, Holden feels very tired.",
+                    "He realizes that growing up is difficult and that the world is not perfect."
+                ],
+                bounds: { xPct: 16.5039, yPct: 85.8724, widthPct: 39.8438, heightPct: 13.3464 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "The Catcher in the Rye is a story about a boy's search for identity, his feelings of alienation, and the challenge of growing up in a complicated world.",
+                sentences: [
+                    "The Catcher in the Rye is a story about a boy's search for identity, his feelings of alienation, and the challenge of growing up in a complicated world."
+                ],
+                bounds: { xPct: 58.7891, yPct: 85.8724, widthPct: 39.8438, heightPct: 13.3464 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    },
 };
