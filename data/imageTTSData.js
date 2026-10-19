@@ -3562,5 +3562,221 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/pride-and-prejudice-jane-austen-basics.png": {
+        imageId: "pride-and-prejudice-jane-austen-basics",
+        assetFile: "images/english/pride-and-prejudice-jane-austen-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Mr. Bingley moves into a large house near the Bennet family. Mrs. Bennet hopes that one of her daughters will marry him.",
+                sentences: [
+                    "Mr. Bingley moves into a large house near the Bennet family.",
+                    "Mrs. Bennet hopes that one of her daughters will marry him."
+                ],
+                bounds: {
+                    xPct: 23.1445,
+                    yPct: 0.5208,
+                    widthPct: 37.1094,
+                    heightPct: 15.4297
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Elizabeth Bennet meets Mr. Darcy at a dance. He seems proud and unfriendly.",
+                sentences: [
+                    "Elizabeth Bennet meets Mr. Darcy at a dance.",
+                    "He seems proud and unfriendly."
+                ],
+                bounds: {
+                    xPct: 61.4258,
+                    yPct: 0.5208,
+                    widthPct: 37.6953,
+                    heightPct: 15.4297
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Elizabeth hears Darcy speak unkindly about her. She decides that she does not like him.",
+                sentences: [
+                    "Elizabeth hears Darcy speak unkindly about her.",
+                    "She decides that she does not like him."
+                ],
+                bounds: {
+                    xPct: 23.1445,
+                    yPct: 16.6667,
+                    widthPct: 37.1094,
+                    heightPct: 14.2578
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Jane Bennet and Mr. Bingley enjoy spending time together. They begin to fall in love.",
+                sentences: [
+                    "Jane Bennet and Mr. Bingley enjoy spending time together.",
+                    "They begin to fall in love."
+                ],
+                bounds: {
+                    xPct: 61.4258,
+                    yPct: 16.6667,
+                    widthPct: 37.6953,
+                    heightPct: 14.2578
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Mr. Collins proposes marriage to Elizabeth, believing that his offer is generous. However, she firmly rejects him because she does not love him.",
+                sentences: [
+                    "Mr. Collins proposes marriage to Elizabeth, believing that his offer is generous.",
+                    "However, she firmly rejects him because she does not love him."
+                ],
+                bounds: {
+                    xPct: 23.1445,
+                    yPct: 31.7057,
+                    widthPct: 37.1094,
+                    heightPct: 16.2109
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Wickham persuades Elizabeth that Darcy has treated him unfairly. His convincing account reinforces her growing prejudice against Darcy.",
+                sentences: [
+                    "Wickham persuades Elizabeth that Darcy has treated him unfairly.",
+                    "His convincing account reinforces her growing prejudice against Darcy."
+                ],
+                bounds: {
+                    xPct: 61.4258,
+                    yPct: 31.7057,
+                    widthPct: 37.6953,
+                    heightPct: 16.2109
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Darcy unexpectedly confesses his feelings and proposes to Elizabeth. Offended by his arrogance and accusations against her family, she refuses his proposal.",
+                sentences: [
+                    "Darcy unexpectedly confesses his feelings and proposes to Elizabeth.",
+                    "Offended by his arrogance and accusations against her family, she refuses his proposal."
+                ],
+                bounds: {
+                    xPct: 23.1445,
+                    yPct: 48.6328,
+                    widthPct: 37.1094,
+                    heightPct: 16.6016
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Darcy writes Elizabeth a letter explaining his actions and exposing Wickham’s deception. As she considers the evidence, Elizabeth begins to question her earlier judgments.",
+                sentences: [
+                    "Darcy writes Elizabeth a letter explaining his actions and exposing Wickham’s deception.",
+                    "As she considers the evidence, Elizabeth begins to question her earlier judgments."
+                ],
+                bounds: {
+                    xPct: 61.4258,
+                    yPct: 48.6328,
+                    widthPct: 37.6953,
+                    heightPct: 16.6016
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "During her visit to Pemberley, Elizabeth discovers evidence of Darcy’s generosity and responsible treatment of those who depend on him. This unexpected revelation challenges her preconceived assumptions and forces her to reconsider the reliability of her previous judgments.",
+                sentences: [
+                    "During her visit to Pemberley, Elizabeth discovers evidence of Darcy’s generosity and responsible treatment of those who depend on him.",
+                    "This unexpected revelation challenges her preconceived assumptions and forces her to reconsider the reliability of her previous judgments."
+                ],
+                bounds: {
+                    xPct: 23.1445,
+                    yPct: 65.9505,
+                    widthPct: 37.1094,
+                    heightPct: 16.5365
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Lydia’s reckless elopement with Wickham threatens to disgrace the entire Bennet family within a society governed by rigid expectations of female respectability. Elizabeth recognizes that the consequences may jeopardize not only her sister’s future but also the marriage prospects and social standing of the whole family.",
+                sentences: [
+                    "Lydia’s reckless elopement with Wickham threatens to disgrace the entire Bennet family within a society governed by rigid expectations of female respectability.",
+                    "Elizabeth recognizes that the consequences may jeopardize not only her sister’s future but also the marriage prospects and social standing of the whole family."
+                ],
+                bounds: {
+                    xPct: 61.4258,
+                    yPct: 65.9505,
+                    widthPct: 37.6953,
+                    heightPct: 16.5365
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Despite having been rejected, Darcy discreetly intervenes to arrange Lydia’s marriage and protect the Bennets from further humiliation. His willingness to assume responsibility without seeking recognition demonstrates a generosity of character that contradicts Elizabeth’s earlier resentment.",
+                sentences: [
+                    "Despite having been rejected, Darcy discreetly intervenes to arrange Lydia’s marriage and protect the Bennets from further humiliation.",
+                    "His willingness to assume responsibility without seeking recognition demonstrates a generosity of character that contradicts Elizabeth’s earlier resentment."
+                ],
+                bounds: {
+                    xPct: 23.1445,
+                    yPct: 83.2031,
+                    widthPct: 37.1094,
+                    heightPct: 16.3411
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Having confronted their own pride, prejudices, and mistaken assumptions, Elizabeth and Darcy gradually develop a more discerning understanding of each other. Their eventual reconciliation illustrates how genuine affection can emerge through self-awareness, humility, and the courage to challenge deeply rooted beliefs.",
+                sentences: [
+                    "Having confronted their own pride, prejudices, and mistaken assumptions, Elizabeth and Darcy gradually develop a more discerning understanding of each other.",
+                    "Their eventual reconciliation illustrates how genuine affection can emerge through self-awareness, humility, and the courage to challenge deeply rooted beliefs."
+                ],
+                bounds: {
+                    xPct: 61.4258,
+                    yPct: 83.2031,
+                    widthPct: 37.6953,
+                    heightPct: 16.3411
+                },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
