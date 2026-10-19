@@ -3406,5 +3406,161 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/matilda-roald-dahl-basics.png": {
+        imageId: "matilda-roald-dahl-basics",
+        assetFile: "images/english/matilda-roald-dahl-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Matilda is a clever little girl who loves books. She reads many stories and learns new things every day.",
+                sentences: [
+                    "Matilda is a clever little girl who loves books.",
+                    "She reads many stories and learns new things every day."
+                ],
+                bounds: { xPct: 21.9727, yPct: 7.8125, widthPct: 38.9648, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Her parents are unkind and do not care about her love of reading. Matilda feels lonely at home.",
+                sentences: [
+                    "Her parents are unkind and do not care about her love of reading.",
+                    "Matilda feels lonely at home."
+                ],
+                bounds: { xPct: 61.2305, yPct: 7.8125, widthPct: 38.3789, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Matilda starts school and meets Miss Honey, a kind teacher. Miss Honey sees how smart she is.",
+                sentences: [
+                    "Matilda starts school and meets Miss Honey, a kind teacher.",
+                    "Miss Honey sees how smart she is."
+                ],
+                bounds: { xPct: 21.9727, yPct: 22.3307, widthPct: 38.9648, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Miss Honey helps Matilda learn and grow. For the first time, Matilda feels understood and supported.",
+                sentences: [
+                    "Miss Honey helps Matilda learn and grow.",
+                    "For the first time, Matilda feels understood and supported."
+                ],
+                bounds: { xPct: 61.2305, yPct: 22.3307, widthPct: 38.3789, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Miss Honey discovers that Matilda has extraordinary intelligence. However, the cruel headmistress, Miss Trunchbull, refuses to recognize her abilities.",
+                sentences: [
+                    "Miss Honey discovers that Matilda has extraordinary intelligence.",
+                    "However, the cruel headmistress, Miss Trunchbull, refuses to recognize her abilities."
+                ],
+                bounds: { xPct: 21.9727, yPct: 36.8490, widthPct: 38.9648, heightPct: 16.2760 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Miss Trunchbull terrifies the students with harsh punishments. Matilda becomes determined to challenge her unfair treatment of others.",
+                sentences: [
+                    "Miss Trunchbull terrifies the students with harsh punishments.",
+                    "Matilda becomes determined to challenge her unfair treatment of others."
+                ],
+                bounds: { xPct: 61.2305, yPct: 36.8490, widthPct: 38.3789, heightPct: 16.2760 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Matilda discovers that she can move objects using only her mind. She begins practicing this mysterious ability until she can control it.",
+                sentences: [
+                    "Matilda discovers that she can move objects using only her mind.",
+                    "She begins practicing this mysterious ability until she can control it."
+                ],
+                bounds: { xPct: 21.9727, yPct: 53.1901, widthPct: 38.9648, heightPct: 15.1693 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Miss Honey reveals that Miss Trunchbull is her aunt. She explains how her aunt mistreated her and took control of her family’s home.",
+                sentences: [
+                    "Miss Honey reveals that Miss Trunchbull is her aunt.",
+                    "She explains how her aunt mistreated her and took control of her family’s home."
+                ],
+                bounds: { xPct: 61.2305, yPct: 53.1901, widthPct: 38.3789, heightPct: 15.1693 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Determined to confront the injustice Miss Honey has endured, Matilda devises a plan to use her telekinetic powers. She carefully prepares a message that will expose Miss Trunchbull’s wrongdoing.",
+                sentences: [
+                    "Determined to confront the injustice Miss Honey has endured, Matilda devises a plan to use her telekinetic powers.",
+                    "She carefully prepares a message that will expose Miss Trunchbull’s wrongdoing."
+                ],
+                bounds: { xPct: 21.9727, yPct: 68.4245, widthPct: 38.9648, heightPct: 15.3646 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "During a lesson, Matilda makes a piece of chalk write a message on the blackboard, apparently from Miss Honey’s deceased father. Terrified by what she believes is a supernatural warning, Miss Trunchbull flees.",
+                sentences: [
+                    "During a lesson, Matilda makes a piece of chalk write a message on the blackboard, apparently from Miss Honey’s deceased father.",
+                    "Terrified by what she believes is a supernatural warning, Miss Trunchbull flees."
+                ],
+                bounds: { xPct: 61.2305, yPct: 68.4245, widthPct: 38.3789, heightPct: 15.3646 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "With Miss Trunchbull gone, Miss Honey regains her family home and begins rebuilding her life. When Matilda’s parents prepare to leave the country, they agree to let her stay with Miss Honey.",
+                sentences: [
+                    "With Miss Trunchbull gone, Miss Honey regains her family home and begins rebuilding her life.",
+                    "When Matilda’s parents prepare to leave the country, they agree to let her stay with Miss Honey."
+                ],
+                bounds: { xPct: 21.9727, yPct: 83.8542, widthPct: 38.9648, heightPct: 16.1458 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Matilda finally finds a loving home where her intelligence and independence are celebrated. Her extraordinary journey demonstrates how courage, compassion, and determination can overcome cruelty and injustice.",
+                sentences: [
+                    "Matilda finally finds a loving home where her intelligence and independence are celebrated.",
+                    "Her extraordinary journey demonstrates how courage, compassion, and determination can overcome cruelty and injustice."
+                ],
+                bounds: { xPct: 61.2305, yPct: 83.8542, widthPct: 38.3789, heightPct: 16.1458 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
