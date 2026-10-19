@@ -4090,5 +4090,162 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/hamlet-william-shakespeare-basics.png": {
+        imageId: "hamlet-william-shakespeare-basics",
+        assetFile: "images/english/hamlet-william-shakespeare-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Prince Hamlet’s father, King Hamlet, dies suddenly. Denmark is going through a time of change, and Hamlet feels deep sadness.",
+                sentences: [
+                    "Prince Hamlet’s father, King Hamlet, dies suddenly.",
+                    "Denmark is going through a time of change, and Hamlet feels deep sadness."
+                ],
+                bounds: { xPct: 18.3500, yPct: 11.2000, widthPct: 39.8000, heightPct: 13.7000 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Soon, Hamlet’s uncle Claudius marries Queen Gertrude, Hamlet’s mother. Their quick marriage makes Hamlet feel confused and troubled.",
+                sentences: [
+                    "Soon, Hamlet’s uncle Claudius marries Queen Gertrude, Hamlet’s mother.",
+                    "Their quick marriage makes Hamlet feel confused and troubled."
+                ],
+                bounds: { xPct: 59.6000, yPct: 11.2000, widthPct: 39.4000, heightPct: 13.7000 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "One night, Hamlet sees the ghost of his father. The ghost says that Claudius murdered him and asks Hamlet to seek revenge.",
+                sentences: [
+                    "One night, Hamlet sees the ghost of his father.",
+                    "The ghost says that Claudius murdered him and asks Hamlet to seek revenge."
+                ],
+                bounds: { xPct: 18.3500, yPct: 25.7500, widthPct: 39.8000, heightPct: 13.6500 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Hamlet struggles with what to do. He thinks deeply about life, death, and what is right or wrong. He is full of doubt and hesitation.",
+                sentences: [
+                    "Hamlet struggles with what to do.",
+                    "He thinks deeply about life, death, and what is right or wrong.",
+                    "He is full of doubt and hesitation."
+                ],
+                bounds: { xPct: 59.6000, yPct: 25.7500, widthPct: 39.4000, heightPct: 13.6500 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Hamlet pretends to be mad so he can investigate the truth. He acts strangely and watches Claudius’s behavior for evidence.",
+                sentences: [
+                    "Hamlet pretends to be mad so he can investigate the truth.",
+                    "He acts strangely and watches Claudius’s behavior for evidence."
+                ],
+                bounds: { xPct: 18.3500, yPct: 40.1500, widthPct: 39.8000, heightPct: 13.5500 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Hamlet arranges a play called “The Mousetrap” that shows a murder similar to his father’s. Claudius looks guilty, which gives Hamlet more evidence.",
+                sentences: [
+                    "Hamlet arranges a play called “The Mousetrap” that shows a murder similar to his father’s.",
+                    "Claudius looks guilty, which gives Hamlet more evidence."
+                ],
+                bounds: { xPct: 59.6000, yPct: 40.1500, widthPct: 39.4000, heightPct: 13.5500 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Hamlet’s strange behavior hurts Ophelia, and their relationship becomes difficult. Ophelia feels confused and heartbroken.",
+                sentences: [
+                    "Hamlet’s strange behavior hurts Ophelia, and their relationship becomes difficult.",
+                    "Ophelia feels confused and heartbroken."
+                ],
+                bounds: { xPct: 18.3500, yPct: 54.4000, widthPct: 39.8000, heightPct: 13.7000 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Hearing someone behind the curtain, Hamlet strikes without checking who is there. He kills Polonius, an act that brings further tragedy.",
+                sentences: [
+                    "Hearing someone behind the curtain, Hamlet strikes without checking who is there.",
+                    "He kills Polonius, an act that brings further tragedy."
+                ],
+                bounds: { xPct: 59.6000, yPct: 54.4000, widthPct: 39.4000, heightPct: 13.7000 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "After her father’s death and Hamlet’s rejection, Ophelia loses her emotional stability. She later drowns, but the play leaves the exact circumstances uncertain.",
+                sentences: [
+                    "After her father’s death and Hamlet’s rejection, Ophelia loses her emotional stability.",
+                    "She later drowns, but the play leaves the exact circumstances uncertain."
+                ],
+                bounds: { xPct: 18.3500, yPct: 68.8500, widthPct: 39.8000, heightPct: 13.1000 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Laertes, Ophelia’s brother, wants revenge for her death. Claudius persuades him to use a poisoned sword and also prepares a poisoned drink for Hamlet.",
+                sentences: [
+                    "Laertes, Ophelia’s brother, wants revenge for her death.",
+                    "Claudius persuades him to use a poisoned sword and also prepares a poisoned drink for Hamlet."
+                ],
+                bounds: { xPct: 59.6000, yPct: 68.8500, widthPct: 39.4000, heightPct: 13.1000 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "During the duel, Gertrude drinks the poisoned wine and dies. Laertes and Hamlet are both wounded by the poisoned sword, and Laertes reveals Claudius’s plot before he dies.",
+                sentences: [
+                    "During the duel, Gertrude drinks the poisoned wine and dies.",
+                    "Laertes and Hamlet are both wounded by the poisoned sword, and Laertes reveals Claudius’s plot before he dies."
+                ],
+                bounds: { xPct: 18.3500, yPct: 82.4500, widthPct: 39.8000, heightPct: 16.7500 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Hamlet kills Claudius before dying himself. He asks Horatio to tell the truth, and Fortinbras arrives to take control of Denmark.",
+                sentences: [
+                    "Hamlet kills Claudius before dying himself.",
+                    "He asks Horatio to tell the truth, and Fortinbras arrives to take control of Denmark."
+                ],
+                bounds: { xPct: 59.6000, yPct: 82.4500, widthPct: 39.4000, heightPct: 16.7500 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
