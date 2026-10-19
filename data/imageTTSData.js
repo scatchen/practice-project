@@ -4247,5 +4247,164 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
-    }
+    },
+    "images/english/macbeth-william-shakespeare-basics.png": {
+        imageId: "macbeth-william-shakespeare-basics",
+        assetFile: "images/english/macbeth-william-shakespeare-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Macbeth is a brave soldier in Scotland. After a victory in battle, he and his friend Banquo meet three witches on a dark and stormy day.",
+                sentences: [
+                    "Macbeth is a brave soldier in Scotland.",
+                    "After a victory in battle, he and his friend Banquo meet three witches on a dark and stormy day."
+                ],
+                bounds: { xPct: 18.3594, yPct: 10.9375, widthPct: 39.6484, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "The witches give Macbeth a prophecy: he will become king. They also say that Banquo’s descendants will be kings.",
+                sentences: [
+                    "The witches give Macbeth a prophecy: he will become king.",
+                    "They also say that Banquo’s descendants will be kings."
+                ],
+                bounds: { xPct: 59.5703, yPct: 10.9375, widthPct: 39.5508, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Macbeth tells his wife, Lady Macbeth, about the prophecy. She persuades him to seize the throne, even though he hesitates and feels uneasy.",
+                sentences: [
+                    "Macbeth tells his wife, Lady Macbeth, about the prophecy.",
+                    "She persuades him to seize the throne, even though he hesitates and feels uneasy."
+                ],
+                bounds: { xPct: 18.3594, yPct: 25.5859, widthPct: 39.6484, heightPct: 14.0625 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Macbeth murders King Duncan while he is sleeping. This terrible act helps Macbeth move closer to the throne, but it also creates a lot of guilt and fear.",
+                sentences: [
+                    "Macbeth murders King Duncan while he is sleeping.",
+                    "This terrible act helps Macbeth move closer to the throne, but it also creates a lot of guilt and fear."
+                ],
+                bounds: { xPct: 59.5703, yPct: 25.5859, widthPct: 39.5508, heightPct: 14.0625 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Macbeth becomes king, but he feels guilty and is haunted by the murder. Lady Macbeth tries to keep him strong, but the pressure to hold on to power grows.",
+                sentences: [
+                    "Macbeth becomes king, but he feels guilty and is haunted by the murder.",
+                    "Lady Macbeth tries to keep him strong, but the pressure to hold on to power grows."
+                ],
+                bounds: { xPct: 18.3594, yPct: 40.1693, widthPct: 39.6484, heightPct: 13.9974 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Macbeth becomes suspicious of Banquo. He arranges for Banquo to be killed, but Banquo’s ghost later appears and haunts Macbeth, showing his growing fear and guilt.",
+                sentences: [
+                    "Macbeth becomes suspicious of Banquo.",
+                    "He arranges for Banquo to be killed, but Banquo’s ghost later appears and haunts Macbeth, showing his growing fear and guilt."
+                ],
+                bounds: { xPct: 59.5703, yPct: 40.1693, widthPct: 39.5508, heightPct: 13.9974 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Lady Macbeth also suffers. She is unable to sleep and walks in her sleep, trying to wash away the blood. Her mental state becomes unstable, and she eventually dies.",
+                sentences: [
+                    "Lady Macbeth also suffers.",
+                    "She is unable to sleep and walks in her sleep, trying to wash away the blood.",
+                    "Her mental state becomes unstable, and she eventually dies."
+                ],
+                bounds: { xPct: 18.3594, yPct: 54.6875, widthPct: 39.6484, heightPct: 13.9974 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Macbeth seeks the witches again. They give him more unclear prophecies, which make him feel safe at first. However, these predictions also make him overconfident and blind to danger.",
+                sentences: [
+                    "Macbeth seeks the witches again.",
+                    "They give him more unclear prophecies, which make him feel safe at first.",
+                    "However, these predictions also make him overconfident and blind to danger."
+                ],
+                bounds: { xPct: 59.5703, yPct: 54.6875, widthPct: 39.5508, heightPct: 13.9974 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Macbeth becomes more violent and cruel. He rules through fear and tyranny, and many people suffer. His ambition and paranoia isolate him, and he loses the support of others.",
+                sentences: [
+                    "Macbeth becomes more violent and cruel.",
+                    "He rules through fear and tyranny, and many people suffer.",
+                    "His ambition and paranoia isolate him, and he loses the support of others."
+                ],
+                bounds: { xPct: 18.3594, yPct: 69.2057, widthPct: 39.6484, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "In the final battle, Macbeth learns that the witches’ prophecies were misleading. Macduff, who was “not born of a woman,” fights against him.",
+                sentences: [
+                    "In the final battle, Macbeth learns that the witches’ prophecies were misleading.",
+                    "Macduff, who was “not born of a woman,” fights against him."
+                ],
+                bounds: { xPct: 59.5703, yPct: 69.2057, widthPct: 39.5508, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Macduff kills Macbeth, ending his rule. Macbeth’s downfall shows the tragic consequences of unchecked ambition, murder, and betrayal.",
+                sentences: [
+                    "Macduff kills Macbeth, ending his rule.",
+                    "Macbeth’s downfall shows the tragic consequences of unchecked ambition, murder, and betrayal."
+                ],
+                bounds: { xPct: 18.3594, yPct: 83.3333, widthPct: 39.6484, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Malcolm becomes the new king. Macbeth’s story reminds us of the destructive power of ambition, guilt, and betrayal, and how these choices can lead to a tragic end and a lasting legacy.",
+                sentences: [
+                    "Malcolm becomes the new king.",
+                    "Macbeth’s story reminds us of the destructive power of ambition, guilt, and betrayal, and how these choices can lead to a tragic end and a lasting legacy."
+                ],
+                bounds: { xPct: 59.5703, yPct: 83.3333, widthPct: 39.5508, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    },
 };
