@@ -4562,4 +4562,159 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/the-book-thief-basics.png": {
+        imageId: "the-book-thief-basics",
+        assetFile: "images/english/the-book-thief-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Liesel Meminger is a young girl in Germany during World War II. She leaves her home and goes to live with a foster family.",
+                sentences: [
+                    "Liesel Meminger is a young girl in Germany during World War II.",
+                    "She leaves her home and goes to live with a foster family."
+                ],
+                bounds: { xPct: 15.9180, yPct: 11.3281, widthPct: 40.6250, heightPct: 14.7135 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Liesel goes to live with Hans and Rosa Hubermann. Hans is kind, and Rosa is strict, but they both care about her and give her a new home.",
+                sentences: [
+                    "Liesel goes to live with Hans and Rosa Hubermann.",
+                    "Hans is kind, and Rosa is strict, but they both care about her and give her a new home."
+                ],
+                bounds: { xPct: 58.3008, yPct: 11.3281, widthPct: 40.6250, heightPct: 14.7135 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "On the train, Liesel finds a book that someone left behind. It is her first stolen book.",
+                sentences: [
+                    "On the train, Liesel finds a book that someone left behind.",
+                    "It is her first stolen book."
+                ],
+                bounds: { xPct: 15.9180, yPct: 27.2135, widthPct: 40.6250, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Liesel cannot read yet, but she is very curious about books. She feels that books are special and wants to learn how to read.",
+                sentences: [
+                    "Liesel cannot read yet, but she is very curious about books.",
+                    "She feels that books are special and wants to learn how to read."
+                ],
+                bounds: { xPct: 58.3008, yPct: 27.2135, widthPct: 40.6250, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Hans teaches Liesel to read. She works hard and feels proud when she can finally read words on her own.",
+                sentences: [
+                    "Hans teaches Liesel to read.",
+                    "She works hard and feels proud when she can finally read words on her own."
+                ],
+                bounds: { xPct: 15.9180, yPct: 42.3177, widthPct: 40.6250, heightPct: 13.3464 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Liesel meets Max, a Jewish boy who is hiding in their house. They become friends, and Liesel reads books to him.",
+                sentences: [
+                    "Liesel meets Max, a Jewish boy who is hiding in their house.",
+                    "They become friends, and Liesel reads books to him."
+                ],
+                bounds: { xPct: 58.3008, yPct: 42.3177, widthPct: 40.6250, heightPct: 13.3464 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Life in Germany becomes more dangerous. There are Nazi soldiers everywhere, and people are afraid to speak freely.",
+                sentences: [
+                    "Life in Germany becomes more dangerous.",
+                    "There are Nazi soldiers everywhere, and people are afraid to speak freely."
+                ],
+                bounds: { xPct: 15.9180, yPct: 56.8359, widthPct: 40.6250, heightPct: 13.2813 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Books give Liesel hope. They help her feel less alone and more brave, even in dark times.",
+                sentences: [
+                    "Books give Liesel hope.",
+                    "They help her feel less alone and more brave, even in dark times."
+                ],
+                bounds: { xPct: 58.3008, yPct: 56.8359, widthPct: 40.6250, heightPct: 13.2813 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Many people in Liesel’s life suffer because of the war. She experiences loss and sees how cruel the world can be.",
+                sentences: [
+                    "Many people in Liesel’s life suffer because of the war.",
+                    "She experiences loss and sees how cruel the world can be."
+                ],
+                bounds: { xPct: 15.9180, yPct: 71.2891, widthPct: 40.6250, heightPct: 13.2161 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Liesel learns that words have great power. Books can bring comfort, courage, and hope to people, even in the hardest times.",
+                sentences: [
+                    "Liesel learns that words have great power.",
+                    "Books can bring comfort, courage, and hope to people, even in the hardest times."
+                ],
+                bounds: { xPct: 58.3008, yPct: 71.2891, widthPct: 40.6250, heightPct: 13.2161 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Liesel continues to read and write. She grows into a stronger person and never forgets the people she loved.",
+                sentences: [
+                    "Liesel continues to read and write.",
+                    "She grows into a stronger person and never forgets the people she loved."
+                ],
+                bounds: { xPct: 15.9180, yPct: 85.5469, widthPct: 40.6250, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "The Book Thief is a story about a girl who finds hope, humanity, and the power of words in a dark time, and how books can change a person’s life.",
+                sentences: [
+                    "The Book Thief is a story about a girl who finds hope, humanity, and the power of words in a dark time, and how books can change a person’s life."
+                ],
+                bounds: { xPct: 58.3008, yPct: 85.5469, widthPct: 40.6250, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    },
 };
