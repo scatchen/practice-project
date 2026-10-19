@@ -3778,5 +3778,161 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/jane-eyre-charlotte-bronte-basics.png": {
+        imageId: "jane-eyre-charlotte-bronte-basics",
+        assetFile: "images/english/jane-eyre-charlotte-bronte-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Jane Eyre lives with her aunt, Mrs. Reed, who treats her unkindly. Jane feels lonely, but she dreams of a better life.",
+                sentences: [
+                    "Jane Eyre lives with her aunt, Mrs. Reed, who treats her unkindly.",
+                    "Jane feels lonely, but she dreams of a better life."
+                ],
+                bounds: { xPct: 23.0, yPct: 0.0, widthPct: 38.0, heightPct: 16.5 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Jane goes to Lowood School, where life is difficult and the rules are strict. She makes a kind friend named Helen Burns.",
+                sentences: [
+                    "Jane goes to Lowood School, where life is difficult and the rules are strict.",
+                    "She makes a kind friend named Helen Burns."
+                ],
+                bounds: { xPct: 61.5, yPct: 0.0, widthPct: 38.0, heightPct: 16.5 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "As an adult, Jane becomes a governess at Thornfield Hall. She teaches a young girl named Adèle.",
+                sentences: [
+                    "As an adult, Jane becomes a governess at Thornfield Hall.",
+                    "She teaches a young girl named Adèle."
+                ],
+                bounds: { xPct: 23.0, yPct: 16.8, widthPct: 38.0, heightPct: 16.5 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Jane meets Mr. Rochester, the owner of Thornfield Hall. Although he seems mysterious, they enjoy talking to each other.",
+                sentences: [
+                    "Jane meets Mr. Rochester, the owner of Thornfield Hall.",
+                    "Although he seems mysterious, they enjoy talking to each other."
+                ],
+                bounds: { xPct: 61.5, yPct: 16.8, widthPct: 38.0, heightPct: 16.5 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "As Jane spends more time with Rochester, their conversations develop into a deeper emotional connection. Despite their differences in wealth and social position, Jane begins to fall in love with him.",
+                sentences: [
+                    "As Jane spends more time with Rochester, their conversations develop into a deeper emotional connection.",
+                    "Despite their differences in wealth and social position, Jane begins to fall in love with him."
+                ],
+                bounds: { xPct: 23.0, yPct: 33.5, widthPct: 38.0, heightPct: 16.5 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Rochester eventually confesses his love and asks Jane to marry him. Although she initially doubts his intentions, Jane accepts his proposal with happiness.",
+                sentences: [
+                    "Rochester eventually confesses his love and asks Jane to marry him.",
+                    "Although she initially doubts his intentions, Jane accepts his proposal with happiness."
+                ],
+                bounds: { xPct: 61.5, yPct: 33.5, widthPct: 38.0, heightPct: 16.5 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "During the wedding ceremony, Jane discovers that Rochester is already married to Bertha Mason. Realizing that their marriage cannot legally proceed, she faces a painful moral dilemma.",
+                sentences: [
+                    "During the wedding ceremony, Jane discovers that Rochester is already married to Bertha Mason.",
+                    "Realizing that their marriage cannot legally proceed, she faces a painful moral dilemma."
+                ],
+                bounds: { xPct: 23.0, yPct: 50.3, widthPct: 38.0, heightPct: 15.2 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Although Jane still loves Rochester, she refuses to compromise her principles by remaining with him. Determined to preserve her self-respect, she leaves Thornfield Hall and begins an uncertain journey.",
+                sentences: [
+                    "Although Jane still loves Rochester, she refuses to compromise her principles by remaining with him.",
+                    "Determined to preserve her self-respect, she leaves Thornfield Hall and begins an uncertain journey."
+                ],
+                bounds: { xPct: 61.5, yPct: 50.3, widthPct: 38.0, heightPct: 15.2 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "After enduring poverty and uncertainty, Jane finds shelter with the Rivers siblings and gradually establishes a new sense of belonging. When she unexpectedly inherits a fortune and discovers their family connection, she gains the financial independence that allows her to determine her own future.",
+                sentences: [
+                    "After enduring poverty and uncertainty, Jane finds shelter with the Rivers siblings and gradually establishes a new sense of belonging.",
+                    "When she unexpectedly inherits a fortune and discovers their family connection, she gains the financial independence that allows her to determine her own future."
+                ],
+                bounds: { xPct: 23.0, yPct: 65.8, widthPct: 38.0, heightPct: 16.8 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "St. John Rivers urges Jane to accompany him to India as his wife, presenting missionary service as a moral obligation rather than a personal choice. Although she respects his dedication, Jane recognizes that accepting a marriage without mutual affection would require her to sacrifice her emotional integrity and autonomy.",
+                sentences: [
+                    "St. John Rivers urges Jane to accompany him to India as his wife, presenting missionary service as a moral obligation rather than a personal choice.",
+                    "Although she respects his dedication, Jane recognizes that accepting a marriage without mutual affection would require her to sacrifice her emotional integrity and autonomy."
+                ],
+                bounds: { xPct: 61.5, yPct: 65.8, widthPct: 38.0, heightPct: 16.8 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Following an inexplicable experience in which she seems to hear Rochester calling her name, Jane resolves to discover what has become of him. She learns that Thornfield Hall has been destroyed by fire, Bertha has died, and Rochester has suffered permanent injuries while attempting to rescue others.",
+                sentences: [
+                    "Following an inexplicable experience in which she seems to hear Rochester calling her name, Jane resolves to discover what has become of him.",
+                    "She learns that Thornfield Hall has been destroyed by fire, Bertha has died, and Rochester has suffered permanent injuries while attempting to rescue others."
+                ],
+                bounds: { xPct: 23.0, yPct: 83.1, widthPct: 38.0, heightPct: 16.7 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Having achieved financial independence and reaffirmed her moral convictions, Jane returns to Rochester as a woman capable of choosing love without surrendering her identity. Their eventual marriage represents a relationship grounded in mutual respect, emotional commitment, and a more equal balance of personal freedom and responsibility.",
+                sentences: [
+                    "Having achieved financial independence and reaffirmed her moral convictions, Jane returns to Rochester as a woman capable of choosing love without surrendering her identity.",
+                    "Their eventual marriage represents a relationship grounded in mutual respect, emotional commitment, and a more equal balance of personal freedom and responsibility."
+                ],
+                bounds: { xPct: 61.5, yPct: 83.1, widthPct: 38.0, heightPct: 16.7 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
