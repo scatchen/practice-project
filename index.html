@@ -3104,6 +3104,11 @@ const englishTTSState = {
     storySequenceTimer: 0,
     storySequenceGeneration: 0,
     storySequenceTrigger: null,
+    answerSequenceTimer: 0,
+    answerSequenceGeneration: 0,
+    answerSequenceTrigger: null,
+    answerSequenceType: "",
+    answerSequenceSelectionText: "",
     observedAnswerRoot: null
 };
 
@@ -3152,7 +3157,14 @@ function setEnglishTTSStatus(message) {
     }
 }
 
-function clearEnglishTTSSelection(message) {
+function clearEnglishTTSSelection(message, preserveActiveSelectionSequence = false) {
+    if (englishTTSState.answerSequenceType === "selection") {
+        if (preserveActiveSelectionSequence) {
+            hideEnglishFloatingButton();
+            return;
+        }
+        cancelEnglishAnswerTTSSequence(true);
+    }
     if (englishTTSState.collapsedSelectionTimer) {
         window.clearTimeout(englishTTSState.collapsedSelectionTimer);
         englishTTSState.collapsedSelectionTimer = 0;
@@ -3420,12 +3432,13 @@ function updateEnglishTTSControls() {
     }
     if (stopButton) {
         stopButton.disabled = !englishTTSState.activeUtterance &&
-            !englishTTSState.collocationReplayTimer && !englishTTSState.storySequenceTimer;
+            !englishTTSState.collocationReplayTimer && !englishTTSState.storySequenceTimer &&
+            !englishTTSState.answerSequenceTimer;
     }
     if (floatingStopButton) {
         const shouldShowStop = appState.subjectMode === "english" &&
             Boolean(englishTTSState.activeUtterance || englishTTSState.collocationReplayTimer ||
-                englishTTSState.storySequenceTimer);
+                englishTTSState.storySequenceTimer || englishTTSState.answerSequenceTimer);
         floatingStopButton.hidden = !shouldShowStop;
         if (shouldShowStop) {
             if (floatingStopButton.parentNode !== document.body) {
@@ -3690,6 +3703,45 @@ function cancelEnglishCollocationReplay() {
     englishTTSState.collocationReplayGeneration += 1;
 }
 
+function cancelEnglishAnswerTTSSequence(cancelCurrentUtterance = false) {
+    const sequenceTrigger = englishTTSState.answerSequenceTrigger;
+    const wasSelectionSequence = englishTTSState.answerSequenceType === "selection";
+    const hadSequence = Boolean(sequenceTrigger || englishTTSState.answerSequenceTimer ||
+        englishTTSState.answerSequenceType);
+    if (englishTTSState.answerSequenceTimer) {
+        window.clearTimeout(englishTTSState.answerSequenceTimer);
+        englishTTSState.answerSequenceTimer = 0;
+    }
+    englishTTSState.answerSequenceGeneration += 1;
+    englishTTSState.answerSequenceTrigger = null;
+    englishTTSState.answerSequenceType = "";
+    englishTTSState.answerSequenceSelectionText = "";
+
+    if (cancelCurrentUtterance && hadSequence && englishTTSState.activeUtterance) {
+        englishTTSState.activeUtterance = null;
+        if (englishTTSState.activeSpeechTrigger === sequenceTrigger) {
+            englishTTSState.activeSpeechTrigger = null;
+            englishTTSState.activeSpeechTriggerRect = null;
+        }
+        if (englishTTSState.synthesis) {
+            try {
+                englishTTSState.synthesis.cancel();
+            } catch (error) {
+                // Keep the page usable even if the browser speech engine is unavailable.
+            }
+        }
+    }
+    if (cancelCurrentUtterance && hadSequence) {
+        updateEnglishTTSControls();
+    }
+    if (wasSelectionSequence) {
+        const selection = window.getSelection();
+        if (!selection || selection.isCollapsed) {
+            clearEnglishTTSSelection();
+        }
+    }
+}
+
 function cancelEnglishImageTTSStorySequence(cancelCurrentUtterance = false) {
     const sequenceTrigger = englishTTSState.storySequenceTrigger;
     const hadSequence = Boolean(sequenceTrigger || englishTTSState.storySequenceTimer);
@@ -3804,10 +3856,28 @@ function speakEnglishCollocationTwice(text) {
     return speakEnglishCollocationSequence([text]);
 }
 
-function speakEnglishText(text, onComplete = null, preserveCollocationReplay = false, onError = null, storySequenceGeneration = null) {
+function speakEnglishText(
+    text,
+    onComplete = null,
+    preserveCollocationReplay = false,
+    onError = null,
+    storySequenceGeneration = null,
+    answerSequenceGeneration = null
+) {
     if (storySequenceGeneration === null) {
         cancelEnglishImageTTSStorySequence();
     } else if (storySequenceGeneration !== englishTTSState.storySequenceGeneration) {
+        return false;
+    }
+    if (answerSequenceGeneration === null) {
+        const requestedSpeechTrigger = englishTTSState.activeSpeechTrigger;
+        const requestedSpeechTriggerRect = englishTTSState.activeSpeechTriggerRect;
+        cancelEnglishAnswerTTSSequence(true);
+        if (requestedSpeechTrigger) {
+            englishTTSState.activeSpeechTrigger = requestedSpeechTrigger;
+            englishTTSState.activeSpeechTriggerRect = requestedSpeechTriggerRect;
+        }
+    } else if (answerSequenceGeneration !== englishTTSState.answerSequenceGeneration) {
         return false;
     }
     if (!preserveCollocationReplay) {
@@ -3848,7 +3918,7 @@ function speakEnglishText(text, onComplete = null, preserveCollocationReplay = f
                 onComplete();
             }
             if (!englishTTSState.activeUtterance && !englishTTSState.collocationReplayTimer &&
-                !englishTTSState.storySequenceTimer) {
+                !englishTTSState.storySequenceTimer && !englishTTSState.answerSequenceTimer) {
                 englishTTSState.activeSpeechTrigger = null;
                 englishTTSState.activeSpeechTriggerRect = null;
             }
@@ -3864,7 +3934,7 @@ function speakEnglishText(text, onComplete = null, preserveCollocationReplay = f
                 onError(event);
             }
             if (!englishTTSState.activeUtterance && !englishTTSState.collocationReplayTimer &&
-                !englishTTSState.storySequenceTimer) {
+                !englishTTSState.storySequenceTimer && !englishTTSState.answerSequenceTimer) {
                 englishTTSState.activeSpeechTrigger = null;
                 englishTTSState.activeSpeechTriggerRect = null;
             }
@@ -3893,6 +3963,7 @@ function speakEnglishText(text, onComplete = null, preserveCollocationReplay = f
 function stopEnglishSpeech() {
     cancelEnglishImageTTSStorySequence();
     cancelEnglishCollocationReplay();
+    cancelEnglishAnswerTTSSequence();
     englishTTSState.activeUtterance = null;
     englishTTSState.activeSpeechTrigger = null;
     englishTTSState.activeSpeechTriggerRect = null;
@@ -3904,6 +3975,103 @@ function stopEnglishSpeech() {
         }
     }
     updateEnglishTTSControls();
+}
+
+function speakEnglishAnswerSequence(trigger, text, sequenceType = "answer") {
+    const safeText = getEnglishTTSUnitText(text);
+    if (!safeText) {
+        return speakEnglishText(text);
+    }
+
+    const segmentation = splitEnglishTTSSentences(safeText.replace(/[ \t]*\n[ \t]*/g, " "));
+    const segmentedUnits = segmentation.reliable
+        ? segmentation.sentences.map(sentence => getEnglishTTSUnitText(sentence))
+        : [];
+    const units = segmentedUnits.length > 1 && segmentedUnits.every(Boolean)
+        ? segmentedUnits
+        : [safeText];
+    if (units.length === 1) {
+        return speakEnglishText(safeText);
+    }
+
+    cancelEnglishImageTTSStorySequence(true);
+    cancelEnglishCollocationReplay();
+    cancelEnglishAnswerTTSSequence(true);
+    if (trigger) {
+        rememberEnglishSpeechTrigger(trigger);
+    }
+
+    const generation = englishTTSState.answerSequenceGeneration;
+    englishTTSState.answerSequenceTrigger = trigger || null;
+    englishTTSState.answerSequenceType = sequenceType;
+    englishTTSState.answerSequenceSelectionText = sequenceType === "selection" ? safeText : "";
+    let unitIndex = 0;
+
+    const finishSequence = () => {
+        if (generation !== englishTTSState.answerSequenceGeneration) {
+            return;
+        }
+        cancelEnglishAnswerTTSSequence();
+        setEnglishTTSStatus("AI 回答已朗讀完成。");
+        updateEnglishTTSControls();
+    };
+
+    const playNext = () => {
+        if (generation !== englishTTSState.answerSequenceGeneration) {
+            return false;
+        }
+        if (appState.subjectMode !== "english" || (trigger && trigger.isConnected === false)) {
+            cancelEnglishAnswerTTSSequence(true);
+            updateEnglishTTSControls();
+            return false;
+        }
+
+        const started = speakEnglishText(units[unitIndex], () => {
+            if (generation !== englishTTSState.answerSequenceGeneration) {
+                return;
+            }
+            if (appState.subjectMode !== "english" || (trigger && trigger.isConnected === false)) {
+                cancelEnglishAnswerTTSSequence();
+                updateEnglishTTSControls();
+                return;
+            }
+
+            unitIndex += 1;
+            if (unitIndex >= units.length) {
+                finishSequence();
+                return;
+            }
+
+            englishTTSState.answerSequenceTimer = window.setTimeout(() => {
+                englishTTSState.answerSequenceTimer = 0;
+                if (generation !== englishTTSState.answerSequenceGeneration) {
+                    updateEnglishTTSControls();
+                    return;
+                }
+                if (appState.subjectMode !== "english" || (trigger && trigger.isConnected === false)) {
+                    cancelEnglishAnswerTTSSequence(true);
+                    updateEnglishTTSControls();
+                    return;
+                }
+                playNext();
+            }, 500);
+            setEnglishTTSStatus("AI 回答逐句朗讀中，句間停頓 0.5 秒。");
+            updateEnglishTTSControls();
+        }, true, () => {
+            if (generation === englishTTSState.answerSequenceGeneration) {
+                cancelEnglishAnswerTTSSequence();
+                updateEnglishTTSControls();
+            }
+        }, null, generation);
+
+        if (!started && generation === englishTTSState.answerSequenceGeneration) {
+            cancelEnglishAnswerTTSSequence();
+            updateEnglishTTSControls();
+        }
+        return started;
+    };
+
+    return playNext();
 }
 
 function normalizeEnglishTTSSelectionText(text) {
@@ -4253,7 +4421,7 @@ function createEnglishTTSAutoButton(label, ariaLabel, speechText, onSpeak = null
     button.addEventListener("click", () => {
         rememberEnglishSpeechTrigger(button);
         if (typeof onSpeak === "function") {
-            onSpeak(button._englishTtsText);
+            onSpeak(button._englishTtsText, button);
         } else {
             speakEnglishText(button._englishTtsText);
         }
@@ -4267,7 +4435,12 @@ function createEnglishTTSParagraphControls(unit, options = {}) {
     controls.setAttribute("data-english-tts-control", "true");
     controls.setAttribute("role", "group");
     controls.setAttribute("aria-label", "段落英文朗讀控制");
-    controls.appendChild(createEnglishTTSAutoButton("🔊 朗讀整段", "朗讀整段英文", unit.text));
+    controls.appendChild(createEnglishTTSAutoButton(
+        "🔊 朗讀整段",
+        "朗讀整段英文",
+        unit.text,
+        (text, button) => speakEnglishAnswerSequence(button, text, "answer")
+    ));
 
     if (unit.sentences.length > 1 || options.alwaysShowSentenceToggle) {
         const toggle = document.createElement("button");
@@ -5496,14 +5669,30 @@ function captureEnglishAnswerSelection() {
     if (!startAnswer || startAnswer !== endAnswer ||
         !selectionStaysInOneAnswerCard(range.startContainer, range.endContainer) ||
         appState.subjectMode !== "english") {
+        if (englishTTSState.answerSequenceType) {
+            cancelEnglishAnswerTTSSequence(true);
+        }
         clearEnglishTTSSelection("朗讀範圍只限英文模式的 AI 英文回答。");
         return { changed: true, valid: false };
     }
 
     const result = extractEnglishRangeText(range);
     if (!result.valid) {
+        if (englishTTSState.answerSequenceType) {
+            cancelEnglishAnswerTTSSequence(true);
+        }
         clearEnglishTTSSelection(result.reason);
         return { changed: true, valid: false };
+    }
+
+    const previousRange = englishTTSState.lastSelectionRange;
+    const selectionChanged = !previousRange || englishTTSState.lastSelectionText !== result.text ||
+        previousRange.startContainer !== range.startContainer || previousRange.startOffset !== range.startOffset ||
+        previousRange.endContainer !== range.endContainer || previousRange.endOffset !== range.endOffset ||
+        (englishTTSState.answerSequenceType === "selection" &&
+            englishTTSState.answerSequenceSelectionText !== result.text);
+    if (selectionChanged && englishTTSState.answerSequenceType) {
+        cancelEnglishAnswerTTSSequence(true);
     }
 
     if (englishTTSState.collapsedSelectionTimer) {
@@ -5629,7 +5818,7 @@ function initializeEnglishTTS() {
                 englishTTSState.selectionButtonPointerTimer = 0;
                 const currentSelection = window.getSelection();
                 if (!currentSelection || currentSelection.isCollapsed) {
-                    clearEnglishTTSSelection("選取已解除，請重新選取英文文字。");
+                    clearEnglishTTSSelection("選取已解除，請重新選取英文文字。", true);
                 }
             }, 1500);
         });
@@ -5641,7 +5830,7 @@ function initializeEnglishTTS() {
             }
             const currentSelection = window.getSelection();
             if (!currentSelection || currentSelection.isCollapsed) {
-                clearEnglishTTSSelection("選取已解除，請重新選取英文文字。");
+                clearEnglishTTSSelection("選取已解除，請重新選取英文文字。", true);
             }
         });
         speakButton.addEventListener("click", () => {
@@ -5651,7 +5840,7 @@ function initializeEnglishTTS() {
             if (englishTTSState.lastSelectionText) {
                 // Save the button's visible position before the selection UI can hide or move it.
                 rememberEnglishSpeechTrigger(speakButton);
-                speakEnglishText(englishTTSState.lastSelectionText);
+                speakEnglishAnswerSequence(speakButton, englishTTSState.lastSelectionText, "selection");
             } else {
                 setEnglishTTSStatus("目前沒有有效的英文選取內容。請在英文回答中重新選取文字。");
             }
@@ -5685,7 +5874,7 @@ function initializeEnglishTTS() {
                     const currentSelection = window.getSelection();
                     if (!englishTTSState.selectionButtonPointerActive &&
                         (!currentSelection || currentSelection.isCollapsed)) {
-                        clearEnglishTTSSelection("選取已解除，請重新選取英文文字。");
+                        clearEnglishTTSSelection("選取已解除，請重新選取英文文字。", true);
                     }
                 }, 250);
             }
