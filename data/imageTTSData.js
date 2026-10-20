@@ -6073,4 +6073,136 @@ const imageTTSData = {
             }
         ]
     }
+,
+"images/english/at-the-post-office-sending-a-package-basics.png": {
+        imageId: "at-the-post-office-sending-a-package-basics",
+        assetFile: "images/english/at-the-post-office-sending-a-package-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Emma arrives at the post office with a package.",
+                sentences: ["Emma arrives at the post office with a package."],
+                bounds: { x: 164, y: 96, width: 415, height: 205, xPct: 16.0156, yPct: 6.2500, widthPct: 40.5273, heightPct: 13.3464 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "I’d like to send this package. Thank you.",
+                sentences: ["I’d like to send this package.", "Thank you."],
+                bounds: { x: 597, y: 96, width: 418, height: 205, xPct: 58.3008, yPct: 6.2500, widthPct: 40.8203, heightPct: 13.3464 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Which country is it going to? Canada.",
+                sentences: ["Which country is it going to?", "Canada."],
+                bounds: { x: 164, y: 316, width: 415, height: 200, xPct: 16.0156, yPct: 20.5729, widthPct: 40.5273, heightPct: 13.0208 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Here’s my friend’s address. Thank you.",
+                sentences: ["Here’s my friend’s address.", "Thank you."],
+                bounds: { x: 597, y: 316, width: 418, height: 200, xPct: 58.3008, yPct: 20.5729, widthPct: 40.8203, heightPct: 13.0208 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "For Canada, this post office offers standard and express international service.",
+                sentences: ["For Canada, this post office offers standard and express international service."],
+                bounds: { x: 164, y: 533, width: 415, height: 224, xPct: 16.0156, yPct: 34.7005, widthPct: 40.5273, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Could you compare the fees for this package? Standard costs less than express.",
+                sentences: ["Could you compare the fees for this package?", "Standard costs less than express."],
+                bounds: { x: 597, y: 533, width: 418, height: 224, xPct: 58.3008, yPct: 34.7005, widthPct: 40.8203, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Standard delivery usually takes 8–12 business days, while express takes 3–5 days. Customs clearance may cause additional delays.",
+                sentences: [
+                    "Standard delivery usually takes 8–12 business days, while express takes 3–5 days.",
+                    "Customs clearance may cause additional delays."
+                ],
+                bounds: { x: 164, y: 773, width: 415, height: 237, xPct: 16.0156, yPct: 50.3255, widthPct: 40.5273, heightPct: 15.4297 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Express is faster, but standard costs less. Since it’s not urgent, I’ll choose standard.",
+                sentences: ["Express is faster, but standard costs less.", "Since it’s not urgent, I’ll choose standard."],
+                bounds: { x: 597, y: 773, width: 418, height: 237, xPct: 58.3008, yPct: 50.3255, widthPct: 40.8203, heightPct: 15.4297 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "The recipient’s apartment number is missing. I can’t accept the package until the address is complete.",
+                sentences: ["The recipient’s apartment number is missing.", "I can’t accept the package until the address is complete."],
+                bounds: { x: 164, y: 1027, width: 415, height: 219, xPct: 16.0156, yPct: 66.8620, widthPct: 40.5273, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "My friend has confirmed the missing apartment number. Could you verify the updated address against the customs declaration?",
+                sentences: ["My friend has confirmed the missing apartment number.", "Could you verify the updated address against the customs declaration?"],
+                bounds: { x: 597, y: 1027, width: 418, height: 219, xPct: 58.3008, yPct: 66.8620, widthPct: 40.8203, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "The details match now. Once payment is complete, we’ll process your package for dispatch through our standard service. I’ll pay by card.",
+                sentences: [
+                    "The details match now.",
+                    "Once payment is complete, we’ll process your package for dispatch through our standard service.",
+                    "I’ll pay by card."
+                ],
+                bounds: { x: 164, y: 1259, width: 415, height: 263, xPct: 16.0156, yPct: 81.9661, widthPct: 40.5273, heightPct: 17.1224 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Your shipment is accepted. The tracking number is on your receipt; we can notify you by text when its status changes. Thank you.",
+                sentences: [
+                    "Your shipment is accepted.",
+                    "The tracking number is on your receipt; we can notify you by text when its status changes.",
+                    "Thank you."
+                ],
+                bounds: { x: 597, y: 1259, width: 418, height: 263, xPct: 58.3008, yPct: 81.9661, widthPct: 40.8203, heightPct: 17.1224 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    }
 };
