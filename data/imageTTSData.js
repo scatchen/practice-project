@@ -5951,5 +5951,126 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+
+    "images/english/dealing-with-a-hotel-room-problem-basics.png": {
+        imageId: "dealing-with-a-hotel-room-problem-basics",
+        assetFile: "images/english/dealing-with-a-hotel-room-problem-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Emma enters Room 402 at Harbor View Hotel.",
+                sentences: ["Emma enters Room 402 at Harbor View Hotel."],
+                bounds: { x: 80, y: 82, width: 472, height: 239, xPct: 7.8125, yPct: 5.3385, widthPct: 46.0938, heightPct: 15.5599 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "It’s really hot. The air conditioner isn’t working.",
+                sentences: ["It’s really hot.", "The air conditioner isn’t working."],
+                bounds: { x: 561, y: 82, width: 456, height: 239, xPct: 54.7852, yPct: 5.3385, widthPct: 44.5313, heightPct: 15.5599 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "The air conditioner in my room is broken. Can you help?",
+                sentences: ["The air conditioner in my room is broken.", "Can you help?"],
+                bounds: { x: 80, y: 329, width: 472, height: 208, xPct: 7.8125, yPct: 21.4193, widthPct: 46.0938, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Of course. What’s your room number? Room 402.",
+                sentences: ["Of course.", "What’s your room number?", "Room 402."],
+                bounds: { x: 561, y: 329, width: 456, height: 208, xPct: 54.7852, yPct: 21.4193, widthPct: 44.5313, heightPct: 13.5417 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "The room keeps getting hotter, so I can’t rest comfortably.",
+                sentences: ["The room keeps getting hotter, so I can’t rest comfortably."],
+                bounds: { x: 80, y: 548, width: 472, height: 220, xPct: 7.8125, yPct: 35.6771, widthPct: 46.0938, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "I’m sorry about that. I can send someone to inspect the unit.",
+                sentences: ["I’m sorry about that.", "I can send someone to inspect the unit."],
+                bounds: { x: 561, y: 548, width: 456, height: 220, xPct: 54.7852, yPct: 35.6771, widthPct: 44.5313, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Could you tell me how long the inspection might take? I need to rest soon.",
+                sentences: ["Could you tell me how long the inspection might take?", "I need to rest soon."],
+                bounds: { x: 80, y: 779, width: 472, height: 221, xPct: 7.8125, yPct: 50.7161, widthPct: 46.0938, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "I can’t confirm a repair time yet. I’ll check whether another room is available.",
+                sentences: ["I can’t confirm a repair time yet.", "I’ll check whether another room is available."],
+                bounds: { x: 561, y: 779, width: 456, height: 221, xPct: 54.7852, yPct: 50.7161, widthPct: 44.5313, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Our maintenance team has checked the unit. It needs a replacement part, but Room 508 is available.",
+                sentences: ["Our maintenance team has checked the unit.", "It needs a replacement part, but Room 508 is available."],
+                bounds: { x: 80, y: 1013, width: 472, height: 233, xPct: 7.8125, yPct: 65.9505, widthPct: 46.0938, heightPct: 15.1693 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Could you verify that its air conditioner works? And will you notify me when the new key card is ready?",
+                sentences: ["Could you verify that its air conditioner works?", "And will you notify me when the new key card is ready?"],
+                bounds: { x: 561, y: 1013, width: 456, height: 233, xPct: 54.7852, yPct: 65.9505, widthPct: 44.5313, heightPct: 15.1693 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "I’ve verified the air conditioner works. We can offer Room 508 as a replacement, at no extra charge.",
+                sentences: ["I’ve verified the air conditioner works.", "We can offer Room 508 as a replacement, at no extra charge."],
+                bounds: { x: 80, y: 1260, width: 472, height: 268, xPct: 7.8125, yPct: 82.0313, widthPct: 46.0938, heightPct: 17.4479 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Thank you for making my comfort a priority. The new room is much better!",
+                sentences: ["Thank you for making my comfort a priority.", "The new room is much better!"],
+                bounds: { x: 561, y: 1260, width: 456, height: 268, xPct: 54.7852, yPct: 82.0313, widthPct: 44.5313, heightPct: 17.4479 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
