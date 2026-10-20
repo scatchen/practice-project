@@ -4865,6 +4865,153 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/dealing-with-a-wrong-order-basics.png": {
+        imageId: "dealing-with-a-wrong-order-basics",
+        assetFile: "images/english/dealing-with-a-wrong-order-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Excuse me, I think this is the wrong dish.",
+                sentences: ["Excuse me, I think this is the wrong dish."],
+                bounds: { xPct: 29.2969, yPct: 0.6510, widthPct: 35.4492, heightPct: 16.7318 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "I’m sorry. What did you order? The chicken pasta, please.",
+                sentences: ["I’m sorry.", "What did you order?", "The chicken pasta, please."],
+                bounds: { xPct: 67.3828, yPct: 0.6510, widthPct: 31.5430, heightPct: 16.7318 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Let me check your order. Thank you.",
+                sentences: ["Let me check your order.", "Thank you."],
+                bounds: { xPct: 29.2969, yPct: 18.8802, widthPct: 35.4492, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "I’ll check it now. Okay.",
+                sentences: ["I’ll check it now.", "Okay."],
+                bounds: { xPct: 67.3828, yPct: 18.8802, widthPct: 31.5430, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "The ticket says chicken pasta with a side salad. Is that right? Yes, but I received fish.",
+                sentences: [
+                    "The ticket says chicken pasta with a side salad.",
+                    "Is that right?",
+                    "Yes, but I received fish."
+                ],
+                bounds: { xPct: 29.2969, yPct: 34.7005, widthPct: 35.4492, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "You’re right. We brought the fish by mistake. I’ll ask the kitchen to remake your pasta.",
+                sentences: [
+                    "You’re right.",
+                    "We brought the fish by mistake.",
+                    "I’ll ask the kitchen to remake your pasta."
+                ],
+                bounds: { xPct: 67.3828, yPct: 34.7005, widthPct: 31.5430, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "It should take about fifteen minutes. That’s okay. I can wait.",
+                sentences: [
+                    "It should take about fifteen minutes.",
+                    "That’s okay.",
+                    "I can wait."
+                ],
+                bounds: { xPct: 29.2969, yPct: 50.3906, widthPct: 35.4492, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "The side salad is correct. Would you like to keep it? Yes, please.",
+                sentences: [
+                    "The side salad is correct.",
+                    "Would you like to keep it?",
+                    "Yes, please."
+                ],
+                bounds: { xPct: 67.3828, yPct: 50.3906, widthPct: 31.5430, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "The wait could disrupt my schedule. Is there a quicker option?",
+                sentences: ["The wait could disrupt my schedule.", "Is there a quicker option?"],
+                bounds: { xPct: 29.2969, yPct: 66.5365, widthPct: 35.4492, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "I’m sorry. I’ll check with the kitchen and verify the timing before I promise anything.",
+                sentences: [
+                    "I’m sorry.",
+                    "I’ll check with the kitchen and verify the timing before I promise anything."
+                ],
+                bounds: { xPct: 67.3828, yPct: 66.5365, widthPct: 31.5430, heightPct: 14.5833 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "The kitchen can have the replacement ready in eight minutes. If that’s too late, I can refund the pasta.",
+                sentences: [
+                    "The kitchen can have the replacement ready in eight minutes.",
+                    "If that’s too late, I can refund the pasta."
+                ],
+                bounds: { xPct: 29.2969, yPct: 82.7474, widthPct: 35.4492, heightPct: 16.3411 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Eight minutes works. Please replace the fish with chicken pasta and keep the salad. To confirm: chicken pasta in eight minutes, with the side salad as ordered? Yes, thank you.",
+                sentences: [
+                    "Eight minutes works.",
+                    "Please replace the fish with chicken pasta and keep the salad.",
+                    "To confirm: chicken pasta in eight minutes, with the side salad as ordered?",
+                    "Yes, thank you."
+                ],
+                bounds: { xPct: 67.3828, yPct: 82.7474, widthPct: 31.5430, heightPct: 16.3411 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    },
     "images/english/making-plans-with-friends-basics.png": {
         imageId: "making-plans-with-friends-basics",
         assetFile: "images/english/making-plans-with-friends-basics.png",
