@@ -5672,5 +5672,125 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/reporting-a-lost-item-basics.png": {
+        imageId: "reporting-a-lost-item-basics",
+        assetFile: "images/english/reporting-a-lost-item-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Oh no! My backpack is missing.",
+                sentences: ["Oh no!", "My backpack is missing."],
+                bounds: { x: 288, y: 1, width: 380, height: 244, xPct: 28.1250, yPct: 0.0651, widthPct: 37.1094, heightPct: 15.8854 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "Hi, I lost my backpack on a bus. I can help.",
+                sentences: ["Hi, I lost my backpack on a bus.", "I can help."],
+                bounds: { x: 677, y: 1, width: 344, height: 244, xPct: 66.1133, yPct: 0.0651, widthPct: 33.5938, heightPct: 15.8854 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "What color is it? It's dark green.",
+                sentences: ["What color is it?", "It's dark green."],
+                bounds: { x: 288, y: 254, width: 380, height: 229, xPct: 28.1250, yPct: 16.5365, widthPct: 37.1094, heightPct: 14.9089 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "It has a yellow star on the front. Has anyone found it?",
+                sentences: ["It has a yellow star on the front.", "Has anyone found it?"],
+                bounds: { x: 677, y: 254, width: 344, height: 229, xPct: 66.1133, yPct: 16.5365, widthPct: 33.5938, heightPct: 14.9089 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "When and where did you last see it? I last saw it on Route 12 this afternoon.",
+                sentences: ["When and where did you last see it?", "I last saw it on Route 12 this afternoon."],
+                bounds: { x: 288, y: 490, width: 380, height: 235, xPct: 28.1250, yPct: 31.9010, widthPct: 37.1094, heightPct: 15.2995 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "What was inside? A notebook, a pencil case, and a folding umbrella.",
+                sentences: ["What was inside?", "A notebook, a pencil case, and a folding umbrella."],
+                bounds: { x: 677, y: 490, width: 344, height: 235, xPct: 66.1133, yPct: 31.9010, widthPct: 33.5938, heightPct: 15.2995 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "I'll check our lost-and-found records for Route 12.",
+                sentences: ["I'll check our lost-and-found records for Route 12."],
+                bounds: { x: 288, y: 734, width: 380, height: 213, xPct: 28.1250, yPct: 47.7865, widthPct: 37.1094, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "We found a bag that matches your description. Could you come to Central Station before 6 to check it?",
+                sentences: ["We found a bag that matches your description.", "Could you come to Central Station before 6 to check it?"],
+                bounds: { x: 677, y: 734, width: 344, height: 213, xPct: 66.1133, yPct: 47.7865, widthPct: 33.5938, heightPct: 13.8672 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "This one matches the color and star you described. Could you confirm what's inside?",
+                sentences: ["This one matches the color and star you described.", "Could you confirm what's inside?"],
+                bounds: { x: 288, y: 956, width: 380, height: 241, xPct: 28.1250, yPct: 62.2396, widthPct: 37.1094, heightPct: 15.6901 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "There's a notebook, a pencil case, and a folding umbrella. Those details match our record.",
+                sentences: ["There's a notebook, a pencil case, and a folding umbrella.", "Those details match our record."],
+                bounds: { x: 677, y: 956, width: 344, height: 241, xPct: 66.1133, yPct: 62.2396, widthPct: 33.5938, heightPct: 15.6901 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "What do I need to do to claim it? Please show me a photo ID.",
+                sentences: ["What do I need to do to claim it?", "Please show me a photo ID."],
+                bounds: { x: 288, y: 1205, width: 380, height: 327, xPct: 28.1250, yPct: 78.4505, widthPct: 37.1094, heightPct: 21.2891 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "I've checked your ID. Here's your backpack. Thank you for helping me get it back.",
+                sentences: ["I've checked your ID.", "Here's your backpack.", "Thank you for helping me get it back."],
+                bounds: { x: 677, y: 1205, width: 344, height: 327, xPct: 66.1133, yPct: 78.4505, widthPct: 33.5938, heightPct: 21.2891 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
