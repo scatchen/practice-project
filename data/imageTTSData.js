@@ -5553,4 +5553,124 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/returning-or-exchanging-an-item-basics.png": {
+        imageId: "returning-or-exchanging-an-item-basics",
+        assetFile: "images/english/returning-or-exchanging-an-item-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Hi! How can I help?",
+                sentences: ["Hi!", "How can I help?"],
+                bounds: { x: 292, y: 2, width: 372, height: 241, xPct: 28.5156, yPct: 0.1302, widthPct: 36.3281, heightPct: 15.6901 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "I bought this navy jacket here yesterday.",
+                sentences: ["I bought this navy jacket here yesterday."],
+                bounds: { x: 680, y: 2, width: 342, height: 241, xPct: 66.4063, yPct: 0.1302, widthPct: 33.3984, heightPct: 15.6901 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "What seems to be the problem? It's too small.",
+                sentences: ["What seems to be the problem?", "It's too small."],
+                bounds: { x: 292, y: 256, width: 372, height: 221, xPct: 28.5156, yPct: 16.6667, widthPct: 36.3281, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Could I exchange it for a medium? Do you have the receipt?",
+                sentences: ["Could I exchange it for a medium?", "Do you have the receipt?"],
+                bounds: { x: 680, y: 256, width: 342, height: 221, xPct: 66.4063, yPct: 16.6667, widthPct: 33.3984, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Here it is. The tags are still on, and I haven't worn it.",
+                sentences: ["Here it is.", "The tags are still on, and I haven't worn it."],
+                bounds: { x: 292, y: 492, width: 372, height: 230, xPct: 28.5156, yPct: 32.0313, widthPct: 36.3281, heightPct: 14.9740 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Our store policy allows returns or exchanges within 14 days for unworn items with tags.",
+                sentences: ["Our store policy allows returns or exchanges within 14 days for unworn items with tags."],
+                bounds: { x: 680, y: 492, width: 342, height: 230, xPct: 66.4063, yPct: 32.0313, widthPct: 33.3984, heightPct: 14.9740 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Do you have a medium in navy? If not, I could consider another color.",
+                sentences: ["Do you have a medium in navy?", "If not, I could consider another color."],
+                bounds: { x: 292, y: 736, width: 372, height: 205, xPct: 28.5156, yPct: 47.9167, widthPct: 36.3281, heightPct: 13.3464 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Yes, we have a medium in navy.",
+                sentences: ["Yes, we have a medium in navy."],
+                bounds: { x: 680, y: 736, width: 342, height: 205, xPct: 66.4063, yPct: 47.9167, widthPct: 33.3984, heightPct: 13.3464 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Would a refund be possible, or could I exchange it for the medium instead?",
+                sentences: ["Would a refund be possible, or could I exchange it for the medium instead?"],
+                bounds: { x: 292, y: 954, width: 372, height: 235, xPct: 28.5156, yPct: 62.1094, widthPct: 36.3281, heightPct: 15.2995 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "Both options are available. If you choose the medium, there's no extra charge.",
+                sentences: ["Both options are available.", "If you choose the medium, there's no extra charge."],
+                bounds: { x: 680, y: 954, width: 342, height: 235, xPct: 66.4063, yPct: 62.1094, widthPct: 33.3984, heightPct: 15.2995 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Then I'd prefer the navy medium. There's no price difference, correct? That's right.",
+                sentences: ["Then I'd prefer the navy medium.", "There's no price difference, correct?", "That's right."],
+                bounds: { x: 292, y: 1203, width: 372, height: 324, xPct: 28.5156, yPct: 78.3203, widthPct: 36.3281, heightPct: 21.0938 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Here's the navy medium and your exchange receipt. Thanks for helping me sort that out.",
+                sentences: ["Here's the navy medium and your exchange receipt.", "Thanks for helping me sort that out."],
+                bounds: { x: 680, y: 1203, width: 342, height: 324, xPct: 66.4063, yPct: 78.3203, widthPct: 33.3984, heightPct: 21.0938 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    }
 };
