@@ -5012,6 +5012,153 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/at-a-cafe-ordering-drinks-and-customizing-an-order-basics.png": {
+        imageId: "at-a-cafe-ordering-drinks-and-customizing-an-order-basics",
+        assetFile: "images/english/at-a-cafe-ordering-drinks-and-customizing-an-order-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Hi! Welcome to Maple Café!",
+                sentences: ["Hi!", "Welcome to Maple Café!"],
+                bounds: { xPct: 7.1289, yPct: 7.4870, widthPct: 45.7031, heightPct: 13.4766 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "What drinks do you have? Coffee, tea, and fruit drinks.",
+                sentences: ["What drinks do you have?", "Coffee, tea, and fruit drinks."],
+                bounds: { xPct: 55.6641, yPct: 7.4870, widthPct: 42.7734, heightPct: 13.4766 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "I'd like an iced latte. Sure.",
+                sentences: ["I'd like an iced latte.", "Sure."],
+                bounds: { xPct: 7.1289, yPct: 22.5911, widthPct: 45.7031, heightPct: 11.8490 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "How much is a large iced latte? It's 140 New Taiwan dollars.",
+                sentences: ["How much is a large iced latte?", "It's 140 New Taiwan dollars."],
+                bounds: { xPct: 55.6641, yPct: 22.5911, widthPct: 42.7734, heightPct: 11.8490 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "I'd prefer a large size, if that's available. Certainly. Would you like to customize your drink?",
+                sentences: [
+                    "I'd prefer a large size, if that's available.",
+                    "Certainly.",
+                    "Would you like to customize your drink?"
+                ],
+                bounds: { xPct: 7.1289, yPct: 36.0677, widthPct: 45.7031, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "If possible, could I have it half sweet with light ice? Of course.",
+                sentences: [
+                    "If possible, could I have it half sweet with light ice?",
+                    "Of course."
+                ],
+                bounds: { xPct: 55.6641, yPct: 36.0677, widthPct: 42.7734, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "Could you substitute oat milk for dairy milk? Yes. There's no extra charge at Maple Café.",
+                sentences: [
+                    "Could you substitute oat milk for dairy milk?",
+                    "Yes.",
+                    "There's no extra charge at Maple Café."
+                ],
+                bounds: { xPct: 7.1289, yPct: 51.6927, widthPct: 45.7031, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Just to confirm: one large iced latte with oat milk, half sweet, and light ice. The total is 140 New Taiwan dollars. That's exactly right.",
+                sentences: [
+                    "Just to confirm: one large iced latte with oat milk, half sweet, and light ice.",
+                    "The total is 140 New Taiwan dollars.",
+                    "That's exactly right."
+                ],
+                bounds: { xPct: 55.6641, yPct: 51.6927, widthPct: 42.7734, heightPct: 13.9323 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "There seems to be a discrepancy: the label says whole milk, but I ordered oat milk.",
+                sentences: ["There seems to be a discrepancy: the label says whole milk, but I ordered oat milk."],
+                bounds: { xPct: 7.1289, yPct: 67.2526, widthPct: 45.7031, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "My receipt lists an oat milk substitution. Let me verify the receipt against the cup label.",
+                sentences: [
+                    "My receipt lists an oat milk substitution.",
+                    "Let me verify the receipt against the cup label."
+                ],
+                bounds: { xPct: 55.6641, yPct: 67.2526, widthPct: 42.7734, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "You're right. The substitution wasn't applied. I can prepare a replacement or issue a refund.",
+                sentences: [
+                    "You're right.",
+                    "The substitution wasn't applied.",
+                    "I can prepare a replacement or issue a refund."
+                ],
+                bounds: { xPct: 7.1289, yPct: 83.9193, widthPct: 45.7031, heightPct: 15.1042 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "A replacement, please, with the same settings. Here it is—large, oat milk, half sweet, and light ice. Perfect. Thank you.",
+                sentences: [
+                    "A replacement, please, with the same settings.",
+                    "Here it is—large, oat milk, half sweet, and light ice.",
+                    "Perfect.",
+                    "Thank you."
+                ],
+                bounds: { xPct: 55.6641, yPct: 83.9193, widthPct: 42.7734, heightPct: 15.1042 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    },
     "images/english/making-plans-with-friends-basics.png": {
         imageId: "making-plans-with-friends-basics",
         assetFile: "images/english/making-plans-with-friends-basics.png",
