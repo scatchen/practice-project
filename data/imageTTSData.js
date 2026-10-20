@@ -6636,6 +6636,415 @@ const imageTTSData = {
                 "contentReviewStatus": "verified-against-image"
             }
         ]
-    }
-
+    },
+    "images/english/at-the-train-station-buying-a-ticket-and-changing-trains-basics.png": {
+        "imageId": "at-the-train-station-buying-a-ticket-and-changing-trains-basics",
+        "assetFile": "images/english/at-the-train-station-buying-a-ticket-and-changing-trains-basics.png",
+        "contentType": "story",
+        "layout": "2x6",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "proficiencyBand": "beginner",
+                "text": "Excuse me, where can I buy a train ticket? At this counter.",
+                "sentences": [
+                    "Excuse me, where can I buy a train ticket?",
+                    "At this counter."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Excuse me, where can I buy a train ticket?",
+                        "ttsText": "Excuse me, where can I buy a train ticket?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "At this counter.",
+                        "ttsText": "At this counter."
+                    }
+                ],
+                "bounds": {
+                    "x": 164,
+                    "y": 163,
+                    "width": 414,
+                    "height": 203,
+                    "xPct": 16.0156,
+                    "yPct": 10.612,
+                    "widthPct": 40.4297,
+                    "heightPct": 13.2161
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "proficiencyBand": "beginner",
+                "text": "I'd like a ticket to Lakeview, please. Certainly.",
+                "sentences": [
+                    "I'd like a ticket to Lakeview, please.",
+                    "Certainly."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "I'd like a ticket to Lakeview, please.",
+                        "ttsText": "I'd like a ticket to Lakeview, please."
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Certainly.",
+                        "ttsText": "Certainly."
+                    }
+                ],
+                "bounds": {
+                    "x": 592,
+                    "y": 163,
+                    "width": 417,
+                    "height": 203,
+                    "xPct": 57.8125,
+                    "yPct": 10.612,
+                    "widthPct": 40.7227,
+                    "heightPct": 13.2161
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "proficiencyBand": "beginner",
+                "text": "One way or round trip? One way, please.",
+                "sentences": [
+                    "One way or round trip?",
+                    "One way, please."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "One way or round trip?",
+                        "ttsText": "One way or round trip?"
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "One way, please.",
+                        "ttsText": "One way, please."
+                    }
+                ],
+                "bounds": {
+                    "x": 164,
+                    "y": 379,
+                    "width": 414,
+                    "height": 199,
+                    "xPct": 16.0156,
+                    "yPct": 24.6745,
+                    "widthPct": 40.4297,
+                    "heightPct": 12.9557
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "proficiencyBand": "beginner",
+                "text": "The nine ten train leaves from Platform 3. Thank you.",
+                "sentences": [
+                    "The nine ten train leaves from Platform 3.",
+                    "Thank you."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "The 9:10 train leaves from Platform 3.",
+                        "ttsText": "The nine ten train leaves from Platform 3."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Thank you.",
+                        "ttsText": "Thank you."
+                    }
+                ],
+                "bounds": {
+                    "x": 592,
+                    "y": 379,
+                    "width": 417,
+                    "height": 199,
+                    "xPct": 57.8125,
+                    "yPct": 24.6745,
+                    "widthPct": 40.7227,
+                    "heightPct": 12.9557
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 5,
+                "readingOrder": 5,
+                "proficiencyBand": "intermediate",
+                "text": "Would a round-trip ticket cost less? For this fare, you'd need to choose a return date now.",
+                "sentences": [
+                    "Would a round-trip ticket cost less?",
+                    "For this fare, you'd need to choose a return date now."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Would a round-trip ticket cost less?",
+                        "ttsText": "Would a round-trip ticket cost less?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "For this fare, you'd need to choose a return date now.",
+                        "ttsText": "For this fare, you'd need to choose a return date now."
+                    }
+                ],
+                "bounds": {
+                    "x": 164,
+                    "y": 587,
+                    "width": 414,
+                    "height": 223,
+                    "xPct": 16.0156,
+                    "yPct": 38.2161,
+                    "widthPct": 40.4297,
+                    "heightPct": 14.5182
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 6,
+                "readingOrder": 6,
+                "proficiencyBand": "intermediate",
+                "text": "I don't know my return date, so I'll take one way. Does the ticket include the transfer at Central Junction? Yes, it covers both trains.",
+                "sentences": [
+                    "I don't know my return date, so I'll take one way.",
+                    "Does the ticket include the transfer at Central Junction?",
+                    "Yes, it covers both trains."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "I don't know my return date, so I'll take one way. Does the ticket include the transfer at Central Junction?",
+                        "ttsText": "I don't know my return date, so I'll take one way. Does the ticket include the transfer at Central Junction?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Yes, it covers both trains.",
+                        "ttsText": "Yes, it covers both trains."
+                    }
+                ],
+                "bounds": {
+                    "x": 592,
+                    "y": 587,
+                    "width": 417,
+                    "height": 223,
+                    "xPct": 57.8125,
+                    "yPct": 38.2161,
+                    "widthPct": 40.7227,
+                    "heightPct": 14.5182
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 7,
+                "readingOrder": 7,
+                "proficiencyBand": "intermediate",
+                "text": "You'll arrive at Central Junction at nine fifty-five. The Lakeview train leaves at ten oh five from Platform 5. That gives me ten minutes to transfer.",
+                "sentences": [
+                    "You'll arrive at Central Junction at nine fifty-five.",
+                    "The Lakeview train leaves at ten oh five from Platform 5.",
+                    "That gives me ten minutes to transfer."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "You'll arrive at Central Junction at 9:55. The Lakeview train leaves at 10:05 from Platform 5.",
+                        "ttsText": "You'll arrive at Central Junction at nine fifty-five. The Lakeview train leaves at ten oh five from Platform 5."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "That gives me ten minutes to transfer.",
+                        "ttsText": "That gives me ten minutes to transfer."
+                    }
+                ],
+                "bounds": {
+                    "x": 164,
+                    "y": 818,
+                    "width": 414,
+                    "height": 224,
+                    "xPct": 16.0156,
+                    "yPct": 53.2552,
+                    "widthPct": 40.4297,
+                    "heightPct": 14.5833
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 8,
+                "readingOrder": 8,
+                "proficiencyBand": "intermediate",
+                "text": "That works. I'll take the one-way ticket with the connection. Here's your ticket for both trains.",
+                "sentences": [
+                    "That works.",
+                    "I'll take the one-way ticket with the connection.",
+                    "Here's your ticket for both trains."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "That works. I'll take the one-way ticket with the connection.",
+                        "ttsText": "That works. I'll take the one-way ticket with the connection."
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Here's your ticket for both trains.",
+                        "ttsText": "Here's your ticket for both trains."
+                    }
+                ],
+                "bounds": {
+                    "x": 592,
+                    "y": 818,
+                    "width": 417,
+                    "height": 224,
+                    "xPct": 57.8125,
+                    "yPct": 53.2552,
+                    "widthPct": 40.7227,
+                    "heightPct": 14.5833
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 9,
+                "readingOrder": 9,
+                "proficiencyBand": "upper-intermediate",
+                "text": "The nine ten train is running 20 minutes late. Its revised arrival time at Central Junction is ten fifteen.",
+                "sentences": [
+                    "The nine ten train is running 20 minutes late.",
+                    "Its revised arrival time at Central Junction is ten fifteen."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Announcement",
+                        "sourceText": "The 9:10 train is running 20 minutes late. Its revised arrival time at Central Junction is 10:15.",
+                        "ttsText": "The nine ten train is running 20 minutes late. Its revised arrival time at Central Junction is ten fifteen."
+                    }
+                ],
+                "bounds": {
+                    "x": 164,
+                    "y": 1057,
+                    "width": 414,
+                    "height": 223,
+                    "xPct": 16.0156,
+                    "yPct": 68.8151,
+                    "widthPct": 40.4297,
+                    "heightPct": 14.5182
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 10,
+                "readingOrder": 10,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Getting to Lakeview tonight is a priority. Could you verify the updated connection information? Of course. Let me check the latest schedule.",
+                "sentences": [
+                    "Getting to Lakeview tonight is a priority.",
+                    "Could you verify the updated connection information?",
+                    "Of course.",
+                    "Let me check the latest schedule."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Getting to Lakeview tonight is a priority. Could you verify the updated connection information?",
+                        "ttsText": "Getting to Lakeview tonight is a priority. Could you verify the updated connection information?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Of course. Let me check the latest schedule.",
+                        "ttsText": "Of course. Let me check the latest schedule."
+                    }
+                ],
+                "bounds": {
+                    "x": 592,
+                    "y": 1057,
+                    "width": 417,
+                    "height": 223,
+                    "xPct": 57.8125,
+                    "yPct": 68.8151,
+                    "widthPct": 40.7227,
+                    "heightPct": 14.5182
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 11,
+                "readingOrder": 11,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Is my through ticket still valid for a later train? Under our policy, I can authorize a free change to the ten thirty-five train.",
+                "sentences": [
+                    "Is my through ticket still valid for a later train?",
+                    "Under our policy, I can authorize a free change to the ten thirty-five train."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Is my through ticket still valid for a later train?",
+                        "ttsText": "Is my through ticket still valid for a later train?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Under our policy, I can authorize a free change to the 10:35 train.",
+                        "ttsText": "Under our policy, I can authorize a free change to the ten thirty-five train."
+                    }
+                ],
+                "bounds": {
+                    "x": 164,
+                    "y": 1290,
+                    "width": 414,
+                    "height": 224,
+                    "xPct": 16.0156,
+                    "yPct": 83.9844,
+                    "widthPct": 40.4297,
+                    "heightPct": 14.5833
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 12,
+                "readingOrder": 12,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Your ten thirty-five train leaves from Platform 4. We'll notify you if the platform changes. Thank you. I'll head there now.",
+                "sentences": [
+                    "Your ten thirty-five train leaves from Platform 4.",
+                    "We'll notify you if the platform changes.",
+                    "Thank you.",
+                    "I'll head there now."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Your 10:35 train leaves from Platform 4. We'll notify you if the platform changes.",
+                        "ttsText": "Your ten thirty-five train leaves from Platform 4. We'll notify you if the platform changes."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Thank you. I'll head there now.",
+                        "ttsText": "Thank you. I'll head there now."
+                    }
+                ],
+                "bounds": {
+                    "x": 592,
+                    "y": 1290,
+                    "width": 417,
+                    "height": 224,
+                    "xPct": 57.8125,
+                    "yPct": 83.9844,
+                    "widthPct": 40.7227,
+                    "heightPct": 14.5833
+                },
+                "contentReviewStatus": "verified-against-image"
+            }
+        ]
+    },
 };
