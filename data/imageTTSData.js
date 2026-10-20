@@ -5433,4 +5433,124 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/shopping-for-clothes-basics.png": {
+        imageId: "shopping-for-clothes-basics",
+        assetFile: "images/english/shopping-for-clothes-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Hi! Can I help you find anything?",
+                sentences: ["Hi! Can I help you find anything?"],
+                bounds: { xPct: 28.8086, yPct: 0.2604, widthPct: 36.3281, heightPct: 15.6901 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "I'm looking for a jacket for school.",
+                sentences: ["I'm looking for a jacket for school."],
+                bounds: { xPct: 66.8945, yPct: 0.2604, widthPct: 32.7148, heightPct: 15.6901 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "This jacket comes in navy and black. The navy one is one thousand five hundred N T dollars.",
+                sentences: ["This jacket comes in navy and black.", "The navy one is one thousand five hundred N T dollars."],
+                bounds: { xPct: 28.8086, yPct: 16.9922, widthPct: 36.3281, heightPct: 14.1276 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Could I see the navy one in a medium? Sure. Here you are.",
+                sentences: ["Could I see the navy one in a medium?", "Sure.", "Here you are."],
+                bounds: { xPct: 66.8945, yPct: 16.9922, widthPct: 32.7148, heightPct: 14.1276 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "May I try it on? Of course. The fitting room is over there.",
+                sentences: ["May I try it on?", "Of course.", "The fitting room is over there."],
+                bounds: { xPct: 28.8086, yPct: 32.0964, widthPct: 36.3281, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "It's loose at the shoulders, and the sleeves are too long.",
+                sentences: ["It's loose at the shoulders, and the sleeves are too long."],
+                bounds: { xPct: 66.8945, yPct: 32.0964, widthPct: 32.7148, heightPct: 13.8021 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "We have a small in navy. Would you like to try that size? Yes, please.",
+                sentences: ["We have a small in navy.", "Would you like to try that size?", "Yes, please."],
+                bounds: { xPct: 28.8086, yPct: 46.9401, widthPct: 36.3281, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "This fits much better over my sweater.",
+                sentences: ["This fits much better over my sweater."],
+                bounds: { xPct: 66.8945, yPct: 46.9401, widthPct: 32.7148, heightPct: 15.0391 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "The small fits well. Could I compare it with the black one?",
+                sentences: ["The small fits well.", "Could I compare it with the black one?"],
+                bounds: { xPct: 28.8086, yPct: 62.9557, widthPct: 36.3281, heightPct: 15.6901 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "The black one is more versatile; it works for school and weekends.",
+                sentences: ["The black one is more versatile; it works for school and weekends."],
+                bounds: { xPct: 66.8945, yPct: 62.9557, widthPct: 32.7148, heightPct: 15.6901 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "Since both colors cost the same, I'll choose black. Does it go with more outfits? Yes. It's easy to match with different styles.",
+                sentences: ["Since both colors cost the same, I'll choose black.", "Does it go with more outfits?", "Yes.", "It's easy to match with different styles."],
+                bounds: { xPct: 28.8086, yPct: 79.6875, widthPct: 36.3281, heightPct: 19.6615 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Then I'll take the small black one. It'll go with more of my outfits. Great choice. I'll get it ready for you.",
+                sentences: ["Then I'll take the small black one.", "It'll go with more of my outfits.", "Great choice.", "I'll get it ready for you."],
+                bounds: { xPct: 66.8945, yPct: 79.6875, widthPct: 32.7148, heightPct: 19.6615 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    },
 };
