@@ -6204,5 +6204,438 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/at-the-movie-theater-buying-tickets-and-choosing-seats-basics.png": {
+        "imageId": "at-the-movie-theater-buying-tickets-and-choosing-seats-basics",
+        "assetFile": "images/english/at-the-movie-theater-buying-tickets-and-choosing-seats-basics.png",
+        "contentType": "story",
+        "layout": "2x6",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "proficiencyBand": "beginner",
+                "text": "Is The Secret Island showing tonight? Yes, at seven thirty P.M.",
+                "sentences": [
+                    "Is The Secret Island showing tonight?",
+                    "Yes, at seven thirty P.M."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Is The Secret Island showing tonight?",
+                        "ttsText": "Is The Secret Island showing tonight?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Yes, at 7:30 PM.",
+                        "ttsText": "Yes, at seven thirty P.M."
+                    }
+                ],
+                "bounds": {
+                    "x": 156,
+                    "y": 80,
+                    "width": 446,
+                    "height": 194,
+                    "xPct": 15.2344,
+                    "yPct": 5.2083,
+                    "widthPct": 43.5547,
+                    "heightPct": 12.6302
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "proficiencyBand": "beginner",
+                "text": "How much is one ticket? It's twelve U.S. dollars.",
+                "sentences": [
+                    "How much is one ticket?",
+                    "It's twelve U.S. dollars."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "How much is one ticket?",
+                        "ttsText": "How much is one ticket?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "It's US$12.",
+                        "ttsText": "It's twelve U.S. dollars."
+                    }
+                ],
+                "bounds": {
+                    "x": 618,
+                    "y": 80,
+                    "width": 400,
+                    "height": 194,
+                    "xPct": 60.3516,
+                    "yPct": 5.2083,
+                    "widthPct": 39.0625,
+                    "heightPct": 12.6302
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "proficiencyBand": "beginner",
+                "text": "I'd like one ticket, please. Certainly.",
+                "sentences": [
+                    "I'd like one ticket, please.",
+                    "Certainly."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "I'd like one ticket, please.",
+                        "ttsText": "I'd like one ticket, please."
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Certainly.",
+                        "ttsText": "Certainly."
+                    }
+                ],
+                "bounds": {
+                    "x": 156,
+                    "y": 292,
+                    "width": 446,
+                    "height": 192,
+                    "xPct": 15.2344,
+                    "yPct": 19.0104,
+                    "widthPct": 43.5547,
+                    "heightPct": 12.5
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "proficiencyBand": "beginner",
+                "text": "The show is in Screen 3. You can choose a seat. Great.",
+                "sentences": [
+                    "The show is in Screen 3.",
+                    "You can choose a seat.",
+                    "Great."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "The show is in Screen 3.",
+                        "ttsText": "The show is in Screen 3."
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "You can choose a seat.",
+                        "ttsText": "You can choose a seat."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Great.",
+                        "ttsText": "Great."
+                    }
+                ],
+                "bounds": {
+                    "x": 618,
+                    "y": 292,
+                    "width": 400,
+                    "height": 192,
+                    "xPct": 60.3516,
+                    "yPct": 19.0104,
+                    "widthPct": 39.0625,
+                    "heightPct": 12.5
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 5,
+                "readingOrder": 5,
+                "proficiencyBand": "intermediate",
+                "text": "Green seats are available; gray seats are already taken.",
+                "sentences": [
+                    "Green seats are available; gray seats are already taken."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Green seats are available; gray seats are already taken.",
+                        "ttsText": "Green seats are available; gray seats are already taken."
+                    }
+                ],
+                "bounds": {
+                    "x": 156,
+                    "y": 501,
+                    "width": 446,
+                    "height": 222,
+                    "xPct": 15.2344,
+                    "yPct": 32.6172,
+                    "widthPct": 43.5547,
+                    "heightPct": 14.4531
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 6,
+                "readingOrder": 6,
+                "proficiencyBand": "intermediate",
+                "text": "If Row F, Seat 8 is available, could I reserve it? Yes, it's open.",
+                "sentences": [
+                    "If Row F, Seat 8 is available, could I reserve it?",
+                    "Yes, it's open."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "If Row F, Seat 8 is available, could I reserve it?",
+                        "ttsText": "If Row F, Seat 8 is available, could I reserve it?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Yes, it's open.",
+                        "ttsText": "Yes, it's open."
+                    }
+                ],
+                "bounds": {
+                    "x": 618,
+                    "y": 501,
+                    "width": 400,
+                    "height": 222,
+                    "xPct": 60.3516,
+                    "yPct": 32.6172,
+                    "widthPct": 39.0625,
+                    "heightPct": 14.4531
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 7,
+                "readingOrder": 7,
+                "proficiencyBand": "intermediate",
+                "text": "Here's my payment. Your digital ticket lists seven thirty P.M., Screen 3, Row F, Seat 8.",
+                "sentences": [
+                    "Here's my payment.",
+                    "Your digital ticket lists seven thirty P.M., Screen 3, Row F, Seat 8."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Here's my payment.",
+                        "ttsText": "Here's my payment."
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Your digital ticket lists 7:30 PM, Screen 3, Row F, Seat 8.",
+                        "ttsText": "Your digital ticket lists seven thirty P.M., Screen 3, Row F, Seat 8."
+                    }
+                ],
+                "bounds": {
+                    "x": 156,
+                    "y": 744,
+                    "width": 446,
+                    "height": 234,
+                    "xPct": 15.2344,
+                    "yPct": 48.4375,
+                    "widthPct": 43.5547,
+                    "heightPct": 15.2344
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 8,
+                "readingOrder": 8,
+                "proficiencyBand": "intermediate",
+                "text": "I'm the usher for Screen 3. Please scan your Q R code here. Thanks.",
+                "sentences": [
+                    "I'm the usher for Screen 3.",
+                    "Please scan your Q R code here.",
+                    "Thanks."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Mia",
+                        "sourceText": "I'm the usher for Screen 3.",
+                        "ttsText": "I'm the usher for Screen 3."
+                    },
+                    {
+                        "speaker": "Mia",
+                        "sourceText": "Please scan your QR code here.",
+                        "ttsText": "Please scan your Q R code here."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Thanks.",
+                        "ttsText": "Thanks."
+                    }
+                ],
+                "bounds": {
+                    "x": 618,
+                    "y": 744,
+                    "width": 400,
+                    "height": 234,
+                    "xPct": 60.3516,
+                    "yPct": 48.4375,
+                    "widthPct": 39.0625,
+                    "heightPct": 15.2344
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 9,
+                "readingOrder": 9,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Excuse me. My ticket says Row F, Seat 8. Could we check our seat numbers?",
+                "sentences": [
+                    "Excuse me.",
+                    "My ticket says Row F, Seat 8.",
+                    "Could we check our seat numbers?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Excuse me.",
+                        "ttsText": "Excuse me."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "My ticket says Row F, Seat 8.",
+                        "ttsText": "My ticket says Row F, Seat 8."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Could we check our seat numbers?",
+                        "ttsText": "Could we check our seat numbers?"
+                    }
+                ],
+                "bounds": {
+                    "x": 156,
+                    "y": 996,
+                    "width": 446,
+                    "height": 232,
+                    "xPct": 15.2344,
+                    "yPct": 64.8438,
+                    "widthPct": 43.5547,
+                    "heightPct": 15.1042
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 10,
+                "readingOrder": 10,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Oh, mine says Row F, Seat 6. I must have read the 6 as an 8. Could we ask a cinema attendant to help us sort this out?",
+                "sentences": [
+                    "Oh, mine says Row F, Seat 6.",
+                    "I must have read the 6 as an 8.",
+                    "Could we ask a cinema attendant to help us sort this out?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Other viewer",
+                        "sourceText": "Oh, mine says Row F, Seat 6.",
+                        "ttsText": "Oh, mine says Row F, Seat 6."
+                    },
+                    {
+                        "speaker": "Other viewer",
+                        "sourceText": "I must have read the 6 as an 8.",
+                        "ttsText": "I must have read the 6 as an 8."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Could we ask a cinema attendant to help us sort this out?",
+                        "ttsText": "Could we ask a cinema attendant to help us sort this out?"
+                    }
+                ],
+                "bounds": {
+                    "x": 618,
+                    "y": 996,
+                    "width": 400,
+                    "height": 232,
+                    "xPct": 60.3516,
+                    "yPct": 64.8438,
+                    "widthPct": 39.0625,
+                    "heightPct": 15.1042
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 11,
+                "readingOrder": 11,
+                "proficiencyBand": "upper-intermediate",
+                "text": "There seems to be a discrepancy between the seats you're occupying and the numbers on your tickets. May I verify both?",
+                "sentences": [
+                    "There seems to be a discrepancy between the seats you're occupying and the numbers on your tickets.",
+                    "May I verify both?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Mia",
+                        "sourceText": "There seems to be a discrepancy between the seats you're occupying and the numbers on your tickets.",
+                        "ttsText": "There seems to be a discrepancy between the seats you're occupying and the numbers on your tickets."
+                    },
+                    {
+                        "speaker": "Mia",
+                        "sourceText": "May I verify both?",
+                        "ttsText": "May I verify both?"
+                    }
+                ],
+                "bounds": {
+                    "x": 156,
+                    "y": 1244,
+                    "width": 446,
+                    "height": 279,
+                    "xPct": 15.2344,
+                    "yPct": 80.9896,
+                    "widthPct": 43.5547,
+                    "heightPct": 18.1641
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 12,
+                "readingOrder": 12,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Both tickets are valid: yours is F eight, and the other ticket is F six. Thank you. I'll take my seat now.",
+                "sentences": [
+                    "Both tickets are valid: yours is F eight, and the other ticket is F six.",
+                    "Thank you.",
+                    "I'll take my seat now."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Mia",
+                        "sourceText": "Both tickets are valid: yours is F8, and the other ticket is F6.",
+                        "ttsText": "Both tickets are valid: yours is F eight, and the other ticket is F six."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Thank you.",
+                        "ttsText": "Thank you."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "I'll take my seat now.",
+                        "ttsText": "I'll take my seat now."
+                    }
+                ],
+                "bounds": {
+                    "x": 618,
+                    "y": 1244,
+                    "width": 400,
+                    "height": 279,
+                    "xPct": 60.3516,
+                    "yPct": 80.9896,
+                    "widthPct": 39.0625,
+                    "heightPct": 18.1641
+                },
+                "contentReviewStatus": "verified-against-image"
+            }
+        ]
     }
+
 };
