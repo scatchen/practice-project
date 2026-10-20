@@ -5313,4 +5313,124 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/asking-for-directions-and-help-basics.png": {
+        imageId: "asking-for-directions-and-help-basics",
+        assetFile: "images/english/asking-for-directions-and-help-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Excuse me. Could you help me?",
+                sentences: ["Excuse me.", "Could you help me?"],
+                bounds: { xPct: 28.7109, yPct: 0.2604, widthPct: 36.7188, heightPct: 17.4479 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "I'm looking for the City Museum. Is it nearby?",
+                sentences: ["I'm looking for the City Museum.", "Is it nearby?"],
+                bounds: { xPct: 66.7969, yPct: 0.2604, widthPct: 32.8125, heightPct: 17.4479 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Go straight to the library, then turn left.",
+                sentences: ["Go straight to the library, then turn left."],
+                bounds: { xPct: 28.7109, yPct: 18.5547, widthPct: 36.7188, heightPct: 15.2344 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Do I pass the library on the way? Yes. Keep going toward the park.",
+                sentences: ["Do I pass the library on the way?", "Yes.", "Keep going toward the park."],
+                bounds: { xPct: 66.7969, yPct: 18.5547, widthPct: 32.8125, heightPct: 15.2344 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "How long does it take to walk there? About fifteen minutes.",
+                sentences: ["How long does it take to walk there?", "About fifteen minutes."],
+                bounds: { xPct: 28.7109, yPct: 34.4401, widthPct: 36.7188, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "Pass the library and cross at the pedestrian crossing by the park.",
+                sentences: ["Pass the library and cross at the pedestrian crossing by the park."],
+                bounds: { xPct: 66.7969, yPct: 34.4401, widthPct: 32.8125, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "So I pass the library, then cross by the park? That's right. The museum is on the other side.",
+                sentences: ["So I pass the library, then cross by the park?", "That's right.", "The museum is on the other side."],
+                bounds: { xPct: 28.7109, yPct: 49.4141, widthPct: 36.7188, heightPct: 14.1276 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Would the bus be faster? Maybe, but the nearest stop is two blocks east.",
+                sentences: ["Would the bus be faster?", "Maybe, but the nearest stop is two blocks east."],
+                bounds: { xPct: 66.7969, yPct: 49.4141, widthPct: 32.8125, heightPct: 14.1276 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "The pedestrian crossing is closed for construction. Is there another way?",
+                sentences: ["The pedestrian crossing is closed for construction.", "Is there another way?"],
+                bounds: { xPct: 28.7109, yPct: 64.3229, widthPct: 36.7188, heightPct: 14.7135 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "The street by the park is under construction, but you can still cross at the next intersection.",
+                sentences: ["The street by the park is under construction, but you can still cross at the next intersection."],
+                bounds: { xPct: 66.7969, yPct: 64.3229, widthPct: 32.8125, heightPct: 14.7135 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "If I walk to the next intersection, how much longer will it take? About five extra minutes. The bus stop is a ten-minute walk from here.",
+                sentences: ["If I walk to the next intersection, how much longer will it take?", "About five extra minutes.", "The bus stop is a ten-minute walk from here."],
+                bounds: { xPct: 28.7109, yPct: 79.8177, widthPct: 36.7188, heightPct: 19.9219 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Then I'll walk. I cross at the next intersection, then follow the path along the park? Exactly. The City Museum is on the other side of the park.",
+                sentences: ["Then I'll walk.", "I cross at the next intersection, then follow the path along the park?", "Exactly.", "The City Museum is on the other side of the park."],
+                bounds: { xPct: 66.7969, yPct: 79.8177, widthPct: 32.8125, heightPct: 19.9219 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
+    },
 };
