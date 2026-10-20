@@ -5792,5 +5792,164 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/dealing-with-lost-luggage-basics.png": {
+        imageId: "dealing-with-lost-luggage-basics",
+        assetFile: "images/english/dealing-with-lost-luggage-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Flight 612 has landed. Emma waits at baggage claim.",
+                sentences: [
+                    "Flight 612 has landed.",
+                    "Emma waits at baggage claim."
+                ],
+                bounds: { x: 103, y: 102, width: 458, height: 222, xPct: 10.0586, yPct: 6.6406, widthPct: 44.7266, heightPct: 14.4531 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "The carousel has stopped, but my suitcase isn’t here.",
+                sentences: [
+                    "The carousel has stopped, but my suitcase isn’t here."
+                ],
+                bounds: { x: 571, y: 102, width: 440, height: 222, xPct: 55.7617, yPct: 6.6406, widthPct: 42.9688, heightPct: 14.4531 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "My checked bag hasn’t arrived. Could you help me? Of course.",
+                sentences: [
+                    "My checked bag hasn’t arrived.",
+                    "Could you help me?",
+                    "Of course."
+                ],
+                bounds: { x: 103, y: 336, width: 458, height: 220, xPct: 10.0586, yPct: 21.8750, widthPct: 44.7266, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "Can you describe it? It’s a large black suitcase with an orange ribbon.",
+                sentences: [
+                    "Can you describe it?",
+                    "It’s a large black suitcase with an orange ribbon."
+                ],
+                bounds: { x: 571, y: 336, width: 440, height: 220, xPct: 55.7617, yPct: 21.8750, widthPct: 42.9688, heightPct: 14.3229 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "Which flight did you take? Flight 612 from Lake City. Here’s my baggage receipt.",
+                sentences: [
+                    "Which flight did you take?",
+                    "Flight 612 from Lake City.",
+                    "Here’s my baggage receipt."
+                ],
+                bounds: { x: 103, y: 565, width: 458, height: 219, xPct: 10.0586, yPct: 36.7839, widthPct: 44.7266, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "May I see the baggage tag number? It’s 612 483 927.",
+                sentences: [
+                    "May I see the baggage tag number?",
+                    "It’s 612 483 927."
+                ],
+                bounds: { x: 571, y: 565, width: 440, height: 219, xPct: 55.7617, yPct: 36.7839, widthPct: 42.9688, heightPct: 14.2578 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "The tracking system shows no arrival scan in Harbor City. We’re still checking its location.",
+                sentences: [
+                    "The tracking system shows no arrival scan in Harbor City.",
+                    "We’re still checking its location."
+                ],
+                bounds: { x: 103, y: 792, width: 458, height: 217, xPct: 10.0586, yPct: 51.5625, widthPct: 44.7266, heightPct: 14.1276 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Would you like to file a delayed-baggage report? Yes, please. How can I track it?",
+                sentences: [
+                    "Would you like to file a delayed-baggage report?",
+                    "Yes, please.",
+                    "How can I track it?"
+                ],
+                bounds: { x: 571, y: 792, width: 440, height: 217, xPct: 55.7617, yPct: 51.5625, widthPct: 42.9688, heightPct: 14.1276 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "Our investigation is underway. Your reference number is BZ-4821.",
+                sentences: [
+                    "Our investigation is underway.",
+                    "Your reference number is BZ-4821."
+                ],
+                bounds: { x: 103, y: 1017, width: 458, height: 221, xPct: 10.0586, yPct: 66.2109, widthPct: 44.7266, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "I’m staying at the Harbor View Hotel. If you locate and retrieve my suitcase, could you arrange delivery to my hotel?",
+                sentences: [
+                    "I’m staying at the Harbor View Hotel.",
+                    "If you locate and retrieve my suitcase, could you arrange delivery to my hotel?"
+                ],
+                bounds: { x: 571, y: 1017, width: 440, height: 221, xPct: 55.7617, yPct: 66.2109, widthPct: 42.9688, heightPct: 14.3880 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "We’ll update the record and notify you once we locate your bag. Delivery options will be confirmed later.",
+                sentences: [
+                    "We’ll update the record and notify you once we locate your bag.",
+                    "Delivery options will be confirmed later."
+                ],
+                bounds: { x: 103, y: 1251, width: 458, height: 265, xPct: 10.0586, yPct: 81.4453, widthPct: 44.7266, heightPct: 17.2526 },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Just to verify, my report number is BZ-4821, and I can call this desk for updates, correct? That’s right. We’ll contact you when we have news.",
+                sentences: [
+                    "Just to verify, my report number is BZ-4821, and I can call this desk for updates, correct?",
+                    "That’s right.",
+                    "We’ll contact you when we have news."
+                ],
+                bounds: { x: 571, y: 1251, width: 440, height: 265, xPct: 55.7617, yPct: 81.4453, widthPct: 42.9688, heightPct: 17.2526 },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
