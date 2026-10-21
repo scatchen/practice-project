@@ -7997,5 +7997,350 @@ const imageTTSData = {
                 "contentReviewStatus": "verified-against-image"
             }
         ]
+    },
+    "images/english/at-the-pharmacy-asking-about-medicine-basics.png": {
+        "imageId": "at-the-pharmacy-asking-about-medicine-basics",
+        "assetFile": "images/english/at-the-pharmacy-asking-about-medicine-basics.png",
+        "contentType": "story",
+        "layout": "2x6",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "proficiencyBand": "beginner",
+                "text": "Hello. Could you help me? Of course.",
+                "sentences": [
+                    "Hello.",
+                    "Could you help me?",
+                    "Of course."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "Hello. Could you help me?",
+                        "ttsText": "Hello. Could you help me?"
+                    },
+                    {
+                        "speaker": "Pharmacist",
+                        "sourceText": "Of course.",
+                        "ttsText": "Of course."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 28.5156,
+                    "yPct": 0.1953,
+                    "widthPct": 34.9609,
+                    "heightPct": 16.0807
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "proficiencyBand": "beginner",
+                "text": "My throat hurts, and I cough sometimes.",
+                "sentences": [
+                    "My throat hurts, and I cough sometimes."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "My throat hurts, and I cough sometimes.",
+                        "ttsText": "My throat hurts, and I cough sometimes."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 63.8672,
+                    "yPct": 0.1953,
+                    "widthPct": 35.9375,
+                    "heightPct": 16.0807
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "proficiencyBand": "beginner",
+                "text": "How long have you felt this way? About two days.",
+                "sentences": [
+                    "How long have you felt this way?",
+                    "About two days."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Pharmacist",
+                        "sourceText": "How long have you felt this way?",
+                        "ttsText": "How long have you felt this way?"
+                    },
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "About two days.",
+                        "ttsText": "About two days."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 28.5156,
+                    "yPct": 16.7318,
+                    "widthPct": 34.9609,
+                    "heightPct": 16.2109
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "proficiencyBand": "beginner",
+                "text": "Is there any medicine that might help? Let’s look at the label together.",
+                "sentences": [
+                    "Is there any medicine that might help?",
+                    "Let’s look at the label together."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "Is there any medicine that might help?",
+                        "ttsText": "Is there any medicine that might help?"
+                    },
+                    {
+                        "speaker": "Pharmacist",
+                        "sourceText": "Let’s look at the label together.",
+                        "ttsText": "Let’s look at the label together."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 63.8672,
+                    "yPct": 16.7318,
+                    "widthPct": 35.9375,
+                    "heightPct": 16.2109
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 5,
+                "readingOrder": 5,
+                "proficiencyBand": "intermediate",
+                "text": "Before we look at options, are you taking any medication or do you have allergies? I take a daily medicine for allergies.",
+                "sentences": [
+                    "Before we look at options, are you taking any medication or do you have allergies?",
+                    "I take a daily medicine for allergies."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Pharmacist",
+                        "sourceText": "Before we look at options, are you taking any medication or do you have allergies?",
+                        "ttsText": "Before we look at options, are you taking any medication or do you have allergies?"
+                    },
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "I take a daily medicine for allergies.",
+                        "ttsText": "I take a daily medicine for allergies."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 28.5156,
+                    "yPct": 33.3984,
+                    "widthPct": 34.9609,
+                    "heightPct": 14.974
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 6,
+                "readingOrder": 6,
+                "proficiencyBand": "intermediate",
+                "text": "Could you show me where the directions and warnings are?",
+                "sentences": [
+                    "Could you show me where the directions and warnings are?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "Could you show me where the directions and warnings are?",
+                        "ttsText": "Could you show me where the directions and warnings are?"
+                    }
+                ],
+                "bounds": {
+                    "xPct": 63.8672,
+                    "yPct": 33.3984,
+                    "widthPct": 35.9375,
+                    "heightPct": 14.974
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 7,
+                "readingOrder": 7,
+                "proficiencyBand": "intermediate",
+                "text": "Follow the package directions. Don’t use more than the label says. I understand.",
+                "sentences": [
+                    "Follow the package directions.",
+                    "Don’t use more than the label says.",
+                    "I understand."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Pharmacist",
+                        "sourceText": "Follow the package directions. Don’t use more than the label says.",
+                        "ttsText": "Follow the package directions. Don’t use more than the label says."
+                    },
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "I understand.",
+                        "ttsText": "I understand."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 28.5156,
+                    "yPct": 48.8281,
+                    "widthPct": 34.9609,
+                    "heightPct": 15.1693
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 8,
+                "readingOrder": 8,
+                "proficiencyBand": "intermediate",
+                "text": "If an instruction isn’t clear, could you explain it? Of course. We can review it together.",
+                "sentences": [
+                    "If an instruction isn’t clear, could you explain it?",
+                    "Of course.",
+                    "We can review it together."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "If an instruction isn’t clear, could you explain it?",
+                        "ttsText": "If an instruction isn’t clear, could you explain it?"
+                    },
+                    {
+                        "speaker": "Pharmacist",
+                        "sourceText": "Of course. We can review it together.",
+                        "ttsText": "Of course. We can review it together."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 63.8672,
+                    "yPct": 48.8281,
+                    "widthPct": 35.9375,
+                    "heightPct": 15.1693
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 9,
+                "readingOrder": 9,
+                "proficiencyBand": "upper-intermediate",
+                "text": "What side effects should I watch for? The label lists possible effects; they can vary by product.",
+                "sentences": [
+                    "What side effects should I watch for?",
+                    "The label lists possible effects; they can vary by product."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "What side effects should I watch for?",
+                        "ttsText": "What side effects should I watch for?"
+                    },
+                    {
+                        "speaker": "Pharmacist",
+                        "sourceText": "The label lists possible effects; they can vary by product.",
+                        "ttsText": "The label lists possible effects; they can vary by product."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 28.5156,
+                    "yPct": 64.3229,
+                    "widthPct": 34.9609,
+                    "heightPct": 16.7318
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 10,
+                "readingOrder": 10,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Could taking this with my daily allergy medication cause an adverse effect? I’d need to check both exact labels before commenting.",
+                "sentences": [
+                    "Could taking this with my daily allergy medication cause an adverse effect?",
+                    "I’d need to check both exact labels before commenting."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "Could taking this with my daily allergy medication cause an adverse effect?",
+                        "ttsText": "Could taking this with my daily allergy medication cause an adverse effect?"
+                    },
+                    {
+                        "speaker": "Pharmacist",
+                        "sourceText": "I’d need to check both exact labels before commenting.",
+                        "ttsText": "I’d need to check both exact labels before commenting."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 63.8672,
+                    "yPct": 64.3229,
+                    "widthPct": 35.9375,
+                    "heightPct": 16.7318
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 11,
+                "readingOrder": 11,
+                "proficiencyBand": "upper-intermediate",
+                "text": "If your cough is persistent or your symptoms worsen, please seek medical advice.",
+                "sentences": [
+                    "If your cough is persistent or your symptoms worsen, please seek medical advice."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Pharmacist",
+                        "sourceText": "If your cough is persistent or your symptoms worsen, please seek medical advice.",
+                        "ttsText": "If your cough is persistent or your symptoms worsen, please seek medical advice."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 28.5156,
+                    "yPct": 81.4453,
+                    "widthPct": 34.9609,
+                    "heightPct": 18.2943
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 12,
+                "readingOrder": 12,
+                "proficiencyBand": "upper-intermediate",
+                "text": "I’ll check the dosage instructions and ask before combining medications. That’s a sensible precaution.",
+                "sentences": [
+                    "I’ll check the dosage instructions and ask before combining medications.",
+                    "That’s a sensible precaution."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Customer",
+                        "sourceText": "I’ll check the dosage instructions and ask before combining medications.",
+                        "ttsText": "I’ll check the dosage instructions and ask before combining medications."
+                    },
+                    {
+                        "speaker": "Pharmacist",
+                        "sourceText": "That’s a sensible precaution.",
+                        "ttsText": "That’s a sensible precaution."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 63.8672,
+                    "yPct": 81.4453,
+                    "widthPct": 35.9375,
+                    "heightPct": 18.2943
+                },
+                "contentReviewStatus": "verified-against-image"
+            }
+        ]
     }
 };
