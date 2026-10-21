@@ -8698,5 +8698,336 @@ const imageTTSData = {
                 "contentReviewStatus": "verified-against-image"
             }
         ]
+    },
+    "images/english/dealing-with-a-flight-delay-basics.png": {
+        "imageId": "dealing-with-a-flight-delay-basics",
+        "assetFile": "images/english/dealing-with-a-flight-delay-basics.png",
+        "contentType": "story",
+        "layout": "2x6",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "proficiencyBand": "beginner",
+                "text": "My flight is late.",
+                "sentences": [
+                    "My flight is late."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "My flight is late.",
+                        "ttsText": "My flight is late."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 25.5859,
+                    "yPct": 7.3568,
+                    "widthPct": 36.6211,
+                    "heightPct": 13.5417
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "proficiencyBand": "beginner",
+                "text": "Excuse me, is Flight two eighteen delayed? Yes, it is.",
+                "sentences": [
+                    "Excuse me, is Flight two eighteen delayed?",
+                    "Yes, it is."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Excuse me, is Flight 218 delayed?",
+                        "ttsText": "Excuse me, is Flight two eighteen delayed?"
+                    },
+                    {
+                        "speaker": "Airline Staff",
+                        "sourceText": "Yes, it is.",
+                        "ttsText": "Yes, it is."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 62.8906,
+                    "yPct": 7.3568,
+                    "widthPct": 36.9141,
+                    "heightPct": 13.5417
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "proficiencyBand": "beginner",
+                "text": "Do you know why? Not yet.",
+                "sentences": [
+                    "Do you know why?",
+                    "Not yet."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Do you know why?",
+                        "ttsText": "Do you know why?"
+                    },
+                    {
+                        "speaker": "Airline Staff",
+                        "sourceText": "Not yet.",
+                        "ttsText": "Not yet."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 25.5859,
+                    "yPct": 21.2891,
+                    "widthPct": 36.6211,
+                    "heightPct": 13.8021
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "proficiencyBand": "beginner",
+                "text": "When will it leave? It should leave at three oh five. Please check the screen again.",
+                "sentences": [
+                    "When will it leave?",
+                    "It should leave at three oh five.",
+                    "Please check the screen again."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "When will it leave?",
+                        "ttsText": "When will it leave?"
+                    },
+                    {
+                        "speaker": "Airline Staff",
+                        "sourceText": "It should leave at 3:05. Please check the screen again.",
+                        "ttsText": "It should leave at three oh five. Please check the screen again."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 62.8906,
+                    "yPct": 21.2891,
+                    "widthPct": 36.9141,
+                    "heightPct": 13.8021
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 5,
+                "readingOrder": 5,
+                "proficiencyBand": "intermediate",
+                "text": "I’m connecting to Flight five oh six in Lake City. It leaves at five twenty-five.",
+                "sentences": [
+                    "I’m connecting to Flight five oh six in Lake City.",
+                    "It leaves at five twenty-five."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "I’m connecting to Flight 506 in Lake City. It leaves at 5:25.",
+                        "ttsText": "I’m connecting to Flight five oh six in Lake City. It leaves at five twenty-five."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 25.5859,
+                    "yPct": 35.4818,
+                    "widthPct": 36.6211,
+                    "heightPct": 14.0625
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 6,
+                "readingOrder": 6,
+                "proficiencyBand": "intermediate",
+                "text": "If we arrive at five twenty, I might miss my connection. Could you check my connection? Sure, let me check that for you.",
+                "sentences": [
+                    "If we arrive at five twenty, I might miss my connection.",
+                    "Could you check my connection?",
+                    "Sure, let me check that for you."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "If we arrive at 5:20, I might miss my connection. Could you check my connection?",
+                        "ttsText": "If we arrive at five twenty, I might miss my connection. Could you check my connection?"
+                    },
+                    {
+                        "speaker": "Airline Staff",
+                        "sourceText": "Sure, let me check that for you.",
+                        "ttsText": "Sure, let me check that for you."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 62.8906,
+                    "yPct": 35.4818,
+                    "widthPct": 36.9141,
+                    "heightPct": 14.0625
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 7,
+                "readingOrder": 7,
+                "proficiencyBand": "intermediate",
+                "text": "The current arrival estimate is five twenty, so you won’t make the five twenty-five connection.",
+                "sentences": [
+                    "The current arrival estimate is five twenty, so you won’t make the five twenty-five connection."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Airline Staff",
+                        "sourceText": "The current arrival estimate is 5:20, so you won’t make the 5:25 connection.",
+                        "ttsText": "The current arrival estimate is five twenty, so you won’t make the five twenty-five connection."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 25.5859,
+                    "yPct": 49.8698,
+                    "widthPct": 36.6211,
+                    "heightPct": 14.5182
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 8,
+                "readingOrder": 8,
+                "proficiencyBand": "intermediate",
+                "text": "Could you check whether there’s a later flight to Harbor City tonight? Let me check.",
+                "sentences": [
+                    "Could you check whether there’s a later flight to Harbor City tonight?",
+                    "Let me check."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Could you check whether there’s a later flight to Harbor City tonight?",
+                        "ttsText": "Could you check whether there’s a later flight to Harbor City tonight?"
+                    },
+                    {
+                        "speaker": "Airline Staff",
+                        "sourceText": "Let me check.",
+                        "ttsText": "Let me check."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 62.8906,
+                    "yPct": 49.8698,
+                    "widthPct": 36.9141,
+                    "heightPct": 14.5182
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 9,
+                "readingOrder": 9,
+                "proficiencyBand": "upper-intermediate",
+                "text": "The delay has disrupted your connection. Flight six twelve at eight forty is an alternative.",
+                "sentences": [
+                    "The delay has disrupted your connection.",
+                    "Flight six twelve at eight forty is an alternative."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Airline Staff",
+                        "sourceText": "The delay has disrupted your connection. Flight 612 at 8:40 is an alternative.",
+                        "ttsText": "The delay has disrupted your connection. Flight six twelve at eight forty is an alternative."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 25.5859,
+                    "yPct": 64.7135,
+                    "widthPct": 36.6211,
+                    "heightPct": 15.2995
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 10,
+                "readingOrder": 10,
+                "proficiencyBand": "upper-intermediate",
+                "text": "If I take Flight six twelve, could you modify my itinerary? Reaching Harbor City tonight is my priority.",
+                "sentences": [
+                    "If I take Flight six twelve, could you modify my itinerary?",
+                    "Reaching Harbor City tonight is my priority."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "If I take Flight 612, could you modify my itinerary? Reaching Harbor City tonight is my priority.",
+                        "ttsText": "If I take Flight six twelve, could you modify my itinerary? Reaching Harbor City tonight is my priority."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 62.8906,
+                    "yPct": 64.7135,
+                    "widthPct": 36.9141,
+                    "heightPct": 15.2995
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 11,
+                "readingOrder": 11,
+                "proficiencyBand": "upper-intermediate",
+                "text": "I’ve updated your itinerary and confirmed your seat. Enable app alerts; they’ll notify you of confirmed changes.",
+                "sentences": [
+                    "I’ve updated your itinerary and confirmed your seat.",
+                    "Enable app alerts; they’ll notify you of confirmed changes."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Airline Staff",
+                        "sourceText": "I’ve updated your itinerary and confirmed your seat. Enable app alerts; they’ll notify you of confirmed changes.",
+                        "ttsText": "I’ve updated your itinerary and confirmed your seat. Enable app alerts; they’ll notify you of confirmed changes."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 25.5859,
+                    "yPct": 80.4036,
+                    "widthPct": 36.6211,
+                    "heightPct": 18.8151
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 12,
+                "readingOrder": 12,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Just to verify: Flight six twelve at eight forty, and I should monitor the app? That’s right. Safe travels!",
+                "sentences": [
+                    "Just to verify: Flight six twelve at eight forty, and I should monitor the app?",
+                    "That’s right.",
+                    "Safe travels!"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Just to verify: Flight 612 at 8:40, and I should monitor the app?",
+                        "ttsText": "Just to verify: Flight six twelve at eight forty, and I should monitor the app?"
+                    },
+                    {
+                        "speaker": "Airline Staff",
+                        "sourceText": "That’s right. Safe travels!",
+                        "ttsText": "That’s right. Safe travels!"
+                    }
+                ],
+                "bounds": {
+                    "xPct": 62.8906,
+                    "yPct": 80.4036,
+                    "widthPct": 36.9141,
+                    "heightPct": 18.8151
+                },
+                "contentReviewStatus": "verified-against-image"
+            }
+        ]
     }
 };
