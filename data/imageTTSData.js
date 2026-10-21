@@ -9029,5 +9029,382 @@ const imageTTSData = {
                 "contentReviewStatus": "verified-against-image"
             }
         ]
+    },
+
+    "images/english/making-a-hotel-reservation-and-checking-in-basics.png": {
+        imageId: "making-a-hotel-reservation-and-checking-in-basics",
+        assetFile: "images/english/making-a-hotel-reservation-and-checking-in-basics.png",
+        contentType: "story",
+        layout: "2x6",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                proficiencyBand: "beginner",
+                text: "Do you have a room from October eighteenth to twentieth? Yes. That's two nights.",
+                sentences: [
+                    "Do you have a room from October eighteenth to twentieth?",
+                    "Yes.",
+                    "That's two nights."
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Emma",
+                        sourceText: "Do you have a room from October 18 to 20?",
+                        ttsText: "Do you have a room from October eighteenth to twentieth?"
+                    },
+                    {
+                        speaker: "Alex",
+                        sourceText: "Yes. That's two nights.",
+                        ttsText: "Yes. That's two nights."
+                    }
+                ],
+                bounds: {
+                    xPct: 20.5078,
+                    yPct: 4.2969,
+                    widthPct: 40.1367,
+                    heightPct: 14.9089
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                proficiencyBand: "beginner",
+                text: "I'd like a king room. How much is it? It's one hundred sixty dollars a night.",
+                sentences: [
+                    "I'd like a king room.",
+                    "How much is it?",
+                    "It's one hundred sixty dollars a night."
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Emma",
+                        sourceText: "I'd like a king room. How much is it?",
+                        ttsText: "I'd like a king room. How much is it?"
+                    },
+                    {
+                        speaker: "Alex",
+                        sourceText: "It's $160 a night.",
+                        ttsText: "It's one hundred sixty dollars a night."
+                    }
+                ],
+                bounds: {
+                    xPct: 61.9141,
+                    yPct: 4.2969,
+                    widthPct: 37.5977,
+                    heightPct: 14.9089
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                proficiencyBand: "beginner",
+                text: "Is breakfast included? Yes, it is.",
+                sentences: [
+                    "Is breakfast included?",
+                    "Yes, it is."
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Emma",
+                        sourceText: "Is breakfast included?",
+                        ttsText: "Is breakfast included?"
+                    },
+                    {
+                        speaker: "Alex",
+                        sourceText: "Yes, it is.",
+                        ttsText: "Yes, it is."
+                    }
+                ],
+                bounds: {
+                    xPct: 20.5078,
+                    yPct: 20.1172,
+                    widthPct: 40.1367,
+                    heightPct: 14.6484
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                proficiencyBand: "beginner",
+                text: "May I have your name? Emma Chen. Great! I'll email your booking details.",
+                sentences: [
+                    "May I have your name?",
+                    "Emma Chen.",
+                    "Great!",
+                    "I'll email your booking details."
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Emma",
+                        sourceText: "May I have your name?",
+                        ttsText: "May I have your name?"
+                    },
+                    {
+                        speaker: "Emma",
+                        sourceText: "Emma Chen.",
+                        ttsText: "Emma Chen."
+                    },
+                    {
+                        speaker: "Alex",
+                        sourceText: "Great! I'll email your booking details.",
+                        ttsText: "Great! I'll email your booking details."
+                    }
+                ],
+                bounds: {
+                    xPct: 61.9141,
+                    yPct: 20.1172,
+                    widthPct: 37.5977,
+                    heightPct: 14.6484
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                proficiencyBand: "intermediate",
+                text: "I'm checking in under Emma Chen. Could you compare my reservation details with this email? Certainly. May I see your passport?",
+                sentences: [
+                    "I'm checking in under Emma Chen.",
+                    "Could you compare my reservation details with this email?",
+                    "Certainly.",
+                    "May I see your passport?"
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Emma",
+                        sourceText: "I'm checking in under Emma Chen. Could you compare my reservation details with this email?",
+                        ttsText: "I'm checking in under Emma Chen. Could you compare my reservation details with this email?"
+                    },
+                    {
+                        speaker: "Alex",
+                        sourceText: "Certainly. May I see your passport?",
+                        ttsText: "Certainly. May I see your passport?"
+                    }
+                ],
+                bounds: {
+                    xPct: 20.5078,
+                    yPct: 35.8073,
+                    widthPct: 40.1367,
+                    heightPct: 15.6901
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 6,
+                readingOrder: 6,
+                proficiencyBand: "intermediate",
+                text: "According to our booking record, it's a king room for October eighteenth to twentieth, at one hundred sixty dollars a night. That matches my email.",
+                sentences: [
+                    "According to our booking record, it's a king room for October eighteenth to twentieth, at one hundred sixty dollars a night.",
+                    "That matches my email."
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Alex",
+                        sourceText: "According to our booking record, it's a king room for October 18 to 20, at $160 a night.",
+                        ttsText: "According to our booking record, it's a king room for October eighteenth to twentieth, at one hundred sixty dollars a night."
+                    },
+                    {
+                        speaker: "Emma",
+                        sourceText: "That matches my email.",
+                        ttsText: "That matches my email."
+                    }
+                ],
+                bounds: {
+                    xPct: 61.9141,
+                    yPct: 35.8073,
+                    widthPct: 37.5977,
+                    heightPct: 15.6901
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 7,
+                readingOrder: 7,
+                proficiencyBand: "intermediate",
+                text: "The email also lists breakfast. Could you check whether it's included? Our system says room only.",
+                sentences: [
+                    "The email also lists breakfast.",
+                    "Could you check whether it's included?",
+                    "Our system says room only."
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Emma",
+                        sourceText: "The email also lists breakfast. Could you check whether it's included?",
+                        ttsText: "The email also lists breakfast. Could you check whether it's included?"
+                    },
+                    {
+                        speaker: "Alex",
+                        sourceText: "Our system says room only.",
+                        ttsText: "Our system says room only."
+                    }
+                ],
+                bounds: {
+                    xPct: 20.5078,
+                    yPct: 52.4089,
+                    widthPct: 40.1367,
+                    heightPct: 15.1042
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 8,
+                readingOrder: 8,
+                proficiencyBand: "intermediate",
+                text: "Could you review the original booking before we finish check-in? Of course. I'll look into it.",
+                sentences: [
+                    "Could you review the original booking before we finish check-in?",
+                    "Of course.",
+                    "I'll look into it."
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Emma",
+                        sourceText: "Could you review the original booking before we finish check-in?",
+                        ttsText: "Could you review the original booking before we finish check-in?"
+                    },
+                    {
+                        speaker: "Alex",
+                        sourceText: "Of course. I'll look into it.",
+                        ttsText: "Of course. I'll look into it."
+                    }
+                ],
+                bounds: {
+                    xPct: 61.9141,
+                    yPct: 52.4089,
+                    widthPct: 37.5977,
+                    heightPct: 15.1042
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 9,
+                readingOrder: 9,
+                proficiencyBand: "upper-intermediate",
+                text: "There's a discrepancy: my confirmation includes breakfast, but your screen lists room only. I'll verify the original booking.",
+                sentences: [
+                    "There's a discrepancy: my confirmation includes breakfast, but your screen lists room only.",
+                    "I'll verify the original booking."
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Emma",
+                        sourceText: "There's a discrepancy: my confirmation includes breakfast, but your screen lists room only.",
+                        ttsText: "There's a discrepancy: my confirmation includes breakfast, but your screen lists room only."
+                    },
+                    {
+                        speaker: "Alex",
+                        sourceText: "I'll verify the original booking.",
+                        ttsText: "I'll verify the original booking."
+                    }
+                ],
+                bounds: {
+                    xPct: 20.5078,
+                    yPct: 68.4896,
+                    widthPct: 40.1367,
+                    heightPct: 14.5833
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 10,
+                readingOrder: 10,
+                proficiencyBand: "upper-intermediate",
+                text: "I've verified your confirmation. Breakfast was included; I'll update the booking record now. Thank you!",
+                sentences: [
+                    "I've verified your confirmation.",
+                    "Breakfast was included; I'll update the booking record now.",
+                    "Thank you!"
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Alex",
+                        sourceText: "I've verified your confirmation. Breakfast was included; I'll update the booking record now.",
+                        ttsText: "I've verified your confirmation. Breakfast was included; I'll update the booking record now."
+                    },
+                    {
+                        speaker: "Emma",
+                        sourceText: "Thank you!",
+                        ttsText: "Thank you!"
+                    }
+                ],
+                bounds: {
+                    xPct: 61.9141,
+                    yPct: 68.4896,
+                    widthPct: 37.5977,
+                    heightPct: 14.5833
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 11,
+                readingOrder: 11,
+                proficiencyBand: "upper-intermediate",
+                text: "What is the fifty-dollar card hold for? We place a fifty-dollar card hold for incidental charges. It isn't an extra room fee.",
+                sentences: [
+                    "What is the fifty-dollar card hold for?",
+                    "We place a fifty-dollar card hold for incidental charges.",
+                    "It isn't an extra room fee."
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Emma",
+                        sourceText: "What is the $50 card hold for?",
+                        ttsText: "What is the fifty-dollar card hold for?"
+                    },
+                    {
+                        speaker: "Alex",
+                        sourceText: "We place a $50 card hold for incidental charges. It isn't an extra room fee.",
+                        ttsText: "We place a fifty-dollar card hold for incidental charges. It isn't an extra room fee."
+                    }
+                ],
+                bounds: {
+                    xPct: 20.5078,
+                    yPct: 83.9844,
+                    widthPct: 40.1367,
+                    heightPct: 15.3646
+                },
+                contentReviewStatus: "verified-against-image"
+            },
+            {
+                panelId: 12,
+                readingOrder: 12,
+                proficiencyBand: "upper-intermediate",
+                text: "Let me reassure you that breakfast is included in your rate. Your room is ready; here's your key card. Thank you for sorting that out!",
+                sentences: [
+                    "Let me reassure you that breakfast is included in your rate.",
+                    "Your room is ready; here's your key card.",
+                    "Thank you for sorting that out!"
+                ],
+                speechUnits: [
+                    {
+                        speaker: "Alex",
+                        sourceText: "Let me reassure you that breakfast is included in your rate. Your room is ready; here's your key card.",
+                        ttsText: "Let me reassure you that breakfast is included in your rate. Your room is ready; here's your key card."
+                    },
+                    {
+                        speaker: "Emma",
+                        sourceText: "Thank you for sorting that out!",
+                        ttsText: "Thank you for sorting that out!"
+                    }
+                ],
+                bounds: {
+                    xPct: 61.9141,
+                    yPct: 83.9844,
+                    widthPct: 37.5977,
+                    heightPct: 15.3646
+                },
+                contentReviewStatus: "verified-against-image"
+            }
+        ]
     }
 };
