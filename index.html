@@ -796,6 +796,11 @@ color: #111827;
             cursor: default;
         }
 
+        .image-tts-dialogue-speaker-below {
+            box-sizing: border-box;
+            padding-bottom: 52px;
+        }
+
         .english-image-story-controls {
             box-sizing: border-box;
             position: fixed;
@@ -3104,6 +3109,9 @@ const englishTTSState = {
     storySequenceTimer: 0,
     storySequenceGeneration: 0,
     storySequenceTrigger: null,
+    dialogueSequenceTimer: 0,
+    dialogueSequenceGeneration: 0,
+    dialogueSequenceTrigger: null,
     answerSequenceTimer: 0,
     answerSequenceGeneration: 0,
     answerSequenceTrigger: null,
@@ -3433,12 +3441,13 @@ function updateEnglishTTSControls() {
     if (stopButton) {
         stopButton.disabled = !englishTTSState.activeUtterance &&
             !englishTTSState.collocationReplayTimer && !englishTTSState.storySequenceTimer &&
-            !englishTTSState.answerSequenceTimer;
+            !englishTTSState.dialogueSequenceTimer && !englishTTSState.answerSequenceTimer;
     }
     if (floatingStopButton) {
         const shouldShowStop = appState.subjectMode === "english" &&
             Boolean(englishTTSState.activeUtterance || englishTTSState.collocationReplayTimer ||
-                englishTTSState.storySequenceTimer || englishTTSState.answerSequenceTimer);
+                englishTTSState.storySequenceTimer || englishTTSState.dialogueSequenceTimer ||
+                englishTTSState.answerSequenceTimer);
         floatingStopButton.hidden = !shouldShowStop;
         if (shouldShowStop) {
             if (floatingStopButton.parentNode !== document.body) {
@@ -3772,6 +3781,38 @@ function cancelEnglishImageTTSStorySequence(cancelCurrentUtterance = false) {
     updateEnglishTTSControls();
 }
 
+function cancelEnglishImageTTSDialogueSequence(cancelCurrentUtterance = false) {
+    const sequenceTrigger = englishTTSState.dialogueSequenceTrigger;
+    const hadSequence = Boolean(sequenceTrigger || englishTTSState.dialogueSequenceTimer);
+    if (!hadSequence) {
+        return;
+    }
+    if (englishTTSState.dialogueSequenceTimer) {
+        window.clearTimeout(englishTTSState.dialogueSequenceTimer);
+        englishTTSState.dialogueSequenceTimer = 0;
+    }
+    englishTTSState.dialogueSequenceGeneration += 1;
+    englishTTSState.dialogueSequenceTrigger = null;
+    if (cancelCurrentUtterance && hadSequence) {
+        const hadActiveUtterance = Boolean(englishTTSState.activeUtterance);
+        if (englishTTSState.activeSpeechTrigger === sequenceTrigger) {
+            englishTTSState.activeSpeechTrigger = null;
+            englishTTSState.activeSpeechTriggerRect = null;
+        }
+        if (englishTTSState.activeUtterance) {
+            englishTTSState.activeUtterance = null;
+        }
+        if (hadActiveUtterance && englishTTSState.synthesis) {
+            try {
+                englishTTSState.synthesis.cancel();
+            } catch (error) {
+                // Keep the page usable even if the browser speech engine is unavailable.
+            }
+        }
+    }
+    updateEnglishTTSControls();
+}
+
 function cancelEnglishImageTTSStorySequenceForDifferentTrigger(trigger) {
     if (englishTTSState.storySequenceTrigger && englishTTSState.storySequenceTrigger !== trigger) {
         cancelEnglishImageTTSStorySequence(true);
@@ -3862,11 +3903,17 @@ function speakEnglishText(
     preserveCollocationReplay = false,
     onError = null,
     storySequenceGeneration = null,
-    answerSequenceGeneration = null
+    answerSequenceGeneration = null,
+    dialogueSequenceGeneration = null
 ) {
     if (storySequenceGeneration === null) {
         cancelEnglishImageTTSStorySequence();
     } else if (storySequenceGeneration !== englishTTSState.storySequenceGeneration) {
+        return false;
+    }
+    if (dialogueSequenceGeneration === null) {
+        cancelEnglishImageTTSDialogueSequence();
+    } else if (dialogueSequenceGeneration !== englishTTSState.dialogueSequenceGeneration) {
         return false;
     }
     if (answerSequenceGeneration === null) {
@@ -3918,7 +3965,7 @@ function speakEnglishText(
                 onComplete();
             }
             if (!englishTTSState.activeUtterance && !englishTTSState.collocationReplayTimer &&
-                !englishTTSState.storySequenceTimer && !englishTTSState.answerSequenceTimer) {
+                !englishTTSState.storySequenceTimer && !englishTTSState.dialogueSequenceTimer && !englishTTSState.answerSequenceTimer) {
                 englishTTSState.activeSpeechTrigger = null;
                 englishTTSState.activeSpeechTriggerRect = null;
             }
@@ -3934,7 +3981,7 @@ function speakEnglishText(
                 onError(event);
             }
             if (!englishTTSState.activeUtterance && !englishTTSState.collocationReplayTimer &&
-                !englishTTSState.storySequenceTimer && !englishTTSState.answerSequenceTimer) {
+                !englishTTSState.storySequenceTimer && !englishTTSState.dialogueSequenceTimer && !englishTTSState.answerSequenceTimer) {
                 englishTTSState.activeSpeechTrigger = null;
                 englishTTSState.activeSpeechTriggerRect = null;
             }
@@ -3962,6 +4009,7 @@ function speakEnglishText(
 
 function stopEnglishSpeech() {
     cancelEnglishImageTTSStorySequence();
+    cancelEnglishImageTTSDialogueSequence(true);
     cancelEnglishCollocationReplay();
     cancelEnglishAnswerTTSSequence();
     englishTTSState.activeUtterance = null;
@@ -4780,6 +4828,77 @@ function getEnglishImageTTSRecord(assetFile) {
     const panelIds = new Set();
     const orderedPanels = record.panels.slice().sort((left, right) => left.readingOrder - right.readingOrder);
 
+    if (record.contentType === "dialogue") {
+        const expectedCells = [
+            { xPct: 0, yPct: 0 },
+            { xPct: 50, yPct: 0 },
+            { xPct: 0, yPct: 50 },
+            { xPct: 50, yPct: 50 }
+        ];
+        if (record.layout !== "2x2" || orderedPanels.length !== 4) {
+            return null;
+        }
+        for (let index = 0; index < orderedPanels.length; index += 1) {
+            const panel = orderedPanels[index];
+            const cell = expectedCells[index];
+            const bounds = panel && panel.bounds;
+            if (!panel || !Number.isInteger(panel.panelId) || panelIds.has(panel.panelId) ||
+                panel.readingOrder !== index + 1 || !isValidBounds(bounds) ||
+                Math.abs(bounds.xPct - cell.xPct) > 0.5 ||
+                Math.abs(bounds.yPct - cell.yPct) > 0.5 ||
+                Math.abs(bounds.widthPct - 50) > 0.5 ||
+                Math.abs(bounds.heightPct - 50) > 0.5 ||
+                !Array.isArray(panel.speechUnits)) {
+                return null;
+            }
+            panelIds.add(panel.panelId);
+            const unitIds = new Set();
+            const unitBounds = [];
+            for (let unitIndex = 0; unitIndex < panel.speechUnits.length; unitIndex += 1) {
+                const unit = panel.speechUnits[unitIndex];
+                const anchor = unit && unit.speakerAnchor;
+                const anchorValues = anchor ? [anchor.xPct, anchor.yPct] : [];
+                if (!unit || !Number.isInteger(unit.unitId) || unitIds.has(unit.unitId) ||
+                    unit.readingOrder !== unitIndex + 1 ||
+                    typeof unit.speaker !== "string" || !unit.speaker.trim() ||
+                    typeof unit.sourceText !== "string" || !getEnglishTTSUnitText(unit.sourceText) ||
+                    typeof unit.ttsText !== "string" || !getEnglishTTSUnitText(unit.ttsText) ||
+                    !isValidBounds(unit.bounds) || anchorValues.length !== 2 ||
+                    !anchorValues.every(value => Number.isFinite(value) && value >= 0 && value <= 100) ||
+                    unit.bounds.xPct < bounds.xPct || unit.bounds.yPct < bounds.yPct ||
+                    unit.bounds.xPct + unit.bounds.widthPct > bounds.xPct + bounds.widthPct + 0.01 ||
+                    unit.bounds.yPct + unit.bounds.heightPct > bounds.yPct + bounds.heightPct + 0.01 ||
+                    anchor.xPct < bounds.xPct || anchor.xPct > bounds.xPct + bounds.widthPct ||
+                    anchor.yPct < bounds.yPct || anchor.yPct > bounds.yPct + bounds.heightPct) {
+                    return null;
+                }
+                unitIds.add(unit.unitId);
+                unitBounds.push(unit.bounds);
+            }
+            for (let a = 0; a < unitBounds.length; a += 1) {
+                for (let b = a + 1; b < unitBounds.length; b += 1) {
+                    const left = unitBounds[a];
+                    const right = unitBounds[b];
+                    if (left.xPct < right.xPct + right.widthPct - 0.01 &&
+                        left.xPct + left.widthPct > right.xPct + 0.01 &&
+                        left.yPct < right.yPct + right.heightPct - 0.01 &&
+                        left.yPct + left.heightPct > right.yPct + 0.01) {
+                        return null;
+                    }
+                }
+            }
+            for (const unit of panel.speechUnits) {
+                if (unitBounds.some(rect => unit.speakerAnchor.xPct >= rect.xPct &&
+                    unit.speakerAnchor.xPct <= rect.xPct + rect.widthPct &&
+                    unit.speakerAnchor.yPct >= rect.yPct &&
+                    unit.speakerAnchor.yPct <= rect.yPct + rect.heightPct)) {
+                    return null;
+                }
+            }
+        }
+        return { ...record, panels: orderedPanels };
+    }
+
     if (record.contentType === "story") {
         if (record.layout !== "2x6" || orderedPanels.length !== 12) {
             return null;
@@ -4954,6 +5073,35 @@ function createEnglishImageTTSStoryControls(wrapper, record) {
     return controls;
 }
 
+function createEnglishImageTTSDialogueSpeaker(wrapper, panel) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-panel-speaker image-tts-dialogue-speaker";
+    button.textContent = "🔊";
+    button.hidden = true;
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("aria-label", "第 " + panel.panelId + " 格英文對話，開啟朗讀選項");
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button._englishImageTTSDialoguePanel = panel;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+            return;
+        }
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishImageTTSMenu(button, panel);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
 function enhanceEnglishImageTTSOverlays(responseRoot) {
     if (!responseRoot || typeof responseRoot.querySelectorAll !== "function") {
         return 0;
@@ -4979,6 +5127,40 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
 
         const record = getEnglishImageTTSRecord(assetFile);
         if (!record) {
+            return;
+        }
+
+        if (record.contentType === "dialogue") {
+            if (image.complete && image.naturalWidth === 0) {
+                return;
+            }
+            const dialoguePanels = record.panels.filter(panel => panel.speechUnits.length);
+            dialoguePanels.forEach(panel => {
+                createEnglishImageTTSDialogueSpeaker(wrapper, panel);
+                added += 1;
+            });
+            if (!dialoguePanels.length) {
+                return;
+            }
+            image.addEventListener("load", () => layoutEnglishImageTTSPanelSpeakers(wrapper), { once: true });
+            image.addEventListener("error", () => {
+                wrapper.querySelectorAll(".image-tts-dialogue-speaker").forEach(button => {
+                    button.hidden = true;
+                });
+                wrapper.classList.remove("image-tts-dialogue-speaker-below");
+            }, { once: true });
+            if (image.complete) {
+                if (image.naturalWidth > 0) {
+                    layoutEnglishImageTTSPanelSpeakers(wrapper);
+                } else {
+                    wrapper.querySelectorAll(".image-tts-dialogue-speaker").forEach(button => {
+                        button.hidden = true;
+                    });
+                    wrapper.classList.remove("image-tts-dialogue-speaker-below");
+                }
+            } else {
+                scheduleEnglishImageTTSLayout();
+            }
             return;
         }
 
@@ -5052,6 +5234,10 @@ function layoutEnglishImageTTSPanelSpeakers(wrapper) {
     const imageLeft = imageRect.left - wrapperRect.left;
     const imageTop = imageRect.top - wrapperRect.top;
     wrapper.querySelectorAll(".image-tts-panel-speaker").forEach(button => {
+        if (button._englishImageTTSDialoguePanel) {
+            layoutEnglishImageTTSDialogueSpeaker(wrapper, imageRect, imageLeft, imageTop, button);
+            return;
+        }
         const placement = button._englishImageTTSPlacement;
         if (!placement) {
             button.hidden = true;
@@ -5079,6 +5265,33 @@ function layoutEnglishImageTTSPanelSpeakers(wrapper) {
         button.style.transform = "none";
         button.hidden = false;
     });
+}
+
+function layoutEnglishImageTTSDialogueSpeaker(wrapper, imageRect, imageLeft, imageTop, button) {
+    const buttonWidth = button.getBoundingClientRect().width || 44;
+    const buttonHeight = button.getBoundingClientRect().height || 44;
+    const panel = button._englishImageTTSDialoguePanel;
+    const viewport = window.visualViewport;
+    const viewportRight = viewport
+        ? viewport.offsetLeft + viewport.width
+        : (document.documentElement.clientWidth || window.innerWidth);
+    const gap = 4;
+    const rightSideFits = imageRect.right + gap + buttonWidth <= viewportRight - 8;
+
+    if (rightSideFits) {
+        wrapper.classList.remove("image-tts-dialogue-speaker-below");
+        button.style.left = (imageLeft + imageRect.width + gap) + "px";
+        button.style.top = (imageTop + imageRect.height * panel.bounds.yPct / 100 + gap) + "px";
+    } else {
+        wrapper.classList.add("image-tts-dialogue-speaker-below");
+        button.style.left = (imageLeft + imageRect.width - buttonWidth) + "px";
+        button.style.top = (imageTop + imageRect.height + gap) + "px";
+    }
+    button.style.transform = "none";
+    button.hidden = false;
+    if (buttonHeight < 44) {
+        button.style.height = "44px";
+    }
 }
 
 function scheduleEnglishImageTTSLayout() {
@@ -5249,12 +5462,113 @@ function speakEnglishImageTTSStorySequence(trigger, sentences, fallbackText) {
     return playNext();
 }
 
+function speakEnglishImageTTSDialogueUnit(trigger, unit) {
+    if (!trigger || !unit || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+        return false;
+    }
+    const text = typeof unit.ttsText === "string" ? getEnglishTTSUnitText(unit.ttsText) : null;
+    if (!text) {
+        setEnglishTTSStatus("這個對話單元的英文資料不完整，未開始朗讀。");
+        return false;
+    }
+    closeEnglishImageTTSMenu();
+    rememberEnglishSpeechTrigger(trigger);
+    return speakEnglishText(text);
+}
+
+function speakEnglishImageTTSDialogueSequence(trigger, panel) {
+    const units = panel && Array.isArray(panel.speechUnits)
+        ? panel.speechUnits.map(unit => unit && typeof unit.ttsText === "string"
+            ? getEnglishTTSUnitText(unit.ttsText)
+            : null)
+        : [];
+    if (!trigger || !units.length || units.some(unit => !unit) ||
+        appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+        setEnglishTTSStatus("這格對話圖片的英文資料不完整，未開始朗讀。");
+        return false;
+    }
+    cancelEnglishImageTTSDialogueSequence(true);
+    cancelEnglishCollocationReplay();
+    closeEnglishImageTTSMenu();
+    rememberEnglishSpeechTrigger(trigger);
+    const generation = englishTTSState.dialogueSequenceGeneration;
+    englishTTSState.dialogueSequenceTrigger = trigger;
+    let unitIndex = 0;
+
+    const finishSequence = () => {
+        if (generation !== englishTTSState.dialogueSequenceGeneration) {
+            return;
+        }
+        cancelEnglishImageTTSDialogueSequence();
+        setEnglishTTSStatus("英文對話已朗讀完成。");
+        updateEnglishTTSControls();
+    };
+    const playNext = () => {
+        if (generation !== englishTTSState.dialogueSequenceGeneration) {
+            return false;
+        }
+        if (appState.subjectMode !== "english" || trigger.isConnected === false) {
+            cancelEnglishImageTTSDialogueSequence(true);
+            updateEnglishTTSControls();
+            return false;
+        }
+        const started = speakEnglishText(units[unitIndex], () => {
+            if (generation !== englishTTSState.dialogueSequenceGeneration) {
+                return;
+            }
+            if (appState.subjectMode !== "english" || trigger.isConnected === false) {
+                cancelEnglishImageTTSDialogueSequence(true);
+                updateEnglishTTSControls();
+                return;
+            }
+            unitIndex += 1;
+            if (unitIndex >= units.length) {
+                finishSequence();
+                return;
+            }
+            englishTTSState.dialogueSequenceTimer = window.setTimeout(() => {
+                englishTTSState.dialogueSequenceTimer = 0;
+                if (generation !== englishTTSState.dialogueSequenceGeneration) {
+                    updateEnglishTTSControls();
+                    return;
+                }
+                playNext();
+            }, 500);
+            setEnglishTTSStatus("英文對話朗讀中，兩句之間停頓 0.5 秒。");
+            updateEnglishTTSControls();
+        }, false, () => {
+            if (generation === englishTTSState.dialogueSequenceGeneration) {
+                cancelEnglishImageTTSDialogueSequence();
+                updateEnglishTTSControls();
+            }
+        }, null, null, generation);
+        if (!started && generation === englishTTSState.dialogueSequenceGeneration) {
+            cancelEnglishImageTTSDialogueSequence();
+            updateEnglishTTSControls();
+        }
+        return started;
+    };
+    return playNext();
+}
+
 function openEnglishImageTTSMenu(trigger, panel) {
     if (!trigger || !panel || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         return;
     }
     cancelEnglishImageTTSStorySequenceForDifferentTrigger(trigger);
-    const content = buildEnglishImageTTSPanelText(panel);
+    const dialogueUnits = Array.isArray(panel.speechUnits) ? panel.speechUnits : null;
+    const dialogueSentences = dialogueUnits
+        ? dialogueUnits.map(unit => unit && typeof unit.ttsText === "string"
+            ? getEnglishTTSUnitText(unit.ttsText)
+            : null)
+        : null;
+    const content = dialogueUnits
+        ? (dialogueSentences.length && dialogueSentences.every(Boolean) &&
+            dialogueUnits.every(unit => unit && typeof unit.sourceText === "string" &&
+                getEnglishTTSUnitText(unit.sourceText))
+            ? { sentences: dialogueSentences }
+            : null)
+        : buildEnglishImageTTSPanelText(panel);
     if (!content || !content.sentences.length || content.sentences.some(sentence => !sentence)) {
         setEnglishTTSStatus("這格圖片的英文資料不完整，暫時無法朗讀。");
         return;
@@ -5267,19 +5581,27 @@ function openEnglishImageTTSMenu(trigger, panel) {
     }
     englishImageTTSOverlayState.activeTrigger = trigger;
     trigger.setAttribute("aria-expanded", "true");
-    menu.setAttribute("aria-label", `第 ${panel.panelId} 格英文朗讀選項`);
+    menu.setAttribute("aria-label", dialogueUnits
+        ? "第 " + panel.panelId + " 格英文對話朗讀選項"
+        : `第 ${panel.panelId} 格英文朗讀選項`);
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
     }
 
     const wholePanelButton = createEnglishImageTTSMenuButton(
         "🔊 朗讀整段",
-        `朗讀第 ${panel.panelId} 格完整英文郵件`,
-        () => speakEnglishImageTTSFromPanel(trigger, content.fullText)
+        dialogueUnits
+            ? "依序朗讀第 " + panel.panelId + " 格完整英文對話"
+            : `朗讀第 ${panel.panelId} 格完整英文郵件`,
+        () => dialogueUnits
+            ? speakEnglishImageTTSDialogueSequence(trigger, panel)
+            : speakEnglishImageTTSFromPanel(trigger, content.fullText)
     );
     const sentenceToggle = createEnglishImageTTSMenuButton(
         "單句",
-        `展開第 ${panel.panelId} 格正文單句`,
+        dialogueUnits
+            ? "展開第 " + panel.panelId + " 格對話單句"
+            : `展開第 ${panel.panelId} 格正文單句`,
         () => {
             const sentenceList = menu.querySelector(".english-image-tts-sentences");
             if (!sentenceList) {
@@ -5296,10 +5618,15 @@ function openEnglishImageTTSMenu(trigger, panel) {
     sentenceList.className = "english-image-tts-sentences";
     sentenceList.hidden = true;
     content.sentences.forEach((sentence, index) => {
+        const unit = dialogueUnits ? dialogueUnits[index] : null;
         sentenceList.appendChild(createEnglishImageTTSMenuButton(
-            `🔊 第 ${index + 1} 句`,
-            `朗讀第 ${index + 1} 句英文正文`,
-            () => speakEnglishImageTTSFromPanel(trigger, sentence)
+            dialogueUnits ? "🔊 " + unit.sourceText : `🔊 第 ${index + 1} 句`,
+            dialogueUnits
+                ? "朗讀單句：" + unit.sourceText
+                : `朗讀第 ${index + 1} 句英文正文`,
+            () => dialogueUnits
+                ? speakEnglishImageTTSDialogueUnit(trigger, unit)
+                : speakEnglishImageTTSFromPanel(trigger, sentence)
         ));
     });
 

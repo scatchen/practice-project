@@ -9406,5 +9406,45 @@ const imageTTSData = {
                 contentReviewStatus: "verified-against-image"
             }
         ]
+    },
+    "images/english/business-meeting-basics.png": {
+        imageId: "business-meeting-basics",
+        assetFile: "images/english/business-meeting-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            { panelId: 1, readingOrder: 1, bounds: { xPct: 0, yPct: 0, widthPct: 50, heightPct: 50 }, speechUnits: [] },
+            { panelId: 2, readingOrder: 2, bounds: { xPct: 50, yPct: 0, widthPct: 50, heightPct: 50 }, speechUnits: [] },
+            { panelId: 3, readingOrder: 3, bounds: { xPct: 0, yPct: 50, widthPct: 50, heightPct: 50 }, speechUnits: [] },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50, yPct: 50, widthPct: 50, heightPct: 50 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "White dog",
+                        sourceText: "What do you think?",
+                        ttsText: "What do you think?",
+                        bounds: { xPct: 58.3, yPct: 51.9, widthPct: 17.4, heightPct: 15.4 },
+                        speakerAnchor: { xPct: 68.2, yPct: 69.2 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Woman in pink",
+                        sourceText: "Let’s discuss it.",
+                        ttsText: "Let’s discuss it.",
+                        bounds: { xPct: 79.0, yPct: 52.8, widthPct: 16.8, heightPct: 14.0 },
+                        speakerAnchor: { xPct: 87.7, yPct: 68.7 }
+                    }
+                ]
+            }
+        ]
     }
 };
