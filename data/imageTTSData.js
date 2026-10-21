@@ -9446,5 +9446,117 @@ const imageTTSData = {
                 ]
             }
         ]
-    }
+    },
+    "images/english/business-telephone-communication-and-difficult-calls-basics.png": {
+        imageId: "business-telephone-communication-and-difficult-calls-basics",
+        assetFile: "images/english/business-telephone-communication-and-difficult-calls-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.7161, yPct: 10.9375, widthPct: 49.1536, heightPct: 42.3828 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "White dog receptionist",
+                        sourceText: "I’m afraid Ms. Lee is away from her desk. Would you like to leave a message?",
+                        ttsText: "I’m afraid Ms. Lee is away from her desk. Would you like to leave a message?",
+                        bounds: { xPct: 1.2370, yPct: 17.5781, widthPct: 17.9036, heightPct: 19.0430 },
+                        speakerAnchor: { xPct: 22.3958, yPct: 41.9922 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Woman caller",
+                        sourceText: "Yes, please. Could you ask her to call me back before noon?",
+                        ttsText: "Yes, please. Could you ask her to call me back before noon?",
+                        bounds: { xPct: 34.3099, yPct: 17.3828, widthPct: 15.3646, heightPct: 15.7227 },
+                        speakerAnchor: { xPct: 29.6224, yPct: 27.8320 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.2604, yPct: 10.9375, widthPct: 49.2839, heightPct: 42.3828 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Woman caller",
+                        sourceText: "I’m sorry, I didn’t catch your last name. Could you spell it for me?",
+                        ttsText: "I’m sorry, I didn’t catch your last name. Could you spell it for me?",
+                        bounds: { xPct: 51.8880, yPct: 17.1875, widthPct: 20.1823, heightPct: 16.9922 },
+                        speakerAnchor: { xPct: 61.0677, yPct: 41.5039 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "White dog receptionist",
+                        sourceText: "Certainly. It’s Chen—C-H-E-N.",
+                        ttsText: "Certainly. It’s Chen—C-H-E-N.",
+                        bounds: { xPct: 86.0677, yPct: 17.3828, widthPct: 13.0208, heightPct: 15.5273 },
+                        speakerAnchor: { xPct: 88.6719, yPct: 41.5039 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.7161, yPct: 53.9063, widthPct: 49.1536, heightPct: 45.5078 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "White dog receptionist",
+                        sourceText: "I’m having trouble hearing you. Could you speak a little more slowly?",
+                        ttsText: "I’m having trouble hearing you. Could you speak a little more slowly?",
+                        bounds: { xPct: 1.8880, yPct: 60.2539, widthPct: 21.2240, heightPct: 18.3594 },
+                        speakerAnchor: { xPct: 11.9792, yPct: 86.9141 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Man caller",
+                        sourceText: "The line is breaking up. May I call you back in a few minutes?",
+                        ttsText: "The line is breaking up. May I call you back in a few minutes?",
+                        bounds: { xPct: 27.9948, yPct: 60.2539, widthPct: 20.3776, heightPct: 15.9180 },
+                        speakerAnchor: { xPct: 40.0391, yPct: 83.7891 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.2604, yPct: 53.9063, widthPct: 49.2839, heightPct: 45.5078 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Woman caller",
+                        sourceText: "An urgent issue has come up, so I need to postpone our call.",
+                        ttsText: "An urgent issue has come up, so I need to postpone our call.",
+                        bounds: { xPct: 51.6927, yPct: 60.2539, widthPct: 23.1120, heightPct: 15.5273 },
+                        speakerAnchor: { xPct: 57.8776, yPct: 83.1055 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "White dog receptionist",
+                        sourceText: "Understood. Could we speak tomorrow morning instead?",
+                        ttsText: "Understood. Could we speak tomorrow morning instead?",
+                        bounds: { xPct: 81.2500, yPct: 60.2539, widthPct: 18.0339, heightPct: 16.6016 },
+                        speakerAnchor: { xPct: 83.2031, yPct: 83.1055 }
+                    }
+                ]
+            }
+        ]
+    },
 };

@@ -798,7 +798,10 @@ color: #111827;
 
         .image-tts-dialogue-speaker-below {
             box-sizing: border-box;
-            padding-bottom: 52px;
+        }
+
+        .image-tts-dialogue-speaker-below-narrow {
+            box-sizing: border-box;
         }
 
         .english-image-story-controls {
@@ -4829,25 +4832,14 @@ function getEnglishImageTTSRecord(assetFile) {
     const orderedPanels = record.panels.slice().sort((left, right) => left.readingOrder - right.readingOrder);
 
     if (record.contentType === "dialogue") {
-        const expectedCells = [
-            { xPct: 0, yPct: 0 },
-            { xPct: 50, yPct: 0 },
-            { xPct: 0, yPct: 50 },
-            { xPct: 50, yPct: 50 }
-        ];
         if (record.layout !== "2x2" || orderedPanels.length !== 4) {
             return null;
         }
         for (let index = 0; index < orderedPanels.length; index += 1) {
             const panel = orderedPanels[index];
-            const cell = expectedCells[index];
             const bounds = panel && panel.bounds;
-            if (!panel || !Number.isInteger(panel.panelId) || panelIds.has(panel.panelId) ||
+            if (!panel || panel.panelId !== index + 1 || panelIds.has(panel.panelId) ||
                 panel.readingOrder !== index + 1 || !isValidBounds(bounds) ||
-                Math.abs(bounds.xPct - cell.xPct) > 0.5 ||
-                Math.abs(bounds.yPct - cell.yPct) > 0.5 ||
-                Math.abs(bounds.widthPct - 50) > 0.5 ||
-                Math.abs(bounds.heightPct - 50) > 0.5 ||
                 !Array.isArray(panel.speechUnits)) {
                 return null;
             }
@@ -4862,7 +4854,8 @@ function getEnglishImageTTSRecord(assetFile) {
                     unit.readingOrder !== unitIndex + 1 ||
                     typeof unit.speaker !== "string" || !unit.speaker.trim() ||
                     typeof unit.sourceText !== "string" || !getEnglishTTSUnitText(unit.sourceText) ||
-                    typeof unit.ttsText !== "string" || !getEnglishTTSUnitText(unit.ttsText) ||
+                    typeof unit.ttsText !== "string" || unit.ttsText !== unit.sourceText ||
+                    !getEnglishTTSUnitText(unit.ttsText) ||
                     !isValidBounds(unit.bounds) || anchorValues.length !== 2 ||
                     !anchorValues.every(value => Number.isFinite(value) && value >= 0 && value <= 100) ||
                     unit.bounds.xPct < bounds.xPct || unit.bounds.yPct < bounds.yPct ||
@@ -4895,6 +4888,23 @@ function getEnglishImageTTSRecord(assetFile) {
                     return null;
                 }
             }
+        }
+
+        const [topLeft, topRight, bottomLeft, bottomRight] = orderedPanels.map(panel => panel.bounds);
+        const nearlyEqual = (left, right) => Math.abs(left - right) <= 0.5;
+        if (!nearlyEqual(topLeft.xPct, bottomLeft.xPct) ||
+            !nearlyEqual(topRight.xPct, bottomRight.xPct) ||
+            !nearlyEqual(topLeft.widthPct, bottomLeft.widthPct) ||
+            !nearlyEqual(topRight.widthPct, bottomRight.widthPct) ||
+            !nearlyEqual(topLeft.yPct, topRight.yPct) ||
+            !nearlyEqual(bottomLeft.yPct, bottomRight.yPct) ||
+            !nearlyEqual(topLeft.heightPct, topRight.heightPct) ||
+            !nearlyEqual(bottomLeft.heightPct, bottomRight.heightPct) ||
+            topLeft.xPct + topLeft.widthPct > topRight.xPct + 0.01 ||
+            bottomLeft.xPct + bottomLeft.widthPct > bottomRight.xPct + 0.01 ||
+            topLeft.yPct + topLeft.heightPct > bottomLeft.yPct + 0.01 ||
+            topRight.yPct + topRight.heightPct > bottomRight.yPct + 0.01) {
+            return null;
         }
         return { ...record, panels: orderedPanels };
     }
@@ -5148,6 +5158,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
                     button.hidden = true;
                 });
                 wrapper.classList.remove("image-tts-dialogue-speaker-below");
+                wrapper.classList.remove("image-tts-dialogue-speaker-below-narrow");
+                wrapper.style.paddingBottom = "";
             }, { once: true });
             if (image.complete) {
                 if (image.naturalWidth > 0) {
@@ -5157,6 +5169,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
                         button.hidden = true;
                     });
                     wrapper.classList.remove("image-tts-dialogue-speaker-below");
+                    wrapper.classList.remove("image-tts-dialogue-speaker-below-narrow");
+                    wrapper.style.paddingBottom = "";
                 }
             } else {
                 scheduleEnglishImageTTSLayout();
@@ -5233,9 +5247,19 @@ function layoutEnglishImageTTSPanelSpeakers(wrapper) {
 
     const imageLeft = imageRect.left - wrapperRect.left;
     const imageTop = imageRect.top - wrapperRect.top;
+    const dialogueButtons = Array.from(wrapper.querySelectorAll(".image-tts-dialogue-speaker"));
+    const dialogueButtonIndexes = new Map(dialogueButtons.map((button, index) => [button, index]));
     wrapper.querySelectorAll(".image-tts-panel-speaker").forEach(button => {
         if (button._englishImageTTSDialoguePanel) {
-            layoutEnglishImageTTSDialogueSpeaker(wrapper, imageRect, imageLeft, imageTop, button);
+            layoutEnglishImageTTSDialogueSpeaker(
+                wrapper,
+                imageRect,
+                imageLeft,
+                imageTop,
+                button,
+                dialogueButtonIndexes.get(button) || 0,
+                dialogueButtons.length
+            );
             return;
         }
         const placement = button._englishImageTTSPlacement;
@@ -5260,32 +5284,55 @@ function layoutEnglishImageTTSPanelSpeakers(wrapper) {
         const desiredLeft = imageLeft + imageRect.width * placement.anchor.xPct / 100 - buttonWidth / 2;
         const desiredTop = imageTop + imageRect.height * placement.anchor.yPct / 100 - buttonHeight / 2;
         const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum);
-        button.style.left = `${clamp(desiredLeft, panelLeft, panelRight - buttonWidth)}px`;
-        button.style.top = `${clamp(desiredTop, panelTop, panelBottom - buttonHeight)}px`;
+        button.style.left = clamp(desiredLeft, panelLeft, panelRight - buttonWidth) + "px";
+        button.style.top = clamp(desiredTop, panelTop, panelBottom - buttonHeight) + "px";
         button.style.transform = "none";
         button.hidden = false;
     });
 }
 
-function layoutEnglishImageTTSDialogueSpeaker(wrapper, imageRect, imageLeft, imageTop, button) {
+function layoutEnglishImageTTSDialogueSpeaker(wrapper, imageRect, imageLeft, imageTop, button, buttonIndex, buttonCount) {
     const buttonWidth = button.getBoundingClientRect().width || 44;
     const buttonHeight = button.getBoundingClientRect().height || 44;
     const panel = button._englishImageTTSDialoguePanel;
     const viewport = window.visualViewport;
+    const viewportLeft = viewport ? viewport.offsetLeft : 0;
     const viewportRight = viewport
         ? viewport.offsetLeft + viewport.width
         : (document.documentElement.clientWidth || window.innerWidth);
     const gap = 4;
+    const stackHeight = buttonCount * buttonHeight + Math.max(0, buttonCount - 1) * gap;
     const rightSideFits = imageRect.right + gap + buttonWidth <= viewportRight - 8;
+    const leftSideFits = imageRect.left - gap - buttonWidth >= viewportLeft + 8;
+    const sideFits = imageRect.height >= stackHeight && (rightSideFits || leftSideFits);
 
-    if (rightSideFits) {
+    if (sideFits) {
         wrapper.classList.remove("image-tts-dialogue-speaker-below");
-        button.style.left = (imageLeft + imageRect.width + gap) + "px";
-        button.style.top = (imageTop + imageRect.height * panel.bounds.yPct / 100 + gap) + "px";
+        wrapper.classList.remove("image-tts-dialogue-speaker-below-narrow");
+        wrapper.style.paddingBottom = "";
+        const sideLeft = rightSideFits
+            ? imageLeft + imageRect.width + gap
+            : imageLeft - buttonWidth - gap;
+        const stackTop = imageTop + Math.max(0, (imageRect.height - stackHeight) / 2);
+        button.style.left = sideLeft + "px";
+        button.style.top = stackTop + buttonIndex * (buttonHeight + gap) + "px";
     } else {
-        wrapper.classList.add("image-tts-dialogue-speaker-below");
-        button.style.left = (imageLeft + imageRect.width - buttonWidth) + "px";
-        button.style.top = (imageTop + imageRect.height + gap) + "px";
+        const narrowColumn = imageRect.width < buttonWidth * 2 + gap;
+        wrapper.classList.toggle("image-tts-dialogue-speaker-below", !narrowColumn);
+        wrapper.classList.toggle("image-tts-dialogue-speaker-below-narrow", narrowColumn);
+        const row = narrowColumn ? buttonIndex : (panel.panelId <= 2 ? 0 : 1);
+        const column = narrowColumn ? 0 : ((panel.panelId === 2 || panel.panelId === 4) ? 1 : 0);
+        const rowCount = narrowColumn ? buttonCount : 2;
+        const requiredPadding = gap + (rowCount - 1) * (buttonHeight + gap) + buttonHeight;
+        wrapper.style.paddingBottom = requiredPadding + "px";
+        const desiredLeft = narrowColumn
+            ? imageLeft + (imageRect.width - buttonWidth) / 2
+            : imageLeft + imageRect.width * (column === 0 ? 0.25 : 0.75) - buttonWidth / 2;
+        button.style.left = Math.min(
+            Math.max(desiredLeft, imageLeft),
+            imageLeft + imageRect.width - buttonWidth
+        ) + "px";
+        button.style.top = imageTop + imageRect.height + gap + row * (buttonHeight + gap) + "px";
     }
     button.style.transform = "none";
     button.hidden = false;
