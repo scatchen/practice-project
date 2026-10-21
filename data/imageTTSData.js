@@ -7047,4 +7047,175 @@ const imageTTSData = {
             }
         ]
     },
+
+    "images/english/at-the-library-borrowing-and-returning-books-basics.png": {
+        "imageId": "at-the-library-borrowing-and-returning-books-basics",
+        "assetFile": "images/english/at-the-library-borrowing-and-returning-books-basics.png",
+        "contentType": "story",
+        "layout": "2x6",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "proficiencyBand": "beginner",
+                "text": "Hello. Can you help me? Of course.",
+                "sentences": ["Hello.", "Can you help me?", "Of course."],
+                "speechUnits": [
+                    { "speaker": "Emma", "sourceText": "Hello. Can you help me?", "ttsText": "Hello. Can you help me?" },
+                    { "speaker": "Jordan", "sourceText": "Of course.", "ttsText": "Of course." }
+                ],
+                "bounds": { "x": 166, "y": 86, "width": 418, "height": 234, "xPct": 16.2109, "yPct": 5.5990, "widthPct": 40.8203, "heightPct": 15.2344 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "proficiencyBand": "beginner",
+                "text": "I’m looking for a book about space. I can help you find one.",
+                "sentences": ["I’m looking for a book about space.", "I can help you find one."],
+                "speechUnits": [
+                    { "speaker": "Emma", "sourceText": "I’m looking for a book about space.", "ttsText": "I’m looking for a book about space." },
+                    { "speaker": "Jordan", "sourceText": "I can help you find one.", "ttsText": "I can help you find one." }
+                ],
+                "bounds": { "x": 595, "y": 86, "width": 418, "height": 234, "xPct": 58.1055, "yPct": 5.5990, "widthPct": 40.8203, "heightPct": 15.2344 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "proficiencyBand": "beginner",
+                "text": "The space books are on Shelf four. Thank you!",
+                "sentences": ["The space books are on Shelf four.", "Thank you!"],
+                "speechUnits": [
+                    { "speaker": "Jordan", "sourceText": "The space books are on Shelf 4.", "ttsText": "The space books are on Shelf four." },
+                    { "speaker": "Emma", "sourceText": "Thank you!", "ttsText": "Thank you!" }
+                ],
+                "bounds": { "x": 166, "y": 330, "width": 418, "height": 225, "xPct": 16.2109, "yPct": 21.4844, "widthPct": 40.8203, "heightPct": 14.6484 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "proficiencyBand": "beginner",
+                "text": "May I borrow this book? Certainly. It’s due September fifteenth.",
+                "sentences": ["May I borrow this book?", "Certainly.", "It’s due September fifteenth."],
+                "speechUnits": [
+                    { "speaker": "Emma", "sourceText": "May I borrow this book?", "ttsText": "May I borrow this book?" },
+                    { "speaker": "Jordan", "sourceText": "Certainly. It’s due September 15.", "ttsText": "Certainly. It’s due September fifteenth." }
+                ],
+                "bounds": { "x": 595, "y": 330, "width": 418, "height": 225, "xPct": 58.1055, "yPct": 21.4844, "widthPct": 40.8203, "heightPct": 14.6484 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 5,
+                "readingOrder": 5,
+                "proficiencyBand": "intermediate",
+                "text": "I still have two chapters to read, and the book is due in three days.",
+                "sentences": ["I still have two chapters to read, and the book is due in three days."],
+                "speechUnits": [
+                    { "speaker": "Emma", "sourceText": "I still have two chapters to read, and the book is due in three days.", "ttsText": "I still have two chapters to read, and the book is due in three days." }
+                ],
+                "bounds": { "x": 166, "y": 566, "width": 418, "height": 222, "xPct": 16.2109, "yPct": 36.8490, "widthPct": 40.8203, "heightPct": 14.4531 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 6,
+                "readingOrder": 6,
+                "proficiencyBand": "intermediate",
+                "text": "Could I renew this book online if no one else has requested it?",
+                "sentences": ["Could I renew this book online if no one else has requested it?"],
+                "speechUnits": [
+                    { "speaker": "Emma", "sourceText": "Could I renew this book online if no one else has requested it?", "ttsText": "Could I renew this book online if no one else has requested it?" }
+                ],
+                "bounds": { "x": 595, "y": 566, "width": 418, "height": 222, "xPct": 58.1055, "yPct": 36.8490, "widthPct": 40.8203, "heightPct": 14.4531 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 7,
+                "readingOrder": 7,
+                "proficiencyBand": "intermediate",
+                "text": "I’ll check the hold list before approving the request. Thank you.",
+                "sentences": ["I’ll check the hold list before approving the request.", "Thank you."],
+                "speechUnits": [
+                    { "speaker": "Jordan", "sourceText": "I’ll check the hold list before approving the request.", "ttsText": "I’ll check the hold list before approving the request." },
+                    { "speaker": "Emma", "sourceText": "Thank you.", "ttsText": "Thank you." }
+                ],
+                "bounds": { "x": 166, "y": 799, "width": 418, "height": 229, "xPct": 16.2109, "yPct": 52.0182, "widthPct": 40.8203, "heightPct": 14.9089 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 8,
+                "readingOrder": 8,
+                "proficiencyBand": "intermediate",
+                "text": "Another reader has requested this book, so we can’t extend the due date. Please return it by September fifteenth.",
+                "sentences": ["Another reader has requested this book, so we can’t extend the due date.", "Please return it by September fifteenth."],
+                "speechUnits": [
+                    { "speaker": "System notice", "sourceText": "Another reader has requested this book, so we can’t extend the due date. Please return it by September 15.", "ttsText": "Another reader has requested this book, so we can’t extend the due date. Please return it by September fifteenth." }
+                ],
+                "bounds": { "x": 595, "y": 799, "width": 418, "height": 229, "xPct": 58.1055, "yPct": 52.0182, "widthPct": 40.8203, "heightPct": 14.9089 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 9,
+                "readingOrder": 9,
+                "proficiencyBand": "upper-intermediate",
+                "text": "My borrowing period expired on September fifteenth, and I still haven’t returned the book.",
+                "sentences": ["My borrowing period expired on September fifteenth, and I still haven’t returned the book."],
+                "speechUnits": [
+                    { "speaker": "Emma", "sourceText": "My borrowing period expired on September 15, and I still haven’t returned the book.", "ttsText": "My borrowing period expired on September fifteenth, and I still haven’t returned the book." }
+                ],
+                "bounds": { "x": 166, "y": 1039, "width": 418, "height": 203, "xPct": 16.2109, "yPct": 67.6432, "widthPct": 40.8203, "heightPct": 13.2161 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 10,
+                "readingOrder": 10,
+                "proficiencyBand": "upper-intermediate",
+                "text": "I’m returning it three days late. Could you verify whether a fee is due?",
+                "sentences": ["I’m returning it three days late.", "Could you verify whether a fee is due?"],
+                "speechUnits": [
+                    { "speaker": "Emma", "sourceText": "I’m returning it three days late. Could you verify whether a fee is due?", "ttsText": "I’m returning it three days late. Could you verify whether a fee is due?" }
+                ],
+                "bounds": { "x": 595, "y": 1039, "width": 418, "height": 203, "xPct": 58.1055, "yPct": 67.6432, "widthPct": 40.8203, "heightPct": 13.2161 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 11,
+                "readingOrder": 11,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Because another reader reserved the book, it wasn’t eligible for renewal. Under our policy, there is no overdue fine, and your library card remains valid.",
+                "sentences": [
+                    "Because another reader reserved the book, it wasn’t eligible for renewal.",
+                    "Under our policy, there is no overdue fine, and your library card remains valid."
+                ],
+                "speechUnits": [
+                    { "speaker": "Jordan", "sourceText": "Because another reader reserved the book, it wasn’t eligible for renewal.", "ttsText": "Because another reader reserved the book, it wasn’t eligible for renewal." },
+                    { "speaker": "Jordan", "sourceText": "Under our policy, there is no overdue fine, and your library card remains valid.", "ttsText": "Under our policy, there is no overdue fine, and your library card remains valid." }
+                ],
+                "bounds": { "x": 166, "y": 1253, "width": 418, "height": 267, "xPct": 16.2109, "yPct": 81.5755, "widthPct": 40.8203, "heightPct": 17.3828 },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 12,
+                "readingOrder": 12,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Could you notify me before my next due date? Certainly. Your book has been returned, and your account is clear.",
+                "sentences": [
+                    "Could you notify me before my next due date?",
+                    "Certainly.",
+                    "Your book has been returned, and your account is clear."
+                ],
+                "speechUnits": [
+                    { "speaker": "Emma", "sourceText": "Could you notify me before my next due date?", "ttsText": "Could you notify me before my next due date?" },
+                    { "speaker": "Jordan", "sourceText": "Certainly. Your book has been returned, and your account is clear.", "ttsText": "Certainly. Your book has been returned, and your account is clear." }
+                ],
+                "bounds": { "x": 595, "y": 1253, "width": 418, "height": 267, "xPct": 58.1055, "yPct": 81.5755, "widthPct": 40.8203, "heightPct": 17.3828 },
+                "contentReviewStatus": "verified-against-image"
+            }
+        ]
+    },
 };
