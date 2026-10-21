@@ -9559,4 +9559,253 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/business-meetings-and-presentations-basics.png": {
+        "imageId": "business-meetings-and-presentations-basics",
+        "assetFile": "images/english/business-meetings-and-presentations-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": {
+                    "xPct": 0.3906,
+                    "yPct": 8.0078,
+                    "widthPct": 49.2839,
+                    "heightPct": 44.043
+                },
+                "speakerButtonPlacement": {
+                    "anchor": {
+                        "xPct": 3.2552,
+                        "yPct": 3.7109
+                    },
+                    "safeBounds": {
+                        "xPct": 0.3906,
+                        "yPct": 0,
+                        "widthPct": 13.2813,
+                        "heightPct": 7.8125
+                    }
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Male presenter",
+                        "sourceText": "Let’s get started. Today’s agenda is as follows.",
+                        "ttsText": "Let’s get started. Today’s agenda is as follows.",
+                        "bounds": {
+                            "xPct": 13.8021,
+                            "yPct": 15.2344,
+                            "widthPct": 15.2995,
+                            "heightPct": 12.793
+                        },
+                        "speakerAnchor": {
+                            "xPct": 9.7656,
+                            "yPct": 21.6797
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": {
+                    "xPct": 50.4557,
+                    "yPct": 8.0078,
+                    "widthPct": 49.1536,
+                    "heightPct": 44.043
+                },
+                "speakerButtonPlacement": {
+                    "anchor": {
+                        "xPct": 54.6875,
+                        "yPct": 17.5781
+                    },
+                    "safeBounds": {
+                        "xPct": 51.1068,
+                        "yPct": 14.0625,
+                        "widthPct": 6.8359,
+                        "heightPct": 7.8125
+                    }
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Woman in tan blazer",
+                        "sourceText": "From my perspective, we should focus on the Asian market.",
+                        "ttsText": "From my perspective, we should focus on the Asian market.",
+                        "bounds": {
+                            "xPct": 60.4167,
+                            "yPct": 14.6484,
+                            "widthPct": 18.1641,
+                            "heightPct": 13.9648
+                        },
+                        "speakerAnchor": {
+                            "xPct": 56.4453,
+                            "yPct": 34.1797
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "Man in dark teal suit",
+                        "sourceText": "I’d like to suggest a digital marketing campaign to reach more customers.",
+                        "ttsText": "I’d like to suggest a digital marketing campaign to reach more customers.",
+                        "bounds": {
+                            "xPct": 80.1432,
+                            "yPct": 14.6484,
+                            "widthPct": 16.2109,
+                            "heightPct": 16.5039
+                        },
+                        "speakerAnchor": {
+                            "xPct": 75.8464,
+                            "yPct": 35.6445
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": {
+                    "xPct": 0.3906,
+                    "yPct": 52.9297,
+                    "widthPct": 49.2839,
+                    "heightPct": 46.4844
+                },
+                "speakerButtonPlacement": {
+                    "anchor": {
+                        "xPct": 46.875,
+                        "yPct": 56.6406
+                    },
+                    "safeBounds": {
+                        "xPct": 44.2708,
+                        "yPct": 52.9297,
+                        "widthPct": 5.2083,
+                        "heightPct": 7.1289
+                    }
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Man with glasses",
+                        "sourceText": "Are we all in agreement with this plan?",
+                        "ttsText": "Are we all in agreement with this plan?",
+                        "bounds": {
+                            "xPct": 4.7526,
+                            "yPct": 61.5234,
+                            "widthPct": 19.2057,
+                            "heightPct": 11.2305
+                        },
+                        "speakerAnchor": {
+                            "xPct": 15.3646,
+                            "yPct": 82.2266
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "Woman in pink",
+                        "sourceText": "Yes, I think this is the best option.",
+                        "ttsText": "Yes, I think this is the best option.",
+                        "bounds": {
+                            "xPct": 24.0234,
+                            "yPct": 65.4297,
+                            "widthPct": 11.1328,
+                            "heightPct": 12.5
+                        },
+                        "speakerAnchor": {
+                            "xPct": 29.4271,
+                            "yPct": 83.6914
+                        }
+                    },
+                    {
+                        "unitId": 3,
+                        "readingOrder": 3,
+                        "speaker": "Man in light blue shirt",
+                        "sourceText": "I agree. Let’s move forward with this plan.",
+                        "ttsText": "I agree. Let’s move forward with this plan.",
+                        "bounds": {
+                            "xPct": 35.612,
+                            "yPct": 62.5,
+                            "widthPct": 13.9323,
+                            "heightPct": 12.9883
+                        },
+                        "speakerAnchor": {
+                            "xPct": 43.8151,
+                            "yPct": 83.0078
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": {
+                    "xPct": 50.4557,
+                    "yPct": 52.9297,
+                    "widthPct": 49.1536,
+                    "heightPct": 46.4844
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Male presenter",
+                        "sourceText": "To summarize, we will implement the plan next month and monitor the results.",
+                        "ttsText": "To summarize, we will implement the plan next month and monitor the results.",
+                        "bounds": {
+                            "xPct": 60.612,
+                            "yPct": 59.375,
+                            "widthPct": 19.0755,
+                            "heightPct": 13.5742
+                        },
+                        "speakerAnchor": {
+                            "xPct": 56.7708,
+                            "yPct": 65.625
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "Foreground man, back to viewer",
+                        "sourceText": "Who will be responsible for the market analysis?",
+                        "ttsText": "Who will be responsible for the market analysis?",
+                        "bounds": {
+                            "xPct": 62.2396,
+                            "yPct": 83.6914,
+                            "widthPct": 18.3594,
+                            "heightPct": 10.2539
+                        },
+                        "speakerAnchor": {
+                            "xPct": 70.3125,
+                            "yPct": 81.543
+                        }
+                    },
+                    {
+                        "unitId": 3,
+                        "readingOrder": 3,
+                        "speaker": "Woman in pink",
+                        "sourceText": "I’ll take care of that.",
+                        "ttsText": "I’ll take care of that.",
+                        "bounds": {
+                            "xPct": 82.1615,
+                            "yPct": 87.1094,
+                            "widthPct": 10.4167,
+                            "heightPct": 7.9102
+                        },
+                        "speakerAnchor": {
+                            "xPct": 96.6797,
+                            "yPct": 91.2109
+                        }
+                    }
+                ]
+            }
+        ]
+    },
 };

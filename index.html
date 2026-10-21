@@ -4844,6 +4844,44 @@ function getEnglishImageTTSRecord(assetFile) {
                 return null;
             }
             panelIds.add(panel.panelId);
+            const hasSpeakerButtonPlacement = Object.prototype.hasOwnProperty.call(panel, "speakerButtonPlacement");
+            const speakerButtonPlacement = hasSpeakerButtonPlacement ? panel.speakerButtonPlacement : null;
+            const hasExactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value) &&
+                Object.keys(value).length === keys.length && keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+            if (hasSpeakerButtonPlacement) {
+                const placement = speakerButtonPlacement;
+                const anchor = placement && placement.anchor;
+                const safeBounds = placement && placement.safeBounds;
+                const anchorValues = anchor ? [anchor.xPct, anchor.yPct] : [];
+                const anchorWithinPanel = anchor && anchor.xPct >= bounds.xPct &&
+                    anchor.xPct <= bounds.xPct + bounds.widthPct &&
+                    anchor.yPct >= bounds.yPct &&
+                    anchor.yPct <= bounds.yPct + bounds.heightPct;
+                const safeBoundsWithinPanel = safeBounds &&
+                    safeBounds.xPct >= bounds.xPct && safeBounds.yPct >= bounds.yPct &&
+                    safeBounds.xPct + safeBounds.widthPct <= bounds.xPct + bounds.widthPct &&
+                    safeBounds.yPct + safeBounds.heightPct <= bounds.yPct + bounds.heightPct;
+                const firstPanelTitleMarginPlacement = record.imageId === "business-meetings-and-presentations-basics" &&
+                    panel.panelId === 1 && safeBounds && anchor &&
+                    safeBounds.xPct >= bounds.xPct &&
+                    safeBounds.xPct + safeBounds.widthPct <= 13.6719 &&
+                    safeBounds.yPct === 0 &&
+                    safeBounds.yPct + safeBounds.heightPct <= 7.8125 &&
+                    Number.isFinite(anchor.xPct) && Number.isFinite(anchor.yPct) &&
+                    anchor.xPct >= safeBounds.xPct && anchor.xPct <= safeBounds.xPct + safeBounds.widthPct &&
+                    anchor.yPct >= safeBounds.yPct && anchor.yPct <= safeBounds.yPct + safeBounds.heightPct;
+                if (!hasExactKeys(placement, ["anchor", "safeBounds"]) ||
+                    !hasExactKeys(anchor, ["xPct", "yPct"]) ||
+                    !hasExactKeys(safeBounds, ["xPct", "yPct", "widthPct", "heightPct"]) ||
+                    !anchorValues.every(value => Number.isFinite(value) && value >= 0 && value <= 100) ||
+                    !isValidBounds(safeBounds) ||
+                    (!anchorWithinPanel && !firstPanelTitleMarginPlacement) ||
+                    (!safeBoundsWithinPanel && !firstPanelTitleMarginPlacement) ||
+                    anchor.xPct < safeBounds.xPct || anchor.xPct > safeBounds.xPct + safeBounds.widthPct ||
+                    anchor.yPct < safeBounds.yPct || anchor.yPct > safeBounds.yPct + safeBounds.heightPct) {
+                    return null;
+                }
+            }
             const unitIds = new Set();
             const unitBounds = [];
             for (let unitIndex = 0; unitIndex < panel.speechUnits.length; unitIndex += 1) {
@@ -4885,6 +4923,15 @@ function getEnglishImageTTSRecord(assetFile) {
                     unit.speakerAnchor.xPct <= rect.xPct + rect.widthPct &&
                     unit.speakerAnchor.yPct >= rect.yPct &&
                     unit.speakerAnchor.yPct <= rect.yPct + rect.heightPct)) {
+                    return null;
+                }
+            }
+            if (speakerButtonPlacement) {
+                const safeBounds = speakerButtonPlacement.safeBounds;
+                if (unitBounds.some(rect => safeBounds.xPct < rect.xPct + rect.widthPct &&
+                    safeBounds.xPct + safeBounds.widthPct > rect.xPct &&
+                    safeBounds.yPct < rect.yPct + rect.heightPct &&
+                    safeBounds.yPct + safeBounds.heightPct > rect.yPct)) {
                     return null;
                 }
             }
@@ -5292,9 +5339,51 @@ function layoutEnglishImageTTSPanelSpeakers(wrapper) {
 }
 
 function layoutEnglishImageTTSDialogueSpeaker(wrapper, imageRect, imageLeft, imageTop, button, buttonIndex, buttonCount) {
-    const buttonWidth = button.getBoundingClientRect().width || 44;
-    const buttonHeight = button.getBoundingClientRect().height || 44;
+    const buttonRect = button.getBoundingClientRect();
+    const buttonWidth = buttonRect.width || 44;
+    const buttonHeight = buttonRect.height || 44;
     const panel = button._englishImageTTSDialoguePanel;
+    const placement = panel && panel.speakerButtonPlacement;
+    if (placement && panel.bounds && Array.isArray(panel.speechUnits)) {
+        const desiredLeft = imageLeft + imageRect.width * placement.anchor.xPct / 100 - buttonWidth / 2;
+        const desiredTop = imageTop + imageRect.height * placement.anchor.yPct / 100 - buttonHeight / 2;
+        const safeLeft = imageLeft + imageRect.width * placement.safeBounds.xPct / 100;
+        const safeTop = imageTop + imageRect.height * placement.safeBounds.yPct / 100;
+        const safeRight = safeLeft + imageRect.width * placement.safeBounds.widthPct / 100;
+        const safeBottom = safeTop + imageRect.height * placement.safeBounds.heightPct / 100;
+        const panelLeft = imageLeft + imageRect.width * panel.bounds.xPct / 100;
+        const panelTop = imageTop + imageRect.height * panel.bounds.yPct / 100;
+        const panelRight = panelLeft + imageRect.width * panel.bounds.widthPct / 100;
+        const panelBottom = panelTop + imageRect.height * panel.bounds.heightPct / 100;
+        const firstPanelTitleMarginPlacement = panel.panelId === 1 &&
+            placement.safeBounds.yPct === 0 &&
+            placement.safeBounds.yPct + placement.safeBounds.heightPct <= 7.8125 &&
+            placement.safeBounds.xPct >= panel.bounds.xPct &&
+            placement.safeBounds.xPct + placement.safeBounds.widthPct <= 13.6719;
+        const buttonRight = desiredLeft + buttonWidth;
+        const buttonBottom = desiredTop + buttonHeight;
+        const bubbleClear = panel.speechUnits.every(unit => {
+            const bubbleLeft = imageLeft + imageRect.width * unit.bounds.xPct / 100;
+            const bubbleTop = imageTop + imageRect.height * unit.bounds.yPct / 100;
+            const bubbleRight = bubbleLeft + imageRect.width * unit.bounds.widthPct / 100;
+            const bubbleBottom = bubbleTop + imageRect.height * unit.bounds.heightPct / 100;
+            const clearance = 1;
+            return buttonRight <= bubbleLeft - clearance || desiredLeft >= bubbleRight + clearance ||
+                buttonBottom <= bubbleTop - clearance || desiredTop >= bubbleBottom + clearance;
+        });
+        if (desiredLeft >= safeLeft && desiredTop >= safeTop &&
+            buttonRight <= safeRight && buttonBottom <= safeBottom &&
+            desiredLeft >= panelLeft && buttonRight <= panelRight &&
+            ((desiredTop >= panelTop && buttonBottom <= panelBottom) ||
+                (firstPanelTitleMarginPlacement && desiredTop >= imageTop && buttonBottom <= panelTop)) &&
+            bubbleClear) {
+            button.style.left = desiredLeft + "px";
+            button.style.top = desiredTop + "px";
+            button.style.transform = "none";
+            button.hidden = false;
+            return;
+        }
+    }
     const viewport = window.visualViewport;
     const viewportLeft = viewport ? viewport.offsetLeft : 0;
     const viewportRight = viewport
