@@ -8342,5 +8342,361 @@ const imageTTSData = {
                 "contentReviewStatus": "verified-against-image"
             }
         ]
+    },
+    "images/english/at-the-airport-checking-in-and-boarding-basics.png": {
+        "imageId": "at-the-airport-checking-in-and-boarding-basics",
+        "assetFile": "images/english/at-the-airport-checking-in-and-boarding-basics.png",
+        "contentType": "story",
+        "layout": "2x6",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "proficiencyBand": "beginner",
+                "text": "Where's the check-in counter for Flight seven oh two? Counter eighteen, straight ahead.",
+                "sentences": [
+                    "Where's the check-in counter for Flight seven oh two?",
+                    "Counter eighteen, straight ahead."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "Where's the check-in counter for Flight 702?",
+                        "ttsText": "Where's the check-in counter for Flight seven oh two?"
+                    },
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "Counter 18, straight ahead.",
+                        "ttsText": "Counter eighteen, straight ahead."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 6.640625,
+                    "yPct": 6.705729166666667,
+                    "widthPct": 47.265625,
+                    "heightPct": 13.8671875
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "proficiencyBand": "beginner",
+                "text": "I'd like to check in for Flight seven oh two. May I see your passport?",
+                "sentences": [
+                    "I'd like to check in for Flight seven oh two.",
+                    "May I see your passport?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "I'd like to check in for Flight 702.",
+                        "ttsText": "I'd like to check in for Flight seven oh two."
+                    },
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "May I see your passport?",
+                        "ttsText": "May I see your passport?"
+                    }
+                ],
+                "bounds": {
+                    "xPct": 54.6875,
+                    "yPct": 6.705729166666667,
+                    "widthPct": 44.7265625,
+                    "heightPct": 13.8671875
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "proficiencyBand": "beginner",
+                "text": "You're on Flight seven oh two to Vancouver. It leaves at six forty-five P M. That's right.",
+                "sentences": [
+                    "You're on Flight seven oh two to Vancouver.",
+                    "It leaves at six forty-five P M.",
+                    "That's right."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "You're on Flight 702 to Vancouver. It leaves at 6:45 p.m.",
+                        "ttsText": "You're on Flight seven oh two to Vancouver. It leaves at six forty-five P M."
+                    },
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "That's right.",
+                        "ttsText": "That's right."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 6.640625,
+                    "yPct": 20.963541666666664,
+                    "widthPct": 47.265625,
+                    "heightPct": 13.997395833333334
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "proficiencyBand": "beginner",
+                "text": "I have one bag to check. Please put it on the scale.",
+                "sentences": [
+                    "I have one bag to check.",
+                    "Please put it on the scale."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "I have one bag to check.",
+                        "ttsText": "I have one bag to check."
+                    },
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "Please put it on the scale.",
+                        "ttsText": "Please put it on the scale."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 54.6875,
+                    "yPct": 20.963541666666664,
+                    "widthPct": 44.7265625,
+                    "heightPct": 13.997395833333334
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 5,
+                "readingOrder": 5,
+                "proficiencyBand": "intermediate",
+                "text": "Could you confirm the checked-baggage allowance for this flight? It's twenty-three kilos.",
+                "sentences": [
+                    "Could you confirm the checked-baggage allowance for this flight?",
+                    "It's twenty-three kilos."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "Could you confirm the checked-baggage allowance for this flight?",
+                        "ttsText": "Could you confirm the checked-baggage allowance for this flight?"
+                    },
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "It's 23 kilos.",
+                        "ttsText": "It's twenty-three kilos."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 6.640625,
+                    "yPct": 35.41666666666667,
+                    "widthPct": 47.265625,
+                    "heightPct": 14.518229166666666
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 6,
+                "readingOrder": 6,
+                "proficiencyBand": "intermediate",
+                "text": "Your bag weighs twenty-six kilos—three kilos over the limit. Would I have to pay an extra fee?",
+                "sentences": [
+                    "Your bag weighs twenty-six kilos—three kilos over the limit.",
+                    "Would I have to pay an extra fee?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "Your bag weighs 26 kilos—three kilos over the limit.",
+                        "ttsText": "Your bag weighs twenty-six kilos—three kilos over the limit."
+                    },
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "Would I have to pay an extra fee?",
+                        "ttsText": "Would I have to pay an extra fee?"
+                    }
+                ],
+                "bounds": {
+                    "xPct": 54.6875,
+                    "yPct": 35.41666666666667,
+                    "widthPct": 44.7265625,
+                    "heightPct": 14.518229166666666
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 7,
+                "readingOrder": 7,
+                "proficiencyBand": "intermediate",
+                "text": "You can pay the fee or move some items to your carry-on. Could I move three kilos, if the carry-on stays within its limit?",
+                "sentences": [
+                    "You can pay the fee or move some items to your carry-on.",
+                    "Could I move three kilos, if the carry-on stays within its limit?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "You can pay the fee or move some items to your carry-on.",
+                        "ttsText": "You can pay the fee or move some items to your carry-on."
+                    },
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "Could I move three kilos, if the carry-on stays within its limit?",
+                        "ttsText": "Could I move three kilos, if the carry-on stays within its limit?"
+                    }
+                ],
+                "bounds": {
+                    "xPct": 6.640625,
+                    "yPct": 50.260416666666664,
+                    "widthPct": 47.265625,
+                    "heightPct": 16.080729166666664
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 8,
+                "readingOrder": 8,
+                "proficiencyBand": "intermediate",
+                "text": "Both bags are within their limits. Here's your boarding pass for Gate sixteen. Great, thank you.",
+                "sentences": [
+                    "Both bags are within their limits.",
+                    "Here's your boarding pass for Gate sixteen.",
+                    "Great, thank you."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "Both bags are within their limits. Here's your boarding pass for Gate 16.",
+                        "ttsText": "Both bags are within their limits. Here's your boarding pass for Gate sixteen."
+                    },
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "Great, thank you.",
+                        "ttsText": "Great, thank you."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 54.6875,
+                    "yPct": 50.260416666666664,
+                    "widthPct": 44.7265625,
+                    "heightPct": 16.080729166666664
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 9,
+                "readingOrder": 9,
+                "proficiencyBand": "upper-intermediate",
+                "text": "I was notified that Flight seven oh two's gate changed. Could you verify the latest information?",
+                "sentences": [
+                    "I was notified that Flight seven oh two's gate changed.",
+                    "Could you verify the latest information?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "I was notified that Flight 702's gate changed. Could you verify the latest information?",
+                        "ttsText": "I was notified that Flight seven oh two's gate changed. Could you verify the latest information?"
+                    }
+                ],
+                "bounds": {
+                    "xPct": 6.640625,
+                    "yPct": 66.53645833333334,
+                    "widthPct": 47.265625,
+                    "heightPct": 14.973958333333334
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 10,
+                "readingOrder": 10,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Gate twenty-eight has been designated for Flight seven oh two. The latest update confirms departure is still at six forty-five.",
+                "sentences": [
+                    "Gate twenty-eight has been designated for Flight seven oh two.",
+                    "The latest update confirms departure is still at six forty-five."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "Gate 28 has been designated for Flight 702. The latest update confirms departure is still at 6:45.",
+                        "ttsText": "Gate twenty-eight has been designated for Flight seven oh two. The latest update confirms departure is still at six forty-five."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 54.6875,
+                    "yPct": 66.53645833333334,
+                    "widthPct": 44.7265625,
+                    "heightPct": 14.973958333333334
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 11,
+                "readingOrder": 11,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Could you help me navigate the terminal and find Gate twenty-eight? Does boarding still start at six twenty? Yes. Follow the B-gate signs; it's a five-minute walk.",
+                "sentences": [
+                    "Could you help me navigate the terminal and find Gate twenty-eight?",
+                    "Does boarding still start at six twenty?",
+                    "Yes.",
+                    "Follow the B-gate signs; it's a five-minute walk."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "Could you help me navigate the terminal and find Gate 28? Does boarding still start at 6:20?",
+                        "ttsText": "Could you help me navigate the terminal and find Gate twenty-eight? Does boarding still start at six twenty?"
+                    },
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "Yes. Follow the B-gate signs; it's a five-minute walk.",
+                        "ttsText": "Yes. Follow the B-gate signs; it's a five-minute walk."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 6.640625,
+                    "yPct": 82.09635416666666,
+                    "widthPct": 47.265625,
+                    "heightPct": 17.513020833333336
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 12,
+                "readingOrder": 12,
+                "proficiencyBand": "upper-intermediate",
+                "text": "So boarding starts here at six twenty, and departure remains at six forty-five. Have I got that right? Everything is confirmed. Please proceed to boarding.",
+                "sentences": [
+                    "So boarding starts here at six twenty, and departure remains at six forty-five.",
+                    "Have I got that right?",
+                    "Everything is confirmed.",
+                    "Please proceed to boarding."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Traveler",
+                        "sourceText": "So boarding starts here at 6:20, and departure remains at 6:45. Have I got that right?",
+                        "ttsText": "So boarding starts here at six twenty, and departure remains at six forty-five. Have I got that right?"
+                    },
+                    {
+                        "speaker": "Check-in Agent",
+                        "sourceText": "Everything is confirmed. Please proceed to boarding.",
+                        "ttsText": "Everything is confirmed. Please proceed to boarding."
+                    }
+                ],
+                "bounds": {
+                    "xPct": 54.6875,
+                    "yPct": 82.09635416666666,
+                    "widthPct": 44.7265625,
+                    "heightPct": 17.513020833333336
+                },
+                "contentReviewStatus": "verified-against-image"
+            }
+        ]
     }
 };
