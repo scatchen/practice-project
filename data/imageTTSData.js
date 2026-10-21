@@ -7218,4 +7218,408 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/at-the-bank-opening-an-account-basics.png": {
+        "imageId": "at-the-bank-opening-an-account-basics",
+        "assetFile": "images/english/at-the-bank-opening-an-account-basics.png",
+        "contentType": "story",
+        "layout": "2x6",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "proficiencyBand": "beginner",
+                "text": "Hello. I’d like to open an account.",
+                "sentences": [
+                    "Hello.",
+                    "I’d like to open an account."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Hello. I’d like to open an account.",
+                        "ttsText": "Hello. I’d like to open an account."
+                    }
+                ],
+                "bounds": {
+                    "x": 109,
+                    "y": 123,
+                    "width": 448,
+                    "height": 210,
+                    "xPct": 10.6445,
+                    "yPct": 8.0078,
+                    "widthPct": 43.75,
+                    "heightPct": 13.6719
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "proficiencyBand": "beginner",
+                "text": "Is it for personal use? Yes, for everyday use.",
+                "sentences": [
+                    "Is it for personal use?",
+                    "Yes, for everyday use."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Is it for personal use?",
+                        "ttsText": "Is it for personal use?"
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Yes, for everyday use.",
+                        "ttsText": "Yes, for everyday use."
+                    }
+                ],
+                "bounds": {
+                    "x": 563,
+                    "y": 123,
+                    "width": 452,
+                    "height": 210,
+                    "xPct": 54.9805,
+                    "yPct": 8.0078,
+                    "widthPct": 44.1406,
+                    "heightPct": 13.6719
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "proficiencyBand": "beginner",
+                "text": "May I see your I.D.? Of course.",
+                "sentences": [
+                    "May I see your I.D.?",
+                    "Of course."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "May I see your ID?",
+                        "ttsText": "May I see your I.D.?"
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Of course.",
+                        "ttsText": "Of course."
+                    }
+                ],
+                "bounds": {
+                    "x": 109,
+                    "y": 342,
+                    "width": 448,
+                    "height": 204,
+                    "xPct": 10.6445,
+                    "yPct": 22.2656,
+                    "widthPct": 43.75,
+                    "heightPct": 13.2813
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "proficiencyBand": "beginner",
+                "text": "Here it is. Thank you. Let’s look at your options.",
+                "sentences": [
+                    "Here it is.",
+                    "Thank you.",
+                    "Let’s look at your options."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Here it is.",
+                        "ttsText": "Here it is."
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Thank you. Let’s look at your options.",
+                        "ttsText": "Thank you. Let’s look at your options."
+                    }
+                ],
+                "bounds": {
+                    "x": 563,
+                    "y": 342,
+                    "width": 452,
+                    "height": 204,
+                    "xPct": 54.9805,
+                    "yPct": 22.2656,
+                    "widthPct": 44.1406,
+                    "heightPct": 13.2813
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 5,
+                "readingOrder": 5,
+                "proficiencyBand": "intermediate",
+                "text": "Would you like to compare our checking and savings accounts? Yes, please.",
+                "sentences": [
+                    "Would you like to compare our checking and savings accounts?",
+                    "Yes, please."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Would you like to compare our checking and savings accounts?",
+                        "ttsText": "Would you like to compare our checking and savings accounts?"
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Yes, please.",
+                        "ttsText": "Yes, please."
+                    }
+                ],
+                "bounds": {
+                    "x": 109,
+                    "y": 556,
+                    "width": 448,
+                    "height": 245,
+                    "xPct": 10.6445,
+                    "yPct": 36.1979,
+                    "widthPct": 43.75,
+                    "heightPct": 15.9505
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 6,
+                "readingOrder": 6,
+                "proficiencyBand": "intermediate",
+                "text": "Does the savings account have a monthly fee? The monthly fee is waived if you maintain a balance of at least one hundred dollars.",
+                "sentences": [
+                    "Does the savings account have a monthly fee?",
+                    "The monthly fee is waived if you maintain a balance of at least one hundred dollars."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Does the savings account have a monthly fee?",
+                        "ttsText": "Does the savings account have a monthly fee?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "The monthly fee is waived if you maintain a balance of at least $100.",
+                        "ttsText": "The monthly fee is waived if you maintain a balance of at least one hundred dollars."
+                    }
+                ],
+                "bounds": {
+                    "x": 563,
+                    "y": 556,
+                    "width": 452,
+                    "height": 245,
+                    "xPct": 54.9805,
+                    "yPct": 36.1979,
+                    "widthPct": 44.1406,
+                    "heightPct": 15.9505
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 7,
+                "readingOrder": 7,
+                "proficiencyBand": "intermediate",
+                "text": "What do I need to apply for checking? At this branch, we ask for I.D. and an opening deposit of twenty-five dollars.",
+                "sentences": [
+                    "What do I need to apply for checking?",
+                    "At this branch, we ask for I.D. and an opening deposit of twenty-five dollars."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "What do I need to apply for checking?",
+                        "ttsText": "What do I need to apply for checking?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "At this branch, we ask for ID and a $25 opening deposit.",
+                        "ttsText": "At this branch, we ask for I.D. and an opening deposit of twenty-five dollars."
+                    }
+                ],
+                "bounds": {
+                    "x": 109,
+                    "y": 810,
+                    "width": 448,
+                    "height": 231,
+                    "xPct": 10.6445,
+                    "yPct": 52.7344,
+                    "widthPct": 43.75,
+                    "heightPct": 15.0391
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 8,
+                "readingOrder": 8,
+                "proficiencyBand": "intermediate",
+                "text": "Checking better suits my daily needs, so I’d like to apply for that one. I’ll prepare the application.",
+                "sentences": [
+                    "Checking better suits my daily needs, so I’d like to apply for that one.",
+                    "I’ll prepare the application."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Checking better suits my daily needs, so I’d like to apply for that one.",
+                        "ttsText": "Checking better suits my daily needs, so I’d like to apply for that one."
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "I’ll prepare the application.",
+                        "ttsText": "I’ll prepare the application."
+                    }
+                ],
+                "bounds": {
+                    "x": 563,
+                    "y": 810,
+                    "width": 452,
+                    "height": 231,
+                    "xPct": 54.9805,
+                    "yPct": 52.7344,
+                    "widthPct": 44.1406,
+                    "heightPct": 15.0391
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 9,
+                "readingOrder": 9,
+                "proficiencyBand": "upper-intermediate",
+                "text": "I need to verify your identity. Your photo I.D. is valid.",
+                "sentences": [
+                    "I need to verify your identity.",
+                    "Your photo I.D. is valid."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "I need to verify your identity. Your photo ID is valid.",
+                        "ttsText": "I need to verify your identity. Your photo I.D. is valid."
+                    }
+                ],
+                "bounds": {
+                    "x": 109,
+                    "y": 1049,
+                    "width": 448,
+                    "height": 235,
+                    "xPct": 10.6445,
+                    "yPct": 68.2943,
+                    "widthPct": 43.75,
+                    "heightPct": 15.2995
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 10,
+                "readingOrder": 10,
+                "proficiencyBand": "upper-intermediate",
+                "text": "There’s a discrepancy between these addresses. Have you moved? Yes, last month. May I update the form?",
+                "sentences": [
+                    "There’s a discrepancy between these addresses.",
+                    "Have you moved?",
+                    "Yes, last month.",
+                    "May I update the form?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "There’s a discrepancy between these addresses. Have you moved?",
+                        "ttsText": "There’s a discrepancy between these addresses. Have you moved?"
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Yes, last month. May I update the form?",
+                        "ttsText": "Yes, last month. May I update the form?"
+                    }
+                ],
+                "bounds": {
+                    "x": 563,
+                    "y": 1049,
+                    "width": 452,
+                    "height": 235,
+                    "xPct": 54.9805,
+                    "yPct": 68.2943,
+                    "widthPct": 44.1406,
+                    "heightPct": 15.2995
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 11,
+                "readingOrder": 11,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Please review this consent. Your signature authorizes us to verify the updated details. I agree.",
+                "sentences": [
+                    "Please review this consent.",
+                    "Your signature authorizes us to verify the updated details.",
+                    "I agree."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Please review this consent. Your signature authorizes us to verify the updated details.",
+                        "ttsText": "Please review this consent. Your signature authorizes us to verify the updated details."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "I agree.",
+                        "ttsText": "I agree."
+                    }
+                ],
+                "bounds": {
+                    "x": 109,
+                    "y": 1292,
+                    "width": 448,
+                    "height": 235,
+                    "xPct": 10.6445,
+                    "yPct": 84.1146,
+                    "widthPct": 43.75,
+                    "heightPct": 15.2995
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 12,
+                "readingOrder": 12,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Your account has been approved. Your opening deposit of twenty-five dollars is now recorded as your first transaction. Wonderful! Thank you for guiding me through the process.",
+                "sentences": [
+                    "Your account has been approved.",
+                    "Your opening deposit of twenty-five dollars is now recorded as your first transaction.",
+                    "Wonderful!",
+                    "Thank you for guiding me through the process."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Your account has been approved. Your $25 opening deposit is now recorded as your first transaction.",
+                        "ttsText": "Your account has been approved. Your opening deposit of twenty-five dollars is now recorded as your first transaction."
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Wonderful! Thank you for guiding me through the process.",
+                        "ttsText": "Wonderful! Thank you for guiding me through the process."
+                    }
+                ],
+                "bounds": {
+                    "x": 563,
+                    "y": 1292,
+                    "width": 452,
+                    "height": 235,
+                    "xPct": 54.9805,
+                    "yPct": 84.1146,
+                    "widthPct": 44.1406,
+                    "heightPct": 15.2995
+                },
+                "contentReviewStatus": "verified-against-image"
+            }
+        ]
+    },
 };
