@@ -7622,4 +7622,380 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/making-a-doctors-appointment-basics.png": {
+        "imageId": "making-a-doctors-appointment-basics",
+        "assetFile": "images/english/making-a-doctors-appointment-basics.png",
+        "contentType": "story",
+        "layout": "2x6",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "proficiencyBand": "beginner",
+                "text": "Greenwood Clinic. Alex speaking. How can I help?",
+                "sentences": [
+                    "Greenwood Clinic.",
+                    "Alex speaking.",
+                    "How can I help?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Greenwood Clinic. Alex speaking. How can I help?",
+                        "ttsText": "Greenwood Clinic. Alex speaking. How can I help?"
+                    }
+                ],
+                "bounds": {
+                    "x": 292,
+                    "y": 2,
+                    "width": 377,
+                    "height": 244,
+                    "xPct": 28.5156,
+                    "yPct": 0.1302,
+                    "widthPct": 36.8164,
+                    "heightPct": 15.8854
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "proficiencyBand": "beginner",
+                "text": "Hello. I’d like to make an appointment with Doctor Lee.",
+                "sentences": [
+                    "Hello.",
+                    "I’d like to make an appointment with Doctor Lee."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Hello. I’d like to make an appointment with Dr. Lee.",
+                        "ttsText": "Hello. I’d like to make an appointment with Doctor Lee."
+                    }
+                ],
+                "bounds": {
+                    "x": 681,
+                    "y": 2,
+                    "width": 341,
+                    "height": 244,
+                    "xPct": 66.5039,
+                    "yPct": 0.1302,
+                    "widthPct": 33.3008,
+                    "heightPct": 15.8854
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "proficiencyBand": "beginner",
+                "text": "Is this your first visit to our clinic? Yes, it is.",
+                "sentences": [
+                    "Is this your first visit to our clinic?",
+                    "Yes, it is."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Is this your first visit to our clinic?",
+                        "ttsText": "Is this your first visit to our clinic?"
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Yes, it is.",
+                        "ttsText": "Yes, it is."
+                    }
+                ],
+                "bounds": {
+                    "x": 292,
+                    "y": 256,
+                    "width": 377,
+                    "height": 223,
+                    "xPct": 28.5156,
+                    "yPct": 16.6667,
+                    "widthPct": 36.8164,
+                    "heightPct": 14.5182
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "proficiencyBand": "beginner",
+                "text": "What day would you prefer? This Thursday, if possible.",
+                "sentences": [
+                    "What day would you prefer?",
+                    "This Thursday, if possible."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "What day would you prefer?",
+                        "ttsText": "What day would you prefer?"
+                    },
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "This Thursday, if possible.",
+                        "ttsText": "This Thursday, if possible."
+                    }
+                ],
+                "bounds": {
+                    "x": 681,
+                    "y": 256,
+                    "width": 341,
+                    "height": 223,
+                    "xPct": 66.5039,
+                    "yPct": 16.6667,
+                    "widthPct": 33.3008,
+                    "heightPct": 14.5182
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 5,
+                "readingOrder": 5,
+                "proficiencyBand": "intermediate",
+                "text": "I’m afraid Thursday at three o'clock is full. The next opening is at four thirty.",
+                "sentences": [
+                    "I’m afraid Thursday at three o'clock is full.",
+                    "The next opening is at four thirty."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "I’m afraid Thursday at 3:00 is full. The next opening is at 4:30.",
+                        "ttsText": "I’m afraid Thursday at three o'clock is full. The next opening is at four thirty."
+                    }
+                ],
+                "bounds": {
+                    "x": 292,
+                    "y": 490,
+                    "width": 377,
+                    "height": 220,
+                    "xPct": 28.5156,
+                    "yPct": 31.901,
+                    "widthPct": 36.8164,
+                    "heightPct": 14.3229
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 6,
+                "readingOrder": 6,
+                "proficiencyBand": "intermediate",
+                "text": "I have a sore throat and a cough. Could you check Friday morning too?",
+                "sentences": [
+                    "I have a sore throat and a cough.",
+                    "Could you check Friday morning too?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "I have a sore throat and a cough. Could you check Friday morning too?",
+                        "ttsText": "I have a sore throat and a cough. Could you check Friday morning too?"
+                    }
+                ],
+                "bounds": {
+                    "x": 681,
+                    "y": 490,
+                    "width": 341,
+                    "height": 220,
+                    "xPct": 66.5039,
+                    "yPct": 31.901,
+                    "widthPct": 33.3008,
+                    "heightPct": 14.3229
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 7,
+                "readingOrder": 7,
+                "proficiencyBand": "intermediate",
+                "text": "There’s also an appointment available Friday at ten o'clock.",
+                "sentences": [
+                    "There’s also an appointment available Friday at ten o'clock."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "There’s also an appointment available Friday at 10:00.",
+                        "ttsText": "There’s also an appointment available Friday at ten o'clock."
+                    }
+                ],
+                "bounds": {
+                    "x": 292,
+                    "y": 721,
+                    "width": 377,
+                    "height": 251,
+                    "xPct": 28.5156,
+                    "yPct": 46.9401,
+                    "widthPct": 36.8164,
+                    "heightPct": 16.3411
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 8,
+                "readingOrder": 8,
+                "proficiencyBand": "intermediate",
+                "text": "Let me compare those times with my class schedule. Could you give me a moment?",
+                "sentences": [
+                    "Let me compare those times with my class schedule.",
+                    "Could you give me a moment?"
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Let me compare those times with my class schedule. Could you give me a moment?",
+                        "ttsText": "Let me compare those times with my class schedule. Could you give me a moment?"
+                    }
+                ],
+                "bounds": {
+                    "x": 681,
+                    "y": 721,
+                    "width": 341,
+                    "height": 251,
+                    "xPct": 66.5039,
+                    "yPct": 46.9401,
+                    "widthPct": 33.3008,
+                    "heightPct": 16.3411
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 9,
+                "readingOrder": 9,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Friday at ten conflicts with class, so Thursday at four thirty works better. Certainly. Your appointment is booked for Thursday at four thirty.",
+                "sentences": [
+                    "Friday at ten conflicts with class, so Thursday at four thirty works better.",
+                    "Certainly.",
+                    "Your appointment is booked for Thursday at four thirty."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Friday at 10 conflicts with class, so Thursday at 4:30 works better.",
+                        "ttsText": "Friday at ten conflicts with class, so Thursday at four thirty works better."
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Certainly. Your appointment is booked for Thursday at 4:30.",
+                        "ttsText": "Certainly. Your appointment is booked for Thursday at four thirty."
+                    }
+                ],
+                "bounds": {
+                    "x": 292,
+                    "y": 982,
+                    "width": 377,
+                    "height": 224,
+                    "xPct": 28.5156,
+                    "yPct": 63.9323,
+                    "widthPct": 36.8164,
+                    "heightPct": 14.5833
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 10,
+                "readingOrder": 10,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Please arrive at four fifteen to complete a new patient form.",
+                "sentences": [
+                    "Please arrive at four fifteen to complete a new patient form."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "Please arrive at 4:15 to complete a new-patient form.",
+                        "ttsText": "Please arrive at four fifteen to complete a new patient form."
+                    }
+                ],
+                "bounds": {
+                    "x": 681,
+                    "y": 982,
+                    "width": 341,
+                    "height": 224,
+                    "xPct": 66.5039,
+                    "yPct": 63.9323,
+                    "widthPct": 33.3008,
+                    "heightPct": 14.5833
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 11,
+                "readingOrder": 11,
+                "proficiencyBand": "upper-intermediate",
+                "text": "So I’m booked for Thursday at four thirty, and I should arrive at four fifteen for the form? That’s right.",
+                "sentences": [
+                    "So I’m booked for Thursday at four thirty, and I should arrive at four fifteen for the form?",
+                    "That’s right."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "So I’m booked for Thursday at 4:30, and I should arrive at 4:15 for the form?",
+                        "ttsText": "So I’m booked for Thursday at four thirty, and I should arrive at four fifteen for the form?"
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "That’s right.",
+                        "ttsText": "That’s right."
+                    }
+                ],
+                "bounds": {
+                    "x": 292,
+                    "y": 1217,
+                    "width": 377,
+                    "height": 311,
+                    "xPct": 28.5156,
+                    "yPct": 79.2318,
+                    "widthPct": 36.8164,
+                    "heightPct": 20.2474
+                },
+                "contentReviewStatus": "verified-against-image"
+            },
+            {
+                "panelId": 12,
+                "readingOrder": 12,
+                "proficiencyBand": "upper-intermediate",
+                "text": "Great. I’ll be there at four fifteen. Thank you for your help. You’re welcome. We’ll see you Thursday.",
+                "sentences": [
+                    "Great.",
+                    "I’ll be there at four fifteen.",
+                    "Thank you for your help.",
+                    "You’re welcome.",
+                    "We’ll see you Thursday."
+                ],
+                "speechUnits": [
+                    {
+                        "speaker": "Emma",
+                        "sourceText": "Great. I’ll be there at 4:15. Thank you for your help.",
+                        "ttsText": "Great. I’ll be there at four fifteen. Thank you for your help."
+                    },
+                    {
+                        "speaker": "Alex",
+                        "sourceText": "You’re welcome. We’ll see you Thursday.",
+                        "ttsText": "You’re welcome. We’ll see you Thursday."
+                    }
+                ],
+                "bounds": {
+                    "x": 681,
+                    "y": 1217,
+                    "width": 341,
+                    "height": 311,
+                    "xPct": 66.5039,
+                    "yPct": 79.2318,
+                    "widthPct": 33.3008,
+                    "heightPct": 20.2474
+                },
+                "contentReviewStatus": "verified-against-image"
+            }
+        ]
+    }
 };
