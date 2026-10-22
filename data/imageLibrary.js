@@ -10398,6 +10398,41 @@ const diagramMap = [
     related: []
 },
 {
+    id: "business-meeting-scheduling-and-time-conflicts-basics",
+    title: "Business Meeting Scheduling & Time Conflicts 商務會議排程與時間衝突",
+    keywords: [
+        "商務會議排程",
+        "會議時間衝突",
+        "季度檢討會",
+        "客戶簡報",
+        "替代時段",
+        "區域團隊協調",
+        "會議邀請",
+        "議程",
+        "business meeting scheduling",
+        "time conflict",
+        "quarterly review",
+        "client briefing",
+        "alternative meeting time",
+        "meeting slot",
+        "coordinate with the regional team",
+        "calendar invitation",
+        "meeting agenda",
+        "Could we schedule the quarterly review for Wednesday at 10 a.m.?",
+        "That conflicts with a client briefing.",
+        "Would Thursday’s 2 p.m. slot work?",
+        "Please send the updated calendar invitation with the agenda attached."
+    ],
+    file: "images/english/business-meeting-scheduling-and-time-conflicts-basics.png",
+    alt: "Business Meeting Scheduling & Time Conflicts 商務會議排程與時間衝突英文教學圖，以四格呈現提出季度檢討會邀請、說明客戶簡報造成的時間衝突、協調替代時段，以及確認新會議邀請與議程。",
+    category: "english",
+    grade: 9,
+    chapter: "TOEIC / Business English 多益與商業英文",
+    concept: "Scheduling a Quarterly Review、Explaining a Client Briefing Conflict、Coordinating an Alternative Meeting Slot、Confirming the Updated Calendar Invitation 與 Meeting Agenda",
+    difficulty: 3,
+    related: ["meeting-schedule-and-appointment-basics", "business-meeting-basics", "business-meetings-and-presentations-basics"]
+},
+{
     id: "cross-departmental-communication-and-coordination-basics",
     title: "Cross-Departmental Communication & Coordination 跨部門溝通與協調",
     keywords: [

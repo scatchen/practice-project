@@ -4849,9 +4849,13 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const hasPanelInteraction = Object.prototype.hasOwnProperty.call(record, "panelInteraction");
+    const allowedPanelInteractionAsset =
+        (record.imageId === "conferences-and-trade-shows-basics" &&
+            record.assetFile === "images/english/conferences-and-trade-shows-basics.png") ||
+        (record.imageId === "business-meeting-scheduling-and-time-conflicts-basics" &&
+            record.assetFile === "images/english/business-meeting-scheduling-and-time-conflicts-basics.png");
     if (hasPanelInteraction && (record.panelInteraction !== "tap-to-open-menu" ||
-        record.imageId !== "conferences-and-trade-shows-basics" ||
-        record.assetFile !== "images/english/conferences-and-trade-shows-basics.png" ||
+        !allowedPanelInteractionAsset ||
         record.contentType !== "dialogue" || record.layout !== "2x2")) {
         return null;
     }

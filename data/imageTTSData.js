@@ -9889,4 +9889,86 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/business-meeting-scheduling-and-time-conflicts-basics.png": {
+        "imageId": "business-meeting-scheduling-and-time-conflicts-basics",
+        "assetFile": "images/english/business-meeting-scheduling-and-time-conflicts-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "panelInteraction": "tap-to-open-menu",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 0.8000, "yPct": 7.8000, "widthPct": 48.8000, "heightPct": 39.5000 },
+                "tapBounds": { "xPct": 1.0000, "yPct": 13.0000, "widthPct": 48.2000, "heightPct": 34.2000 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Man in a navy suit",
+                        "sourceText": 'Could we schedule the quarterly review for Wednesday at 10 a.m.? The agenda is ready.',
+                        "ttsText": 'Could we schedule the quarterly review for Wednesday at 10 a.m.? The agenda is ready.',
+                        "bounds": { "xPct": 18.7500, "yPct": 13.4500, "widthPct": 25.7500, "heightPct": 18.2000 },
+                        "speakerAnchor": { "xPct": 16.8000, "yPct": 28.5000 }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 50.4000, "yPct": 7.8000, "widthPct": 48.8000, "heightPct": 39.5000 },
+                "tapBounds": { "xPct": 50.8000, "yPct": 13.0000, "widthPct": 47.8000, "heightPct": 34.2000 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Woman in a beige blazer",
+                        "sourceText": 'That conflicts with a client briefing. I’m free after noon, though.',
+                        "ttsText": 'That conflicts with a client briefing. I’m free after noon, though.',
+                        "bounds": { "xPct": 60.5500, "yPct": 13.8000, "widthPct": 18.7000, "heightPct": 18.6000 },
+                        "speakerAnchor": { "xPct": 73.7000, "yPct": 34.7000 }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 0.8000, "yPct": 48.9000, "widthPct": 48.8000, "heightPct": 39.1000 },
+                "tapBounds": { "xPct": 1.0000, "yPct": 54.1000, "widthPct": 48.2000, "heightPct": 33.7000 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Man in a navy suit",
+                        "sourceText": 'Would Thursday’s 2 p.m. slot work? I’ve coordinated with the regional team; they’re free then.',
+                        "ttsText": 'Would Thursday’s 2 p.m. slot work? I’ve coordinated with the regional team; they’re free then.',
+                        "bounds": { "xPct": 23.2000, "yPct": 54.7000, "widthPct": 25.8500, "heightPct": 18.6000 },
+                        "speakerAnchor": { "xPct": 21.9000, "yPct": 66.0000 }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 50.4000, "yPct": 48.9000, "widthPct": 48.8000, "heightPct": 39.1000 },
+                "tapBounds": { "xPct": 50.8000, "yPct": 54.1000, "widthPct": 47.8000, "heightPct": 33.7000 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Woman in a beige blazer",
+                        "sourceText": 'Thursday at 2 p.m. works for me. Please send the updated calendar invitation with the agenda attached.',
+                        "ttsText": 'Thursday at 2 p.m. works for me. Please send the updated calendar invitation with the agenda attached.',
+                        "bounds": { "xPct": 64.0000, "yPct": 54.1500, "widthPct": 23.1000, "heightPct": 21.0000 },
+                        "speakerAnchor": { "xPct": 59.5000, "yPct": 66.5000 }
+                    }
+                ]
+            }
+        ]
+    }
+
 };
