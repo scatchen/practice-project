@@ -10284,6 +10284,87 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/office-supplies-and-restocking-basics.png": {
+        "imageId": "office-supplies-and-restocking-basics",
+        "assetFile": "images/english/office-supplies-and-restocking-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "panelInteraction": "tap-to-open-menu",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 0, "yPct": 0, "widthPct": 49.8698, "heightPct": 49.6094 },
+                "tapBounds": { "xPct": 17.4479, "yPct": 8.0078, "widthPct": 22.9167, "heightPct": 10.3516 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "We need paper, pens, and folders.",
+                        "ttsText": "We need paper, pens, and folders.",
+                        "bounds": { "xPct": 16.4714, "yPct": 7.0313, "widthPct": 25.5208, "heightPct": 15.3320 },
+                        "speakerAnchor": { "xPct": 12.0443, "yPct": 25.4883 }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 50.3906, "yPct": 0, "widthPct": 49.6094, "heightPct": 49.6094 },
+                "tapBounds": { "xPct": 70.3125, "yPct": 7.9102, "widthPct": 22.4609, "heightPct": 10.5469 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Boy in a yellow shirt",
+                        "sourceText": "We’re running low on printer paper.",
+                        "ttsText": "We’re running low on printer paper.",
+                        "bounds": { "xPct": 68.8802, "yPct": 6.6406, "widthPct": 25.6510, "heightPct": 15.7227 },
+                        "speakerAnchor": { "xPct": 62.4349, "yPct": 28.6133 }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 0, "yPct": 50.3906, "widthPct": 49.8698, "heightPct": 49.6094 },
+                "tapBounds": { "xPct": 20.6380, "yPct": 58.8867, "widthPct": 21.5495, "heightPct": 10.8398 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Woman with black hair and a pink top",
+                        "sourceText": "Could we get more toner cartridges?",
+                        "ttsText": "Could we get more toner cartridges?",
+                        "bounds": { "xPct": 19.4010, "yPct": 57.3242, "widthPct": 24.6745, "heightPct": 16.5039 },
+                        "speakerAnchor": { "xPct": 12.3698, "yPct": 72.6563 }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 50.3906, "yPct": 50.3906, "widthPct": 49.6094, "heightPct": 49.6094 },
+                "tapBounds": { "xPct": 52.7995, "yPct": 58.8867, "widthPct": 20.8984, "heightPct": 8.6914 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "I’ve restocked the supply cabinet.",
+                        "ttsText": "I’ve restocked the supply cabinet.",
+                        "bounds": { "xPct": 51.3672, "yPct": 57.4219, "widthPct": 24.3490, "heightPct": 14.8438 },
+                        "speakerAnchor": { "xPct": 61.5885, "yPct": 82.3242 }
+                    }
+                ]
+            }
+        ]
     }
 
 };
