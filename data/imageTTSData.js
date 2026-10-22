@@ -9808,4 +9808,85 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/conferences-and-trade-shows-basics.png": {
+        "imageId": "conferences-and-trade-shows-basics",
+        "assetFile": "images/english/conferences-and-trade-shows-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "panelInteraction": "tap-to-open-menu",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 0.2604, "yPct": 14.6484, "widthPct": 49.6094, "heightPct": 36.7188 },
+                "tapBounds": { "xPct": 0.9115, "yPct": 15.1367, "widthPct": 48.3073, "heightPct": 35.5469 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "I’d like to register for the conference.",
+                        "ttsText": "I’d like to register for the conference.",
+                        "bounds": { "xPct": 15.1042, "yPct": 22.5586, "widthPct": 14.1276, "heightPct": 13.1836 },
+                        "speakerAnchor": { "xPct": 20.4427, "yPct": 38.0859 }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 50.2604, "yPct": 14.6484, "widthPct": 49.4792, "heightPct": 36.7188 },
+                "tapBounds": { "xPct": 50.9115, "yPct": 15.1367, "widthPct": 48.1771, "heightPct": 35.5469 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "Welcome to our booth!",
+                        "ttsText": "Welcome to our booth!",
+                        "bounds": { "xPct": 63.4766, "yPct": 22.5586, "widthPct": 12.2396, "heightPct": 12.1094 },
+                        "speakerAnchor": { "xPct": 75.1953, "yPct": 37.3047 }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 0.2604, "yPct": 51.6602, "widthPct": 49.6094, "heightPct": 36.5234 },
+                "tapBounds": { "xPct": 0.9115, "yPct": 52.2461, "widthPct": 48.3073, "heightPct": 33.7539 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "This product can help you save energy.",
+                        "ttsText": "This product can help you save energy.",
+                        "bounds": { "xPct": 14.6484, "yPct": 59.6680, "widthPct": 13.5417, "heightPct": 13.5742 },
+                        "speakerAnchor": { "xPct": 15.7552, "yPct": 76.1719 }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 50.2604, "yPct": 51.6602, "widthPct": 49.4792, "heightPct": 36.5234 },
+                "tapBounds": { "xPct": 50.9115, "yPct": 52.2461, "widthPct": 48.1771, "heightPct": 34.5539 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "Here is my business card.",
+                        "ttsText": "Here is my business card.",
+                        "bounds": { "xPct": 68.1641, "yPct": 58.6914, "widthPct": 14.8438, "heightPct": 12.3047 },
+                        "speakerAnchor": { "xPct": 75.8464, "yPct": 75.1953 }
+                    }
+                ]
+            }
+        ]
+    },
 };
