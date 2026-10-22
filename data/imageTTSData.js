@@ -9969,6 +9969,87 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/office-equipment-and-technical-problems-basics.png": {
+        "imageId": "office-equipment-and-technical-problems-basics",
+        "assetFile": "images/english/office-equipment-and-technical-problems-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "panelInteraction": "tap-to-open-menu",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 0.4557, "yPct": 14.3555, "widthPct": 48.9583, "heightPct": 40.9180 },
+                "tapBounds": { "xPct": 0.5208, "yPct": 23.0469, "widthPct": 48.8281, "heightPct": 31.8359 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Man holding paper",
+                        "sourceText": "The printer is out of paper.",
+                        "ttsText": "The printer is out of paper.",
+                        "bounds": { "xPct": 18.2943, "yPct": 21.4844, "widthPct": 19.7266, "heightPct": 15.0391 },
+                        "speakerAnchor": { "xPct": 11.3281, "yPct": 32.5195 }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 50.5208, "yPct": 14.3555, "widthPct": 48.9583, "heightPct": 40.9180 },
+                "tapBounds": { "xPct": 50.5859, "yPct": 23.0469, "widthPct": 48.8281, "heightPct": 31.8359 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Woman at computer",
+                        "sourceText": "My computer isn't working.",
+                        "ttsText": "My computer isn't working.",
+                        "bounds": { "xPct": 70.3125, "yPct": 21.2891, "widthPct": 18.2292, "heightPct": 15.2344 },
+                        "speakerAnchor": { "xPct": 62.8255, "yPct": 32.5195 }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 0.4557, "yPct": 56.9336, "widthPct": 48.9583, "heightPct": 42.0898 },
+                "tapBounds": { "xPct": 0.5208, "yPct": 66.0156, "widthPct": 48.8281, "heightPct": 32.9102 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Visitor in red striped shirt",
+                        "sourceText": "Could you help me fix this problem?",
+                        "ttsText": "Could you help me fix this problem?",
+                        "bounds": { "xPct": 14.5182, "yPct": 66.3086, "widthPct": 20.7682, "heightPct": 17.3828 },
+                        "speakerAnchor": { "xPct": 11.5234, "yPct": 75.1953 }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 50.5208, "yPct": 56.9336, "widthPct": 48.9583, "heightPct": 42.0898 },
+                "tapBounds": { "xPct": 50.5859, "yPct": 66.0156, "widthPct": 48.8281, "heightPct": 32.9102 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "The problem has been fixed.",
+                        "ttsText": "The problem has been fixed.",
+                        "bounds": { "xPct": 73.5677, "yPct": 65.7227, "widthPct": 19.1406, "heightPct": 16.5039 },
+                        "speakerAnchor": { "xPct": 89.2578, "yPct": 85.4492 }
+                    }
+                ]
+            }
+        ]
     }
 
 };
