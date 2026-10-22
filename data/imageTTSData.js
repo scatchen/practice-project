@@ -10446,6 +10446,105 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/sales-and-orders-basics.png": {
+        imageId: "sales-and-orders-basics",
+        assetFile: "images/english/sales-and-orders-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.5208, yPct: 9.3750, widthPct: 49.3490, heightPct: 42.7734 },
+                tapBounds: { xPct: 7.5521, yPct: 17.9688, widthPct: 17.2526, heightPct: 9.3750 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "I’d like to place an order for these products.",
+                        ttsText: "I’d like to place an order for these products.",
+                        bounds: { xPct: 5.0781, yPct: 16.6992, widthPct: 20.7031, heightPct: 16.0156 },
+                        speakerAnchor: { xPct: 10.6771, yPct: 36.4258 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.2604, yPct: 9.3750, widthPct: 49.3490, heightPct: 42.7734 },
+                tapBounds: { xPct: 56.8359, yPct: 18.6523, widthPct: 14.6484, heightPct: 7.2266 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "I’m processing the order now.",
+                        ttsText: "I’m processing the order now.",
+                        bounds: { xPct: 54.8177, yPct: 17.2852, widthPct: 18.4245, heightPct: 13.6719 },
+                        speakerAnchor: { xPct: 62.3698, yPct: 36.2305 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.5208, yPct: 52.8320, widthPct: 49.3490, heightPct: 46.3867 },
+                tapBounds: { xPct: 12.7604, yPct: 62.0117, widthPct: 14.5833, heightPct: 7.1289 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Woman with black hair and a blue top",
+                        sourceText: "I’ve confirmed the order details.",
+                        ttsText: "I’ve confirmed the order details.",
+                        bounds: { xPct: 10.6771, yPct: 60.5469, widthPct: 18.2292, heightPct: 14.6484 },
+                        speakerAnchor: { xPct: 9.4401, yPct: 80.4688 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Snoopy",
+                        sourceText: "Great! I’ll send the order confirmation to the customer.",
+                        ttsText: "Great! I’ll send the order confirmation to the customer.",
+                        bounds: { xPct: 31.4453, yPct: 60.4492, widthPct: 17.3177, heightPct: 17.8711 },
+                        speakerAnchor: { xPct: 40.4948, yPct: 83.7891 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.2604, yPct: 52.8320, widthPct: 49.3490, heightPct: 46.3867 },
+                tapBounds: { xPct: 54.8177, yPct: 62.3047, widthPct: 14.3229, heightPct: 8.0078 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "I’d like to cancel my order.",
+                        ttsText: "I’d like to cancel my order.",
+                        bounds: { xPct: 52.6693, yPct: 60.7422, widthPct: 18.6198, heightPct: 14.8438 },
+                        speakerAnchor: { xPct: 58.5938, yPct: 81.5430 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Snoopy",
+                        sourceText: "No problem. I’ll cancel the order and update the status in our system.",
+                        ttsText: "No problem. I’ll cancel the order and update the status in our system.",
+                        bounds: { xPct: 74.0885, yPct: 60.6445, widthPct: 20.3776, heightPct: 17.7734 },
+                        speakerAnchor: { xPct: 76.5625, yPct: 84.6680 }
+                    }
+                ]
+            }
+        ]
     }
 
 };
