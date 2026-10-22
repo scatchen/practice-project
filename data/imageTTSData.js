@@ -10203,6 +10203,87 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/quality-control-and-product-defects-basics.png": {
+        "imageId": "quality-control-and-product-defects-basics",
+        "assetFile": "images/english/quality-control-and-product-defects-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "panelInteraction": "tap-to-open-menu",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 1.2839, "yPct": 14.4385, "widthPct": 48.4308, "heightPct": 40.6417 },
+                "tapBounds": { "xPct": 4.0656, "yPct": 22.1034, "widthPct": 20.8274, "heightPct": 13.3690 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "Let's check the products.",
+                        "ttsText": "Let's check the products.",
+                        "bounds": { "xPct": 4.2796, "yPct": 22.2816, "widthPct": 20.3281, "heightPct": 13.0125 },
+                        "speakerAnchor": { "xPct": 11.0556, "yPct": 39.0374 }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 50.2853, "yPct": 14.4385, "widthPct": 48.4308, "heightPct": 40.6417 },
+                "tapBounds": { "xPct": 59.1298, "yPct": 21.9251, "widthPct": 21.0414, "heightPct": 14.6168 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "This product is defective.",
+                        "ttsText": "This product is defective.",
+                        "bounds": { "xPct": 59.3438, "yPct": 22.0143, "widthPct": 20.4708, "heightPct": 14.2602 },
+                        "speakerAnchor": { "xPct": 57.2040, "yPct": 39.6613 }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 1.2839, "yPct": 55.5258, "widthPct": 48.4308, "heightPct": 40.9091 },
+                "tapBounds": { "xPct": 10.9130, "yPct": 63.2799, "widthPct": 24.9643, "heightPct": 15.7754 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "We found quality issues in the production line.",
+                        "ttsText": "We found quality issues in the production line.",
+                        "bounds": { "xPct": 11.1270, "yPct": 62.8342, "widthPct": 24.5364, "heightPct": 15.8645 },
+                        "speakerAnchor": { "xPct": 10.4850, "yPct": 85.2050 }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 50.2853, "yPct": 55.5258, "widthPct": 48.4308, "heightPct": 40.9091 },
+                "tapBounds": { "xPct": 58.8445, "yPct": 63.2799, "widthPct": 22.4679, "heightPct": 15.4189 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "Fix the problem and prevent recurrence.",
+                        "ttsText": "Fix the problem and prevent recurrence.",
+                        "bounds": { "xPct": 59.0585, "yPct": 62.7451, "widthPct": 22.0399, "heightPct": 15.5971 },
+                        "speakerAnchor": { "xPct": 60.5563, "yPct": 84.9376 }
+                    }
+                ]
+            }
+        ]
     }
 
 };
