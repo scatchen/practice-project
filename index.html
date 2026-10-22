@@ -4861,7 +4861,9 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "quality-control-and-product-defects-basics" &&
             record.assetFile === "images/english/quality-control-and-product-defects-basics.png") ||
         (record.imageId === "office-supplies-and-restocking-basics" &&
-            record.assetFile === "images/english/office-supplies-and-restocking-basics.png");
+            record.assetFile === "images/english/office-supplies-and-restocking-basics.png") ||
+        (record.imageId === "business-phone-call-basics" &&
+            record.assetFile === "images/english/business-phone-call-basics.png");
     if (hasPanelInteraction && (record.panelInteraction !== "tap-to-open-menu" ||
         !allowedPanelInteractionAsset ||
         record.contentType !== "dialogue" || record.layout !== "2x2")) {

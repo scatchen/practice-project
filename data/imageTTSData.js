@@ -10365,6 +10365,87 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/business-phone-call-basics.png": {
+        imageId: "business-phone-call-basics",
+        assetFile: "images/english/business-phone-call-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.4785, yPct: 14.3541, widthPct: 49.2026, heightPct: 41.0686 },
+                tapBounds: { xPct: 4.9442, yPct: 24.4019, widthPct: 11.8022, heightPct: 16.1085 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "Good morning! This is Snoopy speaking.",
+                        ttsText: "Good morning! This is Snoopy speaking.",
+                        bounds: { xPct: 3.0303, yPct: 23.2855, widthPct: 15.4705, heightPct: 20.5742 },
+                        speakerAnchor: { xPct: 27.6715, yPct: 35.4864 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.4785, yPct: 14.3541, widthPct: 48.8836, heightPct: 41.0686 },
+                tapBounds: { xPct: 71.3716, yPct: 25.9968, widthPct: 12.2807, heightPct: 11.8820 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Male employee in a brown jacket seated at a laptop",
+                        sourceText: "I’m calling about our meeting tomorrow.",
+                        ttsText: "I’m calling about our meeting tomorrow.",
+                        bounds: { xPct: 70.0159, yPct: 24.9601, widthPct: 14.9920, heightPct: 16.1085 },
+                        speakerAnchor: { xPct: 63.7959, yPct: 37.8788 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.4785, yPct: 56.2998, widthPct: 49.2026, heightPct: 43.1419 },
+                tapBounds: { xPct: 3.9872, yPct: 66.6667, widthPct: 13.0781, heightPct: 6.7783 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "May I take a message?",
+                        ttsText: "May I take a message?",
+                        bounds: { xPct: 1.9936, yPct: 65.3110, widthPct: 16.5072, heightPct: 12.0415 },
+                        speakerAnchor: { xPct: 22.7273, yPct: 80.8612 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.4785, yPct: 56.2998, widthPct: 48.8836, heightPct: 43.1419 },
+                tapBounds: { xPct: 58.4530, yPct: 66.2679, widthPct: 13.8756, heightPct: 9.5694 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "I’ll transfer you to Mr. Brown.",
+                        ttsText: "I’ll transfer you to Mr. Brown.",
+                        bounds: { xPct: 56.5391, yPct: 65.1515, widthPct: 17.7033, heightPct: 14.8325 },
+                        speakerAnchor: { xPct: 62.5997, yPct: 83.8915 }
+                    }
+                ]
+            }
+        ]
     }
 
 };
