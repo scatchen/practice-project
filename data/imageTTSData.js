@@ -10544,6 +10544,105 @@ const imageTTSData = {
                     }
                 ]
             }
+        ],
+    },
+    "images/english/invoices-and-payments-basics.png": {
+        imageId: "invoices-and-payments-basics",
+        assetFile: "images/english/invoices-and-payments-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.5208, yPct: 9.3750, widthPct: 49.2188, heightPct: 43.1641 },
+                tapBounds: { xPct: 6.3802, yPct: 18.4570, widthPct: 18.3594, heightPct: 6.6406 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "I’ll issue an invoice for this order.",
+                        ttsText: "I’ll issue an invoice for this order.",
+                        bounds: { xPct: 4.8828, yPct: 16.6992, widthPct: 21.4844, heightPct: 14.6484 },
+                        speakerAnchor: { xPct: 9.4401, yPct: 35.6445 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.3906, yPct: 9.3750, widthPct: 49.0885, heightPct: 43.1641 },
+                tapBounds: { xPct: 56.4453, yPct: 18.7500, widthPct: 16.0807, heightPct: 7.9102 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "Let me review the invoice details.",
+                        ttsText: "Let me review the invoice details.",
+                        bounds: { xPct: 54.7526, yPct: 16.8945, widthPct: 19.5313, heightPct: 14.4531 },
+                        speakerAnchor: { xPct: 60.5469, yPct: 37.6953 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Woman with black hair and a blue top",
+                        sourceText: "Please check the amount due and the due date.",
+                        ttsText: "Please check the amount due and the due date.",
+                        bounds: { xPct: 76.9531, yPct: 16.5039, widthPct: 16.3411, heightPct: 15.8203 },
+                        speakerAnchor: { xPct: 91.2760, yPct: 36.5234 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.5208, yPct: 53.3203, widthPct: 49.2188, heightPct: 46.0938 },
+                tapBounds: { xPct: 16.2109, yPct: 62.1094, widthPct: 18.6198, heightPct: 7.7148 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "I’ll make a payment for the invoice.",
+                        ttsText: "I’ll make a payment for the invoice.",
+                        bounds: { xPct: 14.9089, yPct: 60.5469, widthPct: 21.2891, heightPct: 13.7695 },
+                        speakerAnchor: { xPct: 9.7656, yPct: 76.1719 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.3906, yPct: 53.3203, widthPct: 49.0885, heightPct: 46.0938 },
+                tapBounds: { xPct: 55.3385, yPct: 62.5000, widthPct: 15.6250, heightPct: 7.5195 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "The payment has been received.",
+                        ttsText: "The payment has been received.",
+                        bounds: { xPct: 53.4505, yPct: 60.9375, widthPct: 18.9453, heightPct: 13.5742 },
+                        speakerAnchor: { xPct: 60.0911, yPct: 81.0547 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Woodstock",
+                        sourceText: "Great! The invoice is paid.",
+                        ttsText: "Great! The invoice is paid.",
+                        bounds: { xPct: 87.7604, yPct: 66.9922, widthPct: 11.4583, heightPct: 16.2109 },
+                        speakerAnchor: { xPct: 94.4010, yPct: 89.4531 }
+                    }
+                ]
+            }
         ]
     }
 
