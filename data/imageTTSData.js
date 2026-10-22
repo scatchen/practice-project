@@ -10644,6 +10644,123 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/returns-and-refunds-basics.png": {
+        imageId: "returns-and-refunds-basics",
+        assetFile: "images/english/returns-and-refunds-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.5859, yPct: 9.1797, widthPct: 49.1536, heightPct: 43.4570 },
+                tapBounds: { xPct: 6.1849, yPct: 17.9688, widthPct: 16.4714, heightPct: 6.4453 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Customer in a yellow shirt holding a defective product",
+                        sourceText: "I’d like to return this product.",
+                        ttsText: "I’d like to return this product.",
+                        bounds: { xPct: 4.6875, yPct: 16.4063, widthPct: 19.4661, heightPct: 14.2578 },
+                        speakerAnchor: { xPct: 8.8542, yPct: 33.8867 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Black-haired store employee in a blue shirt",
+                        sourceText: "Of course. Do you have the receipt?",
+                        ttsText: "Of course. Do you have the receipt?",
+                        bounds: { xPct: 24.9349, yPct: 16.1133, widthPct: 13.9974, heightPct: 15.8203 },
+                        speakerAnchor: { xPct: 39.9089, yPct: 36.1328 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.3906, yPct: 9.1797, widthPct: 48.9583, heightPct: 43.4570 },
+                tapBounds: { xPct: 54.6875, yPct: 17.9688, widthPct: 16.1458, heightPct: 10.2539 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "I’d like to request a refund for this item.",
+                        ttsText: "I’d like to request a refund for this item.",
+                        bounds: { xPct: 53.7109, yPct: 16.6992, widthPct: 18.2292, heightPct: 17.0898 },
+                        speakerAnchor: { xPct: 58.7240, yPct: 40.3320 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Black-haired store employee in a blue shirt",
+                        sourceText: "No problem. Let me check your purchase details.",
+                        ttsText: "No problem. Let me check your purchase details.",
+                        bounds: { xPct: 72.4609, yPct: 16.1133, widthPct: 14.9740, heightPct: 15.9180 },
+                        speakerAnchor: { xPct: 76.6276, yPct: 37.7930 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.5859, yPct: 53.3203, widthPct: 49.1536, heightPct: 46.0938 },
+                tapBounds: { xPct: 5.0781, yPct: 62.1094, widthPct: 20.5078, heightPct: 10.1563 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "Can I exchange this item for a different size?",
+                        ttsText: "Can I exchange this item for a different size?",
+                        bounds: { xPct: 4.1667, yPct: 60.7422, widthPct: 22.3958, heightPct: 16.0156 },
+                        speakerAnchor: { xPct: 8.0078, yPct: 83.4961 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Black-haired store employee in a blue shirt",
+                        sourceText: "Sure! We can exchange it for a larger size.",
+                        ttsText: "Sure! We can exchange it for a larger size.",
+                        bounds: { xPct: 28.0599, yPct: 60.6445, widthPct: 16.7969, heightPct: 14.7461 },
+                        speakerAnchor: { xPct: 37.8255, yPct: 83.3008 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.3906, yPct: 53.3203, widthPct: 48.9583, heightPct: 46.0938 },
+                tapBounds: { xPct: 58.7240, yPct: 62.1094, widthPct: 17.9688, heightPct: 7.7148 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Black-haired store employee in a blue shirt",
+                        sourceText: "The refund has been processed.",
+                        ttsText: "The refund has been processed.",
+                        bounds: { xPct: 57.3568, yPct: 60.7422, widthPct: 20.7682, heightPct: 14.3555 },
+                        speakerAnchor: { xPct: 57.5521, yPct: 79.5898 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Snoopy",
+                        sourceText: "Great! Thank you!",
+                        ttsText: "Great! Thank you!",
+                        bounds: { xPct: 88.0208, yPct: 68.3594, widthPct: 11.1979, heightPct: 12.8906 },
+                        speakerAnchor: { xPct: 91.1458, yPct: 90.2344 }
+                    }
+                ]
+            }
+        ]
     }
 
 };

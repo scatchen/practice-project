@@ -1059,6 +1059,42 @@ color: #111827;
             }
         }
 
+        .english-tts-image-stop-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 20px;
+        }
+
+        #english-tts-floating-stop.is-image-tts-stop-control {
+            position: static;
+            z-index: auto;
+            inset: auto;
+            left: auto;
+            right: auto;
+            top: auto;
+            bottom: auto;
+            transform: none;
+            width: auto;
+            min-width: 0;
+            min-height: 52px;
+            max-width: 100%;
+            visibility: visible;
+        }
+
+        #english-tts-floating-stop.is-image-tts-dialogue-stop-control {
+            position: fixed;
+            z-index: 11900;
+            width: auto;
+            min-width: 0;
+            max-width: none;
+            transform: none;
+            visibility: visible;
+        }
+
         .english-tts-panel button:disabled,
         .english-tts-panel select:disabled {
             cursor: not-allowed;
@@ -3136,6 +3172,13 @@ const englishTTSState = {
     activeUtterance: null,
     activeSpeechTrigger: null,
     activeSpeechTriggerRect: null,
+    activeSpeechIsImageTTS: false,
+    activeImageTTSWrapper: null,
+    activeImageTTSDialoguePanel: null,
+    imageTTSStopRow: null,
+    imageTTSStopButton: null,
+    imageTTSStopObserver: null,
+    imageTTSStopCleanupFrame: 0,
     stopPositionFrame: 0,
     responseObserver: null,
     collocationReplayTimer: 0,
@@ -3417,6 +3460,32 @@ function rememberEnglishSpeechTrigger(trigger) {
         ? trigger
         : null;
     englishTTSState.activeSpeechTriggerRect = null;
+    englishTTSState.activeImageTTSWrapper = englishTTSState.activeSpeechTrigger &&
+        typeof englishTTSState.activeSpeechTrigger.closest === "function"
+        ? englishTTSState.activeSpeechTrigger.closest(".image-tts-overlay-wrapper")
+        : null;
+    englishTTSState.activeSpeechIsImageTTS = Boolean(englishTTSState.activeImageTTSWrapper);
+    const dialoguePanel = englishTTSState.activeSpeechTrigger &&
+        englishTTSState.activeSpeechTrigger._englishImageTTSDialoguePanel;
+    const dialoguePanelId = englishTTSState.activeSpeechTrigger &&
+        englishTTSState.activeSpeechTrigger.getAttribute("data-image-tts-panel-id");
+    const hasDialogueTriggerClass = englishTTSState.activeSpeechTrigger &&
+        englishTTSState.activeSpeechTrigger.classList &&
+        (englishTTSState.activeSpeechTrigger.classList.contains("image-tts-dialogue-speaker") ||
+            englishTTSState.activeSpeechTrigger.classList.contains("image-tts-dialogue-panel-hit-area"));
+    const hasValidPercentBounds = bounds => bounds &&
+        [bounds.xPct, bounds.yPct, bounds.widthPct, bounds.heightPct].every(value =>
+            Number.isFinite(value) && value >= 0 && value <= 100) &&
+        bounds.xPct + bounds.widthPct <= 100.01 && bounds.yPct + bounds.heightPct <= 100.01;
+    const hasValidDialogueUnits = dialoguePanel && Array.isArray(dialoguePanel.speechUnits) &&
+        dialoguePanel.speechUnits.length > 0 &&
+        dialoguePanel.speechUnits.every(unit => unit && hasValidPercentBounds(unit.bounds));
+    englishTTSState.activeImageTTSDialoguePanel = englishTTSState.activeImageTTSWrapper &&
+        hasDialogueTriggerClass && dialoguePanel &&
+        String(dialoguePanel.panelId) === dialoguePanelId &&
+        hasValidPercentBounds(dialoguePanel.bounds) && hasValidDialogueUnits
+        ? dialoguePanel
+        : null;
 
     if (!englishTTSState.activeSpeechTrigger) {
         return;
@@ -3454,12 +3523,236 @@ function scheduleEnglishTTSFloatingStopPosition() {
     });
 }
 
+function cancelEnglishTTSImageStopCleanup() {
+    if (!englishTTSState.imageTTSStopCleanupFrame) {
+        return;
+    }
+    if (typeof window.cancelAnimationFrame === "function") {
+        window.cancelAnimationFrame(englishTTSState.imageTTSStopCleanupFrame);
+    } else {
+        window.clearTimeout(englishTTSState.imageTTSStopCleanupFrame);
+    }
+    englishTTSState.imageTTSStopCleanupFrame = 0;
+}
+
+function resetEnglishTTSFloatingStopButtonStyles(button) {
+    if (!button) {
+        return;
+    }
+    button.classList.remove("is-image-tts-stop-control");
+    button.classList.remove("is-image-tts-dialogue-stop-control");
+    button.style.position = "";
+    button.style.zIndex = "";
+    button.style.inset = "";
+    button.style.left = "";
+    button.style.right = "";
+    button.style.top = "";
+    button.style.bottom = "";
+    button.style.transform = "";
+    button.style.width = "";
+    button.style.minWidth = "";
+    button.style.minHeight = "";
+    button.style.maxWidth = "";
+    button.style.visibility = "";
+}
+
+function getEnglishTTSFloatingStopButton() {
+    return document.getElementById("english-tts-floating-stop") || englishTTSState.imageTTSStopButton || null;
+}
+
+function clearEnglishTTSImageStopRow(button) {
+    button = button || englishTTSState.imageTTSStopButton;
+    const row = englishTTSState.imageTTSStopRow ||
+        (button && typeof button.closest === "function"
+            ? button.closest(".english-tts-image-stop-row")
+            : null);
+    if (englishTTSState.imageTTSStopObserver) {
+        englishTTSState.imageTTSStopObserver.disconnect();
+        englishTTSState.imageTTSStopObserver = null;
+    }
+    if (button) {
+        const belongsToImageRow = row || button.classList.contains("is-image-tts-stop-control");
+        if (belongsToImageRow && button.parentNode !== document.body) {
+            document.body.appendChild(button);
+        }
+        resetEnglishTTSFloatingStopButtonStyles(button);
+    }
+    if (row && row.parentNode) {
+        row.parentNode.removeChild(row);
+    }
+    englishTTSState.imageTTSStopRow = null;
+}
+
+function isEnglishTTSPlaybackActive() {
+    const hasPendingSequenceTrigger = [
+        englishTTSState.storySequenceTrigger,
+        englishTTSState.dialogueSequenceTrigger,
+        englishTTSState.answerSequenceTrigger
+    ].some(trigger => trigger && trigger.isConnected !== false);
+    return Boolean(englishTTSState.activeUtterance || englishTTSState.collocationReplayTimer ||
+        englishTTSState.storySequenceTimer || englishTTSState.dialogueSequenceTimer ||
+        englishTTSState.answerSequenceTimer || hasPendingSequenceTrigger);
+}
+
+function placeEnglishImageTTSStopButton(button, wrapper) {
+    englishTTSState.imageTTSStopButton = button;
+    if (!wrapper || wrapper.isConnected === false || !wrapper.parentNode) {
+        button.hidden = true;
+        clearEnglishTTSImageStopRow(button);
+        return false;
+    }
+
+    let row = englishTTSState.imageTTSStopRow;
+    if (!row || !row.classList.contains("english-tts-image-stop-row")) {
+        row = document.createElement("div");
+        row.className = "english-tts-image-stop-row";
+        englishTTSState.imageTTSStopRow = row;
+    }
+    if (row.parentNode !== wrapper.parentNode || row.previousSibling !== wrapper) {
+        wrapper.parentNode.insertBefore(row, wrapper.nextSibling);
+    }
+    if (button.parentNode !== row) {
+        row.appendChild(button);
+    }
+
+    resetEnglishTTSFloatingStopButtonStyles(button);
+    button.classList.add("is-image-tts-stop-control");
+    button.hidden = false;
+
+    if (!englishTTSState.imageTTSStopObserver && typeof MutationObserver === "function" && document.body) {
+        englishTTSState.imageTTSStopObserver = new MutationObserver(() => {
+            const currentWrapper = englishTTSState.activeImageTTSWrapper;
+            const currentRow = englishTTSState.imageTTSStopRow;
+            if (!currentWrapper || currentWrapper.isConnected === false || !currentRow ||
+                currentRow.isConnected === false || currentRow.parentNode !== currentWrapper.parentNode ||
+                currentRow.previousSibling !== currentWrapper) {
+                scheduleEnglishTTSFloatingStopPosition();
+            }
+        });
+        englishTTSState.imageTTSStopObserver.observe(document.body, { childList: true, subtree: true });
+    }
+    return true;
+}
+
+function placeEnglishImageTTSDialogueStopButton(button, wrapper, panel) {
+    if (!wrapper || wrapper.isConnected === false || !panel || !panel.bounds ||
+        !Array.isArray(panel.speechUnits)) {
+        return false;
+    }
+
+    clearEnglishTTSImageStopRow(button);
+    if (button.parentNode !== document.body) {
+        document.body.appendChild(button);
+    }
+    button.classList.add("is-image-tts-dialogue-stop-control");
+    button.hidden = false;
+    button.style.position = "fixed";
+    button.style.zIndex = "11900";
+    button.style.inset = "auto";
+    button.style.right = "auto";
+    button.style.bottom = "auto";
+
+    const viewport = window.visualViewport;
+    const viewportLeft = viewport ? viewport.offsetLeft : 0;
+    const viewportTop = viewport ? viewport.offsetTop : 0;
+    const viewportWidth = viewport ? (viewport.width || window.innerWidth) : window.innerWidth;
+    const viewportHeight = viewport ? (viewport.height || window.innerHeight) : window.innerHeight;
+    const readSafeInset = name => {
+        try {
+            return parseFloat(window.getComputedStyle(button).getPropertyValue(name)) || 0;
+        } catch (error) {
+            return 0;
+        }
+    };
+    const margin = 8;
+    const safeLeft = viewportLeft + readSafeInset("--english-tts-safe-left") + margin;
+    const safeRight = viewportLeft + viewportWidth - readSafeInset("--english-tts-safe-right") - margin;
+    const safeTop = viewportTop + readSafeInset("--english-tts-safe-top") + margin;
+    const safeBottom = viewportTop + viewportHeight - readSafeInset("--english-tts-safe-bottom") - margin;
+    const availableWidth = Math.max(48, safeRight - safeLeft);
+    button.style.minWidth = `${Math.min(144, availableWidth)}px`;
+    button.style.maxWidth = `${availableWidth}px`;
+    button.style.visibility = "hidden";
+    const measuredButton = button.getBoundingClientRect();
+    const buttonWidth = Math.min(measuredButton.width || 144, availableWidth);
+    const buttonHeight = measuredButton.height || 52;
+    const maxLeft = Math.max(safeLeft, safeRight - buttonWidth);
+    const maxTop = Math.max(safeTop, safeBottom - buttonHeight);
+    const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum);
+    const image = wrapper.querySelector("img");
+    let panelRect = null;
+    let speechRects = [];
+
+    if (image) {
+        const imageRect = image.getBoundingClientRect();
+        if (imageRect.width > 0 && imageRect.height > 0) {
+            const imageLeft = imageRect.left + viewportLeft;
+            const imageTop = imageRect.top + viewportTop;
+            const toRect = bounds => ({
+                left: imageLeft + imageRect.width * bounds.xPct / 100,
+                top: imageTop + imageRect.height * bounds.yPct / 100,
+                right: imageLeft + imageRect.width * (bounds.xPct + bounds.widthPct) / 100,
+                bottom: imageTop + imageRect.height * (bounds.yPct + bounds.heightPct) / 100
+            });
+            panelRect = toRect(panel.bounds);
+            speechRects = panel.speechUnits.map(unit => toRect(unit.bounds));
+        }
+    }
+
+    const panelMinLeft = panelRect ? Math.max(safeLeft, panelRect.left) : safeLeft;
+    const panelMaxLeft = panelRect ? Math.min(maxLeft, panelRect.right - buttonWidth) : maxLeft;
+    const panelCenterLeft = panelRect
+        ? panelRect.left + (panelRect.right - panelRect.left - buttonWidth) / 2
+        : viewportLeft + (viewportWidth - buttonWidth) / 2;
+    const preferredLeft = panelMinLeft <= panelMaxLeft
+        ? clamp(panelCenterLeft, panelMinLeft, panelMaxLeft)
+        : clamp(panelCenterLeft, safeLeft, maxLeft);
+    const leftCandidates = [preferredLeft, safeLeft, maxLeft];
+    const topCandidates = panelRect
+        ? [panelRect.bottom + 6, panelRect.top - buttonHeight - 6]
+        : [];
+    speechRects.forEach(rect => {
+        leftCandidates.push(rect.left - buttonWidth - 4, rect.right + 4);
+        topCandidates.push(rect.top - buttonHeight - 4, rect.bottom + 4);
+    });
+    [0.82, 0.65, 0.35, 0.18].forEach(ratio =>
+        topCandidates.push(clamp(viewportTop + viewportHeight * ratio - buttonHeight / 2, safeTop, maxTop)));
+    topCandidates.push(safeTop, maxTop);
+
+    const overlapsSpeech = (left, top) => speechRects.some(rect =>
+        left < rect.right && left + buttonWidth > rect.left &&
+        top < rect.bottom && top + buttonHeight > rect.top);
+    let placement = null;
+    for (const top of topCandidates) {
+        for (const left of leftCandidates) {
+            if (left >= safeLeft && left + buttonWidth <= safeRight &&
+                top >= safeTop && top + buttonHeight <= safeBottom && !overlapsSpeech(left, top)) {
+                placement = { left, top };
+                break;
+            }
+        }
+        if (placement) {
+            break;
+        }
+    }
+
+    if (!placement) {
+        button.hidden = true;
+        button.style.visibility = "hidden";
+        return false;
+    }
+    button.style.left = `${placement.left}px`;
+    button.style.top = `${placement.top}px`;
+    button.style.visibility = "visible";
+    return true;
+}
+
 function updateEnglishTTSControls() {
     const voiceSelect = document.getElementById("english-tts-voice");
     const previewButton = document.getElementById("english-tts-preview");
     const speakButton = document.getElementById("english-tts-speak-selection");
     const stopButton = document.getElementById("english-tts-stop");
-    const floatingStopButton = document.getElementById("english-tts-floating-stop");
+    const floatingStopButton = getEnglishTTSFloatingStopButton();
     const hasVoice = Boolean(getSelectedLocalEnglishVoice());
     const canSpeak = englishTTSState.supported && hasVoice && appState.subjectMode === "english";
 
@@ -3478,27 +3771,74 @@ function updateEnglishTTSControls() {
             !englishTTSState.dialogueSequenceTimer && !englishTTSState.answerSequenceTimer;
     }
     if (floatingStopButton) {
-        const shouldShowStop = appState.subjectMode === "english" &&
-            Boolean(englishTTSState.activeUtterance || englishTTSState.collocationReplayTimer ||
-                englishTTSState.storySequenceTimer || englishTTSState.dialogueSequenceTimer ||
-                englishTTSState.answerSequenceTimer);
-        floatingStopButton.hidden = !shouldShowStop;
+        const shouldShowStop = appState.subjectMode === "english" && isEnglishTTSPlaybackActive();
+        const imageStopRow = englishTTSState.imageTTSStopRow ||
+            floatingStopButton.closest(".english-tts-image-stop-row");
         if (shouldShowStop) {
-            if (floatingStopButton.parentNode !== document.body) {
-                document.body.appendChild(floatingStopButton);
-            }
+            cancelEnglishTTSImageStopCleanup();
+            floatingStopButton.hidden = false;
             positionEnglishTTSFloatingStopButton();
+        } else if (imageStopRow) {
+            if (!englishTTSState.imageTTSStopCleanupFrame) {
+                const requestFrame = window.requestAnimationFrame || (callback => window.setTimeout(callback, 16));
+                englishTTSState.imageTTSStopCleanupFrame = requestFrame(() => {
+                    englishTTSState.imageTTSStopCleanupFrame = 0;
+                    if (appState.subjectMode === "english" && isEnglishTTSPlaybackActive()) {
+                        positionEnglishTTSFloatingStopButton();
+                        return;
+                    }
+                    floatingStopButton.hidden = true;
+                    clearEnglishTTSImageStopRow(floatingStopButton);
+                    englishTTSState.activeSpeechIsImageTTS = false;
+                    englishTTSState.activeImageTTSWrapper = null;
+                    englishTTSState.activeImageTTSDialoguePanel = null;
+                });
+            }
+        } else {
+            cancelEnglishTTSImageStopCleanup();
+            floatingStopButton.hidden = true;
+            if (englishTTSState.imageTTSStopObserver) {
+                englishTTSState.imageTTSStopObserver.disconnect();
+                englishTTSState.imageTTSStopObserver = null;
+            }
+            englishTTSState.activeSpeechIsImageTTS = false;
+            englishTTSState.activeImageTTSWrapper = null;
+            englishTTSState.activeImageTTSDialoguePanel = null;
+            if (floatingStopButton.classList.contains("is-image-tts-dialogue-stop-control")) {
+                resetEnglishTTSFloatingStopButtonStyles(floatingStopButton);
+            }
         }
     }
 }
 
 function positionEnglishTTSFloatingStopButton() {
-    const button = document.getElementById("english-tts-floating-stop");
-    if (!button || button.hidden || appState.subjectMode !== "english") {
+    const button = getEnglishTTSFloatingStopButton();
+    if (!button || appState.subjectMode !== "english") {
         return;
     }
 
-    // Keep the one floating stop control outside answer containers that may clip fixed descendants.
+    if (englishTTSState.activeImageTTSDialoguePanel) {
+        if (!placeEnglishImageTTSDialogueStopButton(
+            button,
+            englishTTSState.activeImageTTSWrapper,
+            englishTTSState.activeImageTTSDialoguePanel
+        )) {
+            button.hidden = true;
+        }
+        return;
+    }
+
+    if (englishTTSState.activeSpeechIsImageTTS) {
+        placeEnglishImageTTSStopButton(button, englishTTSState.activeImageTTSWrapper);
+        return;
+    }
+
+    if (button.hidden) {
+        return;
+    }
+    clearEnglishTTSImageStopRow(button);
+
+    // Keep non-image speech controls outside answer containers that may clip fixed descendants.
     if (button.parentNode !== document.body) {
         document.body.appendChild(button);
     }
@@ -3955,7 +4295,7 @@ function speakEnglishText(
         const requestedSpeechTriggerRect = englishTTSState.activeSpeechTriggerRect;
         cancelEnglishAnswerTTSSequence(true);
         if (requestedSpeechTrigger) {
-            englishTTSState.activeSpeechTrigger = requestedSpeechTrigger;
+            rememberEnglishSpeechTrigger(requestedSpeechTrigger);
             englishTTSState.activeSpeechTriggerRect = requestedSpeechTriggerRect;
         }
     } else if (answerSequenceGeneration !== englishTTSState.answerSequenceGeneration) {
@@ -4867,7 +5207,9 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "sales-and-orders-basics" &&
             record.assetFile === "images/english/sales-and-orders-basics.png") ||
         (record.imageId === "invoices-and-payments-basics" &&
-            record.assetFile === "images/english/invoices-and-payments-basics.png");
+            record.assetFile === "images/english/invoices-and-payments-basics.png") ||
+        (record.imageId === "returns-and-refunds-basics" &&
+            record.assetFile === "images/english/returns-and-refunds-basics.png");
     if (hasPanelInteraction && (record.panelInteraction !== "tap-to-open-menu" ||
         !allowedPanelInteractionAsset ||
         record.contentType !== "dialogue" || record.layout !== "2x2")) {
