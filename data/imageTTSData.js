@@ -10050,6 +10050,159 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/equipment-malfunctions-and-repairs-basics.png": {
+        "imageId": "equipment-malfunctions-and-repairs-basics",
+        "assetFile": "images/english/equipment-malfunctions-and-repairs-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "panelInteraction": "tap-to-open-menu",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": {
+                    "xPct": 0.2392,
+                    "yPct": 0.1595,
+                    "widthPct": 49.2026,
+                    "heightPct": 49.2026
+                },
+                "tapBounds": {
+                    "xPct": 0.638,
+                    "yPct": 7.496,
+                    "widthPct": 48.3254,
+                    "heightPct": 41.3876
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Worker wearing a yellow hard hat and blue work clothes",
+                        "sourceText": "The machine has stopped working.",
+                        "ttsText": "The machine has stopped working.",
+                        "bounds": {
+                            "xPct": 6.5391,
+                            "yPct": 7.6555,
+                            "widthPct": 36.8421,
+                            "heightPct": 14.992
+                        },
+                        "speakerAnchor": {
+                            "xPct": 39.9522,
+                            "yPct": 31.4195
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": {
+                    "xPct": 50.638,
+                    "yPct": 0.1595,
+                    "widthPct": 49.1228,
+                    "heightPct": 49.2026
+                },
+                "tapBounds": {
+                    "xPct": 51.1962,
+                    "yPct": 7.496,
+                    "widthPct": 35.4067,
+                    "heightPct": 41.3876
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "We need to report this problem to the maintenance department.",
+                        "ttsText": "We need to report this problem to the maintenance department.",
+                        "bounds": {
+                            "xPct": 53.748,
+                            "yPct": 7.6555,
+                            "widthPct": 34.051,
+                            "heightPct": 21.0526
+                        },
+                        "speakerAnchor": {
+                            "xPct": 63.3174,
+                            "yPct": 34.2105
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": {
+                    "xPct": 0.2392,
+                    "yPct": 50.3987,
+                    "widthPct": 49.2026,
+                    "heightPct": 49.362
+                },
+                "tapBounds": {
+                    "xPct": 0.638,
+                    "yPct": 57.7352,
+                    "widthPct": 48.3254,
+                    "heightPct": 41.6268
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Worker wearing a yellow hard hat and blue work clothes",
+                        "sourceText": "When can a technician inspect the machine?",
+                        "ttsText": "When can a technician inspect the machine?",
+                        "bounds": {
+                            "xPct": 11.0048,
+                            "yPct": 58.2137,
+                            "widthPct": 37.7193,
+                            "heightPct": 14.992
+                        },
+                        "speakerAnchor": {
+                            "xPct": 39.3142,
+                            "yPct": 77.9904
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": {
+                    "xPct": 50.638,
+                    "yPct": 50.3987,
+                    "widthPct": 49.1228,
+                    "heightPct": 49.362
+                },
+                "tapBounds": {
+                    "xPct": 51.1962,
+                    "yPct": 57.7352,
+                    "widthPct": 48.2456,
+                    "heightPct": 41.6268
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "The machine is back in operation.",
+                        "ttsText": "The machine is back in operation.",
+                        "bounds": {
+                            "xPct": 54.5455,
+                            "yPct": 58.2137,
+                            "widthPct": 36.8421,
+                            "heightPct": 14.9123
+                        },
+                        "speakerAnchor": {
+                            "xPct": 62.4402,
+                            "yPct": 80.1435
+                        }
+                    }
+                ]
+            }
+        ]
     }
 
 };
