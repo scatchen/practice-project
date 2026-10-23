@@ -912,6 +912,10 @@ color: #111827;
             overscroll-behavior: contain;
         }
 
+        .english-image-tts-menu.is-tap-regions-dialogue {
+            z-index: 11890;
+        }
+
         .english-image-tts-menu[hidden] {
             display: none;
         }
@@ -5242,9 +5246,22 @@ function getEnglishImageTTSRecord(assetFile) {
             record.assetFile === "images/english/customer-service-and-problem-resolution-basics.png") ||
         (record.imageId === "business-complaints-and-problem-resolution-basics" &&
             record.assetFile === "images/english/business-complaints-and-problem-resolution-basics.png");
-    if (hasPanelInteraction && (record.panelInteraction !== "tap-to-open-menu" ||
-        !allowedPanelInteractionAsset ||
-        record.contentType !== "dialogue" || record.layout !== "2x2")) {
+    const isTapRegionsInteraction = record.panelInteraction === "tap-regions-to-open-menu";
+    const isP16TapRegionsFuturePair =
+        record.imageId === "cross-departmental-communication-and-coordination-basics" &&
+        record.assetFile === "images/english/cross-departmental-communication-and-coordination-basics.png";
+    if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
+        (!allowedPanelInteractionAsset ||
+            record.contentType !== "dialogue" || record.layout !== "2x2")) {
+        return null;
+    }
+    if (hasPanelInteraction && isTapRegionsInteraction &&
+        (!isP16TapRegionsFuturePair ||
+            record.contentType !== "dialogue" || record.layout !== "2x2")) {
+        return null;
+    }
+    if (hasPanelInteraction && record.panelInteraction !== "tap-to-open-menu" &&
+        !isTapRegionsInteraction) {
         return null;
     }
 
@@ -5267,18 +5284,31 @@ function getEnglishImageTTSRecord(assetFile) {
             return null;
         }
         if (hasPanelInteraction
-                ? orderedPanels.some(panel => !panel || !Object.prototype.hasOwnProperty.call(panel, "tapBounds"))
-                : orderedPanels.some(panel => panel && Object.prototype.hasOwnProperty.call(panel, "tapBounds"))) {
+                ? orderedPanels.some(panel => !panel || (isTapRegionsInteraction
+                    ? (!Object.prototype.hasOwnProperty.call(panel, "tapRegions") ||
+                        Object.prototype.hasOwnProperty.call(panel, "tapBounds"))
+                    : (!Object.prototype.hasOwnProperty.call(panel, "tapBounds") ||
+                        Object.prototype.hasOwnProperty.call(panel, "tapRegions"))))
+                : orderedPanels.some(panel => panel &&
+                    (Object.prototype.hasOwnProperty.call(panel, "tapBounds") ||
+                        Object.prototype.hasOwnProperty.call(panel, "tapRegions")))) {
             return null;
         }
         const panelTapBounds = [];
+        const panelTapRegions = [];
         for (let index = 0; index < orderedPanels.length; index += 1) {
             const panel = orderedPanels[index];
             const bounds = panel && panel.bounds;
             const hasTapBounds = panel && Object.prototype.hasOwnProperty.call(panel, "tapBounds");
+            const hasTapRegions = panel && Object.prototype.hasOwnProperty.call(panel, "tapRegions");
             if (!panel || panel.panelId !== index + 1 || panelIds.has(panel.panelId) ||
                 panel.readingOrder !== index + 1 || !isValidBounds(bounds) ||
-                !Array.isArray(panel.speechUnits) || hasPanelInteraction !== hasTapBounds ||
+                (isTapRegionsInteraction &&
+                    (bounds.xPct + bounds.widthPct > 100 || bounds.yPct + bounds.heightPct > 100)) ||
+                !Array.isArray(panel.speechUnits) ||
+                (isTapRegionsInteraction
+                    ? (!hasTapRegions || hasTapBounds)
+                    : (hasTapRegions || hasPanelInteraction !== hasTapBounds)) ||
                 (hasPanelInteraction && panel.speechUnits.length === 0)) {
                 return null;
             }
@@ -5368,6 +5398,33 @@ function getEnglishImageTTSRecord(assetFile) {
                     }
                 }
             }
+            if (isTapRegionsInteraction) {
+                const tapRegions = panel.tapRegions;
+                const tapRegionUnitIds = new Set();
+                if (!Array.isArray(tapRegions) || tapRegions.length !== panel.speechUnits.length) {
+                    return null;
+                }
+                for (const tapRegion of tapRegions) {
+                    const regionBounds = tapRegion && tapRegion.bounds;
+                    if (!hasExactKeys(tapRegion, ["unitId", "bounds"]) ||
+                        !Number.isInteger(tapRegion.unitId) || tapRegionUnitIds.has(tapRegion.unitId) ||
+                        !unitIds.has(tapRegion.unitId) ||
+                        !hasExactKeys(regionBounds, ["xPct", "yPct", "widthPct", "heightPct"]) ||
+                        !isValidBounds(regionBounds) ||
+                        regionBounds.xPct + regionBounds.widthPct > 100 ||
+                        regionBounds.yPct + regionBounds.heightPct > 100 ||
+                        regionBounds.xPct < bounds.xPct || regionBounds.yPct < bounds.yPct ||
+                        regionBounds.xPct + regionBounds.widthPct > bounds.xPct + bounds.widthPct ||
+                        regionBounds.yPct + regionBounds.heightPct > bounds.yPct + bounds.heightPct) {
+                        return null;
+                    }
+                    tapRegionUnitIds.add(tapRegion.unitId);
+                    panelTapRegions.push(regionBounds);
+                }
+                if (tapRegionUnitIds.size !== unitIds.size) {
+                    return null;
+                }
+            }
             for (const unit of panel.speechUnits) {
                 if (unitBounds.some(rect => unit.speakerAnchor.xPct >= rect.xPct &&
                     unit.speakerAnchor.xPct <= rect.xPct + rect.widthPct &&
@@ -5391,6 +5448,18 @@ function getEnglishImageTTSRecord(assetFile) {
             for (let b = a + 1; b < panelTapBounds.length; b += 1) {
                 const left = panelTapBounds[a];
                 const right = panelTapBounds[b];
+                if (left.xPct < right.xPct + right.widthPct &&
+                    left.xPct + left.widthPct > right.xPct &&
+                    left.yPct < right.yPct + right.heightPct &&
+                    left.yPct + left.heightPct > right.yPct) {
+                    return null;
+                }
+            }
+        }
+        for (let a = 0; a < panelTapRegions.length; a += 1) {
+            for (let b = a + 1; b < panelTapRegions.length; b += 1) {
+                const left = panelTapRegions[a];
+                const right = panelTapRegions[b];
                 if (left.xPct < right.xPct + right.widthPct &&
                     left.xPct + left.widthPct > right.xPct &&
                     left.yPct < right.yPct + right.heightPct &&
@@ -5622,7 +5691,9 @@ function createEnglishImageTTSDialogueSpeaker(wrapper, panel) {
     return button;
 }
 
-function createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel) {
+function createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel, tapRegion = null) {
+    const isTapRegion = Boolean(tapRegion);
+    const tapBounds = isTapRegion ? tapRegion.bounds : panel.tapBounds;
     const button = document.createElement("button");
     button.type = "button";
     button.className = "image-tts-dialogue-panel-hit-area";
@@ -5634,19 +5705,32 @@ function createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel) {
     button.setAttribute("aria-controls", "english-image-tts-menu");
     button.setAttribute("data-english-tts-control", "true");
     button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
-    button.style.left = `${panel.tapBounds.xPct}%`;
-    button.style.top = `${panel.tapBounds.yPct}%`;
-    button.style.width = `${panel.tapBounds.widthPct}%`;
-    button.style.height = `${panel.tapBounds.heightPct}%`;
+    button.style.left = `${tapBounds.xPct}%`;
+    button.style.top = `${tapBounds.yPct}%`;
+    button.style.width = `${tapBounds.widthPct}%`;
+    button.style.height = `${tapBounds.heightPct}%`;
     button._englishImageTTSDialoguePanel = panel;
+    button._englishImageTTSIsTapRegion = isTapRegion;
     button._englishImageTTSMenuImage = image;
     button.addEventListener("click", event => {
         event.stopPropagation();
         if (button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
             return;
         }
-        if (englishImageTTSOverlayState.activeTrigger === button &&
-            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+        const activeTrigger = englishImageTTSOverlayState.activeTrigger;
+        const activeMenu = englishImageTTSOverlayState.menu;
+        const activePanel = activeTrigger && activeTrigger._englishImageTTSDialoguePanel;
+        if (isTapRegion && activeTrigger && activeTrigger._englishImageTTSIsTapRegion &&
+            activeMenu && !activeMenu.hidden && activePanel && activePanel.panelId === panel.panelId &&
+            activeTrigger.closest(".image-tts-overlay-wrapper") === wrapper) {
+            if (activeTrigger !== button) {
+                activeTrigger.setAttribute("aria-expanded", "false");
+                button.setAttribute("aria-expanded", "true");
+                englishImageTTSOverlayState.activeTrigger = button;
+            }
+            return;
+        }
+        if (activeTrigger === button && activeMenu && !activeMenu.hidden) {
             closeEnglishImageTTSMenu();
             return;
         }
@@ -5721,10 +5805,15 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
             if (image.complete && image.naturalWidth === 0) {
                 return;
             }
-            if (record.panelInteraction === "tap-to-open-menu") {
+            if (record.panelInteraction === "tap-to-open-menu" ||
+                record.panelInteraction === "tap-regions-to-open-menu") {
+                const usesTapRegions = record.panelInteraction === "tap-regions-to-open-menu";
                 record.panels.forEach(panel => {
-                    createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel);
-                    added += 1;
+                    const regions = usesTapRegions ? panel.tapRegions : [null];
+                    regions.forEach(region => {
+                        createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel, region);
+                        added += 1;
+                    });
                 });
                 image.addEventListener("load", () => layoutEnglishImageTTSDialoguePanelHitAreas(wrapper), { once: true });
                 image.addEventListener("error", () => {
@@ -6298,6 +6387,7 @@ function openEnglishImageTTSMenu(trigger, panel) {
     }
     cancelEnglishImageTTSStorySequenceForDifferentTrigger(trigger);
     const dialogueUnits = Array.isArray(panel.speechUnits) ? panel.speechUnits : null;
+    const isTapRegionDialogue = Boolean(trigger._englishImageTTSIsTapRegion);
     const dialogueSentences = dialogueUnits
         ? dialogueUnits.map(unit => unit && typeof unit.ttsText === "string"
             ? getEnglishTTSUnitText(unit.ttsText)
@@ -6321,6 +6411,7 @@ function openEnglishImageTTSMenu(trigger, panel) {
         return;
     }
     englishImageTTSOverlayState.activeTrigger = trigger;
+    menu.classList.toggle("is-tap-regions-dialogue", isTapRegionDialogue);
     trigger.setAttribute("aria-expanded", "true");
     menu.setAttribute("aria-label", dialogueUnits
         ? "第 " + panel.panelId + " 格英文對話朗讀選項"
@@ -6339,9 +6430,11 @@ function openEnglishImageTTSMenu(trigger, panel) {
             : speakEnglishImageTTSFromPanel(trigger, content.fullText)
     );
     const sentenceToggle = createEnglishImageTTSMenuButton(
-        "單句",
+        isTapRegionDialogue ? "單位朗讀" : "單句",
         dialogueUnits
-            ? "展開第 " + panel.panelId + " 格對話單句"
+            ? (isTapRegionDialogue
+                ? "展開第 " + panel.panelId + " 格對話單位朗讀"
+                : "展開第 " + panel.panelId + " 格對話單句")
             : `展開第 ${panel.panelId} 格正文單句`,
         () => {
             const sentenceList = menu.querySelector(".english-image-tts-sentences");
@@ -6363,7 +6456,7 @@ function openEnglishImageTTSMenu(trigger, panel) {
         sentenceList.appendChild(createEnglishImageTTSMenuButton(
             dialogueUnits ? "🔊 " + unit.sourceText : `🔊 第 ${index + 1} 句`,
             dialogueUnits
-                ? "朗讀單句：" + unit.sourceText
+                ? (isTapRegionDialogue ? "朗讀單位：" : "朗讀單句：") + unit.sourceText
                 : `朗讀第 ${index + 1} 句英文正文`,
             () => dialogueUnits
                 ? speakEnglishImageTTSDialogueUnit(trigger, unit)
@@ -6650,6 +6743,7 @@ function closeEnglishImageTTSMenu(restoreFocus = false) {
         trigger._englishImageTTSMenuImage = null;
     }
     if (menu) {
+        menu.classList.remove("is-tap-regions-dialogue");
         menu.hidden = true;
         menu.style.visibility = "";
         while (menu.firstChild) {

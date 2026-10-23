@@ -11609,5 +11609,308 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/cross-departmental-communication-and-coordination-basics.png": {
+        "imageId": "cross-departmental-communication-and-coordination-basics",
+        "assetFile": "images/english/cross-departmental-communication-and-coordination-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panelInteraction": "tap-regions-to-open-menu",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": {
+                    "xPct": 0.5,
+                    "yPct": 11.0,
+                    "widthPct": 49.2,
+                    "heightPct": 44.4
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "We’ve received customer complaints about delayed deliveries.",
+                        "ttsText": "We’ve received customer complaints about delayed deliveries.",
+                        "bounds": {
+                            "xPct": 3.1,
+                            "yPct": 19.1,
+                            "widthPct": 18.0,
+                            "heightPct": 8.6
+                        },
+                        "speakerAnchor": {
+                            "xPct": 10.0,
+                            "yPct": 37.1
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Let’s share the information with all relevant departments.",
+                        "ttsText": "Let’s share the information with all relevant departments.",
+                        "bounds": {
+                            "xPct": 35.6,
+                            "yPct": 19.1,
+                            "widthPct": 11.9,
+                            "heightPct": 10.7
+                        },
+                        "speakerAnchor": {
+                            "xPct": 39.7,
+                            "yPct": 39.3
+                        }
+                    }
+                ],
+                "tapRegions": [
+                    {
+                        "unitId": 1,
+                        "bounds": {
+                            "xPct": 2.7,
+                            "yPct": 18.9,
+                            "widthPct": 18.8,
+                            "heightPct": 9
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "bounds": {
+                            "xPct": 35.2,
+                            "yPct": 18.8,
+                            "widthPct": 12.9,
+                            "heightPct": 11.5
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": {
+                    "xPct": 50.3,
+                    "yPct": 11.0,
+                    "widthPct": 49.2,
+                    "heightPct": 44.4
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "We need to coordinate with the sales, production, logistics, and purchasing teams.",
+                        "ttsText": "We need to coordinate with the sales, production, logistics, and purchasing teams.",
+                        "bounds": {
+                            "xPct": 54.4,
+                            "yPct": 18.8,
+                            "widthPct": 18.2,
+                            "heightPct": 10.9
+                        },
+                        "speakerAnchor": {
+                            "xPct": 60.2,
+                            "yPct": 40.6
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Let’s work together to find the best solution.",
+                        "ttsText": "Let’s work together to find the best solution.",
+                        "bounds": {
+                            "xPct": 76.9,
+                            "yPct": 20.6,
+                            "widthPct": 17.8,
+                            "heightPct": 5.5
+                        },
+                        "speakerAnchor": {
+                            "xPct": 82.7,
+                            "yPct": 39.8
+                        }
+                    }
+                ],
+                "tapRegions": [
+                    {
+                        "unitId": 1,
+                        "bounds": {
+                            "xPct": 53.9,
+                            "yPct": 18.4,
+                            "widthPct": 19.8,
+                            "heightPct": 11.6
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "bounds": {
+                            "xPct": 76.3,
+                            "yPct": 18.9,
+                            "widthPct": 18.9,
+                            "heightPct": 8.7
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": {
+                    "xPct": 0.5,
+                    "yPct": 56.4,
+                    "widthPct": 49.2,
+                    "heightPct": 43.2
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Let’s agree on this plan and assign responsibilities to each team.",
+                        "ttsText": "Let’s agree on this plan and assign responsibilities to each team.",
+                        "bounds": {
+                            "xPct": 23.9,
+                            "yPct": 65.2,
+                            "widthPct": 15.3,
+                            "heightPct": 7.5
+                        },
+                        "speakerAnchor": {
+                            "xPct": 28.5,
+                            "yPct": 81.4
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Who will be responsible for this task?",
+                        "ttsText": "Who will be responsible for this task?",
+                        "bounds": {
+                            "xPct": 41.0,
+                            "yPct": 69.0,
+                            "widthPct": 7.6,
+                            "heightPct": 7.2
+                        },
+                        "speakerAnchor": {
+                            "xPct": 38.4,
+                            "yPct": 84.8
+                        }
+                    }
+                ],
+                "tapRegions": [
+                    {
+                        "unitId": 1,
+                        "bounds": {
+                            "xPct": 23.4,
+                            "yPct": 64.3,
+                            "widthPct": 16.3,
+                            "heightPct": 8.9
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "bounds": {
+                            "xPct": 40.4,
+                            "yPct": 67.9,
+                            "widthPct": 8.6,
+                            "heightPct": 8.6
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": {
+                    "xPct": 50.3,
+                    "yPct": 56.4,
+                    "widthPct": 49.2,
+                    "heightPct": 43.2
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "I’ll provide an update by the end of the day.",
+                        "ttsText": "I’ll provide an update by the end of the day.",
+                        "bounds": {
+                            "xPct": 52.5,
+                            "yPct": 67.8,
+                            "widthPct": 14.4,
+                            "heightPct": 5
+                        },
+                        "speakerAnchor": {
+                            "xPct": 59.2,
+                            "yPct": 83.8
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Please keep everyone informed of any changes.",
+                        "ttsText": "Please keep everyone informed of any changes.",
+                        "bounds": {
+                            "xPct": 78.9,
+                            "yPct": 68.5,
+                            "widthPct": 9.8,
+                            "heightPct": 7.3
+                        },
+                        "speakerAnchor": {
+                            "xPct": 83.5,
+                            "yPct": 83.4
+                        }
+                    },
+                    {
+                        "unitId": 3,
+                        "readingOrder": 3,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Great! The teams are working well together.",
+                        "ttsText": "Great! The teams are working well together.",
+                        "bounds": {
+                            "xPct": 90.9,
+                            "yPct": 66.3,
+                            "widthPct": 7.8,
+                            "heightPct": 9.9
+                        },
+                        "speakerAnchor": {
+                            "xPct": 94.0,
+                            "yPct": 83.2
+                        }
+                    }
+                ],
+                "tapRegions": [
+                    {
+                        "unitId": 1,
+                        "bounds": {
+                            "xPct": 52.0,
+                            "yPct": 65.8,
+                            "widthPct": 15.3,
+                            "heightPct": 8.6
+                        }
+                    },
+                    {
+                        "unitId": 2,
+                        "bounds": {
+                            "xPct": 79.6,
+                            "yPct": 67.8,
+                            "widthPct": 9.8,
+                            "heightPct": 8.6
+                        }
+                    },
+                    {
+                        "unitId": 3,
+                        "bounds": {
+                            "xPct": 90.4,
+                            "yPct": 65.8,
+                            "widthPct": 8.9,
+                            "heightPct": 10.5
+                        }
+                    }
+                ]
+            }
+        ]
     }
 };
