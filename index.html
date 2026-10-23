@@ -4817,8 +4817,9 @@ function splitEnglishTTSTokensAtLineBreaks(tokens) {
 
 function getEnglishTTSUnitText(text) {
     const candidate = normalizeEnglishTTSSelectionText(text);
-    const allowedEnglishText = /^[\p{Script=Latin}\p{M}\p{N}\s.,!?;:'"“”‘’()[\]{}\-–—…/]+$/u;
-    if (!candidate || !allowedEnglishText.test(candidate) || !/\p{Script=Latin}/u.test(candidate)) {
+    const allowedEnglishText = /^[\p{Script=Latin}\p{M}\p{N}\s.,!?;:'"“”‘’()[\]{}\-–—…/%]+$/u;
+    if (!candidate || !allowedEnglishText.test(candidate) ||
+        candidate.replace(/\p{N}%/gu, '').includes('%') || !/\p{Script=Latin}/u.test(candidate)) {
         return null;
     }
 
@@ -5250,13 +5251,17 @@ function getEnglishImageTTSRecord(assetFile) {
     const isP16TapRegionsFuturePair =
         record.imageId === "cross-departmental-communication-and-coordination-basics" &&
         record.assetFile === "images/english/cross-departmental-communication-and-coordination-basics.png";
+    const isP17TapRegionsPair =
+        record.imageId === "business-negotiation-and-contracts-basics" &&
+        record.assetFile === "images/english/business-negotiation-and-contracts-basics.png";
+    const isAllowedTapRegionsAssetPair = isP16TapRegionsFuturePair || isP17TapRegionsPair;
     if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
         (!allowedPanelInteractionAsset ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {
         return null;
     }
     if (hasPanelInteraction && isTapRegionsInteraction &&
-        (!isP16TapRegionsFuturePair ||
+        (!isAllowedTapRegionsAssetPair ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {
         return null;
     }
@@ -5309,7 +5314,9 @@ function getEnglishImageTTSRecord(assetFile) {
                 (isTapRegionsInteraction
                     ? (!hasTapRegions || hasTapBounds)
                     : (hasTapRegions || hasPanelInteraction !== hasTapBounds)) ||
-                (hasPanelInteraction && panel.speechUnits.length === 0)) {
+                (hasPanelInteraction && panel.speechUnits.length === 0 &&
+                    !(isTapRegionsInteraction && isP17TapRegionsPair && panel.panelId === 2 &&
+                        Array.isArray(panel.tapRegions) && panel.tapRegions.length === 0))) {
                 return null;
             }
             panelIds.add(panel.panelId);

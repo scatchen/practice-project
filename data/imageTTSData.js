@@ -11912,5 +11912,92 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/business-negotiation-and-contracts-basics.png": {
+        "imageId": "business-negotiation-and-contracts-basics",
+        "assetFile": "images/english/business-negotiation-and-contracts-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panelInteraction": "tap-regions-to-open-menu",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 0.4, "yPct": 10.9, "widthPct": 49.3, "heightPct": 43.4 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Man in blue",
+                        "sourceText": "We can offer a 10% discount for a larger order.",
+                        "ttsText": "We can offer a 10% discount for a larger order.",
+                        "bounds": { "xPct": 8.3, "yPct": 16.8, "widthPct": 23.0, "heightPct": 13.4 },
+                        "speakerAnchor": { "xPct": 11.8, "yPct": 39.0 }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "Woman in pink",
+                        "sourceText": "That sounds good. Can you do a bit more?",
+                        "ttsText": "That sounds good. Can you do a bit more?",
+                        "bounds": { "xPct": 31.8, "yPct": 16.8, "widthPct": 17.7, "heightPct": 13.6 },
+                        "speakerAnchor": { "xPct": 41.8, "yPct": 39.8 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 8.5, "yPct": 16.8, "widthPct": 22.7, "heightPct": 10.9 } },
+                    { "unitId": 2, "bounds": { "xPct": 31.9, "yPct": 16.8, "widthPct": 17.5, "heightPct": 10.9 } }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 50.3, "yPct": 10.9, "widthPct": 49.3, "heightPct": 43.4 },
+                "speechUnits": [],
+                "tapRegions": []
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 0.4, "yPct": 54.8, "widthPct": 49.3, "heightPct": 44.7 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Woman in purple",
+                        "sourceText": "Let’s review the contract carefully to make sure everything is clear.",
+                        "ttsText": "Let’s review the contract carefully to make sure everything is clear.",
+                        "bounds": { "xPct": 27.9, "yPct": 60.95, "widthPct": 21.3, "heightPct": 13.5 },
+                        "speakerAnchor": { "xPct": 18.8, "yPct": 81.2 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 28.0, "yPct": 60.95, "widthPct": 21.2, "heightPct": 12.2 } }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 50.3, "yPct": 54.8, "widthPct": 49.3, "heightPct": 44.7 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Man in blue",
+                        "sourceText": "Great! We’ve reached an agreement.",
+                        "ttsText": "Great! We’ve reached an agreement.",
+                        "bounds": { "xPct": 66.9, "yPct": 60.95, "widthPct": 21.8, "heightPct": 12.8 },
+                        "speakerAnchor": { "xPct": 61.2, "yPct": 82.5 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 67.0, "yPct": 60.95, "widthPct": 21.5, "heightPct": 10.8 } }
+                ]
+            }
+        ]
     }
 };
