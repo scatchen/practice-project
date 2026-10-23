@@ -11132,6 +11132,105 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/production-delays-and-equipment-downtime-basics.png": {
+        imageId: "production-delays-and-equipment-downtime-basics",
+        assetFile: "images/english/production-delays-and-equipment-downtime-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.7, yPct: 10.3, widthPct: 49.1, heightPct: 44.2 },
+                tapBounds: { xPct: 19.8, yPct: 19.2, widthPct: 22.8, heightPct: 9.3 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy (blue-cap worker)",
+                        sourceText: "The production line has stopped due to equipment failure.",
+                        ttsText: "The production line has stopped due to equipment failure.",
+                        bounds: { xPct: 18.1, yPct: 18.0, widthPct: 25.1, heightPct: 15.0 },
+                        speakerAnchor: { xPct: 32, yPct: 42 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.2, yPct: 10.3, widthPct: 49.1, heightPct: 44.2 },
+                tapBounds: { xPct: 52.1, yPct: 18.1, widthPct: 45.8, heightPct: 10.8 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy (blue-cap worker)",
+                        sourceText: "There will be a delay in production because the machine is down.",
+                        ttsText: "There will be a delay in production because the machine is down.",
+                        bounds: { xPct: 51.8, yPct: 18.5, widthPct: 27.5, heightPct: 14.3 },
+                        speakerAnchor: { xPct: 62, yPct: 41 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Yellow-shirt character",
+                        sourceText: "How long do you think it will take to repair?",
+                        ttsText: "How long do you think it will take to repair?",
+                        bounds: { xPct: 82.4, yPct: 16.1, widthPct: 16.3, heightPct: 17.1 },
+                        speakerAnchor: { xPct: 80, yPct: 39 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.7, yPct: 54.5, widthPct: 49.1, heightPct: 44.7 },
+                tapBounds: { xPct: 2.4, yPct: 63.4, widthPct: 45.8, heightPct: 9.4 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy (blue-cap worker)",
+                        sourceText: "We need to inform the shipping department about the delay.",
+                        ttsText: "We need to inform the shipping department about the delay.",
+                        bounds: { xPct: 1.9, yPct: 62.4, widthPct: 30.5, heightPct: 14.0 },
+                        speakerAnchor: { xPct: 12, yPct: 84 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Unidentified speaker",
+                        sourceText: "Let’s adjust the schedule accordingly.",
+                        ttsText: "Let’s adjust the schedule accordingly.",
+                        bounds: { xPct: 33.5, yPct: 62.4, widthPct: 15.2, heightPct: 13.8 },
+                        speakerAnchor: { xPct: 29, yPct: 78.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.2, yPct: 54.5, widthPct: 49.1, heightPct: 44.7 },
+                tapBounds: { xPct: 56.2, yPct: 63.4, widthPct: 23.2, heightPct: 11.2 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy (blue-cap worker)",
+                        sourceText: "The machine is back in operation. We can resume production today.",
+                        ttsText: "The machine is back in operation. We can resume production today.",
+                        bounds: { xPct: 54.4, yPct: 62.5, widthPct: 25.9, heightPct: 15.8 },
+                        speakerAnchor: { xPct: 65, yPct: 84 }
+                    }
+                ]
+            }
+        ]
     }
 
 };
