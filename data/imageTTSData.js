@@ -11231,6 +11231,86 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/workplace-safety-and-accident-reporting-basics.png": {
+        imageId: "workplace-safety-and-accident-reporting-basics",
+        assetFile: "images/english/workplace-safety-and-accident-reporting-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.1, yPct: 9.5, widthPct: 49.7, heightPct: 44.8 },
+                tapBounds: { xPct: 19.4, yPct: 17.8, widthPct: 13.3, heightPct: 11.3 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "Watch out! The floor is slippery.",
+                        ttsText: "Watch out! The floor is slippery.",
+                        bounds: { xPct: 16.7, yPct: 16.1, widthPct: 19.6, heightPct: 16.6 },
+                        speakerAnchor: { xPct: 14.0, yPct: 32.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 9.5, widthPct: 49.5, heightPct: 44.8 },
+                tapBounds: { xPct: 58.0, yPct: 17.9, widthPct: 26.0, heightPct: 8.9 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "Always wear the required protective equipment.",
+                        ttsText: "Always wear the required protective equipment.",
+                        bounds: { xPct: 54.9, yPct: 16.2, widthPct: 32.1, heightPct: 14.1 },
+                        speakerAnchor: { xPct: 74.5, yPct: 35.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.1, yPct: 55.2, widthPct: 49.7, heightPct: 44.7 },
+                tapBounds: { xPct: 9.4, yPct: 64.3, widthPct: 24.7, heightPct: 7.8 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "Please report the incident to your supervisor.",
+                        ttsText: "Please report the incident to your supervisor.",
+                        bounds: { xPct: 7.2, yPct: 62.3, widthPct: 28.6, heightPct: 13.9 },
+                        speakerAnchor: { xPct: 9.0, yPct: 81.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 55.2, widthPct: 49.5, heightPct: 44.7 },
+                tapBounds: { xPct: 63.4, yPct: 62.9, widthPct: 20.8, heightPct: 6.8 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "We need to prevent similar accidents.",
+                        ttsText: "We need to prevent similar accidents.",
+                        bounds: { xPct: 61.6, yPct: 61.5, widthPct: 24.5, heightPct: 12.3 },
+                        speakerAnchor: { xPct: 78.8, yPct: 79.0 }
+                    }
+                ]
+            }
+        ]
     }
-
 };
