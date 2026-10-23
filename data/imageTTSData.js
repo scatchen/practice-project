@@ -10860,6 +10860,87 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/market-research-and-consumer-trends-basics.png": {
+        imageId: "market-research-and-consumer-trends-basics",
+        assetFile: "images/english/market-research-and-consumer-trends-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.2604, yPct: 14.7461, widthPct: 49.5443, heightPct: 36.6211 },
+                tapBounds: { xPct: 14.5833, yPct: 24.0234, widthPct: 11.9792, heightPct: 9.3750 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "Let's conduct a market research survey.",
+                        ttsText: "Let's conduct a market research survey.",
+                        bounds: { xPct: 12.5000, yPct: 22.6563, widthPct: 15.4297, heightPct: 14.4531 },
+                        speakerAnchor: { xPct: 11.5234, yPct: 38.0859 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.2604, yPct: 14.7461, widthPct: 49.4792, heightPct: 36.6211 },
+                tapBounds: { xPct: 65.1693, yPct: 23.3398, widthPct: 13.2813, heightPct: 10.3516 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "We're collecting customer feedback to improve our products.",
+                        ttsText: "We're collecting customer feedback to improve our products.",
+                        bounds: { xPct: 63.0208, yPct: 21.6797, widthPct: 16.9271, heightPct: 15.2344 },
+                        speakerAnchor: { xPct: 58.5938, yPct: 33.3008 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.2604, yPct: 51.7578, widthPct: 49.5443, heightPct: 36.3281 },
+                tapBounds: { xPct: 12.6953, yPct: 61.8164, widthPct: 12.8255, heightPct: 9.7656 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Black-haired woman in a pink shirt",
+                        sourceText: "The data shows consumer trends in eco-friendly products.",
+                        ttsText: "The data shows consumer trends in eco-friendly products.",
+                        bounds: { xPct: 11.0026, yPct: 59.9609, widthPct: 16.4063, heightPct: 15.5273 },
+                        speakerAnchor: { xPct: 7.9427, yPct: 72.9492 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.2604, yPct: 51.7578, widthPct: 49.4792, heightPct: 36.3281 },
+                tapBounds: { xPct: 58.9193, yPct: 61.8164, widthPct: 9.6354, heightPct: 7.3242 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "Here are our market research findings.",
+                        ttsText: "Here are our market research findings.",
+                        bounds: { xPct: 55.6641, yPct: 60.0586, widthPct: 14.8438, heightPct: 12.8906 },
+                        speakerAnchor: { xPct: 65.2344, yPct: 78.4180 }
+                    }
+                ]
+            }
+        ]
     }
 
 };

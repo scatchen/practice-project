@@ -5211,7 +5211,9 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "returns-and-refunds-basics" &&
             record.assetFile === "images/english/returns-and-refunds-basics.png") ||
         (record.imageId === "marketing-and-advertising-basics" &&
-            record.assetFile === "images/english/marketing-and-advertising-basics.png");
+            record.assetFile === "images/english/marketing-and-advertising-basics.png") ||
+        (record.imageId === "market-research-and-consumer-trends-basics" &&
+            record.assetFile === "images/english/market-research-and-consumer-trends-basics.png");
     if (hasPanelInteraction && (record.panelInteraction !== "tap-to-open-menu" ||
         !allowedPanelInteractionAsset ||
         record.contentType !== "dialogue" || record.layout !== "2x2")) {
