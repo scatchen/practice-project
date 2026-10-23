@@ -11492,5 +11492,122 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/business-complaints-and-problem-resolution-basics.png": {
+        imageId: "business-complaints-and-problem-resolution-basics",
+        assetFile: "images/english/business-complaints-and-problem-resolution-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.3, yPct: 9.6, widthPct: 49.5, heightPct: 46.4 },
+                tapBounds: { xPct: 8.7, yPct: 15.2, widthPct: 40.8, heightPct: 11.2 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Woman in pink",
+                        sourceText: "Our customer received the wrong items. We need to investigate the issue.",
+                        ttsText: "Our customer received the wrong items. We need to investigate the issue.",
+                        bounds: { xPct: 8.8, yPct: 15.1, widthPct: 22.9, heightPct: 14.5 },
+                        speakerAnchor: { xPct: 12.4, yPct: 32.8 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Man in blue",
+                        sourceText: "Let’s check the order records and identify the cause.",
+                        ttsText: "Let’s check the order records and identify the cause.",
+                        bounds: { xPct: 32.1, yPct: 15.0, widthPct: 17.5, heightPct: 14.3 },
+                        speakerAnchor: { xPct: 42.2, yPct: 31.4 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.3, yPct: 9.6, widthPct: 49.5, heightPct: 46.4 },
+                tapBounds: { xPct: 53.6, yPct: 15.2, widthPct: 40.9, heightPct: 11.2 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Woman in pink",
+                        sourceText: "The mistake caused a production delay, and we may miss the deadline.",
+                        ttsText: "The mistake caused a production delay, and we may miss the deadline.",
+                        bounds: { xPct: 53.6, yPct: 15.1, widthPct: 20.2, heightPct: 14.4 },
+                        speakerAnchor: { xPct: 58.3, yPct: 36.4 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Man in blue",
+                        sourceText: "This will affect the delivery schedule and our customer relationship.",
+                        ttsText: "This will affect the delivery schedule and our customer relationship.",
+                        bounds: { xPct: 74.2, yPct: 15.0, widthPct: 20.2, heightPct: 13.5 },
+                        speakerAnchor: { xPct: 80.8, yPct: 34.6 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.3, yPct: 56.7, widthPct: 49.5, heightPct: 43.2 },
+                tapBounds: { xPct: 11.3, yPct: 62.1, widthPct: 37.7, heightPct: 5.3 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Man in blue",
+                        sourceText: "We will send the correct items immediately and take corrective action to prevent this from happening again.",
+                        ttsText: "We will send the correct items immediately and take corrective action to prevent this from happening again.",
+                        bounds: { xPct: 11.3, yPct: 62.1, widthPct: 21.7, heightPct: 14.9 },
+                        speakerAnchor: { xPct: 6.7, yPct: 72.5 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Woman in pink",
+                        sourceText: "That’s a good solution. Let’s also update our checking process.",
+                        ttsText: "That’s a good solution. Let’s also update our checking process.",
+                        bounds: { xPct: 33.3, yPct: 62.2, widthPct: 15.7, heightPct: 14.8 },
+                        speakerAnchor: { xPct: 40.2, yPct: 81.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.3, yPct: 56.7, widthPct: 49.5, heightPct: 43.2 },
+                tapBounds: { xPct: 56.7, yPct: 61.9, widthPct: 42.9, heightPct: 5.8 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Woman in pink",
+                        sourceText: "We followed up with the customer, and they are satisfied with our response.",
+                        ttsText: "We followed up with the customer, and they are satisfied with our response.",
+                        bounds: { xPct: 56.7, yPct: 61.9, widthPct: 22.3, heightPct: 14.4 },
+                        speakerAnchor: { xPct: 59.2, yPct: 80.4 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Man in blue",
+                        sourceText: "Great! Let’s continue to monitor the process and prevent similar problems in the future.",
+                        ttsText: "Great! Let’s continue to monitor the process and prevent similar problems in the future.",
+                        bounds: { xPct: 79.1, yPct: 61.8, widthPct: 20.6, heightPct: 14.0 },
+                        speakerAnchor: { xPct: 81.0, yPct: 78.2 }
+                    }
+                ]
+            }
+        ]
     }
 };

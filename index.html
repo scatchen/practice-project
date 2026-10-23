@@ -5239,7 +5239,9 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "apologies-and-handling-complaints-basics" &&
             record.assetFile === "images/english/apologies-and-handling-complaints-basics.png") ||
         (record.imageId === "customer-service-and-problem-resolution-basics" &&
-            record.assetFile === "images/english/customer-service-and-problem-resolution-basics.png");
+            record.assetFile === "images/english/customer-service-and-problem-resolution-basics.png") ||
+        (record.imageId === "business-complaints-and-problem-resolution-basics" &&
+            record.assetFile === "images/english/business-complaints-and-problem-resolution-basics.png");
     if (hasPanelInteraction && (record.panelInteraction !== "tap-to-open-menu" ||
         !allowedPanelInteractionAsset ||
         record.contentType !== "dialogue" || record.layout !== "2x2")) {
