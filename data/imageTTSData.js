@@ -11312,5 +11312,95 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/apologies-and-handling-complaints-basics.png": {
+        imageId: "apologies-and-handling-complaints-basics",
+        assetFile: "images/english/apologies-and-handling-complaints-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.6, yPct: 9.8, widthPct: 49.1, heightPct: 42.6 },
+                tapBounds: { xPct: 17.1, yPct: 19.1, widthPct: 18.7, heightPct: 8.5 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Unidentified speaker",
+                        sourceText: "My order was supposed to arrive last week, but it still hasn’t come.",
+                        ttsText: "My order was supposed to arrive last week, but it still hasn’t come.",
+                        bounds: { xPct: 15.1, yPct: 17.9, widthPct: 23.0, heightPct: 19.3 },
+                        speakerAnchor: { xPct: 11.5, yPct: 40.2 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 9.8, widthPct: 49.0, heightPct: 42.6 },
+                tapBounds: { xPct: 68.4, yPct: 18.9, widthPct: 16.9, heightPct: 14.6 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Unidentified speaker",
+                        sourceText: "I’m very sorry for the inconvenience. Let me check what happened and find a solution for you.",
+                        ttsText: "I’m very sorry for the inconvenience. Let me check what happened and find a solution for you.",
+                        bounds: { xPct: 65.4, yPct: 18.0, widthPct: 21.9, heightPct: 26.8 },
+                        speakerAnchor: { xPct: 59.5, yPct: 31.3 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.7, yPct: 53.3, widthPct: 49.0, heightPct: 45.7 },
+                tapBounds: { xPct: 14.4, yPct: 60.6, widthPct: 21.3, heightPct: 11.3 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Unidentified speaker",
+                        sourceText: "We can send you a replacement right away, or we can issue a full refund. Which option would you prefer?",
+                        ttsText: "We can send you a replacement right away, or we can issue a full refund. Which option would you prefer?",
+                        bounds: { xPct: 12.4, yPct: 59.1, widthPct: 24.9, heightPct: 23.4 },
+                        speakerAnchor: { xPct: 42.0, yPct: 72.3 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.3, yPct: 53.4, widthPct: 49.1, heightPct: 45.5 },
+                tapBounds: { xPct: 62.3, yPct: 63.4, widthPct: 35.6, heightPct: 8.1 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Unidentified speaker",
+                        sourceText: "I just wanted to follow up and make sure you received your order. Is everything okay now?",
+                        ttsText: "I just wanted to follow up and make sure you received your order. Is everything okay now?",
+                        bounds: { xPct: 60.5, yPct: 62.1, widthPct: 21.9, heightPct: 20.7 },
+                        speakerAnchor: { xPct: 56.8, yPct: 72.9 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Unidentified speaker",
+                        sourceText: "Yes, I received it yesterday. Thank you for your help!",
+                        ttsText: "Yes, I received it yesterday. Thank you for your help!",
+                        bounds: { xPct: 82.6, yPct: 62.1, widthPct: 16.7, heightPct: 18.7 },
+                        speakerAnchor: { xPct: 93.0, yPct: 86.3 }
+                    }
+                ]
+            }
+        ]
     }
 };

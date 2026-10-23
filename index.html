@@ -4593,7 +4593,9 @@ function extractEnglishRangeText(range) {
 function protectEnglishTTSAbbreviationPeriods(text) {
     const marker = "\uE000";
     const protectedText = String(text)
-        .replace(/\b(?:Mr|Mrs|Ms|Dr|Prof|e\.g|i\.e|U\.S|U\.K)\./gi, match => match.replace(/\./g, marker))
+        .replace(/\b(?:e\.g|i\.e|U\.S|U\.K|a\.m|p\.m)\./gi, match =>
+            match.replace(/\.(?=[A-Za-z])/g, marker))
+        .replace(/\b(?:Mr|Mrs|Ms|Dr|Prof)\.(?=\s+[A-Z])/gi, match => match.replace(/\./g, marker))
         .replace(/(\d)\.(?=\d)/g, `$1${marker}`);
     return { text: protectedText, marker };
 }
@@ -4617,6 +4619,10 @@ function splitEnglishTTSSentences(text) {
 
     if (!rawSegments.length) {
         const source = protectedValue.text;
+        const abbreviationContinuation = new RegExp(
+            `(?:e${protectedValue.marker}g|i${protectedValue.marker}e|U${protectedValue.marker}S|U${protectedValue.marker}K|a${protectedValue.marker}m|p${protectedValue.marker}m)\\.$`,
+            "i"
+        );
         let start = 0;
         let index = 0;
         while (index < source.length) {
@@ -4635,6 +4641,16 @@ function splitEnglishTTSSentences(text) {
             }
             while (end < source.length && "\"'”’)]}".includes(source[end])) {
                 end += 1;
+            }
+            if (source[index] === "." && abbreviationContinuation.test(source.slice(start, end))) {
+                let nextTextIndex = end;
+                while (nextTextIndex < source.length && /\s/.test(source[nextTextIndex])) {
+                    nextTextIndex += 1;
+                }
+                if (nextTextIndex < source.length && /[a-z]/.test(source[nextTextIndex])) {
+                    index = end;
+                    continue;
+                }
             }
             if (end === source.length || /\s/.test(source[end])) {
                 rawSegments.push(source.slice(start, end));
@@ -5219,7 +5235,9 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "production-delays-and-equipment-downtime-basics" &&
             record.assetFile === "images/english/production-delays-and-equipment-downtime-basics.png") ||
         (record.imageId === "workplace-safety-and-accident-reporting-basics" &&
-            record.assetFile === "images/english/workplace-safety-and-accident-reporting-basics.png");
+            record.assetFile === "images/english/workplace-safety-and-accident-reporting-basics.png") ||
+        (record.imageId === "apologies-and-handling-complaints-basics" &&
+            record.assetFile === "images/english/apologies-and-handling-complaints-basics.png");
     if (hasPanelInteraction && (record.panelInteraction !== "tap-to-open-menu" ||
         !allowedPanelInteractionAsset ||
         record.contentType !== "dialogue" || record.layout !== "2x2")) {
@@ -6030,6 +6048,92 @@ function createEnglishImageTTSMenuButton(label, ariaLabel, onClick) {
     return button;
 }
 
+function splitEnglishImageTTSText(text) {
+    const safeText = typeof text === "string" ? getEnglishTTSUnitText(text) : null;
+    if (!safeText) {
+        return [];
+    }
+    const segmentation = splitEnglishTTSSentences(safeText.replace(/[ \t]*\n[ \t]*/g, " "));
+    const sentences = segmentation.reliable
+        ? segmentation.sentences.map(sentence => getEnglishTTSUnitText(sentence))
+        : [];
+    return sentences.length > 1 && sentences.every(Boolean) ? sentences : [safeText];
+}
+
+function speakEnglishImageTTSSequence(trigger, sentenceTexts, completionMessage, progressMessage) {
+    const units = Array.isArray(sentenceTexts)
+        ? sentenceTexts.map(sentence => typeof sentence === "string" ? getEnglishTTSUnitText(sentence) : null)
+        : [];
+    if (!trigger || !units.length || units.some(unit => !unit) ||
+        appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+        setEnglishTTSStatus("這段圖片英文資料不完整，未開始朗讀。");
+        return false;
+    }
+
+    cancelEnglishImageTTSDialogueSequence(true);
+    cancelEnglishCollocationReplay();
+    closeEnglishImageTTSMenu();
+    rememberEnglishSpeechTrigger(trigger);
+    const generation = englishTTSState.dialogueSequenceGeneration;
+    englishTTSState.dialogueSequenceTrigger = trigger;
+    let unitIndex = 0;
+
+    const finishSequence = () => {
+        if (generation !== englishTTSState.dialogueSequenceGeneration) {
+            return;
+        }
+        cancelEnglishImageTTSDialogueSequence();
+        setEnglishTTSStatus(completionMessage);
+        updateEnglishTTSControls();
+    };
+    const playNext = () => {
+        if (generation !== englishTTSState.dialogueSequenceGeneration) {
+            return false;
+        }
+        if (appState.subjectMode !== "english" || trigger.isConnected === false) {
+            cancelEnglishImageTTSDialogueSequence(true);
+            updateEnglishTTSControls();
+            return false;
+        }
+        const started = speakEnglishText(units[unitIndex], () => {
+            if (generation !== englishTTSState.dialogueSequenceGeneration) {
+                return;
+            }
+            if (appState.subjectMode !== "english" || trigger.isConnected === false) {
+                cancelEnglishImageTTSDialogueSequence(true);
+                updateEnglishTTSControls();
+                return;
+            }
+            unitIndex += 1;
+            if (unitIndex >= units.length) {
+                finishSequence();
+                return;
+            }
+            englishTTSState.dialogueSequenceTimer = window.setTimeout(() => {
+                englishTTSState.dialogueSequenceTimer = 0;
+                if (generation !== englishTTSState.dialogueSequenceGeneration) {
+                    updateEnglishTTSControls();
+                    return;
+                }
+                playNext();
+            }, 500);
+            setEnglishTTSStatus(progressMessage);
+            updateEnglishTTSControls();
+        }, false, () => {
+            if (generation === englishTTSState.dialogueSequenceGeneration) {
+                cancelEnglishImageTTSDialogueSequence();
+                updateEnglishTTSControls();
+            }
+        }, null, null, generation);
+        if (!started && generation === englishTTSState.dialogueSequenceGeneration) {
+            cancelEnglishImageTTSDialogueSequence();
+            updateEnglishTTSControls();
+        }
+        return started;
+    };
+    return playNext();
+}
+
 function speakEnglishImageTTSFromPanel(trigger, text) {
     const safeText = getEnglishTTSUnitText(text);
     closeEnglishImageTTSMenu(true);
@@ -6037,17 +6141,29 @@ function speakEnglishImageTTSFromPanel(trigger, text) {
         setEnglishTTSStatus("這格圖片的英文資料不完整，未開始朗讀。");
         return false;
     }
+    const sentences = splitEnglishImageTTSText(safeText);
+    if (sentences.length > 1) {
+        return speakEnglishImageTTSSequence(
+            trigger,
+            sentences,
+            "圖片段落已朗讀完成。",
+            "圖片段落朗讀中，句間停頓 0.5 秒。"
+        );
+    }
     rememberEnglishSpeechTrigger(trigger);
     return speakEnglishText(safeText);
 }
 
 function speakEnglishImageTTSStorySequence(trigger, sentences, fallbackText) {
-    const units = Array.isArray(sentences)
+    const suppliedUnits = Array.isArray(sentences)
         ? sentences.map(sentence => typeof sentence === "string" ? getEnglishTTSUnitText(sentence) : null)
         : [];
     const safeFallbackText = typeof fallbackText === "string" ? getEnglishTTSUnitText(fallbackText) : null;
+    const units = suppliedUnits.length && suppliedUnits.every(Boolean)
+        ? suppliedUnits.flatMap(sentence => splitEnglishImageTTSText(sentence))
+        : [];
 
-    if (!units.length || units.some(unit => !unit)) {
+    if (!units.length) {
         return safeFallbackText ? speakEnglishImageTTSFromPanel(trigger, safeFallbackText) : false;
     }
     if (units.length === 1) {
@@ -6140,83 +6256,36 @@ function speakEnglishImageTTSDialogueUnit(trigger, unit) {
         return false;
     }
     closeEnglishImageTTSMenu();
+    const sentences = splitEnglishImageTTSText(text);
+    if (sentences.length > 1) {
+        return speakEnglishImageTTSSequence(
+            trigger,
+            sentences,
+            "英文對話單元已朗讀完成。",
+            "英文對話單元朗讀中，句間停頓 0.5 秒。"
+        );
+    }
     rememberEnglishSpeechTrigger(trigger);
     return speakEnglishText(text);
 }
 
 function speakEnglishImageTTSDialogueSequence(trigger, panel) {
-    const units = panel && Array.isArray(panel.speechUnits)
-        ? panel.speechUnits.map(unit => unit && typeof unit.ttsText === "string"
-            ? getEnglishTTSUnitText(unit.ttsText)
-            : null)
-        : [];
-    if (!trigger || !units.length || units.some(unit => !unit) ||
+    const sourceUnits = panel && Array.isArray(panel.speechUnits) ? panel.speechUnits : [];
+    const unitTexts = sourceUnits.map(unit => unit && typeof unit.ttsText === "string"
+        ? getEnglishTTSUnitText(unit.ttsText)
+        : null);
+    if (!trigger || !unitTexts.length || unitTexts.some(unit => !unit) ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("這格對話圖片的英文資料不完整，未開始朗讀。");
         return false;
     }
-    cancelEnglishImageTTSDialogueSequence(true);
-    cancelEnglishCollocationReplay();
-    closeEnglishImageTTSMenu();
-    rememberEnglishSpeechTrigger(trigger);
-    const generation = englishTTSState.dialogueSequenceGeneration;
-    englishTTSState.dialogueSequenceTrigger = trigger;
-    let unitIndex = 0;
-
-    const finishSequence = () => {
-        if (generation !== englishTTSState.dialogueSequenceGeneration) {
-            return;
-        }
-        cancelEnglishImageTTSDialogueSequence();
-        setEnglishTTSStatus("英文對話已朗讀完成。");
-        updateEnglishTTSControls();
-    };
-    const playNext = () => {
-        if (generation !== englishTTSState.dialogueSequenceGeneration) {
-            return false;
-        }
-        if (appState.subjectMode !== "english" || trigger.isConnected === false) {
-            cancelEnglishImageTTSDialogueSequence(true);
-            updateEnglishTTSControls();
-            return false;
-        }
-        const started = speakEnglishText(units[unitIndex], () => {
-            if (generation !== englishTTSState.dialogueSequenceGeneration) {
-                return;
-            }
-            if (appState.subjectMode !== "english" || trigger.isConnected === false) {
-                cancelEnglishImageTTSDialogueSequence(true);
-                updateEnglishTTSControls();
-                return;
-            }
-            unitIndex += 1;
-            if (unitIndex >= units.length) {
-                finishSequence();
-                return;
-            }
-            englishTTSState.dialogueSequenceTimer = window.setTimeout(() => {
-                englishTTSState.dialogueSequenceTimer = 0;
-                if (generation !== englishTTSState.dialogueSequenceGeneration) {
-                    updateEnglishTTSControls();
-                    return;
-                }
-                playNext();
-            }, 500);
-            setEnglishTTSStatus("英文對話朗讀中，兩句之間停頓 0.5 秒。");
-            updateEnglishTTSControls();
-        }, false, () => {
-            if (generation === englishTTSState.dialogueSequenceGeneration) {
-                cancelEnglishImageTTSDialogueSequence();
-                updateEnglishTTSControls();
-            }
-        }, null, null, generation);
-        if (!started && generation === englishTTSState.dialogueSequenceGeneration) {
-            cancelEnglishImageTTSDialogueSequence();
-            updateEnglishTTSControls();
-        }
-        return started;
-    };
-    return playNext();
+    const sentences = unitTexts.flatMap(unit => splitEnglishImageTTSText(unit));
+    return speakEnglishImageTTSSequence(
+        trigger,
+        sentences,
+        "英文對話已朗讀完成。",
+        "英文對話朗讀中，句間停頓 0.5 秒。"
+    );
 }
 
 function openEnglishImageTTSMenu(trigger, panel) {
