@@ -11402,5 +11402,95 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/customer-service-and-problem-resolution-basics.png": {
+        imageId: "customer-service-and-problem-resolution-basics",
+        assetFile: "images/english/customer-service-and-problem-resolution-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.6, yPct: 9.7, widthPct: 49.1, heightPct: 42.9 },
+                tapBounds: { xPct: 15.8, yPct: 19.4, widthPct: 17.0, heightPct: 11.3 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Unidentified speaker",
+                        sourceText: "Hi, I have a question about my order. I want to know where it is.",
+                        ttsText: "Hi, I have a question about my order. I want to know where it is.",
+                        bounds: { xPct: 14.2, yPct: 17.7, widthPct: 20.7, heightPct: 21.8 },
+                        speakerAnchor: { xPct: 9.7, yPct: 34.3 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 9.7, widthPct: 49.0, heightPct: 42.9 },
+                tapBounds: { xPct: 65.3, yPct: 17.8, widthPct: 17.2, heightPct: 9.7 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy (customer service representative)",
+                        sourceText: "Let me check your order status. Please give me a moment.",
+                        ttsText: "Let me check your order status. Please give me a moment.",
+                        bounds: { xPct: 63.5, yPct: 16.1, widthPct: 20.0, heightPct: 19.8 },
+                        speakerAnchor: { xPct: 58.4, yPct: 38.7 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.6, yPct: 53.3, widthPct: 49.1, heightPct: 45.9 },
+                tapBounds: { xPct: 11.4, yPct: 60.3, widthPct: 21.4, heightPct: 17.2 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy (customer service representative)",
+                        sourceText: "Your order has been shipped. It should arrive in two days. If there is any further delay, we can resend it or offer a full refund.",
+                        ttsText: "Your order has been shipped. It should arrive in two days. If there is any further delay, we can resend it or offer a full refund.",
+                        bounds: { xPct: 9.3, yPct: 58.5, widthPct: 27.0, heightPct: 29.0 },
+                        speakerAnchor: { xPct: 6.3, yPct: 83.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 53.3, widthPct: 49.0, heightPct: 45.9 },
+                tapBounds: { xPct: 62.4, yPct: 62.3, widthPct: 36.1, heightPct: 15.8 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Unidentified speaker",
+                        sourceText: "I received my order today. Everything is perfect! Thank you for your help!",
+                        ttsText: "I received my order today. Everything is perfect! Thank you for your help!",
+                        bounds: { xPct: 60.4, yPct: 61.7, widthPct: 17.8, heightPct: 27.1 },
+                        speakerAnchor: { xPct: 56.2, yPct: 78.1 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Snoopy (customer service representative)",
+                        sourceText: "You’re welcome! If you need any further assistance, please feel free to contact us.",
+                        ttsText: "You’re welcome! If you need any further assistance, please feel free to contact us.",
+                        bounds: { xPct: 82.2, yPct: 61.5, widthPct: 17.0, heightPct: 25.5 },
+                        speakerAnchor: { xPct: 79.8, yPct: 87.5 }
+                    }
+                ]
+            }
+        ]
     }
 };
