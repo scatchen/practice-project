@@ -11022,6 +11022,116 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/business-email-basics.png": {
+        imageId: "business-email-basics",
+        assetFile: "images/english/business-email-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 1.50, yPct: 12.89, widthPct: 47.07, heightPct: 41.41 },
+                speechUnits: []
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 49.35, yPct: 12.89, widthPct: 49.09, heightPct: 41.41 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Unidentified email writer",
+                        sourceText: "Subject: Meeting Schedule",
+                        ttsText: "Subject: Meeting Schedule",
+                        bounds: { xPct: 52.80, yPct: 27.05, widthPct: 25.13, heightPct: 4.20 },
+                        speakerAnchor: { xPct: 90.0, yPct: 30.0 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Unidentified email writer",
+                        sourceText: "Dear Mr. Smith,",
+                        ttsText: "Dear Mr. Smith,",
+                        bounds: { xPct: 53.60, yPct: 37.20, widthPct: 9.60, heightPct: 2.80 },
+                        speakerAnchor: { xPct: 90.0, yPct: 30.0 }
+                    },
+                    {
+                        unitId: 3,
+                        readingOrder: 3,
+                        speaker: "Unidentified email writer",
+                        sourceText: "I hope this email finds you well.",
+                        ttsText: "I hope this email finds you well.",
+                        bounds: { xPct: 53.60, yPct: 40.20, widthPct: 22.90, heightPct: 2.80 },
+                        speakerAnchor: { xPct: 90.0, yPct: 30.0 }
+                    },
+                    {
+                        unitId: 4,
+                        readingOrder: 4,
+                        speaker: "Unidentified email writer",
+                        sourceText: "I would like to confirm our meeting schedule for next week.",
+                        ttsText: "I would like to confirm our meeting schedule for next week.",
+                        bounds: { xPct: 53.60, yPct: 43.10, widthPct: 24.10, heightPct: 4.40 },
+                        speakerAnchor: { xPct: 90.0, yPct: 30.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 1.50, yPct: 55.66, widthPct: 47.07, heightPct: 43.07 },
+                speechUnits: []
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 49.35, yPct: 55.66, widthPct: 49.09, heightPct: 43.07 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Unidentified customer sender",
+                        sourceText: "Subject: Product Inquiry",
+                        ttsText: "Subject: Product Inquiry",
+                        bounds: { xPct: 71.40, yPct: 64.40, widthPct: 14.50, heightPct: 2.40 },
+                        speakerAnchor: { xPct: 68.0, yPct: 66.0 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Unidentified customer sender",
+                        sourceText: "Dear Team,",
+                        ttsText: "Dear Team,",
+                        bounds: { xPct: 71.60, yPct: 67.70, widthPct: 7.20, heightPct: 2.70 },
+                        speakerAnchor: { xPct: 68.0, yPct: 66.0 }
+                    },
+                    {
+                        unitId: 3,
+                        readingOrder: 3,
+                        speaker: "Unidentified customer sender",
+                        sourceText: "Could you please provide more information about the product?",
+                        ttsText: "Could you please provide more information about the product?",
+                        bounds: { xPct: 71.60, yPct: 70.50, widthPct: 18.40, heightPct: 4.20 },
+                        speakerAnchor: { xPct: 68.0, yPct: 66.0 }
+                    },
+                    {
+                        unitId: 4,
+                        readingOrder: 4,
+                        speaker: "Unidentified customer sender",
+                        sourceText: "Thank you.",
+                        ttsText: "Thank you.",
+                        bounds: { xPct: 71.60, yPct: 76.50, widthPct: 7.10, heightPct: 2.50 },
+                        speakerAnchor: { xPct: 68.0, yPct: 66.0 }
+                    }
+                ]
+            }
+        ]
     }
 
 };
