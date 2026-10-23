@@ -10761,6 +10761,105 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/marketing-and-advertising-basics.png": {
+        imageId: "marketing-and-advertising-basics",
+        assetFile: "images/english/marketing-and-advertising-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.52, yPct: 9.18, widthPct: 49.22, heightPct: 45.70 },
+                tapBounds: { xPct: 3.52, yPct: 17.87, widthPct: 16.08, heightPct: 10.64 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "Let’s create an advertisement for our product!",
+                        ttsText: "Let’s create an advertisement for our product!",
+                        bounds: { xPct: 2.54, yPct: 16.50, widthPct: 18.82, heightPct: 16.60 },
+                        speakerAnchor: { xPct: 10.42, yPct: 40.23 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.33, yPct: 9.18, widthPct: 49.15, heightPct: 45.70 },
+                tapBounds: { xPct: 53.45, yPct: 17.77, widthPct: 19.73, heightPct: 10.84 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Black-haired woman in a blue shirt",
+                        sourceText: "We’ll launch a marketing campaign to reach more customers!",
+                        ttsText: "We’ll launch a marketing campaign to reach more customers!",
+                        bounds: { xPct: 52.34, yPct: 16.60, widthPct: 22.01, heightPct: 15.63 },
+                        speakerAnchor: { xPct: 61.78, yPct: 40.04 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Blonde woman in a red-and-white striped shirt",
+                        sourceText: "Our target audience is teenagers and young adults.",
+                        ttsText: "Our target audience is teenagers and young adults.",
+                        bounds: { xPct: 84.51, yPct: 21.68, widthPct: 14.91, heightPct: 16.70 },
+                        speakerAnchor: { xPct: 88.54, yPct: 41.11 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.52, yPct: 55.47, widthPct: 49.22, heightPct: 43.95 },
+                tapBounds: { xPct: 11.78, yPct: 64.06, widthPct: 19.66, heightPct: 8.98 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Black-haired woman in a blue shirt",
+                        sourceText: "This product is made with natural ingredients and is good for you!",
+                        ttsText: "This product is made with natural ingredients and is good for you!",
+                        bounds: { xPct: 10.61, yPct: 62.60, widthPct: 22.40, heightPct: 15.33 },
+                        speakerAnchor: { xPct: 24.74, yPct: 83.20 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.33, yPct: 55.47, widthPct: 49.15, heightPct: 43.95 },
+                tapBounds: { xPct: 52.28, yPct: 64.45, widthPct: 15.04, heightPct: 7.91 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "Now we have a special promotion!",
+                        ttsText: "Now we have a special promotion!",
+                        bounds: { xPct: 51.11, yPct: 63.18, widthPct: 17.45, heightPct: 14.16 },
+                        speakerAnchor: { xPct: 58.72, yPct: 84.96 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Charlie Brown",
+                        sourceText: "Don’t miss it! It’s a great deal!",
+                        ttsText: "Don’t miss it! It’s a great deal!",
+                        bounds: { xPct: 86.46, yPct: 63.48, widthPct: 13.02, heightPct: 14.94 },
+                        speakerAnchor: { xPct: 92.38, yPct: 85.64 }
+                    }
+                ]
+            }
+        ]
     }
 
 };

@@ -5209,7 +5209,9 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "invoices-and-payments-basics" &&
             record.assetFile === "images/english/invoices-and-payments-basics.png") ||
         (record.imageId === "returns-and-refunds-basics" &&
-            record.assetFile === "images/english/returns-and-refunds-basics.png");
+            record.assetFile === "images/english/returns-and-refunds-basics.png") ||
+        (record.imageId === "marketing-and-advertising-basics" &&
+            record.assetFile === "images/english/marketing-and-advertising-basics.png");
     if (hasPanelInteraction && (record.panelInteraction !== "tap-to-open-menu" ||
         !allowedPanelInteractionAsset ||
         record.contentType !== "dialogue" || record.layout !== "2x2")) {
