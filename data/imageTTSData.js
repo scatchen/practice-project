@@ -10941,6 +10941,87 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/job-posting-and-recruitment-basics.png": {
+        imageId: "job-posting-and-recruitment-basics",
+        assetFile: "images/english/job-posting-and-recruitment-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.6510, yPct: 10.9375, widthPct: 48.9583, heightPct: 43.4570 },
+                tapBounds: { xPct: 8.5300, yPct: 17.8000, widthPct: 33.8900, heightPct: 5.7500 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Neutral narrator (unattributed)",
+                        sourceText: "A company posts a job opening with the position and requirements.",
+                        ttsText: "A company posts a job opening with the position and requirements.",
+                        bounds: { xPct: 8.4000, yPct: 17.6500, widthPct: 34.1500, heightPct: 6.0500 },
+                        speakerAnchor: { xPct: 1.8000, yPct: 53.6000 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.3906, yPct: 10.9375, widthPct: 48.9583, heightPct: 43.4570 },
+                tapBounds: { xPct: 58.6000, yPct: 17.8000, widthPct: 36.3000, heightPct: 5.7500 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Neutral narrator (unattributed)",
+                        sourceText: "A job seeker reads the job advertisement and submits an application.",
+                        ttsText: "A job seeker reads the job advertisement and submits an application.",
+                        bounds: { xPct: 58.4500, yPct: 17.6500, widthPct: 36.6000, heightPct: 6.0500 },
+                        speakerAnchor: { xPct: 98.2000, yPct: 53.6000 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.6510, yPct: 55.3711, widthPct: 48.9583, heightPct: 43.8477 },
+                tapBounds: { xPct: 8.5300, yPct: 62.2000, widthPct: 33.8900, heightPct: 5.8500 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Neutral narrator (unattributed)",
+                        sourceText: "The HR team reviews the applications and selects qualified candidates.",
+                        ttsText: "The HR team reviews the applications and selects qualified candidates.",
+                        bounds: { xPct: 8.4000, yPct: 62.0500, widthPct: 34.1500, heightPct: 6.1500 },
+                        speakerAnchor: { xPct: 1.8000, yPct: 98.2000 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.3906, yPct: 55.3711, widthPct: 48.9583, heightPct: 43.8477 },
+                tapBounds: { xPct: 58.6000, yPct: 62.2000, widthPct: 36.3000, heightPct: 5.8500 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Neutral narrator (unattributed)",
+                        sourceText: "The company notifies the selected candidate and welcomes the new employee.",
+                        ttsText: "The company notifies the selected candidate and welcomes the new employee.",
+                        bounds: { xPct: 58.4500, yPct: 62.0500, widthPct: 36.6000, heightPct: 6.1500 },
+                        speakerAnchor: { xPct: 98.2000, yPct: 98.2000 }
+                    }
+                ]
+            }
+        ]
     }
 
 };
