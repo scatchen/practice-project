@@ -11999,5 +11999,86 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/business-travel-expenses-and-reimbursement-basics.png": {
+        imageId: "business-travel-expenses-and-reimbursement-basics",
+        assetFile: "images/english/business-travel-expenses-and-reimbursement-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 0.4, widthPct: 49.2, heightPct: 49.0 },
+                tapBounds: { xPct: 28.4, yPct: 10.1, widthPct: 18.8, heightPct: 9.7 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Keep your receipts.",
+                        ttsText: "Keep your receipts.",
+                        bounds: { xPct: 27.0, yPct: 9.1, widthPct: 21.6, heightPct: 13.5 },
+                        speakerAnchor: { xPct: 20.0, yPct: 20.3 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 0.4, widthPct: 49.2, heightPct: 49.0 },
+                tapBounds: { xPct: 56.6, yPct: 10.3, widthPct: 19.8, heightPct: 9.6 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I’m preparing my expense report.",
+                        ttsText: "I’m preparing my expense report.",
+                        bounds: { xPct: 54.9, yPct: 8.8, widthPct: 23.3, heightPct: 15.0 },
+                        speakerAnchor: { xPct: 64.3, yPct: 30.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.4, yPct: 50.6, widthPct: 49.2, heightPct: 49.0 },
+                tapBounds: { xPct: 16.0, yPct: 59.7, widthPct: 26.0, heightPct: 9.3 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I’ve submitted my expense claim.",
+                        ttsText: "I’ve submitted my expense claim.",
+                        bounds: { xPct: 14.5, yPct: 58.5, widthPct: 29.4, heightPct: 13.2 },
+                        speakerAnchor: { xPct: 10.8, yPct: 74.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 50.6, widthPct: 49.2, heightPct: 49.0 },
+                tapBounds: { xPct: 75.4, yPct: 59.8, widthPct: 22.0, heightPct: 9.4 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "The company reimbursed me!",
+                        ttsText: "The company reimbursed me!",
+                        bounds: { xPct: 73.9, yPct: 58.5, widthPct: 25.2, heightPct: 13.5 },
+                        speakerAnchor: { xPct: 67.5, yPct: 78.0 }
+                    }
+                ]
+            }
+        ]
     }
 };
