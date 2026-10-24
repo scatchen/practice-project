@@ -12552,6 +12552,115 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/invoices-billing-and-payment-issues-basics.png": {
+        imageId: "invoices-billing-and-payment-issues-basics",
+        assetFile: "images/english/invoices-billing-and-payment-issues-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.6, yPct: 9.7, widthPct: 49.0, heightPct: 44.0 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Let’s check the invoice carefully to make sure the amount, quantity, and items are correct.",
+                        ttsText: "Let’s check the invoice carefully to make sure the amount, quantity, and items are correct.",
+                        bounds: { xPct: 15.6, yPct: 17.8, widthPct: 20.9, heightPct: 22.4 },
+                        speakerAnchor: { xPct: 6.5, yPct: 46.8 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 16.5, yPct: 18.7, widthPct: 18.8, heightPct: 20.4 } }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 9.7, widthPct: 49.0, heightPct: 44.0 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I think there is a billing error. The amount on the invoice is higher than what we agreed on.",
+                        ttsText: "I think there is a billing error. The amount on the invoice is higher than what we agreed on.",
+                        bounds: { xPct: 62.9, yPct: 15.8, widthPct: 21.1, heightPct: 23.8 },
+                        speakerAnchor: { xPct: 54.5, yPct: 46.5 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "I’ll check this right away and correct the invoice if needed.",
+                        ttsText: "I’ll check this right away and correct the invoice if needed.",
+                        bounds: { xPct: 84.4, yPct: 15.8, widthPct: 14.9, heightPct: 19.2 },
+                        speakerAnchor: { xPct: 95, yPct: 46.8 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 63.7, yPct: 16.8, widthPct: 19.1, heightPct: 21.5 } },
+                    { unitId: 2, bounds: { xPct: 85.2, yPct: 16.7, widthPct: 13.1, heightPct: 17.3 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.6, yPct: 54.5, widthPct: 49.0, heightPct: 44.4 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "The payment deadline is April 30. We need to complete the payment before that date.",
+                        ttsText: "The payment deadline is April 30. We need to complete the payment before that date.",
+                        bounds: { xPct: 11.4, yPct: 61.0, widthPct: 23.5, heightPct: 18.5 },
+                        speakerAnchor: { xPct: 6.2, yPct: 86.5 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 12.2, yPct: 62.0, widthPct: 21.7, heightPct: 16.3 } }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 54.5, widthPct: 49.0, heightPct: 44.4 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I can confirm that your payment has been received. Your account is now up to date.",
+                        ttsText: "I can confirm that your payment has been received. Your account is now up to date.",
+                        bounds: { xPct: 67.9, yPct: 63.5, widthPct: 17.6, heightPct: 22.2 },
+                        speakerAnchor: { xPct: 65.5, yPct: 87.0 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "Great! Thank you for your help!",
+                        ttsText: "Great! Thank you for your help!",
+                        bounds: { xPct: 88.3, yPct: 63.3, widthPct: 10.7, heightPct: 16.9 },
+                        speakerAnchor: { xPct: 85.0, yPct: 88.0 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 68.7, yPct: 64.3, widthPct: 16.0, heightPct: 20.5 } },
+                    { unitId: 2, bounds: { xPct: 89.0, yPct: 64.1, widthPct: 9.1, heightPct: 15.0 } }
+                ]
+            }
+        ]
     }
 
 };

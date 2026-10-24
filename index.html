@@ -5268,8 +5268,12 @@ function getEnglishImageTTSRecord(assetFile) {
     const isP25TapRegionsPair =
         record.imageId === "negotiating-schedules-and-deadline-changes-basics" &&
         record.assetFile === "images/english/negotiating-schedules-and-deadline-changes-basics.png";
+    const isP26TapRegionsPair =
+        record.imageId === "invoices-billing-and-payment-issues-basics" &&
+        record.assetFile === "images/english/invoices-billing-and-payment-issues-basics.png";
     const isAllowedTapRegionsAssetPair =
-        isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair || isP25TapRegionsPair;
+        isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair ||
+        isP25TapRegionsPair || isP26TapRegionsPair;
     if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
         (!allowedPanelInteractionAsset ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {
