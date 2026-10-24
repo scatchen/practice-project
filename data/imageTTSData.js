@@ -12242,5 +12242,87 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/business-travel-and-transportation-basics.png": {
+        imageId: "business-travel-and-transportation-basics",
+        assetFile: "images/english/business-travel-and-transportation-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.25, yPct: 14.75, widthPct: 49.50, heightPct: 35.85 },
+                tapBounds: { xPct: 16.80, yPct: 23.30, widthPct: 11.90, heightPct: 8.60 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I'd like to book a train ticket to Taipei.",
+                        ttsText: "I'd like to book a train ticket to Taipei.",
+                        bounds: { xPct: 14.35, yPct: 21.60, widthPct: 16.20, heightPct: 15.10 },
+                        speakerAnchor: { xPct: 11.40, yPct: 40.60 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.25, yPct: 14.75, widthPct: 49.50, heightPct: 35.85 },
+                tapBounds: { xPct: 62.60, yPct: 25.20, widthPct: 12.70, heightPct: 7.15 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "What time does the flight depart?",
+                        ttsText: "What time does the flight depart?",
+                        bounds: { xPct: 60.40, yPct: 23.20, widthPct: 16.50, heightPct: 13.10 },
+                        speakerAnchor: { xPct: 61.30, yPct: 39.90 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.25, yPct: 50.90, widthPct: 49.50, heightPct: 35.45 },
+                tapBounds: { xPct: 13.30, yPct: 61.20, widthPct: 14.40, heightPct: 6.20 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Please take me to this office address.",
+                        ttsText: "Please take me to this office address.",
+                        bounds: { xPct: 11.00, yPct: 59.40, widthPct: 17.90, heightPct: 13.90 },
+                        speakerAnchor: { xPct: 9.80, yPct: 77.80 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.25, yPct: 50.90, widthPct: 49.50, heightPct: 35.45 },
+                tapBounds: { xPct: 69.70, yPct: 58.10, widthPct: 9.10, heightPct: 9.40 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I'd like to change my reservation.",
+                        ttsText: "I'd like to change my reservation.",
+                        bounds: { xPct: 66.80, yPct: 56.90, widthPct: 14.00, heightPct: 14.70 },
+                        speakerAnchor: { xPct: 62.40, yPct: 76.50 }
+                    }
+                ]
+            }
+        ]
     }
+
 };
