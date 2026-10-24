@@ -12161,5 +12161,86 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/inventory-management-and-stock-shortages-basics.png": {
+        imageId: "inventory-management-and-stock-shortages-basics",
+        assetFile: "images/english/inventory-management-and-stock-shortages-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.35, yPct: 8.10, widthPct: 49.38, heightPct: 44.38 },
+                tapBounds: { xPct: 28.40, yPct: 16.35, widthPct: 14.05, heightPct: 11.10 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Let’s check our current inventory.",
+                        ttsText: "Let’s check our current inventory.",
+                        bounds: { xPct: 25.76, yPct: 15.00, widthPct: 19.30, heightPct: 16.25 },
+                        speakerAnchor: { xPct: 22.72, yPct: 33.15 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.21, yPct: 8.10, widthPct: 49.38, heightPct: 44.38 },
+                tapBounds: { xPct: 60.35, yPct: 16.50, widthPct: 18.10, heightPct: 8.25 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "We’re running low on supplies.",
+                        ttsText: "We’re running low on supplies.",
+                        bounds: { xPct: 57.20, yPct: 15.00, widthPct: 23.40, heightPct: 15.30 },
+                        speakerAnchor: { xPct: 59.19, yPct: 33.33 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.35, yPct: 53.31, widthPct: 49.38, heightPct: 46.13 },
+                tapBounds: { xPct: 12.90, yPct: 62.05, widthPct: 22.70, heightPct: 7.85 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "We need to reorder these items.",
+                        ttsText: "We need to reorder these items.",
+                        bounds: { xPct: 10.90, yPct: 60.35, widthPct: 26.30, heightPct: 13.65 },
+                        speakerAnchor: { xPct: 10.36, yPct: 78.00 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.21, yPct: 53.31, widthPct: 49.38, heightPct: 46.13 },
+                tapBounds: { xPct: 58.55, yPct: 62.35, widthPct: 15.80, heightPct: 9.90 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Please update the inventory records.",
+                        ttsText: "Please update the inventory records.",
+                        bounds: { xPct: 55.75, yPct: 60.25, widthPct: 20.50, heightPct: 16.45 },
+                        speakerAnchor: { xPct: 59.39, yPct: 78.82 }
+                    }
+                ]
+            }
+        ]
     }
 };
