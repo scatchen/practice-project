@@ -12662,5 +12662,76 @@ const imageTTSData = {
             }
         ]
     }
+,
+    "images/english/meeting-schedule-and-appointment-basics.png": {
+        imageId: "meeting-schedule-and-appointment-basics",
+        assetFile: "images/english/meeting-schedule-and-appointment-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.5, yPct: 9.8, widthPct: 49.2, heightPct: 41.6 },
+                speechUnits: []
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.5, yPct: 9.8, widthPct: 49.0, heightPct: 41.6 },
+                tapBounds: { xPct: 61.7, yPct: 22.2, widthPct: 20.2, heightPct: 10.2 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "Shall we schedule a meeting next week?",
+                        ttsText: "Shall we schedule a meeting next week?",
+                        bounds: { xPct: 60.7, yPct: 21.2, widthPct: 22.4, heightPct: 14.3 },
+                        speakerAnchor: { xPct: 60.1, yPct: 38.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.5, yPct: 52.8, widthPct: 49.2, heightPct: 46.3 },
+                tapBounds: { xPct: 21.3, yPct: 64.6, widthPct: 24.3, heightPct: 10.0 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "Can we reschedule the meeting to next Monday?",
+                        ttsText: "Can we reschedule the meeting to next Monday?",
+                        bounds: { xPct: 20.0, yPct: 63.5, widthPct: 27.0, heightPct: 15.5 },
+                        speakerAnchor: { xPct: 15.9, yPct: 78.2 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.5, yPct: 52.8, widthPct: 49.0, heightPct: 46.3 },
+                tapBounds: { xPct: 61.7, yPct: 65.8, widthPct: 21.5, heightPct: 8.2 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "The meeting is confirmed for next Tuesday at 10 a.m.",
+                        ttsText: "The meeting is confirmed for next Tuesday at 10 a.m.",
+                        bounds: { xPct: 60.3, yPct: 64.0, widthPct: 23.5, heightPct: 16.0 },
+                        speakerAnchor: { xPct: 61.0, yPct: 82.0 }
+                    }
+                ]
+            }
+        ]
+    }
 
 };

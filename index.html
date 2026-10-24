@@ -5210,6 +5210,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const hasPanelInteraction = Object.prototype.hasOwnProperty.call(record, "panelInteraction");
+    const isP27TapBoundsPair =
+        record.imageId === "meeting-schedule-and-appointment-basics" &&
+        record.assetFile === "images/english/meeting-schedule-and-appointment-basics.png";
+    const isP27TapBoundsInteraction = isP27TapBoundsPair &&
+        record.panelInteraction === "tap-to-open-menu";
     const allowedPanelInteractionAsset =
         (record.imageId === "conferences-and-trade-shows-basics" &&
             record.assetFile === "images/english/conferences-and-trade-shows-basics.png") ||
@@ -5254,7 +5259,8 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "inventory-management-and-stock-shortages-basics" &&
             record.assetFile === "images/english/inventory-management-and-stock-shortages-basics.png") ||
         (record.imageId === "business-travel-and-transportation-basics" &&
-            record.assetFile === "images/english/business-travel-and-transportation-basics.png");
+            record.assetFile === "images/english/business-travel-and-transportation-basics.png") ||
+        isP27TapBoundsPair;
     const isTapRegionsInteraction = record.panelInteraction === "tap-regions-to-open-menu";
     const isP16TapRegionsFuturePair =
         record.imageId === "cross-departmental-communication-and-coordination-basics" &&
@@ -5311,7 +5317,9 @@ function getEnglishImageTTSRecord(assetFile) {
                 ? orderedPanels.some(panel => !panel || (isTapRegionsInteraction
                     ? (!Object.prototype.hasOwnProperty.call(panel, "tapRegions") ||
                         Object.prototype.hasOwnProperty.call(panel, "tapBounds"))
-                    : (!Object.prototype.hasOwnProperty.call(panel, "tapBounds") ||
+                    : ((!Object.prototype.hasOwnProperty.call(panel, "tapBounds") &&
+                        !(isP27TapBoundsInteraction && panel.panelId === 1 &&
+                            Array.isArray(panel.speechUnits) && panel.speechUnits.length === 0)) ||
                         Object.prototype.hasOwnProperty.call(panel, "tapRegions"))))
                 : orderedPanels.some(panel => panel &&
                     (Object.prototype.hasOwnProperty.call(panel, "tapBounds") ||
@@ -5325,17 +5333,20 @@ function getEnglishImageTTSRecord(assetFile) {
             const bounds = panel && panel.bounds;
             const hasTapBounds = panel && Object.prototype.hasOwnProperty.call(panel, "tapBounds");
             const hasTapRegions = panel && Object.prototype.hasOwnProperty.call(panel, "tapRegions");
+            const isP27NoSpeechPanel = isP27TapBoundsInteraction && panel && panel.panelId === 1 &&
+                Array.isArray(panel.speechUnits) && panel.speechUnits.length === 0 && !hasTapBounds;
             if (!panel || panel.panelId !== index + 1 || panelIds.has(panel.panelId) ||
                 panel.readingOrder !== index + 1 || !isValidBounds(bounds) ||
                 (isTapRegionsInteraction &&
                     (bounds.xPct + bounds.widthPct > 100 || bounds.yPct + bounds.heightPct > 100)) ||
                 !Array.isArray(panel.speechUnits) ||
+                (isP27TapBoundsInteraction && panel.panelId === 1 && !isP27NoSpeechPanel) ||
                 (isTapRegionsInteraction
                     ? (!hasTapRegions || hasTapBounds)
-                    : (hasTapRegions || hasPanelInteraction !== hasTapBounds)) ||
+                    : (hasTapRegions || (hasPanelInteraction !== hasTapBounds && !isP27NoSpeechPanel))) ||
                 (hasPanelInteraction && panel.speechUnits.length === 0 &&
-                    !(isTapRegionsInteraction && isP17TapRegionsPair && panel.panelId === 2 &&
-                        Array.isArray(panel.tapRegions) && panel.tapRegions.length === 0))) {
+                    !(isP27NoSpeechPanel || (isTapRegionsInteraction && isP17TapRegionsPair &&
+                        panel.panelId === 2 && Array.isArray(panel.tapRegions) && panel.tapRegions.length === 0)))) {
                 return null;
             }
             panelIds.add(panel.panelId);
@@ -5836,7 +5847,15 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
             if (record.panelInteraction === "tap-to-open-menu" ||
                 record.panelInteraction === "tap-regions-to-open-menu") {
                 const usesTapRegions = record.panelInteraction === "tap-regions-to-open-menu";
+                const isP27TapBoundsInteraction = record.panelInteraction === "tap-to-open-menu" &&
+                    record.imageId === "meeting-schedule-and-appointment-basics" &&
+                    record.assetFile === "images/english/meeting-schedule-and-appointment-basics.png";
                 record.panels.forEach(panel => {
+                    if (isP27TapBoundsInteraction && panel.panelId === 1 &&
+                        panel.speechUnits.length === 0 &&
+                        !Object.prototype.hasOwnProperty.call(panel, "tapBounds")) {
+                        return;
+                    }
                     const regions = usesTapRegions ? panel.tapRegions : [null];
                     regions.forEach(region => {
                         createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel, region);
