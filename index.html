@@ -5262,7 +5262,11 @@ function getEnglishImageTTSRecord(assetFile) {
     const isP17TapRegionsPair =
         record.imageId === "business-negotiation-and-contracts-basics" &&
         record.assetFile === "images/english/business-negotiation-and-contracts-basics.png";
-    const isAllowedTapRegionsAssetPair = isP16TapRegionsFuturePair || isP17TapRegionsPair;
+    const isP24TapRegionsPair =
+        record.imageId === "project-management-and-deadlines-basics" &&
+        record.assetFile === "images/english/project-management-and-deadlines-basics.png";
+    const isAllowedTapRegionsAssetPair =
+        isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair;
     if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
         (!allowedPanelInteractionAsset ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {
@@ -5738,11 +5742,13 @@ function createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel, tapReg
         if (isTapRegion && activeTrigger && activeTrigger._englishImageTTSIsTapRegion &&
             activeMenu && !activeMenu.hidden && activePanel && activePanel.panelId === panel.panelId &&
             activeTrigger.closest(".image-tts-overlay-wrapper") === wrapper) {
-            if (activeTrigger !== button) {
-                activeTrigger.setAttribute("aria-expanded", "false");
-                button.setAttribute("aria-expanded", "true");
-                englishImageTTSOverlayState.activeTrigger = button;
+            if (activeTrigger === button) {
+                closeEnglishImageTTSMenu();
+                return;
             }
+            activeTrigger.setAttribute("aria-expanded", "false");
+            button.setAttribute("aria-expanded", "true");
+            englishImageTTSOverlayState.activeTrigger = button;
             return;
         }
         if (activeTrigger === button && activeMenu && !activeMenu.hidden) {

@@ -12324,5 +12324,115 @@ const imageTTSData = {
             }
         ]
     }
+,
+    "images/english/project-management-and-deadlines-basics.png": {
+        "imageId": "project-management-and-deadlines-basics",
+        "assetFile": "images/english/project-management-and-deadlines-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "panelInteraction": "tap-regions-to-open-menu",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 0.52, "yPct": 13.05, "widthPct": 49.40, "heightPct": 42.05 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Let’s define the project goals first.",
+                        "ttsText": "Let’s define the project goals first.",
+                        "bounds": { "xPct": 5.15, "yPct": 21.35, "widthPct": 23.02, "heightPct": 13.12 },
+                        "speakerAnchor": { "xPct": 12.00, "yPct": 37.00 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 7.20, "yPct": 22.00, "widthPct": 18.40, "heightPct": 7.70 } }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 50.39, "yPct": 13.05, "widthPct": 49.20, "heightPct": 42.05 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "I’ll assign tasks and set the deadlines.",
+                        "ttsText": "I’ll assign tasks and set the deadlines.",
+                        "bounds": { "xPct": 51.25, "yPct": 21.50, "widthPct": 25.95, "heightPct": 11.75 },
+                        "speakerAnchor": { "xPct": 60.60, "yPct": 37.30 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 53.50, "yPct": 23.55, "widthPct": 22.00, "heightPct": 7.10 } }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 0.52, "yPct": 55.65, "widthPct": 49.40, "heightPct": 43.86 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Let’s review the project progress.",
+                        "ttsText": "Let’s review the project progress.",
+                        "bounds": { "xPct": 2.10, "yPct": 63.55, "widthPct": 24.40, "heightPct": 12.20 },
+                        "speakerAnchor": { "xPct": 11.97, "yPct": 79.73 }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "We’re on track to meet the milestone!",
+                        "ttsText": "We’re on track to meet the milestone!",
+                        "bounds": { "xPct": 32.00, "yPct": 81.60, "widthPct": 17.60, "heightPct": 10.80 },
+                        "speakerAnchor": { "xPct": 28.58, "yPct": 88.57 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 4.25, "yPct": 64.85, "widthPct": 19.95, "heightPct": 7.50 } },
+                    { "unitId": 2, "bounds": { "xPct": 34.00, "yPct": 82.95, "widthPct": 14.15, "heightPct": 7.35 } }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 50.39, "yPct": 55.65, "widthPct": 49.20, "heightPct": 43.86 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "The project is behind schedule.",
+                        "ttsText": "The project is behind schedule.",
+                        "bounds": { "xPct": 53.00, "yPct": 63.25, "widthPct": 21.60, "heightPct": 11.15 },
+                        "speakerAnchor": { "xPct": 60.98, "yPct": 77.73 }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "We may need to extend the deadline and adjust the schedule.",
+                        "ttsText": "We may need to extend the deadline and adjust the schedule.",
+                        "bounds": { "xPct": 75.35, "yPct": 62.95, "widthPct": 23.85, "heightPct": 14.45 },
+                        "speakerAnchor": { "xPct": 91.77, "yPct": 81.82 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 54.95, "yPct": 64.65, "widthPct": 17.75, "heightPct": 7.50 } },
+                    { "unitId": 2, "bounds": { "xPct": 76.85, "yPct": 64.15, "widthPct": 21.30, "heightPct": 9.35 } }
+                ]
+            }
+        ]
+    }
 
 };
