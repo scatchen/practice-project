@@ -5260,7 +5260,9 @@ function getEnglishImageTTSRecord(assetFile) {
             record.assetFile === "images/english/inventory-management-and-stock-shortages-basics.png") ||
         (record.imageId === "business-travel-and-transportation-basics" &&
             record.assetFile === "images/english/business-travel-and-transportation-basics.png") ||
-        isP27TapBoundsPair;
+        isP27TapBoundsPair ||
+        (record.imageId === "quality-control-and-product-inspection-basics" &&
+            record.assetFile === "images/english/quality-control-and-product-inspection-basics.png");
     const isTapRegionsInteraction = record.panelInteraction === "tap-regions-to-open-menu";
     const isP16TapRegionsFuturePair =
         record.imageId === "cross-departmental-communication-and-coordination-basics" &&

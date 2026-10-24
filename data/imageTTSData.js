@@ -12733,5 +12733,86 @@ const imageTTSData = {
             }
         ]
     }
-
+,
+    "images/english/quality-control-and-product-inspection-basics.png": {
+        imageId: "quality-control-and-product-inspection-basics",
+        assetFile: "images/english/quality-control-and-product-inspection-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.3, yPct: 14.8, widthPct: 49.5, heightPct: 36.5 },
+                tapBounds: { xPct: 15.2, yPct: 23.1, widthPct: 9.8, heightPct: 9.8 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Let’s check the product quality.",
+                        ttsText: "Let’s check the product quality.",
+                        bounds: { xPct: 13.8, yPct: 22.0, widthPct: 12.6, heightPct: 15.5 },
+                        speakerAnchor: { xPct: 14.3, yPct: 41.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.2, yPct: 14.8, widthPct: 49.5, heightPct: 36.5 },
+                tapBounds: { xPct: 67.0, yPct: 23.5, widthPct: 11.5, heightPct: 9.5 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "This product is defective.",
+                        ttsText: "This product is defective.",
+                        bounds: { xPct: 65.7, yPct: 21.9, widthPct: 15.0, heightPct: 14.1 },
+                        speakerAnchor: { xPct: 61.0, yPct: 40.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.3, yPct: 51.8, widthPct: 49.5, heightPct: 35.7 },
+                tapBounds: { xPct: 16.8, yPct: 60.2, widthPct: 11.0, heightPct: 12.8 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I’ll report this quality issue to the supervisor.",
+                        ttsText: "I’ll report this quality issue to the supervisor.",
+                        bounds: { xPct: 14.7, yPct: 58.7, widthPct: 14.6, heightPct: 18.0 },
+                        speakerAnchor: { xPct: 10.0, yPct: 78.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.2, yPct: 51.8, widthPct: 49.5, heightPct: 35.7 },
+                tapBounds: { xPct: 67.0, yPct: 60.5, widthPct: 12.0, heightPct: 13.2 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "These products pass inspection. They’re ready to ship.",
+                        ttsText: "These products pass inspection. They’re ready to ship.",
+                        bounds: { xPct: 65.7, yPct: 59.2, widthPct: 17.0, heightPct: 17.0 },
+                        speakerAnchor: { xPct: 60.0, yPct: 78.0 }
+                    }
+                ]
+            }
+        ]
+    }
 };
