@@ -12433,6 +12433,125 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/negotiating-schedules-and-deadline-changes-basics.png": {
+        "imageId": "negotiating-schedules-and-deadline-changes-basics",
+        "assetFile": "images/english/negotiating-schedules-and-deadline-changes-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "panelInteraction": "tap-regions-to-open-menu",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 0.52, "yPct": 11.62, "widthPct": 49.22, "heightPct": 44.04 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "We’re experiencing an unexpected delay.",
+                        "ttsText": "We’re experiencing an unexpected delay.",
+                        "bounds": { "xPct": 7.29, "yPct": 19.73, "widthPct": 22.79, "heightPct": 10.94 },
+                        "speakerAnchor": { "xPct": 18, "yPct": 42 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 7.75, "yPct": 20.12, "widthPct": 21.88, "heightPct": 10.16 } }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 50.26, "yPct": 11.62, "widthPct": 49.22, "heightPct": 44.04 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Would it be possible to extend the deadline?",
+                        "ttsText": "Would it be possible to extend the deadline?",
+                        "bounds": { "xPct": 54.95, "yPct": 19.63, "widthPct": 23.18, "heightPct": 10.84 },
+                        "speakerAnchor": { "xPct": 62, "yPct": 43 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 55.47, "yPct": 20.02, "widthPct": 22.14, "heightPct": 10.06 } }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 0.52, "yPct": 56.35, "widthPct": 49.22, "heightPct": 42.97 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Could we agree on a new delivery date?",
+                        "ttsText": "Could we agree on a new delivery date?",
+                        "bounds": { "xPct": 5.34, "yPct": 64.36, "widthPct": 24.35, "heightPct": 9.47 },
+                        "speakerAnchor": { "xPct": 15, "yPct": 87 }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "How about next Friday?",
+                        "ttsText": "How about next Friday?",
+                        "bounds": { "xPct": 34.11, "yPct": 64.45, "widthPct": 13.02, "heightPct": 9.18 },
+                        "speakerAnchor": { "xPct": 42, "yPct": 87 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 6.12, "yPct": 64.84, "widthPct": 22.79, "heightPct": 8.59 } },
+                    { "unitId": 2, "bounds": { "xPct": 34.51, "yPct": 64.75, "widthPct": 12.04, "heightPct": 8.59 } }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 50.26, "yPct": 56.35, "widthPct": 49.22, "heightPct": 42.97 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Let’s confirm the revised schedule.",
+                        "ttsText": "Let’s confirm the revised schedule.",
+                        "bounds": { "xPct": 53.26, "yPct": 64.16, "widthPct": 22.01, "heightPct": 9.96 },
+                        "speakerAnchor": { "xPct": 57, "yPct": 85 }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "We can deliver the order by October 20.",
+                        "ttsText": "We can deliver the order by October 20.",
+                        "bounds": { "xPct": 79.10, "yPct": 63.77, "widthPct": 19.27, "heightPct": 10.94 },
+                        "speakerAnchor": { "xPct": 75.5, "yPct": 87 }
+                    },
+                    {
+                        "unitId": 3,
+                        "readingOrder": 3,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "I’ll send a revised schedule for your approval.",
+                        "ttsText": "I’ll send a revised schedule for your approval.",
+                        "bounds": { "xPct": 83.27, "yPct": 79.79, "widthPct": 15.23, "heightPct": 11.72 },
+                        "speakerAnchor": { "xPct": 79, "yPct": 91.5 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 53.84, "yPct": 64.65, "widthPct": 20.83, "heightPct": 8.79 } },
+                    { "unitId": 2, "bounds": { "xPct": 79.75, "yPct": 64.45, "widthPct": 17.84, "heightPct": 9.57 } },
+                    { "unitId": 3, "bounds": { "xPct": 84.64, "yPct": 80.47, "widthPct": 13.35, "heightPct": 10.35 } }
+                ]
+            }
+        ]
     }
 
 };

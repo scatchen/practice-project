@@ -5265,8 +5265,11 @@ function getEnglishImageTTSRecord(assetFile) {
     const isP24TapRegionsPair =
         record.imageId === "project-management-and-deadlines-basics" &&
         record.assetFile === "images/english/project-management-and-deadlines-basics.png";
+    const isP25TapRegionsPair =
+        record.imageId === "negotiating-schedules-and-deadline-changes-basics" &&
+        record.assetFile === "images/english/negotiating-schedules-and-deadline-changes-basics.png";
     const isAllowedTapRegionsAssetPair =
-        isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair;
+        isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair || isP25TapRegionsPair;
     if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
         (!allowedPanelInteractionAsset ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {
