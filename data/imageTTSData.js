@@ -12814,5 +12814,124 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/it-support-and-technical-problems-basics.png": {
+        imageId: "it-support-and-technical-problems-basics",
+        assetFile: "images/english/it-support-and-technical-problems-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panelInteraction: "tap-regions-to-open-menu",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.30, yPct: 14.80, widthPct: 49.55, heightPct: 36.60 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "My computer won’t turn on. I think there’s a problem.",
+                        ttsText: "My computer won’t turn on. I think there’s a problem.",
+                        bounds: { xPct: 16.70, yPct: 21.50, widthPct: 16.50, heightPct: 17.30 },
+                        speakerAnchor: { xPct: 10.00, yPct: 36.40 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "I see. I’ll take a look and help you.",
+                        ttsText: "I see. I’ll take a look and help you.",
+                        bounds: { xPct: 34.15, yPct: 21.50, widthPct: 14.80, heightPct: 16.10 },
+                        speakerAnchor: { xPct: 37.50, yPct: 40.30 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 17.10, yPct: 22.40, widthPct: 15.90, heightPct: 15.70 } },
+                    { unitId: 2, bounds: { xPct: 34.30, yPct: 21.70, widthPct: 14.50, heightPct: 15.70 } }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.20, yPct: 14.80, widthPct: 49.55, heightPct: 36.60 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Could you help me with this issue? I can’t access the shared folder.",
+                        ttsText: "Could you help me with this issue? I can’t access the shared folder.",
+                        bounds: { xPct: 62.00, yPct: 22.80, widthPct: 19.50, heightPct: 18.20 },
+                        speakerAnchor: { xPct: 57.10, yPct: 39.30 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "Sure. I’ll remote in and check it for you.",
+                        ttsText: "Sure. I’ll remote in and check it for you.",
+                        bounds: { xPct: 84.00, yPct: 20.20, widthPct: 14.70, heightPct: 17.00 },
+                        speakerAnchor: { xPct: 81.80, yPct: 42.60 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 62.20, yPct: 23.00, widthPct: 19.10, heightPct: 17.90 } },
+                    { unitId: 2, bounds: { xPct: 84.20, yPct: 20.50, widthPct: 14.30, heightPct: 16.60 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.30, yPct: 51.80, widthPct: 49.55, heightPct: 35.95 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Let’s try a few steps. First, restart the computer. If the problem continues, we can check the settings.",
+                        ttsText: "Let’s try a few steps. First, restart the computer. If the problem continues, we can check the settings.",
+                        bounds: { xPct: 11.10, yPct: 59.70, widthPct: 24.10, heightPct: 16.30 },
+                        speakerAnchor: { xPct: 10.60, yPct: 73.40 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 11.30, yPct: 59.90, widthPct: 23.80, heightPct: 16.00 } }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.20, yPct: 51.80, widthPct: 49.55, heightPct: 35.95 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "It works now! Thank you for your help.",
+                        ttsText: "It works now! Thank you for your help.",
+                        bounds: { xPct: 63.60, yPct: 60.20, widthPct: 14.70, heightPct: 15.60 },
+                        speakerAnchor: { xPct: 58.30, yPct: 73.50 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "You’re welcome! Feel free to contact us again if you have any other issues.",
+                        ttsText: "You’re welcome! Feel free to contact us again if you have any other issues.",
+                        bounds: { xPct: 81.20, yPct: 58.70, widthPct: 17.60, heightPct: 16.20 },
+                        speakerAnchor: { xPct: 86.20, yPct: 78.30 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 63.80, yPct: 60.40, widthPct: 14.30, heightPct: 15.20 } },
+                    { unitId: 2, bounds: { xPct: 81.40, yPct: 58.90, widthPct: 17.20, heightPct: 15.80 } }
+                ]
+            }
+        ]
     }
 };

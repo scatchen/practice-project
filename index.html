@@ -5279,9 +5279,12 @@ function getEnglishImageTTSRecord(assetFile) {
     const isP26TapRegionsPair =
         record.imageId === "invoices-billing-and-payment-issues-basics" &&
         record.assetFile === "images/english/invoices-billing-and-payment-issues-basics.png";
+    const isP29TapRegionsPair =
+        record.imageId === "it-support-and-technical-problems-basics" &&
+        record.assetFile === "images/english/it-support-and-technical-problems-basics.png";
     const isAllowedTapRegionsAssetPair =
         isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair ||
-        isP25TapRegionsPair || isP26TapRegionsPair;
+        isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair;
     if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
         (!allowedPanelInteractionAsset ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {
