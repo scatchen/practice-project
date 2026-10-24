@@ -12080,5 +12080,86 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/business-reports-and-data-basics.png": {
+        imageId: "business-reports-and-data-basics",
+        assetFile: "images/english/business-reports-and-data-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.5, yPct: 9.0, widthPct: 49.2, heightPct: 45.6 },
+                tapBounds: { xPct: 5.9, yPct: 17.6, widthPct: 15.6, heightPct: 9.8 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I’m preparing a business report for this quarter.",
+                        ttsText: "I’m preparing a business report for this quarter.",
+                        bounds: { xPct: 3.4, yPct: 15.8, widthPct: 20.0, heightPct: 16.0 },
+                        speakerAnchor: { xPct: 12.4, yPct: 39.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 9.0, widthPct: 49.1, heightPct: 45.6 },
+                tapBounds: { xPct: 54.0, yPct: 17.9, widthPct: 14.0, heightPct: 9.0 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Let’s review the sales figures for this year.",
+                        ttsText: "Let’s review the sales figures for this year.",
+                        bounds: { xPct: 52.4, yPct: 16.2, widthPct: 17.2, heightPct: 16.2 },
+                        speakerAnchor: { xPct: 62.4, yPct: 37.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.5, yPct: 55.3, widthPct: 49.2, heightPct: 44.2 },
+                tapBounds: { xPct: 2.8, yPct: 64.1, widthPct: 16.2, heightPct: 9.1 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "The chart shows that sales have increased.",
+                        ttsText: "The chart shows that sales have increased.",
+                        bounds: { xPct: 2.8, yPct: 62.4, widthPct: 16.5, heightPct: 15.3 },
+                        speakerAnchor: { xPct: 13.4, yPct: 85.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 55.3, widthPct: 49.1, heightPct: 44.2 },
+                tapBounds: { xPct: 53.3, yPct: 63.9, widthPct: 15.0, heightPct: 9.3 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Here are the business results for this year.",
+                        ttsText: "Here are the business results for this year.",
+                        bounds: { xPct: 52.2, yPct: 62.6, widthPct: 17.2, heightPct: 14.7 },
+                        speakerAnchor: { xPct: 70.0, yPct: 78.3 }
+                    }
+                ]
+            }
+        ]
     }
 };
