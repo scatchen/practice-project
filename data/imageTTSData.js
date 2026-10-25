@@ -13072,5 +13072,134 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/hotel-reservations-and-business-stays-basics.png": {
+        imageId: "hotel-reservations-and-business-stays-basics",
+        assetFile: "images/english/hotel-reservations-and-business-stays-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panelInteraction: "tap-regions-to-open-menu",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.2, yPct: 14.8, widthPct: 49.6, heightPct: 35.1 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Guest",
+                        sourceText: "I’d like to book a room for two nights.",
+                        ttsText: "I’d like to book a room for two nights.",
+                        bounds: { xPct: 14.5, yPct: 20.9, widthPct: 15.3, heightPct: 15.3 },
+                        speakerAnchor: { xPct: 19, yPct: 42 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Hotel staff",
+                        sourceText: "Certainly. Do you have any special requests?",
+                        ttsText: "Certainly. Do you have any special requests?",
+                        bounds: { xPct: 38.2, yPct: 23.7, widthPct: 11.2, heightPct: 14.4 },
+                        speakerAnchor: { xPct: 33, yPct: 42 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 14.5, yPct: 20.9, widthPct: 15.3, heightPct: 15.3 } },
+                    { unitId: 2, bounds: { xPct: 38.2, yPct: 23.7, widthPct: 11.2, heightPct: 14.4 } }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.1, yPct: 14.8, widthPct: 49.7, heightPct: 35.1 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Guest",
+                        sourceText: "Could I request a late checkout?",
+                        ttsText: "Could I request a late checkout?",
+                        bounds: { xPct: 62.6, yPct: 22.3, widthPct: 15.8, heightPct: 12.8 },
+                        speakerAnchor: { xPct: 60, yPct: 43 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Hotel staff",
+                        sourceText: "Certainly. We can extend your checkout until 2 p.m.",
+                        ttsText: "Certainly. We can extend your checkout until 2 p.m.",
+                        bounds: { xPct: 84.2, yPct: 18.6, widthPct: 14.1, heightPct: 16.9 },
+                        speakerAnchor: { xPct: 83, yPct: 43 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 62.6, yPct: 22.3, widthPct: 15.8, heightPct: 12.8 } },
+                    { unitId: 2, bounds: { xPct: 84.2, yPct: 18.6, widthPct: 14.1, heightPct: 16.9 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.2, yPct: 50.4, widthPct: 49.6, heightPct: 36.8 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Guest",
+                        sourceText: "I have a reservation under Chen.",
+                        ttsText: "I have a reservation under Chen.",
+                        bounds: { xPct: 13.7, yPct: 57.1, widthPct: 19.2, heightPct: 12.7 },
+                        speakerAnchor: { xPct: 18, yPct: 78 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Hotel staff",
+                        sourceText: "Let me check your confirmation number.",
+                        ttsText: "Let me check your confirmation number.",
+                        bounds: { xPct: 34.8, yPct: 58.2, widthPct: 14.7, heightPct: 13.8 },
+                        speakerAnchor: { xPct: 32, yPct: 76 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 13.7, yPct: 57.1, widthPct: 19.2, heightPct: 12.7 } },
+                    { unitId: 2, bounds: { xPct: 34.8, yPct: 58.2, widthPct: 14.7, heightPct: 13.8 } }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.1, yPct: 50.4, widthPct: 49.7, heightPct: 36.8 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Guest",
+                        sourceText: "Could you check the booking again? My confirmation number is ABC123.",
+                        ttsText: "Could you check the booking again? My confirmation number is ABC123.",
+                        bounds: { xPct: 62.7, yPct: 58.1, widthPct: 16.9, heightPct: 15.0 },
+                        speakerAnchor: { xPct: 61, yPct: 77 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Hotel staff",
+                        sourceText: "I can’t find your reservation in our system.",
+                        ttsText: "I can’t find your reservation in our system.",
+                        bounds: { xPct: 80.0, yPct: 54.2, widthPct: 14.5, heightPct: 13.2 },
+                        speakerAnchor: { xPct: 87, yPct: 76 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 62.7, yPct: 58.1, widthPct: 16.9, heightPct: 15.0 } },
+                    { unitId: 2, bounds: { xPct: 80.0, yPct: 54.2, widthPct: 14.5, heightPct: 13.2 } }
+                ]
+            }
+        ]
     }
 };
