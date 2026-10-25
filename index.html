@@ -5657,6 +5657,8 @@ function getEnglishImageTTSRecord(assetFile) {
     const isAllowedTapRegionsAssetPair =
         isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair ||
         isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair || isP35TapRegionsPair || isDailyLifeTapRegionsPair ||
+        (record.imageId === "school-life-basics" &&
+            record.assetFile === "images/english/school-life-basics.png") ||
         (record.imageId === "inventory-management-and-stock-shortages-basics" &&
             record.assetFile === "images/english/inventory-and-stock-management-basics.png") ||
         (record.imageId === "business-travel-expenses-and-reimbursement-basics" &&

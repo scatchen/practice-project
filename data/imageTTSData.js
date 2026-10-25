@@ -14130,5 +14130,86 @@ const imageTTSData = {
                 tapRegions: [{ unitId: 1, bounds: { xPct: 84.1, yPct: 18.3, widthPct: 12.5, heightPct: 8.7 } }]
             }
         ]
+    },
+    "images/english/school-life-basics.png": {
+        imageId: "school-life-basics",
+        assetFile: "images/english/school-life-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 1.5, yPct: 10.8, widthPct: 48.0, heightPct: 41.4 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "White dog",
+                        sourceText: "Let's learn!",
+                        ttsText: "Let's learn!",
+                        bounds: { xPct: 4.1, yPct: 19.2, widthPct: 11.3, heightPct: 12.0 },
+                        speakerAnchor: { xPct: 24.2, yPct: 33.3 }
+                    }
+                ],
+                tapRegions: [{ unitId: 1, bounds: { xPct: 3.6, yPct: 18.9, widthPct: 14.2, heightPct: 12.7 } }]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.6, yPct: 10.8, widthPct: 48.0, heightPct: 41.4 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "White dog",
+                        sourceText: "Study hard!",
+                        ttsText: "Study hard!",
+                        bounds: { xPct: 52.9, yPct: 19.3, widthPct: 11.2, heightPct: 11.8 },
+                        speakerAnchor: { xPct: 73.4, yPct: 30.0 }
+                    }
+                ],
+                tapRegions: [{ unitId: 1, bounds: { xPct: 52.3, yPct: 18.8, widthPct: 13.0, heightPct: 12.8 } }]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 1.5, yPct: 53.1, widthPct: 48.0, heightPct: 45.4 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "White dog",
+                        sourceText: "Teamwork makes the dream work!",
+                        ttsText: "Teamwork makes the dream work!",
+                        bounds: { xPct: 3.1, yPct: 61.0, widthPct: 11.8, heightPct: 13.9 },
+                        speakerAnchor: { xPct: 7.3, yPct: 83.5 }
+                    }
+                ],
+                tapRegions: [{ unitId: 1, bounds: { xPct: 2.8, yPct: 60.6, widthPct: 14.2, heightPct: 14.6 } }]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.6, yPct: 53.1, widthPct: 48.0, heightPct: 45.4 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "White dog",
+                        sourceText: "Play hard, have fun!",
+                        ttsText: "Play hard, have fun!",
+                        bounds: { xPct: 52.6, yPct: 63.7, widthPct: 13.6, heightPct: 10.8 },
+                        speakerAnchor: { xPct: 74.2, yPct: 79.0 }
+                    }
+                ],
+                tapRegions: [{ unitId: 1, bounds: { xPct: 52.0, yPct: 63.0, widthPct: 15.3, heightPct: 13.1 } }]
+            }
+        ]
     }
 };
