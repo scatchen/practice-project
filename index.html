@@ -5284,7 +5284,9 @@ function getEnglishImageTTSRecord(assetFile) {
         record.assetFile === "images/english/it-support-and-technical-problems-basics.png";
     const isAllowedTapRegionsAssetPair =
         isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair ||
-        isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair;
+        isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair ||
+        (record.imageId === "business-presentations-and-public-speaking-basics" &&
+            record.assetFile === "images/english/business-presentations-and-public-speaking-basics.png");
     if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
         (!allowedPanelInteractionAsset ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {

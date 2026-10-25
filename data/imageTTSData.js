@@ -12933,5 +12933,144 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/business-presentations-and-public-speaking-basics.png": {
+        imageId: "business-presentations-and-public-speaking-basics",
+        assetFile: "images/english/business-presentations-and-public-speaking-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panelInteraction: "tap-regions-to-open-menu",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.65, yPct: 11.62, widthPct: 49.09, heightPct: 42.48 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Good morning, everyone. Thank you for joining us.",
+                        ttsText: "Good morning, everyone. Thank you for joining us.",
+                        bounds: { xPct: 2.00, yPct: 18.50, widthPct: 14.60, heightPct: 14.50 },
+                        speakerAnchor: { xPct: 22.40, yPct: 41.00 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "Today, I’d like to review our quarterly sales performance.",
+                        ttsText: "Today, I’d like to review our quarterly sales performance.",
+                        bounds: { xPct: 35.60, yPct: 18.70, widthPct: 13.90, heightPct: 16.20 },
+                        speakerAnchor: { xPct: 22.40, yPct: 41.00 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 2.00, yPct: 18.50, widthPct: 14.60, heightPct: 14.50 } },
+                    { unitId: 2, bounds: { xPct: 35.60, yPct: 18.70, widthPct: 13.90, heightPct: 16.20 } }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.39, yPct: 11.62, widthPct: 49.41, heightPct: 42.48 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "As you can see from this chart, revenue rose by 15 percent.",
+                        ttsText: "As you can see from this chart, revenue rose by 15 percent.",
+                        bounds: { xPct: 50.65, yPct: 17.95, widthPct: 14.95, heightPct: 17.35 },
+                        speakerAnchor: { xPct: 62.50, yPct: 44.00 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "The increase was strongest in the online sales division.",
+                        ttsText: "The increase was strongest in the online sales division.",
+                        bounds: { xPct: 87.10, yPct: 19.50, widthPct: 12.20, heightPct: 18.30 },
+                        speakerAnchor: { xPct: 62.50, yPct: 44.00 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 50.65, yPct: 17.95, widthPct: 14.95, heightPct: 17.35 } },
+                    { unitId: 2, bounds: { xPct: 87.10, yPct: 19.50, widthPct: 12.20, heightPct: 18.30 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.65, yPct: 55.00, widthPct: 49.09, heightPct: 44.43 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "That covers our sales results. Let’s move on to customer feedback.",
+                        ttsText: "That covers our sales results. Let’s move on to customer feedback.",
+                        bounds: { xPct: 1.20, yPct: 61.40, widthPct: 16.00, heightPct: 15.10 },
+                        speakerAnchor: { xPct: 16.20, yPct: 86.00 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "Now, let’s take a closer look at the main findings.",
+                        ttsText: "Now, let’s take a closer look at the main findings.",
+                        bounds: { xPct: 33.70, yPct: 61.40, widthPct: 14.80, heightPct: 13.80 },
+                        speakerAnchor: { xPct: 16.20, yPct: 86.00 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 1.20, yPct: 61.40, widthPct: 16.00, heightPct: 15.10 } },
+                    { unitId: 2, bounds: { xPct: 33.70, yPct: 61.40, widthPct: 14.80, heightPct: 13.80 } }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.39, yPct: 55.00, widthPct: 49.41, heightPct: 44.43 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I have a question. Could you explain those figures in more detail?",
+                        ttsText: "I have a question. Could you explain those figures in more detail?",
+                        bounds: { xPct: 51.30, yPct: 61.40, widthPct: 15.00, heightPct: 16.90 },
+                        speakerAnchor: { xPct: 57.00, yPct: 87.50 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "That’s a good question. Could you clarify which figures you’re referring to?",
+                        ttsText: "That’s a good question. Could you clarify which figures you’re referring to?",
+                        bounds: { xPct: 67.00, yPct: 61.30, widthPct: 19.60, heightPct: 13.20 },
+                        speakerAnchor: { xPct: 77.00, yPct: 82.00 }
+                    },
+                    {
+                        unitId: 3,
+                        readingOrder: 3,
+                        speaker: "unidentified speaker",
+                        sourceText: "Certainly. I’ll explain how we calculated the increase.",
+                        ttsText: "Certainly. I’ll explain how we calculated the increase.",
+                        bounds: { xPct: 87.10, yPct: 63.80, widthPct: 12.00, heightPct: 16.80 },
+                        speakerAnchor: { xPct: 77.00, yPct: 82.00 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 51.30, yPct: 61.40, widthPct: 15.00, heightPct: 16.90 } },
+                    { unitId: 2, bounds: { xPct: 67.00, yPct: 61.30, widthPct: 19.60, heightPct: 13.20 } },
+                    { unitId: 3, bounds: { xPct: 87.10, yPct: 63.80, widthPct: 12.00, heightPct: 16.80 } }
+                ]
+            }
+        ]
     }
 };
