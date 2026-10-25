@@ -827,6 +827,37 @@ color: #111827;
             cursor: default;
         }
 
+        .image-tts-business-email-bubble-hit-area {
+            position: absolute;
+            z-index: 10;
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 6px;
+            appearance: none;
+            -webkit-appearance: none;
+            background: transparent;
+            color: transparent;
+            cursor: pointer;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .image-tts-business-email-bubble-hit-area[hidden] {
+            display: none;
+        }
+
+        .image-tts-business-email-bubble-hit-area:focus-visible {
+            outline: 3px solid #facc15;
+            outline-offset: -3px;
+        }
+
+        .image-tts-business-email-bubble-hit-area:disabled {
+            cursor: default;
+        }
+
         .image-tts-dialogue-speaker-below {
             box-sizing: border-box;
         }
@@ -1092,6 +1123,17 @@ color: #111827;
         #english-tts-floating-stop.is-image-tts-dialogue-stop-control {
             position: fixed;
             z-index: 11900;
+            width: auto;
+            min-width: 0;
+            max-width: none;
+            transform: none;
+            visibility: visible;
+        }
+
+        #english-tts-floating-stop.is-image-tts-story-stop-control {
+            position: fixed;
+            z-index: 12200;
+            box-sizing: border-box;
             width: auto;
             min-width: 0;
             max-width: none;
@@ -3179,6 +3221,7 @@ const englishTTSState = {
     activeSpeechIsImageTTS: false,
     activeImageTTSWrapper: null,
     activeImageTTSDialoguePanel: null,
+    activeImageTTSStoryPanel: null,
     imageTTSStopRow: null,
     imageTTSStopButton: null,
     imageTTSStopObserver: null,
@@ -3490,6 +3533,20 @@ function rememberEnglishSpeechTrigger(trigger) {
         hasValidPercentBounds(dialoguePanel.bounds) && hasValidDialogueUnits
         ? dialoguePanel
         : null;
+    const storyPanel = englishTTSState.activeSpeechTrigger &&
+        englishTTSState.activeSpeechTrigger._englishImageTTSPanel;
+    const hasStoryTriggerClass = englishTTSState.activeSpeechTrigger &&
+        englishTTSState.activeSpeechTrigger.classList &&
+        englishTTSState.activeSpeechTrigger.classList.contains("image-tts-story-panel-hit-area");
+    const storyPanelId = englishTTSState.activeSpeechTrigger &&
+        englishTTSState.activeSpeechTrigger.getAttribute("data-image-tts-panel-id");
+    englishTTSState.activeImageTTSStoryPanel = englishTTSState.activeImageTTSWrapper &&
+        hasStoryTriggerClass && storyPanel &&
+        String(storyPanel.panelId) === storyPanelId &&
+        (!englishTTSState.activeImageTTSWrapper.contains ||
+            englishTTSState.activeImageTTSWrapper.contains(englishTTSState.activeSpeechTrigger))
+        ? storyPanel
+        : null;
 
     if (!englishTTSState.activeSpeechTrigger) {
         return;
@@ -3545,6 +3602,7 @@ function resetEnglishTTSFloatingStopButtonStyles(button) {
     }
     button.classList.remove("is-image-tts-stop-control");
     button.classList.remove("is-image-tts-dialogue-stop-control");
+    button.classList.remove("is-image-tts-story-stop-control");
     button.style.position = "";
     button.style.zIndex = "";
     button.style.inset = "";
@@ -3557,6 +3615,7 @@ function resetEnglishTTSFloatingStopButtonStyles(button) {
     button.style.minWidth = "";
     button.style.minHeight = "";
     button.style.maxWidth = "";
+    button.style.maxHeight = "";
     button.style.visibility = "";
 }
 
@@ -3596,6 +3655,279 @@ function isEnglishTTSPlaybackActive() {
     return Boolean(englishTTSState.activeUtterance || englishTTSState.collocationReplayTimer ||
         englishTTSState.storySequenceTimer || englishTTSState.dialogueSequenceTimer ||
         englishTTSState.answerSequenceTimer || hasPendingSequenceTrigger);
+}
+
+function calculateEnglishImageTTSStoryStopPlacement({
+    viewport,
+    safeInsets,
+    buttonSize,
+    panelRect,
+    obstacles,
+    margin = 8
+}) {
+    const isFiniteRect = rect => rect &&
+        [rect.left, rect.top, rect.right, rect.bottom].every(Number.isFinite);
+    if (!viewport || !Number.isFinite(viewport.left) || !Number.isFinite(viewport.top) ||
+        !Number.isFinite(viewport.width) || !Number.isFinite(viewport.height) ||
+        viewport.width <= 0 || viewport.height <= 0) {
+        return null;
+    }
+
+    const viewportRight = viewport.left + viewport.width;
+    const viewportBottom = viewport.top + viewport.height;
+    let safeLeft = viewport.left + Math.max(0, safeInsets.left || 0) + margin;
+    let safeRight = viewportRight - Math.max(0, safeInsets.right || 0) - margin;
+    let safeTop = viewport.top + Math.max(0, safeInsets.top || 0) + margin;
+    let safeBottom = viewportBottom - Math.max(0, safeInsets.bottom || 0) - margin;
+    if (safeRight < safeLeft) {
+        safeLeft = safeRight = viewport.left + viewport.width / 2;
+    }
+    if (safeBottom < safeTop) {
+        safeTop = safeBottom = viewport.top + viewport.height / 2;
+    }
+
+    const availableWidth = Math.max(1, safeRight - safeLeft);
+    const availableHeight = Math.max(1, safeBottom - safeTop);
+    const width = Math.min(Math.max(1, buttonSize.width || 144), availableWidth);
+    const height = Math.min(Math.max(1, buttonSize.height || 52), availableHeight);
+    const maxLeft = Math.max(safeLeft, safeRight - width);
+    const maxTop = Math.max(safeTop, safeBottom - height);
+    const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum);
+    const intersects = (first, second) => isFiniteRect(first) && isFiniteRect(second) &&
+        first.left < second.right && first.right > second.left &&
+        first.top < second.bottom && first.bottom > second.top;
+    const targetIsVisible = isFiniteRect(panelRect) &&
+        panelRect.right > safeLeft && panelRect.left < safeRight &&
+        panelRect.bottom > safeTop && panelRect.top < safeBottom;
+    const nearbyCandidates = [];
+
+    if (targetIsVisible) {
+        const centerLeft = panelRect.left + (panelRect.right - panelRect.left - width) / 2;
+        const centerTop = panelRect.top + (panelRect.bottom - panelRect.top - height) / 2;
+        const gap = 8;
+        nearbyCandidates.push(
+            { left: centerLeft, top: panelRect.top - height - gap },
+            { left: centerLeft, top: panelRect.bottom + gap },
+            { left: panelRect.left - width - gap, top: centerTop },
+            { left: panelRect.right + gap, top: centerTop },
+            { left: panelRect.left - width - gap, top: panelRect.top - height - gap },
+            { left: panelRect.right + gap, top: panelRect.top - height - gap },
+            { left: panelRect.left - width - gap, top: panelRect.bottom + gap },
+            { left: panelRect.right + gap, top: panelRect.bottom + gap }
+        );
+    }
+
+    const dockCandidates = [
+        { left: safeLeft, top: safeTop },
+        { left: maxLeft, top: safeTop },
+        { left: safeLeft, top: maxTop },
+        { left: maxLeft, top: maxTop },
+        { left: safeLeft, top: (safeTop + maxTop) / 2 },
+        { left: maxLeft, top: (safeTop + maxTop) / 2 },
+        { left: (safeLeft + maxLeft) / 2, top: safeTop },
+        { left: (safeLeft + maxLeft) / 2, top: maxTop }
+    ];
+    const candidates = [];
+    const seen = new Set();
+    [...nearbyCandidates, ...dockCandidates].forEach(candidate => {
+        const placement = {
+            left: clamp(candidate.left, safeLeft, maxLeft),
+            top: clamp(candidate.top, safeTop, maxTop)
+        };
+        const key = String(Math.round(placement.left * 10)) + ":" +
+            String(Math.round(placement.top * 10));
+        if (!seen.has(key)) {
+            seen.add(key);
+            candidates.push(placement);
+        }
+    });
+
+    const allObstacles = [
+        ...(targetIsVisible ? [{ ...panelRect, kind: "panel" }] : []),
+        ...(Array.isArray(obstacles) ? obstacles.filter(isFiniteRect) : [])
+    ];
+    const hasCollision = (candidate, blockedBy) => {
+        const buttonRect = {
+            left: candidate.left,
+            top: candidate.top,
+            right: candidate.left + width,
+            bottom: candidate.top + height
+        };
+        return blockedBy.some(obstacle => intersects(buttonRect, obstacle));
+    };
+    const preferred = candidates.find(candidate => !hasCollision(candidate, allObstacles));
+    if (preferred) {
+        return { ...preferred, width, height, mode: targetIsVisible && nearbyCandidates.length ? "near-panel" : "docked" };
+    }
+
+    // Keep the control clear of the fixed header and drawing tools before relaxing panel avoidance.
+    const controls = (Array.isArray(obstacles) ? obstacles : [])
+        .filter(obstacle => obstacle && obstacle.kind === "controls");
+    const safeDock = dockCandidates.map(candidate => ({
+        left: clamp(candidate.left, safeLeft, maxLeft),
+        top: clamp(candidate.top, safeTop, maxTop)
+    }));
+    const clearOfControls = safeDock.find(candidate => !hasCollision(candidate, controls));
+    if (clearOfControls) {
+        return { ...clearOfControls, width, height, mode: "safe-dock" };
+    }
+
+    // A final in-viewport position keeps Stop reachable even when every preferred area is occupied.
+    return { ...safeDock[0], width, height, mode: "visible-fallback" };
+}
+
+function placeEnglishImageTTSStoryStopButton(button, wrapper, panel) {
+    if (!button) {
+        return false;
+    }
+
+    clearEnglishTTSImageStopRow(button);
+    if (button.parentNode !== document.body) {
+        document.body.appendChild(button);
+    }
+    button.classList.add("is-image-tts-story-stop-control");
+    button.hidden = false;
+    button.style.position = "fixed";
+    button.style.zIndex = "12200";
+    button.style.inset = "auto";
+    button.style.right = "auto";
+    button.style.bottom = "auto";
+    button.style.transform = "none";
+
+    const visualViewport = window.visualViewport;
+    const viewportLeft = visualViewport && Number.isFinite(visualViewport.offsetLeft)
+        ? visualViewport.offsetLeft
+        : 0;
+    const viewportTop = visualViewport && Number.isFinite(visualViewport.offsetTop)
+        ? visualViewport.offsetTop
+        : 0;
+    const viewportWidth = visualViewport && Number.isFinite(visualViewport.width) && visualViewport.width > 0
+        ? visualViewport.width
+        : window.innerWidth;
+    const viewportHeight = visualViewport && Number.isFinite(visualViewport.height) && visualViewport.height > 0
+        ? visualViewport.height
+        : window.innerHeight;
+    const readSafeInset = name => {
+        try {
+            const value = parseFloat(window.getComputedStyle(button).getPropertyValue(name));
+            return Number.isFinite(value) && value > 0 ? value : 0;
+        } catch (error) {
+            return 0;
+        }
+    };
+    const safeInsets = {
+        top: readSafeInset("--english-tts-safe-top"),
+        right: readSafeInset("--english-tts-safe-right"),
+        bottom: readSafeInset("--english-tts-safe-bottom"),
+        left: readSafeInset("--english-tts-safe-left")
+    };
+    const margin = 8;
+    const safeWidth = Math.max(1, viewportWidth - safeInsets.left - safeInsets.right - margin * 2);
+    const safeHeight = Math.max(1, viewportHeight - safeInsets.top - safeInsets.bottom - margin * 2);
+    button.style.minWidth = "0";
+    button.style.maxWidth = String(safeWidth) + "px";
+    button.style.minHeight = String(Math.min(52, safeHeight)) + "px";
+    button.style.maxHeight = String(safeHeight) + "px";
+    button.style.visibility = "hidden";
+
+    const measured = button.getBoundingClientRect();
+    const buttonSize = {
+        width: Math.min(measured.width || 144, safeWidth),
+        height: Math.min(measured.height || 52, safeHeight)
+    };
+    let panelRect = null;
+    const bounds = panel && panel.bounds;
+    const hasUsableBounds = bounds &&
+        [bounds.xPct, bounds.yPct, bounds.widthPct, bounds.heightPct].every(value =>
+            Number.isFinite(value) && value >= 0 && value <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100.01 &&
+        bounds.yPct + bounds.heightPct <= 100.01;
+    if (wrapper && wrapper.isConnected !== false && hasUsableBounds) {
+        try {
+            const image = wrapper.querySelector("img");
+            const imageRect = image && image.getBoundingClientRect();
+            if (imageRect && imageRect.width > 0 && imageRect.height > 0 &&
+                [imageRect.left, imageRect.top, imageRect.width, imageRect.height].every(Number.isFinite)) {
+                const imageLeft = imageRect.left + viewportLeft;
+                const imageTop = imageRect.top + viewportTop;
+                panelRect = {
+                    left: imageLeft + imageRect.width * bounds.xPct / 100,
+                    top: imageTop + imageRect.height * bounds.yPct / 100,
+                    right: imageLeft + imageRect.width * (bounds.xPct + bounds.widthPct) / 100,
+                    bottom: imageTop + imageRect.height * (bounds.yPct + bounds.heightPct) / 100
+                };
+            }
+        } catch (error) {
+            panelRect = null;
+        }
+    }
+
+    const obstacles = [];
+    const obstacleSelectors = [
+        { selector: ".control-bar", kind: "controls" },
+        { selector: ".brush-colors", kind: "controls" },
+        { selector: ".scribble-box", kind: "controls" },
+        { selector: ".english-image-story-controls:not([hidden])", kind: "panel" },
+        { selector: ".english-image-tts-menu:not([hidden])", kind: "panel" },
+        { selector: "#english-tts-panel:not([hidden])", kind: "panel" }
+    ];
+    obstacleSelectors.forEach(({ selector, kind }) => {
+        document.querySelectorAll(selector).forEach(element => {
+            if (!element || element === button || element.hidden) {
+                return;
+            }
+            try {
+                const style = window.getComputedStyle(element);
+                if (style.display === "none" || style.visibility === "hidden") {
+                    return;
+                }
+                const rect = element.getBoundingClientRect();
+                if (!rect || rect.width <= 0 || rect.height <= 0 ||
+                    ![rect.left, rect.top, rect.right, rect.bottom].every(Number.isFinite)) {
+                    return;
+                }
+                obstacles.push({
+                    left: rect.left + viewportLeft,
+                    top: rect.top + viewportTop,
+                    right: rect.right + viewportLeft,
+                    bottom: rect.bottom + viewportTop,
+                    kind
+                });
+            } catch (error) {
+                // An unreadable obstruction must not prevent Stop from being placed.
+            }
+        });
+    });
+
+    const placement = calculateEnglishImageTTSStoryStopPlacement({
+        viewport: {
+            left: viewportLeft,
+            top: viewportTop,
+            width: Number.isFinite(viewportWidth) && viewportWidth > 0 ? viewportWidth : 320,
+            height: Number.isFinite(viewportHeight) && viewportHeight > 0 ? viewportHeight : 480
+        },
+        safeInsets,
+        buttonSize,
+        panelRect,
+        obstacles,
+        margin
+    });
+    const fallbackViewportWidth = Number.isFinite(viewportWidth) && viewportWidth > 0 ? viewportWidth : 320;
+    const fallbackViewportHeight = Number.isFinite(viewportHeight) && viewportHeight > 0 ? viewportHeight : 480;
+    const fallbackWidth = Math.min(buttonSize.width, fallbackViewportWidth);
+    const fallbackHeight = Math.min(buttonSize.height, fallbackViewportHeight);
+    const left = placement
+        ? placement.left
+        : viewportLeft + Math.max(0, (fallbackViewportWidth - fallbackWidth) / 2);
+    const top = placement
+        ? placement.top
+        : viewportTop + Math.max(0, (fallbackViewportHeight - fallbackHeight) * 0.65);
+    button.style.left = String(left) + "px";
+    button.style.top = String(top) + "px";
+    button.style.visibility = "visible";
+    button.hidden = false;
+    return true;
 }
 
 function placeEnglishImageTTSStopButton(button, wrapper) {
@@ -3796,6 +4128,7 @@ function updateEnglishTTSControls() {
                     englishTTSState.activeSpeechIsImageTTS = false;
                     englishTTSState.activeImageTTSWrapper = null;
                     englishTTSState.activeImageTTSDialoguePanel = null;
+                    englishTTSState.activeImageTTSStoryPanel = null;
                 });
             }
         } else {
@@ -3808,7 +4141,9 @@ function updateEnglishTTSControls() {
             englishTTSState.activeSpeechIsImageTTS = false;
             englishTTSState.activeImageTTSWrapper = null;
             englishTTSState.activeImageTTSDialoguePanel = null;
-            if (floatingStopButton.classList.contains("is-image-tts-dialogue-stop-control")) {
+            englishTTSState.activeImageTTSStoryPanel = null;
+            if (floatingStopButton.classList.contains("is-image-tts-dialogue-stop-control") ||
+                floatingStopButton.classList.contains("is-image-tts-story-stop-control")) {
                 resetEnglishTTSFloatingStopButtonStyles(floatingStopButton);
             }
         }
@@ -3821,6 +4156,23 @@ function positionEnglishTTSFloatingStopButton() {
         return;
     }
 
+    const businessEmailStopPanel = englishTTSState.activeSpeechIsImageTTS
+        ? getEnglishBusinessEmailStopPanel(
+            englishTTSState.activeSpeechTrigger,
+            englishTTSState.activeImageTTSWrapper
+        )
+        : null;
+    if (businessEmailStopPanel) {
+        if (!placeEnglishImageTTSDialogueStopButton(
+            button,
+            englishTTSState.activeImageTTSWrapper,
+            businessEmailStopPanel
+        )) {
+            button.hidden = true;
+        }
+        return;
+    }
+
     if (englishTTSState.activeImageTTSDialoguePanel) {
         if (!placeEnglishImageTTSDialogueStopButton(
             button,
@@ -3829,6 +4181,15 @@ function positionEnglishTTSFloatingStopButton() {
         )) {
             button.hidden = true;
         }
+        return;
+    }
+
+    if (englishTTSState.activeImageTTSStoryPanel) {
+        placeEnglishImageTTSStoryStopButton(
+            button,
+            englishTTSState.activeImageTTSWrapper,
+            englishTTSState.activeImageTTSStoryPanel
+        );
         return;
     }
 
@@ -5830,6 +6191,283 @@ function layoutEnglishImageTTSDialoguePanelHitAreas(wrapper) {
     });
 }
 
+const ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE =
+    "images/english/business-email-and-professional-correspondence-basics.png";
+const ENGLISH_BUSINESS_EMAIL_BUBBLE_IMAGE_ID =
+    "business-email-and-professional-correspondence-basics";
+const ENGLISH_BUSINESS_EMAIL_BUBBLE_TEXT = Object.freeze({
+    1: "I am writing to inquire about the availability of your products.",
+    2: "Could you please provide me with the updated price list?",
+    3: "Thank you for your prompt response.",
+    4: "I look forward to hearing from you."
+});
+
+function getEnglishBusinessEmailBubblePanels(record, assetFile) {
+    if (assetFile !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE ||
+        typeof imageTTSData === "undefined" || !imageTTSData || typeof imageTTSData !== "object") {
+        return null;
+    }
+
+    const sourceRecord = imageTTSData[ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE];
+    const matchingKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && candidate.imageId === ENGLISH_BUSINESS_EMAIL_BUBBLE_IMAGE_ID &&
+            candidate.assetFile === ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE;
+    });
+    if (!record || !sourceRecord || matchingKeys.length !== 1 ||
+        matchingKeys[0] !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE ||
+        record.imageId !== ENGLISH_BUSINESS_EMAIL_BUBBLE_IMAGE_ID ||
+        record.assetFile !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE ||
+        sourceRecord.imageId !== ENGLISH_BUSINESS_EMAIL_BUBBLE_IMAGE_ID ||
+        sourceRecord.assetFile !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE ||
+        (record.contentType !== undefined && record.contentType !== "business-email") ||
+        record.layout !== "2x2" || !Array.isArray(record.panels) || record.panels.length !== 4 ||
+        !Array.isArray(sourceRecord.panels) || sourceRecord.panels.length !== 4) {
+        return null;
+    }
+
+    const hasExactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value) &&
+        Object.keys(value).length === keys.length && keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const isValidBounds = bounds => bounds &&
+        [bounds.xPct, bounds.yPct, bounds.widthPct, bounds.heightPct].every(value =>
+            Number.isFinite(value) && value >= 0 && value <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+    const panels = record.panels.slice().sort((left, right) => left.readingOrder - right.readingOrder);
+    const bubbles = [];
+
+    for (let index = 0; index < panels.length; index += 1) {
+        const panel = panels[index];
+        const sourcePanel = sourceRecord.panels.find(candidate => candidate && candidate.panelId === index + 1);
+        const bubbleSpeech = panel && panel.bubbleSpeech;
+        const region = bubbleSpeech && bubbleSpeech.tapRegion;
+        const expectedText = ENGLISH_BUSINESS_EMAIL_BUBBLE_TEXT[index + 1];
+        if (!panel || panel.panelId !== index + 1 || panel.readingOrder !== index + 1 ||
+            !sourcePanel || panel !== sourcePanel || !isValidBounds(panel.bounds) ||
+            !hasExactKeys(bubbleSpeech, ["sourceText", "ttsText", "tapRegion", "tapRegionStatus"]) ||
+            bubbleSpeech.sourceText !== expectedText || bubbleSpeech.ttsText !== expectedText ||
+            bubbleSpeech.sourceText !== bubbleSpeech.ttsText ||
+            !getEnglishTTSUnitText(bubbleSpeech.sourceText) || !getEnglishTTSUnitText(bubbleSpeech.ttsText) ||
+            bubbleSpeech.tapRegionStatus !== "visual-estimate-pending-device-calibration" ||
+            !hasExactKeys(region, ["xPct", "yPct", "widthPct", "heightPct"]) || !isValidBounds(region) ||
+            region.xPct < panel.bounds.xPct || region.yPct < panel.bounds.yPct ||
+            region.xPct + region.widthPct > panel.bounds.xPct + panel.bounds.widthPct ||
+            region.yPct + region.heightPct > panel.bounds.yPct + panel.bounds.heightPct) {
+            return null;
+        }
+        bubbles.push({ panel, bubbleSpeech });
+    }
+
+    for (let leftIndex = 0; leftIndex < bubbles.length; leftIndex += 1) {
+        const left = bubbles[leftIndex].bubbleSpeech.tapRegion;
+        for (let rightIndex = leftIndex + 1; rightIndex < bubbles.length; rightIndex += 1) {
+            const right = bubbles[rightIndex].bubbleSpeech.tapRegion;
+            if (left.xPct < right.xPct + right.widthPct &&
+                left.xPct + left.widthPct > right.xPct &&
+                left.yPct < right.yPct + right.heightPct &&
+                left.yPct + left.heightPct > right.yPct) {
+                return null;
+            }
+        }
+    }
+    return bubbles;
+}
+
+function getEnglishBusinessEmailStopPanel(trigger, wrapper) {
+    if (!trigger || !wrapper || wrapper.isConnected === false ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE ||
+        typeof imageTTSData === "undefined" || !imageTTSData || typeof imageTTSData !== "object" ||
+        typeof trigger.closest !== "function" ||
+        trigger.closest(".image-tts-overlay-wrapper") !== wrapper) {
+        return null;
+    }
+
+    const image = wrapper.querySelector("img");
+    const record = imageTTSData[ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE];
+    const matchingKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && candidate.imageId === ENGLISH_BUSINESS_EMAIL_BUBBLE_IMAGE_ID &&
+            candidate.assetFile === ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE;
+    });
+    const validatedBubbles = getEnglishBusinessEmailBubblePanels(
+        record,
+        ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE
+    );
+    if (!image || image.getAttribute("src") !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE ||
+        !record || matchingKeys.length !== 1 || matchingKeys[0] !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE ||
+        record.imageId !== ENGLISH_BUSINESS_EMAIL_BUBBLE_IMAGE_ID ||
+        record.assetFile !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE || record.layout !== "2x2" ||
+        !Array.isArray(record.panels) || record.panels.length !== 4 ||
+        !Array.isArray(validatedBubbles) || validatedBubbles.length !== 4 ||
+        !validatedBubbles.every(({ panel }, index) => panel && panel.panelId === index + 1 &&
+            panel.readingOrder === index + 1)) {
+        return null;
+    }
+
+    const panelId = Number(trigger.getAttribute("data-image-tts-panel-id"));
+    if (!Number.isInteger(panelId) || panelId < 1 || panelId > 4 ||
+        trigger.getAttribute("data-image-tts-panel-id") !== String(panelId)) {
+        return null;
+    }
+    const panel = validatedBubbles[panelId - 1].panel;
+    if (record.panels[panelId - 1] !== panel) {
+        return null;
+    }
+
+    const speakers = Array.from(wrapper.querySelectorAll(".image-tts-panel-speaker"));
+    const bubbleButtons = Array.from(wrapper.querySelectorAll(".image-tts-business-email-bubble-hit-area"));
+    const panelSpeaker = speakers.find(candidate =>
+        candidate.getAttribute("data-image-tts-panel-id") === String(panelId));
+    const bubbleButton = bubbleButtons.find(candidate =>
+        candidate.getAttribute("data-image-tts-panel-id") === String(panelId));
+    if (speakers.length !== 4 || new Set(speakers.map(candidate =>
+        candidate.getAttribute("data-image-tts-panel-id")).filter(Boolean)).size !== 4 ||
+        bubbleButtons.length !== 4 || new Set(bubbleButtons.map(candidate =>
+            candidate.getAttribute("data-image-tts-panel-id")).filter(Boolean)).size !== 4 ||
+        !panelSpeaker || !bubbleButton) {
+        return null;
+    }
+
+    const isBubbleTrigger = trigger.classList.contains("image-tts-business-email-bubble-hit-area");
+    const isPanelSpeaker = trigger.classList.contains("image-tts-panel-speaker") &&
+        !trigger.classList.contains("image-tts-dialogue-speaker");
+    if (isBubbleTrigger) {
+        if (trigger !== bubbleButton || trigger._englishImageTTSBubblePanel !== panel ||
+            trigger._englishImageTTSBubbleSpeech !== validatedBubbles[panelId - 1].bubbleSpeech) {
+            return null;
+        }
+    } else if (isPanelSpeaker) {
+        const placement = trigger._englishImageTTSPlacement;
+        const sameBounds = placement && placement.bounds &&
+            ["xPct", "yPct", "widthPct", "heightPct"].every(key =>
+                placement.bounds[key] === panel.bounds[key]);
+        const sameAnchor = placement && placement.anchor &&
+            ["xPct", "yPct"].every(key => placement.anchor[key] === panel.speakerAnchor[key]);
+        if (trigger !== panelSpeaker || !sameBounds || !sameAnchor) {
+            return null;
+        }
+    } else {
+        return null;
+    }
+
+    const imageRect = image.getBoundingClientRect();
+    const speakerRect = panelSpeaker.getBoundingClientRect();
+    if (!imageRect || !imageRect.width || !imageRect.height ||
+        !speakerRect || !speakerRect.width || !speakerRect.height) {
+        return null;
+    }
+    const speakerBounds = {
+        xPct: (speakerRect.left - imageRect.left) / imageRect.width * 100,
+        yPct: (speakerRect.top - imageRect.top) / imageRect.height * 100,
+        widthPct: speakerRect.width / imageRect.width * 100,
+        heightPct: speakerRect.height / imageRect.height * 100
+    };
+    if (![speakerBounds.xPct, speakerBounds.yPct, speakerBounds.widthPct, speakerBounds.heightPct]
+        .every(Number.isFinite) || speakerBounds.xPct < 0 || speakerBounds.yPct < 0 ||
+        speakerBounds.widthPct <= 0 || speakerBounds.heightPct <= 0 ||
+        speakerBounds.xPct + speakerBounds.widthPct > 100 ||
+        speakerBounds.yPct + speakerBounds.heightPct > 100) {
+        return null;
+    }
+
+    return {
+        panelId: panel.panelId,
+        bounds: panel.bounds,
+        speechUnits: [
+            { bounds: panel.bubbleSpeech.tapRegion },
+            { bounds: speakerBounds }
+        ]
+    };
+}
+
+function createEnglishBusinessEmailBubbleHitArea(wrapper, panel, bubbleSpeech) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-business-email-bubble-hit-area";
+    button.textContent = "";
+    button.hidden = true;
+    button.disabled = isEnglishImageTTSDrawingMode();
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("aria-label", `第 ${panel.panelId} 格泡泡原文：${bubbleSpeech.sourceText}，開啟泡泡朗讀選項`);
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("aria-disabled", String(button.disabled));
+    button.style.pointerEvents = button.disabled ? "none" : "auto";
+    button._englishImageTTSBubblePanel = panel;
+    button._englishImageTTSBubbleSpeech = bubbleSpeech;
+    button._englishImageTTSBubbleRegion = { ...bubbleSpeech.tapRegion };
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+            return;
+        }
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishImageTTSBubbleMenu(button, panel, bubbleSpeech);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
+function layoutEnglishBusinessEmailBubbleHitAreas(wrapper) {
+    if (!wrapper) {
+        return;
+    }
+    const buttons = Array.from(wrapper.querySelectorAll(".image-tts-business-email-bubble-hit-area"));
+    if (!buttons.length) {
+        return;
+    }
+    const hideAll = () => buttons.forEach(button => { button.hidden = true; });
+    const image = wrapper.querySelector("img");
+    const imageRect = image && image.getBoundingClientRect();
+    const wrapperRect = wrapper.getBoundingClientRect();
+    if (!image || !image.complete || image.naturalWidth <= 0 || !imageRect ||
+        !imageRect.width || !imageRect.height || !wrapperRect.width || !wrapperRect.height) {
+        hideAll();
+        return;
+    }
+
+    const speakers = Array.from(wrapper.querySelectorAll(".image-tts-panel-speaker"));
+    if (speakers.length !== 4 || speakers.some(button => button.hidden)) {
+        hideAll();
+        return;
+    }
+    const imageLeft = imageRect.left - wrapperRect.left;
+    const imageTop = imageRect.top - wrapperRect.top;
+    buttons.forEach(button => {
+        const region = button._englishImageTTSBubbleRegion;
+        if (!region) {
+            button.hidden = true;
+            return;
+        }
+        button.style.left = `${imageLeft + imageRect.width * region.xPct / 100}px`;
+        button.style.top = `${imageTop + imageRect.height * region.yPct / 100}px`;
+        button.style.width = `${imageRect.width * region.widthPct / 100}px`;
+        button.style.height = `${imageRect.height * region.heightPct / 100}px`;
+        button.hidden = false;
+    });
+
+    const speakerRects = speakers.map(button => button.getBoundingClientRect());
+    const overlapsSpeaker = buttons.some(button => {
+        if (button.hidden) {
+            return true;
+        }
+        const rect = button.getBoundingClientRect();
+        const clearance = 1;
+        return speakerRects.some(speakerRect =>
+            rect.left < speakerRect.right + clearance && rect.right > speakerRect.left - clearance &&
+            rect.top < speakerRect.bottom + clearance && rect.bottom > speakerRect.top - clearance);
+    });
+    if (overlapsSpeaker) {
+        hideAll();
+    }
+}
+
 function enhanceEnglishImageTTSOverlays(responseRoot) {
     if (!responseRoot || typeof responseRoot.querySelectorAll !== "function") {
         return 0;
@@ -5951,6 +6589,13 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
             return;
         }
 
+        const businessEmailBubbles = getEnglishBusinessEmailBubblePanels(record, assetFile);
+        if (businessEmailBubbles) {
+            businessEmailBubbles.forEach(({ panel, bubbleSpeech }) => {
+                createEnglishBusinessEmailBubbleHitArea(wrapper, panel, bubbleSpeech);
+                added += 1;
+            });
+        }
         record.panels.forEach(panel => {
             createEnglishImageTTSPanelSpeaker(wrapper, panel);
             added += 1;
@@ -5961,12 +6606,15 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
             wrapper.querySelectorAll(".image-tts-panel-speaker").forEach(button => {
                 button.hidden = true;
             });
+            wrapper.querySelectorAll(".image-tts-business-email-bubble-hit-area").forEach(button => {
+                button.hidden = true;
+            });
         }, { once: true });
         if (image.complete) {
             if (image.naturalWidth > 0) {
                 layoutEnglishImageTTSPanelSpeakers(wrapper);
             } else {
-                wrapper.querySelectorAll(".image-tts-panel-speaker").forEach(button => {
+                wrapper.querySelectorAll(".image-tts-panel-speaker, .image-tts-business-email-bubble-hit-area").forEach(button => {
                     button.hidden = true;
                 });
             }
@@ -6039,6 +6687,7 @@ function layoutEnglishImageTTSPanelSpeakers(wrapper) {
         button.style.transform = "none";
         button.hidden = false;
     });
+    layoutEnglishBusinessEmailBubbleHitAreas(wrapper);
 }
 
 function layoutEnglishImageTTSDialogueSpeaker(wrapper, imageRect, imageLeft, imageTop, button, buttonIndex, buttonCount) {
@@ -6164,6 +6813,11 @@ function syncEnglishImageTTSDrawingMode() {
         button.setAttribute("aria-disabled", String(isDrawing));
     });
     document.querySelectorAll("#ai-response .image-tts-dialogue-panel-hit-area").forEach(button => {
+        button.disabled = isDrawing;
+        button.style.pointerEvents = isDrawing ? "none" : "auto";
+        button.setAttribute("aria-disabled", String(isDrawing));
+    });
+    document.querySelectorAll("#ai-response .image-tts-business-email-bubble-hit-area").forEach(button => {
         button.disabled = isDrawing;
         button.style.pointerEvents = isDrawing ? "none" : "auto";
         button.setAttribute("aria-disabled", String(isDrawing));
@@ -6539,6 +7193,52 @@ function openEnglishImageTTSMenu(trigger, panel) {
         wholePanelButton.focus({ preventScroll: true });
     } catch (error) {
         wholePanelButton.focus();
+    }
+}
+
+function openEnglishImageTTSBubbleMenu(trigger, panel, bubbleSpeech) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const expectedText = panel && ENGLISH_BUSINESS_EMAIL_BUBBLE_TEXT[panel.panelId];
+    const speechText = bubbleSpeech && typeof bubbleSpeech.ttsText === "string"
+        ? getEnglishTTSUnitText(bubbleSpeech.ttsText)
+        : null;
+    if (!trigger || !panel || !bubbleSpeech || !wrapper ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE ||
+        trigger._englishImageTTSBubblePanel !== panel ||
+        trigger._englishImageTTSBubbleSpeech !== bubbleSpeech ||
+        bubbleSpeech.sourceText !== expectedText || bubbleSpeech.ttsText !== expectedText ||
+        !speechText || speechText !== bubbleSpeech.sourceText ||
+        appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+        return;
+    }
+
+    cancelEnglishImageTTSStorySequenceForDifferentTrigger(trigger);
+    closeEnglishImageTTSMenu();
+    const menu = englishImageTTSOverlayState.menu;
+    if (!menu) {
+        return;
+    }
+    englishImageTTSOverlayState.activeTrigger = trigger;
+    trigger.setAttribute("aria-expanded", "true");
+    menu.classList.remove("is-tap-regions-dialogue");
+    menu.setAttribute("aria-label", `第 ${panel.panelId} 格泡泡朗讀選項`);
+    while (menu.firstChild) {
+        menu.removeChild(menu.firstChild);
+    }
+
+    const speechButton = createEnglishImageTTSMenuButton(
+        "🔊 朗讀泡泡句子",
+        `朗讀泡泡原文：${bubbleSpeech.sourceText}`,
+        () => speakEnglishImageTTSFromPanel(trigger, speechText)
+    );
+    menu.appendChild(speechButton);
+    menu.hidden = false;
+    menu.style.visibility = "hidden";
+    positionEnglishImageTTSMenu();
+    try {
+        speechButton.focus({ preventScroll: true });
+    } catch (error) {
+        speechButton.focus();
     }
 }
 

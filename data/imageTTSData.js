@@ -28,7 +28,13 @@ const imageTTSData = {
                     xPct: 46.875,
                     yPct: 12.1094
                 },
-                speakerPlacementStatus: "top-right-clear"
+                speakerPlacementStatus: "top-right-clear",
+                bubbleSpeech: {
+                    sourceText: "I am writing to inquire about the availability of your products.",
+                    ttsText: "I am writing to inquire about the availability of your products.",
+                    tapRegion: { xPct: 11.4583, yPct: 14.0625, widthPct: 14.8438, heightPct: 15.6250 },
+                    tapRegionStatus: "visual-estimate-pending-device-calibration"
+                }
             },
             {
                 panelId: 2,
@@ -51,7 +57,13 @@ const imageTTSData = {
                     xPct: 97.0052,
                     yPct: 16.0156
                 },
-                speakerPlacementStatus: "top-right-email-header-clear-static-estimate-narrow-width-review-required"
+                speakerPlacementStatus: "top-right-email-header-clear-static-estimate-narrow-width-review-required",
+                bubbleSpeech: {
+                    sourceText: "Could you please provide me with the updated price list?",
+                    ttsText: "Could you please provide me with the updated price list?",
+                    tapRegion: { xPct: 61.5885, yPct: 14.7461, widthPct: 15.4948, heightPct: 17.6758 },
+                    tapRegionStatus: "visual-estimate-pending-device-calibration"
+                }
             },
             {
                 panelId: 3,
@@ -74,7 +86,13 @@ const imageTTSData = {
                     xPct: 46.224,
                     yPct: 58.5938
                 },
-                speakerPlacementStatus: "upper-right-email-header-clear-static-estimate"
+                speakerPlacementStatus: "upper-right-email-header-clear-static-estimate",
+                bubbleSpeech: {
+                    sourceText: "Thank you for your prompt response.",
+                    ttsText: "Thank you for your prompt response.",
+                    tapRegion: { xPct: 12.3047, yPct: 56.2500, widthPct: 14.3229, heightPct: 13.7695 },
+                    tapRegionStatus: "visual-estimate-pending-device-calibration"
+                }
             },
             {
                 panelId: 4,
@@ -96,7 +114,13 @@ const imageTTSData = {
                     xPct: 96.3542,
                     yPct: 53.6133
                 },
-                speakerPlacementStatus: "top-right-clear"
+                speakerPlacementStatus: "top-right-clear",
+                bubbleSpeech: {
+                    sourceText: "I look forward to hearing from you.",
+                    ttsText: "I look forward to hearing from you.",
+                    tapRegion: { xPct: 61.4583, yPct: 56.2500, widthPct: 15.2995, heightPct: 16.3086 },
+                    tapRegionStatus: "visual-estimate-pending-device-calibration"
+                }
             }
         ]
     },
