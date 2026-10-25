@@ -13420,5 +13420,114 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/inventory-and-stock-management-basics.png": {
+        imageId: "inventory-management-and-stock-shortages-basics",
+        assetFile: "images/english/inventory-and-stock-management-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.2604, yPct: 14.7461, widthPct: 49.6745, heightPct: 36.8164 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Let’s check the inventory levels.",
+                        ttsText: "Let’s check the inventory levels.",
+                        bounds: { xPct: 16.8620, yPct: 24.0234, widthPct: 11.0026, heightPct: 10.1563 },
+                        speakerAnchor: { xPct: 14.7135, yPct: 37.6953 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 16.2760, yPct: 23.2422, widthPct: 12.2396, heightPct: 11.8164 } }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.1953, yPct: 14.7461, widthPct: 49.4792, heightPct: 37.0117 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "We’re running low on stock of notebooks.",
+                        ttsText: "We’re running low on stock of notebooks.",
+                        bounds: { xPct: 63.8021, yPct: 24.4141, widthPct: 14.4531, heightPct: 9.4727 },
+                        speakerAnchor: { xPct: 62.9557, yPct: 37.9883 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "Only 10 left!",
+                        ttsText: "Only 10 left!",
+                        bounds: { xPct: 85.4167, yPct: 25.0000, widthPct: 4.6875, heightPct: 5.3711 },
+                        speakerAnchor: { xPct: 84.3099, yPct: 34.2773 }
+                    },
+                    {
+                        unitId: 3,
+                        readingOrder: 3,
+                        speaker: "unidentified speaker",
+                        sourceText: "I’ll inform the supplier right away.",
+                        ttsText: "I’ll inform the supplier right away.",
+                        bounds: { xPct: 89.9089, yPct: 31.0547, widthPct: 8.5286, heightPct: 11.0352 },
+                        speakerAnchor: { xPct: 89.3229, yPct: 43.6523 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 63.1510, yPct: 23.6328, widthPct: 15.7552, heightPct: 11.0352 } },
+                    { unitId: 2, bounds: { xPct: 84.8958, yPct: 24.0234, widthPct: 5.7943, heightPct: 6.5430 } },
+                    { unitId: 3, bounds: { xPct: 89.6484, yPct: 30.8594, widthPct: 9.3099, heightPct: 12.0117 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.2604, yPct: 51.8555, widthPct: 49.7396, heightPct: 35.8398 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I’ll place a reorder for notebooks.",
+                        ttsText: "I’ll place a reorder for notebooks.",
+                        bounds: { xPct: 14.1276, yPct: 61.1328, widthPct: 10.4167, heightPct: 9.6680 },
+                        speakerAnchor: { xPct: 19.2057, yPct: 74.2188 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 13.4766, yPct: 60.1563, widthPct: 11.7188, heightPct: 11.6211 } }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.1953, yPct: 51.8555, widthPct: 49.4792, heightPct: 35.8398 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "The new stock has arrived. I’ll update the inventory records.",
+                        ttsText: "The new stock has arrived. I’ll update the inventory records.",
+                        bounds: { xPct: 66.9922, yPct: 60.2539, widthPct: 11.1979, heightPct: 15.3320 },
+                        speakerAnchor: { xPct: 64.2578, yPct: 77.8320 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 66.2760, yPct: 59.0820, widthPct: 12.7604, heightPct: 17.4805 } }
+                ]
+            }
+        ]
     }
 };
