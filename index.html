@@ -5660,7 +5660,9 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "advanced-contract-terms-and-compliance-basics" &&
             record.assetFile === "images/english/advanced-contract-terms-and-compliance-basics.png") ||
         (record.imageId === "people-introduction-basics" &&
-            record.assetFile === "images/english/people-introduction-basics.png");
+            record.assetFile === "images/english/people-introduction-basics.png") ||
+        (record.imageId === "food-drinks-basics" &&
+            record.assetFile === "images/english/food-drinks-basics.png");
     if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
         (!allowedPanelInteractionAsset ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {

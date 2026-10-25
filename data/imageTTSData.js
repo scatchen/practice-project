@@ -13811,5 +13811,125 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+
+    "images/english/food-drinks-basics.png": {
+        "imageId": "food-drinks-basics",
+        "assetFile": "images/english/food-drinks-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panelInteraction": "tap-regions-to-open-menu",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 1.3, "yPct": 11.7, "widthPct": 48.1, "heightPct": 42.5 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "I like many kinds of food!",
+                        "ttsText": "I like many kinds of food!",
+                        "bounds": { "xPct": 2.3, "yPct": 16.8, "widthPct": 12.5, "heightPct": 12.8 },
+                        "speakerAnchor": { "xPct": 10.5, "yPct": 39.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 2.3, "yPct": 16.8, "widthPct": 12.5, "heightPct": 12.8 } }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 50.4, "yPct": 11.7, "widthPct": 48.3, "heightPct": 42.5 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "Drink water every day!",
+                        "ttsText": "Drink water every day!",
+                        "bounds": { "xPct": 52.0, "yPct": 16.8, "widthPct": 13.9, "heightPct": 10.2 },
+                        "speakerAnchor": { "xPct": 58.0, "yPct": 39.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 52.0, "yPct": 16.8, "widthPct": 13.9, "heightPct": 10.2 } }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 1.3, "yPct": 55.2, "widthPct": 48.1, "heightPct": 41.5 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "Let's eat together!",
+                        "ttsText": "Let's eat together!",
+                        "bounds": { "xPct": 3.6, "yPct": 60.3, "widthPct": 10.9, "heightPct": 8.3 },
+                        "speakerAnchor": { "xPct": 20.0, "yPct": 83.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 3.6, "yPct": 60.3, "widthPct": 10.9, "heightPct": 8.3 } }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 50.4, "yPct": 55.2, "widthPct": 48.3, "heightPct": 41.5 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Charlie Brown",
+                        "sourceText": "What do you like?",
+                        "ttsText": "What do you like?",
+                        "bounds": { "xPct": 61.4, "yPct": 60.3, "widthPct": 14.4, "heightPct": 8.0 },
+                        "speakerAnchor": { "xPct": 57.0, "yPct": 72.0 }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "Snoopy",
+                        "sourceText": "I like hamburgers.",
+                        "ttsText": "I like hamburgers.",
+                        "bounds": { "xPct": 84.5, "yPct": 59.8, "widthPct": 12.3, "heightPct": 8.2 },
+                        "speakerAnchor": { "xPct": 80.0, "yPct": 72.0 }
+                    },
+                    {
+                        "unitId": 3,
+                        "readingOrder": 3,
+                        "speaker": "Lucy",
+                        "sourceText": "What do you want to drink?",
+                        "ttsText": "What do you want to drink?",
+                        "bounds": { "xPct": 60.2, "yPct": 74.5, "widthPct": 15.2, "heightPct": 9.0 },
+                        "speakerAnchor": { "xPct": 57.0, "yPct": 86.0 }
+                    },
+                    {
+                        "unitId": 4,
+                        "readingOrder": 4,
+                        "speaker": "Snoopy",
+                        "sourceText": "I want some juice.",
+                        "ttsText": "I want some juice.",
+                        "bounds": { "xPct": 84.6, "yPct": 74.9, "widthPct": 12.1, "heightPct": 7.7 },
+                        "speakerAnchor": { "xPct": 80.0, "yPct": 86.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 61.4, "yPct": 60.3, "widthPct": 14.4, "heightPct": 8.0 } },
+                    { "unitId": 2, "bounds": { "xPct": 84.5, "yPct": 59.8, "widthPct": 12.3, "heightPct": 8.2 } },
+                    { "unitId": 3, "bounds": { "xPct": 60.2, "yPct": 74.5, "widthPct": 15.2, "heightPct": 9.0 } },
+                    { "unitId": 4, "bounds": { "xPct": 84.6, "yPct": 74.9, "widthPct": 12.1, "heightPct": 7.7 } }
+                ]
+            }
+        ]
     }
 };
