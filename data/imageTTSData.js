@@ -12162,6 +12162,95 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/data-analysis-and-business-reports-basics.png": {
+        imageId: "business-reports-and-data-basics",
+        assetFile: "images/english/data-analysis-and-business-reports-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.2604, yPct: 14.7461, widthPct: 49.5443, heightPct: 36.6211 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Let’s collect and organize the data.",
+                        ttsText: "Let’s collect and organize the data.",
+                        bounds: { xPct: 20.2474, yPct: 24.4141, widthPct: 9.8958, heightPct: 7.6172 },
+                        speakerAnchor: { xPct: 21.4844, yPct: 40.6250 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 19.5313, yPct: 23.4375, widthPct: 11.3281, heightPct: 9.5703 } }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.1953, yPct: 14.7461, widthPct: 49.5443, heightPct: 36.6211 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "The chart shows an increase in sales.",
+                        ttsText: "The chart shows an increase in sales.",
+                        bounds: { xPct: 58.8542, yPct: 24.7070, widthPct: 9.8307, heightPct: 8.0078 },
+                        speakerAnchor: { xPct: 59.8958, yPct: 40.6250 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 58.2031, yPct: 23.7305, widthPct: 10.9375, heightPct: 9.7656 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.2604, yPct: 51.8555, widthPct: 49.5443, heightPct: 36.4258 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Here are the key findings.",
+                        ttsText: "Here are the key findings.",
+                        bounds: { xPct: 13.6068, yPct: 61.6211, widthPct: 12.1094, heightPct: 5.7617 },
+                        speakerAnchor: { xPct: 7.6172, yPct: 73.3398 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 12.9557, yPct: 60.6445, widthPct: 13.0859, heightPct: 7.7148 } }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.1953, yPct: 51.8555, widthPct: 49.5443, heightPct: 36.4258 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Here is our business report.",
+                        ttsText: "Here is our business report.",
+                        bounds: { xPct: 57.7474, yPct: 61.7188, widthPct: 12.3047, heightPct: 5.7617 },
+                        speakerAnchor: { xPct: 60.8073, yPct: 76.5625 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 57.0964, yPct: 60.7422, widthPct: 13.6068, heightPct: 7.7148 } }
+                ]
+            }
+        ]
+    },
     "images/english/inventory-management-and-stock-shortages-basics.png": {
         imageId: "inventory-management-and-stock-shortages-basics",
         assetFile: "images/english/inventory-management-and-stock-shortages-basics.png",

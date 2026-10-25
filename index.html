@@ -5282,9 +5282,12 @@ function getEnglishImageTTSRecord(assetFile) {
     const isP29TapRegionsPair =
         record.imageId === "it-support-and-technical-problems-basics" &&
         record.assetFile === "images/english/it-support-and-technical-problems-basics.png";
+    const isP35TapRegionsPair =
+        record.imageId === "business-reports-and-data-basics" &&
+        record.assetFile === "images/english/data-analysis-and-business-reports-basics.png";
     const isAllowedTapRegionsAssetPair =
         isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair ||
-        isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair ||
+        isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair || isP35TapRegionsPair ||
         (record.imageId === "inventory-management-and-stock-shortages-basics" &&
             record.assetFile === "images/english/inventory-and-stock-management-basics.png") ||
         (record.imageId === "business-travel-expenses-and-reimbursement-basics" &&
