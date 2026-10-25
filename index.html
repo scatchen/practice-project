@@ -5662,7 +5662,9 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "people-introduction-basics" &&
             record.assetFile === "images/english/people-introduction-basics.png") ||
         (record.imageId === "food-drinks-basics" &&
-            record.assetFile === "images/english/food-drinks-basics.png");
+            record.assetFile === "images/english/food-drinks-basics.png") ||
+        (record.imageId === "weather-natural-phenomena-basics" &&
+            record.assetFile === "images/english/weather-natural-phenomena-basics.png");
     if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
         (!allowedPanelInteractionAsset ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {

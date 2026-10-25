@@ -13931,5 +13931,125 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+
+    "images/english/weather-natural-phenomena-basics.png": {
+        "imageId": "weather-natural-phenomena-basics",
+        "assetFile": "images/english/weather-natural-phenomena-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panelInteraction": "tap-regions-to-open-menu",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 1.5, "yPct": 1.5, "widthPct": 47.8, "heightPct": 47.0 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Boy in a red shirt",
+                        "sourceText": "It's sunny!",
+                        "ttsText": "It's sunny!",
+                        "bounds": { "xPct": 2.8, "yPct": 18.5, "widthPct": 11.6, "heightPct": 4.1 },
+                        "speakerAnchor": { "xPct": 18.5, "yPct": 16.5 }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "Girl in a yellow shirt",
+                        "sourceText": "It's cloudy!",
+                        "ttsText": "It's cloudy!",
+                        "bounds": { "xPct": 26.9, "yPct": 18.4, "widthPct": 11.2, "heightPct": 4.0 },
+                        "speakerAnchor": { "xPct": 42.0, "yPct": 16.0 }
+                    },
+                    {
+                        "unitId": 3,
+                        "readingOrder": 3,
+                        "speaker": "Girl in a yellow raincoat",
+                        "sourceText": "It's raining!",
+                        "ttsText": "It's raining!",
+                        "bounds": { "xPct": 11.3, "yPct": 30.9, "widthPct": 12.5, "heightPct": 4.1 },
+                        "speakerAnchor": { "xPct": 8.5, "yPct": 41.5 }
+                    },
+                    {
+                        "unitId": 4,
+                        "readingOrder": 4,
+                        "speaker": "Boy in a blue hooded jacket",
+                        "sourceText": "It's windy!",
+                        "ttsText": "It's windy!",
+                        "bounds": { "xPct": 35.9, "yPct": 30.7, "widthPct": 11.9, "heightPct": 4.2 },
+                        "speakerAnchor": { "xPct": 36.5, "yPct": 39.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 2.5, "yPct": 17.6, "widthPct": 12.4, "heightPct": 5.9 } },
+                    { "unitId": 2, "bounds": { "xPct": 26.2, "yPct": 17.5, "widthPct": 12.7, "heightPct": 5.9 } },
+                    { "unitId": 3, "bounds": { "xPct": 10.4, "yPct": 30.0, "widthPct": 14.3, "heightPct": 6.0 } },
+                    { "unitId": 4, "bounds": { "xPct": 35.0, "yPct": 29.8, "widthPct": 13.3, "heightPct": 6.0 } }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 50.9, "yPct": 1.5, "widthPct": 47.7, "heightPct": 47.0 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Boy pointing at lightning",
+                        "sourceText": "Look! Lightning!",
+                        "ttsText": "Look! Lightning!",
+                        "bounds": { "xPct": 82.8, "yPct": 13.7, "widthPct": 15.2, "heightPct": 11.7 },
+                        "speakerAnchor": { "xPct": 90.5, "yPct": 33.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 82.0, "yPct": 12.9, "widthPct": 16.5, "heightPct": 13.2 } }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 1.5, "yPct": 49.9, "widthPct": 47.8, "heightPct": 47.0 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Girl holding an umbrella",
+                        "sourceText": "The strong wind caused flooding.",
+                        "ttsText": "The strong wind caused flooding.",
+                        "bounds": { "xPct": 26.0, "yPct": 61.8, "widthPct": 22.2, "heightPct": 10.9 },
+                        "speakerAnchor": { "xPct": 45.5, "yPct": 87.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 25.3, "yPct": 61.0, "widthPct": 23.7, "heightPct": 12.4 } }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 50.9, "yPct": 49.9, "widthPct": 47.7, "heightPct": 47.0 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Boy in a green hooded jacket",
+                        "sourceText": "Rain and sunlight can make a rainbow.",
+                        "ttsText": "Rain and sunlight can make a rainbow.",
+                        "bounds": { "xPct": 52.8, "yPct": 67.2, "widthPct": 24.0, "heightPct": 11.1 },
+                        "speakerAnchor": { "xPct": 59.5, "yPct": 85.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 52.0, "yPct": 66.3, "widthPct": 25.5, "heightPct": 12.7 } }
+                ]
+            }
+        ]
     }
 };
