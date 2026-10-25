@@ -13330,5 +13330,95 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+
+    "images/english/travel-expenses-and-reimbursements-basics.png": {
+        imageId: "business-travel-expenses-and-reimbursement-basics",
+        assetFile: "images/english/travel-expenses-and-reimbursements-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.5208, yPct: 9.3750, widthPct: 49.0234, heightPct: 41.9922 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Please keep all your receipts for meals, transport and hotel.",
+                        ttsText: "Please keep all your receipts for meals, transport and hotel.",
+                        bounds: { xPct: 20.1823, yPct: 19.1406, widthPct: 12.7604, heightPct: 11.1328 },
+                        speakerAnchor: { xPct: 40.8854, yPct: 31.1523 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 19.8568, yPct: 18.5547, widthPct: 13.5417, heightPct: 12.1094 } }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.1302, yPct: 9.3750, widthPct: 49.3490, heightPct: 41.9922 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I’ll submit the expense report with all the receipts and details.",
+                        ttsText: "I’ll submit the expense report with all the receipts and details.",
+                        bounds: { xPct: 66.0807, yPct: 19.2383, widthPct: 14.9740, heightPct: 10.6445 },
+                        speakerAnchor: { xPct: 58.9193, yPct: 31.2500 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 65.6250, yPct: 18.5547, widthPct: 15.8854, heightPct: 12.0117 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.5208, yPct: 52.2461, widthPct: 49.0234, heightPct: 45.4102 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "I’ll check the reimbursement status online.",
+                        ttsText: "I’ll check the reimbursement status online.",
+                        bounds: { xPct: 35.6771, yPct: 59.8633, widthPct: 11.3932, heightPct: 9.1797 },
+                        speakerAnchor: { xPct: 27.2786, yPct: 73.7305 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 35.4818, yPct: 59.5703, widthPct: 11.8490, heightPct: 9.8633 } }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.1302, yPct: 52.2461, widthPct: 49.3490, heightPct: 45.4102 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "Great! The reimbursement has been approved and the money has been received!",
+                        ttsText: "Great! The reimbursement has been approved and the money has been received!",
+                        bounds: { xPct: 65.1042, yPct: 62.4023, widthPct: 14.9740, heightPct: 13.4766 },
+                        speakerAnchor: { xPct: 58.3333, yPct: 72.6562 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 64.6484, yPct: 61.7188, widthPct: 15.9505, heightPct: 14.7461 } }
+                ]
+            }
+        ]
     }
 };
