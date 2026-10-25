@@ -13642,5 +13642,174 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/people-introduction-basics.png": {
+        "imageId": "people-introduction-basics",
+        "assetFile": "images/english/people-introduction-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panelInteraction": "tap-regions-to-open-menu",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": { "xPct": 1.28, "yPct": 10.07, "widthPct": 47.15, "heightPct": 43.41 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Boy in blue",
+                        "sourceText": "Hello!",
+                        "ttsText": "Hello!",
+                        "bounds": { "xPct": 18.0, "yPct": 17.1, "widthPct": 9.7, "heightPct": 10.0 },
+                        "speakerAnchor": { "xPct": 16.5, "yPct": 37.5 }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "Girl in yellow",
+                        "sourceText": "Hi!",
+                        "ttsText": "Hi!",
+                        "bounds": { "xPct": 28.5, "yPct": 18.5, "widthPct": 7.9, "heightPct": 9.8 },
+                        "speakerAnchor": { "xPct": 38.5, "yPct": 38.0 }
+                    },
+                    {
+                        "unitId": 3,
+                        "readingOrder": 3,
+                        "speaker": "Boy in blue",
+                        "sourceText": "What’s your name?",
+                        "ttsText": "What’s your name?",
+                        "bounds": { "xPct": 6.4, "yPct": 41.3, "widthPct": 19.5, "heightPct": 8.7 },
+                        "speakerAnchor": { "xPct": 16.5, "yPct": 37.5 }
+                    },
+                    {
+                        "unitId": 4,
+                        "readingOrder": 4,
+                        "speaker": "Girl in yellow",
+                        "sourceText": "My name is Lily.",
+                        "ttsText": "My name is Lily.",
+                        "bounds": { "xPct": 27.1, "yPct": 41.3, "widthPct": 17.2, "heightPct": 8.7 },
+                        "speakerAnchor": { "xPct": 38.5, "yPct": 38.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 18.0, "yPct": 17.1, "widthPct": 9.7, "heightPct": 10.0 } },
+                    { "unitId": 2, "bounds": { "xPct": 28.5, "yPct": 18.5, "widthPct": 7.9, "heightPct": 9.8 } },
+                    { "unitId": 3, "bounds": { "xPct": 6.4, "yPct": 41.3, "widthPct": 19.5, "heightPct": 8.7 } },
+                    { "unitId": 4, "bounds": { "xPct": 27.1, "yPct": 41.3, "widthPct": 17.2, "heightPct": 8.7 } }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": { "xPct": 49.93, "yPct": 10.07, "widthPct": 48.50, "heightPct": 43.41 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Boy in green",
+                        "sourceText": "How old are you?",
+                        "ttsText": "How old are you?",
+                        "bounds": { "xPct": 53.1, "yPct": 17.5, "widthPct": 18.5, "heightPct": 10.1 },
+                        "speakerAnchor": { "xPct": 61.0, "yPct": 39.0 }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "Girl in pink",
+                        "sourceText": "I’m 13 years old.",
+                        "ttsText": "I’m 13 years old.",
+                        "bounds": { "xPct": 75.0, "yPct": 17.5, "widthPct": 18.8, "heightPct": 10.1 },
+                        "speakerAnchor": { "xPct": 86.5, "yPct": 39.0 }
+                    },
+                    {
+                        "unitId": 3,
+                        "readingOrder": 3,
+                        "speaker": "Boy in green",
+                        "sourceText": "Where are you from?",
+                        "ttsText": "Where are you from?",
+                        "bounds": { "xPct": 51.8, "yPct": 43.5, "widthPct": 21.2, "heightPct": 9.4 },
+                        "speakerAnchor": { "xPct": 61.0, "yPct": 39.0 }
+                    },
+                    {
+                        "unitId": 4,
+                        "readingOrder": 4,
+                        "speaker": "Girl in pink",
+                        "sourceText": "I’m from Taiwan.",
+                        "ttsText": "I’m from Taiwan.",
+                        "bounds": { "xPct": 75.7, "yPct": 43.5, "widthPct": 20.1, "heightPct": 9.4 },
+                        "speakerAnchor": { "xPct": 86.5, "yPct": 39.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 53.1, "yPct": 17.5, "widthPct": 18.5, "heightPct": 10.1 } },
+                    { "unitId": 2, "bounds": { "xPct": 75.0, "yPct": 17.5, "widthPct": 18.8, "heightPct": 10.1 } },
+                    { "unitId": 3, "bounds": { "xPct": 51.8, "yPct": 43.5, "widthPct": 21.2, "heightPct": 9.4 } },
+                    { "unitId": 4, "bounds": { "xPct": 75.7, "yPct": 43.5, "widthPct": 20.1, "heightPct": 9.4 } }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": { "xPct": 1.28, "yPct": 54.90, "widthPct": 47.15, "heightPct": 42.87 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Emma",
+                        "sourceText": "Let me introduce myself. My name is Emma. I’m 14 years old. I’m from Taiwan. I like reading and music.",
+                        "ttsText": "Let me introduce myself. My name is Emma. I’m 14 years old. I’m from Taiwan. I like reading and music.",
+                        "bounds": { "xPct": 18.8, "yPct": 61.5, "widthPct": 27.2, "heightPct": 33.5 },
+                        "speakerAnchor": { "xPct": 13.0, "yPct": 83.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 18.8, "yPct": 61.5, "widthPct": 27.2, "heightPct": 33.5 } }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": { "xPct": 49.93, "yPct": 54.90, "widthPct": 48.50, "heightPct": 42.87 },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "This is my family.",
+                        "ttsText": "This is my family.",
+                        "bounds": { "xPct": 54.9, "yPct": 61.1, "widthPct": 17.7, "heightPct": 9.2 },
+                        "speakerAnchor": { "xPct": 63.0, "yPct": 77.0 }
+                    },
+                    {
+                        "unitId": 2,
+                        "readingOrder": 2,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "These are my friends.",
+                        "ttsText": "These are my friends.",
+                        "bounds": { "xPct": 76.3, "yPct": 61.1, "widthPct": 20.8, "heightPct": 9.2 },
+                        "speakerAnchor": { "xPct": 86.0, "yPct": 78.0 }
+                    },
+                    {
+                        "unitId": 3,
+                        "readingOrder": 3,
+                        "speaker": "unidentified speaker",
+                        "sourceText": "Nice to meet you!",
+                        "ttsText": "Nice to meet you!",
+                        "bounds": { "xPct": 62.0, "yPct": 88.2, "widthPct": 24.8, "heightPct": 9.4 },
+                        "speakerAnchor": { "xPct": 74.5, "yPct": 84.0 }
+                    }
+                ],
+                "tapRegions": [
+                    { "unitId": 1, "bounds": { "xPct": 54.9, "yPct": 61.1, "widthPct": 17.7, "heightPct": 9.2 } },
+                    { "unitId": 2, "bounds": { "xPct": 76.3, "yPct": 61.1, "widthPct": 20.8, "heightPct": 9.2 } },
+                    { "unitId": 3, "bounds": { "xPct": 62.0, "yPct": 88.2, "widthPct": 24.8, "heightPct": 9.4 } }
+                ]
+            }
+        ]
     }
 };
