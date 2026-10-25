@@ -5646,9 +5646,17 @@ function getEnglishImageTTSRecord(assetFile) {
     const isP35TapRegionsPair =
         record.imageId === "business-reports-and-data-basics" &&
         record.assetFile === "images/english/data-analysis-and-business-reports-basics.png";
+
+    const isDailyLifeTapRegionsPair =
+        record.imageId === "daily-life-basics" &&
+        record.assetFile === "images/english/daily-life-basics.png";
+    const isDailyLifeSixPanelException = isDailyLifeTapRegionsPair &&
+        record.contentType === "dialogue" &&
+        record.panelInteraction === "tap-regions-to-open-menu" &&
+        record.layout === "1x6";
     const isAllowedTapRegionsAssetPair =
         isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair ||
-        isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair || isP35TapRegionsPair ||
+        isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair || isP35TapRegionsPair || isDailyLifeTapRegionsPair ||
         (record.imageId === "inventory-management-and-stock-shortages-basics" &&
             record.assetFile === "images/english/inventory-and-stock-management-basics.png") ||
         (record.imageId === "business-travel-expenses-and-reimbursement-basics" &&
@@ -5672,7 +5680,10 @@ function getEnglishImageTTSRecord(assetFile) {
     }
     if (hasPanelInteraction && isTapRegionsInteraction &&
         (!isAllowedTapRegionsAssetPair ||
-            record.contentType !== "dialogue" || record.layout !== "2x2")) {
+            record.contentType !== "dialogue" ||
+            (isDailyLifeTapRegionsPair
+                ? !isDailyLifeSixPanelException
+                : record.layout !== "2x2"))) {
         return null;
     }
     if (hasPanelInteraction && record.panelInteraction !== "tap-to-open-menu" &&
@@ -5690,6 +5701,101 @@ function getEnglishImageTTSRecord(assetFile) {
             bounds.xPct + bounds.widthPct <= 100.01 &&
             bounds.yPct + bounds.heightPct <= 100.01;
     };
+
+
+    if (isDailyLifeSixPanelException) {
+        const panels = record.panels;
+        if (panels.length !== 6 ||
+            !panels.every(panel => panel && typeof panel === "object" &&
+                !Array.isArray(panel) && Number.isFinite(panel.readingOrder))) {
+            return null;
+        }
+
+        const orderedPanels = panels.slice().sort((left, right) => left.readingOrder - right.readingOrder);
+        const hasExactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value) &&
+            Object.keys(value).length === keys.length && keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+        const isDailyLifeBounds = bounds => hasExactKeys(bounds, ["xPct", "yPct", "widthPct", "heightPct"]) &&
+            [bounds.xPct, bounds.yPct, bounds.widthPct, bounds.heightPct].every(value =>
+                Number.isFinite(value) && value >= 0 && value <= 100) &&
+            bounds.widthPct > 0 && bounds.heightPct > 0 &&
+            bounds.xPct + bounds.widthPct <= 100 &&
+            bounds.yPct + bounds.heightPct <= 100;
+        const tapRegionBounds = [];
+        let firstPanelBounds = null;
+        let previousPanelBounds = null;
+
+        for (let index = 0; index < orderedPanels.length; index += 1) {
+            const panel = orderedPanels[index];
+            if (panel.panelId !== index + 1 || panel.readingOrder !== index + 1 ||
+                Object.prototype.hasOwnProperty.call(panel, "tapBounds") ||
+                !Object.prototype.hasOwnProperty.call(panel, "tapRegions") ||
+                !isDailyLifeBounds(panel.bounds) ||
+                !Array.isArray(panel.speechUnits) || panel.speechUnits.length !== 1 ||
+                !Array.isArray(panel.tapRegions) || panel.tapRegions.length !== 1) {
+                return null;
+            }
+
+            const bounds = panel.bounds;
+            const unit = panel.speechUnits[0];
+            const tapRegion = panel.tapRegions[0];
+            if (!unit || typeof unit !== "object" || Array.isArray(unit) ||
+                !Number.isInteger(unit.unitId) || unit.readingOrder !== 1 ||
+                typeof unit.speaker !== "string" || !unit.speaker.trim() ||
+                typeof unit.sourceText !== "string" || !getEnglishTTSUnitText(unit.sourceText) ||
+                typeof unit.ttsText !== "string" || unit.ttsText !== unit.sourceText ||
+                !getEnglishTTSUnitText(unit.ttsText) ||
+                !isDailyLifeBounds(unit.bounds) ||
+                !hasExactKeys(unit.speakerAnchor, ["xPct", "yPct"]) ||
+                ![unit.speakerAnchor.xPct, unit.speakerAnchor.yPct].every(value =>
+                    Number.isFinite(value) && value >= 0 && value <= 100) ||
+                unit.bounds.xPct < bounds.xPct || unit.bounds.yPct < bounds.yPct ||
+                unit.bounds.xPct + unit.bounds.widthPct > bounds.xPct + bounds.widthPct ||
+                unit.bounds.yPct + unit.bounds.heightPct > bounds.yPct + bounds.heightPct ||
+                unit.speakerAnchor.xPct < bounds.xPct ||
+                unit.speakerAnchor.xPct > bounds.xPct + bounds.widthPct ||
+                unit.speakerAnchor.yPct < bounds.yPct ||
+                unit.speakerAnchor.yPct > bounds.yPct + bounds.heightPct ||
+                (unit.speakerAnchor.xPct >= unit.bounds.xPct &&
+                    unit.speakerAnchor.xPct <= unit.bounds.xPct + unit.bounds.widthPct &&
+                    unit.speakerAnchor.yPct >= unit.bounds.yPct &&
+                    unit.speakerAnchor.yPct <= unit.bounds.yPct + unit.bounds.heightPct)) {
+                return null;
+            }
+
+            const regionBounds = tapRegion && tapRegion.bounds;
+            if (!hasExactKeys(tapRegion, ["unitId", "bounds"]) ||
+                tapRegion.unitId !== unit.unitId ||
+                !isDailyLifeBounds(regionBounds) ||
+                regionBounds.xPct < bounds.xPct || regionBounds.yPct < bounds.yPct ||
+                regionBounds.xPct + regionBounds.widthPct > bounds.xPct + bounds.widthPct ||
+                regionBounds.yPct + regionBounds.heightPct > bounds.yPct + bounds.heightPct ||
+                regionBounds.xPct > unit.bounds.xPct || regionBounds.yPct > unit.bounds.yPct ||
+                regionBounds.xPct + regionBounds.widthPct < unit.bounds.xPct + unit.bounds.widthPct ||
+                regionBounds.yPct + regionBounds.heightPct < unit.bounds.yPct + unit.bounds.heightPct) {
+                return null;
+            }
+
+            if (firstPanelBounds === null) {
+                firstPanelBounds = bounds;
+            } else if (bounds.yPct !== firstPanelBounds.yPct ||
+                bounds.heightPct !== firstPanelBounds.heightPct ||
+                bounds.xPct < previousPanelBounds.xPct + previousPanelBounds.widthPct) {
+                return null;
+            }
+            for (const previousRegion of tapRegionBounds) {
+                if (regionBounds.xPct < previousRegion.xPct + previousRegion.widthPct &&
+                    regionBounds.xPct + regionBounds.widthPct > previousRegion.xPct &&
+                    regionBounds.yPct < previousRegion.yPct + previousRegion.heightPct &&
+                    regionBounds.yPct + regionBounds.heightPct > previousRegion.yPct) {
+                    return null;
+                }
+            }
+            previousPanelBounds = bounds;
+            tapRegionBounds.push(regionBounds);
+        }
+
+        return { ...record, panels: orderedPanels };
+    }
 
     const panelIds = new Set();
     const orderedPanels = record.panels.slice().sort((left, right) => left.readingOrder - right.readingOrder);

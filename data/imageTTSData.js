@@ -14051,5 +14051,84 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/daily-life-basics.png": {
+        imageId: "daily-life-basics",
+        assetFile: "images/english/daily-life-basics.png",
+        contentType: "dialogue",
+        layout: "1x6",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.8, yPct: 12.7, widthPct: 16.0, heightPct: 39.4 },
+                speechUnits: [{
+                    unitId: 1, readingOrder: 1, speaker: "White dog",
+                    sourceText: "Good morning! It's time to get up.", ttsText: "Good morning! It's time to get up.",
+                    bounds: { xPct: 2.4, yPct: 18.3, widthPct: 14.2, heightPct: 8.8 },
+                    speakerAnchor: { xPct: 9.3, yPct: 33.5 }
+                }],
+                tapRegions: [{ unitId: 1, bounds: { xPct: 2.2, yPct: 18.1, widthPct: 14.6, heightPct: 9.2 } }]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 17.3, yPct: 12.7, widthPct: 15.2, heightPct: 39.4 },
+                speechUnits: [{
+                    unitId: 1, readingOrder: 1, speaker: "White dog",
+                    sourceText: "What do you want for breakfast?", ttsText: "What do you want for breakfast?",
+                    bounds: { xPct: 19.3, yPct: 18.3, widthPct: 10.7, heightPct: 9.5 },
+                    speakerAnchor: { xPct: 25.5, yPct: 34.5 }
+                }],
+                tapRegions: [{ unitId: 1, bounds: { xPct: 19.1, yPct: 18.1, widthPct: 11.1, heightPct: 9.9 } }]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 33.2, yPct: 12.7, widthPct: 16.0, heightPct: 39.4 },
+                speechUnits: [{
+                    unitId: 1, readingOrder: 1, speaker: "White dog",
+                    sourceText: "I go to school at 7:30.", ttsText: "I go to school at 7:30.",
+                    bounds: { xPct: 34.8, yPct: 18.5, widthPct: 11.4, heightPct: 9.2 },
+                    speakerAnchor: { xPct: 41.0, yPct: 34.5 }
+                }],
+                tapRegions: [{ unitId: 1, bounds: { xPct: 34.5, yPct: 18.3, widthPct: 12.0, heightPct: 9.6 } }]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 49.7, yPct: 12.7, widthPct: 15.7, heightPct: 39.4 },
+                speechUnits: [{
+                    unitId: 1, readingOrder: 1, speaker: "White dog",
+                    sourceText: "I do my homework after school.", ttsText: "I do my homework after school.",
+                    bounds: { xPct: 50.9, yPct: 18.5, widthPct: 13.3, heightPct: 9.2 },
+                    speakerAnchor: { xPct: 57.5, yPct: 34.5 }
+                }],
+                tapRegions: [{ unitId: 1, bounds: { xPct: 50.6, yPct: 18.3, widthPct: 13.9, heightPct: 9.6 } }]
+            },
+            {
+                panelId: 5, readingOrder: 5,
+                bounds: { xPct: 66.1, yPct: 12.7, widthPct: 16.0, heightPct: 39.4 },
+                speechUnits: [{
+                    unitId: 1, readingOrder: 1, speaker: "unidentified speaker",
+                    sourceText: "We have dinner together.", ttsText: "We have dinner together.",
+                    bounds: { xPct: 67.5, yPct: 18.3, widthPct: 13.6, heightPct: 9.4 },
+                    speakerAnchor: { xPct: 74.3, yPct: 31.0 }
+                }],
+                tapRegions: [{ unitId: 1, bounds: { xPct: 67.2, yPct: 18.1, widthPct: 14.2, heightPct: 9.8 } }]
+            },
+            {
+                panelId: 6, readingOrder: 6,
+                bounds: { xPct: 82.9, yPct: 12.7, widthPct: 16.2, heightPct: 39.4 },
+                speechUnits: [{
+                    unitId: 1, readingOrder: 1, speaker: "White dog",
+                    sourceText: "Good night! Sweet dreams!", ttsText: "Good night! Sweet dreams!",
+                    bounds: { xPct: 84.4, yPct: 18.5, widthPct: 11.9, heightPct: 8.3 },
+                    speakerAnchor: { xPct: 90.5, yPct: 34.5 }
+                }],
+                tapRegions: [{ unitId: 1, bounds: { xPct: 84.1, yPct: 18.3, widthPct: 12.5, heightPct: 8.7 } }]
+            }
+        ]
     }
 };
