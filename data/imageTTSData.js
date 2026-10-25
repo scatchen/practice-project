@@ -13201,5 +13201,134 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/advanced-contract-terms-and-compliance-basics.png": {
+        imageId: "advanced-contract-terms-and-compliance-basics",
+        assetFile: "images/english/advanced-contract-terms-and-compliance-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panelInteraction: "tap-regions-to-open-menu",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.32, yPct: 5.58, widthPct: 49.28, heightPct: 45.69 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "The proposed 40% deposit would put pressure on our cash flow. Could we reduce it to 20% and pay the balance in two installments?",
+                        ttsText: "The proposed 40% deposit would put pressure on our cash flow. Could we reduce it to 20% and pay the balance in two installments?",
+                        bounds: { xPct: 1.12, yPct: 12.44, widthPct: 22.17, heightPct: 13.32 },
+                        speakerAnchor: { xPct: 12, yPct: 38 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "We could accept a 20% deposit, provided the first installment is due upon shipment and the final payment is made within 30 days of delivery.",
+                        ttsText: "We could accept a 20% deposit, provided the first installment is due upon shipment and the final payment is made within 30 days of delivery.",
+                        bounds: { xPct: 23.52, yPct: 12.52, widthPct: 19.78, heightPct: 13.24 },
+                        speakerAnchor: { xPct: 35, yPct: 38 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 1.12, yPct: 12.44, widthPct: 22.17, heightPct: 13.32 } },
+                    { unitId: 2, bounds: { xPct: 23.52, yPct: 12.52, widthPct: 19.78, heightPct: 13.24 } }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.40, yPct: 5.58, widthPct: 49.28, heightPct: 45.69 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "To avoid delays, could we confirm each party’s contractual obligations? Our team will provide the final specifications by May 10.",
+                        ttsText: "To avoid delays, could we confirm each party’s contractual obligations? Our team will provide the final specifications by May 10.",
+                        bounds: { xPct: 51.75, yPct: 13.00, widthPct: 23.52, heightPct: 12.68 },
+                        speakerAnchor: { xPct: 59, yPct: 38 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "Once we receive the specifications, we’ll deliver 500 units within 20 business days, in accordance with the agreed delivery terms.",
+                        ttsText: "Once we receive the specifications, we’ll deliver 500 units within 20 business days, in accordance with the agreed delivery terms.",
+                        bounds: { xPct: 75.60, yPct: 12.76, widthPct: 23.37, heightPct: 12.76 },
+                        speakerAnchor: { xPct: 81, yPct: 38 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 51.75, yPct: 13.00, widthPct: 23.52, heightPct: 12.68 } },
+                    { unitId: 2, bounds: { xPct: 75.60, yPct: 12.76, widthPct: 23.37, heightPct: 12.76 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.32, yPct: 52.07, widthPct: 49.28, heightPct: 47.61 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "We have not received the shipment by the agreed date. We’re sending written notice to document the breach of contract under the agreement.",
+                        ttsText: "We have not received the shipment by the agreed date. We’re sending written notice to document the breach of contract under the agreement.",
+                        bounds: { xPct: 1.12, yPct: 59.33, widthPct: 24.96, heightPct: 13.56 },
+                        speakerAnchor: { xPct: 13, yPct: 85 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "We acknowledge the delay. Would you agree to a 10-business-day cure period, as stipulated in the contract, to allow us to complete the delivery?",
+                        ttsText: "We acknowledge the delay. Would you agree to a 10-business-day cure period, as stipulated in the contract, to allow us to complete the delivery?",
+                        bounds: { xPct: 26.32, yPct: 59.25, widthPct: 22.97, heightPct: 14.99 },
+                        speakerAnchor: { xPct: 39, yPct: 85 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 1.12, yPct: 59.33, widthPct: 24.96, heightPct: 13.56 } },
+                    { unitId: 2, bounds: { xPct: 26.32, yPct: 59.25, widthPct: 22.97, heightPct: 14.99 } }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.40, yPct: 52.07, widthPct: 49.28, heightPct: 47.61 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "unidentified speaker",
+                        sourceText: "The renewal clause requires 60 days’ notice before the term ends. Would you like to renew the agreement for another year?",
+                        ttsText: "The renewal clause requires 60 days’ notice before the term ends. Would you like to renew the agreement for another year?",
+                        bounds: { xPct: 51.36, yPct: 59.33, widthPct: 22.57, heightPct: 15.07 },
+                        speakerAnchor: { xPct: 60, yPct: 85 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "unidentified speaker",
+                        sourceText: "We’re open to renewing, provided the revised pricing takes effect next term. Otherwise, we may need to terminate the agreement at the end of the current term.",
+                        ttsText: "We’re open to renewing, provided the revised pricing takes effect next term. Otherwise, we may need to terminate the agreement at the end of the current term.",
+                        bounds: { xPct: 74.16, yPct: 58.61, widthPct: 24.80, heightPct: 15.39 },
+                        speakerAnchor: { xPct: 88, yPct: 85 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 51.36, yPct: 59.33, widthPct: 22.57, heightPct: 15.07 } },
+                    { unitId: 2, bounds: { xPct: 74.16, yPct: 58.61, widthPct: 24.80, heightPct: 15.39 } }
+                ]
+            }
+        ]
     }
 };

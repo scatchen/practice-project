@@ -5288,7 +5288,9 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "hotel-reservations-and-business-stays-basics" &&
             record.assetFile === "images/english/hotel-reservations-and-business-stays-basics.png") ||
         (record.imageId === "business-presentations-and-public-speaking-basics" &&
-            record.assetFile === "images/english/business-presentations-and-public-speaking-basics.png");
+            record.assetFile === "images/english/business-presentations-and-public-speaking-basics.png") ||
+        (record.imageId === "advanced-contract-terms-and-compliance-basics" &&
+            record.assetFile === "images/english/advanced-contract-terms-and-compliance-basics.png");
     if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
         (!allowedPanelInteractionAsset ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {
