@@ -14788,5 +14788,61 @@ const imageTTSData = {
                 tapRegions: []
             }
         ]
+    },
+    "images/english/afternoon-tea-basics.png": {
+        imageId: "afternoon-tea-basics",
+        assetFile: "images/english/afternoon-tea-basics.png",
+        contentType: "teaching-sentences",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0, yPct: 0, widthPct: 49.8, heightPct: 49.8 },
+                sentence: {
+                    sourceText: "People enjoy afternoon tea.",
+                    ttsText: "People enjoy afternoon tea.",
+                    bounds: { xPct: 8.4, yPct: 42.3, widthPct: 34.4, heightPct: 3.9 }
+                },
+                tapRegion: { xPct: 7.8, yPct: 41.9, widthPct: 35.3, heightPct: 4.8 }
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.2, yPct: 0, widthPct: 49.8, heightPct: 49.8 },
+                sentence: {
+                    sourceText: "They pour tea into their cups.",
+                    ttsText: "They pour tea into their cups.",
+                    bounds: { xPct: 58.9, yPct: 42.3, widthPct: 36.6, heightPct: 3.9 }
+                },
+                tapRegion: { xPct: 58.5, yPct: 41.9, widthPct: 37.5, heightPct: 4.8 }
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0, yPct: 50.2, widthPct: 49.8, heightPct: 49.8 },
+                sentence: {
+                    sourceText: "They enjoy tea, sandwiches, and cakes.",
+                    ttsText: "They enjoy tea, sandwiches, and cakes.",
+                    bounds: { xPct: 7.5, yPct: 91.3, widthPct: 40.1, heightPct: 3.9 }
+                },
+                tapRegion: { xPct: 6.8, yPct: 90.8, widthPct: 41.5, heightPct: 4.8 }
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.2, yPct: 50.2, widthPct: 49.8, heightPct: 49.8 },
+                sentence: {
+                    sourceText: "They talk and spend time together.",
+                    ttsText: "They talk and spend time together.",
+                    bounds: { xPct: 58.9, yPct: 91.3, widthPct: 38.8, heightPct: 3.9 }
+                },
+                tapRegion: { xPct: 58.4, yPct: 90.8, widthPct: 39.9, heightPct: 4.8 }
+            }
+        ]
     }
 };
