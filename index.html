@@ -5633,7 +5633,14 @@ function getEnglishImageTTSRecord(assetFile) {
     const isTimeDateTapRegionsPair =
         record.imageId === "time-date-basics" &&
         record.assetFile === "images/english/time-date-basics.png";
+    const isBodyHealthTapRegionsPair =
+        record.imageId === "body-health-basics" &&
+        record.assetFile === "images/english/body-health-basics.png";
     const isTimeDateTwoByTwoTapRegionsException = isTimeDateTapRegionsPair &&
+        record.contentType === "dialogue" &&
+        record.panelInteraction === "tap-regions-to-open-menu" &&
+        record.layout === "2x2";
+    const isBodyHealthTwoByTwoTapRegionsException = isBodyHealthTapRegionsPair &&
         record.contentType === "dialogue" &&
         record.panelInteraction === "tap-regions-to-open-menu" &&
         record.layout === "2x2";
@@ -5679,6 +5686,7 @@ function getEnglishImageTTSRecord(assetFile) {
         isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair ||
         isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair || isP35TapRegionsPair || isDailyLifeTapRegionsPair ||
         isShoppingTapRegionsPair || isTransportationTapRegionsPair || isTimeDateTapRegionsPair ||
+        isBodyHealthTapRegionsPair ||
         (record.imageId === "school-life-basics" &&
             record.assetFile === "images/english/school-life-basics.png") ||
         (record.imageId === "inventory-management-and-stock-shortages-basics" &&
@@ -5851,6 +5859,7 @@ function getEnglishImageTTSRecord(assetFile) {
         const shoppingPanelUnitCounts = [0, 3, 2, 0];
         const transportationPanelUnitCounts = [1, 1, 1, 1];
         const timeDatePanelUnitCounts = [1, 1, 0, 2];
+        const bodyHealthPanelUnitCounts = [1, 2, 0, 1];
         for (let index = 0; index < orderedPanels.length; index += 1) {
             const panel = orderedPanels[index];
             const bounds = panel && panel.bounds;
@@ -5868,6 +5877,8 @@ function getEnglishImageTTSRecord(assetFile) {
                     panel.speechUnits.length !== transportationPanelUnitCounts[index]) ||
                 (isTimeDateTwoByTwoTapRegionsException &&
                     panel.speechUnits.length !== timeDatePanelUnitCounts[index]) ||
+                (isBodyHealthTwoByTwoTapRegionsException &&
+                    panel.speechUnits.length !== bodyHealthPanelUnitCounts[index]) ||
                 (isP27TapBoundsInteraction && panel.panelId === 1 && !isP27NoSpeechPanel) ||
                 (isTapRegionsInteraction
                     ? (!hasTapRegions || hasTapBounds)
@@ -5879,6 +5890,8 @@ function getEnglishImageTTSRecord(assetFile) {
                             (panel.panelId === 1 || panel.panelId === 4) &&
                             Array.isArray(panel.tapRegions) && panel.tapRegions.length === 0) ||
                         (isTimeDateTwoByTwoTapRegionsException && panel.panelId === 3 &&
+                            Array.isArray(panel.tapRegions) && panel.tapRegions.length === 0) ||
+                        (isBodyHealthTwoByTwoTapRegionsException && panel.panelId === 3 &&
                             Array.isArray(panel.tapRegions) && panel.tapRegions.length === 0)))) {
                 return null;
             }
@@ -5941,6 +5954,7 @@ function getEnglishImageTTSRecord(assetFile) {
                 if (!unit || !Number.isInteger(unit.unitId) || unitIds.has(unit.unitId) ||
                     (isTransportationTwoByTwoTapRegionsException && unit.unitId !== 1) ||
                     (isTimeDateTwoByTwoTapRegionsException && unit.unitId !== unitIndex + 1) ||
+                    (isBodyHealthTwoByTwoTapRegionsException && unit.unitId !== unitIndex + 1) ||
                     unit.readingOrder !== unitIndex + 1 ||
                     typeof unit.speaker !== "string" || !unit.speaker.trim() ||
                     typeof unit.sourceText !== "string" || !getEnglishTTSUnitText(unit.sourceText) ||
@@ -5980,7 +5994,8 @@ function getEnglishImageTTSRecord(assetFile) {
                     const regionBounds = tapRegion && tapRegion.bounds;
                     const bubbleUnit = (isShoppingTwoByTwoTapRegionsException ||
                         isTransportationTwoByTwoTapRegionsException ||
-                        isTimeDateTwoByTwoTapRegionsException) && tapRegion
+                        isTimeDateTwoByTwoTapRegionsException ||
+                        isBodyHealthTwoByTwoTapRegionsException) && tapRegion
                         ? panel.speechUnits.find(unit => unit && unit.unitId === tapRegion.unitId)
                         : null;
                     if (!hasExactKeys(tapRegion, ["unitId", "bounds"]) ||
@@ -5995,7 +6010,8 @@ function getEnglishImageTTSRecord(assetFile) {
                         regionBounds.yPct + regionBounds.heightPct > bounds.yPct + bounds.heightPct ||
                         ((isShoppingTwoByTwoTapRegionsException ||
                             isTransportationTwoByTwoTapRegionsException ||
-                            isTimeDateTwoByTwoTapRegionsException) &&
+                            isTimeDateTwoByTwoTapRegionsException ||
+                            isBodyHealthTwoByTwoTapRegionsException) &&
                             (!bubbleUnit ||
                                 regionBounds.xPct > bubbleUnit.bounds.xPct ||
                                 regionBounds.yPct > bubbleUnit.bounds.yPct ||
@@ -6286,6 +6302,8 @@ function isEnglishImageTTSBubbleTapRegionAssetPair(assetFile) {
         expectedImageId = "transportation-travel-basics";
     } else if (assetFile === "images/english/time-date-basics.png") {
         expectedImageId = "time-date-basics";
+    } else if (assetFile === "images/english/body-health-basics.png") {
+        expectedImageId = "body-health-basics";
     }
     const record = typeof imageTTSData !== "undefined" && imageTTSData
         ? imageTTSData[assetFile]

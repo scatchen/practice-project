@@ -14566,5 +14566,92 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/body-health-basics.png": {
+        imageId: "body-health-basics",
+        assetFile: "images/english/body-health-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 1.4, yPct: 12.5, widthPct: 48.2, heightPct: 39.0 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Boy",
+                        sourceText: "This is my head. This is my arm. This is my leg.",
+                        ttsText: "This is my head. This is my arm. This is my leg.",
+                        bounds: { xPct: 10.6, yPct: 16.4, widthPct: 22.8, heightPct: 15.7 },
+                        speakerAnchor: { xPct: 10.4, yPct: 30.5 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 9.8, yPct: 15.8, widthPct: 24.1, heightPct: 17.8 } }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.6, yPct: 12.5, widthPct: 48.2, heightPct: 39.0 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Girl",
+                        sourceText: "I have a fever. I don’t feel well.",
+                        ttsText: "I have a fever. I don’t feel well.",
+                        bounds: { xPct: 54.7, yPct: 17.4, widthPct: 22.1, heightPct: 13.4 },
+                        speakerAnchor: { xPct: 60.9, yPct: 33.5 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Snoopy",
+                        sourceText: "Let’s take your temperature.",
+                        ttsText: "Let’s take your temperature.",
+                        bounds: { xPct: 77.7, yPct: 17.5, widthPct: 19.7, heightPct: 13.4 },
+                        speakerAnchor: { xPct: 87.3, yPct: 36.0 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 54.1, yPct: 16.8, widthPct: 23.1, heightPct: 15.0 } },
+                    { unitId: 2, bounds: { xPct: 77.5, yPct: 16.8, widthPct: 20.6, heightPct: 15.0 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 1.4, yPct: 52.6, widthPct: 48.2, heightPct: 44.5 },
+                speechUnits: [],
+                tapRegions: []
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.6, yPct: 52.6, widthPct: 48.2, heightPct: 44.5 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Unknown",
+                        sourceText: "A healthy life makes you happy!",
+                        ttsText: "A healthy life makes you happy!",
+                        bounds: { xPct: 75.5, yPct: 82.7, widthPct: 22.8, heightPct: 13.5 },
+                        speakerAnchor: { xPct: 74.9, yPct: 95.8 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 75.1, yPct: 82.3, widthPct: 23.5, heightPct: 14.3 } }
+                ]
+            }
+        ]
     }
 };
