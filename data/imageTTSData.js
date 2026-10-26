@@ -14844,5 +14844,61 @@ const imageTTSData = {
                 tapRegion: { xPct: 58.4, yPct: 90.8, widthPct: 39.9, heightPct: 4.8 }
             }
         ]
+    },
+    "images/english/german-christmas-markets-basics.png": {
+        imageId: "german-christmas-markets-basics",
+        assetFile: "images/english/german-christmas-markets-basics.png",
+        contentType: "teaching-sentences",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.5, yPct: 0.5, widthPct: 49, heightPct: 49 },
+                sentence: {
+                    sourceText: "People visit a Christmas market in winter.",
+                    ttsText: "People visit a Christmas market in winter.",
+                    bounds: { xPct: 7.3, yPct: 2.6, widthPct: 26.4, heightPct: 10.4 }
+                },
+                tapRegion: { xPct: 7.1, yPct: 1.8, widthPct: 27, heightPct: 11.3 }
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.5, yPct: 0.5, widthPct: 49, heightPct: 49 },
+                sentence: {
+                    sourceText: "The market is filled with lights and decorations.",
+                    ttsText: "The market is filled with lights and decorations.",
+                    bounds: { xPct: 59.6, yPct: 2.6, widthPct: 36, heightPct: 10.3 }
+                },
+                tapRegion: { xPct: 59.1, yPct: 1.6, widthPct: 37, heightPct: 11.5 }
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.5, yPct: 50.5, widthPct: 49, heightPct: 49 },
+                sentence: {
+                    sourceText: "People enjoy traditional food and warm drinks.",
+                    ttsText: "People enjoy traditional food and warm drinks.",
+                    bounds: { xPct: 7.7, yPct: 52.9, widthPct: 39.4, heightPct: 8.1 }
+                },
+                tapRegion: { xPct: 7, yPct: 52.3, widthPct: 40.4, heightPct: 9.1 }
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.5, yPct: 50.5, widthPct: 49, heightPct: 49 },
+                sentence: {
+                    sourceText: "People buy handmade gifts and Christmas decorations.",
+                    ttsText: "People buy handmade gifts and Christmas decorations.",
+                    bounds: { xPct: 58, yPct: 52.9, widthPct: 37.5, heightPct: 8.1 }
+                },
+                tapRegion: { xPct: 57.4, yPct: 52.3, widthPct: 38.8, heightPct: 9.1 }
+            }
+        ]
     }
 };

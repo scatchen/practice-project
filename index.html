@@ -4141,8 +4141,12 @@ function placeEnglishImageTTSTeachingStopButton(button, wrapper, panel) {
         !trigger.classList.contains("image-tts-teaching-sentence-hit-area") ||
         trigger._englishImageTTSTeachingPanel !== panel ||
         !record || record.contentType !== "teaching-sentences" ||
-        record.imageId !== "afternoon-tea-basics" ||
-        record.assetFile !== "images/english/afternoon-tea-basics.png" ||
+        !(
+            (record.imageId === "afternoon-tea-basics" &&
+                record.assetFile === "images/english/afternoon-tea-basics.png") ||
+            (record.imageId === "german-christmas-markets-basics" &&
+                record.assetFile === "images/english/german-christmas-markets-basics.png")
+        ) ||
         !Array.isArray(record.panels) || !record.panels.includes(panel) ||
         !panel.sentence || !panel.sentence.sourceText ||
         panel.sentence.ttsText !== panel.sentence.sourceText ||
@@ -6053,6 +6057,107 @@ function getEnglishAfternoonTeaTeachingTTSRecord(record, assetFile) {
     return { ...record, panels };
 }
 
+function getEnglishGermanChristmasMarketsTeachingTTSRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/german-christmas-markets-basics.png";
+    const expectedPanels = [
+        {
+            panelId: 1,
+            bounds: { xPct: 0.5, yPct: 0.5, widthPct: 49, heightPct: 49 },
+            sourceText: "People visit a Christmas market in winter.",
+            sentenceBounds: { xPct: 7.3, yPct: 2.6, widthPct: 26.4, heightPct: 10.4 },
+            tapRegion: { xPct: 7.1, yPct: 1.8, widthPct: 27, heightPct: 11.3 }
+        },
+        {
+            panelId: 2,
+            bounds: { xPct: 50.5, yPct: 0.5, widthPct: 49, heightPct: 49 },
+            sourceText: "The market is filled with lights and decorations.",
+            sentenceBounds: { xPct: 59.6, yPct: 2.6, widthPct: 36, heightPct: 10.3 },
+            tapRegion: { xPct: 59.1, yPct: 1.6, widthPct: 37, heightPct: 11.5 }
+        },
+        {
+            panelId: 3,
+            bounds: { xPct: 0.5, yPct: 50.5, widthPct: 49, heightPct: 49 },
+            sourceText: "People enjoy traditional food and warm drinks.",
+            sentenceBounds: { xPct: 7.7, yPct: 52.9, widthPct: 39.4, heightPct: 8.1 },
+            tapRegion: { xPct: 7, yPct: 52.3, widthPct: 40.4, heightPct: 9.1 }
+        },
+        {
+            panelId: 4,
+            bounds: { xPct: 50.5, yPct: 50.5, widthPct: 49, heightPct: 49 },
+            sourceText: "People buy handmade gifts and Christmas decorations.",
+            sentenceBounds: { xPct: 58, yPct: 52.9, widthPct: 37.5, heightPct: 8.1 },
+            tapRegion: { xPct: 57.4, yPct: 52.3, widthPct: 38.8, heightPct: 9.1 }
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value) &&
+        Object.keys(value).length === keys.length && keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const matchesBounds = (actual, expected) => hasExactKeys(actual, ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        actual.xPct === expected.xPct && actual.yPct === expected.yPct &&
+        actual.widthPct === expected.widthPct && actual.heightPct === expected.heightPct;
+    const isValidBounds = bounds => hasExactKeys(bounds, ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        [bounds.xPct, bounds.yPct, bounds.widthPct, bounds.heightPct].every(value =>
+            Number.isFinite(value) && value >= 0 && value <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+    const containsBounds = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== "german-christmas-markets-basics" ||
+        record.assetFile !== expectedAssetFile || assetFile !== expectedAssetFile ||
+        record.contentType !== "teaching-sentences" || record.layout !== "2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+
+    const panels = record.panels;
+    for (let index = 0; index < expectedPanels.length; index += 1) {
+        const panel = panels[index];
+        const expected = expectedPanels[index];
+        const sentence = panel && panel.sentence;
+        const tapRegion = panel && panel.tapRegion;
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "sentence", "tapRegion"]) ||
+            panel.panelId !== expected.panelId || panel.readingOrder !== index + 1 ||
+            !matchesBounds(panel.bounds, expected.bounds) ||
+            !hasExactKeys(sentence, ["sourceText", "ttsText", "bounds"]) ||
+            sentence.sourceText !== expected.sourceText || sentence.ttsText !== sentence.sourceText ||
+            !getEnglishTTSUnitText(sentence.sourceText) ||
+            !matchesBounds(sentence.bounds, expected.sentenceBounds) ||
+            !matchesBounds(tapRegion, expected.tapRegion) ||
+            !containsBounds(panel.bounds, sentence.bounds) ||
+            !containsBounds(panel.bounds, tapRegion) ||
+            !containsBounds(tapRegion, sentence.bounds) ||
+            tapRegion.xPct < panel.bounds.xPct + 6.5 ||
+            tapRegion.widthPct >= panel.bounds.widthPct * 0.9 ||
+            tapRegion.heightPct >= panel.bounds.heightPct * 0.27 ||
+            tapRegion.widthPct * tapRegion.heightPct >=
+                panel.bounds.widthPct * panel.bounds.heightPct * 0.2) {
+            return null;
+        }
+    }
+
+    for (let leftIndex = 0; leftIndex < panels.length; leftIndex += 1) {
+        for (let rightIndex = leftIndex + 1; rightIndex < panels.length; rightIndex += 1) {
+            if (overlaps(panels[leftIndex].bounds, panels[rightIndex].bounds) ||
+                overlaps(panels[leftIndex].tapRegion, panels[rightIndex].tapRegion)) {
+                return null;
+            }
+        }
+    }
+    return { ...record, panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -6067,12 +6172,21 @@ function getEnglishImageTTSRecord(assetFile) {
         return null;
     }
 
-    const expectedTeachingSentenceAssetFile = "images/english/afternoon-tea-basics.png";
+    const afternoonTeaAssetFile = "images/english/afternoon-tea-basics.png";
+    const germanChristmasMarketsAssetFile = "images/english/german-christmas-markets-basics.png";
     const isTeachingSentenceIdentity = record.contentType === "teaching-sentences" ||
-        record.imageId === "afternoon-tea-basics" || record.assetFile === expectedTeachingSentenceAssetFile ||
-        assetFile === expectedTeachingSentenceAssetFile;
+        record.imageId === "afternoon-tea-basics" || record.assetFile === afternoonTeaAssetFile ||
+        assetFile === afternoonTeaAssetFile ||
+        record.imageId === "german-christmas-markets-basics" ||
+        record.assetFile === germanChristmasMarketsAssetFile || assetFile === germanChristmasMarketsAssetFile;
     if (isTeachingSentenceIdentity) {
-        return getEnglishAfternoonTeaTeachingTTSRecord(record, assetFile);
+        const isGermanChristmasMarketsIdentity =
+            record.imageId === "german-christmas-markets-basics" &&
+            record.assetFile === germanChristmasMarketsAssetFile &&
+            assetFile === germanChristmasMarketsAssetFile;
+        return isGermanChristmasMarketsIdentity
+            ? getEnglishGermanChristmasMarketsTeachingTTSRecord(record, assetFile)
+            : getEnglishAfternoonTeaTeachingTTSRecord(record, assetFile);
     }
 
     const isPlacesDirectionsIdentity =
@@ -7998,7 +8112,15 @@ function openEnglishImageTTSTeachingSentenceMenu(trigger, record, panel) {
     const safeRecord = assetFile ? getEnglishImageTTSRecord(assetFile) : null;
     const panelId = panel && panel.panelId;
     const safePanel = safeRecord && safeRecord.panels.find(item => item.panelId === panelId);
-    if (!trigger || !wrapper || assetFile !== "images/english/afternoon-tea-basics.png" ||
+    const isAfternoonTeaTeachingAsset = Boolean(assetFile === "images/english/afternoon-tea-basics.png" &&
+        record && record.imageId === "afternoon-tea-basics" && safeRecord &&
+        safeRecord.imageId === "afternoon-tea-basics" && safeRecord.assetFile === assetFile);
+    const isGermanChristmasMarketsTeachingAsset = Boolean(
+        assetFile === "images/english/german-christmas-markets-basics.png" &&
+        record && record.imageId === "german-christmas-markets-basics" && safeRecord &&
+        safeRecord.imageId === "german-christmas-markets-basics" && safeRecord.assetFile === assetFile);
+    if (!trigger || !wrapper ||
+        (!isAfternoonTeaTeachingAsset && !isGermanChristmasMarketsTeachingAsset) ||
         !record || record !== trigger._englishImageTTSTeachingRecord ||
         !panel || panel !== trigger._englishImageTTSTeachingPanel ||
         !record.panels.includes(panel) || !safePanel ||
@@ -8019,10 +8141,11 @@ function openEnglishImageTTSTeachingSentenceMenu(trigger, record, panel) {
     }
     const sentenceText = panel.sentence.ttsText;
     const sequenceTexts = safeRecord.panels.map(item => item.sentence.ttsText);
+    const teachingTitle = isAfternoonTeaTeachingAsset ? "Afternoon Tea" : "German Christmas Markets";
     englishImageTTSOverlayState.activeTrigger = trigger;
     trigger.setAttribute("aria-expanded", "true");
     menu.classList.remove("is-tap-regions-dialogue");
-    menu.setAttribute("aria-label", `Afternoon Tea 第 ${panel.panelId} 格教學句朗讀選項`);
+    menu.setAttribute("aria-label", `${teachingTitle} 第 ${panel.panelId} 格教學句朗讀選項`);
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
     }
@@ -8038,7 +8161,7 @@ function openEnglishImageTTSTeachingSentenceMenu(trigger, record, panel) {
         () => speakEnglishImageTTSSequence(
             trigger,
             sequenceTexts,
-            "Afternoon Tea 教學句已朗讀完成。",
+            `${teachingTitle} 教學句已朗讀完成。`,
             "依序朗讀本圖教學句中，句間停頓 0.5 秒。"
         )
     );
