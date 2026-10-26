@@ -14211,5 +14211,100 @@ const imageTTSData = {
                 tapRegions: [{ unitId: 1, bounds: { xPct: 52.0, yPct: 63.0, widthPct: 15.3, heightPct: 13.1 } }]
             }
         ]
+    },
+    "images/english/shopping-basics.png": {
+        imageId: "shopping-basics",
+        assetFile: "images/english/shopping-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 1.5, yPct: 14.0, widthPct: 47.9, heightPct: 36.9 },
+                speechUnits: [],
+                tapRegions: []
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.7, yPct: 14.0, widthPct: 47.9, heightPct: 36.9 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "How much is this shirt?",
+                        ttsText: "How much is this shirt?",
+                        bounds: { xPct: 52.3, yPct: 18.9, widthPct: 23.4, heightPct: 11.3 },
+                        speakerAnchor: { xPct: 57.5, yPct: 35.0 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "store clerk",
+                        sourceText: "It’s $20.",
+                        ttsText: "It’s $20.",
+                        bounds: { xPct: 77.0, yPct: 20.3, widthPct: 11.2, heightPct: 10.5 },
+                        speakerAnchor: { xPct: 76.5, yPct: 32.7 }
+                    },
+                    {
+                        unitId: 3,
+                        readingOrder: 3,
+                        speaker: "Snoopy",
+                        sourceText: "That’s great!",
+                        ttsText: "That’s great!",
+                        bounds: { xPct: 82.4, yPct: 33.4, widthPct: 13.8, heightPct: 9.8 },
+                        speakerAnchor: { xPct: 89.3, yPct: 45.2 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 51.9, yPct: 18.4, widthPct: 24.1, heightPct: 12.1 } },
+                    { unitId: 2, bounds: { xPct: 76.6, yPct: 19.9, widthPct: 12.0, heightPct: 11.4 } },
+                    { unitId: 3, bounds: { xPct: 82.0, yPct: 33.0, widthPct: 14.5, heightPct: 10.6 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 1.5, yPct: 52.5, widthPct: 47.9, heightPct: 33.7 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "Can I pay by credit card?",
+                        ttsText: "Can I pay by credit card?",
+                        bounds: { xPct: 5.5, yPct: 56.8, widthPct: 20.9, heightPct: 11.7 },
+                        speakerAnchor: { xPct: 12.5, yPct: 72.9 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "store clerk",
+                        sourceText: "Sure.",
+                        ttsText: "Sure.",
+                        bounds: { xPct: 30.7, yPct: 57.4, widthPct: 12.9, heightPct: 11.0 },
+                        speakerAnchor: { xPct: 38.3, yPct: 71.0 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 5.1, yPct: 56.4, widthPct: 21.8, heightPct: 12.5 } },
+                    { unitId: 2, bounds: { xPct: 30.3, yPct: 57.0, widthPct: 13.7, heightPct: 11.7 } }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.7, yPct: 52.5, widthPct: 47.9, heightPct: 33.7 },
+                speechUnits: [],
+                tapRegions: []
+            }
+        ]
     }
 };
