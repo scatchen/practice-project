@@ -14306,5 +14306,178 @@ const imageTTSData = {
                 tapRegions: []
             }
         ]
+    },
+    "images/english/transportation-travel-basics.png": {
+        "imageId": "transportation-travel-basics",
+        "assetFile": "images/english/transportation-travel-basics.png",
+        "contentType": "dialogue",
+        "layout": "2x2",
+        "panelInteraction": "tap-regions-to-open-menu",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 1,
+                "readingOrder": 1,
+                "bounds": {
+                    "xPct": 1.8,
+                    "yPct": 12,
+                    "widthPct": 47.8,
+                    "heightPct": 40.2
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "Let's take the bus!",
+                        "ttsText": "Let's take the bus!",
+                        "bounds": {
+                            "xPct": 11.2,
+                            "yPct": 13.2,
+                            "widthPct": 19.8,
+                            "heightPct": 16.8
+                        },
+                        "speakerAnchor": {
+                            "xPct": 16.2,
+                            "yPct": 34.5
+                        }
+                    }
+                ],
+                "tapRegions": [
+                    {
+                        "unitId": 1,
+                        "bounds": {
+                            "xPct": 10.3,
+                            "yPct": 12.5,
+                            "widthPct": 22,
+                            "heightPct": 18.5
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 2,
+                "bounds": {
+                    "xPct": 50.6,
+                    "yPct": 12,
+                    "widthPct": 47.6,
+                    "heightPct": 40.2
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "I'm going on a trip!",
+                        "ttsText": "I'm going on a trip!",
+                        "bounds": {
+                            "xPct": 55.2,
+                            "yPct": 13.2,
+                            "widthPct": 19.8,
+                            "heightPct": 16.8
+                        },
+                        "speakerAnchor": {
+                            "xPct": 63.3,
+                            "yPct": 35
+                        }
+                    }
+                ],
+                "tapRegions": [
+                    {
+                        "unitId": 1,
+                        "bounds": {
+                            "xPct": 54.2,
+                            "yPct": 12.5,
+                            "widthPct": 22,
+                            "heightPct": 18.5
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 3,
+                "bounds": {
+                    "xPct": 1.8,
+                    "yPct": 53.8,
+                    "widthPct": 47.8,
+                    "heightPct": 44.2
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "The train is coming!",
+                        "ttsText": "The train is coming!",
+                        "bounds": {
+                            "xPct": 3.5,
+                            "yPct": 55.3,
+                            "widthPct": 22.8,
+                            "heightPct": 17.2
+                        },
+                        "speakerAnchor": {
+                            "xPct": 16.2,
+                            "yPct": 81
+                        }
+                    }
+                ],
+                "tapRegions": [
+                    {
+                        "unitId": 1,
+                        "bounds": {
+                            "xPct": 2.6,
+                            "yPct": 54.6,
+                            "widthPct": 24.6,
+                            "heightPct": 18.8
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 4,
+                "bounds": {
+                    "xPct": 50.6,
+                    "yPct": 53.8,
+                    "widthPct": 47.6,
+                    "heightPct": 44.2
+                },
+                "speechUnits": [
+                    {
+                        "unitId": 1,
+                        "readingOrder": 1,
+                        "speaker": "Snoopy",
+                        "sourceText": "Travel makes life more exciting!",
+                        "ttsText": "Travel makes life more exciting!",
+                        "bounds": {
+                            "xPct": 52,
+                            "yPct": 55.3,
+                            "widthPct": 24.5,
+                            "heightPct": 17.5
+                        },
+                        "speakerAnchor": {
+                            "xPct": 61,
+                            "yPct": 82.5
+                        }
+                    }
+                ],
+                "tapRegions": [
+                    {
+                        "unitId": 1,
+                        "bounds": {
+                            "xPct": 51,
+                            "yPct": 54.6,
+                            "widthPct": 27,
+                            "heightPct": 18.9
+                        }
+                    }
+                ]
+            }
+        ]
     }
 };

@@ -5627,6 +5627,13 @@ function getEnglishImageTTSRecord(assetFile) {
     const isShoppingTapRegionsPair =
         record.imageId === "shopping-basics" &&
         record.assetFile === "images/english/shopping-basics.png";
+    const isTransportationTapRegionsPair =
+        record.imageId === "transportation-travel-basics" &&
+        record.assetFile === "images/english/transportation-travel-basics.png";
+    const isTransportationTwoByTwoTapRegionsException = isTransportationTapRegionsPair &&
+        record.contentType === "dialogue" &&
+        record.panelInteraction === "tap-regions-to-open-menu" &&
+        record.layout === "2x2";
     const isShoppingTwoByTwoTapRegionsException = isShoppingTapRegionsPair &&
         record.contentType === "dialogue" &&
         record.panelInteraction === "tap-regions-to-open-menu" &&
@@ -5664,7 +5671,7 @@ function getEnglishImageTTSRecord(assetFile) {
     const isAllowedTapRegionsAssetPair =
         isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair ||
         isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair || isP35TapRegionsPair || isDailyLifeTapRegionsPair ||
-        isShoppingTapRegionsPair ||
+        isShoppingTapRegionsPair || isTransportationTapRegionsPair ||
         (record.imageId === "school-life-basics" &&
             record.assetFile === "images/english/school-life-basics.png") ||
         (record.imageId === "inventory-management-and-stock-shortages-basics" &&
@@ -5835,6 +5842,7 @@ function getEnglishImageTTSRecord(assetFile) {
         const panelTapBounds = [];
         const panelTapRegions = [];
         const shoppingPanelUnitCounts = [0, 3, 2, 0];
+        const transportationPanelUnitCounts = [1, 1, 1, 1];
         for (let index = 0; index < orderedPanels.length; index += 1) {
             const panel = orderedPanels[index];
             const bounds = panel && panel.bounds;
@@ -5848,6 +5856,8 @@ function getEnglishImageTTSRecord(assetFile) {
                     (bounds.xPct + bounds.widthPct > 100 || bounds.yPct + bounds.heightPct > 100)) ||
                 !Array.isArray(panel.speechUnits) ||
                 (isShoppingTwoByTwoTapRegionsException && panel.speechUnits.length !== shoppingPanelUnitCounts[index]) ||
+                (isTransportationTwoByTwoTapRegionsException &&
+                    panel.speechUnits.length !== transportationPanelUnitCounts[index]) ||
                 (isP27TapBoundsInteraction && panel.panelId === 1 && !isP27NoSpeechPanel) ||
                 (isTapRegionsInteraction
                     ? (!hasTapRegions || hasTapBounds)
@@ -5917,6 +5927,7 @@ function getEnglishImageTTSRecord(assetFile) {
                 const anchor = unit && unit.speakerAnchor;
                 const anchorValues = anchor ? [anchor.xPct, anchor.yPct] : [];
                 if (!unit || !Number.isInteger(unit.unitId) || unitIds.has(unit.unitId) ||
+                    (isTransportationTwoByTwoTapRegionsException && unit.unitId !== 1) ||
                     unit.readingOrder !== unitIndex + 1 ||
                     typeof unit.speaker !== "string" || !unit.speaker.trim() ||
                     typeof unit.sourceText !== "string" || !getEnglishTTSUnitText(unit.sourceText) ||
@@ -5954,7 +5965,8 @@ function getEnglishImageTTSRecord(assetFile) {
                 }
                 for (const tapRegion of tapRegions) {
                     const regionBounds = tapRegion && tapRegion.bounds;
-                    const shoppingUnit = isShoppingTwoByTwoTapRegionsException && tapRegion
+                    const bubbleUnit = (isShoppingTwoByTwoTapRegionsException ||
+                        isTransportationTwoByTwoTapRegionsException) && tapRegion
                         ? panel.speechUnits.find(unit => unit && unit.unitId === tapRegion.unitId)
                         : null;
                     if (!hasExactKeys(tapRegion, ["unitId", "bounds"]) ||
@@ -5967,14 +5979,15 @@ function getEnglishImageTTSRecord(assetFile) {
                         regionBounds.xPct < bounds.xPct || regionBounds.yPct < bounds.yPct ||
                         regionBounds.xPct + regionBounds.widthPct > bounds.xPct + bounds.widthPct ||
                         regionBounds.yPct + regionBounds.heightPct > bounds.yPct + bounds.heightPct ||
-                        (isShoppingTwoByTwoTapRegionsException &&
-                            (!shoppingUnit ||
-                                regionBounds.xPct > shoppingUnit.bounds.xPct ||
-                                regionBounds.yPct > shoppingUnit.bounds.yPct ||
+                        ((isShoppingTwoByTwoTapRegionsException ||
+                            isTransportationTwoByTwoTapRegionsException) &&
+                            (!bubbleUnit ||
+                                regionBounds.xPct > bubbleUnit.bounds.xPct ||
+                                regionBounds.yPct > bubbleUnit.bounds.yPct ||
                                 regionBounds.xPct + regionBounds.widthPct <
-                                    shoppingUnit.bounds.xPct + shoppingUnit.bounds.widthPct ||
+                                    bubbleUnit.bounds.xPct + bubbleUnit.bounds.widthPct ||
                                 regionBounds.yPct + regionBounds.heightPct <
-                                    shoppingUnit.bounds.yPct + shoppingUnit.bounds.heightPct))) {
+                                    bubbleUnit.bounds.yPct + bubbleUnit.bounds.heightPct))) {
                         return null;
                     }
                     tapRegionUnitIds.add(tapRegion.unitId);
@@ -6250,10 +6263,25 @@ function createEnglishImageTTSDialogueSpeaker(wrapper, panel) {
     return button;
 }
 
+function isEnglishImageTTSBubbleTapRegionAssetPair(assetFile) {
+    let expectedImageId = null;
+    if (assetFile === "images/english/shopping-basics.png") {
+        expectedImageId = "shopping-basics";
+    } else if (assetFile === "images/english/transportation-travel-basics.png") {
+        expectedImageId = "transportation-travel-basics";
+    }
+    const record = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[assetFile]
+        : null;
+    return Boolean(expectedImageId && record &&
+        record.imageId === expectedImageId && record.assetFile === assetFile);
+}
+
 function createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel, tapRegion = null) {
     const isTapRegion = Boolean(tapRegion);
-    const isShoppingBubbleTapRegion = isTapRegion &&
-        image && image.getAttribute("src") === "images/english/shopping-basics.png";
+    const assetFile = image && image.getAttribute("src");
+    const isBubbleSpecificTapRegion = isTapRegion &&
+        isEnglishImageTTSBubbleTapRegionAssetPair(assetFile);
     const tapBounds = isTapRegion ? tapRegion.bounds : panel.tapBounds;
     const button = document.createElement("button");
     button.type = "button";
@@ -6261,7 +6289,7 @@ function createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel, tapReg
     button.textContent = "";
     button.hidden = true;
     button.setAttribute("aria-label", `第 ${panel.panelId} 格英文對話：${panel.speechUnits.map(unit => unit.sourceText).join("；")}，開啟朗讀選項`);
-    if (isShoppingBubbleTapRegion) {
+    if (isBubbleSpecificTapRegion) {
         const bubbleUnit = panel.speechUnits.find(unit => unit.unitId === tapRegion.unitId);
         if (bubbleUnit) {
             button.setAttribute("aria-label",
@@ -6279,8 +6307,8 @@ function createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel, tapReg
     button.style.height = `${tapBounds.heightPct}%`;
     button._englishImageTTSDialoguePanel = panel;
     button._englishImageTTSIsTapRegion = isTapRegion;
-    button._englishImageTTSShoppingBubble = Boolean(isShoppingBubbleTapRegion);
-    button._englishImageTTSDialogueUnitId = isShoppingBubbleTapRegion ? tapRegion.unitId : null;
+    button._englishImageTTSBubbleTapRegion = Boolean(isBubbleSpecificTapRegion);
+    button._englishImageTTSDialogueUnitId = isBubbleSpecificTapRegion ? tapRegion.unitId : null;
     button._englishImageTTSMenuImage = image;
     button.addEventListener("click", event => {
         event.stopPropagation();
@@ -6297,8 +6325,8 @@ function createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel, tapReg
                 closeEnglishImageTTSMenu();
                 return;
             }
-            if (button._englishImageTTSShoppingBubble ||
-                activeTrigger._englishImageTTSShoppingBubble) {
+            if (button._englishImageTTSBubbleTapRegion ||
+                activeTrigger._englishImageTTSBubbleTapRegion) {
                 openEnglishImageTTSMenu(button, panel);
                 return;
             }
@@ -7266,8 +7294,8 @@ function openEnglishImageTTSMenu(trigger, panel) {
     cancelEnglishImageTTSStorySequenceForDifferentTrigger(trigger);
     const dialogueUnits = Array.isArray(panel.speechUnits) ? panel.speechUnits : null;
     const isTapRegionDialogue = Boolean(trigger._englishImageTTSIsTapRegion);
-    const isShoppingBubbleTrigger = trigger._englishImageTTSShoppingBubble === true;
-    const selectedDialogueUnit = isShoppingBubbleTrigger && dialogueUnits
+    const isBubbleSpecificTapRegionTrigger = trigger._englishImageTTSBubbleTapRegion === true;
+    const selectedDialogueUnit = isBubbleSpecificTapRegionTrigger && dialogueUnits
         ? dialogueUnits.find(unit => unit && unit.unitId === trigger._englishImageTTSDialogueUnitId)
         : null;
     const dialogueSentences = dialogueUnits
@@ -7286,8 +7314,8 @@ function openEnglishImageTTSMenu(trigger, panel) {
         setEnglishTTSStatus("這格圖片的英文資料不完整，暫時無法朗讀。");
         return;
     }
-    if (isShoppingBubbleTrigger && !selectedDialogueUnit) {
-        setEnglishTTSStatus("這個購物對話泡泡的朗讀資料不完整，未顯示錯誤選項。");
+    if (isBubbleSpecificTapRegionTrigger && !selectedDialogueUnit) {
+        setEnglishTTSStatus("這個對話泡泡的朗讀資料不完整，未顯示錯誤選項。");
         return;
     }
 
