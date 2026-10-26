@@ -5556,6 +5556,155 @@ function enhanceEnglishCollocationsForTTS(answerRoot) {
     return added;
 }
 
+function getEnglishWeatherBasicsCustomTTSRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/weather-basics.png";
+    const expectedImageId = "weather-basics";
+    const expectedBounds = [
+        { xPct: 0.6, yPct: 0.4, widthPct: 98.8, heightPct: 58.2 },
+        { xPct: 0.6, yPct: 59.0, widthPct: 61.1, heightPct: 30.2 },
+        { xPct: 62.1, yPct: 59.0, widthPct: 37.1, heightPct: 30.2 },
+        { xPct: 0.6, yPct: 90.0, widthPct: 98.8, heightPct: 9.5 }
+    ];
+    const expectedUnits = [
+        [],
+        [
+            {
+                unitId: 1,
+                speaker: "Charlie Brown",
+                sourceText: "What's the weather like today?",
+                bounds: { xPct: 32.1, yPct: 60.7, widthPct: 13.6, heightPct: 6.1 },
+                speakerAnchor: { xPct: 38.7, yPct: 76.0 },
+                tapRegion: { xPct: 31.8, yPct: 60.2, widthPct: 14.3, heightPct: 10.0 }
+            },
+            {
+                unitId: 2,
+                speaker: "Snoopy",
+                sourceText: "It's sunny.",
+                bounds: { xPct: 46.5, yPct: 67.7, widthPct: 12.8, heightPct: 5.7 },
+                speakerAnchor: { xPct: 45.2, yPct: 75.7 },
+                tapRegion: { xPct: 46.2, yPct: 67.4, widthPct: 13.5, heightPct: 7.6 }
+            }
+        ],
+        [],
+        []
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const anchorKeys = ["xPct", "yPct"];
+    const matchesValues = (value, expected, keys) =>
+        hasExactKeys(value, keys) && keys.every(key => value[key] === expected[key]);
+    const isValidBounds = bounds =>
+        hasExactKeys(bounds, boundsKeys) &&
+        [bounds.xPct, bounds.yPct, bounds.widthPct, bounds.heightPct].every(value =>
+            Number.isFinite(value) && value >= 0 && value <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 &&
+        bounds.yPct + bounds.heightPct <= 100;
+    const matchesBounds = (actual, expected) =>
+        isValidBounds(actual) &&
+        ["xPct", "yPct", "widthPct", "heightPct"].every(key => actual[key] === expected[key]);
+    const containsBounds = (outer, inner) =>
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) =>
+        left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (assetFile !== expectedAssetFile ||
+        !record || record !== imageTTSData[expectedAssetFile] ||
+        record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        record.contentType !== "dialogue" || record.layout !== "custom-weather-4-panel" ||
+        record.panelInteraction !== "tap-regions-to-open-menu" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !hasExactKeys(record, [
+            "imageId", "assetFile", "contentType", "layout", "panelInteraction",
+            "transcriptStatus", "transcriptReviewMethod", "coordinateStatus",
+            "overlayRuntimeStatus", "panels"
+        ]) ||
+        !Array.isArray(record.panels) || record.panels.length !== 4) {
+        return null;
+    }
+
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (candidate.imageId === expectedImageId ||
+            candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const panels = record.panels.slice().sort((left, right) =>
+        left && right ? left.readingOrder - right.readingOrder : 0);
+    const panelKeys = ["panelId", "readingOrder", "bounds", "speechUnits", "tapRegions"];
+    const unitKeys = [
+        "unitId", "readingOrder", "speaker", "sourceText", "ttsText", "bounds", "speakerAnchor"
+    ];
+
+    for (let index = 0; index < panels.length; index += 1) {
+        const panel = panels[index];
+        const expectedPanelUnits = expectedUnits[index];
+        const expectedUnitCount = expectedPanelUnits.length;
+        if (!hasExactKeys(panel, panelKeys) ||
+            panel.panelId !== index + 1 || panel.readingOrder !== index + 1 ||
+            !matchesBounds(panel.bounds, expectedBounds[index]) ||
+            !Array.isArray(panel.speechUnits) || panel.speechUnits.length !== expectedUnitCount ||
+            !Array.isArray(panel.tapRegions) || panel.tapRegions.length !== expectedUnitCount) {
+            return null;
+        }
+
+        for (let unitIndex = 0; unitIndex < expectedUnitCount; unitIndex += 1) {
+            const unit = panel.speechUnits[unitIndex];
+            const expectedUnit = expectedPanelUnits[unitIndex];
+            const anchor = unit && unit.speakerAnchor;
+            const region = panel.tapRegions[unitIndex];
+            const regionBounds = region && region.bounds;
+            const expectedRegion = expectedUnit.tapRegion;
+            if (!hasExactKeys(unit, unitKeys) ||
+                unit.unitId !== expectedUnit.unitId || unit.readingOrder !== unitIndex + 1 ||
+                unit.speaker !== expectedUnit.speaker ||
+                unit.sourceText !== expectedUnit.sourceText || unit.ttsText !== expectedUnit.sourceText ||
+                !getEnglishTTSUnitText(unit.sourceText) || !getEnglishTTSUnitText(unit.ttsText) ||
+                !matchesBounds(unit.bounds, expectedUnit.bounds) ||
+                !containsBounds(panel.bounds, unit.bounds) ||
+                !matchesValues(anchor, expectedUnit.speakerAnchor, anchorKeys) ||
+                anchor.xPct < panel.bounds.xPct || anchor.xPct > panel.bounds.xPct + panel.bounds.widthPct ||
+                anchor.yPct < panel.bounds.yPct || anchor.yPct > panel.bounds.yPct + panel.bounds.heightPct ||
+                !hasExactKeys(region, ["unitId", "bounds"]) ||
+                region.unitId !== unit.unitId ||
+                !matchesBounds(regionBounds, expectedRegion) ||
+                !containsBounds(panel.bounds, regionBounds) ||
+                !containsBounds(regionBounds, unit.bounds)) {
+                return null;
+            }
+            for (let previous = 0; previous < unitIndex; previous += 1) {
+                if (overlaps(unit.bounds, panel.speechUnits[previous].bounds) ||
+                    overlaps(regionBounds, panel.tapRegions[previous].bounds)) {
+                    return null;
+                }
+            }
+        }
+    }
+
+    for (let leftIndex = 0; leftIndex < panels.length; leftIndex += 1) {
+        for (let rightIndex = leftIndex + 1; rightIndex < panels.length; rightIndex += 1) {
+            if (overlaps(panels[leftIndex].bounds, panels[rightIndex].bounds)) {
+                return null;
+            }
+        }
+    }
+
+    return { ...record, panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -5567,6 +5716,21 @@ function getEnglishImageTTSRecord(assetFile) {
         record.transcriptStatus !== "verified" ||
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
+        return null;
+    }
+
+    const isWeatherBasicsIdentity =
+        record.imageId === "weather-basics" ||
+        record.assetFile === "images/english/weather-basics.png";
+    const isWeatherBasicsCustomLayout =
+        record.imageId === "weather-basics" &&
+        record.assetFile === "images/english/weather-basics.png" &&
+        assetFile === "images/english/weather-basics.png" &&
+        record.contentType === "dialogue" &&
+        record.layout === "custom-weather-4-panel" &&
+        record.panelInteraction === "tap-regions-to-open-menu";
+    if ((isWeatherBasicsIdentity || record.layout === "custom-weather-4-panel") &&
+        !isWeatherBasicsCustomLayout) {
         return null;
     }
 
@@ -5704,7 +5868,9 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === "food-drinks-basics" &&
             record.assetFile === "images/english/food-drinks-basics.png") ||
         (record.imageId === "weather-natural-phenomena-basics" &&
-            record.assetFile === "images/english/weather-natural-phenomena-basics.png");
+            record.assetFile === "images/english/weather-natural-phenomena-basics.png") ||
+        (record.imageId === "weather-basics" &&
+            record.assetFile === "images/english/weather-basics.png");
     if (hasPanelInteraction && record.panelInteraction === "tap-to-open-menu" &&
         (!allowedPanelInteractionAsset ||
             record.contentType !== "dialogue" || record.layout !== "2x2")) {
@@ -5715,7 +5881,7 @@ function getEnglishImageTTSRecord(assetFile) {
             record.contentType !== "dialogue" ||
             (isDailyLifeTapRegionsPair
                 ? !isDailyLifeSixPanelException
-                : record.layout !== "2x2"))) {
+                : (record.layout !== "2x2" && !isWeatherBasicsCustomLayout)))) {
         return null;
     }
     if (hasPanelInteraction && record.panelInteraction !== "tap-to-open-menu" &&
@@ -5838,6 +6004,9 @@ function getEnglishImageTTSRecord(assetFile) {
     const orderedPanels = record.panels.slice().sort((left, right) => left.readingOrder - right.readingOrder);
 
     if (record.contentType === "dialogue") {
+        if (isWeatherBasicsCustomLayout) {
+            return getEnglishWeatherBasicsCustomTTSRecord(record, assetFile);
+        }
         if (record.layout !== "2x2" || orderedPanels.length !== 4) {
             return null;
         }
@@ -6296,7 +6465,9 @@ function createEnglishImageTTSDialogueSpeaker(wrapper, panel) {
 
 function isEnglishImageTTSBubbleTapRegionAssetPair(assetFile) {
     let expectedImageId = null;
-    if (assetFile === "images/english/shopping-basics.png") {
+    if (assetFile === "images/english/weather-basics.png") {
+        expectedImageId = "weather-basics";
+    } else if (assetFile === "images/english/shopping-basics.png") {
         expectedImageId = "shopping-basics";
     } else if (assetFile === "images/english/transportation-travel-basics.png") {
         expectedImageId = "transportation-travel-basics";

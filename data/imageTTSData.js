@@ -14653,5 +14653,68 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/weather-basics.png": {
+        imageId: "weather-basics",
+        assetFile: "images/english/weather-basics.png",
+        contentType: "dialogue",
+        layout: "custom-weather-4-panel",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.6, yPct: 0.4, widthPct: 98.8, heightPct: 58.2 },
+                speechUnits: [],
+                tapRegions: []
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 0.6, yPct: 59.0, widthPct: 61.1, heightPct: 30.2 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "What's the weather like today?",
+                        ttsText: "What's the weather like today?",
+                        bounds: { xPct: 32.1, yPct: 60.7, widthPct: 13.6, heightPct: 6.1 },
+                        speakerAnchor: { xPct: 38.7, yPct: 76.0 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Snoopy",
+                        sourceText: "It's sunny.",
+                        ttsText: "It's sunny.",
+                        bounds: { xPct: 46.5, yPct: 67.7, widthPct: 12.8, heightPct: 5.7 },
+                        speakerAnchor: { xPct: 45.2, yPct: 75.7 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 31.8, yPct: 60.2, widthPct: 14.3, heightPct: 10.0 } },
+                    { unitId: 2, bounds: { xPct: 46.2, yPct: 67.4, widthPct: 13.5, heightPct: 7.6 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 62.1, yPct: 59.0, widthPct: 37.1, heightPct: 30.2 },
+                speechUnits: [],
+                tapRegions: []
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 0.6, yPct: 90.0, widthPct: 98.8, heightPct: 9.5 },
+                speechUnits: [],
+                tapRegions: []
+            }
+        ]
     }
 };
