@@ -5705,6 +5705,155 @@ function getEnglishWeatherBasicsCustomTTSRecord(record, assetFile) {
     return { ...record, panels };
 }
 
+function getEnglishPlacesDirectionsCustomTTSRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/places-directions-basics.png";
+    const expectedImageId = "places-directions-basics";
+    const expectedPanels = [
+        {
+            bounds: { xPct: 1.2, yPct: 17.8, widthPct: 24.9, heightPct: 61.4 },
+            units: []
+        },
+        {
+            bounds: { xPct: 27.1, yPct: 17.8, widthPct: 37.5, heightPct: 61.4 },
+            units: [
+                {
+                    unitId: 1,
+                    speaker: "Snoopy",
+                    sourceText: "Let’s go to the park!",
+                    bounds: { xPct: 35.0, yPct: 24.8, widthPct: 11.5, heightPct: 11.0 },
+                    speakerAnchor: { xPct: 38.2, yPct: 52.5 },
+                    tapRegion: { xPct: 33.0, yPct: 22.0, widthPct: 15.0, heightPct: 18.0 }
+                }
+            ]
+        },
+        {
+            bounds: { xPct: 65.8, yPct: 17.8, widthPct: 33.0, heightPct: 61.4 },
+            units: [
+                {
+                    unitId: 1,
+                    speaker: "Unknown",
+                    sourceText: "Go straight, then turn right.",
+                    bounds: { xPct: 86.5, yPct: 56.3, widthPct: 11.7, heightPct: 12.2 },
+                    speakerAnchor: { xPct: 94.5, yPct: 75.0 },
+                    tapRegion: { xPct: 86.1, yPct: 56.0, widthPct: 12.6, heightPct: 12.7 }
+                }
+            ]
+        },
+        {
+            bounds: { xPct: 1.2, yPct: 80.4, widthPct: 56.7, heightPct: 18.0 },
+            units: []
+        },
+        {
+            bounds: { xPct: 58.9, yPct: 80.9, widthPct: 39.9, heightPct: 17.5 },
+            units: []
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const anchorKeys = ["xPct", "yPct"];
+    const matchesValues = (value, expected, keys) =>
+        hasExactKeys(value, keys) && keys.every(key => value[key] === expected[key]);
+    const isValidBounds = bounds => hasExactKeys(bounds, boundsKeys) &&
+        [bounds.xPct, bounds.yPct, bounds.widthPct, bounds.heightPct].every(value =>
+            Number.isFinite(value) && value >= 0 && value <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const containsBounds = (outer, inner) =>
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) =>
+        left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (assetFile !== expectedAssetFile || !record ||
+        record !== imageTTSData[expectedAssetFile] ||
+        record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        record.contentType !== "dialogue" ||
+        record.layout !== "custom-places-directions-5-panel" ||
+        record.panelInteraction !== "tap-regions-to-open-menu" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !hasExactKeys(record, [
+            "imageId", "assetFile", "contentType", "layout", "panelInteraction",
+            "transcriptStatus", "transcriptReviewMethod", "coordinateStatus",
+            "overlayRuntimeStatus", "panels"
+        ]) || !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (candidate.imageId === expectedImageId ||
+            candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const panels = record.panels.slice().sort((left, right) =>
+        left && right ? left.readingOrder - right.readingOrder : 0);
+    const panelKeys = ["panelId", "readingOrder", "bounds", "speechUnits", "tapRegions"];
+    const unitKeys = [
+        "unitId", "readingOrder", "speaker", "sourceText", "ttsText", "bounds", "speakerAnchor"
+    ];
+    for (let index = 0; index < expectedPanels.length; index += 1) {
+        const panel = panels[index];
+        const expectedPanel = expectedPanels[index];
+        if (!hasExactKeys(panel, panelKeys) || panel.panelId !== index + 1 ||
+            panel.readingOrder !== index + 1 || !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.speechUnits) || panel.speechUnits.length !== expectedPanel.units.length ||
+            !Array.isArray(panel.tapRegions) || panel.tapRegions.length !== expectedPanel.units.length) {
+            return null;
+        }
+
+        for (let unitIndex = 0; unitIndex < expectedPanel.units.length; unitIndex += 1) {
+            const unit = panel.speechUnits[unitIndex];
+            const expectedUnit = expectedPanel.units[unitIndex];
+            const anchor = unit && unit.speakerAnchor;
+            const region = panel.tapRegions[unitIndex];
+            const regionBounds = region && region.bounds;
+            if (!hasExactKeys(unit, unitKeys) || unit.unitId !== expectedUnit.unitId ||
+                unit.readingOrder !== unitIndex + 1 || unit.speaker !== expectedUnit.speaker ||
+                unit.sourceText !== expectedUnit.sourceText || unit.ttsText !== expectedUnit.sourceText ||
+                !getEnglishTTSUnitText(unit.sourceText) || !getEnglishTTSUnitText(unit.ttsText) ||
+                !matchesBounds(unit.bounds, expectedUnit.bounds) ||
+                !containsBounds(panel.bounds, unit.bounds) ||
+                !matchesValues(anchor, expectedUnit.speakerAnchor, anchorKeys) ||
+                anchor.xPct < panel.bounds.xPct ||
+                anchor.xPct > panel.bounds.xPct + panel.bounds.widthPct ||
+                anchor.yPct < panel.bounds.yPct ||
+                anchor.yPct > panel.bounds.yPct + panel.bounds.heightPct ||
+                !hasExactKeys(region, ["unitId", "bounds"]) || region.unitId !== unit.unitId ||
+                !matchesBounds(regionBounds, expectedUnit.tapRegion) ||
+                !containsBounds(panel.bounds, regionBounds) || !containsBounds(regionBounds, unit.bounds) ||
+                (anchor.xPct >= unit.bounds.xPct &&
+                    anchor.xPct <= unit.bounds.xPct + unit.bounds.widthPct &&
+                    anchor.yPct >= unit.bounds.yPct &&
+                    anchor.yPct <= unit.bounds.yPct + unit.bounds.heightPct)) {
+                return null;
+            }
+        }
+    }
+
+    for (let leftIndex = 0; leftIndex < panels.length; leftIndex += 1) {
+        for (let rightIndex = leftIndex + 1; rightIndex < panels.length; rightIndex += 1) {
+            if (overlaps(panels[leftIndex].bounds, panels[rightIndex].bounds)) {
+                return null;
+            }
+        }
+    }
+    return { ...record, panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -5717,6 +5866,24 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isPlacesDirectionsIdentity =
+        record.imageId === "places-directions-basics" ||
+        record.assetFile === "images/english/places-directions-basics.png";
+    const isPlacesDirectionsCustomLayout =
+        record.imageId === "places-directions-basics" &&
+        record.assetFile === "images/english/places-directions-basics.png" &&
+        assetFile === "images/english/places-directions-basics.png" &&
+        record.contentType === "dialogue" &&
+        record.layout === "custom-places-directions-5-panel" &&
+        record.panelInteraction === "tap-regions-to-open-menu";
+    if ((isPlacesDirectionsIdentity || record.layout === "custom-places-directions-5-panel") &&
+        !isPlacesDirectionsCustomLayout) {
+        return null;
+    }
+    if (isPlacesDirectionsCustomLayout) {
+        return getEnglishPlacesDirectionsCustomTTSRecord(record, assetFile);
     }
 
     const isWeatherBasicsIdentity =
@@ -6469,6 +6636,8 @@ function isEnglishImageTTSBubbleTapRegionAssetPair(assetFile) {
         expectedImageId = "weather-basics";
     } else if (assetFile === "images/english/shopping-basics.png") {
         expectedImageId = "shopping-basics";
+    } else if (assetFile === "images/english/places-directions-basics.png") {
+        expectedImageId = "places-directions-basics";
     } else if (assetFile === "images/english/transportation-travel-basics.png") {
         expectedImageId = "transportation-travel-basics";
     } else if (assetFile === "images/english/time-date-basics.png") {
@@ -6520,6 +6689,9 @@ function createEnglishImageTTSDialoguePanelHitArea(wrapper, image, panel, tapReg
         event.stopPropagation();
         if (button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
             return;
+        }
+        if (assetFile === "images/english/places-directions-basics.png") {
+            button._englishImageTTSMenuImage = image;
         }
         const activeTrigger = englishImageTTSOverlayState.activeTrigger;
         const activeMenu = englishImageTTSOverlayState.menu;
@@ -6594,6 +6766,44 @@ const ENGLISH_BUSINESS_EMAIL_BUBBLE_TEXT = Object.freeze({
     3: "Thank you for your prompt response.",
     4: "I look forward to hearing from you."
 });
+
+const ENGLISH_PLACES_DIRECTIONS_BUBBLE_ASSET_FILE =
+    "images/english/places-directions-basics.png";
+const ENGLISH_PLACES_DIRECTIONS_BUBBLE_IMAGE_ID = "places-directions-basics";
+
+function getEnglishPlacesDirectionsBubbleSequence(trigger, panel) {
+    const wrapper = trigger && typeof trigger.closest === "function"
+        ? trigger.closest(".image-tts-overlay-wrapper")
+        : null;
+    const image = trigger && trigger._englishImageTTSMenuImage;
+    const assetFile = wrapper && wrapper.dataset.imageTtsAssetFile;
+    const record = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_PLACES_DIRECTIONS_BUBBLE_ASSET_FILE]
+        : null;
+    const validatedRecord = getEnglishPlacesDirectionsCustomTTSRecord(record, assetFile);
+    if (!trigger || !panel || !wrapper || !image ||
+        assetFile !== ENGLISH_PLACES_DIRECTIONS_BUBBLE_ASSET_FILE ||
+        image.getAttribute("src") !== ENGLISH_PLACES_DIRECTIONS_BUBBLE_ASSET_FILE ||
+        trigger._englishImageTTSBubbleTapRegion !== true ||
+        trigger._englishImageTTSDialoguePanel !== panel ||
+        typeof trigger.closest !== "function" ||
+        trigger.closest(".image-tts-overlay-wrapper") !== wrapper ||
+        !validatedRecord || validatedRecord.imageId !== ENGLISH_PLACES_DIRECTIONS_BUBBLE_IMAGE_ID ||
+        (panel.panelId !== 2 && panel.panelId !== 3) ||
+        validatedRecord.panels[panel.panelId - 1] !== panel ||
+        trigger._englishImageTTSDialogueUnitId !== 1) {
+        return null;
+    }
+
+    const units = validatedRecord.panels.slice(1, 3).flatMap(candidate => candidate.speechUnits);
+    return units.length === 2 &&
+        units[0].sourceText === "Let’s go to the park!" &&
+        units[0].ttsText === units[0].sourceText &&
+        units[1].sourceText === "Go straight, then turn right." &&
+        units[1].ttsText === units[1].sourceText
+        ? units
+        : null;
+}
 
 function getEnglishBusinessEmailBubblePanels(record, assetFile) {
     if (assetFile !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE ||
@@ -7501,17 +7711,21 @@ function openEnglishImageTTSMenu(trigger, panel) {
     const dialogueUnits = Array.isArray(panel.speechUnits) ? panel.speechUnits : null;
     const isTapRegionDialogue = Boolean(trigger._englishImageTTSIsTapRegion);
     const isBubbleSpecificTapRegionTrigger = trigger._englishImageTTSBubbleTapRegion === true;
+    const placesDirectionsSequence = isBubbleSpecificTapRegionTrigger
+        ? getEnglishPlacesDirectionsBubbleSequence(trigger, panel)
+        : null;
+    const menuDialogueUnits = placesDirectionsSequence || dialogueUnits;
     const selectedDialogueUnit = isBubbleSpecificTapRegionTrigger && dialogueUnits
         ? dialogueUnits.find(unit => unit && unit.unitId === trigger._englishImageTTSDialogueUnitId)
         : null;
-    const dialogueSentences = dialogueUnits
-        ? dialogueUnits.map(unit => unit && typeof unit.ttsText === "string"
+    const dialogueSentences = menuDialogueUnits
+        ? menuDialogueUnits.map(unit => unit && typeof unit.ttsText === "string"
             ? getEnglishTTSUnitText(unit.ttsText)
             : null)
         : null;
     const content = dialogueUnits
         ? (dialogueSentences.length && dialogueSentences.every(Boolean) &&
-            dialogueUnits.every(unit => unit && typeof unit.sourceText === "string" &&
+            menuDialogueUnits.every(unit => unit && typeof unit.sourceText === "string" &&
                 getEnglishTTSUnitText(unit.sourceText))
             ? { sentences: dialogueSentences }
             : null)
@@ -7534,7 +7748,9 @@ function openEnglishImageTTSMenu(trigger, panel) {
     menu.classList.toggle("is-tap-regions-dialogue", isTapRegionDialogue);
     trigger.setAttribute("aria-expanded", "true");
     menu.setAttribute("aria-label", dialogueUnits
-        ? "第 " + panel.panelId + " 格英文對話朗讀選項"
+        ? (placesDirectionsSequence
+            ? "Places & Directions 第 2 至第 3 格英文對話朗讀選項"
+            : "第 " + panel.panelId + " 格英文對話朗讀選項")
         : `第 ${panel.panelId} 格英文朗讀選項`);
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
@@ -7543,10 +7759,19 @@ function openEnglishImageTTSMenu(trigger, panel) {
     const wholePanelButton = createEnglishImageTTSMenuButton(
         "🔊 朗讀整段",
         dialogueUnits
-            ? "依序朗讀第 " + panel.panelId + " 格完整英文對話"
+            ? (placesDirectionsSequence
+                ? "依序朗讀 Places & Directions 第 2 格至第 3 格完整英文對話"
+                : "依序朗讀第 " + panel.panelId + " 格完整英文對話")
             : `朗讀第 ${panel.panelId} 格完整英文郵件`,
         () => dialogueUnits
-            ? speakEnglishImageTTSDialogueSequence(trigger, panel)
+            ? (placesDirectionsSequence
+                ? speakEnglishImageTTSSequence(
+                    trigger,
+                    dialogueSentences,
+                    "Places & Directions 對話已朗讀完成。",
+                    "Places & Directions 對話朗讀中，句間停頓 0.5 秒。"
+                )
+                : speakEnglishImageTTSDialogueSequence(trigger, panel))
             : speakEnglishImageTTSFromPanel(trigger, content.fullText)
     );
     const sentenceToggle = createEnglishImageTTSMenuButton(
@@ -7572,7 +7797,7 @@ function openEnglishImageTTSMenu(trigger, panel) {
     sentenceList.className = "english-image-tts-sentences";
     sentenceList.hidden = true;
     content.sentences.forEach((sentence, index) => {
-        const unit = dialogueUnits ? dialogueUnits[index] : null;
+        const unit = menuDialogueUnits ? menuDialogueUnits[index] : null;
         sentenceList.appendChild(createEnglishImageTTSMenuButton(
             dialogueUnits ? "🔊 " + unit.sourceText : `🔊 第 ${index + 1} 句`,
             dialogueUnits

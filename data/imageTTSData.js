@@ -14716,5 +14716,77 @@ const imageTTSData = {
                 tapRegions: []
             }
         ]
+    },
+    "images/english/places-directions-basics.png": {
+        imageId: "places-directions-basics",
+        assetFile: "images/english/places-directions-basics.png",
+        contentType: "dialogue",
+        layout: "custom-places-directions-5-panel",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 1.2, yPct: 17.8, widthPct: 24.9, heightPct: 61.4 },
+                speechUnits: [],
+                tapRegions: []
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 27.1, yPct: 17.8, widthPct: 37.5, heightPct: 61.4 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "Let’s go to the park!",
+                        ttsText: "Let’s go to the park!",
+                        bounds: { xPct: 35.0, yPct: 24.8, widthPct: 11.5, heightPct: 11.0 },
+                        speakerAnchor: { xPct: 38.2, yPct: 52.5 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 33.0, yPct: 22.0, widthPct: 15.0, heightPct: 18.0 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 65.8, yPct: 17.8, widthPct: 33.0, heightPct: 61.4 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Unknown",
+                        sourceText: "Go straight, then turn right.",
+                        ttsText: "Go straight, then turn right.",
+                        bounds: { xPct: 86.5, yPct: 56.3, widthPct: 11.7, heightPct: 12.2 },
+                        speakerAnchor: { xPct: 94.5, yPct: 75.0 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 86.1, yPct: 56.0, widthPct: 12.6, heightPct: 12.7 } }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 1.2, yPct: 80.4, widthPct: 56.7, heightPct: 18.0 },
+                speechUnits: [],
+                tapRegions: []
+            },
+            {
+                panelId: 5,
+                readingOrder: 5,
+                bounds: { xPct: 58.9, yPct: 80.9, widthPct: 39.9, heightPct: 17.5 },
+                speechUnits: [],
+                tapRegions: []
+            }
+        ]
     }
 };
