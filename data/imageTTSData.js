@@ -14479,5 +14479,92 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/time-date-basics.png": {
+        imageId: "time-date-basics",
+        assetFile: "images/english/time-date-basics.png",
+        contentType: "dialogue",
+        layout: "2x2",
+        panelInteraction: "tap-regions-to-open-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.8, yPct: 17.8, widthPct: 48.5, heightPct: 36.1 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "It’s 3:15.",
+                        ttsText: "It’s 3:15.",
+                        bounds: { xPct: 11.2, yPct: 25.7, widthPct: 10.1, heightPct: 11.6 },
+                        speakerAnchor: { xPct: 8.4, yPct: 42.5 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 10.8, yPct: 25.3, widthPct: 10.9, heightPct: 12.4 } }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.6, yPct: 17.8, widthPct: 48.6, heightPct: 36.1 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Charlie Brown",
+                        sourceText: "It’s May 16th.",
+                        ttsText: "It’s May 16th.",
+                        bounds: { xPct: 61.7, yPct: 25.8, widthPct: 15.8, heightPct: 11.7 },
+                        speakerAnchor: { xPct: 58.4, yPct: 42.1 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 61.3, yPct: 25.4, widthPct: 16.6, heightPct: 12.5 } }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.8, yPct: 55.2, widthPct: 48.5, heightPct: 36.0 },
+                speechUnits: [],
+                tapRegions: []
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.6, yPct: 55.2, widthPct: 48.6, heightPct: 36.0 },
+                speechUnits: [
+                    {
+                        unitId: 1,
+                        readingOrder: 1,
+                        speaker: "Snoopy",
+                        sourceText: "When is your birthday?",
+                        ttsText: "When is your birthday?",
+                        bounds: { xPct: 51.8, yPct: 65.7, widthPct: 12.8, heightPct: 12.2 },
+                        speakerAnchor: { xPct: 53.2, yPct: 83.0 }
+                    },
+                    {
+                        unitId: 2,
+                        readingOrder: 2,
+                        speaker: "Charlie Brown",
+                        sourceText: "It’s on August 12th.",
+                        ttsText: "It’s on August 12th.",
+                        bounds: { xPct: 65.1, yPct: 66.1, widthPct: 11.1, heightPct: 10.8 },
+                        speakerAnchor: { xPct: 73.0, yPct: 83.0 }
+                    }
+                ],
+                tapRegions: [
+                    { unitId: 1, bounds: { xPct: 51.5, yPct: 65.4, widthPct: 13.1, heightPct: 12.8 } },
+                    { unitId: 2, bounds: { xPct: 64.9, yPct: 65.8, widthPct: 11.6, heightPct: 11.3 } }
+                ]
+            }
+        ]
     }
 };

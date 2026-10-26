@@ -5630,6 +5630,13 @@ function getEnglishImageTTSRecord(assetFile) {
     const isTransportationTapRegionsPair =
         record.imageId === "transportation-travel-basics" &&
         record.assetFile === "images/english/transportation-travel-basics.png";
+    const isTimeDateTapRegionsPair =
+        record.imageId === "time-date-basics" &&
+        record.assetFile === "images/english/time-date-basics.png";
+    const isTimeDateTwoByTwoTapRegionsException = isTimeDateTapRegionsPair &&
+        record.contentType === "dialogue" &&
+        record.panelInteraction === "tap-regions-to-open-menu" &&
+        record.layout === "2x2";
     const isTransportationTwoByTwoTapRegionsException = isTransportationTapRegionsPair &&
         record.contentType === "dialogue" &&
         record.panelInteraction === "tap-regions-to-open-menu" &&
@@ -5671,7 +5678,7 @@ function getEnglishImageTTSRecord(assetFile) {
     const isAllowedTapRegionsAssetPair =
         isP16TapRegionsFuturePair || isP17TapRegionsPair || isP24TapRegionsPair ||
         isP25TapRegionsPair || isP26TapRegionsPair || isP29TapRegionsPair || isP35TapRegionsPair || isDailyLifeTapRegionsPair ||
-        isShoppingTapRegionsPair || isTransportationTapRegionsPair ||
+        isShoppingTapRegionsPair || isTransportationTapRegionsPair || isTimeDateTapRegionsPair ||
         (record.imageId === "school-life-basics" &&
             record.assetFile === "images/english/school-life-basics.png") ||
         (record.imageId === "inventory-management-and-stock-shortages-basics" &&
@@ -5843,6 +5850,7 @@ function getEnglishImageTTSRecord(assetFile) {
         const panelTapRegions = [];
         const shoppingPanelUnitCounts = [0, 3, 2, 0];
         const transportationPanelUnitCounts = [1, 1, 1, 1];
+        const timeDatePanelUnitCounts = [1, 1, 0, 2];
         for (let index = 0; index < orderedPanels.length; index += 1) {
             const panel = orderedPanels[index];
             const bounds = panel && panel.bounds;
@@ -5858,6 +5866,8 @@ function getEnglishImageTTSRecord(assetFile) {
                 (isShoppingTwoByTwoTapRegionsException && panel.speechUnits.length !== shoppingPanelUnitCounts[index]) ||
                 (isTransportationTwoByTwoTapRegionsException &&
                     panel.speechUnits.length !== transportationPanelUnitCounts[index]) ||
+                (isTimeDateTwoByTwoTapRegionsException &&
+                    panel.speechUnits.length !== timeDatePanelUnitCounts[index]) ||
                 (isP27TapBoundsInteraction && panel.panelId === 1 && !isP27NoSpeechPanel) ||
                 (isTapRegionsInteraction
                     ? (!hasTapRegions || hasTapBounds)
@@ -5867,6 +5877,8 @@ function getEnglishImageTTSRecord(assetFile) {
                         panel.panelId === 2 && Array.isArray(panel.tapRegions) && panel.tapRegions.length === 0) ||
                         (isShoppingTwoByTwoTapRegionsException &&
                             (panel.panelId === 1 || panel.panelId === 4) &&
+                            Array.isArray(panel.tapRegions) && panel.tapRegions.length === 0) ||
+                        (isTimeDateTwoByTwoTapRegionsException && panel.panelId === 3 &&
                             Array.isArray(panel.tapRegions) && panel.tapRegions.length === 0)))) {
                 return null;
             }
@@ -5928,6 +5940,7 @@ function getEnglishImageTTSRecord(assetFile) {
                 const anchorValues = anchor ? [anchor.xPct, anchor.yPct] : [];
                 if (!unit || !Number.isInteger(unit.unitId) || unitIds.has(unit.unitId) ||
                     (isTransportationTwoByTwoTapRegionsException && unit.unitId !== 1) ||
+                    (isTimeDateTwoByTwoTapRegionsException && unit.unitId !== unitIndex + 1) ||
                     unit.readingOrder !== unitIndex + 1 ||
                     typeof unit.speaker !== "string" || !unit.speaker.trim() ||
                     typeof unit.sourceText !== "string" || !getEnglishTTSUnitText(unit.sourceText) ||
@@ -5966,7 +5979,8 @@ function getEnglishImageTTSRecord(assetFile) {
                 for (const tapRegion of tapRegions) {
                     const regionBounds = tapRegion && tapRegion.bounds;
                     const bubbleUnit = (isShoppingTwoByTwoTapRegionsException ||
-                        isTransportationTwoByTwoTapRegionsException) && tapRegion
+                        isTransportationTwoByTwoTapRegionsException ||
+                        isTimeDateTwoByTwoTapRegionsException) && tapRegion
                         ? panel.speechUnits.find(unit => unit && unit.unitId === tapRegion.unitId)
                         : null;
                     if (!hasExactKeys(tapRegion, ["unitId", "bounds"]) ||
@@ -5980,7 +5994,8 @@ function getEnglishImageTTSRecord(assetFile) {
                         regionBounds.xPct + regionBounds.widthPct > bounds.xPct + bounds.widthPct ||
                         regionBounds.yPct + regionBounds.heightPct > bounds.yPct + bounds.heightPct ||
                         ((isShoppingTwoByTwoTapRegionsException ||
-                            isTransportationTwoByTwoTapRegionsException) &&
+                            isTransportationTwoByTwoTapRegionsException ||
+                            isTimeDateTwoByTwoTapRegionsException) &&
                             (!bubbleUnit ||
                                 regionBounds.xPct > bubbleUnit.bounds.xPct ||
                                 regionBounds.yPct > bubbleUnit.bounds.yPct ||
@@ -6269,6 +6284,8 @@ function isEnglishImageTTSBubbleTapRegionAssetPair(assetFile) {
         expectedImageId = "shopping-basics";
     } else if (assetFile === "images/english/transportation-travel-basics.png") {
         expectedImageId = "transportation-travel-basics";
+    } else if (assetFile === "images/english/time-date-basics.png") {
+        expectedImageId = "time-date-basics";
     }
     const record = typeof imageTTSData !== "undefined" && imageTTSData
         ? imageTTSData[assetFile]
