@@ -15560,6 +15560,268 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/job-interview-basics.png": {
+        imageId: "job-interview-basics",
+        assetFile: "images/english/job-interview-basics.png",
+        contentType: "image-text",
+        layout: "custom-job-interview-title-plus-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 0,
+                readingOrder: 1,
+                bounds: {
+                    xPct: 0.8,
+                    yPct: 0.8,
+                    widthPct: 98.4,
+                    heightPct: 9.3
+                },
+                items: [
+                    {
+                        itemId: 1,
+                        readingOrder: 1,
+                        type: "label",
+                        sourceText: "JOB INTERVIEW",
+                        ttsText: "JOB INTERVIEW",
+                        bounds: {
+                            xPct: 31,
+                            yPct: 2,
+                            widthPct: 38.2,
+                            heightPct: 6
+                        },
+                        tapRegion: {
+                            xPct: 29.5,
+                            yPct: 1,
+                            widthPct: 41.2,
+                            heightPct: 8
+                        }
+                    }
+                ]
+            },
+            {
+                panelId: 1,
+                readingOrder: 2,
+                bounds: {
+                    xPct: 0.8,
+                    yPct: 11.1,
+                    widthPct: 48.8,
+                    heightPct: 41.3
+                },
+                items: [
+                    {
+                        itemId: 1,
+                        readingOrder: 1,
+                        type: "phrase",
+                        sourceText: "ARRIVING FOR AN INTERVIEW",
+                        ttsText: "ARRIVING FOR AN INTERVIEW",
+                        bounds: {
+                            xPct: 7.7,
+                            yPct: 12.7,
+                            widthPct: 38.4,
+                            heightPct: 5.2
+                        },
+                        tapRegion: {
+                            xPct: 1.2,
+                            yPct: 11.4,
+                            widthPct: 47.5,
+                            heightPct: 7.2
+                        }
+                    },
+                    {
+                        itemId: 2,
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "ABC Company",
+                        ttsText: "ABC Company",
+                        bounds: {
+                            xPct: 25,
+                            yPct: 22.2,
+                            widthPct: 6,
+                            heightPct: 5.2
+                        },
+                        tapRegion: {
+                            xPct: 23.8,
+                            yPct: 20.6,
+                            widthPct: 8.7,
+                            heightPct: 8.3
+                        }
+                    },
+                    {
+                        itemId: 3,
+                        readingOrder: 3,
+                        type: "label",
+                        sourceText: "RESUME",
+                        ttsText: "RESUME",
+                        bounds: {
+                            xPct: 20.1,
+                            yPct: 37.4,
+                            widthPct: 4.6,
+                            heightPct: 2.5
+                        },
+                        tapRegion: {
+                            xPct: 18.2,
+                            yPct: 36,
+                            widthPct: 7.7,
+                            heightPct: 10.9
+                        }
+                    },
+                    {
+                        itemId: 4,
+                        readingOrder: 4,
+                        type: "label",
+                        sourceText: "RECEPTION",
+                        ttsText: "RECEPTION",
+                        bounds: {
+                            xPct: 34.2,
+                            yPct: 38.2,
+                            widthPct: 8.7,
+                            heightPct: 3.2
+                        },
+                        tapRegion: {
+                            xPct: 32.8,
+                            yPct: 37.2,
+                            widthPct: 10.7,
+                            heightPct: 4.8
+                        }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 3,
+                bounds: {
+                    xPct: 50.5,
+                    yPct: 11.1,
+                    widthPct: 48.6,
+                    heightPct: 41.3
+                },
+                items: [
+                    {
+                        itemId: 1,
+                        readingOrder: 1,
+                        type: "phrase",
+                        sourceText: "NICE TO MEET YOU",
+                        ttsText: "NICE TO MEET YOU",
+                        bounds: {
+                            xPct: 59.1,
+                            yPct: 12.8,
+                            widthPct: 26.1,
+                            heightPct: 5
+                        },
+                        tapRegion: {
+                            xPct: 51.7,
+                            yPct: 11.4,
+                            widthPct: 37,
+                            heightPct: 7.2
+                        }
+                    },
+                    {
+                        itemId: 2,
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "INTERVIEW",
+                        ttsText: "INTERVIEW",
+                        bounds: {
+                            xPct: 69,
+                            yPct: 23,
+                            widthPct: 11.3,
+                            heightPct: 2.7
+                        },
+                        tapRegion: {
+                            xPct: 68,
+                            yPct: 20.7,
+                            widthPct: 13.5,
+                            heightPct: 7.2
+                        }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 4,
+                bounds: {
+                    xPct: 0.8,
+                    yPct: 53.4,
+                    widthPct: 48.8,
+                    heightPct: 45.5
+                },
+                items: [
+                    {
+                        itemId: 1,
+                        readingOrder: 1,
+                        type: "phrase",
+                        sourceText: "ANSWERING QUESTIONS",
+                        ttsText: "ANSWERING QUESTIONS",
+                        bounds: {
+                            xPct: 8.2,
+                            yPct: 55.7,
+                            widthPct: 34.4,
+                            heightPct: 4.8
+                        },
+                        tapRegion: {
+                            xPct: 1.2,
+                            yPct: 54,
+                            widthPct: 42.1,
+                            heightPct: 7.5
+                        }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 5,
+                bounds: {
+                    xPct: 50.5,
+                    yPct: 53.4,
+                    widthPct: 48.6,
+                    heightPct: 45.5
+                },
+                items: [
+                    {
+                        itemId: 1,
+                        readingOrder: 1,
+                        type: "phrase",
+                        sourceText: "WORK EXPERIENCE & SKILLS",
+                        ttsText: "WORK EXPERIENCE & SKILLS",
+                        bounds: {
+                            xPct: 58.6,
+                            yPct: 55.7,
+                            widthPct: 34.3,
+                            heightPct: 4.8
+                        },
+                        tapRegion: {
+                            xPct: 51.7,
+                            yPct: 54,
+                            widthPct: 43.6,
+                            heightPct: 7.5
+                        }
+                    },
+                    {
+                        itemId: 2,
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "RESUME",
+                        ttsText: "RESUME",
+                        bounds: {
+                            xPct: 70.9,
+                            yPct: 81.4,
+                            widthPct: 5,
+                            heightPct: 2.7
+                        },
+                        tapRegion: {
+                            xPct: 69.2,
+                            yPct: 79.2,
+                            widthPct: 8.5,
+                            heightPct: 14.2
+                        }
+                    }
+                ]
+            }
+        ]
     }
 
 };
