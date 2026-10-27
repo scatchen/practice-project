@@ -15069,6 +15069,58 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/thanksgiving-basics.png": {
+        imageId: "thanksgiving-basics",
+        assetFile: "images/english/thanksgiving-basics.png",
+        contentType: "teaching-sentences",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 0.4, widthPct: 49, heightPct: 49.1 },
+                sentence: {
+                    sourceText: "Families prepare a Thanksgiving meal.",
+                    ttsText: "Families prepare a Thanksgiving meal.",
+                    bounds: { xPct: 10.2, yPct: 2.3, widthPct: 33, heightPct: 7.8 }
+                },
+                tapRegion: { xPct: 6.1, yPct: 1.0, widthPct: 40.2, heightPct: 11.6 }
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.6, yPct: 0.4, widthPct: 49, heightPct: 49.1 },
+                sentence: {
+                    sourceText: "Families enjoy a Thanksgiving dinner.",
+                    ttsText: "Families enjoy a Thanksgiving dinner.",
+                    bounds: { xPct: 58.9, yPct: 2.3, widthPct: 34.9, heightPct: 7.8 }
+                },
+                tapRegion: { xPct: 56.2, yPct: 1.0, widthPct: 40.3, heightPct: 11.6 }
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.4, yPct: 50.7, widthPct: 49, heightPct: 48.9 },
+                sentence: {
+                    sourceText: "People eat and talk together.",
+                    ttsText: "People eat and talk together.",
+                    bounds: { xPct: 14.9, yPct: 53.1, widthPct: 23, heightPct: 7.7 }
+                },
+                tapRegion: { xPct: 7.8, yPct: 51.6, widthPct: 37.8, heightPct: 11.8 }
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.6, yPct: 50.7, widthPct: 49, heightPct: 48.9 },
+                sentence: {
+                    sourceText: "People give thanks for family and friends.",
+                    ttsText: "People give thanks for family and friends.",
+                    bounds: { xPct: 60.8, yPct: 53.1, widthPct: 33.4, heightPct: 7.7 }
+                },
+                tapRegion: { xPct: 58.7, yPct: 51.6, widthPct: 38, heightPct: 11.8 }
+            }
+        ]
+    },
     "images/english/halloween-basics.png": {
         imageId: "halloween-basics",
         assetFile: "images/english/halloween-basics.png",
