@@ -15822,6 +15822,268 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/customer-service-basics.png": {
+        "imageId": "customer-service-basics",
+        "assetFile": "images/english/customer-service-basics.png",
+        "contentType": "image-text",
+        "layout": "custom-customer-service-title-plus-2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 0,
+                "readingOrder": 1,
+                "bounds": {
+                    "xPct": 0.5,
+                    "yPct": 0.7,
+                    "widthPct": 99.0,
+                    "heightPct": 9.6
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "label",
+                        "sourceText": "Customer Service",
+                        "bounds": {
+                            "xPct": 19.2,
+                            "yPct": 2.1,
+                            "widthPct": 42.0,
+                            "heightPct": 6.0
+                        },
+                        "tapRegion": {
+                            "xPct": 18.2,
+                            "yPct": 1.2,
+                            "widthPct": 44.0,
+                            "heightPct": 7.7
+                        },
+                        "ttsText": "Customer Service"
+                    }
+                ]
+            },
+            {
+                "panelId": 1,
+                "readingOrder": 2,
+                "bounds": {
+                    "xPct": 0.5,
+                    "yPct": 11.2,
+                    "widthPct": 49.1,
+                    "heightPct": 42.6
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Asking for Help",
+                        "bounds": {
+                            "xPct": 8.2,
+                            "yPct": 12.4,
+                            "widthPct": 18.7,
+                            "heightPct": 4.4
+                        },
+                        "tapRegion": {
+                            "xPct": 7.5,
+                            "yPct": 11.8,
+                            "widthPct": 20.1,
+                            "heightPct": 5.6
+                        },
+                        "ttsText": "Asking for Help"
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "CUSTOMER SERVICE",
+                        "bounds": {
+                            "xPct": 35.4,
+                            "yPct": 22.0,
+                            "widthPct": 9.2,
+                            "heightPct": 7.1
+                        },
+                        "tapRegion": {
+                            "xPct": 34.3,
+                            "yPct": 21.2,
+                            "widthPct": 11.4,
+                            "heightPct": 8.8
+                        },
+                        "ttsText": "CUSTOMER SERVICE"
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 3,
+                "bounds": {
+                    "xPct": 50.4,
+                    "yPct": 11.2,
+                    "widthPct": 49.1,
+                    "heightPct": 42.6
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Making a Complaint",
+                        "bounds": {
+                            "xPct": 58.1,
+                            "yPct": 12.4,
+                            "widthPct": 27.3,
+                            "heightPct": 4.5
+                        },
+                        "tapRegion": {
+                            "xPct": 57.0,
+                            "yPct": 11.8,
+                            "widthPct": 29.5,
+                            "heightPct": 5.6
+                        },
+                        "ttsText": "Making a Complaint"
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 4,
+                "bounds": {
+                    "xPct": 0.5,
+                    "yPct": 54.7,
+                    "widthPct": 49.1,
+                    "heightPct": 44.6
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Refund / Exchange",
+                        "bounds": {
+                            "xPct": 8.2,
+                            "yPct": 55.7,
+                            "widthPct": 26.0,
+                            "heightPct": 4.7
+                        },
+                        "tapRegion": {
+                            "xPct": 7.3,
+                            "yPct": 55.1,
+                            "widthPct": 27.9,
+                            "heightPct": 5.9
+                        },
+                        "ttsText": "Refund / Exchange"
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "RETURNS",
+                        "bounds": {
+                            "xPct": 22.6,
+                            "yPct": 68.0,
+                            "widthPct": 6.1,
+                            "heightPct": 2.5
+                        },
+                        "tapRegion": {
+                            "xPct": 20.5,
+                            "yPct": 67.4,
+                            "widthPct": 11.9,
+                            "heightPct": 3.3
+                        },
+                        "ttsText": "RETURNS"
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "EXCHANGES",
+                        "bounds": {
+                            "xPct": 22.6,
+                            "yPct": 71.5,
+                            "widthPct": 7.3,
+                            "heightPct": 2.7
+                        },
+                        "tapRegion": {
+                            "xPct": 20.5,
+                            "yPct": 71.0,
+                            "widthPct": 11.9,
+                            "heightPct": 3.3
+                        },
+                        "ttsText": "EXCHANGES"
+                    },
+                    {
+                        "itemId": 4,
+                        "readingOrder": 4,
+                        "type": "label",
+                        "sourceText": "REFUNDS",
+                        "bounds": {
+                            "xPct": 22.6,
+                            "yPct": 74.9,
+                            "widthPct": 6.6,
+                            "heightPct": 2.5
+                        },
+                        "tapRegion": {
+                            "xPct": 20.5,
+                            "yPct": 74.6,
+                            "widthPct": 11.9,
+                            "heightPct": 3.3
+                        },
+                        "ttsText": "REFUNDS"
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 5,
+                "bounds": {
+                    "xPct": 50.4,
+                    "yPct": 54.7,
+                    "widthPct": 49.1,
+                    "heightPct": 44.6
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Solving the Problem",
+                        "bounds": {
+                            "xPct": 58.1,
+                            "yPct": 55.7,
+                            "widthPct": 23.5,
+                            "heightPct": 4.7
+                        },
+                        "tapRegion": {
+                            "xPct": 57.0,
+                            "yPct": 55.1,
+                            "widthPct": 25.6,
+                            "heightPct": 5.9
+                        },
+                        "ttsText": "Solving the Problem"
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "CUSTOMER SATISFACTION",
+                        "bounds": {
+                            "xPct": 88.3,
+                            "yPct": 65.8,
+                            "widthPct": 8.0,
+                            "heightPct": 6.4
+                        },
+                        "tapRegion": {
+                            "xPct": 87.0,
+                            "yPct": 65.0,
+                            "widthPct": 10.2,
+                            "heightPct": 7.8
+                        },
+                        "ttsText": "CUSTOMER SATISFACTION"
+                    }
+                ]
+            }
+        ]
     }
 
 };

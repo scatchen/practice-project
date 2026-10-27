@@ -7876,9 +7876,351 @@ function getEnglishJobInterviewImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishCustomerServiceImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/customer-service-basics.png";
+    const expectedImageId = "customer-service-basics";
+    const expectedPanels = [
+        {
+            "panelId": 0,
+            "readingOrder": 1,
+            "bounds": {
+                "xPct": 0.5,
+                "yPct": 0.7,
+                "widthPct": 99.0,
+                "heightPct": 9.6
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "readingOrder": 1,
+                    "type": "label",
+                    "sourceText": "Customer Service",
+                    "bounds": {
+                        "xPct": 19.2,
+                        "yPct": 2.1,
+                        "widthPct": 42.0,
+                        "heightPct": 6.0
+                    },
+                    "tapRegion": {
+                        "xPct": 18.2,
+                        "yPct": 1.2,
+                        "widthPct": 44.0,
+                        "heightPct": 7.7
+                    }
+                }
+            ]
+        },
+        {
+            "panelId": 1,
+            "readingOrder": 2,
+            "bounds": {
+                "xPct": 0.5,
+                "yPct": 11.2,
+                "widthPct": 49.1,
+                "heightPct": 42.6
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "readingOrder": 1,
+                    "type": "phrase",
+                    "sourceText": "Asking for Help",
+                    "bounds": {
+                        "xPct": 8.2,
+                        "yPct": 12.4,
+                        "widthPct": 18.7,
+                        "heightPct": 4.4
+                    },
+                    "tapRegion": {
+                        "xPct": 7.5,
+                        "yPct": 11.8,
+                        "widthPct": 20.1,
+                        "heightPct": 5.6
+                    }
+                },
+                {
+                    "itemId": 2,
+                    "readingOrder": 2,
+                    "type": "label",
+                    "sourceText": "CUSTOMER SERVICE",
+                    "bounds": {
+                        "xPct": 35.4,
+                        "yPct": 22.0,
+                        "widthPct": 9.2,
+                        "heightPct": 7.1
+                    },
+                    "tapRegion": {
+                        "xPct": 34.3,
+                        "yPct": 21.2,
+                        "widthPct": 11.4,
+                        "heightPct": 8.8
+                    }
+                }
+            ]
+        },
+        {
+            "panelId": 2,
+            "readingOrder": 3,
+            "bounds": {
+                "xPct": 50.4,
+                "yPct": 11.2,
+                "widthPct": 49.1,
+                "heightPct": 42.6
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "readingOrder": 1,
+                    "type": "phrase",
+                    "sourceText": "Making a Complaint",
+                    "bounds": {
+                        "xPct": 58.1,
+                        "yPct": 12.4,
+                        "widthPct": 27.3,
+                        "heightPct": 4.5
+                    },
+                    "tapRegion": {
+                        "xPct": 57.0,
+                        "yPct": 11.8,
+                        "widthPct": 29.5,
+                        "heightPct": 5.6
+                    }
+                }
+            ]
+        },
+        {
+            "panelId": 3,
+            "readingOrder": 4,
+            "bounds": {
+                "xPct": 0.5,
+                "yPct": 54.7,
+                "widthPct": 49.1,
+                "heightPct": 44.6
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "readingOrder": 1,
+                    "type": "phrase",
+                    "sourceText": "Refund / Exchange",
+                    "bounds": {
+                        "xPct": 8.2,
+                        "yPct": 55.7,
+                        "widthPct": 26.0,
+                        "heightPct": 4.7
+                    },
+                    "tapRegion": {
+                        "xPct": 7.3,
+                        "yPct": 55.1,
+                        "widthPct": 27.9,
+                        "heightPct": 5.9
+                    }
+                },
+                {
+                    "itemId": 2,
+                    "readingOrder": 2,
+                    "type": "label",
+                    "sourceText": "RETURNS",
+                    "bounds": {
+                        "xPct": 22.6,
+                        "yPct": 68.0,
+                        "widthPct": 6.1,
+                        "heightPct": 2.5
+                    },
+                    "tapRegion": {
+                        "xPct": 20.5,
+                        "yPct": 67.4,
+                        "widthPct": 11.9,
+                        "heightPct": 3.3
+                    }
+                },
+                {
+                    "itemId": 3,
+                    "readingOrder": 3,
+                    "type": "label",
+                    "sourceText": "EXCHANGES",
+                    "bounds": {
+                        "xPct": 22.6,
+                        "yPct": 71.5,
+                        "widthPct": 7.3,
+                        "heightPct": 2.7
+                    },
+                    "tapRegion": {
+                        "xPct": 20.5,
+                        "yPct": 71.0,
+                        "widthPct": 11.9,
+                        "heightPct": 3.3
+                    }
+                },
+                {
+                    "itemId": 4,
+                    "readingOrder": 4,
+                    "type": "label",
+                    "sourceText": "REFUNDS",
+                    "bounds": {
+                        "xPct": 22.6,
+                        "yPct": 74.9,
+                        "widthPct": 6.6,
+                        "heightPct": 2.5
+                    },
+                    "tapRegion": {
+                        "xPct": 20.5,
+                        "yPct": 74.6,
+                        "widthPct": 11.9,
+                        "heightPct": 3.3
+                    }
+                }
+            ]
+        },
+        {
+            "panelId": 4,
+            "readingOrder": 5,
+            "bounds": {
+                "xPct": 50.4,
+                "yPct": 54.7,
+                "widthPct": 49.1,
+                "heightPct": 44.6
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "readingOrder": 1,
+                    "type": "phrase",
+                    "sourceText": "Solving the Problem",
+                    "bounds": {
+                        "xPct": 58.1,
+                        "yPct": 55.7,
+                        "widthPct": 23.5,
+                        "heightPct": 4.7
+                    },
+                    "tapRegion": {
+                        "xPct": 57.0,
+                        "yPct": 55.1,
+                        "widthPct": 25.6,
+                        "heightPct": 5.9
+                    }
+                },
+                {
+                    "itemId": 2,
+                    "readingOrder": 2,
+                    "type": "label",
+                    "sourceText": "CUSTOMER SATISFACTION",
+                    "bounds": {
+                        "xPct": 88.3,
+                        "yPct": 65.8,
+                        "widthPct": 8.0,
+                        "heightPct": 6.4
+                    },
+                    "tapRegion": {
+                        "xPct": 87.0,
+                        "yPct": 65.0,
+                        "widthPct": 10.2,
+                        "heightPct": 7.8
+                    }
+                }
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = value => hasExactKeys(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-customer-service-title-plus-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (key === expectedAssetFile ||
+            candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+    const allTextBounds = [];
+    const allTapRegions = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panel.readingOrder !== expectedPanel.readingOrder ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== expectedItem.itemId ||
+                item.readingOrder !== expectedItem.readingOrder || item.type !== expectedItem.type ||
+                item.sourceText !== expectedItem.sourceText || item.ttsText !== item.sourceText ||
+                !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !matchesBounds(item.tapRegion, expectedItem.tapRegion) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) {
+                    return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
+function isEnglishImageTTSFullTitleImageTextRecord(record) {
+    return Boolean(record && (
+        (record.imageId === "job-interview-basics" &&
+            record.assetFile === "images/english/job-interview-basics.png") ||
+        (record.imageId === "customer-service-basics" &&
+            record.assetFile === "images/english/customer-service-basics.png")
+    ));
+}
+
 function getEnglishImageTTSImageTextPanelLabel(record, panel) {
-    if (record && record.imageId === "job-interview-basics" &&
-        record.assetFile === "images/english/job-interview-basics.png" && panel) {
+    if (isEnglishImageTTSFullTitleImageTextRecord(record) && panel) {
         return panel.panelId === 0 ? "全圖標題" : "第 " + panel.panelId + " 格";
     }
     return panel ? "第 " + panel.panelId + " 格" : "原圖文字區域";
@@ -7888,6 +8230,10 @@ function getEnglishImageTTSImageTextName(record) {
     if (record && record.imageId === "job-interview-basics" &&
         record.assetFile === "images/english/job-interview-basics.png") {
         return "Job Interview";
+    }
+    if (record && record.imageId === "customer-service-basics" &&
+        record.assetFile === "images/english/customer-service-basics.png") {
+        return "Customer Service";
     }
     if (record && record.imageId === "office-and-workplace-basics" &&
         record.assetFile === "images/english/office-and-workplace-basics.png") {
@@ -7928,6 +8274,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/job-interview-basics.png";
     if (isJobInterviewImageTextIdentity) {
         return getEnglishJobInterviewImageTextRecord(record, assetFile);
+    }
+
+    const isCustomerServiceImageTextIdentity =
+        record.imageId === "customer-service-basics" ||
+        record.assetFile === "images/english/customer-service-basics.png" ||
+        assetFile === "images/english/customer-service-basics.png";
+    if (isCustomerServiceImageTextIdentity) {
+        return getEnglishCustomerServiceImageTextRecord(record, assetFile);
     }
 
     const isLaTomatinaImageTextIdentity =
@@ -8969,11 +9323,9 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record) {
     button.className = "image-tts-image-text-hit-area";
     button.textContent = "";
     button.hidden = true;
-    const isJobInterviewImageText = record &&
-        record.imageId === "job-interview-basics" &&
-        record.assetFile === "images/english/job-interview-basics.png";
+    const isFullTitleImageText = isEnglishImageTTSFullTitleImageTextRecord(record);
     const panelLabel = getEnglishImageTTSImageTextPanelLabel(record, panel);
-    button.setAttribute("aria-label", isJobInterviewImageText
+    button.setAttribute("aria-label", isFullTitleImageText
         ? panelLabel + "第 " + item.readingOrder + " 項原圖文字：" +
             item.sourceText + "，開啟朗讀選項"
         : "第 " + panel.panelId + " 格第 " + item.readingOrder +
@@ -10198,11 +10550,10 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     englishImageTTSOverlayState.activeTrigger = trigger;
     trigger.setAttribute("aria-expanded", "true");
     menu.classList.remove("is-tap-regions-dialogue");
-    const isJobInterviewImageText = safeRecord.imageId === "job-interview-basics" &&
-        safeRecord.assetFile === "images/english/job-interview-basics.png";
+    const isFullTitleImageText = isEnglishImageTTSFullTitleImageTextRecord(safeRecord);
     const panelLabel = getEnglishImageTTSImageTextPanelLabel(safeRecord, panel);
-    const isFullTitlePanel = isJobInterviewImageText && panelLabel === "全圖標題";
-    menu.setAttribute("aria-label", isJobInterviewImageText
+    const isFullTitlePanel = isFullTitleImageText && panelLabel === "全圖標題";
+    menu.setAttribute("aria-label", isFullTitleImageText
         ? safeRecordName + " " + panelLabel + "原圖文字朗讀選項"
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
@@ -10210,10 +10561,10 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     }
 
     menu.appendChild(createEnglishImageTTSMenuButton(
-        isFullTitlePanel ? "朗讀全圖標題" : (isJobInterviewImageText
+        isFullTitlePanel ? "朗讀全圖標題" : (isFullTitleImageText
             ? "朗讀第 " + panel.panelId + " 格原圖文字"
             : "朗讀此格原圖文字"),
-        isFullTitlePanel ? "朗讀全圖標題" : (isJobInterviewImageText
+        isFullTitlePanel ? "朗讀全圖標題" : (isFullTitleImageText
             ? "朗讀第 " + panel.panelId + " 格原圖文字"
             : "朗讀此格原圖文字"),
         () => speakEnglishImageTTSImageTextSequence(
