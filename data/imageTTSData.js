@@ -14900,5 +14900,61 @@ const imageTTSData = {
                 tapRegion: { xPct: 57.4, yPct: 52.3, widthPct: 38.8, heightPct: 9.1 }
             }
         ]
+    },
+    "images/english/st-patricks-day-basics.png": {
+        imageId: "st-patricks-day-basics",
+        assetFile: "images/english/st-patricks-day-basics.png",
+        contentType: "teaching-sentences",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 14.2, widthPct: 49.4, heightPct: 40.5 },
+                sentence: {
+                    sourceText: "We wear green on St. Patrick’s Day.",
+                    ttsText: "We wear green on St. Patrick’s Day.",
+                    bounds: { xPct: 4.3, yPct: 48.6, widthPct: 41.8, heightPct: 4.0 }
+                },
+                tapRegion: { xPct: 4.0, yPct: 48.3, widthPct: 42.4, heightPct: 4.6 }
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 14.2, widthPct: 49.2, heightPct: 40.5 },
+                sentence: {
+                    sourceText: "We celebrate Irish culture and traditions.",
+                    ttsText: "We celebrate Irish culture and traditions.",
+                    bounds: { xPct: 53.1, yPct: 48.6, widthPct: 43.7, heightPct: 4.0 }
+                },
+                tapRegion: { xPct: 52.8, yPct: 48.4, widthPct: 44.2, heightPct: 4.4 }
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.4, yPct: 55.4, widthPct: 49.4, heightPct: 44.2 },
+                sentence: {
+                    sourceText: "We join a St. Patrick’s Day parade.",
+                    ttsText: "We join a St. Patrick’s Day parade.",
+                    bounds: { xPct: 4.4, yPct: 93.2, widthPct: 41.8, heightPct: 3.8 }
+                },
+                tapRegion: { xPct: 4.1, yPct: 92.8, widthPct: 42.4, heightPct: 4.6 }
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 55.4, widthPct: 49.2, heightPct: 44.2 },
+                sentence: {
+                    sourceText: "We celebrate and have fun together.",
+                    ttsText: "We celebrate and have fun together.",
+                    bounds: { xPct: 53.0, yPct: 93.2, widthPct: 43.4, heightPct: 3.8 }
+                },
+                tapRegion: { xPct: 52.7, yPct: 92.8, widthPct: 44.1, heightPct: 4.6 }
+            }
+        ]
     }
 };
