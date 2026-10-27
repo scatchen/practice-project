@@ -15069,6 +15069,58 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/venice-carnival-basics.png": {
+        imageId: "venice-carnival-basics",
+        assetFile: "images/english/venice-carnival-basics.png",
+        contentType: "teaching-sentences",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 0.4, widthPct: 49.2, heightPct: 49.2 },
+                sentence: {
+                    sourceText: "People wear traditional Venetian masks.",
+                    ttsText: "People wear traditional Venetian masks.",
+                    bounds: { xPct: 9.2, yPct: 2.2, widthPct: 33.6, heightPct: 7.2 }
+                },
+                tapRegion: { xPct: 4.4, yPct: 1.2, widthPct: 42.8, heightPct: 8.9 }
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 0.4, widthPct: 49.2, heightPct: 49.2 },
+                sentence: {
+                    sourceText: "People wear beautiful costumes.",
+                    ttsText: "People wear beautiful costumes.",
+                    bounds: { xPct: 58.0, yPct: 2.2, widthPct: 35.8, heightPct: 7.2 }
+                },
+                tapRegion: { xPct: 53.8, yPct: 1.2, widthPct: 44.1, heightPct: 8.9 }
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.4, yPct: 50.4, widthPct: 49.2, heightPct: 49.2 },
+                sentence: {
+                    sourceText: "People enjoy the carnival in Venice.",
+                    ttsText: "People enjoy the carnival in Venice.",
+                    bounds: { xPct: 7.9, yPct: 51.9, widthPct: 35.7, heightPct: 7.3 }
+                },
+                tapRegion: { xPct: 4.4, yPct: 51.2, widthPct: 42.8, heightPct: 8.8 }
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 50.4, widthPct: 49.2, heightPct: 49.2 },
+                sentence: {
+                    sourceText: "People enjoy masks, music, and celebrations.",
+                    ttsText: "People enjoy masks, music, and celebrations.",
+                    bounds: { xPct: 58.0, yPct: 51.8, widthPct: 35.7, heightPct: 7.5 }
+                },
+                tapRegion: { xPct: 53.8, yPct: 51.2, widthPct: 44.1, heightPct: 8.8 }
+            }
+        ]
+    },
     "images/english/thanksgiving-basics.png": {
         imageId: "thanksgiving-basics",
         assetFile: "images/english/thanksgiving-basics.png",
