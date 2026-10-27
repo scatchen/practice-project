@@ -14956,5 +14956,61 @@ const imageTTSData = {
                 tapRegion: { xPct: 52.7, yPct: 92.8, widthPct: 44.1, heightPct: 4.6 }
             }
         ]
-    }
+    },
+    "images/english/flamenco-basics.png": {
+        imageId: "flamenco-basics",
+        assetFile: "images/english/flamenco-basics.png",
+        contentType: "teaching-sentences",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.3, yPct: 0.3, widthPct: 49.3, heightPct: 49.4 },
+                sentence: {
+                    sourceText: "The dancers get ready for a flamenco performance.",
+                    ttsText: "The dancers get ready for a flamenco performance.",
+                    bounds: { xPct: 2.4, yPct: 43.8, widthPct: 45.9, heightPct: 3.2 }
+                },
+                tapRegion: { xPct: 2.0, yPct: 43.3, widthPct: 46.8, heightPct: 4.2 }
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 0.3, widthPct: 49.3, heightPct: 49.4 },
+                sentence: {
+                    sourceText: "They dance with strong movements and rhythms.",
+                    ttsText: "They dance with strong movements and rhythms.",
+                    bounds: { xPct: 52.5, yPct: 43.8, widthPct: 44.9, heightPct: 3.2 }
+                },
+                tapRegion: { xPct: 52.1, yPct: 43.3, widthPct: 45.8, heightPct: 4.2 }
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.3, yPct: 50.5, widthPct: 49.3, heightPct: 49.2 },
+                sentence: {
+                    sourceText: "The music and clapping create a strong rhythm.",
+                    ttsText: "The music and clapping create a strong rhythm.",
+                    bounds: { xPct: 2.5, yPct: 92.7, widthPct: 46.0, heightPct: 3.3 }
+                },
+                tapRegion: { xPct: 2.1, yPct: 92.3, widthPct: 46.8, heightPct: 4.2 }
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 50.5, widthPct: 49.3, heightPct: 49.2 },
+                sentence: {
+                    sourceText: "Flamenco is an important part of Spanish culture.",
+                    ttsText: "Flamenco is an important part of Spanish culture.",
+                    bounds: { xPct: 52.4, yPct: 92.7, widthPct: 44.9, heightPct: 3.3 }
+                },
+                tapRegion: { xPct: 52.0, yPct: 92.3, widthPct: 45.8, heightPct: 4.2 }
+            }
+        ]
+    },
 };
