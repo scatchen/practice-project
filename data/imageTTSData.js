@@ -15225,4 +15225,56 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/oktoberfest-basics.png": {
+        imageId: "oktoberfest-basics",
+        assetFile: "images/english/oktoberfest-basics.png",
+        contentType: "teaching-sentences",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.7, yPct: 15.4, widthPct: 49, heightPct: 43.6 },
+                sentence: {
+                    sourceText: "People wear traditional clothes at Oktoberfest.",
+                    ttsText: "People wear traditional clothes at Oktoberfest.",
+                    bounds: { xPct: 7.7, yPct: 17.0, widthPct: 34.9, heightPct: 7.2 }
+                },
+                tapRegion: { xPct: 7.3, yPct: 16.2, widthPct: 35.8, heightPct: 8.4 }
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.5, yPct: 15.4, widthPct: 48.8, heightPct: 43.6 },
+                sentence: {
+                    sourceText: "People gather in large festival tents.",
+                    ttsText: "People gather in large festival tents.",
+                    bounds: { xPct: 57.8, yPct: 17.3, widthPct: 38.5, heightPct: 4.0 }
+                },
+                tapRegion: { xPct: 57.2, yPct: 16.5, widthPct: 39.4, heightPct: 5.8 }
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.7, yPct: 60.0, widthPct: 49, heightPct: 39.0 },
+                sentence: {
+                    sourceText: "They enjoy traditional food and music.",
+                    ttsText: "They enjoy traditional food and music.",
+                    bounds: { xPct: 7.7, yPct: 62.2, widthPct: 38.5, heightPct: 4.2 }
+                },
+                tapRegion: { xPct: 7.3, yPct: 61.5, widthPct: 39.0, heightPct: 5.7 }
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.5, yPct: 60.0, widthPct: 48.8, heightPct: 39.0 },
+                sentence: {
+                    sourceText: "People celebrate together at the festival.",
+                    ttsText: "People celebrate together at the festival.",
+                    bounds: { xPct: 57.8, yPct: 62.2, widthPct: 39.7, heightPct: 4.3 }
+                },
+                tapRegion: { xPct: 57.2, yPct: 61.5, widthPct: 40.4, heightPct: 5.7 }
+            }
+        ]
+    },
 };
