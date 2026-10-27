@@ -4198,6 +4198,7 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
     const activeItem = trigger && trigger._englishImageTTSImageTextActiveItem;
     const assetFile = wrapper && wrapper.dataset && wrapper.dataset.imageTtsAssetFile;
     const validatedRecord = assetFile ? getEnglishImageTTSRecord(assetFile) : null;
+    const imageTextName = getEnglishImageTTSImageTextName(record);
     const safePanel = validatedRecord && validatedRecord.panels.find(panel =>
         panel.panelId === (activePanel && activePanel.panelId));
     const safeItem = safePanel && safePanel.items.find(item =>
@@ -4205,8 +4206,7 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
     if (!button || !wrapper || wrapper.isConnected === false ||
         !trigger || !trigger.classList ||
         !trigger.classList.contains("image-tts-image-text-hit-area") ||
-        !record || record.imageId !== "changing-of-the-guard-basics" ||
-        record.assetFile !== "images/english/changing-of-the-guard-basics.png" ||
+        !record || !imageTextName ||
         !validatedRecord || validatedRecord.imageId !== record.imageId ||
         validatedRecord.assetFile !== record.assetFile ||
         !safePanel || safePanel !== activePanel || !safeItem || safeItem !== activeItem ||
@@ -7198,6 +7198,164 @@ function getEnglishChangingOfTheGuardImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishLaTomatinaImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/la-tomatina-basics.png";
+    const expectedImageId = "la-tomatina-basics";
+    const expectedPanels = [
+        {
+            panelId: 1, bounds: { xPct: 0.3, yPct: 0.3, widthPct: 49.3, heightPct: 49.1 },
+            items: [
+                {
+                    itemId: 1, type: "label", sourceText: "La Tomatina",
+                    bounds: { xPct: 6.8, yPct: 3.2, widthPct: 29.2, heightPct: 7.0 },
+                    tapRegion: { xPct: 5.7, yPct: 2.2, widthPct: 31.5, heightPct: 8.2 }
+                },
+                {
+                    itemId: 2, type: "label", sourceText: "Spain",
+                    bounds: { xPct: 17.8, yPct: 10.9, widthPct: 8.5, heightPct: 3.8 },
+                    tapRegion: { xPct: 16.8, yPct: 10.7, widthPct: 10.4, heightPct: 4.5 }
+                }
+            ]
+        },
+        {
+            panelId: 2, bounds: { xPct: 50.4, yPct: 0.3, widthPct: 49.3, heightPct: 49.1 },
+            items: [
+                {
+                    itemId: 1, type: "phrase", sourceText: "Lots of tomatoes!",
+                    bounds: { xPct: 55.3, yPct: 3.6, widthPct: 33.7, heightPct: 5.8 },
+                    tapRegion: { xPct: 54.5, yPct: 3.0, widthPct: 35.3, heightPct: 7.0 }
+                }
+            ]
+        },
+        {
+            panelId: 3, bounds: { xPct: 0.3, yPct: 50.5, widthPct: 49.3, heightPct: 49.1 },
+            items: [
+                {
+                    itemId: 1, type: "phrase", sourceText: "A tomato fight!",
+                    bounds: { xPct: 12.1, yPct: 53.9, widthPct: 29.7, heightPct: 6.0 },
+                    tapRegion: { xPct: 11.2, yPct: 53.1, widthPct: 31.6, heightPct: 7.6 }
+                }
+            ]
+        },
+        {
+            panelId: 4, bounds: { xPct: 50.4, yPct: 50.5, widthPct: 49.3, heightPct: 49.1 },
+            items: [
+                {
+                    itemId: 1, type: "sentence", sourceText: "People have fun together!",
+                    bounds: { xPct: 55.7, yPct: 52.8, widthPct: 39.5, heightPct: 5.7 },
+                    tapRegion: { xPct: 54.9, yPct: 52.1, widthPct: 41.0, heightPct: 7.2 }
+                }
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = bounds => hasExactKeys(bounds, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(bounds[key]) && bounds[key] >= 0 && bounds[key] <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        record.contentType !== "image-text" || record.layout !== "2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (key === expectedAssetFile ||
+            candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allTextBounds = [];
+    const allTapRegions = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== expectedItem.itemId ||
+                item.readingOrder !== itemIndex + 1 || item.type !== expectedItem.type ||
+                item.sourceText !== expectedItem.sourceText ||
+                item.ttsText !== item.sourceText ||
+                item.sourceText.length === 0 ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !matchesBounds(item.tapRegion, expectedItem.tapRegion) ||
+                !contains(panel.bounds, item.bounds) ||
+                !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds) ||
+                !getEnglishTTSUnitText(item.sourceText)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+        }
+    }
+
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) {
+                    return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
+function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "changing-of-the-guard-basics" &&
+        record.assetFile === "images/english/changing-of-the-guard-basics.png") {
+        return "Changing of the Guard";
+    }
+    if (record && record.imageId === "la-tomatina-basics" &&
+        record.assetFile === "images/english/la-tomatina-basics.png") {
+        return "La Tomatina";
+    }
+    return null;
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -7210,6 +7368,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isLaTomatinaImageTextIdentity =
+        record.imageId === "la-tomatina-basics" ||
+        record.assetFile === "images/english/la-tomatina-basics.png" ||
+        assetFile === "images/english/la-tomatina-basics.png";
+    if (isLaTomatinaImageTextIdentity) {
+        return getEnglishLaTomatinaImageTextRecord(record, assetFile);
     }
 
     const isChangingOfTheGuardImageTextIdentity =
@@ -9415,6 +9581,7 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : null;
     const assetFile = wrapper && wrapper.dataset.imageTtsAssetFile;
     const safeRecord = assetFile ? getEnglishImageTTSRecord(assetFile) : null;
+    const safeRecordName = getEnglishImageTTSImageTextName(safeRecord);
     const clickedPanel = trigger && trigger._englishImageTTSImageTextPanel;
     const safePanel = safeRecord && safeRecord.panels.find(item =>
         item.panelId === (panel && panel.panelId));
@@ -9423,9 +9590,8 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         !record || !trigger._englishImageTTSImageTextRecord ||
         trigger._englishImageTTSImageTextRecord.imageId !== record.imageId ||
         !clickedPanel || clickedPanel !== panel || !safeRecord ||
-        safeRecord.imageId !== "changing-of-the-guard-basics" ||
-        safeRecord.assetFile !== "images/english/changing-of-the-guard-basics.png" ||
-        record.assetFile !== safeRecord.assetFile || !safePanel || safePanel !== panel ||
+        !safeRecordName || record.assetFile !== safeRecord.assetFile ||
+        !safePanel || safePanel !== panel ||
         !panel.items.includes(trigger._englishImageTTSImageTextItem) ||
         wrapper.dataset.imageTtsAssetFile !== safeRecord.assetFile ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
@@ -9449,7 +9615,7 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     englishImageTTSOverlayState.activeTrigger = trigger;
     trigger.setAttribute("aria-expanded", "true");
     menu.classList.remove("is-tap-regions-dialogue");
-    menu.setAttribute("aria-label", "Changing of the Guard 第 " + panel.panelId +
+    menu.setAttribute("aria-label", safeRecordName + " 第 " + panel.panelId +
         " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
@@ -9470,7 +9636,7 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         () => speakEnglishImageTTSImageTextSequence(
             trigger,
             safeRecord.panels.flatMap(item => item.items),
-            "Changing of the Guard 原圖文字已朗讀完成。"
+            safeRecordName + " 原圖文字已朗讀完成。"
         )
     ));
     menu.hidden = false;

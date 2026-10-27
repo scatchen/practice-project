@@ -15348,4 +15348,75 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/la-tomatina-basics.png": {
+        imageId: "la-tomatina-basics",
+        assetFile: "images/english/la-tomatina-basics.png",
+        contentType: "image-text",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.3, yPct: 0.3, widthPct: 49.3, heightPct: 49.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "La Tomatina",
+                        ttsText: "La Tomatina",
+                        bounds: { xPct: 6.8, yPct: 3.2, widthPct: 29.2, heightPct: 7.0 },
+                        tapRegion: { xPct: 5.7, yPct: 2.2, widthPct: 31.5, heightPct: 8.2 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "Spain",
+                        ttsText: "Spain",
+                        bounds: { xPct: 17.8, yPct: 10.9, widthPct: 8.5, heightPct: 3.8 },
+                        tapRegion: { xPct: 16.8, yPct: 10.7, widthPct: 10.4, heightPct: 4.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 0.3, widthPct: 49.3, heightPct: 49.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Lots of tomatoes!",
+                        ttsText: "Lots of tomatoes!",
+                        bounds: { xPct: 55.3, yPct: 3.6, widthPct: 33.7, heightPct: 5.8 },
+                        tapRegion: { xPct: 54.5, yPct: 3.0, widthPct: 35.3, heightPct: 7.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.3, yPct: 50.5, widthPct: 49.3, heightPct: 49.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "A tomato fight!",
+                        ttsText: "A tomato fight!",
+                        bounds: { xPct: 12.1, yPct: 53.9, widthPct: 29.7, heightPct: 6.0 },
+                        tapRegion: { xPct: 11.2, yPct: 53.1, widthPct: 31.6, heightPct: 7.6 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 50.5, widthPct: 49.3, heightPct: 49.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "People have fun together!",
+                        ttsText: "People have fun together!",
+                        bounds: { xPct: 55.7, yPct: 52.8, widthPct: 39.5, heightPct: 5.7 },
+                        tapRegion: { xPct: 54.9, yPct: 52.1, widthPct: 41.0, heightPct: 7.2 }
+                    }
+                ]
+            }
+        ]
+    }
 };
