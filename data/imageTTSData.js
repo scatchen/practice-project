@@ -15277,4 +15277,75 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/changing-of-the-guard-basics.png": {
+        imageId: "changing-of-the-guard-basics",
+        assetFile: "images/english/changing-of-the-guard-basics.png",
+        contentType: "image-text",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 0.4, widthPct: 49.2, heightPct: 49.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Buckingham Palace",
+                        ttsText: "Buckingham Palace",
+                        bounds: { xPct: 7.8, yPct: 3.0, widthPct: 38.2, heightPct: 4.9 },
+                        tapRegion: { xPct: 2.5, yPct: 1.3, widthPct: 45.5, heightPct: 8.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 0.4, widthPct: 49.2, heightPct: 49.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "The guards wear uniforms.",
+                        ttsText: "The guards wear uniforms.",
+                        bounds: { xPct: 53.8, yPct: 3.0, widthPct: 42.8, heightPct: 4.9 },
+                        tapRegion: { xPct: 51.5, yPct: 1.3, widthPct: 46.5, heightPct: 8.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.4, yPct: 50.4, widthPct: 49.2, heightPct: 49.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "The guards march.",
+                        ttsText: "The guards march.",
+                        bounds: { xPct: 8.6, yPct: 53.5, widthPct: 35.4, heightPct: 4.7 },
+                        tapRegion: { xPct: 3.2, yPct: 51.8, widthPct: 44.0, heightPct: 8.2 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 50.4, widthPct: 49.2, heightPct: 49.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Changing of the Guard",
+                        ttsText: "Changing of the Guard",
+                        bounds: { xPct: 54.1, yPct: 53.4, widthPct: 42.4, heightPct: 4.2 },
+                        tapRegion: { xPct: 52.1, yPct: 52.3, widthPct: 45.8, heightPct: 6.1 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "phrase",
+                        sourceText: "A traditional ceremony.",
+                        ttsText: "A traditional ceremony.",
+                        bounds: { xPct: 59.4, yPct: 59.1, widthPct: 31.3, heightPct: 3.1 },
+                        tapRegion: { xPct: 58.6, yPct: 58.8, widthPct: 34.5, heightPct: 4.4 }
+                    }
+                ]
+            }
+        ]
+    },
 };
