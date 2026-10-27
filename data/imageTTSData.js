@@ -15069,4 +15069,56 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/halloween-basics.png": {
+        imageId: "halloween-basics",
+        assetFile: "images/english/halloween-basics.png",
+        contentType: "teaching-sentences",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.5, yPct: 0.5, widthPct: 49, heightPct: 49 },
+                sentence: {
+                    sourceText: "We decorate the house for Halloween.",
+                    ttsText: "We decorate the house for Halloween.",
+                    bounds: { xPct: 3.6, yPct: 43.2, widthPct: 42.5, heightPct: 3.8 }
+                },
+                tapRegion: { xPct: 3.3, yPct: 42.7, widthPct: 43.1, heightPct: 4.8 }
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.5, yPct: 0.5, widthPct: 49, heightPct: 49 },
+                sentence: {
+                    sourceText: "We wear Halloween costumes.",
+                    ttsText: "We wear Halloween costumes.",
+                    bounds: { xPct: 58.5, yPct: 43.2, widthPct: 35.1, heightPct: 3.8 }
+                },
+                tapRegion: { xPct: 58.1, yPct: 42.7, widthPct: 35.9, heightPct: 4.8 }
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.5, yPct: 50.5, widthPct: 49, heightPct: 49 },
+                sentence: {
+                    sourceText: "We go trick-or-treating.",
+                    ttsText: "We go trick-or-treating.",
+                    bounds: { xPct: 9.2, yPct: 93.0, widthPct: 31.8, heightPct: 3.8 }
+                },
+                tapRegion: { xPct: 8.8, yPct: 92.5, widthPct: 32.6, heightPct: 4.8 }
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.5, yPct: 50.5, widthPct: 49, heightPct: 49 },
+                sentence: {
+                    sourceText: "We collect and share Halloween treats.",
+                    ttsText: "We collect and share Halloween treats.",
+                    bounds: { xPct: 57.1, yPct: 93.0, widthPct: 37.1, heightPct: 3.8 }
+                },
+                tapRegion: { xPct: 56.7, yPct: 92.5, widthPct: 37.9, heightPct: 4.8 }
+            }
+        ]
+    },
 };
