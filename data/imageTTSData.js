@@ -15418,5 +15418,76 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/bonfire-night-basics.png": {
+        imageId: "bonfire-night-basics",
+        assetFile: "images/english/bonfire-night-basics.png",
+        contentType: "image-text",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.3, yPct: 0.3, widthPct: 49.3, heightPct: 49.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Bonfire Night",
+                        ttsText: "Bonfire Night",
+                        bounds: { xPct: 8.2, yPct: 3.4, widthPct: 35.7, heightPct: 6.0 },
+                        tapRegion: { xPct: 7.5, yPct: 2.9, widthPct: 37.0, heightPct: 6.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "November 5",
+                        ttsText: "November 5",
+                        bounds: { xPct: 16.2, yPct: 10.1, widthPct: 17.3, heightPct: 3.5 },
+                        tapRegion: { xPct: 15.2, yPct: 9.9, widthPct: 19.4, heightPct: 4.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 0.3, widthPct: 49.3, heightPct: 49.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "A big bonfire.",
+                        ttsText: "A big bonfire.",
+                        bounds: { xPct: 59.2, yPct: 4.0, widthPct: 35.7, heightPct: 5.0 },
+                        tapRegion: { xPct: 58.3, yPct: 3.2, widthPct: 37.5, heightPct: 6.6 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.3, yPct: 50.5, widthPct: 49.3, heightPct: 49.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Beautiful fireworks!",
+                        ttsText: "Beautiful fireworks!",
+                        bounds: { xPct: 4.7, yPct: 53.8, widthPct: 43.1, heightPct: 5.6 },
+                        tapRegion: { xPct: 3.8, yPct: 52.9, widthPct: 45.0, heightPct: 7.4 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 50.5, widthPct: 49.3, heightPct: 49.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "People celebrate together.",
+                        ttsText: "People celebrate together.",
+                        bounds: { xPct: 54.3, yPct: 53.8, widthPct: 43.2, heightPct: 4.8 },
+                        tapRegion: { xPct: 53.2, yPct: 52.9, widthPct: 45.0, heightPct: 6.6 }
+                    }
+                ]
+            }
+        ]
     }
 };

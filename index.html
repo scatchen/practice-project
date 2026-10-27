@@ -7344,6 +7344,152 @@ function getEnglishLaTomatinaImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishBonfireNightImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/bonfire-night-basics.png";
+    const expectedImageId = "bonfire-night-basics";
+    const expectedPanels = [
+        {
+            panelId: 1, bounds: { xPct: 0.3, yPct: 0.3, widthPct: 49.3, heightPct: 49.1 },
+            items: [
+                {
+                    itemId: 1, type: "label", sourceText: "Bonfire Night",
+                    bounds: { xPct: 8.2, yPct: 3.4, widthPct: 35.7, heightPct: 6.0 },
+                    tapRegion: { xPct: 7.5, yPct: 2.9, widthPct: 37.0, heightPct: 6.8 }
+                },
+                {
+                    itemId: 2, type: "label", sourceText: "November 5",
+                    bounds: { xPct: 16.2, yPct: 10.1, widthPct: 17.3, heightPct: 3.5 },
+                    tapRegion: { xPct: 15.2, yPct: 9.9, widthPct: 19.4, heightPct: 4.0 }
+                }
+            ]
+        },
+        {
+            panelId: 2, bounds: { xPct: 50.4, yPct: 0.3, widthPct: 49.3, heightPct: 49.1 },
+            items: [
+                {
+                    itemId: 1, type: "phrase", sourceText: "A big bonfire.",
+                    bounds: { xPct: 59.2, yPct: 4.0, widthPct: 35.7, heightPct: 5.0 },
+                    tapRegion: { xPct: 58.3, yPct: 3.2, widthPct: 37.5, heightPct: 6.6 }
+                }
+            ]
+        },
+        {
+            panelId: 3, bounds: { xPct: 0.3, yPct: 50.5, widthPct: 49.3, heightPct: 49.1 },
+            items: [
+                {
+                    itemId: 1, type: "phrase", sourceText: "Beautiful fireworks!",
+                    bounds: { xPct: 4.7, yPct: 53.8, widthPct: 43.1, heightPct: 5.6 },
+                    tapRegion: { xPct: 3.8, yPct: 52.9, widthPct: 45.0, heightPct: 7.4 }
+                }
+            ]
+        },
+        {
+            panelId: 4, bounds: { xPct: 50.4, yPct: 50.5, widthPct: 49.3, heightPct: 49.1 },
+            items: [
+                {
+                    itemId: 1, type: "sentence", sourceText: "People celebrate together.",
+                    bounds: { xPct: 54.3, yPct: 53.8, widthPct: 43.2, heightPct: 4.8 },
+                    tapRegion: { xPct: 53.2, yPct: 52.9, widthPct: 45.0, heightPct: 6.6 }
+                }
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = bounds => hasExactKeys(bounds, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(bounds[key]) && bounds[key] >= 0 && bounds[key] <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        record.contentType !== "image-text" || record.layout !== "2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (key === expectedAssetFile ||
+            candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allTextBounds = [];
+    const allTapRegions = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== expectedItem.itemId ||
+                item.readingOrder !== itemIndex + 1 || item.type !== expectedItem.type ||
+                item.sourceText !== expectedItem.sourceText ||
+                item.ttsText !== item.sourceText ||
+                item.sourceText.length === 0 ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !matchesBounds(item.tapRegion, expectedItem.tapRegion) ||
+                !contains(panel.bounds, item.bounds) ||
+                !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds) ||
+                !getEnglishTTSUnitText(item.sourceText)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+        }
+    }
+
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) {
+                    return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSImageTextName(record) {
     if (record && record.imageId === "changing-of-the-guard-basics" &&
         record.assetFile === "images/english/changing-of-the-guard-basics.png") {
@@ -7352,6 +7498,10 @@ function getEnglishImageTTSImageTextName(record) {
     if (record && record.imageId === "la-tomatina-basics" &&
         record.assetFile === "images/english/la-tomatina-basics.png") {
         return "La Tomatina";
+    }
+    if (record && record.imageId === "bonfire-night-basics" &&
+        record.assetFile === "images/english/bonfire-night-basics.png") {
+        return "Bonfire Night";
     }
     return null;
 }
@@ -7376,6 +7526,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/la-tomatina-basics.png";
     if (isLaTomatinaImageTextIdentity) {
         return getEnglishLaTomatinaImageTextRecord(record, assetFile);
+    }
+
+    const isBonfireNightImageTextIdentity =
+        record.imageId === "bonfire-night-basics" ||
+        record.assetFile === "images/english/bonfire-night-basics.png" ||
+        assetFile === "images/english/bonfire-night-basics.png";
+    if (isBonfireNightImageTextIdentity) {
+        return getEnglishBonfireNightImageTextRecord(record, assetFile);
     }
 
     const isChangingOfTheGuardImageTextIdentity =
