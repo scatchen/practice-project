@@ -15013,4 +15013,60 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/maori-haka-basics.png": {
+        imageId: "maori-haka-basics",
+        assetFile: "images/english/maori-haka-basics.png",
+        contentType: "teaching-sentences",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 11.2, widthPct: 49.3, heightPct: 42.0 },
+                sentence: {
+                    sourceText: "The group prepares for the haka.",
+                    ttsText: "The group prepares for the haka.",
+                    bounds: { xPct: 8.4, yPct: 14.1, widthPct: 37.6, heightPct: 3.6 }
+                },
+                tapRegion: { xPct: 6.7, yPct: 11.8, widthPct: 41.3, heightPct: 8.0 }
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 11.2, widthPct: 49.3, heightPct: 42.0 },
+                sentence: {
+                    sourceText: "They perform the traditional haka together.",
+                    ttsText: "They perform the traditional haka together.",
+                    bounds: { xPct: 58.7, yPct: 13.8, widthPct: 36.0, heightPct: 7.8 }
+                },
+                tapRegion: { xPct: 56.7, yPct: 11.8, widthPct: 40.2, heightPct: 10.5 }
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0.4, yPct: 54.0, widthPct: 49.3, heightPct: 45.3 },
+                sentence: {
+                    sourceText: "They use strong movements and facial expressions.",
+                    ttsText: "They use strong movements and facial expressions.",
+                    bounds: { xPct: 9.0, yPct: 56.2, widthPct: 31.3, heightPct: 8.0 }
+                },
+                tapRegion: { xPct: 6.8, yPct: 54.5, widthPct: 36.5, heightPct: 11.5 }
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 54.0, widthPct: 49.3, heightPct: 45.3 },
+                sentence: {
+                    sourceText: "The haka is an important part of Māori culture.",
+                    ttsText: "The haka is an important part of Māori culture.",
+                    bounds: { xPct: 58.4, yPct: 56.2, widthPct: 31.2, heightPct: 8.0 }
+                },
+                tapRegion: { xPct: 56.7, yPct: 54.6, widthPct: 35.1, heightPct: 11.5 }
+            }
+        ]
+    },
 };
