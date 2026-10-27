@@ -3734,7 +3734,8 @@ function calculateEnglishImageTTSStoryStopPlacement({
     panelRect,
     obstacles,
     margin = 8,
-    preferBelow = false
+    preferBelow = false,
+    scanForClearPosition = false
 }) {
     const isFiniteRect = rect => rect &&
         [rect.left, rect.top, rect.right, rect.bottom].every(Number.isFinite);
@@ -3837,6 +3838,53 @@ function calculateEnglishImageTTSStoryStopPlacement({
     const preferred = candidates.find(candidate => !hasCollision(candidate, allObstacles));
     if (preferred) {
         return { ...preferred, width, height, mode: targetIsVisible && nearbyCandidates.length ? "near-panel" : "docked" };
+    }
+
+    if (scanForClearPosition) {
+        const scanPositions = (minimum, maximum, step) => {
+            const positions = [];
+            for (let value = minimum; value <= maximum; value += step) {
+                positions.push(value);
+            }
+            if (!positions.length || positions[positions.length - 1] !== maximum) {
+                positions.push(maximum);
+            }
+            return positions;
+        };
+        const scanStepX = Math.max(8, Math.min(32, Math.floor(width / 6)));
+        const scanStepY = Math.max(8, Math.min(24, Math.floor(height / 3)));
+        const scanCandidates = [];
+        scanPositions(safeTop, maxTop, scanStepY).forEach(top => {
+            scanPositions(safeLeft, maxLeft, scanStepX).forEach(left => {
+                scanCandidates.push({ left, top });
+            });
+        });
+        const targetCenter = targetIsVisible
+            ? {
+                left: (panelRect.left + panelRect.right) / 2,
+                top: (panelRect.top + panelRect.bottom) / 2
+            }
+            : {
+                left: viewport.left + viewport.width / 2,
+                top: viewport.top + viewport.height / 2
+            };
+        scanCandidates.sort((first, second) => {
+            const firstDistance = Math.pow(first.left + width / 2 - targetCenter.left, 2) +
+                Math.pow(first.top + height / 2 - targetCenter.top, 2);
+            const secondDistance = Math.pow(second.left + width / 2 - targetCenter.left, 2) +
+                Math.pow(second.top + height / 2 - targetCenter.top, 2);
+            return firstDistance - secondDistance;
+        });
+        const clearScanPosition = scanCandidates.find(candidate =>
+            !hasCollision(candidate, allObstacles));
+        if (clearScanPosition) {
+            return {
+                ...clearScanPosition,
+                width,
+                height,
+                mode: "clear-scan"
+            };
+        }
     }
 
     // Keep the control clear of the fixed header and drawing tools before relaxing panel avoidance.
@@ -4019,7 +4067,8 @@ function placeEnglishImageTTSStoryStopButton(button, wrapper, panel, placementOp
         panelRect,
         obstacles,
         margin,
-        preferBelow: placementOptions.preferBelow === true
+        preferBelow: placementOptions.preferBelow === true,
+        scanForClearPosition: placementOptions.scanForClearPosition === true
     });
     const fallbackViewportWidth = Number.isFinite(viewportWidth) && viewportWidth > 0 ? viewportWidth : 320;
     const fallbackViewportHeight = Number.isFinite(viewportHeight) && viewportHeight > 0 ? viewportHeight : 480;
@@ -4225,6 +4274,7 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
         },
         {
             preferBelow: true,
+            scanForClearPosition: true,
             stopControlClass: "is-image-tts-image-text-stop-control"
         }
     );
@@ -7490,7 +7540,157 @@ function getEnglishBonfireNightImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+
+function getEnglishOfficeAndWorkplaceImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/office-and-workplace-basics.png";
+    const expectedImageId = "office-and-workplace-basics";
+    const expectedPanels = [
+        {
+            panelId: 1, bounds: { xPct: 0.5, yPct: 0.8, widthPct: 49.1, heightPct: 49.1 },
+            items: [
+                {
+                    itemId: 1, type: "phrase", sourceText: "WORKING AT A DESK",
+                    bounds: { xPct: 8.4, yPct: 3.0, widthPct: 35.3, heightPct: 5.0 },
+                    tapRegion: { xPct: 7.0, yPct: 2.0, widthPct: 37.8, heightPct: 7.2 }
+                }
+            ]
+        },
+        {
+            panelId: 2, bounds: { xPct: 50.4, yPct: 0.8, widthPct: 49.1, heightPct: 49.1 },
+            items: [
+                {
+                    itemId: 1, type: "phrase", sourceText: "PRINTING DOCUMENTS",
+                    bounds: { xPct: 57.7, yPct: 3.0, widthPct: 35.5, heightPct: 5.0 },
+                    tapRegion: { xPct: 56.2, yPct: 2.0, widthPct: 38.5, heightPct: 7.2 }
+                }
+            ]
+        },
+        {
+            panelId: 3, bounds: { xPct: 0.5, yPct: 51.1, widthPct: 49.1, heightPct: 48.1 },
+            items: [
+                {
+                    itemId: 1, type: "phrase", sourceText: "TALKING WITH A COWORKER",
+                    bounds: { xPct: 5.4, yPct: 53.6, widthPct: 39.3, heightPct: 5.0 },
+                    tapRegion: { xPct: 4.0, yPct: 52.5, widthPct: 42.2, heightPct: 7.2 }
+                }
+            ]
+        },
+        {
+            panelId: 4, bounds: { xPct: 50.4, yPct: 51.1, widthPct: 49.1, heightPct: 48.1 },
+            items: [
+                {
+                    itemId: 1, type: "phrase", sourceText: "AT THE WORKPLACE",
+                    bounds: { xPct: 59.4, yPct: 53.6, widthPct: 32.4, heightPct: 5.0 },
+                    tapRegion: { xPct: 57.9, yPct: 52.5, widthPct: 35.2, heightPct: 7.2 }
+                },
+                {
+                    itemId: 2, type: "label", sourceText: "MANAGER",
+                    bounds: { xPct: 69.9, yPct: 93.1, widthPct: 10.0, heightPct: 2.5 },
+                    tapRegion: { xPct: 68.3, yPct: 92.4, widthPct: 13.2, heightPct: 4.4 }
+                }
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = bounds => hasExactKeys(bounds, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(bounds[key]) && bounds[key] >= 0 && bounds[key] <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        record.contentType !== "image-text" || record.layout !== "2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (key === expectedAssetFile ||
+            candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allTextBounds = [];
+    const allTapRegions = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== expectedItem.itemId ||
+                item.readingOrder !== itemIndex + 1 || item.type !== expectedItem.type ||
+                item.sourceText !== expectedItem.sourceText ||
+                item.ttsText !== item.sourceText || item.sourceText.length === 0 ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !matchesBounds(item.tapRegion, expectedItem.tapRegion) ||
+                !contains(panel.bounds, item.bounds) ||
+                !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds) ||
+                !getEnglishTTSUnitText(item.sourceText)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+        }
+    }
+
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) {
+                    return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "office-and-workplace-basics" &&
+        record.assetFile === "images/english/office-and-workplace-basics.png") {
+        return "Office & Workplace";
+    }
     if (record && record.imageId === "changing-of-the-guard-basics" &&
         record.assetFile === "images/english/changing-of-the-guard-basics.png") {
         return "Changing of the Guard";
@@ -7534,6 +7734,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/bonfire-night-basics.png";
     if (isBonfireNightImageTextIdentity) {
         return getEnglishBonfireNightImageTextRecord(record, assetFile);
+    }
+
+    const isOfficeAndWorkplaceImageTextIdentity =
+        record.imageId === "office-and-workplace-basics" ||
+        record.assetFile === "images/english/office-and-workplace-basics.png" ||
+        assetFile === "images/english/office-and-workplace-basics.png";
+    if (isOfficeAndWorkplaceImageTextIdentity) {
+        return getEnglishOfficeAndWorkplaceImageTextRecord(record, assetFile);
     }
 
     const isChangingOfTheGuardImageTextIdentity =

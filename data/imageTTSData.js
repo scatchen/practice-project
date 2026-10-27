@@ -15489,5 +15489,77 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/office-and-workplace-basics.png": {
+        imageId: "office-and-workplace-basics",
+        assetFile: "images/english/office-and-workplace-basics.png",
+        contentType: "image-text",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.5, yPct: 0.8, widthPct: 49.1, heightPct: 49.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "WORKING AT A DESK",
+                        ttsText: "WORKING AT A DESK",
+                        bounds: { xPct: 8.4, yPct: 3.0, widthPct: 35.3, heightPct: 5.0 },
+                        tapRegion: { xPct: 7.0, yPct: 2.0, widthPct: 37.8, heightPct: 7.2 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 0.8, widthPct: 49.1, heightPct: 49.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "PRINTING DOCUMENTS",
+                        ttsText: "PRINTING DOCUMENTS",
+                        bounds: { xPct: 57.7, yPct: 3.0, widthPct: 35.5, heightPct: 5.0 },
+                        tapRegion: { xPct: 56.2, yPct: 2.0, widthPct: 38.5, heightPct: 7.2 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.5, yPct: 51.1, widthPct: 49.1, heightPct: 48.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "TALKING WITH A COWORKER",
+                        ttsText: "TALKING WITH A COWORKER",
+                        bounds: { xPct: 5.4, yPct: 53.6, widthPct: 39.3, heightPct: 5.0 },
+                        tapRegion: { xPct: 4.0, yPct: 52.5, widthPct: 42.2, heightPct: 7.2 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 51.1, widthPct: 49.1, heightPct: 48.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "AT THE WORKPLACE",
+                        ttsText: "AT THE WORKPLACE",
+                        bounds: { xPct: 59.4, yPct: 53.6, widthPct: 32.4, heightPct: 5.0 },
+                        tapRegion: { xPct: 57.9, yPct: 52.5, widthPct: 35.2, heightPct: 7.2 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "MANAGER",
+                        ttsText: "MANAGER",
+                        bounds: { xPct: 69.9, yPct: 93.1, widthPct: 10.0, heightPct: 2.5 },
+                        tapRegion: { xPct: 68.3, yPct: 92.4, widthPct: 13.2, heightPct: 4.4 }
+                    }
+                ]
+            }
+        ]
     }
+
 };
