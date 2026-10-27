@@ -16084,6 +16084,267 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/office-reception-and-visitors-basics.png": {
+        "imageId": "office-reception-and-visitors-basics",
+        "assetFile": "images/english/office-reception-and-visitors-basics.png",
+        "contentType": "image-text",
+        "layout": "custom-office-reception-title-plus-2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 0,
+                "readingOrder": 1,
+                "bounds": {
+                    "xPct": 0.4,
+                    "yPct": 0.4,
+                    "widthPct": 99.2,
+                    "heightPct": 10.0
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "label",
+                        "sourceText": "Office Reception & Visitors",
+                        "ttsText": "Office Reception & Visitors",
+                        "bounds": {
+                            "xPct": 19.2,
+                            "yPct": 2.4,
+                            "widthPct": 61.6,
+                            "heightPct": 5.9
+                        },
+                        "tapRegion": {
+                            "xPct": 15.0,
+                            "yPct": 0.8,
+                            "widthPct": 70.0,
+                            "heightPct": 9.3
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 1,
+                "readingOrder": 2,
+                "bounds": {
+                    "xPct": 0.4,
+                    "yPct": 11.5,
+                    "widthPct": 49.2,
+                    "heightPct": 42.2
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "label",
+                        "sourceText": "Reception Desk",
+                        "ttsText": "Reception Desk",
+                        "bounds": {
+                            "xPct": 8.2,
+                            "yPct": 13.5,
+                            "widthPct": 24.0,
+                            "heightPct": 4.5
+                        },
+                        "tapRegion": {
+                            "xPct": 7.2,
+                            "yPct": 12.5,
+                            "widthPct": 26.0,
+                            "heightPct": 6.4
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "sentence",
+                        "sourceText": "Welcome to Our Company",
+                        "ttsText": "Welcome to Our Company",
+                        "bounds": {
+                            "xPct": 38.2,
+                            "yPct": 15.5,
+                            "widthPct": 8.0,
+                            "heightPct": 8.2
+                        },
+                        "tapRegion": {
+                            "xPct": 37.0,
+                            "yPct": 14.4,
+                            "widthPct": 10.7,
+                            "heightPct": 10.6
+                        }
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "RECEPTION",
+                        "ttsText": "RECEPTION",
+                        "bounds": {
+                            "xPct": 13.4,
+                            "yPct": 44.6,
+                            "widthPct": 11.9,
+                            "heightPct": 3.4
+                        },
+                        "tapRegion": {
+                            "xPct": 12.2,
+                            "yPct": 43.4,
+                            "widthPct": 14.3,
+                            "heightPct": 5.8
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 3,
+                "bounds": {
+                    "xPct": 50.4,
+                    "yPct": 11.5,
+                    "widthPct": 49.2,
+                    "heightPct": 42.2
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "label",
+                        "sourceText": "Sign In",
+                        "ttsText": "Sign In",
+                        "bounds": {
+                            "xPct": 59.0,
+                            "yPct": 13.5,
+                            "widthPct": 10.0,
+                            "heightPct": 4.4
+                        },
+                        "tapRegion": {
+                            "xPct": 57.8,
+                            "yPct": 12.4,
+                            "widthPct": 12.4,
+                            "heightPct": 6.4
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "sentence",
+                        "sourceText": "Please Sign In",
+                        "ttsText": "Please Sign In",
+                        "bounds": {
+                            "xPct": 73.3,
+                            "yPct": 41.9,
+                            "widthPct": 6.5,
+                            "heightPct": 3.7
+                        },
+                        "tapRegion": {
+                            "xPct": 72.2,
+                            "yPct": 40.7,
+                            "widthPct": 8.8,
+                            "heightPct": 6.1
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 4,
+                "bounds": {
+                    "xPct": 0.4,
+                    "yPct": 55.2,
+                    "widthPct": 49.2,
+                    "heightPct": 44.4
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "label",
+                        "sourceText": "Visitor Badge",
+                        "ttsText": "Visitor Badge",
+                        "bounds": {
+                            "xPct": 8.2,
+                            "yPct": 56.8,
+                            "widthPct": 23.5,
+                            "heightPct": 4.8
+                        },
+                        "tapRegion": {
+                            "xPct": 7.1,
+                            "yPct": 55.8,
+                            "widthPct": 26.0,
+                            "heightPct": 6.6
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "VISITOR",
+                        "ttsText": "VISITOR",
+                        "bounds": {
+                            "xPct": 24.1,
+                            "yPct": 81.9,
+                            "widthPct": 6.1,
+                            "heightPct": 2.6
+                        },
+                        "tapRegion": {
+                            "xPct": 23.0,
+                            "yPct": 80.8,
+                            "widthPct": 8.4,
+                            "heightPct": 4.8
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 5,
+                "bounds": {
+                    "xPct": 50.4,
+                    "yPct": 55.2,
+                    "widthPct": 49.2,
+                    "heightPct": 44.4
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Meeting a Visitor",
+                        "ttsText": "Meeting a Visitor",
+                        "bounds": {
+                            "xPct": 58.2,
+                            "yPct": 56.9,
+                            "widthPct": 26.8,
+                            "heightPct": 5.0
+                        },
+                        "tapRegion": {
+                            "xPct": 57.2,
+                            "yPct": 55.8,
+                            "widthPct": 28.9,
+                            "heightPct": 6.7
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "Meeting Room",
+                        "ttsText": "Meeting Room",
+                        "bounds": {
+                            "xPct": 92.5,
+                            "yPct": 61.7,
+                            "widthPct": 5.4,
+                            "heightPct": 4.4
+                        },
+                        "tapRegion": {
+                            "xPct": 91.2,
+                            "yPct": 60.5,
+                            "widthPct": 7.8,
+                            "heightPct": 6.6
+                        }
+                    }
+                ]
+            }
+        ]
     }
-
 };
