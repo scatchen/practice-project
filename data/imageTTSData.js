@@ -18214,4 +18214,149 @@ const imageTTSData = {
             }
         ]
     },
+
+    "images/english/family-basics.png": {
+        imageId: "family-basics",
+        assetFile: "images/english/family-basics.png",
+        contentType: "image-text",
+        layout: "custom-family-basics-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.60, yPct: 9.70, widthPct: 49.10, heightPct: 43.70 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "This is my family.", ttsText: "This is my family.",
+                        bounds: { xPct: 12.30, yPct: 12.30, widthPct: 21.80, heightPct: 3.20 },
+                        tapRegion: { xPct: 11.10, yPct: 11.20, widthPct: 24.20, heightPct: 6.00 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "father\n(dad)", ttsText: "father\n(dad)",
+                        bounds: { xPct: 3.90, yPct: 46.30, widthPct: 6.30, heightPct: 4.60 },
+                        tapRegion: { xPct: 3.20, yPct: 45.30, widthPct: 7.70, heightPct: 6.20 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "mother\n(mom)", ttsText: "mother\n(mom)",
+                        bounds: { xPct: 15.70, yPct: 46.30, widthPct: 6.30, heightPct: 4.60 },
+                        tapRegion: { xPct: 14.80, yPct: 45.30, widthPct: 8.40, heightPct: 6.20 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "brother", ttsText: "brother",
+                        bounds: { xPct: 31.00, yPct: 47.00, widthPct: 6.30, heightPct: 2.80 },
+                        tapRegion: { xPct: 30.30, yPct: 46.20, widthPct: 7.70, heightPct: 4.20 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "sister", ttsText: "sister",
+                        bounds: { xPct: 40.50, yPct: 47.00, widthPct: 6.00, heightPct: 2.80 },
+                        tapRegion: { xPct: 39.70, yPct: 46.20, widthPct: 7.60, heightPct: 4.20 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 49.75, yPct: 9.70, widthPct: 49.60, heightPct: 43.70 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "We love our family.", ttsText: "We love our family.",
+                        bounds: { xPct: 61.10, yPct: 12.30, widthPct: 23.10, heightPct: 3.20 },
+                        tapRegion: { xPct: 59.30, yPct: 11.20, widthPct: 26.70, heightPct: 6.00 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.60, yPct: 53.60, widthPct: 49.10, heightPct: 44.50 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "They are my family members.", ttsText: "They are my family members.",
+                        bounds: { xPct: 6.30, yPct: 56.40, widthPct: 34.50, heightPct: 3.60 },
+                        tapRegion: { xPct: 5.30, yPct: 55.10, widthPct: 36.40, heightPct: 6.30 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "father (dad)", ttsText: "father (dad)",
+                        bounds: { xPct: 3.60, yPct: 76.30, widthPct: 10.00, heightPct: 2.60 },
+                        tapRegion: { xPct: 3.00, yPct: 75.40, widthPct: 11.20, heightPct: 4.30 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "mother (mom)", ttsText: "mother (mom)",
+                        bounds: { xPct: 18.00, yPct: 76.30, widthPct: 10.50, heightPct: 2.60 },
+                        tapRegion: { xPct: 17.20, yPct: 75.40, widthPct: 12.00, heightPct: 4.30 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "brother", ttsText: "brother",
+                        bounds: { xPct: 36.00, yPct: 76.30, widthPct: 7.50, heightPct: 2.60 },
+                        tapRegion: { xPct: 35.20, yPct: 75.40, widthPct: 9.10, heightPct: 4.30 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "sentence",
+                        sourceText: "Family is love.", ttsText: "Family is love.",
+                        bounds: { xPct: 31.20, yPct: 83.10, widthPct: 13.00, heightPct: 7.00 },
+                        tapRegion: { xPct: 30.30, yPct: 82.20, widthPct: 14.70, heightPct: 9.00 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "label",
+                        sourceText: "sister", ttsText: "sister",
+                        bounds: { xPct: 4.40, yPct: 94.00, widthPct: 7.50, heightPct: 2.50 },
+                        tapRegion: { xPct: 3.40, yPct: 93.20, widthPct: 9.50, heightPct: 3.90 }
+                    },
+                    {
+                        itemId: 7, readingOrder: 7, type: "label",
+                        sourceText: "pet (dog)", ttsText: "pet (dog)",
+                        bounds: { xPct: 18.80, yPct: 94.00, widthPct: 8.50, heightPct: 2.50 },
+                        tapRegion: { xPct: 17.70, yPct: 93.20, widthPct: 10.70, heightPct: 3.90 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 49.75, yPct: 53.60, widthPct: 49.60, heightPct: 44.50 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "This is my family.", ttsText: "This is my family.",
+                        bounds: { xPct: 55.80, yPct: 64.40, widthPct: 19.50, heightPct: 4.60 },
+                        tapRegion: { xPct: 55.00, yPct: 63.90, widthPct: 21.00, heightPct: 5.60 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "I live with my family.", ttsText: "I live with my family.",
+                        bounds: { xPct: 55.80, yPct: 70.60, widthPct: 22.80, heightPct: 4.60 },
+                        tapRegion: { xPct: 55.00, yPct: 70.10, widthPct: 24.40, heightPct: 5.60 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "I love my family.", ttsText: "I love my family.",
+                        bounds: { xPct: 55.80, yPct: 76.80, widthPct: 18.00, heightPct: 4.60 },
+                        tapRegion: { xPct: 55.00, yPct: 76.30, widthPct: 20.00, heightPct: 5.60 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "We have a happy family.", ttsText: "We have a happy family.",
+                        bounds: { xPct: 55.80, yPct: 83.00, widthPct: 25.80, heightPct: 4.60 },
+                        tapRegion: { xPct: 55.00, yPct: 82.50, widthPct: 27.10, heightPct: 5.60 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "sentence",
+                        sourceText: "Family is important.", ttsText: "Family is important.",
+                        bounds: { xPct: 55.80, yPct: 89.20, widthPct: 21.20, heightPct: 4.60 },
+                        tapRegion: { xPct: 55.00, yPct: 88.70, widthPct: 23.00, heightPct: 5.60 }
+                    }
+                ]
+            }
+        ]
+    },
 };

@@ -8611,8 +8611,27 @@ function isEnglishHobbiesInterestsImageTTSItem(record, item) {
             "I like playing sports.", "I like drawing."].includes(item.sourceText));
 }
 
+function isEnglishFamilyBasicsImageTTSItem(record, item) {
+    if (!record || record.contentType !== "image-text" ||
+        record.imageId !== "family-basics" ||
+        record.assetFile !== "images/english/family-basics.png" || !item ||
+        item.ttsText !== item.sourceText) {
+        return false;
+    }
+    const allowedTexts = item.type === "sentence"
+        ? ["This is my family.", "We love our family.", "They are my family members.",
+            "Family is love.", "I live with my family.", "I love my family.",
+            "We have a happy family.", "Family is important."]
+        : item.type === "label"
+            ? ["father\n(dad)", "mother\n(mom)", "father (dad)", "mother (mom)",
+                "brother", "sister", "pet (dog)"]
+            : [];
+    return allowedTexts.includes(item.sourceText);
+}
+
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishHobbiesInterestsImageTTSItem(record, item) ||
+    if (isEnglishFamilyBasicsImageTTSItem(record, item) ||
+        isEnglishHobbiesInterestsImageTTSItem(record, item) ||
         isEnglishJobInterviewImageTTSItemText(record, item)) return true;
     return Boolean((item && typeof item.ttsText === "string" && record &&
         record.contentType === "image-text" && record.imageId === "shipping-and-logistics-basics" &&
@@ -9161,6 +9180,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "family-basics" &&
+        record.assetFile === "images/english/family-basics.png") {
+        return "Family";
+    }
     if (record && record.imageId === "daily-life-routines-basics" &&
         record.assetFile === "images/english/daily-life-routines-basics.png") {
         return "Daily Life & Routines";
@@ -9657,6 +9680,165 @@ function getEnglishHobbiesInterestsImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishFamilyBasicsImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/family-basics.png";
+    const expectedImageId = "family-basics";
+    const makeBounds = (xPct, yPct, widthPct, heightPct) =>
+        ({ xPct, yPct, widthPct, heightPct });
+    const expectedPanels = [
+        {
+            panelId: 1,
+            bounds: makeBounds(0.60, 9.70, 49.10, 43.70),
+            items: [
+                ["sentence", "This is my family.", makeBounds(12.30, 12.30, 21.80, 3.20),
+                    makeBounds(11.10, 11.20, 24.20, 6.00)],
+                ["label", "father\n(dad)", makeBounds(3.90, 46.30, 6.30, 4.60),
+                    makeBounds(3.20, 45.30, 7.70, 6.20)],
+                ["label", "mother\n(mom)", makeBounds(15.70, 46.30, 6.30, 4.60),
+                    makeBounds(14.80, 45.30, 8.40, 6.20)],
+                ["label", "brother", makeBounds(31.00, 47.00, 6.30, 2.80),
+                    makeBounds(30.30, 46.20, 7.70, 4.20)],
+                ["label", "sister", makeBounds(40.50, 47.00, 6.00, 2.80),
+                    makeBounds(39.70, 46.20, 7.60, 4.20)]
+            ]
+        },
+        {
+            panelId: 2,
+            bounds: makeBounds(49.75, 9.70, 49.60, 43.70),
+            items: [
+                ["sentence", "We love our family.", makeBounds(61.10, 12.30, 23.10, 3.20),
+                    makeBounds(59.30, 11.20, 26.70, 6.00)]
+            ]
+        },
+        {
+            panelId: 3,
+            bounds: makeBounds(0.60, 53.60, 49.10, 44.50),
+            items: [
+                ["sentence", "They are my family members.", makeBounds(6.30, 56.40, 34.50, 3.60),
+                    makeBounds(5.30, 55.10, 36.40, 6.30)],
+                ["label", "father (dad)", makeBounds(3.60, 76.30, 10.00, 2.60),
+                    makeBounds(3.00, 75.40, 11.20, 4.30)],
+                ["label", "mother (mom)", makeBounds(18.00, 76.30, 10.50, 2.60),
+                    makeBounds(17.20, 75.40, 12.00, 4.30)],
+                ["label", "brother", makeBounds(36.00, 76.30, 7.50, 2.60),
+                    makeBounds(35.20, 75.40, 9.10, 4.30)],
+                ["sentence", "Family is love.", makeBounds(31.20, 83.10, 13.00, 7.00),
+                    makeBounds(30.30, 82.20, 14.70, 9.00)],
+                ["label", "sister", makeBounds(4.40, 94.00, 7.50, 2.50),
+                    makeBounds(3.40, 93.20, 9.50, 3.90)],
+                ["label", "pet (dog)", makeBounds(18.80, 94.00, 8.50, 2.50),
+                    makeBounds(17.70, 93.20, 10.70, 3.90)]
+            ]
+        },
+        {
+            panelId: 4,
+            bounds: makeBounds(49.75, 53.60, 49.60, 44.50),
+            items: [
+                ["sentence", "This is my family.", makeBounds(55.80, 64.40, 19.50, 4.60),
+                    makeBounds(55.00, 63.90, 21.00, 5.60)],
+                ["sentence", "I live with my family.", makeBounds(55.80, 70.60, 22.80, 4.60),
+                    makeBounds(55.00, 70.10, 24.40, 5.60)],
+                ["sentence", "I love my family.", makeBounds(55.80, 76.80, 18.00, 4.60),
+                    makeBounds(55.00, 76.30, 20.00, 5.60)],
+                ["sentence", "We have a happy family.", makeBounds(55.80, 83.00, 25.80, 4.60),
+                    makeBounds(55.00, 82.50, 27.10, 5.60)],
+                ["sentence", "Family is important.", makeBounds(55.80, 89.20, 21.20, 4.60),
+                    makeBounds(55.00, 88.70, 23.00, 5.60)]
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = value => hasExactKeys(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-family-basics-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allTextBounds = [];
+    const allTapRegions = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 || item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem[0] || item.sourceText !== expectedItem[1] ||
+                item.ttsText !== item.sourceText || !getEnglishTTSUnitText(item.sourceText) ||
+                !isEnglishFamilyBasicsImageTTSItem(record, item) ||
+                !matchesBounds(item.bounds, expectedItem[2]) ||
+                !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+        }
+    }
+
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) {
+                    return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -9669,6 +9851,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isFamilyBasicsImageTextIdentity =
+        record.imageId === "family-basics" ||
+        record.assetFile === "images/english/family-basics.png" ||
+        assetFile === "images/english/family-basics.png";
+    if (isFamilyBasicsImageTextIdentity) {
+        return getEnglishFamilyBasicsImageTextRecord(record, assetFile);
     }
 
     const isDailyLifeRoutinesImageTextIdentity =
@@ -11770,6 +11960,11 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "hobbies-interests-basics" &&
         record.assetFile === "images/english/hobbies-interests-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isFamilyBasicsImageText = Boolean(record &&
+        record.imageId === "family-basics" &&
+        record.assetFile === "images/english/family-basics.png");
+    const isFamilyBasicsSingleItemSequence = Boolean(isFamilyBasicsImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isDailyLifeRoutinesImageText = Boolean(record &&
         record.imageId === "daily-life-routines-basics" &&
         record.assetFile === "images/english/daily-life-routines-basics.png");
@@ -11800,7 +11995,8 @@ function speakEnglishImageTTSImageTextSequence(
         triggerPanel !== record.panels.find(panel => panel.panelId === triggerPanel.panelId) ||
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
         (!isPanelSequence && !isWholeImageSequence &&
-            !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence) ||
+            !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
+            !isFamilyBasicsSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length ||
@@ -12110,6 +12306,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
                     trigger,
                     [item],
                     "已朗讀所選句子。"
+                )
+            ));
+        });
+    }
+
+    const isFamilyBasicsImageText = safeRecord.imageId === "family-basics" &&
+        safeRecord.assetFile === "images/english/family-basics.png";
+    if (isFamilyBasicsImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
                 )
             ));
         });
