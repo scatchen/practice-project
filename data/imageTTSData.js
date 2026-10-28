@@ -18359,4 +18359,93 @@ const imageTTSData = {
             }
         ]
     },
+
+    "images/english/weather-instruments-basics.png": {
+        imageId: "weather-instruments-basics",
+        assetFile: "images/english/weather-instruments-basics.png",
+        contentType: "image-text",
+        layout: "custom-weather-instruments-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.64, yPct: 13.88, widthPct: 49.12, heightPct: 40.43 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Thermometer", ttsText: "Thermometer",
+                        bounds: { xPct: 12.52, yPct: 14.91, widthPct: 27.35, heightPct: 3.91 },
+                        tapRegion: { xPct: 10.37, yPct: 14.59, widthPct: 31.66, heightPct: 4.63 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A thermometer measures\nthe temperature of the air.",
+                        ttsText: "A thermometer measures\nthe temperature of the air.",
+                        bounds: { xPct: 7.89, yPct: 20.02, widthPct: 36.52, heightPct: 6.06 },
+                        tapRegion: { xPct: 6.86, yPct: 19.54, widthPct: 38.60, heightPct: 7.10 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.40, yPct: 13.88, widthPct: 49.04, heightPct: 40.43 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Anemometer", ttsText: "Anemometer",
+                        bounds: { xPct: 64.83, yPct: 14.91, widthPct: 26.08, heightPct: 3.91 },
+                        tapRegion: { xPct: 62.76, yPct: 14.59, widthPct: 30.30, heightPct: 4.63 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "An anemometer measures\nthe wind speed.",
+                        ttsText: "An anemometer measures\nthe wind speed.",
+                        bounds: { xPct: 59.33, yPct: 20.02, widthPct: 35.41, heightPct: 6.06 },
+                        tapRegion: { xPct: 57.50, yPct: 19.54, widthPct: 39.23, heightPct: 7.10 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.64, yPct: 54.86, widthPct: 49.12, heightPct: 44.66 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Wind Vane", ttsText: "Wind Vane",
+                        bounds: { xPct: 15.87, yPct: 55.98, widthPct: 20.10, heightPct: 3.91 },
+                        tapRegion: { xPct: 14.35, yPct: 55.58, widthPct: 23.13, heightPct: 4.63 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A wind vane shows\nthe wind direction.",
+                        ttsText: "A wind vane shows\nthe wind direction.",
+                        bounds: { xPct: 11.88, yPct: 61.08, widthPct: 28.23, heightPct: 6.22 },
+                        tapRegion: { xPct: 10.53, yPct: 60.45, widthPct: 31.10, heightPct: 7.50 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.40, yPct: 54.86, widthPct: 49.04, heightPct: 44.66 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Rain Gauge", ttsText: "Rain Gauge",
+                        bounds: { xPct: 65.95, yPct: 55.90, widthPct: 25.44, heightPct: 3.91 },
+                        tapRegion: { xPct: 64.04, yPct: 55.50, widthPct: 29.27, heightPct: 4.63 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A rain gauge measures\nthe amount of rainfall.",
+                        ttsText: "A rain gauge measures\nthe amount of rainfall.",
+                        bounds: { xPct: 61.24, yPct: 61.16, widthPct: 30.94, heightPct: 6.14 },
+                        tapRegion: { xPct: 59.33, yPct: 60.53, widthPct: 34.77, heightPct: 7.34 }
+                    }
+                ]
+            }
+        ]
+    },
 };
