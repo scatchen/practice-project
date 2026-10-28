@@ -16346,5 +16346,267 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/business-presentation-basics.png": {
+        "imageId": "business-presentation-basics",
+        "assetFile": "images/english/business-presentation-basics.png",
+        "contentType": "image-text",
+        "layout": "custom-business-presentation-title-plus-2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 0,
+                "readingOrder": 1,
+                "bounds": {
+                    "xPct": 0.4,
+                    "yPct": 0.4,
+                    "widthPct": 99.2,
+                    "heightPct": 8.3
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "label",
+                        "sourceText": "Business Presentation",
+                        "ttsText": "Business Presentation",
+                        "bounds": {
+                            "xPct": 19.5,
+                            "yPct": 1.6,
+                            "widthPct": 45.3,
+                            "heightPct": 5.7
+                        },
+                        "tapRegion": {
+                            "xPct": 18.4,
+                            "yPct": 0.8,
+                            "widthPct": 47.8,
+                            "heightPct": 7.3
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 1,
+                "readingOrder": 2,
+                "bounds": {
+                    "xPct": 0.4,
+                    "yPct": 9.4,
+                    "widthPct": 49.2,
+                    "heightPct": 44.4
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Giving a Presentation",
+                        "ttsText": "Giving a Presentation",
+                        "bounds": {
+                            "xPct": 5.4,
+                            "yPct": 10.3,
+                            "widthPct": 25.6,
+                            "heightPct": 3.4
+                        },
+                        "tapRegion": {
+                            "xPct": 4.6,
+                            "yPct": 9.9,
+                            "widthPct": 27.2,
+                            "heightPct": 5.0
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 3,
+                "bounds": {
+                    "xPct": 50.4,
+                    "yPct": 9.4,
+                    "widthPct": 49.2,
+                    "heightPct": 44.4
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Showing Presentation Slides",
+                        "ttsText": "Showing Presentation Slides",
+                        "bounds": {
+                            "xPct": 56.0,
+                            "yPct": 10.3,
+                            "widthPct": 34.8,
+                            "heightPct": 3.4
+                        },
+                        "tapRegion": {
+                            "xPct": 55.2,
+                            "yPct": 9.9,
+                            "widthPct": 36.2,
+                            "heightPct": 5.0
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "Project Plan",
+                        "ttsText": "Project Plan",
+                        "bounds": {
+                            "xPct": 69.1,
+                            "yPct": 23.6,
+                            "widthPct": 10.4,
+                            "heightPct": 2.5
+                        },
+                        "tapRegion": {
+                            "xPct": 67.8,
+                            "yPct": 22.3,
+                            "widthPct": 13.0,
+                            "heightPct": 5.1
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 4,
+                "bounds": {
+                    "xPct": 0.4,
+                    "yPct": 54.7,
+                    "widthPct": 49.2,
+                    "heightPct": 44.8
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Speaking to the Audience",
+                        "ttsText": "Speaking to the Audience",
+                        "bounds": {
+                            "xPct": 5.4,
+                            "yPct": 55.6,
+                            "widthPct": 30.0,
+                            "heightPct": 3.4
+                        },
+                        "tapRegion": {
+                            "xPct": 4.6,
+                            "yPct": 55.2,
+                            "widthPct": 31.8,
+                            "heightPct": 5.0
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "Key Points",
+                        "ttsText": "Key Points",
+                        "bounds": {
+                            "xPct": 27.3,
+                            "yPct": 64.3,
+                            "widthPct": 9.3,
+                            "heightPct": 2.5
+                        },
+                        "tapRegion": {
+                            "xPct": 26.1,
+                            "yPct": 63.5,
+                            "widthPct": 11.6,
+                            "heightPct": 4.0
+                        }
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "Market Analysis",
+                        "ttsText": "Market Analysis",
+                        "bounds": {
+                            "xPct": 28.6,
+                            "yPct": 68.2,
+                            "widthPct": 11.6,
+                            "heightPct": 2.4
+                        },
+                        "tapRegion": {
+                            "xPct": 27.7,
+                            "yPct": 67.8,
+                            "widthPct": 13.6,
+                            "heightPct": 2.9
+                        }
+                    },
+                    {
+                        "itemId": 4,
+                        "readingOrder": 4,
+                        "type": "label",
+                        "sourceText": "Work Plan",
+                        "ttsText": "Work Plan",
+                        "bounds": {
+                            "xPct": 28.6,
+                            "yPct": 71.5,
+                            "widthPct": 7.9,
+                            "heightPct": 2.4
+                        },
+                        "tapRegion": {
+                            "xPct": 27.7,
+                            "yPct": 71.0,
+                            "widthPct": 10.2,
+                            "heightPct": 2.9
+                        }
+                    },
+                    {
+                        "itemId": 5,
+                        "readingOrder": 5,
+                        "type": "label",
+                        "sourceText": "Expected Results",
+                        "ttsText": "Expected Results",
+                        "bounds": {
+                            "xPct": 28.6,
+                            "yPct": 74.8,
+                            "widthPct": 13.0,
+                            "heightPct": 2.4
+                        },
+                        "tapRegion": {
+                            "xPct": 27.7,
+                            "yPct": 74.4,
+                            "widthPct": 15.2,
+                            "heightPct": 3.1
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 5,
+                "bounds": {
+                    "xPct": 50.4,
+                    "yPct": 54.7,
+                    "widthPct": 49.2,
+                    "heightPct": 44.8
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Answering Questions",
+                        "ttsText": "Answering Questions",
+                        "bounds": {
+                            "xPct": 56.0,
+                            "yPct": 55.6,
+                            "widthPct": 24.2,
+                            "heightPct": 3.4
+                        },
+                        "tapRegion": {
+                            "xPct": 55.2,
+                            "yPct": 55.2,
+                            "widthPct": 25.8,
+                            "heightPct": 5.0
+                        }
+                    }
+                ]
+            }
+        ]
     }
 };

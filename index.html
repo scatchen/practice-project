@@ -7104,6 +7104,163 @@ function getEnglishOktoberfestTeachingTTSRecord(record, assetFile) {
 }
 
 
+function getEnglishBusinessPresentationImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/business-presentation-basics.png";
+    const expectedImageId = "business-presentation-basics";
+    const makeBounds = (xPct, yPct, widthPct, heightPct) =>
+        ({ xPct, yPct, widthPct, heightPct });
+    const expectedPanels = [
+        {
+            panelId: 0, readingOrder: 1,
+            bounds: makeBounds(0.4, 0.4, 99.2, 8.3),
+            items: [
+                { itemId: 1, readingOrder: 1, type: "label", sourceText: "Business Presentation",
+                    bounds: makeBounds(19.5, 1.6, 45.3, 5.7),
+                    tapRegion: makeBounds(18.4, 0.8, 47.8, 7.3) }
+            ]
+        },
+        {
+            panelId: 1, readingOrder: 2,
+            bounds: makeBounds(0.4, 9.4, 49.2, 44.4),
+            items: [
+                { itemId: 1, readingOrder: 1, type: "phrase", sourceText: "Giving a Presentation",
+                    bounds: makeBounds(5.4, 10.3, 25.6, 3.4),
+                    tapRegion: makeBounds(4.6, 9.9, 27.2, 5.0) }
+            ]
+        },
+        {
+            panelId: 2, readingOrder: 3,
+            bounds: makeBounds(50.4, 9.4, 49.2, 44.4),
+            items: [
+                { itemId: 1, readingOrder: 1, type: "phrase", sourceText: "Showing Presentation Slides",
+                    bounds: makeBounds(56.0, 10.3, 34.8, 3.4),
+                    tapRegion: makeBounds(55.2, 9.9, 36.2, 5.0) },
+                { itemId: 2, readingOrder: 2, type: "label", sourceText: "Project Plan",
+                    bounds: makeBounds(69.1, 23.6, 10.4, 2.5),
+                    tapRegion: makeBounds(67.8, 22.3, 13.0, 5.1) }
+            ]
+        },
+        {
+            panelId: 3, readingOrder: 4,
+            bounds: makeBounds(0.4, 54.7, 49.2, 44.8),
+            items: [
+                { itemId: 1, readingOrder: 1, type: "phrase", sourceText: "Speaking to the Audience",
+                    bounds: makeBounds(5.4, 55.6, 30.0, 3.4),
+                    tapRegion: makeBounds(4.6, 55.2, 31.8, 5.0) },
+                { itemId: 2, readingOrder: 2, type: "label", sourceText: "Key Points",
+                    bounds: makeBounds(27.3, 64.3, 9.3, 2.5),
+                    tapRegion: makeBounds(26.1, 63.5, 11.6, 4.0) },
+                { itemId: 3, readingOrder: 3, type: "label", sourceText: "Market Analysis",
+                    bounds: makeBounds(28.6, 68.2, 11.6, 2.4),
+                    tapRegion: makeBounds(27.7, 67.8, 13.6, 2.9) },
+                { itemId: 4, readingOrder: 4, type: "label", sourceText: "Work Plan",
+                    bounds: makeBounds(28.6, 71.5, 7.9, 2.4),
+                    tapRegion: makeBounds(27.7, 71.0, 10.2, 2.9) },
+                { itemId: 5, readingOrder: 5, type: "label", sourceText: "Expected Results",
+                    bounds: makeBounds(28.6, 74.8, 13.0, 2.4),
+                    tapRegion: makeBounds(27.7, 74.4, 15.2, 3.1) }
+            ]
+        },
+        {
+            panelId: 4, readingOrder: 5,
+            bounds: makeBounds(50.4, 54.7, 49.2, 44.8),
+            items: [
+                { itemId: 1, readingOrder: 1, type: "phrase", sourceText: "Answering Questions",
+                    bounds: makeBounds(56.0, 55.6, 24.2, 3.4),
+                    tapRegion: makeBounds(55.2, 55.2, 25.8, 5.0) }
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = value => hasExactKeys(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-business-presentation-title-plus-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allTextBounds = [];
+    const allTapRegions = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panel.readingOrder !== expectedPanel.readingOrder ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== expectedItem.itemId ||
+                item.readingOrder !== expectedItem.readingOrder || item.type !== expectedItem.type ||
+                item.sourceText !== expectedItem.sourceText || item.ttsText !== item.sourceText ||
+                !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !matchesBounds(item.tapRegion, expectedItem.tapRegion) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) {
+                    return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishOfficeReceptionImageTextRecord(record, assetFile) {
     const expectedAssetFile = "images/english/office-reception-and-visitors-basics.png";
     const expectedImageId = "office-reception-and-visitors-basics";
@@ -8574,7 +8731,9 @@ function isEnglishImageTTSFullTitleImageTextRecord(record) {
         (record.imageId === "customer-service-basics" &&
             record.assetFile === "images/english/customer-service-basics.png") ||
         (record.imageId === "office-reception-and-visitors-basics" &&
-            record.assetFile === "images/english/office-reception-and-visitors-basics.png")
+            record.assetFile === "images/english/office-reception-and-visitors-basics.png") ||
+        (record.imageId === "business-presentation-basics" &&
+            record.assetFile === "images/english/business-presentation-basics.png")
     ));
 }
 
@@ -8597,6 +8756,10 @@ function getEnglishImageTTSImageTextName(record) {
     if (record && record.imageId === "office-reception-and-visitors-basics" &&
         record.assetFile === "images/english/office-reception-and-visitors-basics.png") {
         return "Office Reception & Visitors";
+    }
+    if (record && record.imageId === "business-presentation-basics" &&
+        record.assetFile === "images/english/business-presentation-basics.png") {
+        return "Business Presentation";
     }
     if (record && record.imageId === "office-and-workplace-basics" &&
         record.assetFile === "images/english/office-and-workplace-basics.png") {
@@ -8677,6 +8840,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/office-reception-and-visitors-basics.png";
     if (isOfficeReceptionImageTextIdentity) {
         return getEnglishOfficeReceptionImageTextRecord(record, assetFile);
+    }
+
+    const isBusinessPresentationImageTextIdentity =
+        record.imageId === "business-presentation-basics" ||
+        record.assetFile === "images/english/business-presentation-basics.png" ||
+        assetFile === "images/english/business-presentation-basics.png";
+    if (isBusinessPresentationImageTextIdentity) {
+        return getEnglishBusinessPresentationImageTextRecord(record, assetFile);
     }
 
     const isChangingOfTheGuardImageTextIdentity =
