@@ -16783,5 +16783,552 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/airport-and-business-travel-basics.png": {
+        "imageId": "airport-and-business-travel-basics",
+        "assetFile": "images/english/airport-and-business-travel-basics.png",
+        "contentType": "image-text",
+        "layout": "custom-airport-business-travel-title-plus-2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 0,
+                "readingOrder": 1,
+                "bounds": {
+                    "xPct": 0.7,
+                    "yPct": 0.6,
+                    "widthPct": 98.6,
+                    "heightPct": 9.2
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "label",
+                        "sourceText": "Airport & Business Travel",
+                        "ttsText": "Airport & Business Travel",
+                        "bounds": {
+                            "xPct": 10.4,
+                            "yPct": 2.0,
+                            "widthPct": 52.0,
+                            "heightPct": 5.3
+                        },
+                        "tapRegion": {
+                            "xPct": 9.8,
+                            "yPct": 1.3,
+                            "widthPct": 53.2,
+                            "heightPct": 6.8
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 1,
+                "readingOrder": 2,
+                "bounds": {
+                    "xPct": 0.7,
+                    "yPct": 11.0,
+                    "widthPct": 48.8,
+                    "heightPct": 44.8
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Airport Check-in",
+                        "ttsText": "Airport Check-in",
+                        "bounds": {
+                            "xPct": 8.4,
+                            "yPct": 12.4,
+                            "widthPct": 24.0,
+                            "heightPct": 3.5
+                        },
+                        "tapRegion": {
+                            "xPct": 7.6,
+                            "yPct": 11.8,
+                            "widthPct": 26.0,
+                            "heightPct": 4.8
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "Departures",
+                        "ttsText": "Departures",
+                        "bounds": {
+                            "xPct": 2.4,
+                            "yPct": 22.3,
+                            "widthPct": 13.5,
+                            "heightPct": 3.5
+                        },
+                        "tapRegion": {
+                            "xPct": 1.4,
+                            "yPct": 20.8,
+                            "widthPct": 15.5,
+                            "heightPct": 6.2
+                        }
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "Check-in",
+                        "ttsText": "Check-in",
+                        "bounds": {
+                            "xPct": 32.4,
+                            "yPct": 19.4,
+                            "widthPct": 12.0,
+                            "heightPct": 3.5
+                        },
+                        "tapRegion": {
+                            "xPct": 31.1,
+                            "yPct": 18.4,
+                            "widthPct": 14.8,
+                            "heightPct": 5.6
+                        }
+                    },
+                    {
+                        "itemId": 4,
+                        "readingOrder": 4,
+                        "type": "phrase",
+                        "sourceText": "check in at the airport",
+                        "ttsText": "check in at the airport",
+                        "bounds": {
+                            "xPct": 23.5,
+                            "yPct": 45.6,
+                            "widthPct": 18.0,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 22.8,
+                            "yPct": 45.3,
+                            "widthPct": 26.0,
+                            "heightPct": 2.8
+                        }
+                    },
+                    {
+                        "itemId": 5,
+                        "readingOrder": 5,
+                        "type": "label",
+                        "sourceText": "passport",
+                        "ttsText": "passport",
+                        "bounds": {
+                            "xPct": 23.5,
+                            "yPct": 48.8,
+                            "widthPct": 18.0,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 22.8,
+                            "yPct": 48.5,
+                            "widthPct": 26.0,
+                            "heightPct": 2.8
+                        }
+                    },
+                    {
+                        "itemId": 6,
+                        "readingOrder": 6,
+                        "type": "phrase",
+                        "sourceText": "ticket / boarding pass",
+                        "ttsText": "ticket / boarding pass",
+                        "bounds": {
+                            "xPct": 23.5,
+                            "yPct": 52.0,
+                            "widthPct": 18.0,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 22.8,
+                            "yPct": 51.7,
+                            "widthPct": 26.0,
+                            "heightPct": 2.8
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 3,
+                "bounds": {
+                    "xPct": 50.5,
+                    "yPct": 11.0,
+                    "widthPct": 48.8,
+                    "heightPct": 44.8
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Boarding Pass & Gate",
+                        "ttsText": "Boarding Pass & Gate",
+                        "bounds": {
+                            "xPct": 57.8,
+                            "yPct": 12.4,
+                            "widthPct": 25.5,
+                            "heightPct": 3.5
+                        },
+                        "tapRegion": {
+                            "xPct": 56.8,
+                            "yPct": 11.8,
+                            "widthPct": 27.5,
+                            "heightPct": 4.8
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "Gate A8",
+                        "ttsText": "Gate A8",
+                        "bounds": {
+                            "xPct": 84.0,
+                            "yPct": 21.6,
+                            "widthPct": 11.0,
+                            "heightPct": 4.1
+                        },
+                        "tapRegion": {
+                            "xPct": 82.5,
+                            "yPct": 20.3,
+                            "widthPct": 14.4,
+                            "heightPct": 6.5
+                        }
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "BOARDING PASS",
+                        "ttsText": "BOARDING PASS",
+                        "bounds": {
+                            "xPct": 66.2,
+                            "yPct": 35.0,
+                            "widthPct": 8.0,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 64.6,
+                            "yPct": 33.7,
+                            "widthPct": 11.2,
+                            "heightPct": 4.8
+                        }
+                    },
+                    {
+                        "itemId": 4,
+                        "readingOrder": 4,
+                        "type": "label",
+                        "sourceText": "boarding pass",
+                        "ttsText": "boarding pass",
+                        "bounds": {
+                            "xPct": 80.4,
+                            "yPct": 45.6,
+                            "widthPct": 10.3,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 79.2,
+                            "yPct": 45.3,
+                            "widthPct": 19.2,
+                            "heightPct": 2.8
+                        }
+                    },
+                    {
+                        "itemId": 5,
+                        "readingOrder": 5,
+                        "type": "label",
+                        "sourceText": "boarding gate",
+                        "ttsText": "boarding gate",
+                        "bounds": {
+                            "xPct": 80.4,
+                            "yPct": 48.8,
+                            "widthPct": 10.3,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 79.2,
+                            "yPct": 48.5,
+                            "widthPct": 19.2,
+                            "heightPct": 2.8
+                        }
+                    },
+                    {
+                        "itemId": 6,
+                        "readingOrder": 6,
+                        "type": "phrase",
+                        "sourceText": "board the plane",
+                        "ttsText": "board the plane",
+                        "bounds": {
+                            "xPct": 80.4,
+                            "yPct": 52.0,
+                            "widthPct": 10.3,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 79.2,
+                            "yPct": 51.7,
+                            "widthPct": 19.2,
+                            "heightPct": 2.8
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 4,
+                "bounds": {
+                    "xPct": 0.7,
+                    "yPct": 57.0,
+                    "widthPct": 48.8,
+                    "heightPct": 41.8
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Baggage & Flight",
+                        "ttsText": "Baggage & Flight",
+                        "bounds": {
+                            "xPct": 8.4,
+                            "yPct": 58.4,
+                            "widthPct": 21.0,
+                            "heightPct": 3.5
+                        },
+                        "tapRegion": {
+                            "xPct": 7.6,
+                            "yPct": 57.8,
+                            "widthPct": 22.8,
+                            "heightPct": 4.8
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "Baggage Drop",
+                        "ttsText": "Baggage Drop",
+                        "bounds": {
+                            "xPct": 19.5,
+                            "yPct": 68.6,
+                            "widthPct": 12.0,
+                            "heightPct": 5.2
+                        },
+                        "tapRegion": {
+                            "xPct": 16.5,
+                            "yPct": 65.3,
+                            "widthPct": 15.5,
+                            "heightPct": 9.0
+                        }
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "baggage / luggage",
+                        "ttsText": "baggage / luggage",
+                        "bounds": {
+                            "xPct": 23.7,
+                            "yPct": 83.0,
+                            "widthPct": 14.8,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 22.7,
+                            "yPct": 82.7,
+                            "widthPct": 26.0,
+                            "heightPct": 2.8
+                        }
+                    },
+                    {
+                        "itemId": 4,
+                        "readingOrder": 4,
+                        "type": "phrase",
+                        "sourceText": "check in luggage",
+                        "ttsText": "check in luggage",
+                        "bounds": {
+                            "xPct": 23.7,
+                            "yPct": 86.2,
+                            "widthPct": 14.8,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 22.7,
+                            "yPct": 85.9,
+                            "widthPct": 26.0,
+                            "heightPct": 2.8
+                        }
+                    },
+                    {
+                        "itemId": 5,
+                        "readingOrder": 5,
+                        "type": "label",
+                        "sourceText": "flight",
+                        "ttsText": "flight",
+                        "bounds": {
+                            "xPct": 23.7,
+                            "yPct": 89.4,
+                            "widthPct": 14.8,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 22.7,
+                            "yPct": 89.1,
+                            "widthPct": 26.0,
+                            "heightPct": 2.8
+                        }
+                    },
+                    {
+                        "itemId": 6,
+                        "readingOrder": 6,
+                        "type": "phrase",
+                        "sourceText": "departure / arrival",
+                        "ttsText": "departure / arrival",
+                        "bounds": {
+                            "xPct": 23.7,
+                            "yPct": 92.6,
+                            "widthPct": 14.8,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 22.7,
+                            "yPct": 92.3,
+                            "widthPct": 26.0,
+                            "heightPct": 2.8
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 5,
+                "bounds": {
+                    "xPct": 50.5,
+                    "yPct": 57.0,
+                    "widthPct": 48.8,
+                    "heightPct": 41.8
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Business Trip",
+                        "ttsText": "Business Trip",
+                        "bounds": {
+                            "xPct": 57.8,
+                            "yPct": 58.4,
+                            "widthPct": 15.6,
+                            "heightPct": 3.5
+                        },
+                        "tapRegion": {
+                            "xPct": 56.8,
+                            "yPct": 57.8,
+                            "widthPct": 17.6,
+                            "heightPct": 4.8
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "Business Travel",
+                        "ttsText": "Business Travel",
+                        "bounds": {
+                            "xPct": 82.6,
+                            "yPct": 67.0,
+                            "widthPct": 13.8,
+                            "heightPct": 3.6
+                        },
+                        "tapRegion": {
+                            "xPct": 79.0,
+                            "yPct": 63.4,
+                            "widthPct": 18.6,
+                            "heightPct": 10.5
+                        }
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "business trip",
+                        "ttsText": "business trip",
+                        "bounds": {
+                            "xPct": 79.2,
+                            "yPct": 83.0,
+                            "widthPct": 15.0,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 78.0,
+                            "yPct": 82.7,
+                            "widthPct": 20.8,
+                            "heightPct": 2.8
+                        }
+                    },
+                    {
+                        "itemId": 4,
+                        "readingOrder": 4,
+                        "type": "phrase",
+                        "sourceText": "travel for business",
+                        "ttsText": "travel for business",
+                        "bounds": {
+                            "xPct": 79.2,
+                            "yPct": 86.2,
+                            "widthPct": 15.0,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 78.0,
+                            "yPct": 85.9,
+                            "widthPct": 20.8,
+                            "heightPct": 2.8
+                        }
+                    },
+                    {
+                        "itemId": 5,
+                        "readingOrder": 5,
+                        "type": "label",
+                        "sourceText": "business travel",
+                        "ttsText": "business travel",
+                        "bounds": {
+                            "xPct": 79.2,
+                            "yPct": 89.4,
+                            "widthPct": 15.0,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 78.0,
+                            "yPct": 89.1,
+                            "widthPct": 20.8,
+                            "heightPct": 2.8
+                        }
+                    },
+                    {
+                        "itemId": 6,
+                        "readingOrder": 6,
+                        "type": "phrase",
+                        "sourceText": "take a flight",
+                        "ttsText": "take a flight",
+                        "bounds": {
+                            "xPct": 79.2,
+                            "yPct": 92.6,
+                            "widthPct": 15.0,
+                            "heightPct": 2.2
+                        },
+                        "tapRegion": {
+                            "xPct": 78.0,
+                            "yPct": 92.3,
+                            "widthPct": 20.8,
+                            "heightPct": 2.8
+                        }
+                    }
+                ]
+            }
+        ]
     }
 };
