@@ -17330,5 +17330,742 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/hotel-check-in-and-business-hotel-basics.png": {
+        "imageId": "hotel-check-in-and-business-hotel-basics",
+        "assetFile": "images/english/hotel-check-in-and-business-hotel-basics.png",
+        "contentType": "image-text",
+        "layout": "custom-hotel-checkin-title-plus-2x2",
+        "transcriptStatus": "verified",
+        "transcriptReviewMethod": "manual-visual-no-OCR",
+        "coordinateStatus": "calibrated",
+        "overlayRuntimeStatus": "not-tested",
+        "panels": [
+            {
+                "panelId": 0,
+                "readingOrder": 1,
+                "bounds": {
+                    "xPct": 0.5,
+                    "yPct": 0.4,
+                    "widthPct": 99.0,
+                    "heightPct": 11.9
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "label",
+                        "sourceText": "Hotel Check-in & Business Hotel",
+                        "ttsText": "Hotel Check-in & Business Hotel",
+                        "bounds": {
+                            "xPct": 4.1,
+                            "yPct": 1.5,
+                            "widthPct": 81.0,
+                            "heightPct": 5.2
+                        },
+                        "tapRegion": {
+                            "xPct": 3.2,
+                            "yPct": 0.9,
+                            "widthPct": 83.0,
+                            "heightPct": 7.0
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 1,
+                "readingOrder": 2,
+                "bounds": {
+                    "xPct": 0.5,
+                    "yPct": 12.8,
+                    "widthPct": 49.3,
+                    "heightPct": 42.8
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Hotel Check-in",
+                        "ttsText": "Hotel Check-in",
+                        "bounds": {
+                            "xPct": 8.0,
+                            "yPct": 13.9,
+                            "widthPct": 23.9,
+                            "heightPct": 2.6
+                        },
+                        "tapRegion": {
+                            "xPct": 7.0,
+                            "yPct": 13.4,
+                            "widthPct": 26.0,
+                            "heightPct": 3.6
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "hotel check-in",
+                        "ttsText": "hotel check-in",
+                        "bounds": {
+                            "xPct": 4.3,
+                            "yPct": 45.2,
+                            "widthPct": 14.0,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 3.4,
+                            "yPct": 45.0,
+                            "widthPct": 16.0,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "reservation",
+                        "ttsText": "reservation",
+                        "bounds": {
+                            "xPct": 28.8,
+                            "yPct": 45.2,
+                            "widthPct": 13.8,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 27.8,
+                            "yPct": 45.0,
+                            "widthPct": 15.5,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 4,
+                        "readingOrder": 4,
+                        "type": "label",
+                        "sourceText": "front desk",
+                        "ttsText": "front desk",
+                        "bounds": {
+                            "xPct": 4.3,
+                            "yPct": 47.6,
+                            "widthPct": 11.7,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 3.4,
+                            "yPct": 47.4,
+                            "widthPct": 16.0,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 5,
+                        "readingOrder": 5,
+                        "type": "label",
+                        "sourceText": "book a room",
+                        "ttsText": "book a room",
+                        "bounds": {
+                            "xPct": 28.8,
+                            "yPct": 47.6,
+                            "widthPct": 15.2,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 27.8,
+                            "yPct": 47.4,
+                            "widthPct": 16.5,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 6,
+                        "readingOrder": 6,
+                        "type": "label",
+                        "sourceText": "reception desk",
+                        "ttsText": "reception desk",
+                        "bounds": {
+                            "xPct": 4.3,
+                            "yPct": 50.0,
+                            "widthPct": 14.6,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 3.4,
+                            "yPct": 49.8,
+                            "widthPct": 16.0,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 7,
+                        "readingOrder": 7,
+                        "type": "label",
+                        "sourceText": "hotel guest",
+                        "ttsText": "hotel guest",
+                        "bounds": {
+                            "xPct": 28.8,
+                            "yPct": 50.0,
+                            "widthPct": 13.8,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 27.8,
+                            "yPct": 49.8,
+                            "widthPct": 15.5,
+                            "heightPct": 2.2
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 2,
+                "readingOrder": 3,
+                "bounds": {
+                    "xPct": 50.5,
+                    "yPct": 12.8,
+                    "widthPct": 49.0,
+                    "heightPct": 42.8
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Hotel Room",
+                        "ttsText": "Hotel Room",
+                        "bounds": {
+                            "xPct": 58.6,
+                            "yPct": 13.9,
+                            "widthPct": 20.5,
+                            "heightPct": 2.6
+                        },
+                        "tapRegion": {
+                            "xPct": 57.5,
+                            "yPct": 13.4,
+                            "widthPct": 23.0,
+                            "heightPct": 3.6
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "hotel room",
+                        "ttsText": "hotel room",
+                        "bounds": {
+                            "xPct": 54.4,
+                            "yPct": 45.2,
+                            "widthPct": 11.0,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 53.3,
+                            "yPct": 45.0,
+                            "widthPct": 15.0,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "TV",
+                        "ttsText": "TV",
+                        "bounds": {
+                            "xPct": 78.4,
+                            "yPct": 45.2,
+                            "widthPct": 3.5,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 77.3,
+                            "yPct": 45.0,
+                            "widthPct": 18.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 4,
+                        "readingOrder": 4,
+                        "type": "label",
+                        "sourceText": "guest room",
+                        "ttsText": "guest room",
+                        "bounds": {
+                            "xPct": 54.4,
+                            "yPct": 47.6,
+                            "widthPct": 11.7,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 53.3,
+                            "yPct": 47.4,
+                            "widthPct": 15.0,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 5,
+                        "readingOrder": 5,
+                        "type": "label",
+                        "sourceText": "desk",
+                        "ttsText": "desk",
+                        "bounds": {
+                            "xPct": 78.4,
+                            "yPct": 47.6,
+                            "widthPct": 4.5,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 77.3,
+                            "yPct": 47.4,
+                            "widthPct": 18.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 6,
+                        "readingOrder": 6,
+                        "type": "label",
+                        "sourceText": "room",
+                        "ttsText": "room",
+                        "bounds": {
+                            "xPct": 54.4,
+                            "yPct": 50.0,
+                            "widthPct": 5.0,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 53.3,
+                            "yPct": 49.8,
+                            "widthPct": 15.0,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 7,
+                        "readingOrder": 7,
+                        "type": "label",
+                        "sourceText": "Wi-Fi",
+                        "ttsText": "Wi-Fi",
+                        "bounds": {
+                            "xPct": 78.4,
+                            "yPct": 50.0,
+                            "widthPct": 6.0,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 77.3,
+                            "yPct": 49.8,
+                            "widthPct": 18.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 8,
+                        "readingOrder": 8,
+                        "type": "label",
+                        "sourceText": "bed",
+                        "ttsText": "bed",
+                        "bounds": {
+                            "xPct": 54.4,
+                            "yPct": 52.400000000000006,
+                            "widthPct": 3.5,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 53.3,
+                            "yPct": 52.2,
+                            "widthPct": 15.0,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 9,
+                        "readingOrder": 9,
+                        "type": "label",
+                        "sourceText": "room facilities",
+                        "ttsText": "room facilities",
+                        "bounds": {
+                            "xPct": 78.4,
+                            "yPct": 52.400000000000006,
+                            "widthPct": 15.5,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 77.3,
+                            "yPct": 52.2,
+                            "widthPct": 18.8,
+                            "heightPct": 2.2
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 3,
+                "readingOrder": 4,
+                "bounds": {
+                    "xPct": 0.5,
+                    "yPct": 56.1,
+                    "widthPct": 49.3,
+                    "heightPct": 43.0
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Hotel Services",
+                        "ttsText": "Hotel Services",
+                        "bounds": {
+                            "xPct": 8.3,
+                            "yPct": 57.2,
+                            "widthPct": 24.1,
+                            "heightPct": 2.6
+                        },
+                        "tapRegion": {
+                            "xPct": 7.3,
+                            "yPct": 56.7,
+                            "widthPct": 26.2,
+                            "heightPct": 3.6
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "room service",
+                        "ttsText": "room service",
+                        "bounds": {
+                            "xPct": 4.3,
+                            "yPct": 87.5,
+                            "widthPct": 12.4,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 3.4,
+                            "yPct": 87.3,
+                            "widthPct": 16.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "request",
+                        "ttsText": "request",
+                        "bounds": {
+                            "xPct": 28.0,
+                            "yPct": 87.5,
+                            "widthPct": 9.0,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 26.9,
+                            "yPct": 87.3,
+                            "widthPct": 21.2,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 4,
+                        "readingOrder": 4,
+                        "type": "label",
+                        "sourceText": "breakfast",
+                        "ttsText": "breakfast",
+                        "bounds": {
+                            "xPct": 4.3,
+                            "yPct": 90.0,
+                            "widthPct": 9.0,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 3.4,
+                            "yPct": 89.8,
+                            "widthPct": 16.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 5,
+                        "readingOrder": 5,
+                        "type": "label",
+                        "sourceText": "order",
+                        "ttsText": "order",
+                        "bounds": {
+                            "xPct": 28.0,
+                            "yPct": 90.0,
+                            "widthPct": 8.0,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 26.9,
+                            "yPct": 89.8,
+                            "widthPct": 21.2,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 6,
+                        "readingOrder": 6,
+                        "type": "label",
+                        "sourceText": "hotel services",
+                        "ttsText": "hotel services",
+                        "bounds": {
+                            "xPct": 4.3,
+                            "yPct": 92.5,
+                            "widthPct": 14.2,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 3.4,
+                            "yPct": 92.3,
+                            "widthPct": 16.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 7,
+                        "readingOrder": 7,
+                        "type": "label",
+                        "sourceText": "additional services",
+                        "ttsText": "additional services",
+                        "bounds": {
+                            "xPct": 28.0,
+                            "yPct": 92.5,
+                            "widthPct": 18.8,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 26.9,
+                            "yPct": 92.3,
+                            "widthPct": 21.2,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 8,
+                        "readingOrder": 8,
+                        "type": "label",
+                        "sourceText": "laundry service",
+                        "ttsText": "laundry service",
+                        "bounds": {
+                            "xPct": 4.3,
+                            "yPct": 95.0,
+                            "widthPct": 13.5,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 3.4,
+                            "yPct": 94.8,
+                            "widthPct": 16.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 9,
+                        "readingOrder": 9,
+                        "type": "label",
+                        "sourceText": "business hotel",
+                        "ttsText": "business hotel",
+                        "bounds": {
+                            "xPct": 28.0,
+                            "yPct": 95.0,
+                            "widthPct": 13.8,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 26.9,
+                            "yPct": 94.8,
+                            "widthPct": 21.2,
+                            "heightPct": 2.2
+                        }
+                    }
+                ]
+            },
+            {
+                "panelId": 4,
+                "readingOrder": 5,
+                "bounds": {
+                    "xPct": 50.5,
+                    "yPct": 56.1,
+                    "widthPct": 49.0,
+                    "heightPct": 43.0
+                },
+                "items": [
+                    {
+                        "itemId": 1,
+                        "readingOrder": 1,
+                        "type": "phrase",
+                        "sourceText": "Check-out",
+                        "ttsText": "Check-out",
+                        "bounds": {
+                            "xPct": 59.0,
+                            "yPct": 57.2,
+                            "widthPct": 16.6,
+                            "heightPct": 2.6
+                        },
+                        "tapRegion": {
+                            "xPct": 58.0,
+                            "yPct": 56.7,
+                            "widthPct": 18.6,
+                            "heightPct": 3.6
+                        }
+                    },
+                    {
+                        "itemId": 2,
+                        "readingOrder": 2,
+                        "type": "label",
+                        "sourceText": "check-out",
+                        "ttsText": "check-out",
+                        "bounds": {
+                            "xPct": 53.6,
+                            "yPct": 87.5,
+                            "widthPct": 9.5,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 52.7,
+                            "yPct": 87.3,
+                            "widthPct": 16.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 3,
+                        "readingOrder": 3,
+                        "type": "label",
+                        "sourceText": "key card",
+                        "ttsText": "key card",
+                        "bounds": {
+                            "xPct": 75.8,
+                            "yPct": 87.5,
+                            "widthPct": 8.0,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 74.8,
+                            "yPct": 87.3,
+                            "widthPct": 21.5,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 4,
+                        "readingOrder": 4,
+                        "type": "label",
+                        "sourceText": "check out",
+                        "ttsText": "check out",
+                        "bounds": {
+                            "xPct": 53.6,
+                            "yPct": 90.0,
+                            "widthPct": 10.0,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 52.7,
+                            "yPct": 89.8,
+                            "widthPct": 16.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 5,
+                        "readingOrder": 5,
+                        "type": "label",
+                        "sourceText": "return the key card",
+                        "ttsText": "return the key card",
+                        "bounds": {
+                            "xPct": 75.8,
+                            "yPct": 90.0,
+                            "widthPct": 18.7,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 74.8,
+                            "yPct": 89.8,
+                            "widthPct": 21.5,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 6,
+                        "readingOrder": 6,
+                        "type": "label",
+                        "sourceText": "pay the bill",
+                        "ttsText": "pay the bill",
+                        "bounds": {
+                            "xPct": 53.6,
+                            "yPct": 92.5,
+                            "widthPct": 12.4,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 52.7,
+                            "yPct": 92.3,
+                            "widthPct": 16.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 7,
+                        "readingOrder": 7,
+                        "type": "label",
+                        "sourceText": "check-out time",
+                        "ttsText": "check-out time",
+                        "bounds": {
+                            "xPct": 75.8,
+                            "yPct": 92.5,
+                            "widthPct": 14.8,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 74.8,
+                            "yPct": 92.3,
+                            "widthPct": 21.5,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 8,
+                        "readingOrder": 8,
+                        "type": "label",
+                        "sourceText": "hotel invoice",
+                        "ttsText": "hotel invoice",
+                        "bounds": {
+                            "xPct": 53.6,
+                            "yPct": 95.0,
+                            "widthPct": 13.8,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 52.7,
+                            "yPct": 94.8,
+                            "widthPct": 16.8,
+                            "heightPct": 2.2
+                        }
+                    },
+                    {
+                        "itemId": 9,
+                        "readingOrder": 9,
+                        "type": "label",
+                        "sourceText": "leave the hotel",
+                        "ttsText": "leave the hotel",
+                        "bounds": {
+                            "xPct": 75.8,
+                            "yPct": 95.0,
+                            "widthPct": 15.7,
+                            "heightPct": 1.8
+                        },
+                        "tapRegion": {
+                            "xPct": 74.8,
+                            "yPct": 94.8,
+                            "widthPct": 21.5,
+                            "heightPct": 2.2
+                        }
+                    }
+                ]
+            }
+        ]
     }
 };
