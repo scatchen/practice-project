@@ -18135,4 +18135,83 @@ const imageTTSData = {
             }
         ]
     },
+
+    "images/english/daily-life-routines-basics.png": {
+        imageId: "daily-life-routines-basics",
+        assetFile: "images/english/daily-life-routines-basics.png",
+        contentType: "image-text",
+        layout: "custom-daily-life-routines-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 1.5, yPct: 13.8, widthPct: 47.7, heightPct: 39.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "get up", ttsText: "get up",
+                        bounds: { xPct: 7.1, yPct: 15.8, widthPct: 14.0, heightPct: 4.4 },
+                        tapRegion: { xPct: 6.5, yPct: 15.1, widthPct: 15.2, heightPct: 5.7 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Good morning!", ttsText: "Good morning!",
+                        bounds: { xPct: 22.4, yPct: 20.0, widthPct: 11.8, heightPct: 7.0 },
+                        tapRegion: { xPct: 21.8, yPct: 19.3, widthPct: 13.2, heightPct: 8.4 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.8, yPct: 13.8, widthPct: 47.7, heightPct: 39.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "go to school", ttsText: "go to school",
+                        bounds: { xPct: 54.8, yPct: 16.1, widthPct: 22.8, heightPct: 4.2 },
+                        tapRegion: { xPct: 54.1, yPct: 15.4, widthPct: 24.2, heightPct: 5.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 1.5, yPct: 54.5, widthPct: 47.7, heightPct: 43.7 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "have breakfast", ttsText: "have breakfast",
+                        bounds: { xPct: 6.9, yPct: 56.7, widthPct: 25.5, heightPct: 4.3 },
+                        tapRegion: { xPct: 6.2, yPct: 56.0, widthPct: 26.9, heightPct: 5.7 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "phrase",
+                        sourceText: "Good food, Good day!", ttsText: "Good food, Good day!",
+                        bounds: { xPct: 28.6, yPct: 66.0, widthPct: 10.9, heightPct: 8.0 },
+                        tapRegion: { xPct: 27.9, yPct: 65.3, widthPct: 12.3, heightPct: 9.4 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.8, yPct: 54.5, widthPct: 47.7, heightPct: 43.7 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "go to bed", ttsText: "go to bed",
+                        bounds: { xPct: 56.6, yPct: 57.1, widthPct: 18.0, heightPct: 4.3 },
+                        tapRegion: { xPct: 55.8, yPct: 56.4, widthPct: 19.6, heightPct: 5.7 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Good night\nSweet dreams!", ttsText: "Good night\nSweet dreams!",
+                        bounds: { xPct: 80.1, yPct: 88.0, widthPct: 15.8, heightPct: 7.8 },
+                        tapRegion: { xPct: 79.4, yPct: 87.3, widthPct: 17.2, heightPct: 9.1 }
+                    }
+                ]
+            }
+        ]
+    },
 };

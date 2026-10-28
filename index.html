@@ -9161,6 +9161,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "daily-life-routines-basics" &&
+        record.assetFile === "images/english/daily-life-routines-basics.png") {
+        return "Daily Life & Routines";
+    }
     if (record && record.imageId === "hobbies-interests-basics" &&
         record.assetFile === "images/english/hobbies-interests-basics.png") {
         return "Hobbies & Interests";
@@ -9358,6 +9362,164 @@ function getEnglishHotelCheckInImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishDailyLifeRoutinesImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/daily-life-routines-basics.png";
+    const expectedImageId = "daily-life-routines-basics";
+    const expectedPanels = [
+        {
+            panelId: 1, readingOrder: 1,
+            bounds: { xPct: 1.5, yPct: 13.8, widthPct: 47.7, heightPct: 39.2 },
+            items: [
+                {
+                    itemId: 1, readingOrder: 1, type: "label", sourceText: "get up",
+                    bounds: { xPct: 7.1, yPct: 15.8, widthPct: 14.0, heightPct: 4.4 },
+                    tapRegion: { xPct: 6.5, yPct: 15.1, widthPct: 15.2, heightPct: 5.7 }
+                },
+                {
+                    itemId: 2, readingOrder: 2, type: "sentence", sourceText: "Good morning!",
+                    bounds: { xPct: 22.4, yPct: 20.0, widthPct: 11.8, heightPct: 7.0 },
+                    tapRegion: { xPct: 21.8, yPct: 19.3, widthPct: 13.2, heightPct: 8.4 }
+                }
+            ]
+        },
+        {
+            panelId: 2, readingOrder: 2,
+            bounds: { xPct: 50.8, yPct: 13.8, widthPct: 47.7, heightPct: 39.2 },
+            items: [
+                {
+                    itemId: 1, readingOrder: 1, type: "label", sourceText: "go to school",
+                    bounds: { xPct: 54.8, yPct: 16.1, widthPct: 22.8, heightPct: 4.2 },
+                    tapRegion: { xPct: 54.1, yPct: 15.4, widthPct: 24.2, heightPct: 5.5 }
+                }
+            ]
+        },
+        {
+            panelId: 3, readingOrder: 3,
+            bounds: { xPct: 1.5, yPct: 54.5, widthPct: 47.7, heightPct: 43.7 },
+            items: [
+                {
+                    itemId: 1, readingOrder: 1, type: "label", sourceText: "have breakfast",
+                    bounds: { xPct: 6.9, yPct: 56.7, widthPct: 25.5, heightPct: 4.3 },
+                    tapRegion: { xPct: 6.2, yPct: 56.0, widthPct: 26.9, heightPct: 5.7 }
+                },
+                {
+                    itemId: 2, readingOrder: 2, type: "phrase", sourceText: "Good food, Good day!",
+                    bounds: { xPct: 28.6, yPct: 66.0, widthPct: 10.9, heightPct: 8.0 },
+                    tapRegion: { xPct: 27.9, yPct: 65.3, widthPct: 12.3, heightPct: 9.4 }
+                }
+            ]
+        },
+        {
+            panelId: 4, readingOrder: 4,
+            bounds: { xPct: 50.8, yPct: 54.5, widthPct: 47.7, heightPct: 43.7 },
+            items: [
+                {
+                    itemId: 1, readingOrder: 1, type: "label", sourceText: "go to bed",
+                    bounds: { xPct: 56.6, yPct: 57.1, widthPct: 18.0, heightPct: 4.3 },
+                    tapRegion: { xPct: 55.8, yPct: 56.4, widthPct: 19.6, heightPct: 5.7 }
+                },
+                {
+                    itemId: 2, readingOrder: 2, type: "sentence",
+                    sourceText: "Good night\nSweet dreams!",
+                    bounds: { xPct: 80.1, yPct: 88.0, widthPct: 15.8, heightPct: 7.8 },
+                    tapRegion: { xPct: 79.4, yPct: 87.3, widthPct: 17.2, heightPct: 9.1 }
+                }
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = value => hasExactKeys(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-daily-life-routines-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allTextBounds = [];
+    const allTapRegions = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId ||
+            panel.readingOrder !== expectedPanel.readingOrder ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== expectedItem.itemId ||
+                item.readingOrder !== expectedItem.readingOrder ||
+                item.type !== expectedItem.type || item.sourceText !== expectedItem.sourceText ||
+                item.ttsText !== item.sourceText || !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !matchesBounds(item.tapRegion, expectedItem.tapRegion) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds) || !isEnglishImageTTSItemText(record, item)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+        }
+    }
+
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) {
+                    return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishHobbiesInterestsImageTextRecord(record, assetFile) {
     const expectedAssetFile = "images/english/hobbies-interests-basics.png";
     const expectedImageId = "hobbies-interests-basics";
@@ -9507,6 +9669,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isDailyLifeRoutinesImageTextIdentity =
+        record.imageId === "daily-life-routines-basics" ||
+        record.assetFile === "images/english/daily-life-routines-basics.png" ||
+        assetFile === "images/english/daily-life-routines-basics.png";
+    if (isDailyLifeRoutinesImageTextIdentity) {
+        return getEnglishDailyLifeRoutinesImageTextRecord(record, assetFile);
     }
 
     const isHobbiesInterestsImageTextIdentity =
@@ -11565,6 +11735,15 @@ function getEnglishAirportBusinessTravelImageTextSpeechText(record, item) {
     return item.ttsText;
 }
 
+function getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item) {
+    if (!record || record.imageId !== "daily-life-routines-basics" ||
+        record.assetFile !== "images/english/daily-life-routines-basics.png" ||
+        !item || typeof item.ttsText !== "string" || item.sourceText !== item.ttsText) {
+        return [];
+    }
+    return item.ttsText.split(/\r?\n/).map(unit => getEnglishTTSUnitText(unit)).filter(Boolean);
+}
+
 function getEnglishImageTTSImageTextSpeechText(record, item) {
     if (isEnglishHotelCheckInImageTextAmpersandItem(record, item)) {
         return item.sourceText.replace(" & ", " and ");
@@ -11572,7 +11751,9 @@ function getEnglishImageTTSImageTextSpeechText(record, item) {
     return getEnglishAirportBusinessTravelImageTextSpeechText(record, item);
 }
 
-function speakEnglishImageTTSImageTextSequence(trigger, items, completionMessage) {
+function speakEnglishImageTTSImageTextSequence(
+    trigger, items, completionMessage, selectedSpeechUnitText = null
+) {
     const wrapper = trigger && typeof trigger.closest === "function"
         ? trigger.closest(".image-tts-overlay-wrapper")
         : null;
@@ -11589,6 +11770,27 @@ function speakEnglishImageTTSImageTextSequence(trigger, items, completionMessage
         record.imageId === "hobbies-interests-basics" &&
         record.assetFile === "images/english/hobbies-interests-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isDailyLifeRoutinesImageText = Boolean(record &&
+        record.imageId === "daily-life-routines-basics" &&
+        record.assetFile === "images/english/daily-life-routines-basics.png");
+    const isDailyLifeRoutinesSingleItemSequence = Boolean(isDailyLifeRoutinesImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const dailyLifeSteps = isDailyLifeRoutinesImageText
+        ? itemList.flatMap(item => getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item)
+            .map(text => ({ item, text })))
+        : null;
+    const isValidSelectedSpeechUnit = selectedSpeechUnitText === null ||
+        (isDailyLifeRoutinesSingleItemSequence &&
+            getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, itemList[0])
+                .includes(selectedSpeechUnitText));
+    const playbackSteps = isDailyLifeRoutinesImageText
+        ? (selectedSpeechUnitText === null
+            ? dailyLifeSteps
+            : [{ item: itemList[0], text: selectedSpeechUnitText }])
+        : itemList.map(item => ({
+            item,
+            text: item ? getEnglishImageTTSImageTextSpeechText(record, item) : null
+        }));
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
     if (!trigger || !wrapper || !record || !trigger.classList ||
         !trigger.classList.contains("image-tts-image-text-hit-area") ||
@@ -11597,11 +11799,13 @@ function speakEnglishImageTTSImageTextSequence(trigger, items, completionMessage
         !triggerPanel ||
         triggerPanel !== record.panels.find(panel => panel.panelId === triggerPanel.panelId) ||
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
-        (!isPanelSequence && !isWholeImageSequence && !isHobbiesSingleItemSequence) ||
+        (!isPanelSequence && !isWholeImageSequence &&
+            !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
-        !itemList.length || appState.subjectMode !== "english" ||
-        isEnglishImageTTSDrawingMode()) {
+        !isValidSelectedSpeechUnit || !playbackSteps.length ||
+        playbackSteps.some(step => !step.item || !step.text) ||
+        appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
     }
@@ -11632,15 +11836,16 @@ function speakEnglishImageTTSImageTextSequence(trigger, items, completionMessage
             cancelEnglishImageTTSImageTextSequence(true);
             return false;
         }
-        const item = itemList[itemIndex];
-        const itemPanel = record.panels.find(panel => panel.items.includes(item));
+        const step = playbackSteps[itemIndex];
+        const item = step && step.item;
+        const itemPanel = item && record.panels.find(panel => panel.items.includes(item));
         if (!itemPanel) {
             cancelEnglishImageTTSImageTextSequence(true);
             return false;
         }
         trigger._englishImageTTSImageTextActivePanel = itemPanel;
         trigger._englishImageTTSImageTextActiveItem = item;
-        const speechText = getEnglishImageTTSImageTextSpeechText(record, item);
+        const speechText = step.text;
         if (!speechText) {
             cancelEnglishImageTTSImageTextSequence(true);
             setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
@@ -11654,9 +11859,9 @@ function speakEnglishImageTTSImageTextSequence(trigger, items, completionMessage
                 cancelEnglishImageTTSImageTextSequence(true);
                 return;
             }
-            const previousItem = itemList[itemIndex];
+            const previousItem = playbackSteps[itemIndex].item;
             itemIndex += 1;
-            if (itemIndex >= itemList.length) {
+            if (itemIndex >= playbackSteps.length) {
                 finishSequence();
                 return;
             }
@@ -11907,6 +12112,41 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
                     "已朗讀所選句子。"
                 )
             ));
+        });
+    }
+
+    const isDailyLifeRoutinesImageText = safeRecord.imageId === "daily-life-routines-basics" &&
+        safeRecord.assetFile === "images/english/daily-life-routines-basics.png";
+    if (isDailyLifeRoutinesImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+            const speechUnits = getEnglishDailyLifeRoutinesImageTextSpeechUnits(safeRecord, item);
+            if (speechUnits.length > 1) {
+                speechUnits.forEach(unitText => {
+                    menu.appendChild(createEnglishImageTTSMenuButton(
+                        "朗讀「" + unitText + "」",
+                        "朗讀第 " + panel.panelId + " 格單句：" + unitText,
+                        () => speakEnglishImageTTSImageTextSequence(
+                            trigger,
+                            [item],
+                            "已朗讀所選句子。",
+                            unitText
+                        )
+                    ));
+                });
+            }
         });
     }
 
