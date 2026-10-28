@@ -15561,6 +15561,181 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/shipping-and-logistics-basics.png": {
+        imageId: "shipping-and-logistics-basics",
+        assetFile: "images/english/shipping-and-logistics-basics.png",
+        contentType: "image-text",
+        layout: "custom-shipping-logistics-title-plus-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 0, readingOrder: 1,
+                bounds: { xPct: 0.8, yPct: 1.2, widthPct: 98.4, heightPct: 10.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Shipping & Logistics",
+                        ttsText: "Shipping & Logistics",
+                        bounds: { xPct: 22.8, yPct: 2.4, widthPct: 43.2, heightPct: 6.1 },
+                        tapRegion: { xPct: 21.7, yPct: 1.8, widthPct: 45.4, heightPct: 7.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 1, readingOrder: 2,
+                bounds: { xPct: 0.9, yPct: 12.5, widthPct: 48.8, heightPct: 41.5 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Preparing a Shipment",
+                        ttsText: "Preparing a Shipment",
+                        bounds: { xPct: 8.4, yPct: 14.1, widthPct: 24.9, heightPct: 3.5 },
+                        tapRegion: { xPct: 7.7, yPct: 13.5, widthPct: 26.2, heightPct: 4.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "Order",
+                        ttsText: "Order",
+                        bounds: { xPct: 40.8, yPct: 20.5, widthPct: 5.0, heightPct: 2.6 },
+                        tapRegion: { xPct: 38.4, yPct: 20.0, widthPct: 10.4, heightPct: 3.5 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Item",
+                        ttsText: "Item",
+                        bounds: { xPct: 40.8, yPct: 24.7, widthPct: 3.2, heightPct: 2.6 },
+                        tapRegion: { xPct: 38.4, yPct: 24.2, widthPct: 10.4, heightPct: 3.5 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Packing",
+                        ttsText: "Packing",
+                        bounds: { xPct: 40.8, yPct: 28.8, widthPct: 7.0, heightPct: 2.6 },
+                        tapRegion: { xPct: 38.4, yPct: 28.3, widthPct: 10.4, heightPct: 3.5 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Label",
+                        ttsText: "Label",
+                        bounds: { xPct: 40.8, yPct: 33.1, widthPct: 4.0, heightPct: 2.6 },
+                        tapRegion: { xPct: 38.4, yPct: 32.6, widthPct: 10.4, heightPct: 3.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 3,
+                bounds: { xPct: 50.5, yPct: 12.5, widthPct: 48.6, heightPct: 41.5 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Shipping a Package",
+                        ttsText: "Shipping a Package",
+                        bounds: { xPct: 58.3, yPct: 14.1, widthPct: 23.5, heightPct: 3.5 },
+                        tapRegion: { xPct: 57.5, yPct: 13.5, widthPct: 25.0, heightPct: 4.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "DELIVERY",
+                        ttsText: "DELIVERY",
+                        bounds: { xPct: 88.3, yPct: 33.3, widthPct: 8.2, heightPct: 2.7 },
+                        tapRegion: { xPct: 87.5, yPct: 32.8, widthPct: 9.8, heightPct: 3.8 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 4,
+                bounds: { xPct: 0.9, yPct: 55.0, widthPct: 48.8, heightPct: 44.0 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Tracking a Shipment",
+                        ttsText: "Tracking a Shipment",
+                        bounds: { xPct: 8.4, yPct: 56.4, widthPct: 19.2, heightPct: 3.7 },
+                        tapRegion: { xPct: 7.7, yPct: 55.8, widthPct: 20.7, heightPct: 5.0 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "Tracking Number",
+                        ttsText: "Tracking Number",
+                        bounds: { xPct: 28.8, yPct: 65.2, widthPct: 12.0, heightPct: 2.5 },
+                        tapRegion: { xPct: 27.9, yPct: 64.6, widthPct: 13.8, heightPct: 3.7 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "AB123456789",
+                        ttsText: "AB123456789",
+                        bounds: { xPct: 28.8, yPct: 69.4, widthPct: 12.0, heightPct: 2.5 },
+                        tapRegion: { xPct: 27.9, yPct: 68.8, widthPct: 13.8, heightPct: 3.6 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Order Confirmed",
+                        ttsText: "Order Confirmed",
+                        bounds: { xPct: 31.2, yPct: 73.8, widthPct: 11.5, heightPct: 2.5 },
+                        tapRegion: { xPct: 30.3, yPct: 73.3, widthPct: 13.8, heightPct: 3.2 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Shipped",
+                        ttsText: "Shipped",
+                        bounds: { xPct: 31.2, yPct: 77.6, widthPct: 5.2, heightPct: 2.5 },
+                        tapRegion: { xPct: 30.3, yPct: 77.1, widthPct: 13.8, heightPct: 3.2 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "label",
+                        sourceText: "Out for Delivery",
+                        ttsText: "Out for Delivery",
+                        bounds: { xPct: 31.2, yPct: 81.3, widthPct: 12.0, heightPct: 2.5 },
+                        tapRegion: { xPct: 30.3, yPct: 80.8, widthPct: 13.8, heightPct: 3.2 }
+                    },
+                    {
+                        itemId: 7, readingOrder: 7, type: "label",
+                        sourceText: "Delivered",
+                        ttsText: "Delivered",
+                        bounds: { xPct: 31.2, yPct: 85.0, widthPct: 7.0, heightPct: 2.5 },
+                        tapRegion: { xPct: 30.3, yPct: 84.5, widthPct: 13.8, heightPct: 3.2 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 5,
+                bounds: { xPct: 50.5, yPct: 55.0, widthPct: 48.6, heightPct: 44.0 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Delivery Delay",
+                        ttsText: "Delivery Delay",
+                        bounds: { xPct: 58.3, yPct: 56.4, widthPct: 17.8, heightPct: 3.7 },
+                        tapRegion: { xPct: 57.5, yPct: 55.8, widthPct: 19.1, heightPct: 5.0 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "Expected Delivery Date",
+                        ttsText: "Expected Delivery Date",
+                        bounds: { xPct: 86.3, yPct: 61.8, widthPct: 11.8, heightPct: 5.8 },
+                        tapRegion: { xPct: 85.6, yPct: 61.2, widthPct: 13.1, heightPct: 6.9 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Apr 12",
+                        ttsText: "Apr 12",
+                        bounds: { xPct: 86.7, yPct: 69.7, widthPct: 7.9, heightPct: 3.5 },
+                        tapRegion: { xPct: 85.8, yPct: 69.0, widthPct: 10.0, heightPct: 4.8 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Apr 15",
+                        ttsText: "Apr 15",
+                        bounds: { xPct: 86.7, yPct: 75.3, widthPct: 8.0, heightPct: 3.5 },
+                        tapRegion: { xPct: 85.8, yPct: 74.6, widthPct: 10.0, heightPct: 4.8 }
+                    }
+                ]
+            }
+        ]
+    },
     "images/english/job-interview-basics.png": {
         imageId: "job-interview-basics",
         assetFile: "images/english/job-interview-basics.png",

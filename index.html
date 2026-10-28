@@ -7611,6 +7611,230 @@ function getEnglishOfficeReceptionImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishShippingLogisticsImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/shipping-and-logistics-basics.png";
+    const expectedImageId = "shipping-and-logistics-basics";
+    const bounds = (xPct, yPct, widthPct, heightPct) =>
+        ({ xPct, yPct, widthPct, heightPct });
+    const expectedPanels = [
+        {
+            panelId: 0, readingOrder: 1,
+            bounds: bounds(0.8, 1.2, 98.4, 10.2),
+            items: [
+                {
+                    type: "label", sourceText: "Shipping & Logistics",
+                    bounds: bounds(22.8, 2.4, 43.2, 6.1),
+                    tapRegion: bounds(21.7, 1.8, 45.4, 7.5)
+                }
+            ]
+        },
+        {
+            panelId: 1, readingOrder: 2,
+            bounds: bounds(0.9, 12.5, 48.8, 41.5),
+            items: [
+                {
+                    type: "phrase", sourceText: "Preparing a Shipment",
+                    bounds: bounds(8.4, 14.1, 24.9, 3.5),
+                    tapRegion: bounds(7.7, 13.5, 26.2, 4.8)
+                },
+                {
+                    type: "label", sourceText: "Order",
+                    bounds: bounds(40.8, 20.5, 5.0, 2.6),
+                    tapRegion: bounds(38.4, 20.0, 10.4, 3.5)
+                },
+                {
+                    type: "label", sourceText: "Item",
+                    bounds: bounds(40.8, 24.7, 3.2, 2.6),
+                    tapRegion: bounds(38.4, 24.2, 10.4, 3.5)
+                },
+                {
+                    type: "label", sourceText: "Packing",
+                    bounds: bounds(40.8, 28.8, 7.0, 2.6),
+                    tapRegion: bounds(38.4, 28.3, 10.4, 3.5)
+                },
+                {
+                    type: "label", sourceText: "Label",
+                    bounds: bounds(40.8, 33.1, 4.0, 2.6),
+                    tapRegion: bounds(38.4, 32.6, 10.4, 3.5)
+                }
+            ]
+        },
+        {
+            panelId: 2, readingOrder: 3,
+            bounds: bounds(50.5, 12.5, 48.6, 41.5),
+            items: [
+                {
+                    type: "phrase", sourceText: "Shipping a Package",
+                    bounds: bounds(58.3, 14.1, 23.5, 3.5),
+                    tapRegion: bounds(57.5, 13.5, 25.0, 4.8)
+                },
+                {
+                    type: "label", sourceText: "DELIVERY",
+                    bounds: bounds(88.3, 33.3, 8.2, 2.7),
+                    tapRegion: bounds(87.5, 32.8, 9.8, 3.8)
+                }
+            ]
+        },
+        {
+            panelId: 3, readingOrder: 4,
+            bounds: bounds(0.9, 55.0, 48.8, 44.0),
+            items: [
+                {
+                    type: "phrase", sourceText: "Tracking a Shipment",
+                    bounds: bounds(8.4, 56.4, 19.2, 3.7),
+                    tapRegion: bounds(7.7, 55.8, 20.7, 5.0)
+                },
+                {
+                    type: "label", sourceText: "Tracking Number",
+                    bounds: bounds(28.8, 65.2, 12.0, 2.5),
+                    tapRegion: bounds(27.9, 64.6, 13.8, 3.7)
+                },
+                {
+                    type: "label", sourceText: "AB123456789",
+                    bounds: bounds(28.8, 69.4, 12.0, 2.5),
+                    tapRegion: bounds(27.9, 68.8, 13.8, 3.6)
+                },
+                {
+                    type: "label", sourceText: "Order Confirmed",
+                    bounds: bounds(31.2, 73.8, 11.5, 2.5),
+                    tapRegion: bounds(30.3, 73.3, 13.8, 3.2)
+                },
+                {
+                    type: "label", sourceText: "Shipped",
+                    bounds: bounds(31.2, 77.6, 5.2, 2.5),
+                    tapRegion: bounds(30.3, 77.1, 13.8, 3.2)
+                },
+                {
+                    type: "label", sourceText: "Out for Delivery",
+                    bounds: bounds(31.2, 81.3, 12.0, 2.5),
+                    tapRegion: bounds(30.3, 80.8, 13.8, 3.2)
+                },
+                {
+                    type: "label", sourceText: "Delivered",
+                    bounds: bounds(31.2, 85.0, 7.0, 2.5),
+                    tapRegion: bounds(30.3, 84.5, 13.8, 3.2)
+                }
+            ]
+        },
+        {
+            panelId: 4, readingOrder: 5,
+            bounds: bounds(50.5, 55.0, 48.6, 44.0),
+            items: [
+                {
+                    type: "phrase", sourceText: "Delivery Delay",
+                    bounds: bounds(58.3, 56.4, 17.8, 3.7),
+                    tapRegion: bounds(57.5, 55.8, 19.1, 5.0)
+                },
+                {
+                    type: "label", sourceText: "Expected Delivery Date",
+                    bounds: bounds(86.3, 61.8, 11.8, 5.8),
+                    tapRegion: bounds(85.6, 61.2, 13.1, 6.9)
+                },
+                {
+                    type: "label", sourceText: "Apr 12",
+                    bounds: bounds(86.7, 69.7, 7.9, 3.5),
+                    tapRegion: bounds(85.8, 69.0, 10.0, 4.8)
+                },
+                {
+                    type: "label", sourceText: "Apr 15",
+                    bounds: bounds(86.7, 75.3, 8.0, 3.5),
+                    tapRegion: bounds(85.8, 74.6, 10.0, 4.8)
+                }
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = value => hasExactKeys(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-shipping-logistics-title-plus-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (key === expectedAssetFile ||
+            candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allTextBounds = [];
+    const allTapRegions = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId ||
+            panel.readingOrder !== expectedPanel.readingOrder ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 || item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem.type || item.sourceText !== expectedItem.sourceText ||
+                item.ttsText !== item.sourceText || item.sourceText.length === 0 ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !matchesBounds(item.tapRegion, expectedItem.tapRegion) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds) ||
+                !isEnglishImageTTSItemText(record, item)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) {
+                    return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishChangingOfTheGuardImageTextRecord(record, assetFile) {
     const expectedAssetFile = "images/english/changing-of-the-guard-basics.png";
     const expectedImageId = "changing-of-the-guard-basics";
@@ -8212,6 +8436,18 @@ function isEnglishJobInterviewImageTTSItemText(record, item) {
             item.ttsText === item.sourceText));
 }
 
+function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishJobInterviewImageTTSItemText(record, item)) {
+        return true;
+    }
+    return Boolean(item && typeof item.ttsText === "string" && record &&
+        record.contentType === "image-text" &&
+        record.imageId === "shipping-and-logistics-basics" &&
+        record.assetFile === "images/english/shipping-and-logistics-basics.png" &&
+        item.type === "label" && item.sourceText === "Shipping & Logistics" &&
+        item.ttsText === item.sourceText);
+}
+
 function getEnglishJobInterviewImageTextRecord(record, assetFile) {
     const expectedAssetFile = "images/english/job-interview-basics.png";
     const expectedImageId = "job-interview-basics";
@@ -8733,7 +8969,9 @@ function isEnglishImageTTSFullTitleImageTextRecord(record) {
         (record.imageId === "office-reception-and-visitors-basics" &&
             record.assetFile === "images/english/office-reception-and-visitors-basics.png") ||
         (record.imageId === "business-presentation-basics" &&
-            record.assetFile === "images/english/business-presentation-basics.png")
+            record.assetFile === "images/english/business-presentation-basics.png") ||
+        (record.imageId === "shipping-and-logistics-basics" &&
+            record.assetFile === "images/english/shipping-and-logistics-basics.png")
     ));
 }
 
@@ -8776,6 +9014,10 @@ function getEnglishImageTTSImageTextName(record) {
     if (record && record.imageId === "bonfire-night-basics" &&
         record.assetFile === "images/english/bonfire-night-basics.png") {
         return "Bonfire Night";
+    }
+    if (record && record.imageId === "shipping-and-logistics-basics" &&
+        record.assetFile === "images/english/shipping-and-logistics-basics.png") {
+        return "Shipping & Logistics";
     }
     return null;
 }
@@ -8848,6 +9090,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/business-presentation-basics.png";
     if (isBusinessPresentationImageTextIdentity) {
         return getEnglishBusinessPresentationImageTextRecord(record, assetFile);
+    }
+
+    const isShippingLogisticsImageTextIdentity =
+        record.imageId === "shipping-and-logistics-basics" ||
+        record.assetFile === "images/english/shipping-and-logistics-basics.png" ||
+        assetFile === "images/english/shipping-and-logistics-basics.png";
+    if (isShippingLogisticsImageTextIdentity) {
+        return getEnglishShippingLogisticsImageTextRecord(record, assetFile);
     }
 
     const isChangingOfTheGuardImageTextIdentity =
@@ -10816,7 +11066,7 @@ function speakEnglishImageTTSImageTextSequence(trigger, items, completionMessage
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
         (!isPanelSequence && !isWholeImageSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
-            !isEnglishJobInterviewImageTTSItemText(record, item)) ||
+            !isEnglishImageTTSItemText(record, item)) ||
         !itemList.length || appState.subjectMode !== "english" ||
         isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
