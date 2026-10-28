@@ -18067,5 +18067,72 @@ const imageTTSData = {
                 ]
             }
         ]
-    }
+    },
+
+    "images/english/hobbies-interests-basics.png": {
+        imageId: "hobbies-interests-basics",
+        assetFile: "images/english/hobbies-interests-basics.png",
+        contentType: "image-text",
+        layout: "custom-hobbies-interests-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 2.86, yPct: 11.04, widthPct: 46.61, heightPct: 41.11 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "I like reading.", ttsText: "I like reading.",
+                        bounds: { xPct: 14.32, yPct: 12.89, widthPct: 17.70, heightPct: 4.10 },
+                        tapRegion: { xPct: 13.48, yPct: 11.82, widthPct: 18.95, heightPct: 6.25 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "It's fun!", ttsText: "It's fun!",
+                        bounds: { xPct: 34.00, yPct: 25.80, widthPct: 7.60, heightPct: 3.80 },
+                        tapRegion: { xPct: 31.19, yPct: 23.24, widthPct: 12.11, heightPct: 9.77 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.46, yPct: 11.04, widthPct: 46.61, heightPct: 41.11 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "I like listening to music.", ttsText: "I like listening to music.",
+                        bounds: { xPct: 58.30, yPct: 12.89, widthPct: 29.20, heightPct: 4.10 },
+                        tapRegion: { xPct: 57.29, yPct: 11.82, widthPct: 30.60, heightPct: 6.25 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 2.86, yPct: 53.61, widthPct: 46.61, heightPct: 43.46 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "I like playing sports.", ttsText: "I like playing sports.",
+                        bounds: { xPct: 12.50, yPct: 55.47, widthPct: 27.47, heightPct: 4.10 },
+                        tapRegion: { xPct: 11.59, yPct: 54.39, widthPct: 29.30, heightPct: 6.35 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.46, yPct: 53.61, widthPct: 46.61, heightPct: 43.46 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "I like drawing.", ttsText: "I like drawing.",
+                        bounds: { xPct: 62.56, yPct: 55.47, widthPct: 21.81, heightPct: 4.10 },
+                        tapRegion: { xPct: 61.65, yPct: 54.39, widthPct: 23.63, heightPct: 6.35 }
+                    }
+                ]
+            }
+        ]
+    },
 };

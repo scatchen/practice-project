@@ -8602,8 +8602,18 @@ function isEnglishHotelCheckInImageTextAmpersandItem(record, item) {
         item.ttsText === item.sourceText);
 }
 
+function isEnglishHobbiesInterestsImageTTSItem(record, item) {
+    return Boolean(record && record.contentType === "image-text" &&
+        record.imageId === "hobbies-interests-basics" &&
+        record.assetFile === "images/english/hobbies-interests-basics.png" &&
+        item && item.type === "sentence" && item.ttsText === item.sourceText &&
+        ["I like reading.", "It's fun!", "I like listening to music.",
+            "I like playing sports.", "I like drawing."].includes(item.sourceText));
+}
+
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishJobInterviewImageTTSItemText(record, item)) return true;
+    if (isEnglishHobbiesInterestsImageTTSItem(record, item) ||
+        isEnglishJobInterviewImageTTSItemText(record, item)) return true;
     return Boolean((item && typeof item.ttsText === "string" && record &&
         record.contentType === "image-text" && record.imageId === "shipping-and-logistics-basics" &&
         record.assetFile === "images/english/shipping-and-logistics-basics.png" &&
@@ -9151,6 +9161,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "hobbies-interests-basics" &&
+        record.assetFile === "images/english/hobbies-interests-basics.png") {
+        return "Hobbies & Interests";
+    }
     if (record && record.imageId === "job-interview-basics" &&
         record.assetFile === "images/english/job-interview-basics.png") {
         return "Job Interview";
@@ -9344,6 +9358,143 @@ function getEnglishHotelCheckInImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishHobbiesInterestsImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/hobbies-interests-basics.png";
+    const expectedImageId = "hobbies-interests-basics";
+    const expectedPanels = [
+        {
+            panelId: 1, readingOrder: 1,
+            bounds: { xPct: 2.86, yPct: 11.04, widthPct: 46.61, heightPct: 41.11 },
+            items: [
+                [1, 1, "I like reading.",
+                    { xPct: 14.32, yPct: 12.89, widthPct: 17.70, heightPct: 4.10 },
+                    { xPct: 13.48, yPct: 11.82, widthPct: 18.95, heightPct: 6.25 }],
+                [2, 2, "It's fun!",
+                    { xPct: 34.00, yPct: 25.80, widthPct: 7.60, heightPct: 3.80 },
+                    { xPct: 31.19, yPct: 23.24, widthPct: 12.11, heightPct: 9.77 }]
+            ]
+        },
+        {
+            panelId: 2, readingOrder: 2,
+            bounds: { xPct: 50.46, yPct: 11.04, widthPct: 46.61, heightPct: 41.11 },
+            items: [
+                [1, 1, "I like listening to music.",
+                    { xPct: 58.30, yPct: 12.89, widthPct: 29.20, heightPct: 4.10 },
+                    { xPct: 57.29, yPct: 11.82, widthPct: 30.60, heightPct: 6.25 }]
+            ]
+        },
+        {
+            panelId: 3, readingOrder: 3,
+            bounds: { xPct: 2.86, yPct: 53.61, widthPct: 46.61, heightPct: 43.46 },
+            items: [
+                [1, 1, "I like playing sports.",
+                    { xPct: 12.50, yPct: 55.47, widthPct: 27.47, heightPct: 4.10 },
+                    { xPct: 11.59, yPct: 54.39, widthPct: 29.30, heightPct: 6.35 }]
+            ]
+        },
+        {
+            panelId: 4, readingOrder: 4,
+            bounds: { xPct: 50.46, yPct: 53.61, widthPct: 46.61, heightPct: 43.46 },
+            items: [
+                [1, 1, "I like drawing.",
+                    { xPct: 62.56, yPct: 55.47, widthPct: 21.81, heightPct: 4.10 },
+                    { xPct: 61.65, yPct: 54.39, widthPct: 23.63, heightPct: 6.35 }]
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = value => hasExactKeys(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-hobbies-interests-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allTextBounds = [];
+    const allTapRegions = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId ||
+            panel.readingOrder !== expectedPanel.readingOrder ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== expectedItem[0] || item.readingOrder !== expectedItem[1] ||
+                item.type !== "sentence" || item.sourceText !== expectedItem[2] ||
+                item.ttsText !== item.sourceText ||
+                !matchesBounds(item.bounds, expectedItem[3]) ||
+                !matchesBounds(item.tapRegion, expectedItem[4]) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds) ||
+                !isEnglishHobbiesInterestsImageTTSItem(record, item)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+        }
+    }
+
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) {
+                    return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -9356,6 +9507,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isHobbiesInterestsImageTextIdentity =
+        record.imageId === "hobbies-interests-basics" ||
+        record.assetFile === "images/english/hobbies-interests-basics.png" ||
+        assetFile === "images/english/hobbies-interests-basics.png";
+    if (isHobbiesInterestsImageTextIdentity) {
+        return getEnglishHobbiesInterestsImageTextRecord(record, assetFile);
     }
 
     const isJobInterviewImageTextIdentity =
@@ -11426,6 +11585,10 @@ function speakEnglishImageTTSImageTextSequence(trigger, items, completionMessage
         panel.items.every((item, index) => item === itemList[index])));
     const isWholeImageSequence = Boolean(record && allItems.length === itemList.length &&
         allItems.every((item, index) => item === itemList[index]));
+    const isHobbiesSingleItemSequence = Boolean(record &&
+        record.imageId === "hobbies-interests-basics" &&
+        record.assetFile === "images/english/hobbies-interests-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
     if (!trigger || !wrapper || !record || !trigger.classList ||
         !trigger.classList.contains("image-tts-image-text-hit-area") ||
@@ -11434,7 +11597,7 @@ function speakEnglishImageTTSImageTextSequence(trigger, items, completionMessage
         !triggerPanel ||
         triggerPanel !== record.panels.find(panel => panel.panelId === triggerPanel.panelId) ||
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
-        (!isPanelSequence && !isWholeImageSequence) ||
+        (!isPanelSequence && !isWholeImageSequence && !isHobbiesSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
         !itemList.length || appState.subjectMode !== "english" ||
@@ -11726,6 +11889,25 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    const isHobbiesInterestsImageText = safeRecord.imageId === "hobbies-interests-basics" &&
+        safeRecord.assetFile === "images/english/hobbies-interests-basics.png";
+    if (isHobbiesInterestsImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const sentenceItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        sentenceItems.forEach(item => {
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + item.sourceText + "」",
+                "只朗讀第 " + panel.panelId + " 格句子：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選句子。"
+                )
+            ));
+        });
     }
 
     menu.appendChild(createEnglishImageTTSMenuButton(
