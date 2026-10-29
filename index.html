@@ -8773,6 +8773,161 @@ function getEnglishSimpleMachinesImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishSpaceSolarSystemImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/space-solar-system-basics.png";
+    const expectedImageId = "space-solar-system-basics";
+    const expectedPanels = [
+        [1, [0.6, 0.7, 98.9, 14.3], []],
+        [2, [0.6, 15.8, 55.1, 28.4], [
+            ["sentence", "The solar system is made up of\nthe Sun, planets, moons, and more.", [3.8, 17.2, 27, 4.1], [1.5, 16.4, 31, 5.8]],
+            ["label", "Sun", [3.2, 39.7, 3.3, 1.7], [2.9, 39.5, 3.9, 2.1]],
+            ["label", "Mercury", [10, 36.3, 5.1, 1.8], [9.7, 36.1, 5.5, 2.2]],
+            ["label", "Venus", [15.6, 36.3, 3.4, 1.8], [15.4, 36.1, 3.9, 2.2]],
+            ["label", "Earth", [20.4, 36.3, 3.7, 1.8], [20.1, 36.1, 4.3, 2.2]],
+            ["label", "Mars", [25.6, 36.3, 2.7, 1.8], [25.3, 36.1, 3.3, 2.2]],
+            ["label", "Jupiter", [31, 37.1, 4.7, 1.8], [30.7, 36.9, 5.3, 2.2]],
+            ["label", "Saturn", [39.6, 36.3, 3.9, 1.8], [39.3, 36.1, 4.5, 2.2]],
+            ["label", "Uranus", [45.8, 36.3, 4.5, 1.8], [45.4, 36.1, 4.9, 2.2]],
+            ["label", "Neptune", [50.8, 36.3, 4.4, 1.8], [50.5, 36.1, 4.8, 2.2]]
+        ]],
+        [3, [56.3, 15.8, 43.1, 28.4], [
+            ["sentence", "Look at the stars!\nThe universe is so big\nand amazing!", [70.1, 17.2, 18.6, 6], [67.8, 16.4, 21.3, 10.2]]
+        ]],
+        [4, [0.6, 45.1, 55.1, 28], [
+            ["sentence", "Each planet has its own special features.", [3.3, 47, 30, 2], [1.4, 46, 34, 5.8]],
+            ["phrase", "Earth\nOur home", [5, 64, 8.5, 4.1], [4.7, 63.8, 9.1, 4.6]],
+            ["phrase", "Mars\nThe Red Planet", [15, 64, 7, 4.1], [14.7, 63.8, 7.6, 4.6]],
+            ["phrase", "Jupiter\nThe biggest\nplanet", [27.3, 64, 9.1, 7], [26.9, 63.7, 9.9, 7.6]],
+            ["phrase", "Saturn\nBeautiful rings", [40, 64, 9.1, 4.1], [39.7, 63.8, 9.7, 4.6]]
+        ]],
+        [5, [56.3, 45.1, 43.1, 28], [
+            ["sentence", "The moon is Earth's\nnatural satellite.", [58.8, 47.6, 13.7, 4.2], [56.8, 46.1, 16.9, 12.1]]
+        ]],
+        [6, [0.7, 73.8, 35, 24.7], [
+            ["label", "space", [2.4, 79.2, 5.3, 1.7], [2.2, 79.1, 5.7, 1.9]],
+            ["label", "universe", [2.4, 81.4, 6.3, 1.7], [2.2, 81.3, 6.7, 1.9]],
+            ["label", "solar system", [2.4, 83.6, 8.9, 1.7], [2.2, 83.5, 9.3, 1.9]],
+            ["label", "sun", [2.4, 85.8, 3.4, 1.7], [2.2, 85.7, 3.8, 1.9]],
+            ["label", "planet", [2.4, 88, 4.7, 1.7], [2.2, 87.9, 5.1, 1.9]],
+            ["label", "moon", [2.4, 90.2, 4, 1.7], [2.2, 90.1, 4.4, 1.9]],
+            ["label", "star", [2.4, 92.4, 3.3, 1.7], [2.2, 92.3, 3.7, 1.9]],
+            ["label", "Earth", [21, 79.2, 4.2, 1.7], [20.8, 79.1, 4.6, 1.9]],
+            ["label", "Mars", [21, 81.4, 3.5, 1.7], [20.8, 81.3, 3.9, 1.9]],
+            ["label", "Jupiter", [21, 83.6, 5.2, 1.7], [20.8, 83.5, 5.6, 1.9]],
+            ["label", "Saturn", [21, 85.8, 4.4, 1.7], [20.8, 85.7, 4.8, 1.9]],
+            ["label", "Uranus", [21, 88, 4.5, 1.7], [20.8, 87.9, 4.9, 1.9]],
+            ["label", "Neptune", [21, 90.2, 5.6, 1.7], [20.8, 90.1, 6, 1.9]],
+            ["label", "galaxy", [21, 92.4, 4.8, 1.7], [20.8, 92.3, 5.2, 1.9]]
+        ]],
+        [7, [36.4, 73.8, 31.8, 24.7], [
+            ["sentence", "The Earth is a planet.", [40.4, 79.2, 15.8, 1.7], [40.1, 79, 16.4, 2.1]],
+            ["sentence", "The sun gives us light and heat.", [40.4, 82.8, 22.9, 1.7], [40.1, 82.6, 23.5, 2.1]],
+            ["sentence", "The moon orbits the Earth.", [40.4, 86.4, 19.3, 1.7], [40.1, 86.2, 19.9, 2.1]],
+            ["sentence", "There are eight planets in the solar system.", [40.4, 90, 25.9, 1.7], [40.1, 89.8, 26.5, 2.1]]
+        ]],
+        [8, [68.9, 73.8, 30.6, 24.7], [
+            ["sentence", "The Sun is a star, not a planet.", [72.3, 79, 22, 1.8], [72, 78.8, 22.6, 2.2]],
+            ["sentence", "Jupiter is the largest planet\nin our solar system.", [72.3, 82.1, 22.2, 3.8], [72, 81.9, 22.8, 4.2]],
+            ["sentence", "Saturn's rings are made of ice\nand rock.", [72.3, 86.8, 22, 3.8], [72, 86.6, 22.6, 4.2]],
+            ["sentence", "There are billions of galaxies\nin the universe.", [72.3, 91.5, 22.7, 3.8], [72, 91.3, 23.3, 4.2]]
+        ]]
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const boundsValues = bounds => boundsKeys.map(key => bounds[key]);
+    const matchesBounds = (actual, expected) => hasExactKeys(actual, boundsKeys) &&
+        boundsKeys.every((key, index) => Number.isFinite(actual[key]) && actual[key] === expected[index]) &&
+        actual.xPct >= 0 && actual.yPct >= 0 && actual.widthPct > 0 && actual.heightPct > 0 &&
+        actual.xPct + actual.widthPct <= 100 && actual.yPct + actual.heightPct <= 100;
+    const contains = (outer, inner) => {
+        const outerValues = boundsValues(outer);
+        const innerValues = boundsValues(inner);
+        return matchesBounds(outer, outerValues) && matchesBounds(inner, innerValues) &&
+            inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+            inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+            inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    };
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        !hasExactKeys(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+            "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"]) ||
+        record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        record.contentType !== "image-text" || record.layout !== "custom-space-solar-system-8-panel" ||
+        record.transcriptStatus !== "verified" || record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (key === expectedAssetFile || candidate.imageId === expectedImageId ||
+            candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) return null;
+
+    const allItems = [];
+    const panelIds = new Set();
+    const itemPositions = new Set();
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        const panelBounds = { xPct: expectedPanel[1][0], yPct: expectedPanel[1][1],
+            widthPct: expectedPanel[1][2], heightPct: expectedPanel[1][3] };
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel[0] || panelIds.has(panel.panelId) ||
+            panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel[1]) || !Array.isArray(panel.items) ||
+            panel.items.length !== expectedPanel[2].length) return null;
+        panelIds.add(panel.panelId);
+        for (let itemIndex = 0; itemIndex < expectedPanel[2].length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel[2][itemIndex];
+            if (!hasExactKeys(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"])) {
+                return null;
+            }
+            const positionKey = panel.panelId + ":" + item.itemId;
+            if (item.itemId !== itemIndex + 1 || itemPositions.has(positionKey) ||
+                item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem[0] || item.sourceText !== expectedItem[1] ||
+                item.ttsText !== item.sourceText || !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem[2]) || !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panelBounds, item.bounds) || !contains(panelBounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) return null;
+            itemPositions.add(positionKey);
+            allItems.push(item);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            if (overlaps(allItems[left].bounds, allItems[right].bounds) ||
+                overlaps(allItems[left].tapRegion, allItems[right].tapRegion) ||
+                overlaps(allItems[left].bounds, allItems[right].tapRegion) ||
+                overlaps(allItems[left].tapRegion, allItems[right].bounds)) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
+function isEnglishSpaceSolarSystemImageTTSItemText(record, item) {
+    return Boolean(record && record.contentType === "image-text" &&
+        record.imageId === "space-solar-system-basics" &&
+        record.assetFile === "images/english/space-solar-system-basics.png" && item &&
+        item.sourceText === item.ttsText && record.panels.some(panel => panel.items.includes(item)) &&
+        getEnglishTTSUnitText(item.ttsText));
+}
+
 function isEnglishSimpleMachinesImageTTSItemText(record, item) {
     return Boolean(record && record.contentType === "image-text" &&
         record.imageId === "simple-machines-basics" &&
@@ -8782,7 +8937,8 @@ function isEnglishSimpleMachinesImageTTSItemText(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishVolcanoesImageTTSItemText(record, item) ||
+    if (isEnglishSpaceSolarSystemImageTTSItemText(record, item) ||
+        isEnglishVolcanoesImageTTSItemText(record, item) ||
         isEnglishWeatherInstrumentsImageTTSItemText(record, item) ||
         isEnglishFamilyBasicsImageTTSItem(record, item) ||
         isEnglishHobbiesInterestsImageTTSItem(record, item) ||
@@ -9335,6 +9491,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "space-solar-system-basics" &&
+        record.assetFile === "images/english/space-solar-system-basics.png") {
+        return "Space & the Solar System";
+    }
     if (record && record.imageId === "simple-machines-basics" &&
         record.assetFile === "images/english/simple-machines-basics.png") {
         return "Simple Machines";
@@ -10336,6 +10496,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isSpaceSolarSystemImageTextIdentity =
+        record.imageId === "space-solar-system-basics" ||
+        record.assetFile === "images/english/space-solar-system-basics.png" ||
+        assetFile === "images/english/space-solar-system-basics.png";
+    if (isSpaceSolarSystemImageTextIdentity) {
+        return getEnglishSpaceSolarSystemImageTextRecord(record, assetFile);
     }
 
     const isSimpleMachinesImageTextIdentity =
@@ -12450,6 +12618,20 @@ function getEnglishImageTTSImageTextSpeechText(record, item) {
     return getEnglishAirportBusinessTravelImageTextSpeechText(record, item);
 }
 
+function getEnglishSpaceSolarSystemImageTextSpeechSegments(record, item) {
+    if (!record || record.imageId !== "space-solar-system-basics" ||
+        record.assetFile !== "images/english/space-solar-system-basics.png" ||
+        record.contentType !== "image-text" || !item || item.sourceText !== item.ttsText) {
+        return null;
+    }
+    const panel = record.panels.find(candidate => candidate.items.includes(item));
+    if (!panel || panel.panelId !== 3 || item.itemId !== 1 || item.type !== "sentence" ||
+        item.sourceText !== "Look at the stars!\nThe universe is so big\nand amazing!") {
+        return null;
+    }
+    return ["Look at the stars!", "The universe is so big and amazing!"];
+}
+
 function getEnglishSimpleMachinesImageTextSpeechSegments(record, item) {
     if (!record || record.imageId !== "simple-machines-basics" ||
         record.assetFile !== "images/english/simple-machines-basics.png" ||
@@ -12483,11 +12665,25 @@ function getEnglishSimpleMachinesImageTextSpeechSegments(record, item) {
 function speakEnglishImageTTSImageTextSequence(
     trigger, items, completionMessage, selectedSpeechUnitText = null
 ) {
-    const wrapper = trigger && typeof trigger.closest === "function"
-        ? trigger.closest(".image-tts-overlay-wrapper")
-        : null;
-    const assetFile = wrapper && wrapper.dataset ? wrapper.dataset.imageTtsAssetFile : null;
-    const record = assetFile ? getEnglishImageTTSRecord(assetFile) : null;
+    if (!trigger || typeof trigger !== "object" || typeof trigger.closest !== "function") {
+        setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
+        return false;
+    }
+    const wrapper = trigger.closest(".image-tts-overlay-wrapper");
+    if (!wrapper || typeof wrapper !== "object" || Array.isArray(wrapper) ||
+        !wrapper.dataset || typeof wrapper.dataset !== "object" || Array.isArray(wrapper.dataset) ||
+        typeof wrapper.dataset.imageTtsAssetFile !== "string" || !wrapper.dataset.imageTtsAssetFile) {
+        setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
+        return false;
+    }
+    const assetFile = wrapper.dataset.imageTtsAssetFile;
+    const record = getEnglishImageTTSRecord(assetFile);
+    if (!record || typeof record !== "object" || Array.isArray(record) ||
+        typeof record.imageId !== "string" || typeof record.assetFile !== "string" ||
+        !Array.isArray(record.panels)) {
+        setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
+        return false;
+    }
     const itemList = Array.isArray(items) ? items : [];
     const allItems = record ? record.panels.flatMap(panel => panel.items) : [];
     const isPanelSequence = Boolean(record && record.panels.some(panel =>
@@ -12518,6 +12714,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "volcanoes-basics" &&
         record.assetFile === "images/english/volcanoes-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isSpaceSolarSystemSingleItemSequence = Boolean(record &&
+        record.imageId === "space-solar-system-basics" &&
+        record.assetFile === "images/english/space-solar-system-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isSimpleMachinesSingleItemSequence = Boolean(record &&
         record.imageId === "simple-machines-basics" &&
         record.assetFile === "images/english/simple-machines-basics.png" &&
@@ -12537,7 +12737,12 @@ function speakEnglishImageTTSImageTextSequence(
         : itemList.map(item => ({
             item,
             text: item ? getEnglishImageTTSImageTextSpeechText(record, item) : null,
-            speechSegments: item ? getEnglishSimpleMachinesImageTextSpeechSegments(record, item) : null
+            speechSegments: item
+                ? (record.imageId === "space-solar-system-basics" &&
+                    record.assetFile === "images/english/space-solar-system-basics.png"
+                    ? getEnglishSpaceSolarSystemImageTextSpeechSegments(record, item)
+                    : getEnglishSimpleMachinesImageTextSpeechSegments(record, item))
+                : null
         }));
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
     if (!trigger || !wrapper || !record || !trigger.classList ||
@@ -12550,7 +12755,8 @@ function speakEnglishImageTTSImageTextSequence(
         (!isPanelSequence && !isWholeImageSequence &&
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
             !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence &&
-            !isVolcanoesSingleItemSequence && !isSimpleMachinesSingleItemSequence) ||
+            !isVolcanoesSingleItemSequence && !isSimpleMachinesSingleItemSequence &&
+            !isSpaceSolarSystemSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length ||
@@ -12937,6 +13143,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const isVolcanoesImageText = safeRecord.imageId === "volcanoes-basics" &&
         safeRecord.assetFile === "images/english/volcanoes-basics.png";
     if (isVolcanoesImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isSpaceSolarSystemImageText = safeRecord.imageId === "space-solar-system-basics" &&
+        safeRecord.assetFile === "images/english/space-solar-system-basics.png";
+    if (isSpaceSolarSystemImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));

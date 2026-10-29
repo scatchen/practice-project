@@ -18719,5 +18719,303 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+
+    "images/english/space-solar-system-basics.png": {
+        imageId: "space-solar-system-basics",
+        assetFile: "images/english/space-solar-system-basics.png",
+        contentType: "image-text",
+        layout: "custom-space-solar-system-8-panel",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.6, yPct: 0.7, widthPct: 98.9, heightPct: 14.3 },
+                items: []
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 0.6, yPct: 15.8, widthPct: 55.1, heightPct: 28.4 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "The solar system is made up of\nthe Sun, planets, moons, and more.",
+                        ttsText: "The solar system is made up of\nthe Sun, planets, moons, and more.",
+                        bounds: { xPct: 3.8, yPct: 17.2, widthPct: 27, heightPct: 4.1 },
+                        tapRegion: { xPct: 1.5, yPct: 16.4, widthPct: 31, heightPct: 5.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "Sun", ttsText: "Sun",
+                        bounds: { xPct: 3.2, yPct: 39.7, widthPct: 3.3, heightPct: 1.7 },
+                        tapRegion: { xPct: 2.9, yPct: 39.5, widthPct: 3.9, heightPct: 2.1 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Mercury", ttsText: "Mercury",
+                        bounds: { xPct: 10, yPct: 36.3, widthPct: 5.1, heightPct: 1.8 },
+                        tapRegion: { xPct: 9.7, yPct: 36.1, widthPct: 5.5, heightPct: 2.2 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Venus", ttsText: "Venus",
+                        bounds: { xPct: 15.6, yPct: 36.3, widthPct: 3.4, heightPct: 1.8 },
+                        tapRegion: { xPct: 15.4, yPct: 36.1, widthPct: 3.9, heightPct: 2.2 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Earth", ttsText: "Earth",
+                        bounds: { xPct: 20.4, yPct: 36.3, widthPct: 3.7, heightPct: 1.8 },
+                        tapRegion: { xPct: 20.1, yPct: 36.1, widthPct: 4.3, heightPct: 2.2 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "label",
+                        sourceText: "Mars", ttsText: "Mars",
+                        bounds: { xPct: 25.6, yPct: 36.3, widthPct: 2.7, heightPct: 1.8 },
+                        tapRegion: { xPct: 25.3, yPct: 36.1, widthPct: 3.3, heightPct: 2.2 }
+                    },
+                    {
+                        itemId: 7, readingOrder: 7, type: "label",
+                        sourceText: "Jupiter", ttsText: "Jupiter",
+                        bounds: { xPct: 31, yPct: 37.1, widthPct: 4.7, heightPct: 1.8 },
+                        tapRegion: { xPct: 30.7, yPct: 36.9, widthPct: 5.3, heightPct: 2.2 }
+                    },
+                    {
+                        itemId: 8, readingOrder: 8, type: "label",
+                        sourceText: "Saturn", ttsText: "Saturn",
+                        bounds: { xPct: 39.6, yPct: 36.3, widthPct: 3.9, heightPct: 1.8 },
+                        tapRegion: { xPct: 39.3, yPct: 36.1, widthPct: 4.5, heightPct: 2.2 }
+                    },
+                    {
+                        itemId: 9, readingOrder: 9, type: "label",
+                        sourceText: "Uranus", ttsText: "Uranus",
+                        bounds: { xPct: 45.8, yPct: 36.3, widthPct: 4.5, heightPct: 1.8 },
+                        tapRegion: { xPct: 45.4, yPct: 36.1, widthPct: 4.9, heightPct: 2.2 }
+                    },
+                    {
+                        itemId: 10, readingOrder: 10, type: "label",
+                        sourceText: "Neptune", ttsText: "Neptune",
+                        bounds: { xPct: 50.8, yPct: 36.3, widthPct: 4.4, heightPct: 1.8 },
+                        tapRegion: { xPct: 50.5, yPct: 36.1, widthPct: 4.8, heightPct: 2.2 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 56.3, yPct: 15.8, widthPct: 43.1, heightPct: 28.4 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Look at the stars!\nThe universe is so big\nand amazing!",
+                        ttsText: "Look at the stars!\nThe universe is so big\nand amazing!",
+                        bounds: { xPct: 70.1, yPct: 17.2, widthPct: 18.6, heightPct: 6 },
+                        tapRegion: { xPct: 67.8, yPct: 16.4, widthPct: 21.3, heightPct: 10.2 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 0.6, yPct: 45.1, widthPct: 55.1, heightPct: 28 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Each planet has its own special features.",
+                        ttsText: "Each planet has its own special features.",
+                        bounds: { xPct: 3.3, yPct: 47, widthPct: 30, heightPct: 2 },
+                        tapRegion: { xPct: 1.4, yPct: 46, widthPct: 34, heightPct: 5.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "phrase",
+                        sourceText: "Earth\nOur home", ttsText: "Earth\nOur home",
+                        bounds: { xPct: 5, yPct: 64, widthPct: 8.5, heightPct: 4.1 },
+                        tapRegion: { xPct: 4.7, yPct: 63.8, widthPct: 9.1, heightPct: 4.6 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "phrase",
+                        sourceText: "Mars\nThe Red Planet", ttsText: "Mars\nThe Red Planet",
+                        bounds: { xPct: 15, yPct: 64, widthPct: 7, heightPct: 4.1 },
+                        tapRegion: { xPct: 14.7, yPct: 63.8, widthPct: 7.6, heightPct: 4.6 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "phrase",
+                        sourceText: "Jupiter\nThe biggest\nplanet", ttsText: "Jupiter\nThe biggest\nplanet",
+                        bounds: { xPct: 27.3, yPct: 64, widthPct: 9.1, heightPct: 7 },
+                        tapRegion: { xPct: 26.9, yPct: 63.7, widthPct: 9.9, heightPct: 7.6 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "phrase",
+                        sourceText: "Saturn\nBeautiful rings", ttsText: "Saturn\nBeautiful rings",
+                        bounds: { xPct: 40, yPct: 64, widthPct: 9.1, heightPct: 4.1 },
+                        tapRegion: { xPct: 39.7, yPct: 63.8, widthPct: 9.7, heightPct: 4.6 }
+                    }
+                ]
+            },
+            {
+                panelId: 5, readingOrder: 5,
+                bounds: { xPct: 56.3, yPct: 45.1, widthPct: 43.1, heightPct: 28 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "The moon is Earth's\nnatural satellite.",
+                        ttsText: "The moon is Earth's\nnatural satellite.",
+                        bounds: { xPct: 58.8, yPct: 47.6, widthPct: 13.7, heightPct: 4.2 },
+                        tapRegion: { xPct: 56.8, yPct: 46.1, widthPct: 16.9, heightPct: 12.1 }
+                    }
+                ]
+            },
+            {
+                panelId: 6, readingOrder: 6,
+                bounds: { xPct: 0.7, yPct: 73.8, widthPct: 35, heightPct: 24.7 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "space", ttsText: "space",
+                        bounds: { xPct: 2.4, yPct: 79.2, widthPct: 5.3, heightPct: 1.7 },
+                        tapRegion: { xPct: 2.2, yPct: 79.1, widthPct: 5.7, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "universe", ttsText: "universe",
+                        bounds: { xPct: 2.4, yPct: 81.4, widthPct: 6.3, heightPct: 1.7 },
+                        tapRegion: { xPct: 2.2, yPct: 81.3, widthPct: 6.7, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "solar system", ttsText: "solar system",
+                        bounds: { xPct: 2.4, yPct: 83.6, widthPct: 8.9, heightPct: 1.7 },
+                        tapRegion: { xPct: 2.2, yPct: 83.5, widthPct: 9.3, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "sun", ttsText: "sun",
+                        bounds: { xPct: 2.4, yPct: 85.8, widthPct: 3.4, heightPct: 1.7 },
+                        tapRegion: { xPct: 2.2, yPct: 85.7, widthPct: 3.8, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "planet", ttsText: "planet",
+                        bounds: { xPct: 2.4, yPct: 88, widthPct: 4.7, heightPct: 1.7 },
+                        tapRegion: { xPct: 2.2, yPct: 87.9, widthPct: 5.1, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "label",
+                        sourceText: "moon", ttsText: "moon",
+                        bounds: { xPct: 2.4, yPct: 90.2, widthPct: 4, heightPct: 1.7 },
+                        tapRegion: { xPct: 2.2, yPct: 90.1, widthPct: 4.4, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 7, readingOrder: 7, type: "label",
+                        sourceText: "star", ttsText: "star",
+                        bounds: { xPct: 2.4, yPct: 92.4, widthPct: 3.3, heightPct: 1.7 },
+                        tapRegion: { xPct: 2.2, yPct: 92.3, widthPct: 3.7, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 8, readingOrder: 8, type: "label",
+                        sourceText: "Earth", ttsText: "Earth",
+                        bounds: { xPct: 21, yPct: 79.2, widthPct: 4.2, heightPct: 1.7 },
+                        tapRegion: { xPct: 20.8, yPct: 79.1, widthPct: 4.6, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 9, readingOrder: 9, type: "label",
+                        sourceText: "Mars", ttsText: "Mars",
+                        bounds: { xPct: 21, yPct: 81.4, widthPct: 3.5, heightPct: 1.7 },
+                        tapRegion: { xPct: 20.8, yPct: 81.3, widthPct: 3.9, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 10, readingOrder: 10, type: "label",
+                        sourceText: "Jupiter", ttsText: "Jupiter",
+                        bounds: { xPct: 21, yPct: 83.6, widthPct: 5.2, heightPct: 1.7 },
+                        tapRegion: { xPct: 20.8, yPct: 83.5, widthPct: 5.6, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 11, readingOrder: 11, type: "label",
+                        sourceText: "Saturn", ttsText: "Saturn",
+                        bounds: { xPct: 21, yPct: 85.8, widthPct: 4.4, heightPct: 1.7 },
+                        tapRegion: { xPct: 20.8, yPct: 85.7, widthPct: 4.8, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 12, readingOrder: 12, type: "label",
+                        sourceText: "Uranus", ttsText: "Uranus",
+                        bounds: { xPct: 21, yPct: 88, widthPct: 4.5, heightPct: 1.7 },
+                        tapRegion: { xPct: 20.8, yPct: 87.9, widthPct: 4.9, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 13, readingOrder: 13, type: "label",
+                        sourceText: "Neptune", ttsText: "Neptune",
+                        bounds: { xPct: 21, yPct: 90.2, widthPct: 5.6, heightPct: 1.7 },
+                        tapRegion: { xPct: 20.8, yPct: 90.1, widthPct: 6, heightPct: 1.9 }
+                    },
+                    {
+                        itemId: 14, readingOrder: 14, type: "label",
+                        sourceText: "galaxy", ttsText: "galaxy",
+                        bounds: { xPct: 21, yPct: 92.4, widthPct: 4.8, heightPct: 1.7 },
+                        tapRegion: { xPct: 20.8, yPct: 92.3, widthPct: 5.2, heightPct: 1.9 }
+                    }
+                ]
+            },
+            {
+                panelId: 7, readingOrder: 7,
+                bounds: { xPct: 36.4, yPct: 73.8, widthPct: 31.8, heightPct: 24.7 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "The Earth is a planet.", ttsText: "The Earth is a planet.",
+                        bounds: { xPct: 40.4, yPct: 79.2, widthPct: 15.8, heightPct: 1.7 },
+                        tapRegion: { xPct: 40.1, yPct: 79, widthPct: 16.4, heightPct: 2.1 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "The sun gives us light and heat.", ttsText: "The sun gives us light and heat.",
+                        bounds: { xPct: 40.4, yPct: 82.8, widthPct: 22.9, heightPct: 1.7 },
+                        tapRegion: { xPct: 40.1, yPct: 82.6, widthPct: 23.5, heightPct: 2.1 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "The moon orbits the Earth.", ttsText: "The moon orbits the Earth.",
+                        bounds: { xPct: 40.4, yPct: 86.4, widthPct: 19.3, heightPct: 1.7 },
+                        tapRegion: { xPct: 40.1, yPct: 86.2, widthPct: 19.9, heightPct: 2.1 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "There are eight planets in the solar system.", ttsText: "There are eight planets in the solar system.",
+                        bounds: { xPct: 40.4, yPct: 90, widthPct: 25.9, heightPct: 1.7 },
+                        tapRegion: { xPct: 40.1, yPct: 89.8, widthPct: 26.5, heightPct: 2.1 }
+                    }
+                ]
+            },
+            {
+                panelId: 8, readingOrder: 8,
+                bounds: { xPct: 68.9, yPct: 73.8, widthPct: 30.6, heightPct: 24.7 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "The Sun is a star, not a planet.", ttsText: "The Sun is a star, not a planet.",
+                        bounds: { xPct: 72.3, yPct: 79, widthPct: 22, heightPct: 1.8 },
+                        tapRegion: { xPct: 72, yPct: 78.8, widthPct: 22.6, heightPct: 2.2 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Jupiter is the largest planet\nin our solar system.", ttsText: "Jupiter is the largest planet\nin our solar system.",
+                        bounds: { xPct: 72.3, yPct: 82.1, widthPct: 22.2, heightPct: 3.8 },
+                        tapRegion: { xPct: 72, yPct: 81.9, widthPct: 22.8, heightPct: 4.2 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "Saturn's rings are made of ice\nand rock.", ttsText: "Saturn's rings are made of ice\nand rock.",
+                        bounds: { xPct: 72.3, yPct: 86.8, widthPct: 22, heightPct: 3.8 },
+                        tapRegion: { xPct: 72, yPct: 86.6, widthPct: 22.6, heightPct: 4.2 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "There are billions of galaxies\nin the universe.", ttsText: "There are billions of galaxies\nin the universe.",
+                        bounds: { xPct: 72.3, yPct: 91.5, widthPct: 22.7, heightPct: 3.8 },
+                        tapRegion: { xPct: 72, yPct: 91.3, widthPct: 23.3, heightPct: 4.2 }
+                    }
+                ]
+            }
+        ]
     }
 };
