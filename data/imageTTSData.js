@@ -18594,5 +18594,130 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/simple-machines-basics.png": {
+        imageId: "simple-machines-basics",
+        assetFile: "images/english/simple-machines-basics.png",
+        contentType: "image-text",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.8, yPct: 10.7, widthPct: 49.7, heightPct: 42.0 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "1. What is a Simple Machine?", ttsText: "1. What is a Simple Machine?",
+                        bounds: { xPct: 3.1, yPct: 12.2, widthPct: 44.0, heightPct: 4.2 },
+                        tapRegion: { xPct: 2.0, yPct: 11.4, widthPct: 46.2, heightPct: 6.0 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A simple machine\nhelps us do work\neasier. It can\nchange the size\nor direction of\na force.",
+                        ttsText: "A simple machine\nhelps us do work\neasier. It can\nchange the size\nor direction of\na force.",
+                        bounds: { xPct: 3.1, yPct: 19.8, widthPct: 17.2, heightPct: 22.4 },
+                        tapRegion: { xPct: 2.0, yPct: 18.7, widthPct: 19.0, heightPct: 24.4 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 51.0, yPct: 10.7, widthPct: 48.5, heightPct: 42.0 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "2. Lever", ttsText: "2. Lever",
+                        bounds: { xPct: 54.0, yPct: 12.2, widthPct: 12.2, heightPct: 4.2 },
+                        tapRegion: { xPct: 52.5, yPct: 11.4, widthPct: 15.0, heightPct: 6.0 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A lever is a rigid bar\nthat pivots on a point\ncalled a fulcrum. It helps\nus lift a load with less force.",
+                        ttsText: "A lever is a rigid bar\nthat pivots on a point\ncalled a fulcrum. It helps\nus lift a load with less force.",
+                        bounds: { xPct: 56.0, yPct: 18.9, widthPct: 24.1, heightPct: 12.3 },
+                        tapRegion: { xPct: 54.0, yPct: 17.8, widthPct: 27.5, heightPct: 14.3 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Load", ttsText: "Load",
+                        bounds: { xPct: 92.1, yPct: 24.2, widthPct: 4.6, heightPct: 3.2 },
+                        tapRegion: { xPct: 90.5, yPct: 23.2, widthPct: 7.6, heightPct: 5.3 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Force", ttsText: "Force",
+                        bounds: { xPct: 67.0, yPct: 34.5, widthPct: 5.4, heightPct: 3.4 },
+                        tapRegion: { xPct: 65.5, yPct: 33.4, widthPct: 8.4, heightPct: 5.5 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Fulcrum", ttsText: "Fulcrum",
+                        bounds: { xPct: 81.5, yPct: 46.2, widthPct: 7.8, heightPct: 3.1 },
+                        tapRegion: { xPct: 80.0, yPct: 45.0, widthPct: 10.0, heightPct: 5.1 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.8, yPct: 53.5, widthPct: 49.7, heightPct: 45.7 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "3. Pulley", ttsText: "3. Pulley",
+                        bounds: { xPct: 3.1, yPct: 55.3, widthPct: 14.5, heightPct: 4.2 },
+                        tapRegion: { xPct: 2.0, yPct: 54.4, widthPct: 17.0, heightPct: 6.1 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A pulley is a wheel\nwith a rope. It\nchanges the\ndirection of the force\nand helps us lift\na heavy load more\neasily.",
+                        ttsText: "A pulley is a wheel\nwith a rope. It\nchanges the\ndirection of the force\nand helps us lift\na heavy load more\neasily.",
+                        bounds: { xPct: 3.2, yPct: 63.2, widthPct: 21.0, heightPct: 25.5 },
+                        tapRegion: { xPct: 2.0, yPct: 62.1, widthPct: 23.4, heightPct: 27.5 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Force\n(up)", ttsText: "Force\n(up)",
+                        bounds: { xPct: 39.4, yPct: 65.6, widthPct: 6.2, heightPct: 7.1 },
+                        tapRegion: { xPct: 37.8, yPct: 64.5, widthPct: 9.5, heightPct: 9.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 51.0, yPct: 53.5, widthPct: 48.5, heightPct: 45.7 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Inclined Plane", ttsText: "Inclined Plane",
+                        bounds: { xPct: 53.7, yPct: 61.6, widthPct: 17.5, heightPct: 3.4 },
+                        tapRegion: { xPct: 52.7, yPct: 60.5, widthPct: 19.7, heightPct: 5.3 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "An inclined plane is\na slanted surface. It helps\nus move a heavy load up\nwith less force.",
+                        ttsText: "An inclined plane is\na slanted surface. It helps\nus move a heavy load up\nwith less force.",
+                        bounds: { xPct: 53.7, yPct: 66.3, widthPct: 18.0, heightPct: 11.4 },
+                        tapRegion: { xPct: 52.5, yPct: 66.1, widthPct: 20.5, heightPct: 12.8 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Wheel and Axle", ttsText: "Wheel and Axle",
+                        bounds: { xPct: 80.0, yPct: 61.6, widthPct: 16.5, heightPct: 3.4 },
+                        tapRegion: { xPct: 78.5, yPct: 60.5, widthPct: 18.5, heightPct: 5.3 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "A wheel and axle is a large\nwheel attached to a smaller\naxle. It helps us move\nobjects more easily.",
+                        ttsText: "A wheel and axle is a large\nwheel attached to a smaller\naxle. It helps us move\nobjects more easily.",
+                        bounds: { xPct: 78.0, yPct: 66.3, widthPct: 19.4, heightPct: 11.4 },
+                        tapRegion: { xPct: 77.0, yPct: 66.1, widthPct: 21.0, heightPct: 12.8 }
+                    }
+                ]
+            }
+        ]
     }
 };

@@ -8667,6 +8667,120 @@ function isEnglishVolcanoesImageTTSItemText(record, item) {
         ));
 }
 
+function getEnglishSimpleMachinesImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/simple-machines-basics.png";
+    const expectedImageId = "simple-machines-basics";
+    const expectedPanels = [
+        [1, [0.8, 10.7, 49.7, 42.0], [
+            ["sentence", "1. What is a Simple Machine?", [3.1, 12.2, 44.0, 4.2], [2.0, 11.4, 46.2, 6.0]],
+            ["sentence", "A simple machine\nhelps us do work\neasier. It can\nchange the size\nor direction of\na force.", [3.1, 19.8, 17.2, 22.4], [2.0, 18.7, 19.0, 24.4]]
+        ]],
+        [2, [51.0, 10.7, 48.5, 42.0], [
+            ["label", "2. Lever", [54.0, 12.2, 12.2, 4.2], [52.5, 11.4, 15.0, 6.0]],
+            ["sentence", "A lever is a rigid bar\nthat pivots on a point\ncalled a fulcrum. It helps\nus lift a load with less force.", [56.0, 18.9, 24.1, 12.3], [54.0, 17.8, 27.5, 14.3]],
+            ["label", "Load", [92.1, 24.2, 4.6, 3.2], [90.5, 23.2, 7.6, 5.3]],
+            ["label", "Force", [67.0, 34.5, 5.4, 3.4], [65.5, 33.4, 8.4, 5.5]],
+            ["label", "Fulcrum", [81.5, 46.2, 7.8, 3.1], [80.0, 45.0, 10.0, 5.1]]
+        ]],
+        [3, [0.8, 53.5, 49.7, 45.7], [
+            ["label", "3. Pulley", [3.1, 55.3, 14.5, 4.2], [2.0, 54.4, 17.0, 6.1]],
+            ["sentence", "A pulley is a wheel\nwith a rope. It\nchanges the\ndirection of the force\nand helps us lift\na heavy load more\neasily.", [3.2, 63.2, 21.0, 25.5], [2.0, 62.1, 23.4, 27.5]],
+            ["label", "Force\n(up)", [39.4, 65.6, 6.2, 7.1], [37.8, 64.5, 9.5, 9.0]]
+        ]],
+        [4, [51.0, 53.5, 48.5, 45.7], [
+            ["label", "Inclined Plane", [53.7, 61.6, 17.5, 3.4], [52.7, 60.5, 19.7, 5.3]],
+            ["sentence", "An inclined plane is\na slanted surface. It helps\nus move a heavy load up\nwith less force.", [53.7, 66.3, 18.0, 11.4], [52.5, 66.1, 20.5, 12.8]],
+            ["label", "Wheel and Axle", [80.0, 61.6, 16.5, 3.4], [78.5, 60.5, 18.5, 5.3]],
+            ["sentence", "A wheel and axle is a large\nwheel attached to a smaller\naxle. It helps us move\nobjects more easily.", [78.0, 66.3, 19.4, 11.4], [77.0, 66.1, 21.0, 12.8]]
+        ]]
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const boundsValues = bounds => boundsKeys.map(key => bounds[key]);
+    const matchesBounds = (actual, expected) => hasExactKeys(actual, boundsKeys) &&
+        boundsKeys.every((key, index) => Number.isFinite(actual[key]) && actual[key] === expected[index]) &&
+        actual.xPct >= 0 && actual.yPct >= 0 && actual.widthPct > 0 && actual.heightPct > 0 &&
+        actual.xPct + actual.widthPct <= 100 && actual.yPct + actual.heightPct <= 100;
+    const contains = (outer, inner) => {
+        const outerValues = boundsValues(outer);
+        const innerValues = boundsValues(inner);
+        return matchesBounds(outer, outerValues) && matchesBounds(inner, innerValues) &&
+            inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+            inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+            inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    };
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        !hasExactKeys(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+            "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"]) ||
+        record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        record.contentType !== "image-text" || record.layout !== "2x2" ||
+        record.transcriptStatus !== "verified" || record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (key === expectedAssetFile || candidate.imageId === expectedImageId ||
+            candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) return null;
+
+    const allItems = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        const panelBounds = { xPct: expectedPanel[1][0], yPct: expectedPanel[1][1],
+            widthPct: expectedPanel[1][2], heightPct: expectedPanel[1][3] };
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel[0] || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel[1]) || !Array.isArray(panel.items) ||
+            panel.items.length !== expectedPanel[2].length) return null;
+        for (let itemIndex = 0; itemIndex < expectedPanel[2].length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel[2][itemIndex];
+            if (!hasExactKeys(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"]) ||
+                item.itemId !== itemIndex + 1 || item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem[0] || item.sourceText !== expectedItem[1] ||
+                item.ttsText !== item.sourceText || !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem[2]) || !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panelBounds, item.bounds) || !contains(panelBounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) return null;
+            allItems.push(item);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            if (overlaps(allItems[left].bounds, allItems[right].bounds) ||
+                overlaps(allItems[left].tapRegion, allItems[right].tapRegion) ||
+                overlaps(allItems[left].bounds, allItems[right].tapRegion) ||
+                overlaps(allItems[left].tapRegion, allItems[right].bounds)) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
+function isEnglishSimpleMachinesImageTTSItemText(record, item) {
+    return Boolean(record && record.contentType === "image-text" &&
+        record.imageId === "simple-machines-basics" &&
+        record.assetFile === "images/english/simple-machines-basics.png" && item &&
+        item.sourceText === item.ttsText && record.panels.some(panel => panel.items.includes(item)) &&
+        getEnglishTTSUnitText(item.ttsText));
+}
+
 function isEnglishImageTTSItemText(record, item) {
     if (isEnglishVolcanoesImageTTSItemText(record, item) ||
         isEnglishWeatherInstrumentsImageTTSItemText(record, item) ||
@@ -8678,7 +8792,8 @@ function isEnglishImageTTSItemText(record, item) {
         record.assetFile === "images/english/shipping-and-logistics-basics.png" &&
         item.type === "label" && item.sourceText === "Shipping & Logistics" &&
         item.ttsText === item.sourceText) || isEnglishAirportBusinessTravelAmpersandItem(record, item) ||
-        isEnglishHotelCheckInImageTextAmpersandItem(record, item));
+        isEnglishHotelCheckInImageTextAmpersandItem(record, item) ||
+        isEnglishSimpleMachinesImageTTSItemText(record, item));
 }
 
 function getEnglishJobInterviewImageTextRecord(record, assetFile) {
@@ -9220,6 +9335,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "simple-machines-basics" &&
+        record.assetFile === "images/english/simple-machines-basics.png") {
+        return "Simple Machines";
+    }
     if (record && record.imageId === "volcanoes-basics" &&
         record.assetFile === "images/english/volcanoes-basics.png") {
         return "Volcanoes";
@@ -10217,6 +10336,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isSimpleMachinesImageTextIdentity =
+        record.imageId === "simple-machines-basics" ||
+        record.assetFile === "images/english/simple-machines-basics.png" ||
+        assetFile === "images/english/simple-machines-basics.png";
+    if (isSimpleMachinesImageTextIdentity) {
+        return getEnglishSimpleMachinesImageTextRecord(record, assetFile);
     }
 
     const isWeatherInstrumentsImageTextIdentity =
@@ -12323,6 +12450,36 @@ function getEnglishImageTTSImageTextSpeechText(record, item) {
     return getEnglishAirportBusinessTravelImageTextSpeechText(record, item);
 }
 
+function getEnglishSimpleMachinesImageTextSpeechSegments(record, item) {
+    if (!record || record.imageId !== "simple-machines-basics" ||
+        record.assetFile !== "images/english/simple-machines-basics.png" ||
+        record.contentType !== "image-text" || !item || item.sourceText !== item.ttsText) {
+        return null;
+    }
+    const internalSentenceUnits = [
+        { panelId: 1, itemId: 2, type: "sentence",
+            sourceText: "A simple machine\nhelps us do work\neasier. It can\nchange the size\nor direction of\na force.",
+            segments: ["A simple machine helps us do work easier.", "It can change the size or direction of a force."] },
+        { panelId: 2, itemId: 2, type: "sentence",
+            sourceText: "A lever is a rigid bar\nthat pivots on a point\ncalled a fulcrum. It helps\nus lift a load with less force.",
+            segments: ["A lever is a rigid bar that pivots on a point called a fulcrum.", "It helps us lift a load with less force."] },
+        { panelId: 3, itemId: 2, type: "sentence",
+            sourceText: "A pulley is a wheel\nwith a rope. It\nchanges the\ndirection of the force\nand helps us lift\na heavy load more\neasily.",
+            segments: ["A pulley is a wheel with a rope.", "It changes the direction of the force and helps us lift a heavy load more easily."] },
+        { panelId: 4, itemId: 2, type: "sentence",
+            sourceText: "An inclined plane is\na slanted surface. It helps\nus move a heavy load up\nwith less force.",
+            segments: ["An inclined plane is a slanted surface.", "It helps us move a heavy load up with less force."] },
+        { panelId: 4, itemId: 4, type: "sentence",
+            sourceText: "A wheel and axle is a large\nwheel attached to a smaller\naxle. It helps us move\nobjects more easily.",
+            segments: ["A wheel and axle is a large wheel attached to a smaller axle.", "It helps us move objects more easily."] }
+    ];
+    const panel = record.panels.find(candidate => candidate.items.includes(item));
+    const expected = panel && internalSentenceUnits.find(unit =>
+        unit.panelId === panel.panelId && unit.itemId === item.itemId);
+    if (!expected || item.type !== expected.type || item.sourceText !== expected.sourceText) return null;
+    return expected.segments.slice();
+}
+
 function speakEnglishImageTTSImageTextSequence(
     trigger, items, completionMessage, selectedSpeechUnitText = null
 ) {
@@ -12361,6 +12518,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "volcanoes-basics" &&
         record.assetFile === "images/english/volcanoes-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isSimpleMachinesSingleItemSequence = Boolean(record &&
+        record.imageId === "simple-machines-basics" &&
+        record.assetFile === "images/english/simple-machines-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const dailyLifeSteps = isDailyLifeRoutinesImageText
         ? itemList.flatMap(item => getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item)
             .map(text => ({ item, text })))
@@ -12375,7 +12536,8 @@ function speakEnglishImageTTSImageTextSequence(
             : [{ item: itemList[0], text: selectedSpeechUnitText }])
         : itemList.map(item => ({
             item,
-            text: item ? getEnglishImageTTSImageTextSpeechText(record, item) : null
+            text: item ? getEnglishImageTTSImageTextSpeechText(record, item) : null,
+            speechSegments: item ? getEnglishSimpleMachinesImageTextSpeechSegments(record, item) : null
         }));
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
     if (!trigger || !wrapper || !record || !trigger.classList ||
@@ -12388,7 +12550,7 @@ function speakEnglishImageTTSImageTextSequence(
         (!isPanelSequence && !isWholeImageSequence &&
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
             !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence &&
-            !isVolcanoesSingleItemSequence) ||
+            !isVolcanoesSingleItemSequence && !isSimpleMachinesSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length ||
@@ -12439,43 +12601,72 @@ function speakEnglishImageTTSImageTextSequence(
             setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
             return false;
         }
-        const started = speakEnglishText(speechText, () => {
-            if (generation !== englishTTSState.imageTextSequenceGeneration) {
-                return;
-            }
-            if (appState.subjectMode !== "english" || trigger.isConnected === false) {
-                cancelEnglishImageTTSImageTextSequence(true);
-                return;
-            }
-            const previousItem = playbackSteps[itemIndex].item;
-            itemIndex += 1;
-            if (itemIndex >= playbackSteps.length) {
-                finishSequence();
-                return;
-            }
-            const delay = previousItem.type === "sentence" ? 500 : 300;
-            englishTTSState.imageTextSequenceTimer = window.setTimeout(() => {
-                englishTTSState.imageTextSequenceTimer = 0;
-                if (generation !== englishTTSState.imageTextSequenceGeneration) {
+        const speechSegments = Array.isArray(step.speechSegments) && step.speechSegments.length
+            ? step.speechSegments
+            : [speechText];
+        if (speechSegments.some(segment => !getEnglishTTSUnitText(segment))) {
+            cancelEnglishImageTTSImageTextSequence(true);
+            setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
+            return false;
+        }
+        let speechSegmentIndex = 0;
+        const playSpeechSegment = () => {
+            if (generation !== englishTTSState.imageTextSequenceGeneration) return false;
+            const started = speakEnglishText(speechSegments[speechSegmentIndex], () => {
+                if (generation !== englishTTSState.imageTextSequenceGeneration) return;
+                if (appState.subjectMode !== "english" || trigger.isConnected === false) {
+                    cancelEnglishImageTTSImageTextSequence(true);
+                    return;
+                }
+                if (speechSegmentIndex + 1 < speechSegments.length) {
+                    speechSegmentIndex += 1;
+                    englishTTSState.imageTextSequenceTimer = window.setTimeout(() => {
+                        englishTTSState.imageTextSequenceTimer = 0;
+                        if (generation !== englishTTSState.imageTextSequenceGeneration) {
+                            updateEnglishTTSControls();
+                            return;
+                        }
+                        if (appState.subjectMode !== "english" || trigger.isConnected === false) {
+                            cancelEnglishImageTTSImageTextSequence(true);
+                            return;
+                        }
+                        playSpeechSegment();
+                    }, 500);
+                    setEnglishTTSStatus("原圖文字朗讀中，單一文字區內完整句後停頓 0.5 秒。");
                     updateEnglishTTSControls();
                     return;
                 }
-                playNext();
-            }, delay);
-            setEnglishTTSStatus(delay === 500
-                ? "原圖文字朗讀中，完整句後停頓 0.5 秒。"
-                : "原圖文字朗讀中，標籤或片語後停頓 0.3 秒。");
-            updateEnglishTTSControls();
-        }, true, () => {
-            if (generation === englishTTSState.imageTextSequenceGeneration) {
+                const previousItem = playbackSteps[itemIndex].item;
+                itemIndex += 1;
+                if (itemIndex >= playbackSteps.length) {
+                    finishSequence();
+                    return;
+                }
+                const delay = previousItem.type === "sentence" ? 500 : 300;
+                englishTTSState.imageTextSequenceTimer = window.setTimeout(() => {
+                    englishTTSState.imageTextSequenceTimer = 0;
+                    if (generation !== englishTTSState.imageTextSequenceGeneration) {
+                        updateEnglishTTSControls();
+                        return;
+                    }
+                    playNext();
+                }, delay);
+                setEnglishTTSStatus(delay === 500
+                    ? "原圖文字朗讀中，完整句後停頓 0.5 秒。"
+                    : "原圖文字朗讀中，標籤或片語後停頓 0.3 秒。");
+                updateEnglishTTSControls();
+            }, true, () => {
+                if (generation === englishTTSState.imageTextSequenceGeneration) {
+                    cancelEnglishImageTTSImageTextSequence();
+                }
+            }, null, null, null, generation);
+            if (!started && generation === englishTTSState.imageTextSequenceGeneration) {
                 cancelEnglishImageTTSImageTextSequence();
+                updateEnglishTTSControls();
             }
-        }, null, null, null, generation);
-        if (!started && generation === englishTTSState.imageTextSequenceGeneration) {
-            cancelEnglishImageTTSImageTextSequence();
-            updateEnglishTTSControls();
-        }
-        return started;
+            return started;
+        };
+        return playSpeechSegment();
     };
     return playNext();
 }
@@ -12746,6 +12937,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const isVolcanoesImageText = safeRecord.imageId === "volcanoes-basics" &&
         safeRecord.assetFile === "images/english/volcanoes-basics.png";
     if (isVolcanoesImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isSimpleMachinesImageText = safeRecord.imageId === "simple-machines-basics" &&
+        safeRecord.assetFile === "images/english/simple-machines-basics.png";
+    if (isSimpleMachinesImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));
