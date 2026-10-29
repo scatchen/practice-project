@@ -8645,8 +8645,31 @@ function isEnglishWeatherInstrumentsImageTTSItemText(record, item) {
         ));
 }
 
+function isEnglishVolcanoesImageTTSItemText(record, item) {
+    return Boolean(record && record.contentType === "image-text" &&
+        record.imageId === "volcanoes-basics" &&
+        record.assetFile === "images/english/volcanoes-basics.png" &&
+        item && item.ttsText === item.sourceText && (
+            (item.type === "sentence" && [
+                "A volcano is a mountain\nthat can erupt lava,\nash and gas.",
+                "Wide and gentle.",
+                "Often has runny lava.",
+                "Steep and tall.",
+                "Often has explosive\neruptions.",
+                "Volcanoes can be dangerous,\nbut they also help our planet!"
+            ].includes(item.sourceText)) ||
+            (item.type === "label" &&
+                ["ash cloud", "crater", "lava", "vent", "magma",
+                    "Shield Volcano", "Stratovolcano"].includes(item.sourceText)) ||
+            (item.type === "phrase" &&
+                ["They create:", "new land", "fertile soil", "useful minerals",
+                    "beautiful landscapes"].includes(item.sourceText))
+        ));
+}
+
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishWeatherInstrumentsImageTTSItemText(record, item) ||
+    if (isEnglishVolcanoesImageTTSItemText(record, item) ||
+        isEnglishWeatherInstrumentsImageTTSItemText(record, item) ||
         isEnglishFamilyBasicsImageTTSItem(record, item) ||
         isEnglishHobbiesInterestsImageTTSItem(record, item) ||
         isEnglishJobInterviewImageTTSItemText(record, item)) return true;
@@ -9197,6 +9220,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "volcanoes-basics" &&
+        record.assetFile === "images/english/volcanoes-basics.png") {
+        return "Volcanoes";
+    }
     if (record && record.imageId === "weather-instruments-basics" &&
         record.assetFile === "images/english/weather-instruments-basics.png") {
         return "Weather Instruments";
@@ -10010,6 +10037,174 @@ function getEnglishWeatherInstrumentsImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishVolcanoesImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/volcanoes-basics.png";
+    const expectedImageId = "volcanoes-basics";
+    const makeBounds = (xPct, yPct, widthPct, heightPct) =>
+        ({ xPct, yPct, widthPct, heightPct });
+    const expectedPanels = [
+        {
+            panelId: 1, bounds: makeBounds(1.0, 0.9, 55.9, 50.6),
+            items: [
+                ["sentence", "A volcano is a mountain\nthat can erupt lava,\nash and gas.",
+                    makeBounds(4.8, 14.6, 31.7, 10.2),
+                    makeBounds(3.5, 13.9, 34.5, 11.8)]
+            ]
+        },
+        {
+            panelId: 2, bounds: makeBounds(57.7, 0.9, 41.3, 50.6),
+            items: [
+                ["label", "ash cloud", makeBounds(86.2, 10.9, 9.8, 2.6),
+                    makeBounds(84.7, 9.8, 13.2, 4.4)],
+                ["label", "crater", makeBounds(83.1, 20.6, 7.7, 2.5),
+                    makeBounds(81.0, 19.7, 11.3, 4.1)],
+                ["label", "lava", makeBounds(87.4, 27.2, 5.5, 2.3),
+                    makeBounds(85.0, 26.3, 9.4, 4.3)],
+                ["label", "vent", makeBounds(60.8, 31.7, 4.8, 2.5),
+                    makeBounds(58.8, 30.7, 9.0, 4.9)],
+                ["label", "magma", makeBounds(86.0, 43.8, 8.2, 2.4),
+                    makeBounds(83.9, 42.9, 12.3, 4.3)]
+            ]
+        },
+        {
+            panelId: 3, bounds: makeBounds(1.1, 52.6, 51.2, 45.1),
+            items: [
+                ["label", "Shield Volcano", makeBounds(7.0, 81.5, 15.8, 2.3),
+                    makeBounds(3.5, 80.5, 22.5, 4.2)],
+                ["sentence", "Wide and gentle.", makeBounds(6.7, 85.9, 16.4, 2.2),
+                    makeBounds(5.0, 85.8, 19.0, 2.4)],
+                ["sentence", "Often has runny lava.", makeBounds(5.8, 88.5, 18.2, 2.3),
+                    makeBounds(4.7, 88.4, 20.4, 2.5)],
+                ["label", "Stratovolcano", makeBounds(31.3, 81.5, 17.3, 2.3),
+                    makeBounds(27.3, 80.5, 22.2, 4.2)],
+                ["sentence", "Steep and tall.", makeBounds(31.6, 85.9, 16.0, 2.2),
+                    makeBounds(30.5, 85.8, 18.2, 2.4)],
+                ["sentence", "Often has explosive\neruptions.",
+                    makeBounds(30.8, 88.5, 18.0, 4.4),
+                    makeBounds(29.8, 88.3, 19.8, 5.0)]
+            ]
+        },
+        {
+            panelId: 4, bounds: makeBounds(53.2, 52.6, 45.9, 45.1),
+            items: [
+                ["sentence", "Volcanoes can be dangerous,\nbut they also help our planet!",
+                    makeBounds(57.4, 54.7, 37.3, 6.1),
+                    makeBounds(55.9, 53.8, 40.0, 7.6)],
+                ["phrase", "They create:", makeBounds(83.6, 71.4, 12.4, 2.2),
+                    makeBounds(82.2, 70.6, 15.5, 3.5)],
+                ["phrase", "new land", makeBounds(84.5, 74.7, 7.5, 1.8),
+                    makeBounds(81.7, 74.3, 16.8, 2.3)],
+                ["phrase", "fertile soil", makeBounds(84.5, 77.5, 8.9, 1.8),
+                    makeBounds(81.7, 77.0, 16.8, 2.3)],
+                ["phrase", "useful minerals", makeBounds(84.5, 80.4, 11.8, 1.8),
+                    makeBounds(81.7, 79.7, 16.8, 2.5)],
+                ["phrase", "beautiful landscapes", makeBounds(84.5, 83.3, 13.7, 1.8),
+                    makeBounds(81.7, 82.6, 16.8, 2.7)]
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = value => hasExactKeys(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-volcanoes-4-panel" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allTextBounds = [];
+    const allTapRegions = [];
+    const allItems = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 || item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem[0] || item.sourceText !== expectedItem[1] ||
+                item.ttsText !== item.sourceText || !getEnglishTTSUnitText(item.sourceText) ||
+                !isEnglishVolcanoesImageTTSItemText(record, item) ||
+                !matchesBounds(item.bounds, expectedItem[2]) ||
+                !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+            allItems.push(item);
+        }
+    }
+
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) {
+                    return null;
+                }
+            }
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            if (overlaps(allItems[left].bounds, allItems[right].tapRegion) ||
+                overlaps(allItems[left].tapRegion, allItems[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -10134,6 +10329,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/hotel-check-in-and-business-hotel-basics.png";
     if (isHotelCheckInImageTextIdentity) {
         return getEnglishHotelCheckInImageTextRecord(record, assetFile);
+    }
+
+    const isVolcanoesImageTextIdentity =
+        record.imageId === "volcanoes-basics" ||
+        record.assetFile === "images/english/volcanoes-basics.png" ||
+        assetFile === "images/english/volcanoes-basics.png";
+    if (isVolcanoesImageTextIdentity) {
+        return getEnglishVolcanoesImageTextRecord(record, assetFile);
     }
 
     const isChangingOfTheGuardImageTextIdentity =
@@ -12154,6 +12357,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.assetFile === "images/english/weather-instruments-basics.png");
     const isWeatherInstrumentsSingleItemSequence = Boolean(isWeatherInstrumentsImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isVolcanoesSingleItemSequence = Boolean(record &&
+        record.imageId === "volcanoes-basics" &&
+        record.assetFile === "images/english/volcanoes-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const dailyLifeSteps = isDailyLifeRoutinesImageText
         ? itemList.flatMap(item => getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item)
             .map(text => ({ item, text })))
@@ -12180,7 +12387,8 @@ function speakEnglishImageTTSImageTextSequence(
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
         (!isPanelSequence && !isWholeImageSequence &&
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
-            !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence) ||
+            !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence &&
+            !isVolcanoesSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length ||
@@ -12518,6 +12726,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const isWeatherInstrumentsImageText = safeRecord.imageId === "weather-instruments-basics" &&
         safeRecord.assetFile === "images/english/weather-instruments-basics.png";
     if (isWeatherInstrumentsImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isVolcanoesImageText = safeRecord.imageId === "volcanoes-basics" &&
+        safeRecord.assetFile === "images/english/volcanoes-basics.png";
+    if (isVolcanoesImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));

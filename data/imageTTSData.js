@@ -18448,4 +18448,151 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/volcanoes-basics.png": {
+        imageId: "volcanoes-basics",
+        assetFile: "images/english/volcanoes-basics.png",
+        contentType: "image-text",
+        layout: "custom-volcanoes-4-panel",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 1.0, yPct: 0.9, widthPct: 55.9, heightPct: 50.6 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "A volcano is a mountain\nthat can erupt lava,\nash and gas.",
+                        ttsText: "A volcano is a mountain\nthat can erupt lava,\nash and gas.",
+                        bounds: { xPct: 4.8, yPct: 14.6, widthPct: 31.7, heightPct: 10.2 },
+                        tapRegion: { xPct: 3.5, yPct: 13.9, widthPct: 34.5, heightPct: 11.8 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 57.7, yPct: 0.9, widthPct: 41.3, heightPct: 50.6 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "ash cloud", ttsText: "ash cloud",
+                        bounds: { xPct: 86.2, yPct: 10.9, widthPct: 9.8, heightPct: 2.6 },
+                        tapRegion: { xPct: 84.7, yPct: 9.8, widthPct: 13.2, heightPct: 4.4 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "crater", ttsText: "crater",
+                        bounds: { xPct: 83.1, yPct: 20.6, widthPct: 7.7, heightPct: 2.5 },
+                        tapRegion: { xPct: 81.0, yPct: 19.7, widthPct: 11.3, heightPct: 4.1 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "lava", ttsText: "lava",
+                        bounds: { xPct: 87.4, yPct: 27.2, widthPct: 5.5, heightPct: 2.3 },
+                        tapRegion: { xPct: 85.0, yPct: 26.3, widthPct: 9.4, heightPct: 4.3 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "vent", ttsText: "vent",
+                        bounds: { xPct: 60.8, yPct: 31.7, widthPct: 4.8, heightPct: 2.5 },
+                        tapRegion: { xPct: 58.8, yPct: 30.7, widthPct: 9.0, heightPct: 4.9 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "magma", ttsText: "magma",
+                        bounds: { xPct: 86.0, yPct: 43.8, widthPct: 8.2, heightPct: 2.4 },
+                        tapRegion: { xPct: 83.9, yPct: 42.9, widthPct: 12.3, heightPct: 4.3 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 1.1, yPct: 52.6, widthPct: 51.2, heightPct: 45.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Shield Volcano", ttsText: "Shield Volcano",
+                        bounds: { xPct: 7.0, yPct: 81.5, widthPct: 15.8, heightPct: 2.3 },
+                        tapRegion: { xPct: 3.5, yPct: 80.5, widthPct: 22.5, heightPct: 4.2 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Wide and gentle.", ttsText: "Wide and gentle.",
+                        bounds: { xPct: 6.7, yPct: 85.9, widthPct: 16.4, heightPct: 2.2 },
+                        tapRegion: { xPct: 5.0, yPct: 85.8, widthPct: 19.0, heightPct: 2.4 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "Often has runny lava.", ttsText: "Often has runny lava.",
+                        bounds: { xPct: 5.8, yPct: 88.5, widthPct: 18.2, heightPct: 2.3 },
+                        tapRegion: { xPct: 4.7, yPct: 88.4, widthPct: 20.4, heightPct: 2.5 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Stratovolcano", ttsText: "Stratovolcano",
+                        bounds: { xPct: 31.3, yPct: 81.5, widthPct: 17.3, heightPct: 2.3 },
+                        tapRegion: { xPct: 27.3, yPct: 80.5, widthPct: 22.2, heightPct: 4.2 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "sentence",
+                        sourceText: "Steep and tall.", ttsText: "Steep and tall.",
+                        bounds: { xPct: 31.6, yPct: 85.9, widthPct: 16.0, heightPct: 2.2 },
+                        tapRegion: { xPct: 30.5, yPct: 85.8, widthPct: 18.2, heightPct: 2.4 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "sentence",
+                        sourceText: "Often has explosive\neruptions.",
+                        ttsText: "Often has explosive\neruptions.",
+                        bounds: { xPct: 30.8, yPct: 88.5, widthPct: 18.0, heightPct: 4.4 },
+                        tapRegion: { xPct: 29.8, yPct: 88.3, widthPct: 19.8, heightPct: 5.0 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 53.2, yPct: 52.6, widthPct: 45.9, heightPct: 45.1 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Volcanoes can be dangerous,\nbut they also help our planet!",
+                        ttsText: "Volcanoes can be dangerous,\nbut they also help our planet!",
+                        bounds: { xPct: 57.4, yPct: 54.7, widthPct: 37.3, heightPct: 6.1 },
+                        tapRegion: { xPct: 55.9, yPct: 53.8, widthPct: 40.0, heightPct: 7.6 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "phrase",
+                        sourceText: "They create:", ttsText: "They create:",
+                        bounds: { xPct: 83.6, yPct: 71.4, widthPct: 12.4, heightPct: 2.2 },
+                        tapRegion: { xPct: 82.2, yPct: 70.6, widthPct: 15.5, heightPct: 3.5 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "phrase",
+                        sourceText: "new land", ttsText: "new land",
+                        bounds: { xPct: 84.5, yPct: 74.7, widthPct: 7.5, heightPct: 1.8 },
+                        tapRegion: { xPct: 81.7, yPct: 74.3, widthPct: 16.8, heightPct: 2.3 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "phrase",
+                        sourceText: "fertile soil", ttsText: "fertile soil",
+                        bounds: { xPct: 84.5, yPct: 77.5, widthPct: 8.9, heightPct: 1.8 },
+                        tapRegion: { xPct: 81.7, yPct: 77.0, widthPct: 16.8, heightPct: 2.3 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "phrase",
+                        sourceText: "useful minerals", ttsText: "useful minerals",
+                        bounds: { xPct: 84.5, yPct: 80.4, widthPct: 11.8, heightPct: 1.8 },
+                        tapRegion: { xPct: 81.7, yPct: 79.7, widthPct: 16.8, heightPct: 2.5 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "phrase",
+                        sourceText: "beautiful landscapes", ttsText: "beautiful landscapes",
+                        bounds: { xPct: 84.5, yPct: 83.3, widthPct: 13.7, heightPct: 1.8 },
+                        tapRegion: { xPct: 81.7, yPct: 82.6, widthPct: 16.8, heightPct: 2.7 }
+                    }
+                ]
+            }
+        ]
+    }
 };
