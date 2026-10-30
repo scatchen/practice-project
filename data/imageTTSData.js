@@ -19310,5 +19310,111 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/space-technology-basics.png": {
+        imageId: "space-technology-basics",
+        assetFile: "images/english/space-technology-basics.png",
+        contentType: "image-text",
+        layout: "custom-space-technology-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.7, yPct: 0.7, widthPct: 48.6, heightPct: 48.6 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "1. Rockets", ttsText: "1. Rockets",
+                        bounds: { xPct: 4.2, yPct: 2.5, widthPct: 18.9, heightPct: 4.4 },
+                        tapRegion: { xPct: 1.3, yPct: 1.4, widthPct: 25, heightPct: 6.6 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Rockets take\npeople and robots\nto space.",
+                        ttsText: "Rockets take\npeople and robots\nto space.",
+                        bounds: { xPct: 3.7, yPct: 8.8, widthPct: 21, heightPct: 8.5 },
+                        tapRegion: { xPct: 2.7, yPct: 8.4, widthPct: 22.8, heightPct: 9.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.7, yPct: 0.7, widthPct: 48.6, heightPct: 48.6 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "2. Satellites", ttsText: "2. Satellites",
+                        bounds: { xPct: 54.4, yPct: 2.4, widthPct: 21.2, heightPct: 4.2 },
+                        tapRegion: { xPct: 51.7, yPct: 1.4, widthPct: 25.6, heightPct: 6.7 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Satellites orbit\nEarth and help us\ncommunicate, find\nlocations, and\nobserve weather.",
+                        ttsText: "Satellites orbit\nEarth and help us\ncommunicate, find\nlocations, and\nobserve weather.",
+                        bounds: { xPct: 53.3, yPct: 8.6, widthPct: 17.6, heightPct: 14 },
+                        tapRegion: { xPct: 51.7, yPct: 8.3, widthPct: 20.4, heightPct: 15 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Communication", ttsText: "Communication",
+                        bounds: { xPct: 87.2, yPct: 28.7, widthPct: 10.5, heightPct: 2 },
+                        tapRegion: { xPct: 81.4, yPct: 27, widthPct: 17.7, heightPct: 5.9 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "GPS\nNavigation", ttsText: "GPS\nNavigation",
+                        bounds: { xPct: 89.2, yPct: 33.7, widthPct: 7.6, heightPct: 4 },
+                        tapRegion: { xPct: 82.1, yPct: 33.1, widthPct: 17.2, heightPct: 6.4 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Weather\nForecast", ttsText: "Weather\nForecast",
+                        bounds: { xPct: 88, yPct: 41.5, widthPct: 10, heightPct: 3.7 },
+                        tapRegion: { xPct: 83.4, yPct: 40, widthPct: 15.6, heightPct: 6.8 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.7, yPct: 50.7, widthPct: 48.6, heightPct: 48.6 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "3. Astronauts", ttsText: "3. Astronauts",
+                        bounds: { xPct: 4, yPct: 52.2, widthPct: 27.8, heightPct: 4.2 },
+                        tapRegion: { xPct: 1.4, yPct: 51, widthPct: 32, heightPct: 6.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Astronauts travel\nto space to explore,\nlearn, and do\nscientific research.",
+                        ttsText: "Astronauts travel\nto space to explore,\nlearn, and do\nscientific research.",
+                        bounds: { xPct: 3.7, yPct: 58.6, widthPct: 21.5, heightPct: 10.9 },
+                        tapRegion: { xPct: 2.5, yPct: 58.2, widthPct: 24.8, heightPct: 11.8 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.7, yPct: 50.7, widthPct: 48.6, heightPct: 48.6 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "4. Space Exploration", ttsText: "4. Space Exploration",
+                        bounds: { xPct: 53.7, yPct: 52.2, widthPct: 33, heightPct: 4.4 },
+                        tapRegion: { xPct: 51.7, yPct: 51, widthPct: 36, heightPct: 6.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "We explore other planets\nand look for new discoveries.",
+                        ttsText: "We explore other planets\nand look for new discoveries.",
+                        bounds: { xPct: 53.7, yPct: 58.5, widthPct: 29.5, heightPct: 5.4 },
+                        tapRegion: { xPct: 52.5, yPct: 58.2, widthPct: 32, heightPct: 6.2 }
+                    }
+                ]
+            }
+        ]
+    },
 
 };

@@ -9022,6 +9022,115 @@ function getEnglishSimpleMachinesImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishSpaceTechnologyImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/space-technology-basics.png";
+    const expectedImageId = "space-technology-basics";
+    const expectedPanels = [
+        [1, [0.7, 0.7, 48.6, 48.6], [
+            ["label", "1. Rockets", [4.2, 2.5, 18.9, 4.4], [1.3, 1.4, 25, 6.6]],
+            ["sentence", "Rockets take\npeople and robots\nto space.", [3.7, 8.8, 21, 8.5], [2.7, 8.4, 22.8, 9.5]]
+        ]],
+        [2, [50.7, 0.7, 48.6, 48.6], [
+            ["label", "2. Satellites", [54.4, 2.4, 21.2, 4.2], [51.7, 1.4, 25.6, 6.7]],
+            ["sentence", "Satellites orbit\nEarth and help us\ncommunicate, find\nlocations, and\nobserve weather.", [53.3, 8.6, 17.6, 14], [51.7, 8.3, 20.4, 15]],
+            ["label", "Communication", [87.2, 28.7, 10.5, 2], [81.4, 27, 17.7, 5.9]],
+            ["label", "GPS\nNavigation", [89.2, 33.7, 7.6, 4], [82.1, 33.1, 17.2, 6.4]],
+            ["label", "Weather\nForecast", [88, 41.5, 10, 3.7], [83.4, 40, 15.6, 6.8]]
+        ]],
+        [3, [0.7, 50.7, 48.6, 48.6], [
+            ["label", "3. Astronauts", [4, 52.2, 27.8, 4.2], [1.4, 51, 32, 6.8]],
+            ["sentence", "Astronauts travel\nto space to explore,\nlearn, and do\nscientific research.", [3.7, 58.6, 21.5, 10.9], [2.5, 58.2, 24.8, 11.8]]
+        ]],
+        [4, [50.7, 50.7, 48.6, 48.6], [
+            ["label", "4. Space Exploration", [53.7, 52.2, 33, 4.4], [51.7, 51, 36, 6.8]],
+            ["sentence", "We explore other planets\nand look for new discoveries.", [53.7, 58.5, 29.5, 5.4], [52.5, 58.2, 32, 6.2]]
+        ]]
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const boundsValues = bounds => boundsKeys.map(key => bounds[key]);
+    const matchesBounds = (actual, expected) => hasExactKeys(actual, boundsKeys) &&
+        boundsKeys.every((key, index) => Number.isFinite(actual[key]) && actual[key] === expected[index]) &&
+        actual.xPct >= 0 && actual.yPct >= 0 && actual.widthPct > 0 && actual.heightPct > 0 &&
+        actual.xPct + actual.widthPct <= 100 && actual.yPct + actual.heightPct <= 100;
+    const contains = (outer, inner) => {
+        const outerValues = boundsValues(outer);
+        const innerValues = boundsValues(inner);
+        return matchesBounds(outer, outerValues) && matchesBounds(inner, innerValues) &&
+            inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+            inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+            inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    };
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        !hasExactKeys(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+            "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"]) ||
+        record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        record.contentType !== "image-text" || record.layout !== "custom-space-technology-2x2" ||
+        record.transcriptStatus !== "verified" || record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (key === expectedAssetFile || candidate.imageId === expectedImageId ||
+            candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) return null;
+
+    const allItems = [];
+    const panelIds = new Set();
+    const itemPositions = new Set();
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        const panelBounds = { xPct: expectedPanel[1][0], yPct: expectedPanel[1][1],
+            widthPct: expectedPanel[1][2], heightPct: expectedPanel[1][3] };
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel[0] || panelIds.has(panel.panelId) ||
+            panel.readingOrder !== panelIndex + 1 || !matchesBounds(panel.bounds, expectedPanel[1]) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel[2].length) return null;
+        panelIds.add(panel.panelId);
+        for (let itemIndex = 0; itemIndex < expectedPanel[2].length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel[2][itemIndex];
+            const positionKey = panel.panelId + ":" + item.itemId;
+            if (!hasExactKeys(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"]) ||
+                item.itemId !== itemIndex + 1 || itemPositions.has(positionKey) ||
+                item.readingOrder !== itemIndex + 1 || item.type !== expectedItem[0] ||
+                item.sourceText !== expectedItem[1] || item.ttsText !== item.sourceText ||
+                !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem[2]) || !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panelBounds, item.bounds) || !contains(panelBounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) return null;
+            itemPositions.add(positionKey);
+            allItems.push(item);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            if (overlaps(allItems[left].bounds, allItems[right].bounds) ||
+                overlaps(allItems[left].tapRegion, allItems[right].tapRegion) ||
+                overlaps(allItems[left].bounds, allItems[right].tapRegion) ||
+                overlaps(allItems[left].tapRegion, allItems[right].bounds)) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishSpaceSolarSystemImageTextRecord(record, assetFile) {
     const expectedAssetFile = "images/english/space-solar-system-basics.png";
     const expectedImageId = "space-solar-system-basics";
@@ -9186,6 +9295,14 @@ function isEnglishStarsAndGalaxiesImageTTSItemText(record, item) {
         getEnglishTTSUnitText(item.ttsText));
 }
 
+function isEnglishSpaceTechnologyImageTTSItemText(record, item) {
+    return Boolean(record && record.contentType === "image-text" &&
+        record.imageId === "space-technology-basics" &&
+        record.assetFile === "images/english/space-technology-basics.png" && item &&
+        item.sourceText === item.ttsText && record.panels.some(panel => panel.items.includes(item)) &&
+        getEnglishTTSUnitText(item.ttsText));
+}
+
 function isEnglishSpaceSolarSystemImageTTSItemText(record, item) {
     return Boolean(record && record.contentType === "image-text" &&
         record.imageId === "space-solar-system-basics" &&
@@ -9205,6 +9322,7 @@ function isEnglishSimpleMachinesImageTTSItemText(record, item) {
 function isEnglishImageTTSItemText(record, item) {
     if (isEnglishMoonPhasesImageTTSItemText(record, item) ||
         isEnglishStarsAndGalaxiesImageTTSItemText(record, item) ||
+        isEnglishSpaceTechnologyImageTTSItemText(record, item) ||
         isEnglishSpaceSolarSystemImageTTSItemText(record, item) ||
         isEnglishVolcanoesImageTTSItemText(record, item) ||
         isEnglishWeatherInstrumentsImageTTSItemText(record, item) ||
@@ -9766,6 +9884,10 @@ function getEnglishImageTTSImageTextName(record) {
     if (record && record.imageId === "stars-and-galaxies-basics" &&
         record.assetFile === "images/english/stars-and-galaxies-basics.png") {
         return "Stars & Galaxies";
+    }
+    if (record && record.imageId === "space-technology-basics" &&
+        record.assetFile === "images/english/space-technology-basics.png") {
+        return "Space Technology";
     }
     if (record && record.imageId === "space-solar-system-basics" &&
         record.assetFile === "images/english/space-solar-system-basics.png") {
@@ -10788,6 +10910,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/stars-and-galaxies-basics.png";
     if (isStarsAndGalaxiesImageTextIdentity) {
         return getEnglishStarsAndGalaxiesImageTextRecord(record, assetFile);
+    }
+
+    const isSpaceTechnologyImageTextIdentity =
+        record.imageId === "space-technology-basics" ||
+        record.assetFile === "images/english/space-technology-basics.png" ||
+        assetFile === "images/english/space-technology-basics.png";
+    if (isSpaceTechnologyImageTextIdentity) {
+        return getEnglishSpaceTechnologyImageTextRecord(record, assetFile);
     }
 
     const isSpaceSolarSystemImageTextIdentity =
@@ -13041,6 +13171,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "stars-and-galaxies-basics" &&
         record.assetFile === "images/english/stars-and-galaxies-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isSpaceTechnologySingleItemSequence = Boolean(record &&
+        record.imageId === "space-technology-basics" &&
+        record.assetFile === "images/english/space-technology-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isSpaceSolarSystemSingleItemSequence = Boolean(record &&
         record.imageId === "space-solar-system-basics" &&
         record.assetFile === "images/english/space-solar-system-basics.png" &&
@@ -13090,7 +13224,8 @@ function speakEnglishImageTTSImageTextSequence(
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
             !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence &&
             !isVolcanoesSingleItemSequence && !isSimpleMachinesSingleItemSequence &&
-            !isSpaceSolarSystemSingleItemSequence && !isStarsAndGalaxiesSingleItemSequence &&
+            !isSpaceTechnologySingleItemSequence && !isSpaceSolarSystemSingleItemSequence &&
+            !isStarsAndGalaxiesSingleItemSequence &&
             !isMoonPhasesSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
@@ -13518,6 +13653,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const isSpaceSolarSystemImageText = safeRecord.imageId === "space-solar-system-basics" &&
         safeRecord.assetFile === "images/english/space-solar-system-basics.png";
     if (isSpaceSolarSystemImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isSpaceTechnologyImageText = safeRecord.imageId === "space-technology-basics" &&
+        safeRecord.assetFile === "images/english/space-technology-basics.png";
+    if (isSpaceTechnologyImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));
