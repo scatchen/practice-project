@@ -8667,6 +8667,147 @@ function isEnglishVolcanoesImageTTSItemText(record, item) {
         ));
 }
 
+function getEnglishMoonPhasesImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/moon-phases-basics.png";
+    const expectedImageId = "moon-phases-basics";
+    const expectedPanels = [
+        [1, [0, 0, 49.5, 49.8], [
+            ["phrase", "1. New Moon", [2.9, 2, 25.5, 4.6], [0.8, 0.8, 29.5, 7]],
+            ["sentence", "The Moon is between\nthe Sun and Earth.", [5.6, 8.5, 22.8, 5.9], [2, 8.1, 30, 9]],
+            ["phrase", "New Moon", [37.4, 15.1, 8.4, 2.4], [36.3, 14.7, 10.3, 3.3]],
+            ["label", "Sun", [3.8, 31.2, 3.8, 2.2], [2.6, 30.4, 6.8, 4]],
+            ["label", "Moon", [22.2, 28.8, 4.5, 2.1], [21, 28, 7, 3.8]],
+            ["label", "Earth", [35, 32, 4.7, 2.5], [33.8, 31.1, 7.2, 4.2]]
+        ]],
+        [2, [50.5, 0, 49.5, 49.8], [
+            ["phrase", "2. First Quarter", [53, 2, 29.5, 4.6], [51.1, 0.8, 33, 7.1]],
+            ["sentence", "We see about half\nof the Moon illuminated.", [56.1, 8.6, 27, 6.2], [51.9, 8, 32.3, 9.1]],
+            ["phrase", "First Quarter", [89.8, 14.4, 9.3, 2.3], [88.4, 13.8, 11, 3.2]],
+            ["label", "Sun", [54.6, 31.3, 4.1, 2.3], [53.3, 30.5, 6.9, 4.1]],
+            ["label", "Moon", [81.1, 23, 4.8, 2.2], [79.8, 22.2, 7.3, 4]],
+            ["label", "Earth", [90, 34.1, 4.7, 2.2], [88.7, 33.2, 7.7, 4]]
+        ]],
+        [3, [0, 50.8, 49.5, 49.2], [
+            ["phrase", "3. Full Moon", [2.9, 52.9, 25.6, 4.5], [1, 51.5, 29.1, 6.8]],
+            ["sentence", "Earth is between\nthe Sun and Moon.", [5.4, 58.8, 23.8, 5.7], [2.2, 58.7, 29, 9.7]],
+            ["phrase", "Full Moon", [37.1, 66, 8.7, 2.3], [35.9, 65.4, 10.7, 3.3]],
+            ["label", "Sun", [3.9, 82.8, 4, 2.2], [2.6, 82, 6.8, 4]],
+            ["label", "Earth", [27.8, 82.7, 5.4, 2.4], [26.4, 81.9, 8.2, 4]],
+            ["label", "Moon", [40.3, 80, 4.4, 2.2], [39, 79.2, 7, 4]]
+        ]],
+        [4, [50.5, 50.8, 49.5, 49.2], [
+            ["phrase", "4. Last Quarter", [51.6, 52.9, 30.3, 4.5], [51.1, 51.5, 32.7, 6.8]],
+            ["sentence", "We see about half\nof the Moon illuminated again.", [58.5, 59, 24.2, 5.7], [52.2, 58.7, 32.5, 9]],
+            ["phrase", "Last Quarter", [88.4, 66.1, 10, 2.3], [88, 65.4, 11.2, 3.3]],
+            ["label", "Sun", [54.6, 82.9, 4, 2.4], [53.3, 82, 6.8, 4.2]],
+            ["label", "Moon", [75.2, 77.8, 4.3, 2.3], [73.9, 76.9, 6.9, 4.2]],
+            ["label", "Earth", [82.5, 83.5, 4.8, 2.4], [81.2, 82.5, 7.5, 4.2]]
+        ]]
+    ];
+    const hasExactKeys = (value, expectedKeys) => {
+        if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+        const keys = Object.keys(value).sort();
+        return keys.length === expectedKeys.length &&
+            expectedKeys.slice().sort().every((key, index) => keys[index] === key);
+    };
+    const isValidBounds = bounds => hasExactKeys(bounds,
+        ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        ["xPct", "yPct", "widthPct", "heightPct"].every(key =>
+            typeof bounds[key] === "number" && Number.isFinite(bounds[key])) &&
+        bounds.xPct >= 0 && bounds.yPct >= 0 &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 &&
+        bounds.yPct + bounds.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        ["xPct", "yPct", "widthPct", "heightPct"].every((key, index) =>
+            actual[key] === expected[index]);
+    const contains = (outer, inner) =>
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) =>
+        left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        record.contentType !== "image-text" || record.layout !== "2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !hasExactKeys(record, [
+            "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+            "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+        ]) || !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (key === expectedAssetFile ||
+            candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allItems = [];
+    const seenPanelIds = new Set();
+    const seenPositions = new Set();
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        const panelBounds = {
+            xPct: expectedPanel[1][0], yPct: expectedPanel[1][1],
+            widthPct: expectedPanel[1][2], heightPct: expectedPanel[1][3]
+        };
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel[0] || seenPanelIds.has(panel.panelId) ||
+            panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel[1]) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel[2].length) {
+            return null;
+        }
+        seenPanelIds.add(panel.panelId);
+        for (let itemIndex = 0; itemIndex < expectedPanel[2].length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel[2][itemIndex];
+            const position = panel.panelId + ":" + item.itemId;
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 || seenPositions.has(position) ||
+                item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem[0] || item.sourceText !== expectedItem[1] ||
+                item.ttsText !== item.sourceText || !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem[2]) ||
+                !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panelBounds, item.bounds) || !contains(panelBounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            seenPositions.add(position);
+            allItems.push(item);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            if (overlaps(allItems[left].bounds, allItems[right].bounds) ||
+                overlaps(allItems[left].tapRegion, allItems[right].tapRegion) ||
+                overlaps(allItems[left].bounds, allItems[right].tapRegion) ||
+                overlaps(allItems[left].tapRegion, allItems[right].bounds)) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishStarsAndGalaxiesImageTextRecord(record, assetFile) {
     const expectedAssetFile = "images/english/stars-and-galaxies-basics.png";
     const expectedImageId = "stars-and-galaxies-basics";
@@ -9028,6 +9169,15 @@ function getEnglishSpaceSolarSystemImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function isEnglishMoonPhasesImageTTSItemText(record, item) {
+    return Boolean(record && record.contentType === "image-text" &&
+        record.imageId === "moon-phases-basics" &&
+        record.assetFile === "images/english/moon-phases-basics.png" &&
+        item && item.sourceText === item.ttsText &&
+        record.panels.some(panel => panel.items.includes(item)) &&
+        getEnglishTTSUnitText(item.ttsText));
+}
+
 function isEnglishStarsAndGalaxiesImageTTSItemText(record, item) {
     return Boolean(record && record.contentType === "image-text" &&
         record.imageId === "stars-and-galaxies-basics" &&
@@ -9053,7 +9203,8 @@ function isEnglishSimpleMachinesImageTTSItemText(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishStarsAndGalaxiesImageTTSItemText(record, item) ||
+    if (isEnglishMoonPhasesImageTTSItemText(record, item) ||
+        isEnglishStarsAndGalaxiesImageTTSItemText(record, item) ||
         isEnglishSpaceSolarSystemImageTTSItemText(record, item) ||
         isEnglishVolcanoesImageTTSItemText(record, item) ||
         isEnglishWeatherInstrumentsImageTTSItemText(record, item) ||
@@ -9608,6 +9759,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "moon-phases-basics" &&
+        record.assetFile === "images/english/moon-phases-basics.png") {
+        return "Moon Phases";
+    }
     if (record && record.imageId === "stars-and-galaxies-basics" &&
         record.assetFile === "images/english/stars-and-galaxies-basics.png") {
         return "Stars & Galaxies";
@@ -10617,6 +10772,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isMoonPhasesImageTextIdentity =
+        record.imageId === "moon-phases-basics" ||
+        record.assetFile === "images/english/moon-phases-basics.png" ||
+        assetFile === "images/english/moon-phases-basics.png";
+    if (isMoonPhasesImageTextIdentity) {
+        return getEnglishMoonPhasesImageTextRecord(record, assetFile);
     }
 
     const isStarsAndGalaxiesImageTextIdentity =
@@ -12741,7 +12904,8 @@ function getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
-    if (isEnglishStarsAndGalaxiesImageTTSItemText(record, item)) {
+    if (isEnglishMoonPhasesImageTTSItemText(record, item) ||
+        isEnglishStarsAndGalaxiesImageTTSItemText(record, item)) {
         return item.ttsText;
     }
     if (isEnglishHotelCheckInImageTextAmpersandItem(record, item)) {
@@ -12885,6 +13049,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "simple-machines-basics" &&
         record.assetFile === "images/english/simple-machines-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isMoonPhasesSingleItemSequence = Boolean(record &&
+        record.imageId === "moon-phases-basics" &&
+        record.assetFile === "images/english/moon-phases-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const dailyLifeSteps = isDailyLifeRoutinesImageText
         ? itemList.flatMap(item => getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item)
             .map(text => ({ item, text })))
@@ -12922,7 +13090,8 @@ function speakEnglishImageTTSImageTextSequence(
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
             !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence &&
             !isVolcanoesSingleItemSequence && !isSimpleMachinesSingleItemSequence &&
-            !isSpaceSolarSystemSingleItemSequence && !isStarsAndGalaxiesSingleItemSequence) ||
+            !isSpaceSolarSystemSingleItemSequence && !isStarsAndGalaxiesSingleItemSequence &&
+            !isMoonPhasesSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length ||
@@ -13369,6 +13538,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const isSimpleMachinesImageText = safeRecord.imageId === "simple-machines-basics" &&
         safeRecord.assetFile === "images/english/simple-machines-basics.png";
     if (isSimpleMachinesImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isMoonPhasesImageText = safeRecord.imageId === "moon-phases-basics" &&
+        safeRecord.assetFile === "images/english/moon-phases-basics.png";
+    if (isMoonPhasesImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));

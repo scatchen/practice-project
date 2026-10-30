@@ -19125,4 +19125,190 @@ const imageTTSData = {
             }
         ]
     },
+
+    "images/english/moon-phases-basics.png": {
+        imageId: "moon-phases-basics",
+        assetFile: "images/english/moon-phases-basics.png",
+        contentType: "image-text",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0, yPct: 0, widthPct: 49.5, heightPct: 49.8 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "1. New Moon", ttsText: "1. New Moon",
+                        bounds: { xPct: 2.9, yPct: 2, widthPct: 25.5, heightPct: 4.6 },
+                        tapRegion: { xPct: 0.8, yPct: 0.8, widthPct: 29.5, heightPct: 7 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "The Moon is between\nthe Sun and Earth.",
+                        ttsText: "The Moon is between\nthe Sun and Earth.",
+                        bounds: { xPct: 5.6, yPct: 8.5, widthPct: 22.8, heightPct: 5.9 },
+                        tapRegion: { xPct: 2, yPct: 8.1, widthPct: 30, heightPct: 9 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "phrase",
+                        sourceText: "New Moon", ttsText: "New Moon",
+                        bounds: { xPct: 37.4, yPct: 15.1, widthPct: 8.4, heightPct: 2.4 },
+                        tapRegion: { xPct: 36.3, yPct: 14.7, widthPct: 10.3, heightPct: 3.3 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Sun", ttsText: "Sun",
+                        bounds: { xPct: 3.8, yPct: 31.2, widthPct: 3.8, heightPct: 2.2 },
+                        tapRegion: { xPct: 2.6, yPct: 30.4, widthPct: 6.8, heightPct: 4 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Moon", ttsText: "Moon",
+                        bounds: { xPct: 22.2, yPct: 28.8, widthPct: 4.5, heightPct: 2.1 },
+                        tapRegion: { xPct: 21, yPct: 28, widthPct: 7, heightPct: 3.8 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "label",
+                        sourceText: "Earth", ttsText: "Earth",
+                        bounds: { xPct: 35, yPct: 32, widthPct: 4.7, heightPct: 2.5 },
+                        tapRegion: { xPct: 33.8, yPct: 31.1, widthPct: 7.2, heightPct: 4.2 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.5, yPct: 0, widthPct: 49.5, heightPct: 49.8 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "2. First Quarter", ttsText: "2. First Quarter",
+                        bounds: { xPct: 53, yPct: 2, widthPct: 29.5, heightPct: 4.6 },
+                        tapRegion: { xPct: 51.1, yPct: 0.8, widthPct: 33, heightPct: 7.1 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "We see about half\nof the Moon illuminated.",
+                        ttsText: "We see about half\nof the Moon illuminated.",
+                        bounds: { xPct: 56.1, yPct: 8.6, widthPct: 27, heightPct: 6.2 },
+                        tapRegion: { xPct: 51.9, yPct: 8, widthPct: 32.3, heightPct: 9.1 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "phrase",
+                        sourceText: "First Quarter", ttsText: "First Quarter",
+                        bounds: { xPct: 89.8, yPct: 14.4, widthPct: 9.3, heightPct: 2.3 },
+                        tapRegion: { xPct: 88.4, yPct: 13.8, widthPct: 11, heightPct: 3.2 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Sun", ttsText: "Sun",
+                        bounds: { xPct: 54.6, yPct: 31.3, widthPct: 4.1, heightPct: 2.3 },
+                        tapRegion: { xPct: 53.3, yPct: 30.5, widthPct: 6.9, heightPct: 4.1 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Moon", ttsText: "Moon",
+                        bounds: { xPct: 81.1, yPct: 23, widthPct: 4.8, heightPct: 2.2 },
+                        tapRegion: { xPct: 79.8, yPct: 22.2, widthPct: 7.3, heightPct: 4 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "label",
+                        sourceText: "Earth", ttsText: "Earth",
+                        bounds: { xPct: 90, yPct: 34.1, widthPct: 4.7, heightPct: 2.2 },
+                        tapRegion: { xPct: 88.7, yPct: 33.2, widthPct: 7.7, heightPct: 4 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0, yPct: 50.8, widthPct: 49.5, heightPct: 49.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "3. Full Moon", ttsText: "3. Full Moon",
+                        bounds: { xPct: 2.9, yPct: 52.9, widthPct: 25.6, heightPct: 4.5 },
+                        tapRegion: { xPct: 1, yPct: 51.5, widthPct: 29.1, heightPct: 6.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Earth is between\nthe Sun and Moon.",
+                        ttsText: "Earth is between\nthe Sun and Moon.",
+                        bounds: { xPct: 5.4, yPct: 58.8, widthPct: 23.8, heightPct: 5.7 },
+                        tapRegion: { xPct: 2.2, yPct: 58.7, widthPct: 29, heightPct: 9.7 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "phrase",
+                        sourceText: "Full Moon", ttsText: "Full Moon",
+                        bounds: { xPct: 37.1, yPct: 66, widthPct: 8.7, heightPct: 2.3 },
+                        tapRegion: { xPct: 35.9, yPct: 65.4, widthPct: 10.7, heightPct: 3.3 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Sun", ttsText: "Sun",
+                        bounds: { xPct: 3.9, yPct: 82.8, widthPct: 4, heightPct: 2.2 },
+                        tapRegion: { xPct: 2.6, yPct: 82, widthPct: 6.8, heightPct: 4 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Earth", ttsText: "Earth",
+                        bounds: { xPct: 27.8, yPct: 82.7, widthPct: 5.4, heightPct: 2.4 },
+                        tapRegion: { xPct: 26.4, yPct: 81.9, widthPct: 8.2, heightPct: 4 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "label",
+                        sourceText: "Moon", ttsText: "Moon",
+                        bounds: { xPct: 40.3, yPct: 80, widthPct: 4.4, heightPct: 2.2 },
+                        tapRegion: { xPct: 39, yPct: 79.2, widthPct: 7, heightPct: 4 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.5, yPct: 50.8, widthPct: 49.5, heightPct: 49.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "4. Last Quarter", ttsText: "4. Last Quarter",
+                        bounds: { xPct: 51.6, yPct: 52.9, widthPct: 30.3, heightPct: 4.5 },
+                        tapRegion: { xPct: 51.1, yPct: 51.5, widthPct: 32.7, heightPct: 6.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "We see about half\nof the Moon illuminated again.",
+                        ttsText: "We see about half\nof the Moon illuminated again.",
+                        bounds: { xPct: 58.5, yPct: 59, widthPct: 24.2, heightPct: 5.7 },
+                        tapRegion: { xPct: 52.2, yPct: 58.7, widthPct: 32.5, heightPct: 9 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "phrase",
+                        sourceText: "Last Quarter", ttsText: "Last Quarter",
+                        bounds: { xPct: 88.4, yPct: 66.1, widthPct: 10, heightPct: 2.3 },
+                        tapRegion: { xPct: 88, yPct: 65.4, widthPct: 11.2, heightPct: 3.3 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Sun", ttsText: "Sun",
+                        bounds: { xPct: 54.6, yPct: 82.9, widthPct: 4, heightPct: 2.4 },
+                        tapRegion: { xPct: 53.3, yPct: 82, widthPct: 6.8, heightPct: 4.2 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Moon", ttsText: "Moon",
+                        bounds: { xPct: 75.2, yPct: 77.8, widthPct: 4.3, heightPct: 2.3 },
+                        tapRegion: { xPct: 73.9, yPct: 76.9, widthPct: 6.9, heightPct: 4.2 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "label",
+                        sourceText: "Earth", ttsText: "Earth",
+                        bounds: { xPct: 82.5, yPct: 83.5, widthPct: 4.8, heightPct: 2.4 },
+                        tapRegion: { xPct: 81.2, yPct: 82.5, widthPct: 7.5, heightPct: 4.2 }
+                    }
+                ]
+            }
+        ]
+    },
+
 };
