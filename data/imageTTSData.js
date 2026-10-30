@@ -19416,5 +19416,132 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/earth-environment-basics.png": {
+        imageId: "earth-environment-basics",
+        assetFile: "images/english/earth-environment-basics.png",
+        contentType: "image-text",
+        layout: "custom-earth-environment-5-panel",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 3, yPct: 1.2, widthPct: 38, heightPct: 9.8 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "English Learning", ttsText: "English Learning",
+                        bounds: { xPct: 4.8, yPct: 2.5, widthPct: 28.8, heightPct: 5.5 },
+                        tapRegion: { xPct: 3.8, yPct: 2, widthPct: 31, heightPct: 6.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 6.5, yPct: 11.5, widthPct: 87, heightPct: 12.4 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Earth & Environment", ttsText: "Earth & Environment",
+                        bounds: { xPct: 10, yPct: 13.2, widthPct: 81.5, heightPct: 8.6 },
+                        tapRegion: { xPct: 8.8, yPct: 12.2, widthPct: 83.8, heightPct: 10.3 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 58.5, yPct: 32.5, widthPct: 25.2, heightPct: 18.4 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "A cleaner planet\nfor a brighter\nfuture!",
+                        ttsText: "A cleaner planet\nfor a brighter\nfuture!",
+                        bounds: { xPct: 62, yPct: 34, widthPct: 18.8, heightPct: 11.5 },
+                        tapRegion: { xPct: 60.8, yPct: 33.2, widthPct: 21.1, heightPct: 13.3 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 3, yPct: 49, widthPct: 21.5, heightPct: 13.5 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Reduce", ttsText: "Reduce",
+                        bounds: { xPct: 6, yPct: 51.6, widthPct: 10.5, heightPct: 2 },
+                        tapRegion: { xPct: 5.5, yPct: 51.3, widthPct: 11.8, heightPct: 2.4 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "Reuse", ttsText: "Reuse",
+                        bounds: { xPct: 6, yPct: 54, widthPct: 10, heightPct: 2 },
+                        tapRegion: { xPct: 5.5, yPct: 53.8, widthPct: 11.8, heightPct: 2.4 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Recycle", ttsText: "Recycle",
+                        bounds: { xPct: 6, yPct: 56.6, widthPct: 11, heightPct: 2 },
+                        tapRegion: { xPct: 5.5, yPct: 56.4, widthPct: 12.5, heightPct: 2.4 }
+                    }
+                ]
+            },
+            {
+                panelId: 5, readingOrder: 5,
+                bounds: { xPct: 0.5, yPct: 80.4, widthPct: 99, heightPct: 19.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "earth", ttsText: "earth",
+                        bounds: { xPct: 4.8, yPct: 93, widthPct: 7.3, heightPct: 2.7 },
+                        tapRegion: { xPct: 3.8, yPct: 92.5, widthPct: 9.5, heightPct: 3.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "environment", ttsText: "environment",
+                        bounds: { xPct: 15.8, yPct: 93, widthPct: 10.5, heightPct: 2.7 },
+                        tapRegion: { xPct: 14.7, yPct: 92.5, widthPct: 12.5, heightPct: 3.8 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "water", ttsText: "water",
+                        bounds: { xPct: 30, yPct: 93, widthPct: 7, heightPct: 2.7 },
+                        tapRegion: { xPct: 29.1, yPct: 92.5, widthPct: 8.8, heightPct: 3.8 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "pollution", ttsText: "pollution",
+                        bounds: { xPct: 40.6, yPct: 93, widthPct: 10, heightPct: 2.7 },
+                        tapRegion: { xPct: 39.5, yPct: 92.5, widthPct: 12, heightPct: 3.8 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "recycling", ttsText: "recycling",
+                        bounds: { xPct: 52.9, yPct: 93, widthPct: 9.3, heightPct: 2.7 },
+                        tapRegion: { xPct: 51.8, yPct: 92.5, widthPct: 11.4, heightPct: 3.8 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "label",
+                        sourceText: "natural\nresources", ttsText: "natural\nresources",
+                        bounds: { xPct: 65.6, yPct: 91.2, widthPct: 8.9, heightPct: 5.5 },
+                        tapRegion: { xPct: 64.7, yPct: 90.5, widthPct: 11, heightPct: 7 }
+                    },
+                    {
+                        itemId: 7, readingOrder: 7, type: "label",
+                        sourceText: "clean\nenergy", ttsText: "clean\nenergy",
+                        bounds: { xPct: 77.8, yPct: 91.2, widthPct: 6.8, heightPct: 5.5 },
+                        tapRegion: { xPct: 76.8, yPct: 90.5, widthPct: 9.2, heightPct: 7 }
+                    },
+                    {
+                        itemId: 8, readingOrder: 8, type: "label",
+                        sourceText: "protect\nthe Earth", ttsText: "protect\nthe Earth",
+                        bounds: { xPct: 89.8, yPct: 91.2, widthPct: 8.7, heightPct: 5.5 },
+                        tapRegion: { xPct: 88.6, yPct: 90.5, widthPct: 10.6, heightPct: 7 }
+                    }
+                ]
+            }
+        ]
+    },
 
 };

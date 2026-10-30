@@ -9022,6 +9022,131 @@ function getEnglishSimpleMachinesImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishEarthEnvironmentImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/earth-environment-basics.png";
+    const expectedImageId = "earth-environment-basics";
+    const expectedPanels = [
+        [1, [3, 1.2, 38, 9.8], [
+            ["label", "English Learning", [4.8, 2.5, 28.8, 5.5], [3.8, 2, 31, 6.5]]
+        ]],
+        [2, [6.5, 11.5, 87, 12.4], [
+            ["label", "Earth & Environment", [10, 13.2, 81.5, 8.6], [8.8, 12.2, 83.8, 10.3]]
+        ]],
+        [3, [58.5, 32.5, 25.2, 18.4], [
+            ["sentence", "A cleaner planet\nfor a brighter\nfuture!",
+                [62, 34, 18.8, 11.5], [60.8, 33.2, 21.1, 13.3]]
+        ]],
+        [4, [3, 49, 21.5, 13.5], [
+            ["label", "Reduce", [6, 51.6, 10.5, 2], [5.5, 51.3, 11.8, 2.4]],
+            ["label", "Reuse", [6, 54, 10, 2], [5.5, 53.8, 11.8, 2.4]],
+            ["label", "Recycle", [6, 56.6, 11, 2], [5.5, 56.4, 12.5, 2.4]]
+        ]],
+        [5, [0.5, 80.4, 99, 19.2], [
+            ["label", "earth", [4.8, 93, 7.3, 2.7], [3.8, 92.5, 9.5, 3.8]],
+            ["label", "environment", [15.8, 93, 10.5, 2.7], [14.7, 92.5, 12.5, 3.8]],
+            ["label", "water", [30, 93, 7, 2.7], [29.1, 92.5, 8.8, 3.8]],
+            ["label", "pollution", [40.6, 93, 10, 2.7], [39.5, 92.5, 12, 3.8]],
+            ["label", "recycling", [52.9, 93, 9.3, 2.7], [51.8, 92.5, 11.4, 3.8]],
+            ["label", "natural\nresources", [65.6, 91.2, 8.9, 5.5], [64.7, 90.5, 11, 7]],
+            ["label", "clean\nenergy", [77.8, 91.2, 6.8, 5.5], [76.8, 90.5, 9.2, 7]],
+            ["label", "protect\nthe Earth", [89.8, 91.2, 8.7, 5.5], [88.6, 90.5, 10.6, 7]]
+        ]]
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const matchesBounds = (actual, expected) => hasExactKeys(actual, boundsKeys) &&
+        boundsKeys.every((key, index) => Number.isFinite(actual[key]) &&
+            actual[key] === expected[index]) &&
+        actual.xPct >= 0 && actual.yPct >= 0 && actual.widthPct > 0 &&
+        actual.heightPct > 0 && actual.xPct + actual.widthPct <= 100 &&
+        actual.yPct + actual.heightPct <= 100;
+    const toBounds = values => ({
+        xPct: values[0], yPct: values[1], widthPct: values[2], heightPct: values[3]
+    });
+    const contains = (outer, inner) => {
+        const values = [inner.xPct, inner.yPct, inner.widthPct, inner.heightPct];
+        return matchesBounds(outer, [
+            outer.xPct, outer.yPct, outer.widthPct, outer.heightPct
+        ]) && matchesBounds(inner, values) &&
+            inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+            inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+            inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    };
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-earth-environment-5-panel" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allItems = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        const panelBounds = toBounds(expectedPanel[1]);
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel[0] || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel[1]) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel[2].length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel[2].length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel[2][itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 || item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem[0] || item.sourceText !== expectedItem[1] ||
+                item.ttsText !== item.sourceText ||
+                !(getEnglishTTSUnitText(item.sourceText) ||
+                    isEnglishEarthEnvironmentAmpersandItem(record, item)) ||
+                !matchesBounds(item.bounds, expectedItem[2]) ||
+                !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panelBounds, item.bounds) || !contains(panelBounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allItems.push(item);
+        }
+    }
+
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            if (overlaps(allItems[left].bounds, allItems[right].bounds) ||
+                overlaps(allItems[left].tapRegion, allItems[right].tapRegion) ||
+                overlaps(allItems[left].bounds, allItems[right].tapRegion) ||
+                overlaps(allItems[left].tapRegion, allItems[right].bounds)) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
 function getEnglishSpaceTechnologyImageTextRecord(record, assetFile) {
     const expectedAssetFile = "images/english/space-technology-basics.png";
     const expectedImageId = "space-technology-basics";
@@ -9319,8 +9444,44 @@ function isEnglishSimpleMachinesImageTTSItemText(record, item) {
         getEnglishTTSUnitText(item.ttsText));
 }
 
+function isEnglishEarthEnvironmentAmpersandItem(record, item) {
+    const expectedImageId = "earth-environment-basics";
+    const expectedAssetFile = "images/english/earth-environment-basics.png";
+    const expectedText = "Earth & Environment";
+    if (!record || !item || typeof imageTTSData === "undefined" || !imageTTSData ||
+        typeof imageTTSData !== "object") {
+        return false;
+    }
+    const canonicalRecord = imageTTSData[expectedAssetFile];
+    if (!canonicalRecord || !Array.isArray(canonicalRecord.panels)) {
+        return false;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    return matchingIdentityKeys.length === 1 && matchingIdentityKeys[0] === expectedAssetFile &&
+        record.contentType === "image-text" && record.imageId === expectedImageId &&
+        record.assetFile === expectedAssetFile && record.panels === canonicalRecord.panels &&
+        record.panels.some(panel => panel.panelId === 2 && panel.readingOrder === 2 &&
+            Array.isArray(panel.items) && panel.items.length === 1 && panel.items[0] === item) &&
+        item.itemId === 1 && item.readingOrder === 1 && item.type === "label" &&
+        item.sourceText === expectedText && item.ttsText === expectedText;
+}
+
+function isEnglishEarthEnvironmentImageTTSItemText(record, item) {
+    return Boolean(record && record.contentType === "image-text" &&
+        record.imageId === "earth-environment-basics" &&
+        record.assetFile === "images/english/earth-environment-basics.png" && item &&
+        item.sourceText === item.ttsText && record.panels.some(panel => panel.items.includes(item)) &&
+        (getEnglishTTSUnitText(item.ttsText) ||
+            isEnglishEarthEnvironmentAmpersandItem(record, item)));
+}
+
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishMoonPhasesImageTTSItemText(record, item) ||
+    if (isEnglishEarthEnvironmentImageTTSItemText(record, item) ||
+        isEnglishMoonPhasesImageTTSItemText(record, item) ||
         isEnglishStarsAndGalaxiesImageTTSItemText(record, item) ||
         isEnglishSpaceTechnologyImageTTSItemText(record, item) ||
         isEnglishSpaceSolarSystemImageTTSItemText(record, item) ||
@@ -9888,6 +10049,10 @@ function getEnglishImageTTSImageTextName(record) {
     if (record && record.imageId === "space-technology-basics" &&
         record.assetFile === "images/english/space-technology-basics.png") {
         return "Space Technology";
+    }
+    if (record && record.imageId === "earth-environment-basics" &&
+        record.assetFile === "images/english/earth-environment-basics.png") {
+        return "Earth & Environment";
     }
     if (record && record.imageId === "space-solar-system-basics" &&
         record.assetFile === "images/english/space-solar-system-basics.png") {
@@ -10918,6 +11083,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/space-technology-basics.png";
     if (isSpaceTechnologyImageTextIdentity) {
         return getEnglishSpaceTechnologyImageTextRecord(record, assetFile);
+    }
+
+    const isEarthEnvironmentImageTextIdentity =
+        record.imageId === "earth-environment-basics" ||
+        record.assetFile === "images/english/earth-environment-basics.png" ||
+        assetFile === "images/english/earth-environment-basics.png";
+    if (isEarthEnvironmentImageTextIdentity) {
+        return getEnglishEarthEnvironmentImageTextRecord(record, assetFile);
     }
 
     const isSpaceSolarSystemImageTextIdentity =
@@ -13034,6 +13207,9 @@ function getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishEarthEnvironmentAmpersandItem(record, item)) {
+        return "Earth and Environment";
+    }
     if (isEnglishMoonPhasesImageTTSItemText(record, item) ||
         isEnglishStarsAndGalaxiesImageTTSItemText(record, item)) {
         return item.ttsText;
@@ -13183,6 +13359,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "simple-machines-basics" &&
         record.assetFile === "images/english/simple-machines-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isEarthEnvironmentSingleItemSequence = Boolean(record &&
+        record.imageId === "earth-environment-basics" &&
+        record.assetFile === "images/english/earth-environment-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isMoonPhasesSingleItemSequence = Boolean(record &&
         record.imageId === "moon-phases-basics" &&
         record.assetFile === "images/english/moon-phases-basics.png" &&
@@ -13226,7 +13406,8 @@ function speakEnglishImageTTSImageTextSequence(
             !isVolcanoesSingleItemSequence && !isSimpleMachinesSingleItemSequence &&
             !isSpaceTechnologySingleItemSequence && !isSpaceSolarSystemSingleItemSequence &&
             !isStarsAndGalaxiesSingleItemSequence &&
-            !isMoonPhasesSingleItemSequence) ||
+            !isMoonPhasesSingleItemSequence &&
+            !isEarthEnvironmentSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length ||
@@ -13673,6 +13854,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const isSpaceTechnologyImageText = safeRecord.imageId === "space-technology-basics" &&
         safeRecord.assetFile === "images/english/space-technology-basics.png";
     if (isSpaceTechnologyImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isEarthEnvironmentImageText = safeRecord.imageId === "earth-environment-basics" &&
+        safeRecord.assetFile === "images/english/earth-environment-basics.png";
+    if (isEarthEnvironmentImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));
