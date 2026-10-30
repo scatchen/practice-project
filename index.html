@@ -8667,6 +8667,114 @@ function isEnglishVolcanoesImageTTSItemText(record, item) {
         ));
 }
 
+function getEnglishStarsAndGalaxiesImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/stars-and-galaxies-basics.png";
+    const expectedImageId = "stars-and-galaxies-basics";
+    const expectedPanels = [
+        [1, [1.1, 1.1, 50.3, 47.9], [
+            ["label", "Stars and Galaxies", [7.2, 2.3, 38.5, 4.1], [1.5, 1.1, 49.4, 7.3]],
+            ["sentence", "Look at the sky!\nThose bright points\nare stars!", [4.0, 11.3, 26.1, 10.7], [2.0, 8.5, 31.0, 16.5]]
+        ]],
+        [2, [52.7, 1.1, 46.1, 47.9], [
+            ["label", "Stars", [57.3, 2.8, 11.6, 4.4], [54.0, 1.8, 17.2, 6.4]],
+            ["sentence", "Stars are huge, hot balls of gas\nthat give off light and heat.\nOur sun is a star!", [55.0, 9.1, 26.8, 10.2], [54.1, 8.4, 29.1, 11.8]],
+            ["sentence", "Stars are\nlike giant\nfireballs!", [58.1, 23.6, 14.2, 7.5], [54.4, 21.1, 18.4, 12.8]]
+        ]],
+        [3, [1.1, 50.4, 50.3, 48.2], [
+            ["label", "Galaxies", [5.3, 52.3, 19.2, 4.3], [2.6, 51.3, 25.4, 6.3]],
+            ["sentence", "Galaxies are huge groups of stars,\ngas, and dust. They come in many\nshapes and sizes.", [3.8, 58.3, 45.8, 7.9], [3.1, 57.7, 47.4, 9.0]],
+            ["label", "Spiral Galaxy", [4.2, 84.8, 12.0, 2.2], [3.4, 83.8, 13.7, 4.2]],
+            ["label", "Elliptical Galaxy", [31.1, 80.4, 13.1, 2.3], [30.2, 79.3, 14.8, 4.3]],
+            ["label", "Irregular Galaxy", [21.9, 93.1, 12.2, 2.4], [20.9, 92.0, 14.2, 4.4]]
+        ]],
+        [4, [52.7, 50.4, 46.1, 48.2], [
+            ["sentence", "Our galaxy is called\nthe Milky Way. It has billions\nof stars!", [56.1, 54.0, 33.4, 8.7], [54.0, 52.3, 42.3, 16.5]]
+        ]]
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const matchesBounds = (actual, expected) => hasExactKeys(actual, boundsKeys) &&
+        boundsKeys.every((key, index) => Number.isFinite(actual[key]) && actual[key] === expected[index]) &&
+        actual.xPct >= 0 && actual.yPct >= 0 && actual.widthPct > 0 && actual.heightPct > 0 &&
+        actual.xPct + actual.widthPct <= 100 && actual.yPct + actual.heightPct <= 100;
+    const contains = (outer, inner) =>
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"]) ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        record.contentType !== "image-text" || record.layout !== "custom-stars-and-galaxies-2x2" ||
+        record.transcriptStatus !== "verified" || record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (key === expectedAssetFile || candidate.imageId === expectedImageId ||
+            candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) return null;
+
+    const allBounds = [];
+    const allTapRegions = [];
+    const panelIds = new Set();
+    const itemPositions = new Set();
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        const panelBounds = {
+            xPct: expectedPanel[1][0], yPct: expectedPanel[1][1],
+            widthPct: expectedPanel[1][2], heightPct: expectedPanel[1][3]
+        };
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel[0] || panelIds.has(panel.panelId) ||
+            panel.readingOrder !== panelIndex + 1 || !matchesBounds(panel.bounds, expectedPanel[1]) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel[2].length) return null;
+        panelIds.add(panel.panelId);
+        for (let itemIndex = 0; itemIndex < expectedPanel[2].length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel[2][itemIndex];
+            const itemPosition = panel.panelId + ":" + item.itemId;
+            if (!hasExactKeys(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"]) ||
+                item.itemId !== itemIndex + 1 || itemPositions.has(itemPosition) ||
+                item.readingOrder !== itemIndex + 1 || item.type !== expectedItem[0] ||
+                item.sourceText !== expectedItem[1] || item.ttsText !== item.sourceText ||
+                !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem[2]) || !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panelBounds, item.bounds) || !contains(panelBounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) return null;
+            itemPositions.add(itemPosition);
+            allBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allBounds.length; left += 1) {
+        for (let right = left + 1; right < allBounds.length; right += 1) {
+            if (overlaps(allBounds[left], allBounds[right]) ||
+                overlaps(allTapRegions[left], allTapRegions[right]) ||
+                overlaps(allBounds[left], allTapRegions[right]) ||
+                overlaps(allTapRegions[left], allBounds[right])) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishSimpleMachinesImageTextRecord(record, assetFile) {
     const expectedAssetFile = "images/english/simple-machines-basics.png";
     const expectedImageId = "simple-machines-basics";
@@ -8920,6 +9028,14 @@ function getEnglishSpaceSolarSystemImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function isEnglishStarsAndGalaxiesImageTTSItemText(record, item) {
+    return Boolean(record && record.contentType === "image-text" &&
+        record.imageId === "stars-and-galaxies-basics" &&
+        record.assetFile === "images/english/stars-and-galaxies-basics.png" && item &&
+        item.sourceText === item.ttsText && record.panels.some(panel => panel.items.includes(item)) &&
+        getEnglishTTSUnitText(item.ttsText));
+}
+
 function isEnglishSpaceSolarSystemImageTTSItemText(record, item) {
     return Boolean(record && record.contentType === "image-text" &&
         record.imageId === "space-solar-system-basics" &&
@@ -8937,7 +9053,8 @@ function isEnglishSimpleMachinesImageTTSItemText(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishSpaceSolarSystemImageTTSItemText(record, item) ||
+    if (isEnglishStarsAndGalaxiesImageTTSItemText(record, item) ||
+        isEnglishSpaceSolarSystemImageTTSItemText(record, item) ||
         isEnglishVolcanoesImageTTSItemText(record, item) ||
         isEnglishWeatherInstrumentsImageTTSItemText(record, item) ||
         isEnglishFamilyBasicsImageTTSItem(record, item) ||
@@ -9491,6 +9608,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "stars-and-galaxies-basics" &&
+        record.assetFile === "images/english/stars-and-galaxies-basics.png") {
+        return "Stars & Galaxies";
+    }
     if (record && record.imageId === "space-solar-system-basics" &&
         record.assetFile === "images/english/space-solar-system-basics.png") {
         return "Space & the Solar System";
@@ -10496,6 +10617,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isStarsAndGalaxiesImageTextIdentity =
+        record.imageId === "stars-and-galaxies-basics" ||
+        record.assetFile === "images/english/stars-and-galaxies-basics.png" ||
+        assetFile === "images/english/stars-and-galaxies-basics.png";
+    if (isStarsAndGalaxiesImageTextIdentity) {
+        return getEnglishStarsAndGalaxiesImageTextRecord(record, assetFile);
     }
 
     const isSpaceSolarSystemImageTextIdentity =
@@ -12612,10 +12741,40 @@ function getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishStarsAndGalaxiesImageTTSItemText(record, item)) {
+        return item.ttsText;
+    }
     if (isEnglishHotelCheckInImageTextAmpersandItem(record, item)) {
         return item.sourceText.replace(" & ", " and ");
     }
     return getEnglishAirportBusinessTravelImageTextSpeechText(record, item);
+}
+
+function getEnglishStarsAndGalaxiesImageTextSpeechSegments(record, item) {
+    if (!record || record.imageId !== "stars-and-galaxies-basics" ||
+        record.assetFile !== "images/english/stars-and-galaxies-basics.png" ||
+        record.contentType !== "image-text" || !item || item.sourceText !== item.ttsText) {
+        return null;
+    }
+    const panel = record.panels.find(candidate => candidate.items.includes(item));
+    const internalSentenceUnits = [
+        { panelId: 1, itemId: 2,
+            sourceText: "Look at the sky!\nThose bright points\nare stars!",
+            segments: ["Look at the sky!", "Those bright points are stars!"] },
+        { panelId: 2, itemId: 2,
+            sourceText: "Stars are huge, hot balls of gas\nthat give off light and heat.\nOur sun is a star!",
+            segments: ["Stars are huge, hot balls of gas that give off light and heat.", "Our sun is a star!"] },
+        { panelId: 3, itemId: 2,
+            sourceText: "Galaxies are huge groups of stars,\ngas, and dust. They come in many\nshapes and sizes.",
+            segments: ["Galaxies are huge groups of stars, gas, and dust.", "They come in many shapes and sizes."] },
+        { panelId: 4, itemId: 1,
+            sourceText: "Our galaxy is called\nthe Milky Way. It has billions\nof stars!",
+            segments: ["Our galaxy is called the Milky Way.", "It has billions of stars!"] }
+    ];
+    const expected = panel && internalSentenceUnits.find(unit =>
+        unit.panelId === panel.panelId && unit.itemId === item.itemId);
+    if (!expected || item.type !== "sentence" || item.sourceText !== expected.sourceText) return null;
+    return expected.segments.slice();
 }
 
 function getEnglishSpaceSolarSystemImageTextSpeechSegments(record, item) {
@@ -12714,6 +12873,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "volcanoes-basics" &&
         record.assetFile === "images/english/volcanoes-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isStarsAndGalaxiesSingleItemSequence = Boolean(record &&
+        record.imageId === "stars-and-galaxies-basics" &&
+        record.assetFile === "images/english/stars-and-galaxies-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isSpaceSolarSystemSingleItemSequence = Boolean(record &&
         record.imageId === "space-solar-system-basics" &&
         record.assetFile === "images/english/space-solar-system-basics.png" &&
@@ -12738,10 +12901,13 @@ function speakEnglishImageTTSImageTextSequence(
             item,
             text: item ? getEnglishImageTTSImageTextSpeechText(record, item) : null,
             speechSegments: item
-                ? (record.imageId === "space-solar-system-basics" &&
-                    record.assetFile === "images/english/space-solar-system-basics.png"
-                    ? getEnglishSpaceSolarSystemImageTextSpeechSegments(record, item)
-                    : getEnglishSimpleMachinesImageTextSpeechSegments(record, item))
+                ? (record.imageId === "stars-and-galaxies-basics" &&
+                    record.assetFile === "images/english/stars-and-galaxies-basics.png"
+                    ? getEnglishStarsAndGalaxiesImageTextSpeechSegments(record, item)
+                    : (record.imageId === "space-solar-system-basics" &&
+                        record.assetFile === "images/english/space-solar-system-basics.png"
+                        ? getEnglishSpaceSolarSystemImageTextSpeechSegments(record, item)
+                        : getEnglishSimpleMachinesImageTextSpeechSegments(record, item)))
                 : null
         }));
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
@@ -12756,7 +12922,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
             !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence &&
             !isVolcanoesSingleItemSequence && !isSimpleMachinesSingleItemSequence &&
-            !isSpaceSolarSystemSingleItemSequence) ||
+            !isSpaceSolarSystemSingleItemSequence && !isStarsAndGalaxiesSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length ||
@@ -13143,6 +13309,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const isVolcanoesImageText = safeRecord.imageId === "volcanoes-basics" &&
         safeRecord.assetFile === "images/english/volcanoes-basics.png";
     if (isVolcanoesImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isStarsAndGalaxiesImageText = safeRecord.imageId === "stars-and-galaxies-basics" &&
+        safeRecord.assetFile === "images/english/stars-and-galaxies-basics.png";
+    if (isStarsAndGalaxiesImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));

@@ -19017,5 +19017,112 @@ const imageTTSData = {
                 ]
             }
         ]
-    }
+    },
+    "images/english/stars-and-galaxies-basics.png": {
+        imageId: "stars-and-galaxies-basics",
+        assetFile: "images/english/stars-and-galaxies-basics.png",
+        contentType: "image-text",
+        layout: "custom-stars-and-galaxies-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 1.1, yPct: 1.1, widthPct: 50.3, heightPct: 47.9 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Stars and Galaxies", ttsText: "Stars and Galaxies",
+                        bounds: { xPct: 7.2, yPct: 2.3, widthPct: 38.5, heightPct: 4.1 },
+                        tapRegion: { xPct: 1.5, yPct: 1.1, widthPct: 49.4, heightPct: 7.3 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Look at the sky!\nThose bright points\nare stars!",
+                        ttsText: "Look at the sky!\nThose bright points\nare stars!",
+                        bounds: { xPct: 4.0, yPct: 11.3, widthPct: 26.1, heightPct: 10.7 },
+                        tapRegion: { xPct: 2.0, yPct: 8.5, widthPct: 31.0, heightPct: 16.5 }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 52.7, yPct: 1.1, widthPct: 46.1, heightPct: 47.9 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Stars", ttsText: "Stars",
+                        bounds: { xPct: 57.3, yPct: 2.8, widthPct: 11.6, heightPct: 4.4 },
+                        tapRegion: { xPct: 54.0, yPct: 1.8, widthPct: 17.2, heightPct: 6.4 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Stars are huge, hot balls of gas\nthat give off light and heat.\nOur sun is a star!",
+                        ttsText: "Stars are huge, hot balls of gas\nthat give off light and heat.\nOur sun is a star!",
+                        bounds: { xPct: 55.0, yPct: 9.1, widthPct: 26.8, heightPct: 10.2 },
+                        tapRegion: { xPct: 54.1, yPct: 8.4, widthPct: 29.1, heightPct: 11.8 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "Stars are\nlike giant\nfireballs!",
+                        ttsText: "Stars are\nlike giant\nfireballs!",
+                        bounds: { xPct: 58.1, yPct: 23.6, widthPct: 14.2, heightPct: 7.5 },
+                        tapRegion: { xPct: 54.4, yPct: 21.1, widthPct: 18.4, heightPct: 12.8 }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 1.1, yPct: 50.4, widthPct: 50.3, heightPct: 48.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Galaxies", ttsText: "Galaxies",
+                        bounds: { xPct: 5.3, yPct: 52.3, widthPct: 19.2, heightPct: 4.3 },
+                        tapRegion: { xPct: 2.6, yPct: 51.3, widthPct: 25.4, heightPct: 6.3 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Galaxies are huge groups of stars,\ngas, and dust. They come in many\nshapes and sizes.",
+                        ttsText: "Galaxies are huge groups of stars,\ngas, and dust. They come in many\nshapes and sizes.",
+                        bounds: { xPct: 3.8, yPct: 58.3, widthPct: 45.8, heightPct: 7.9 },
+                        tapRegion: { xPct: 3.1, yPct: 57.7, widthPct: 47.4, heightPct: 9.0 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Spiral Galaxy", ttsText: "Spiral Galaxy",
+                        bounds: { xPct: 4.2, yPct: 84.8, widthPct: 12.0, heightPct: 2.2 },
+                        tapRegion: { xPct: 3.4, yPct: 83.8, widthPct: 13.7, heightPct: 4.2 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Elliptical Galaxy", ttsText: "Elliptical Galaxy",
+                        bounds: { xPct: 31.1, yPct: 80.4, widthPct: 13.1, heightPct: 2.3 },
+                        tapRegion: { xPct: 30.2, yPct: 79.3, widthPct: 14.8, heightPct: 4.3 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Irregular Galaxy", ttsText: "Irregular Galaxy",
+                        bounds: { xPct: 21.9, yPct: 93.1, widthPct: 12.2, heightPct: 2.4 },
+                        tapRegion: { xPct: 20.9, yPct: 92.0, widthPct: 14.2, heightPct: 4.4 }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 52.7, yPct: 50.4, widthPct: 46.1, heightPct: 48.2 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Our galaxy is called\nthe Milky Way. It has billions\nof stars!",
+                        ttsText: "Our galaxy is called\nthe Milky Way. It has billions\nof stars!",
+                        bounds: { xPct: 56.1, yPct: 54.0, widthPct: 33.4, heightPct: 8.7 },
+                        tapRegion: { xPct: 54.0, yPct: 52.3, widthPct: 42.3, heightPct: 16.5 }
+                    }
+                ]
+            }
+        ]
+    },
 };
