@@ -19913,4 +19913,103 @@ const imageTTSData = {
         ]
     },
 
+    "images/english/scientific-method-basics.png": {
+        imageId: "scientific-method-basics",
+        assetFile: "images/english/scientific-method-basics.png",
+        contentType: "image-text",
+        layout: "custom-scientific-method-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.6, yPct: 0.6, widthPct: 49, heightPct: 49.3 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Question", ttsText: "Question",
+                        bounds: { xPct: 10.8, yPct: 2.3, widthPct: 25, heightPct: 6.4 },
+                        tapRegion: { xPct: 10.3, yPct: 1.8, widthPct: 26, heightPct: 7.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Ask a question about\nsomething you want to know.",
+                        ttsText: "Ask a question about\nsomething you want to know.",
+                        bounds: { xPct: 11.8, yPct: 9.4, widthPct: 31.3, heightPct: 5.4 },
+                        tapRegion: { xPct: 11.3, yPct: 9.3, widthPct: 32.5, heightPct: 6.2 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "Why do\nplants grow\ntoward light?",
+                        ttsText: "Why do\nplants grow\ntoward light?",
+                        bounds: { xPct: 29, yPct: 18.1, widthPct: 13.8, heightPct: 12.9 },
+                        tapRegion: { xPct: 28.4, yPct: 17.5, widthPct: 15, heightPct: 14 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.3, yPct: 0.6, widthPct: 48.9, heightPct: 49.3 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Hypothesis", ttsText: "Hypothesis",
+                        bounds: { xPct: 61.2, yPct: 2.1, widthPct: 25, heightPct: 6.6 },
+                        tapRegion: { xPct: 60.7, yPct: 1.6, widthPct: 26, heightPct: 7.6 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Make a possible answer\nbased on what you know.",
+                        ttsText: "Make a possible answer\nbased on what you know.",
+                        bounds: { xPct: 61.5, yPct: 9.2, widthPct: 27, heightPct: 5 },
+                        tapRegion: { xPct: 60.9, yPct: 9.2, widthPct: 28.2, heightPct: 5.8 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "I think plants\ngrow toward light\nbecause they need\nlight to make food.",
+                        ttsText: "I think plants\ngrow toward light\nbecause they need\nlight to make food.",
+                        bounds: { xPct: 63.3, yPct: 20.8, widthPct: 19.2, heightPct: 15.6 },
+                        tapRegion: { xPct: 62.7, yPct: 20.1, widthPct: 20.4, heightPct: 16.9 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.6, yPct: 50.5, widthPct: 49, heightPct: 48.7 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Experiment", ttsText: "Experiment",
+                        bounds: { xPct: 11.4, yPct: 52.6, widthPct: 23, heightPct: 6.9 },
+                        tapRegion: { xPct: 10.9, yPct: 52.1, widthPct: 24, heightPct: 7.9 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Test your hypothesis by doing\na controlled experiment.",
+                        ttsText: "Test your hypothesis by doing\na controlled experiment.",
+                        bounds: { xPct: 11.6, yPct: 61, widthPct: 31.5, heightPct: 5.3 },
+                        tapRegion: { xPct: 11, yPct: 60.9, widthPct: 32.4, heightPct: 6 } },
+                    { itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "With light", ttsText: "With light",
+                        bounds: { xPct: 20.7, yPct: 92.7, widthPct: 9.5, heightPct: 3.8 },
+                        tapRegion: { xPct: 19.7, yPct: 92, widthPct: 11, heightPct: 5.3 } },
+                    { itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "Without light", ttsText: "Without light",
+                        bounds: { xPct: 34.2, yPct: 92.7, widthPct: 13.8, heightPct: 3.8 },
+                        tapRegion: { xPct: 33.1, yPct: 92, widthPct: 15.2, heightPct: 5.3 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.3, yPct: 50.5, widthPct: 48.9, heightPct: 48.7 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Conclusion", ttsText: "Conclusion",
+                        bounds: { xPct: 62.3, yPct: 52.6, widthPct: 23.7, heightPct: 6.9 },
+                        tapRegion: { xPct: 61.8, yPct: 52, widthPct: 24.8, heightPct: 7.8 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Look at your results and decide\nif your hypothesis is correct.",
+                        ttsText: "Look at your results and decide\nif your hypothesis is correct.",
+                        bounds: { xPct: 61.5, yPct: 60.8, widthPct: 32.1, heightPct: 5.3 },
+                        tapRegion: { xPct: 60.9, yPct: 60.7, widthPct: 33.2, heightPct: 6.1 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "The plant with light\ngrew toward the light.",
+                        ttsText: "The plant with light\ngrew toward the light.",
+                        bounds: { xPct: 71, yPct: 73.7, widthPct: 17.5, heightPct: 7.1 },
+                        tapRegion: { xPct: 70.5, yPct: 73.2, widthPct: 18.5, heightPct: 8.1 } },
+                    { itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "My hypothesis\nis correct!", ttsText: "My hypothesis\nis correct!",
+                        bounds: { xPct: 71.1, yPct: 82.4, widthPct: 13.2, heightPct: 4.8 },
+                        tapRegion: { xPct: 70.6, yPct: 81.8, widthPct: 14.1, heightPct: 6 } }
+                ]
+            }
+        ]
+    },
 };

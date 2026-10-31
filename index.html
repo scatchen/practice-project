@@ -9479,9 +9479,21 @@ function isEnglishEarthEnvironmentImageTTSItemText(record, item) {
             isEnglishEarthEnvironmentAmpersandItem(record, item)));
 }
 
+function isEnglishScientificMethodImageTTSItemText(record, item) {
+    const expectedAssetFile = "images/english/scientific-method-basics.png";
+    return Boolean(record && record.contentType === "image-text" &&
+        record.imageId === "scientific-method-basics" &&
+        record.assetFile === expectedAssetFile && item &&
+        item.sourceText === item.ttsText &&
+        record === imageTTSData[expectedAssetFile] &&
+        record.panels.some(panel => panel.items.includes(item)) &&
+        getEnglishTTSUnitText(item.ttsText));
+}
+
 function isEnglishImageTTSItemText(record, item) {
     if (isEnglishHumanBodyHowItWorksImageTTSItemText(record, item) ||
-        isEnglishCirculatorySystemImageTTSItemText(record, item)) return true;
+        isEnglishCirculatorySystemImageTTSItemText(record, item) ||
+        isEnglishScientificMethodImageTTSItemText(record, item)) return true;
     if (isEnglishEarthEnvironmentImageTTSItemText(record, item) ||
         isEnglishMoonPhasesImageTTSItemText(record, item) ||
         isEnglishStarsAndGalaxiesImageTTSItemText(record, item) ||
@@ -10042,6 +10054,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "scientific-method-basics" &&
+        record.assetFile === "images/english/scientific-method-basics.png") {
+        return "Scientific Method";
+    }
     if (record && record.imageId === "circulatory-system-basics" &&
         record.assetFile === "images/english/circulatory-system-basics.png") {
         return "Circulatory System";
@@ -11415,6 +11431,168 @@ function getEnglishCirculatorySystemImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishScientificMethodImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/scientific-method-basics.png";
+    const expectedImageId = "scientific-method-basics";
+    const expectedPanels = [
+        {
+            panelId: 1, readingOrder: 1,
+            bounds: { xPct: 0.6, yPct: 0.6, widthPct: 49, heightPct: 49.3 },
+            items: [
+                { type: "label", sourceText: "Question",
+                    bounds: { xPct: 10.8, yPct: 2.3, widthPct: 25, heightPct: 6.4 },
+                    tapRegion: { xPct: 10.3, yPct: 1.8, widthPct: 26, heightPct: 7.2 } },
+                { type: "sentence", sourceText: "Ask a question about\nsomething you want to know.",
+                    bounds: { xPct: 11.8, yPct: 9.4, widthPct: 31.3, heightPct: 5.4 },
+                    tapRegion: { xPct: 11.3, yPct: 9.3, widthPct: 32.5, heightPct: 6.2 } },
+                { type: "sentence", sourceText: "Why do\nplants grow\ntoward light?",
+                    bounds: { xPct: 29, yPct: 18.1, widthPct: 13.8, heightPct: 12.9 },
+                    tapRegion: { xPct: 28.4, yPct: 17.5, widthPct: 15, heightPct: 14 } }
+            ]
+        },
+        {
+            panelId: 2, readingOrder: 2,
+            bounds: { xPct: 50.3, yPct: 0.6, widthPct: 48.9, heightPct: 49.3 },
+            items: [
+                { type: "label", sourceText: "Hypothesis",
+                    bounds: { xPct: 61.2, yPct: 2.1, widthPct: 25, heightPct: 6.6 },
+                    tapRegion: { xPct: 60.7, yPct: 1.6, widthPct: 26, heightPct: 7.6 } },
+                { type: "sentence", sourceText: "Make a possible answer\nbased on what you know.",
+                    bounds: { xPct: 61.5, yPct: 9.2, widthPct: 27, heightPct: 5 },
+                    tapRegion: { xPct: 60.9, yPct: 9.2, widthPct: 28.2, heightPct: 5.8 } },
+                { type: "sentence", sourceText: "I think plants\ngrow toward light\nbecause they need\nlight to make food.",
+                    bounds: { xPct: 63.3, yPct: 20.8, widthPct: 19.2, heightPct: 15.6 },
+                    tapRegion: { xPct: 62.7, yPct: 20.1, widthPct: 20.4, heightPct: 16.9 } }
+            ]
+        },
+        {
+            panelId: 3, readingOrder: 3,
+            bounds: { xPct: 0.6, yPct: 50.5, widthPct: 49, heightPct: 48.7 },
+            items: [
+                { type: "label", sourceText: "Experiment",
+                    bounds: { xPct: 11.4, yPct: 52.6, widthPct: 23, heightPct: 6.9 },
+                    tapRegion: { xPct: 10.9, yPct: 52.1, widthPct: 24, heightPct: 7.9 } },
+                { type: "sentence", sourceText: "Test your hypothesis by doing\na controlled experiment.",
+                    bounds: { xPct: 11.6, yPct: 61, widthPct: 31.5, heightPct: 5.3 },
+                    tapRegion: { xPct: 11, yPct: 60.9, widthPct: 32.4, heightPct: 6 } },
+                { type: "label", sourceText: "With light",
+                    bounds: { xPct: 20.7, yPct: 92.7, widthPct: 9.5, heightPct: 3.8 },
+                    tapRegion: { xPct: 19.7, yPct: 92, widthPct: 11, heightPct: 5.3 } },
+                { type: "label", sourceText: "Without light",
+                    bounds: { xPct: 34.2, yPct: 92.7, widthPct: 13.8, heightPct: 3.8 },
+                    tapRegion: { xPct: 33.1, yPct: 92, widthPct: 15.2, heightPct: 5.3 } }
+            ]
+        },
+        {
+            panelId: 4, readingOrder: 4,
+            bounds: { xPct: 50.3, yPct: 50.5, widthPct: 48.9, heightPct: 48.7 },
+            items: [
+                { type: "label", sourceText: "Conclusion",
+                    bounds: { xPct: 62.3, yPct: 52.6, widthPct: 23.7, heightPct: 6.9 },
+                    tapRegion: { xPct: 61.8, yPct: 52, widthPct: 24.8, heightPct: 7.8 } },
+                { type: "sentence", sourceText: "Look at your results and decide\nif your hypothesis is correct.",
+                    bounds: { xPct: 61.5, yPct: 60.8, widthPct: 32.1, heightPct: 5.3 },
+                    tapRegion: { xPct: 60.9, yPct: 60.7, widthPct: 33.2, heightPct: 6.1 } },
+                { type: "sentence", sourceText: "The plant with light\ngrew toward the light.",
+                    bounds: { xPct: 71, yPct: 73.7, widthPct: 17.5, heightPct: 7.1 },
+                    tapRegion: { xPct: 70.5, yPct: 73.2, widthPct: 18.5, heightPct: 8.1 } },
+                { type: "sentence", sourceText: "My hypothesis\nis correct!",
+                    bounds: { xPct: 71.1, yPct: 82.4, widthPct: 13.2, heightPct: 4.8 },
+                    tapRegion: { xPct: 70.6, yPct: 81.8, widthPct: 14.1, heightPct: 6 } }
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = bounds => hasExactKeys(bounds, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(bounds[key]) && bounds[key] >= 0 && bounds[key] <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) =>
+        left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-scientific-method-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || (candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile));
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allItems = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expected = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expected.panelId || panel.readingOrder !== expected.readingOrder ||
+            !matchesBounds(panel.bounds, expected.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expected.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expected.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expected.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 || item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem.type || item.sourceText !== expectedItem.sourceText ||
+                item.ttsText !== item.sourceText ||
+                !isEnglishImageTTSItemText(record, item) ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !matchesBounds(item.tapRegion, expectedItem.tapRegion) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allItems.push(item);
+        }
+    }
+
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            for (const leftRegion of [allItems[left].bounds, allItems[left].tapRegion]) {
+                for (const rightRegion of [allItems[right].bounds, allItems[right].tapRegion]) {
+                    if (overlaps(leftRegion, rightRegion)) return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -11427,6 +11605,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isScientificMethodImageTextIdentity =
+        record.imageId === "scientific-method-basics" ||
+        record.assetFile === "images/english/scientific-method-basics.png" ||
+        assetFile === "images/english/scientific-method-basics.png";
+    if (isScientificMethodImageTextIdentity) {
+        return getEnglishScientificMethodImageTextRecord(record, assetFile);
     }
 
     const isCirculatorySystemImageTextIdentity =
@@ -13758,6 +13944,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "moon-phases-basics" &&
         record.assetFile === "images/english/moon-phases-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isScientificMethodSingleItemSequence = Boolean(record &&
+        record.imageId === "scientific-method-basics" &&
+        record.assetFile === "images/english/scientific-method-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isCirculatorySystemSingleItemSequence = Boolean(record &&
         record.imageId === "circulatory-system-basics" &&
         record.assetFile === "images/english/circulatory-system-basics.png" &&
@@ -13802,6 +13992,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isSpaceTechnologySingleItemSequence && !isSpaceSolarSystemSingleItemSequence &&
             !isStarsAndGalaxiesSingleItemSequence &&
             !isMoonPhasesSingleItemSequence &&
+            !isScientificMethodSingleItemSequence &&
             !isCirculatorySystemSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
             !isHumanBodyHowItWorksSingleItemSequence) ||
@@ -14207,6 +14398,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const isVolcanoesImageText = safeRecord.imageId === "volcanoes-basics" &&
         safeRecord.assetFile === "images/english/volcanoes-basics.png";
     if (isVolcanoesImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isScientificMethodImageText = safeRecord.imageId === "scientific-method-basics" &&
+        safeRecord.assetFile === "images/english/scientific-method-basics.png";
+    if (isScientificMethodImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));
