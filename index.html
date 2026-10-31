@@ -9490,8 +9490,33 @@ function isEnglishScientificMethodImageTTSItemText(record, item) {
         getEnglishTTSUnitText(item.ttsText));
 }
 
+function isEnglishFrictionImageTTSItemText(record, item) {
+    const expectedAssetFile = "images/english/friction-basics.png";
+    const expectedImageId = "friction-basics";
+    if (!record || !item || typeof imageTTSData === "undefined" || !imageTTSData ||
+        typeof imageTTSData !== "object") {
+        return false;
+    }
+    const canonicalRecord = imageTTSData[expectedAssetFile];
+    if (!canonicalRecord || !Array.isArray(canonicalRecord.panels)) {
+        return false;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    return matchingIdentityKeys.length === 1 && matchingIdentityKeys[0] === expectedAssetFile &&
+        record.contentType === "image-text" && record.imageId === expectedImageId &&
+        record.assetFile === expectedAssetFile && record.panels === canonicalRecord.panels &&
+        item.sourceText === item.ttsText &&
+        record.panels.some(panel => panel.items.includes(item)) &&
+        getEnglishTTSUnitText(item.ttsText);
+}
+
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishHumanBodyHowItWorksImageTTSItemText(record, item) ||
+    if (isEnglishFrictionImageTTSItemText(record, item) ||
+        isEnglishHumanBodyHowItWorksImageTTSItemText(record, item) ||
         isEnglishCirculatorySystemImageTTSItemText(record, item) ||
         isEnglishScientificMethodImageTTSItemText(record, item)) return true;
     if (isEnglishEarthEnvironmentImageTTSItemText(record, item) ||
@@ -10057,6 +10082,11 @@ function getEnglishImageTTSImageTextName(record) {
     if (record && record.imageId === "cause-and-effect-in-science-basics" &&
         record.assetFile === "images/english/cause-and-effect-in-science-basics.png") {
         return "Cause and Effect in Science";
+    }
+
+    if (record && record.imageId === "friction-basics" &&
+        record.assetFile === "images/english/friction-basics.png") {
+        return "Friction";
     }
 
     if (record && record.imageId === "scientific-method-basics" &&
@@ -11727,6 +11757,152 @@ function getEnglishCauseAndEffectInScienceImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+
+function getEnglishFrictionImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/friction-basics.png";
+    const expectedImageId = "friction-basics";
+    const expectedPanels = [
+        {
+            bounds: [0.521, 0.684, 49.414, 42.090],
+            items: [
+                ["sentence", "What Is Friction?", [9.701, 2.930, 31.510, 5.078], [9.310, 2.344, 32.357, 6.250]],
+                ["sentence", "Friction is a force that\nopposes motion.", [13.281, 9.082, 23.503, 6.445], [12.695, 8.691, 24.674, 7.422]],
+                ["label", "Motion", [39.583, 18.750, 7.422, 2.832], [38.802, 17.773, 8.984, 4.785]],
+                ["label", "Friction", [28.060, 37.402, 8.854, 2.734], [27.018, 36.523, 10.938, 4.492]]
+            ]
+        },
+        {
+            bounds: [50.456, 0.684, 49.154, 42.090],
+            items: [
+                ["phrase", "Rough vs. Smooth Surfaces", [59.440, 2.832, 37.240, 5.176], [58.724, 2.344, 38.607, 6.250]],
+                ["sentence", "Rough surface\ncreates more\nfriction.", [57.552, 10.547, 13.477, 9.375], [57.096, 9.570, 14.518, 11.035]],
+                ["sentence", "Smooth surface\ncreates less\nfriction.", [80.859, 10.645, 14.128, 9.277], [79.102, 9.570, 16.862, 11.035]],
+                ["sentence", "The object moves a shorter distance.", [52.214, 38.379, 21.224, 2.441], [51.172, 37.305, 23.242, 4.199]],
+                ["sentence", "The object moves a longer distance.", [76.237, 38.379, 21.419, 2.441], [75.065, 37.305, 23.698, 4.199]]
+            ]
+        },
+        {
+            bounds: [0.521, 43.555, 49.414, 43.945],
+            items: [
+                ["label", "Increasing Friction", [12.174, 45.898, 32.422, 5.078], [11.458, 44.922, 34.049, 6.836]],
+                ["sentence", "We increase friction when we need more grip.", [6.380, 52.637, 38.607, 3.418], [5.664, 52.051, 40.169, 4.688]],
+                ["label", "Shoe soles", [4.036, 75.586, 10.286, 2.441], [3.581, 74.512, 11.328, 4.297]],
+                ["sentence", "Rough soles increase\nfriction so we do not slip.", [2.474, 79.395, 13.411, 4.297], [1.888, 78.906, 14.648, 5.469]],
+                ["label", "Tires", [22.201, 75.488, 5.599, 2.539], [21.484, 74.512, 7.031, 4.297]],
+                ["sentence", "Tire treads increase\nfriction for better grip.", [19.401, 79.395, 12.630, 4.297], [18.750, 78.906, 13.997, 5.469]],
+                ["label", "Brakes", [38.281, 75.488, 7.552, 2.637], [37.565, 74.512, 9.049, 4.250]],
+                ["sentence", "Friction helps the bike\nslow down and stop.", [35.286, 79.395, 11.979, 4.297], [34.635, 78.906, 13.411, 5.469]]
+            ]
+        },
+        {
+            bounds: [50.456, 43.555, 49.154, 43.945],
+            items: [
+                ["label", "Reducing Friction", [60.742, 45.898, 28.971, 4.980], [60.026, 44.922, 30.404, 6.738]],
+                ["sentence", "We reduce friction when we want things to\nmove more easily.", [57.943, 51.953, 34.440, 5.762], [57.357, 51.953, 35.742, 6.543]],
+                ["label", "OIL", [54.818, 59.277, 4.232, 2.734], [54.167, 58.594, 5.469, 4.102]],
+                ["label", "Lubrication", [52.995, 75.098, 11.263, 2.734], [52.344, 74.023, 12.500, 4.590]],
+                ["sentence", "Oil reduces friction\nbetween moving parts.", [52.409, 79.395, 12.956, 4.395], [51.888, 78.906, 14.062, 5.566]],
+                ["label", "Rollers and bearings", [67.773, 75.195, 12.174, 2.734], [66.927, 74.023, 13.802, 4.590]],
+                ["sentence", "Rolling reduces\nfriction.", [70.508, 79.297, 8.138, 4.492], [69.531, 78.906, 10.156, 5.566]],
+                ["label", "Smooth surfaces", [84.701, 75.195, 12.240, 2.637], [83.919, 74.023, 13.802, 4.590]],
+                ["sentence", "Smoother surfaces\nreduce friction.", [85.417, 79.297, 10.742, 4.492], [84.635, 78.906, 12.370, 5.566]]
+            ]
+        },
+        {
+            bounds: [0.521, 88.574, 99.089, 10.547],
+            items: [
+                ["sentence", "Friction can help us move, stop, and grip.", [20.182, 89.844, 61.523, 4.883], [19.336, 89.258, 63.216, 6.250]]
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = bounds => hasExactKeys(bounds, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(bounds[key]) && bounds[key] >= 0 && bounds[key] <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every((key, index) => actual[key] === expected[index]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-friction-5-panel" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allItems = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== panelIndex + 1 || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 ||
+                item.readingOrder !== itemIndex + 1 || item.type !== expectedItem[0] ||
+                item.sourceText !== expectedItem[1] || item.ttsText !== item.sourceText ||
+                !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem[2]) ||
+                !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allItems.push(item);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            for (const leftRegion of [allItems[left].bounds, allItems[left].tapRegion]) {
+                for (const rightRegion of [allItems[right].bounds, allItems[right].tapRegion]) {
+                    if (overlaps(leftRegion, rightRegion)) return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -11747,6 +11923,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/cause-and-effect-in-science-basics.png";
     if (isCauseAndEffectInScienceImageTextIdentity) {
         return getEnglishCauseAndEffectInScienceImageTextRecord(record, assetFile);
+    }
+
+    const isFrictionImageTextIdentity =
+        record.imageId === "friction-basics" ||
+        record.assetFile === "images/english/friction-basics.png" ||
+        assetFile === "images/english/friction-basics.png";
+    if (isFrictionImageTextIdentity) {
+        return getEnglishFrictionImageTextRecord(record, assetFile);
     }
 
     const isScientificMethodImageTextIdentity =
@@ -14091,6 +14275,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.assetFile === "images/english/cause-and-effect-in-science-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
 
+    const isFrictionSingleItemSequence = Boolean(record &&
+        record.imageId === "friction-basics" &&
+        record.assetFile === "images/english/friction-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isScientificMethodSingleItemSequence = Boolean(record &&
         record.imageId === "scientific-method-basics" &&
         record.assetFile === "images/english/scientific-method-basics.png" &&
@@ -14140,6 +14328,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isStarsAndGalaxiesSingleItemSequence &&
             !isMoonPhasesSingleItemSequence &&
             !isCauseAndEffectInScienceSingleItemSequence &&
+            !isFrictionSingleItemSequence &&
             !isScientificMethodSingleItemSequence &&
             !isCirculatorySystemSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
@@ -14567,6 +14756,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         safeRecord.imageId === "cause-and-effect-in-science-basics" &&
         safeRecord.assetFile === "images/english/cause-and-effect-in-science-basics.png";
     if (isCauseAndEffectInScienceImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isFrictionImageText = safeRecord.imageId === "friction-basics" &&
+        safeRecord.assetFile === "images/english/friction-basics.png";
+    if (isFrictionImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));
