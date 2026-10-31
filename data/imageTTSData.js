@@ -20264,6 +20264,60 @@ const imageTTSData = {
         ]
     },
 
+    "images/english/airplane-wright-brothers-basics.png": {
+        imageId: "airplane-wright-brothers-basics",
+        assetFile: "images/english/airplane-wright-brothers-basics.png",
+        contentType: "image-text",
+        layout: "2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.6380, yPct: 0.6380, widthPct: 48.8038, heightPct: 48.8038 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "People wanted to fly.", ttsText: "People wanted to fly.",
+                        bounds: { xPct: 5.2632, yPct: 3.3493, widthPct: 40.7496, heightPct: 5.9011 },
+                        tapRegion: { xPct: 2.0734, yPct: 1.5949, widthPct: 46.8102, heightPct: 8.6124 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.4785, yPct: 0.6380, widthPct: 48.8836, heightPct: 48.8038 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "The Wright brothers tested their airplane.",
+                        ttsText: "The Wright brothers tested their airplane.",
+                        bounds: { xPct: 57.7352, yPct: 2.4721, widthPct: 37.5598, heightPct: 9.0112 },
+                        tapRegion: { xPct: 51.8341, yPct: 1.5949, widthPct: 46.5710, heightPct: 10.4466 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.6380, yPct: 50.4785, widthPct: 48.8038, heightPct: 48.8836 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Their airplane could fly.", ttsText: "Their airplane could fly.",
+                        bounds: { xPct: 3.9872, yPct: 52.7911, widthPct: 44.6571, heightPct: 6.2201 },
+                        tapRegion: { xPct: 2.0734, yPct: 51.1962, widthPct: 46.8102, heightPct: 8.3732 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.4785, yPct: 50.4785, widthPct: 48.8836, heightPct: 48.8836 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Airplanes changed travel.", ttsText: "Airplanes changed travel.",
+                        bounds: { xPct: 54.1467, yPct: 52.7911, widthPct: 42.6635, heightPct: 6.2201 },
+                        tapRegion: { xPct: 51.8341, yPct: 51.1962, widthPct: 46.5710, heightPct: 8.3732 } }
+                ]
+            }
+        ]
+    },
+
     "images/english/static-electricity-basics.png": {
         imageId: "static-electricity-basics",
         assetFile: "images/english/static-electricity-basics.png",
