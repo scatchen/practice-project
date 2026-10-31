@@ -19814,5 +19814,103 @@ const imageTTSData = {
             },
         ]
     },
+    "images/english/circulatory-system-basics.png": {
+        imageId: "circulatory-system-basics",
+        assetFile: "images/english/circulatory-system-basics.png",
+        contentType: "image-text",
+        layout: "custom-circulatory-system-5-panel",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 0, readingOrder: 1,
+                bounds: { xPct: 0.5, yPct: 0.4, widthPct: 99, heightPct: 10.1 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Circulatory System", ttsText: "Circulatory System",
+                        bounds: { xPct: 20.2, yPct: 1.4, widthPct: 36.5, heightPct: 6.4 },
+                        tapRegion: { xPct: 19.4, yPct: 0.8, widthPct: 38.2, heightPct: 8 } }
+                ]
+            },
+            {
+                panelId: 1, readingOrder: 2,
+                bounds: { xPct: 0.5, yPct: 11.1, widthPct: 49.2, heightPct: 40.3 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "The Heart", ttsText: "The Heart",
+                        bounds: { xPct: 9.5, yPct: 13.3, widthPct: 18.5, heightPct: 5.2 },
+                        tapRegion: { xPct: 8.7, yPct: 12.4, widthPct: 20, heightPct: 7 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "The heart\npumps blood.", ttsText: "The heart\npumps blood.",
+                        bounds: { xPct: 9.5, yPct: 21, widthPct: 15.4, heightPct: 6.2 },
+                        tapRegion: { xPct: 8.8, yPct: 20.2, widthPct: 17.2, heightPct: 7.8 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 3,
+                bounds: { xPct: 50.3, yPct: 11.1, widthPct: 49.2, heightPct: 40.3 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Blood", ttsText: "Blood",
+                        bounds: { xPct: 61.3, yPct: 13.2, widthPct: 9, heightPct: 5.6 },
+                        tapRegion: { xPct: 60.4, yPct: 12.3, widthPct: 10.8, heightPct: 7.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Blood carries\noxygen and\nnutrients.", ttsText: "Blood carries\noxygen and\nnutrients.",
+                        bounds: { xPct: 57.5, yPct: 21, widthPct: 16.3, heightPct: 11.7 },
+                        tapRegion: { xPct: 56.7, yPct: 20.2, widthPct: 18, heightPct: 13.3 } },
+                    { itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "red blood cell\n(carries oxygen)", ttsText: "red blood cell\n(carries oxygen)",
+                        bounds: { xPct: 89.5, yPct: 12.3, widthPct: 8.4, heightPct: 5.5 },
+                        tapRegion: { xPct: 88.8, yPct: 11.8, widthPct: 9.7, heightPct: 6.4 } },
+                    { itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "oxygen (O₂)", ttsText: "oxygen (O₂)",
+                        bounds: { xPct: 89.5, yPct: 18.7, widthPct: 7.7, heightPct: 2.7 },
+                        tapRegion: { xPct: 88.8, yPct: 18.4, widthPct: 9.5, heightPct: 3.6 } },
+                    { itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "nutrients", ttsText: "nutrients",
+                        bounds: { xPct: 89.5, yPct: 22.4, widthPct: 6.4, heightPct: 2.8 },
+                        tapRegion: { xPct: 88.8, yPct: 22.2, widthPct: 8.4, heightPct: 3.6 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 4,
+                bounds: { xPct: 0.5, yPct: 52.5, widthPct: 49.2, heightPct: 46.4 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Blood Vessels", ttsText: "Blood Vessels",
+                        bounds: { xPct: 9.3, yPct: 54.6, widthPct: 19.5, heightPct: 5.7 },
+                        tapRegion: { xPct: 8.4, yPct: 53.6, widthPct: 21.2, heightPct: 7.4 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Arteries\ncarry blood away\nfrom the heart.", ttsText: "Arteries\ncarry blood away\nfrom the heart.",
+                        bounds: { xPct: 6, yPct: 62.5, widthPct: 18.2, heightPct: 12.5 },
+                        tapRegion: { xPct: 5, yPct: 61.7, widthPct: 20.2, heightPct: 14 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "Veins\ncarry blood back\nto the heart.", ttsText: "Veins\ncarry blood back\nto the heart.",
+                        bounds: { xPct: 30.5, yPct: 62.5, widthPct: 17.5, heightPct: 12.5 },
+                        tapRegion: { xPct: 29.7, yPct: 61.7, widthPct: 19, heightPct: 14 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 5,
+                bounds: { xPct: 50.3, yPct: 52.5, widthPct: 49.2, heightPct: 46.4 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Blood Circulation", ttsText: "Blood Circulation",
+                        bounds: { xPct: 57.7, yPct: 54.4, widthPct: 29, heightPct: 6 },
+                        tapRegion: { xPct: 56.8, yPct: 53.5, widthPct: 30.8, heightPct: 7.7 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Blood travels around the body.", ttsText: "Blood travels around the body.",
+                        bounds: { xPct: 52.3, yPct: 62.1, widthPct: 34, heightPct: 3.5 },
+                        tapRegion: { xPct: 51.5, yPct: 61.5, widthPct: 35.5, heightPct: 4.7 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "Oxygen reaches body cells.", ttsText: "Oxygen reaches body cells.",
+                        bounds: { xPct: 52.3, yPct: 66.5, widthPct: 31.5, heightPct: 3.6 },
+                        tapRegion: { xPct: 51.5, yPct: 66.3, widthPct: 33, heightPct: 4.2 } }
+                ]
+            }
+        ]
+    },
 
 };

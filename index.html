@@ -9480,7 +9480,8 @@ function isEnglishEarthEnvironmentImageTTSItemText(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishHumanBodyHowItWorksImageTTSItemText(record, item)) return true;
+    if (isEnglishHumanBodyHowItWorksImageTTSItemText(record, item) ||
+        isEnglishCirculatorySystemImageTTSItemText(record, item)) return true;
     if (isEnglishEarthEnvironmentImageTTSItemText(record, item) ||
         isEnglishMoonPhasesImageTTSItemText(record, item) ||
         isEnglishStarsAndGalaxiesImageTTSItemText(record, item) ||
@@ -10027,7 +10028,9 @@ function isEnglishImageTTSFullTitleImageTextRecord(record) {
         (record.imageId === "airport-and-business-travel-basics" &&
             record.assetFile === "images/english/airport-and-business-travel-basics.png") ||
         (record.imageId === "hotel-check-in-and-business-hotel-basics" &&
-            record.assetFile === "images/english/hotel-check-in-and-business-hotel-basics.png")
+            record.assetFile === "images/english/hotel-check-in-and-business-hotel-basics.png") ||
+        (record.imageId === "circulatory-system-basics" &&
+            record.assetFile === "images/english/circulatory-system-basics.png")
     ));
 }
 
@@ -10039,6 +10042,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "circulatory-system-basics" &&
+        record.assetFile === "images/english/circulatory-system-basics.png") {
+        return "Circulatory System";
+    }
     if (record && record.imageId === "human-body-how-it-works-basics" &&
         record.assetFile === "images/english/human-body-how-it-works-basics.png") {
         return "Human Body and How the Body Works";
@@ -11243,6 +11250,171 @@ function getEnglishHumanBodyHowItWorksImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishCirculatorySystemImageTTSExpectedPanels() {
+    const makeBounds = (xPct, yPct, widthPct, heightPct) =>
+        ({ xPct, yPct, widthPct, heightPct });
+    const makeItem = (type, sourceText, textBounds, tapRegion) =>
+        ({ type, sourceText, bounds: makeBounds(...textBounds), tapRegion: makeBounds(...tapRegion) });
+    return [
+        {
+            panelId: 0, readingOrder: 1,
+            bounds: makeBounds(0.5, 0.4, 99, 10.1),
+            items: [makeItem("phrase", "Circulatory System",
+                [20.2, 1.4, 36.5, 6.4], [19.4, 0.8, 38.2, 8])]
+        },
+        {
+            panelId: 1, readingOrder: 2,
+            bounds: makeBounds(0.5, 11.1, 49.2, 40.3),
+            items: [
+                makeItem("phrase", "The Heart", [9.5, 13.3, 18.5, 5.2], [8.7, 12.4, 20, 7]),
+                makeItem("sentence", "The heart\npumps blood.",
+                    [9.5, 21, 15.4, 6.2], [8.8, 20.2, 17.2, 7.8])
+            ]
+        },
+        {
+            panelId: 2, readingOrder: 3,
+            bounds: makeBounds(50.3, 11.1, 49.2, 40.3),
+            items: [
+                makeItem("label", "Blood", [61.3, 13.2, 9, 5.6], [60.4, 12.3, 10.8, 7.2]),
+                makeItem("sentence", "Blood carries\noxygen and\nnutrients.",
+                    [57.5, 21, 16.3, 11.7], [56.7, 20.2, 18, 13.3]),
+                makeItem("label", "red blood cell\n(carries oxygen)",
+                    [89.5, 12.3, 8.4, 5.5], [88.8, 11.8, 9.7, 6.4]),
+                makeItem("label", "oxygen (O₂)",
+                    [89.5, 18.7, 7.7, 2.7], [88.8, 18.4, 9.5, 3.6]),
+                makeItem("label", "nutrients", [89.5, 22.4, 6.4, 2.8], [88.8, 22.2, 8.4, 3.6])
+            ]
+        },
+        {
+            panelId: 3, readingOrder: 4,
+            bounds: makeBounds(0.5, 52.5, 49.2, 46.4),
+            items: [
+                makeItem("phrase", "Blood Vessels",
+                    [9.3, 54.6, 19.5, 5.7], [8.4, 53.6, 21.2, 7.4]),
+                makeItem("sentence", "Arteries\ncarry blood away\nfrom the heart.",
+                    [6, 62.5, 18.2, 12.5], [5, 61.7, 20.2, 14]),
+                makeItem("sentence", "Veins\ncarry blood back\nto the heart.",
+                    [30.5, 62.5, 17.5, 12.5], [29.7, 61.7, 19, 14])
+            ]
+        },
+        {
+            panelId: 4, readingOrder: 5,
+            bounds: makeBounds(50.3, 52.5, 49.2, 46.4),
+            items: [
+                makeItem("phrase", "Blood Circulation",
+                    [57.7, 54.4, 29, 6], [56.8, 53.5, 30.8, 7.7]),
+                makeItem("sentence", "Blood travels around the body.",
+                    [52.3, 62.1, 34, 3.5], [51.5, 61.5, 35.5, 4.7]),
+                makeItem("sentence", "Oxygen reaches body cells.",
+                    [52.3, 66.5, 31.5, 3.6], [51.5, 66.3, 33, 4.2])
+            ]
+        }
+    ];
+}
+
+function isEnglishCirculatorySystemImageTTSItemText(record, item) {
+    const expectedPanels = getEnglishCirculatorySystemImageTTSExpectedPanels();
+    if (!record || record.contentType !== "image-text" ||
+        record.imageId !== "circulatory-system-basics" ||
+        record.assetFile !== "images/english/circulatory-system-basics.png" ||
+        !Array.isArray(record.panels) || !item || item.sourceText !== item.ttsText ||
+        !Number.isInteger(item.itemId) || item.itemId < 1 || item.readingOrder !== item.itemId) {
+        return false;
+    }
+    const panel = record.panels.find(candidate => candidate && Array.isArray(candidate.items) &&
+        candidate.items.includes(item));
+    const expectedPanel = expectedPanels.find(candidate => candidate.panelId === (panel && panel.panelId));
+    const expectedItem = expectedPanel && expectedPanel.items[item.itemId - 1];
+    return Boolean(expectedItem && item.type === expectedItem.type &&
+        item.sourceText === expectedItem.sourceText && getEnglishTTSUnitText(item.sourceText));
+}
+
+function getEnglishCirculatorySystemImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/circulatory-system-basics.png";
+    const expectedImageId = "circulatory-system-basics";
+    const expectedPanels = getEnglishCirculatorySystemImageTTSExpectedPanels();
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = value => hasExactKeys(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every((key, index) => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (assetFile !== expectedAssetFile || typeof imageTTSData === "undefined" || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        !hasExactKeys(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+            "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"]) ||
+        record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        record.contentType !== "image-text" || record.layout !== "custom-circulatory-system-5-panel" ||
+        record.transcriptStatus !== "verified" || record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) return null;
+
+    const allItems = [];
+    const panelIds = new Set();
+    const itemPositions = new Set();
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panelIds.has(panel.panelId) ||
+            panel.readingOrder !== panelIndex + 1 || !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) return null;
+        panelIds.add(panel.panelId);
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            const positionKey = item && panel.panelId + ":" + item.itemId;
+            if (!hasExactKeys(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"]) ||
+                item.itemId !== itemIndex + 1 || itemPositions.has(positionKey) ||
+                item.readingOrder !== itemIndex + 1 || item.type !== expectedItem.type ||
+                item.sourceText !== expectedItem.sourceText || item.ttsText !== item.sourceText ||
+                !getEnglishTTSUnitText(item.sourceText) || !isEnglishCirculatorySystemImageTTSItemText(record, item) ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !matchesBounds(item.tapRegion, expectedItem.tapRegion) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) return null;
+            itemPositions.add(positionKey);
+            allItems.push(item);
+        }
+    }
+    if (panelIds.size !== 5 || itemPositions.size !== 14) return null;
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            if (overlaps(allItems[left].bounds, allItems[right].bounds) ||
+                overlaps(allItems[left].tapRegion, allItems[right].tapRegion) ||
+                overlaps(allItems[left].bounds, allItems[right].tapRegion) ||
+                overlaps(allItems[left].tapRegion, allItems[right].bounds)) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -11255,6 +11427,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isCirculatorySystemImageTextIdentity =
+        record.imageId === "circulatory-system-basics" ||
+        record.assetFile === "images/english/circulatory-system-basics.png" ||
+        assetFile === "images/english/circulatory-system-basics.png";
+    if (isCirculatorySystemImageTextIdentity) {
+        return getEnglishCirculatorySystemImageTextRecord(record, assetFile);
     }
 
     const isMoonPhasesImageTextIdentity =
@@ -13411,6 +13591,9 @@ function getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishCirculatorySystemImageTTSItemText(record, item)) {
+        return item.ttsText;
+    }
     if (isEnglishEarthEnvironmentAmpersandItem(record, item)) {
         return "Earth and Environment";
     }
@@ -13575,6 +13758,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "moon-phases-basics" &&
         record.assetFile === "images/english/moon-phases-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isCirculatorySystemSingleItemSequence = Boolean(record &&
+        record.imageId === "circulatory-system-basics" &&
+        record.assetFile === "images/english/circulatory-system-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const dailyLifeSteps = isDailyLifeRoutinesImageText
         ? itemList.flatMap(item => getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item)
             .map(text => ({ item, text })))
@@ -13615,6 +13802,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isSpaceTechnologySingleItemSequence && !isSpaceSolarSystemSingleItemSequence &&
             !isStarsAndGalaxiesSingleItemSequence &&
             !isMoonPhasesSingleItemSequence &&
+            !isCirculatorySystemSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
             !isHumanBodyHowItWorksSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
@@ -13939,6 +14127,22 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    const isCirculatorySystemImageText = safeRecord.imageId === "circulatory-system-basics" &&
+        safeRecord.assetFile === "images/english/circulatory-system-basics.png";
+    if (isCirculatorySystemImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const itemLabel = clickedItem.sourceText.replace(/\r?\n/g, " ");
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "朗讀「" + itemLabel + "」",
+            "朗讀所選原圖文字：" + clickedItem.sourceText,
+            () => speakEnglishImageTTSImageTextSequence(
+                trigger,
+                [clickedItem],
+                "已朗讀所選原圖文字。"
+            )
+        ));
     }
 
     const isHobbiesInterestsImageText = safeRecord.imageId === "hobbies-interests-basics" &&
