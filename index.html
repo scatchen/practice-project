@@ -10054,6 +10054,11 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "cause-and-effect-in-science-basics" &&
+        record.assetFile === "images/english/cause-and-effect-in-science-basics.png") {
+        return "Cause and Effect in Science";
+    }
+
     if (record && record.imageId === "scientific-method-basics" &&
         record.assetFile === "images/english/scientific-method-basics.png") {
         return "Scientific Method";
@@ -11593,6 +11598,135 @@ function getEnglishScientificMethodImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishCauseAndEffectInScienceImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/cause-and-effect-in-science-basics.png";
+    const expectedImageId = "cause-and-effect-in-science-basics";
+    const panelBounds = [
+        { xPct: 0.5, yPct: 0.5, widthPct: 49, heightPct: 49 },
+        { xPct: 50.5, yPct: 0.5, widthPct: 49, heightPct: 49 },
+        { xPct: 0.5, yPct: 50.5, widthPct: 49, heightPct: 49 },
+        { xPct: 50.5, yPct: 50.5, widthPct: 49, heightPct: 49 }
+    ];
+    const expectedItems = [
+        [
+            { type: "label", sourceText: "Cause", bounds: [8.5, 3.6, 8.5, 3.8], tap: [4, 2.8, 18.5, 5] },
+            { type: "sentence", sourceText: "The sun heats\nthe water.", bounds: [5.2, 8.2, 15.2, 7.4], tap: [3.5, 8, 19.3, 8.2] },
+            { type: "label", sourceText: "Effect", bounds: [37, 3.6, 8.2, 3.8], tap: [32.5, 2.8, 16.5, 5] },
+            { type: "sentence", sourceText: "The water\nevaporates.", bounds: [34.2, 8.2, 13.8, 7.4], tap: [32, 8, 17.5, 8.2] }
+        ],
+        [
+            { type: "label", sourceText: "Cause", bounds: [60.5, 2.8, 7, 4], tap: [53.5, 2, 18, 5.3] },
+            { type: "sentence", sourceText: "Plants get\nwater.", bounds: [55, 7.7, 14.3, 6.8], tap: [53, 7.4, 19, 8.3] },
+            { type: "label", sourceText: "Effect", bounds: [84, 2.8, 8.5, 4], tap: [79, 2, 19, 5.3] },
+            { type: "sentence", sourceText: "Plants grow.", bounds: [81.5, 7.7, 14.6, 4], tap: [78, 7.4, 21, 8.3] }
+        ],
+        [
+            { type: "label", sourceText: "Cause", bounds: [8, 53.4, 8, 3.5], tap: [3, 52.2, 19.5, 4.8] },
+            { type: "sentence", sourceText: "The temperature\ngets higher.", bounds: [4.6, 57.1, 16.6, 6.3], tap: [2.4, 57.1, 20.7, 7.4] },
+            { type: "label", sourceText: "Effect", bounds: [37.3, 53.4, 9, 3.5], tap: [30.8, 52.2, 18.2, 4.8] },
+            { type: "sentence", sourceText: "The ice melts.", bounds: [32.7, 57.1, 15.5, 4.5], tap: [30.4, 57.1, 18.6, 7.4] }
+        ],
+        [
+            { type: "label", sourceText: "Cause", bounds: [58.7, 53.4, 8, 3.5], tap: [52.2, 52.2, 18.2, 4.8] },
+            { type: "sentence", sourceText: "A magnet\nis nearby.", bounds: [53, 57.1, 15, 6.3], tap: [51.8, 57.1, 18.8, 7.4] },
+            { type: "label", sourceText: "Effect", bounds: [84.5, 53.4, 8.6, 3.5], tap: [78.5, 52.2, 19.5, 4.8] },
+            { type: "sentence", sourceText: "The metal objects\nmove toward it.", bounds: [79, 57.1, 19, 6.3], tap: [77.5, 57.1, 21.5, 7.4] }
+        ]
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = bounds => hasExactKeys(bounds, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(bounds[key]) && bounds[key] >= 0 && bounds[key] <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+    const toBounds = values => ({
+        xPct: values[0], yPct: values[1], widthPct: values[2], heightPct: values[3]
+    });
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every((key, index) => actual[key] === expected[index]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) =>
+        left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-cause-and-effect-in-science-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== 4) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || (candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile));
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allRegions = [];
+    for (let panelIndex = 0; panelIndex < 4; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanelBounds = panelBounds[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== panelIndex + 1 || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, [
+                expectedPanelBounds.xPct, expectedPanelBounds.yPct,
+                expectedPanelBounds.widthPct, expectedPanelBounds.heightPct
+            ]) || !Array.isArray(panel.items) || panel.items.length !== 4) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < 4; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedItems[panelIndex][itemIndex];
+            const expectedTapRegion = toBounds(expectedItem.tap);
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 || item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem.type || item.sourceText !== expectedItem.sourceText ||
+                item.ttsText !== item.sourceText || !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !matchesBounds(item.tapRegion, expectedItem.tap) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allRegions.push([item.bounds, item.tapRegion]);
+        }
+    }
+    for (let left = 0; left < 4; left += 1) {
+        for (let right = left + 1; right < 4; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allRegions.length; left += 1) {
+        for (let right = left + 1; right < allRegions.length; right += 1) {
+            for (const leftRegion of allRegions[left]) {
+                for (const rightRegion of allRegions[right]) {
+                    if (overlaps(leftRegion, rightRegion)) return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -11605,6 +11739,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isCauseAndEffectInScienceImageTextIdentity =
+        record.imageId === "cause-and-effect-in-science-basics" ||
+        record.assetFile === "images/english/cause-and-effect-in-science-basics.png" ||
+        assetFile === "images/english/cause-and-effect-in-science-basics.png";
+    if (isCauseAndEffectInScienceImageTextIdentity) {
+        return getEnglishCauseAndEffectInScienceImageTextRecord(record, assetFile);
     }
 
     const isScientificMethodImageTextIdentity =
@@ -13944,6 +14086,11 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "moon-phases-basics" &&
         record.assetFile === "images/english/moon-phases-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isCauseAndEffectInScienceSingleItemSequence = Boolean(record &&
+        record.imageId === "cause-and-effect-in-science-basics" &&
+        record.assetFile === "images/english/cause-and-effect-in-science-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+
     const isScientificMethodSingleItemSequence = Boolean(record &&
         record.imageId === "scientific-method-basics" &&
         record.assetFile === "images/english/scientific-method-basics.png" &&
@@ -13992,6 +14139,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isSpaceTechnologySingleItemSequence && !isSpaceSolarSystemSingleItemSequence &&
             !isStarsAndGalaxiesSingleItemSequence &&
             !isMoonPhasesSingleItemSequence &&
+            !isCauseAndEffectInScienceSingleItemSequence &&
             !isScientificMethodSingleItemSequence &&
             !isCirculatorySystemSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
@@ -14398,6 +14546,27 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const isVolcanoesImageText = safeRecord.imageId === "volcanoes-basics" &&
         safeRecord.assetFile === "images/english/volcanoes-basics.png";
     if (isVolcanoesImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isCauseAndEffectInScienceImageText =
+        safeRecord.imageId === "cause-and-effect-in-science-basics" &&
+        safeRecord.assetFile === "images/english/cause-and-effect-in-science-basics.png";
+    if (isCauseAndEffectInScienceImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));

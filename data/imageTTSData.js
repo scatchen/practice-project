@@ -20012,4 +20012,104 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/cause-and-effect-in-science-basics.png": {
+        imageId: "cause-and-effect-in-science-basics",
+        assetFile: "images/english/cause-and-effect-in-science-basics.png",
+        contentType: "image-text",
+        layout: "custom-cause-and-effect-in-science-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.5, yPct: 0.5, widthPct: 49, heightPct: 49 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Cause", ttsText: "Cause",
+                        bounds: { xPct: 8.5, yPct: 3.6, widthPct: 8.5, heightPct: 3.8 },
+                        tapRegion: { xPct: 4, yPct: 2.8, widthPct: 18.5, heightPct: 5 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "The sun heats\nthe water.", ttsText: "The sun heats\nthe water.",
+                        bounds: { xPct: 5.2, yPct: 8.2, widthPct: 15.2, heightPct: 7.4 },
+                        tapRegion: { xPct: 3.5, yPct: 8, widthPct: 19.3, heightPct: 8.2 } },
+                    { itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Effect", ttsText: "Effect",
+                        bounds: { xPct: 37, yPct: 3.6, widthPct: 8.2, heightPct: 3.8 },
+                        tapRegion: { xPct: 32.5, yPct: 2.8, widthPct: 16.5, heightPct: 5 } },
+                    { itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "The water\nevaporates.", ttsText: "The water\nevaporates.",
+                        bounds: { xPct: 34.2, yPct: 8.2, widthPct: 13.8, heightPct: 7.4 },
+                        tapRegion: { xPct: 32, yPct: 8, widthPct: 17.5, heightPct: 8.2 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.5, yPct: 0.5, widthPct: 49, heightPct: 49 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Cause", ttsText: "Cause",
+                        bounds: { xPct: 60.5, yPct: 2.8, widthPct: 7, heightPct: 4 },
+                        tapRegion: { xPct: 53.5, yPct: 2, widthPct: 18, heightPct: 5.3 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Plants get\nwater.", ttsText: "Plants get\nwater.",
+                        bounds: { xPct: 55, yPct: 7.7, widthPct: 14.3, heightPct: 6.8 },
+                        tapRegion: { xPct: 53, yPct: 7.4, widthPct: 19, heightPct: 8.3 } },
+                    { itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Effect", ttsText: "Effect",
+                        bounds: { xPct: 84, yPct: 2.8, widthPct: 8.5, heightPct: 4 },
+                        tapRegion: { xPct: 79, yPct: 2, widthPct: 19, heightPct: 5.3 } },
+                    { itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "Plants grow.", ttsText: "Plants grow.",
+                        bounds: { xPct: 81.5, yPct: 7.7, widthPct: 14.6, heightPct: 4 },
+                        tapRegion: { xPct: 78, yPct: 7.4, widthPct: 21, heightPct: 8.3 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.5, yPct: 50.5, widthPct: 49, heightPct: 49 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Cause", ttsText: "Cause",
+                        bounds: { xPct: 8, yPct: 53.4, widthPct: 8, heightPct: 3.5 },
+                        tapRegion: { xPct: 3, yPct: 52.2, widthPct: 19.5, heightPct: 4.8 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "The temperature\ngets higher.", ttsText: "The temperature\ngets higher.",
+                        bounds: { xPct: 4.6, yPct: 57.1, widthPct: 16.6, heightPct: 6.3 },
+                        tapRegion: { xPct: 2.4, yPct: 57.1, widthPct: 20.7, heightPct: 7.4 } },
+                    { itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Effect", ttsText: "Effect",
+                        bounds: { xPct: 37.3, yPct: 53.4, widthPct: 9, heightPct: 3.5 },
+                        tapRegion: { xPct: 30.8, yPct: 52.2, widthPct: 18.2, heightPct: 4.8 } },
+                    { itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "The ice melts.", ttsText: "The ice melts.",
+                        bounds: { xPct: 32.7, yPct: 57.1, widthPct: 15.5, heightPct: 4.5 },
+                        tapRegion: { xPct: 30.4, yPct: 57.1, widthPct: 18.6, heightPct: 7.4 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.5, yPct: 50.5, widthPct: 49, heightPct: 49 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Cause", ttsText: "Cause",
+                        bounds: { xPct: 58.7, yPct: 53.4, widthPct: 8, heightPct: 3.5 },
+                        tapRegion: { xPct: 52.2, yPct: 52.2, widthPct: 18.2, heightPct: 4.8 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A magnet\nis nearby.", ttsText: "A magnet\nis nearby.",
+                        bounds: { xPct: 53, yPct: 57.1, widthPct: 15, heightPct: 6.3 },
+                        tapRegion: { xPct: 51.8, yPct: 57.1, widthPct: 18.8, heightPct: 7.4 } },
+                    { itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Effect", ttsText: "Effect",
+                        bounds: { xPct: 84.5, yPct: 53.4, widthPct: 8.6, heightPct: 3.5 },
+                        tapRegion: { xPct: 78.5, yPct: 52.2, widthPct: 19.5, heightPct: 4.8 } },
+                    { itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "The metal objects\nmove toward it.", ttsText: "The metal objects\nmove toward it.",
+                        bounds: { xPct: 79, yPct: 57.1, widthPct: 19, heightPct: 6.3 },
+                        tapRegion: { xPct: 77.5, yPct: 57.1, widthPct: 21.5, heightPct: 7.4 } }
+                ]
+            }
+        ]
+    },
 };
