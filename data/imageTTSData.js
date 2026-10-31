@@ -20397,6 +20397,70 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/plateaus-basics.png": {
+        imageId: "plateaus-basics",
+        assetFile: "images/english/plateaus-basics.png",
+        contentType: "image-text",
+        layout: "custom-plateaus-outside-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "ipad-safari-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 0.4, widthPct: 49, heightPct: 49 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Plateau", ttsText: "Plateau",
+                        bounds: { xPct: 12.2, yPct: 2.1, widthPct: 17.1, heightPct: 4.1 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A plateau is high, flat land.",
+                        ttsText: "A plateau is high, flat land.",
+                        bounds: { xPct: 4.5, yPct: 9, widthPct: 41, heightPct: 4.3 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.6, yPct: 0.4, widthPct: 49, heightPct: 49 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Flat Top", ttsText: "Flat Top",
+                        bounds: { xPct: 62, yPct: 2.1, widthPct: 18.3, heightPct: 4.1 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A plateau has a flat top.",
+                        ttsText: "A plateau has a flat top.",
+                        bounds: { xPct: 56, yPct: 9, widthPct: 39.2, heightPct: 4.3 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.4, yPct: 50.6, widthPct: 49, heightPct: 49 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Steep Sides", ttsText: "Steep Sides",
+                        bounds: { xPct: 12, yPct: 53, widthPct: 22, heightPct: 4.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A plateau can have steep sides.",
+                        ttsText: "A plateau can have steep sides.",
+                        bounds: { xPct: 4.2, yPct: 59, widthPct: 43, heightPct: 4.3 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.6, yPct: 50.6, widthPct: 49, heightPct: 49 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Plateau Landscape", ttsText: "Plateau Landscape",
+                        bounds: { xPct: 61.5, yPct: 53, widthPct: 35.5, heightPct: 4.4 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "People can live on some plateaus.",
+                        ttsText: "People can live on some plateaus.",
+                        bounds: { xPct: 53.8, yPct: 59, widthPct: 43, heightPct: 4.3 } }
+                ]
+            }
+        ]
     }
 
 };

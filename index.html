@@ -889,6 +889,47 @@ color: #111827;
             cursor: default;
         }
 
+        .image-tts-plateaus-side-trigger {
+            position: absolute;
+            z-index: 11;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            min-height: 44px;
+            margin: 0;
+            padding: 0;
+            border: 2px solid #0c4a6e;
+            border-radius: 12px;
+            appearance: none;
+            -webkit-appearance: none;
+            background: #ffffff;
+            color: #0f172a;
+            font: 700 12px/1 Arial, sans-serif;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.4);
+            cursor: pointer;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .image-tts-plateaus-side-trigger[hidden] {
+            display: none;
+        }
+
+        .image-tts-plateaus-side-trigger:focus-visible {
+            outline: 3px solid #facc15;
+            outline-offset: 2px;
+        }
+
+        .image-tts-plateaus-side-trigger:disabled {
+            cursor: default;
+            opacity: 0.72;
+        }
+
         .image-tts-business-email-bubble-hit-area {
             position: absolute;
             z-index: 10;
@@ -3736,7 +3777,8 @@ function calculateEnglishImageTTSStoryStopPlacement({
     obstacles,
     margin = 8,
     preferBelow = false,
-    scanForClearPosition = false
+    scanForClearPosition = false,
+    strictAvoidance = false
 }) {
     const isFiniteRect = rect => rect &&
         [rect.left, rect.top, rect.right, rect.bottom].every(Number.isFinite);
@@ -3886,6 +3928,10 @@ function calculateEnglishImageTTSStoryStopPlacement({
                 mode: "clear-scan"
             };
         }
+    }
+
+    if (strictAvoidance) {
+        return null;
     }
 
     // Keep the control clear of the fixed header and drawing tools before relaxing panel avoidance.
@@ -4056,6 +4102,30 @@ function placeEnglishImageTTSStoryStopButton(button, wrapper, panel, placementOp
         }
     }
 
+    if (Array.isArray(panel && panel.avoidRects)) {
+        const validAvoidRects = panel.avoidRects.every(rect => rect &&
+            [rect.left, rect.top, rect.right, rect.bottom].every(Number.isFinite) &&
+            rect.right > rect.left && rect.bottom > rect.top);
+        if (!validAvoidRects && placementOptions.strictAvoidance === true) {
+            button.hidden = true;
+            button.style.visibility = "hidden";
+            return false;
+        }
+        panel.avoidRects.forEach(rect => {
+            if (!rect || ![rect.left, rect.top, rect.right, rect.bottom].every(Number.isFinite) ||
+                rect.right <= rect.left || rect.bottom <= rect.top) {
+                return;
+            }
+            obstacles.push({
+                left: rect.left + viewportLeft,
+                top: rect.top + viewportTop,
+                right: rect.right + viewportLeft,
+                bottom: rect.bottom + viewportTop,
+                kind: "panel"
+            });
+        });
+    }
+
     const placement = calculateEnglishImageTTSStoryStopPlacement({
         viewport: {
             left: viewportLeft,
@@ -4069,8 +4139,14 @@ function placeEnglishImageTTSStoryStopButton(button, wrapper, panel, placementOp
         obstacles,
         margin,
         preferBelow: placementOptions.preferBelow === true,
-        scanForClearPosition: placementOptions.scanForClearPosition === true
+        scanForClearPosition: placementOptions.scanForClearPosition === true,
+        strictAvoidance: placementOptions.strictAvoidance === true
     });
+    if (!placement && placementOptions.strictAvoidance === true) {
+        button.hidden = true;
+        button.style.visibility = "hidden";
+        return false;
+    }
     const fallbackViewportWidth = Number.isFinite(viewportWidth) && viewportWidth > 0 ? viewportWidth : 320;
     const fallbackViewportHeight = Number.isFinite(viewportHeight) && viewportHeight > 0 ? viewportHeight : 480;
     const fallbackWidth = Math.min(buttonSize.width, fallbackViewportWidth);
@@ -4265,17 +4341,41 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
         (typeof wrapper.contains === "function" && !wrapper.contains(trigger))) {
         return false;
     }
+    const isPlateausImageText = record.imageId === "plateaus-basics" &&
+        record.assetFile === "images/english/plateaus-basics.png";
+    const avoidRects = [];
+    if (isPlateausImageText) {
+        const sideButtons = Array.from(wrapper.querySelectorAll(".image-tts-plateaus-side-trigger"));
+        if (sideButtons.length !== 4) {
+            return false;
+        }
+        for (const sideButton of sideButtons) {
+            if (sideButton.hidden) {
+                continue;
+            }
+            const rect = sideButton.getBoundingClientRect();
+            if (!rect || rect.width <= 0 || rect.height <= 0 ||
+                ![rect.left, rect.top, rect.right, rect.bottom].every(Number.isFinite)) {
+                return false;
+            }
+            avoidRects.push({
+                left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom
+            });
+        }
+    }
     return placeEnglishImageTTSStoryStopButton(
         button,
         wrapper,
         {
             bounds: safeItem.bounds,
             avoidBounds: validatedRecord.panels.flatMap(panel =>
-                panel.items.map(item => item.bounds))
+                panel.items.map(item => item.bounds)),
+            avoidRects
         },
         {
             preferBelow: true,
             scanForClearPosition: true,
+            strictAvoidance: isPlateausImageText,
             stopControlClass: "is-image-tts-image-text-stop-control"
         }
     );
@@ -4450,6 +4550,13 @@ function positionEnglishTTSFloatingStopButton() {
             englishTTSState.activeImageTTSWrapper
         )) {
             button.hidden = true;
+            const isPlateausTrigger = imageTextTrigger.classList.contains(
+                "image-tts-plateaus-side-trigger"
+            );
+            if (isPlateausTrigger && isEnglishTTSPlaybackActive()) {
+                stopEnglishSpeech();
+                setEnglishTTSStatus("畫面空間不足，已停止 Plateaus 朗讀。");
+            }
         }
         return;
     }
@@ -9575,8 +9682,29 @@ function isEnglishAirplaneWrightBrothersImageTTSItemText(record, item) {
             getEnglishTTSUnitText(item.ttsText));
 }
 
+function isEnglishPlateausImageTTSItemText(record, item) {
+    const canonicalRecord = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData["images/english/plateaus-basics.png"]
+        : null;
+    if (!isEnglishPlateausImageTTSRecord(record) || !item || !canonicalRecord ||
+        !Array.isArray(record.panels) || !Array.isArray(canonicalRecord.panels) ||
+        record.panels !== canonicalRecord.panels ||
+        item.sourceText !== item.ttsText || !getEnglishTTSUnitText(item.ttsText)) {
+        return false;
+    }
+    const panel = record.panels.find(candidate => candidate &&
+        Array.isArray(candidate.items) && candidate.items.includes(item));
+    const expectedPanel = panel && getEnglishPlateausImageTextExpectedPanels()[panel.panelId - 1];
+    const expectedItem = expectedPanel && expectedPanel.items[item.itemId - 1];
+    return Boolean(panel && expectedItem && item.itemId === item.readingOrder &&
+        item.itemId >= 1 && item.itemId <= 2 &&
+        item.type === expectedItem.type && item.sourceText === expectedItem.sourceText &&
+        !Object.prototype.hasOwnProperty.call(item, "tapRegion"));
+}
+
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishAirplaneWrightBrothersImageTTSItemText(record, item) ||
+    if (isEnglishPlateausImageTTSItemText(record, item) ||
+        isEnglishAirplaneWrightBrothersImageTTSItemText(record, item) ||
         isEnglishStaticElectricityImageTTSItemText(record, item) ||
         isEnglishFrictionImageTTSItemText(record, item) ||
         isEnglishHumanBodyHowItWorksImageTTSItemText(record, item) ||
@@ -10144,6 +10272,9 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishPlateausImageTTSRecord(record)) {
+        return "Plateaus";
+    }
     if (record && record.imageId === "airplane-wright-brothers-basics" &&
         record.assetFile === "images/english/airplane-wright-brothers-basics.png") {
         return "The Airplane — Wright Brothers";
@@ -12217,6 +12348,137 @@ function getEnglishAirplaneWrightBrothersImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishPlateausImageTextExpectedPanels() {
+    const makeBounds = (xPct, yPct, widthPct, heightPct) =>
+        ({ xPct, yPct, widthPct, heightPct });
+    const makeItem = (type, sourceText, bounds) => ({ type, sourceText, bounds });
+    return [
+        {
+            panelId: 1, bounds: makeBounds(0.4, 0.4, 49, 49),
+            items: [
+                makeItem("label", "Plateau", makeBounds(12.2, 2.1, 17.1, 4.1)),
+                makeItem("sentence", "A plateau is high, flat land.",
+                    makeBounds(4.5, 9, 41, 4.3))
+            ]
+        },
+        {
+            panelId: 2, bounds: makeBounds(50.6, 0.4, 49, 49),
+            items: [
+                makeItem("label", "Flat Top", makeBounds(62, 2.1, 18.3, 4.1)),
+                makeItem("sentence", "A plateau has a flat top.",
+                    makeBounds(56, 9, 39.2, 4.3))
+            ]
+        },
+        {
+            panelId: 3, bounds: makeBounds(0.4, 50.6, 49, 49),
+            items: [
+                makeItem("label", "Steep Sides", makeBounds(12, 53, 22, 4.2)),
+                makeItem("sentence", "A plateau can have steep sides.",
+                    makeBounds(4.2, 59, 43, 4.3))
+            ]
+        },
+        {
+            panelId: 4, bounds: makeBounds(50.6, 50.6, 49, 49),
+            items: [
+                makeItem("label", "Plateau Landscape", makeBounds(61.5, 53, 35.5, 4.4)),
+                makeItem("sentence", "People can live on some plateaus.",
+                    makeBounds(53.8, 59, 43, 4.3))
+            ]
+        }
+    ];
+}
+
+function isEnglishPlateausImageTTSRecord(record) {
+    return Boolean(record && record.imageId === "plateaus-basics" &&
+        record.assetFile === "images/english/plateaus-basics.png" &&
+        record.contentType === "image-text");
+}
+
+function getEnglishPlateausImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/plateaus-basics.png";
+    const expectedImageId = "plateaus-basics";
+    const expectedPanels = getEnglishPlateausImageTextExpectedPanels();
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = value => hasExactKeys(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || typeof imageTTSData === "undefined" || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-plateaus-outside-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        !["not-tested", "ipad-safari-tested"].includes(record.overlayRuntimeStatus) ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+    const libraryMatches = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(item => item &&
+            (item.id === expectedImageId || item.file === expectedAssetFile))
+        : [];
+    if (libraryMatches.length !== 1 || libraryMatches[0].id !== expectedImageId ||
+        libraryMatches[0].file !== expectedAssetFile || libraryMatches[0].category !== "english") {
+        return null;
+    }
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"
+            ]) || item.itemId !== itemIndex + 1 || item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem.type || item.sourceText !== expectedItem.sourceText ||
+                item.ttsText !== item.sourceText || !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem.bounds) ||
+                !contains(panel.bounds, item.bounds)) {
+                return null;
+            }
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) {
+                return null;
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -12229,6 +12491,14 @@ function getEnglishImageTTSRecord(assetFile) {
         record.coordinateStatus !== "calibrated" ||
         !Array.isArray(record.panels)) {
         return null;
+    }
+
+    const isPlateausImageTextIdentity =
+        record.imageId === "plateaus-basics" ||
+        record.assetFile === "images/english/plateaus-basics.png" ||
+        assetFile === "images/english/plateaus-basics.png";
+    if (isPlateausImageTextIdentity) {
+        return getEnglishPlateausImageTextRecord(record, assetFile);
     }
 
     const isCauseAndEffectInScienceImageTextIdentity =
@@ -13447,6 +13717,240 @@ function layoutEnglishImageTTSTeachingSentenceHitAreas(wrapper) {
     });
 }
 
+function createEnglishImageTTSPlateausSideButton(wrapper, panel, record) {
+    if (!wrapper || !panel || !isEnglishPlateausImageTTSRecord(record) ||
+        !Array.isArray(panel.items) || panel.items.length !== 2) {
+        return null;
+    }
+    const item = panel.items[0];
+    if (!isEnglishPlateausImageTTSItemText(record, item)) {
+        return null;
+    }
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-image-text-hit-area image-tts-plateaus-side-trigger";
+    button.textContent = String(panel.panelId) + " 🔊";
+    button.hidden = true;
+    button.setAttribute("aria-label", "P" + panel.panelId +
+        " Plateaus，開啟本格英文朗讀選項");
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("data-image-tts-item-id", String(item.itemId));
+    button._englishImageTTSImageTextPanel = panel;
+    button._englishImageTTSImageTextItem = item;
+    button._englishImageTTSImageTextRecord = record;
+    button._englishImageTTSImageTextActivePanel = panel;
+    button._englishImageTTSImageTextActiveItem = item;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (button.hidden || button.disabled || appState.subjectMode !== "english" ||
+            isEnglishImageTTSDrawingMode()) {
+            return;
+        }
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishImageTTSImageTextMenu(button, record, panel);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
+function layoutEnglishImageTTSPlateausSideButtons(wrapper) {
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".image-tts-plateaus-side-trigger"))
+        : [];
+    const hideAll = () => buttons.forEach(button => {
+        button.hidden = true;
+        button.style.visibility = "hidden";
+    });
+    if (!wrapper || buttons.length !== 4 || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== "images/english/plateaus-basics.png") {
+        hideAll();
+        return;
+    }
+    const record = getEnglishImageTTSRecord(wrapper.dataset.imageTtsAssetFile);
+    const image = wrapper.querySelector("img");
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const imageRect = image && image.getBoundingClientRect();
+    const wrapperClientLeft = wrapper.clientLeft;
+    const wrapperClientTop = wrapper.clientTop;
+    const visual = window.visualViewport;
+    const viewportLeft = visual ? visual.offsetLeft : 0;
+    const viewportTop = visual ? visual.offsetTop : 0;
+    const viewportWidth = visual ? visual.width : window.innerWidth;
+    const viewportHeight = visual ? visual.height : window.innerHeight;
+    const finiteRect = rect => rect &&
+        [rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height].every(Number.isFinite) &&
+        rect.width > 0 && rect.height > 0;
+    let wrapperPosition = "";
+    try {
+        wrapperPosition = window.getComputedStyle(wrapper).position;
+    } catch (error) {
+        wrapperPosition = "";
+    }
+    if (!record || !isEnglishPlateausImageTTSRecord(record) || !image ||
+        image.getAttribute("src") !== "images/english/plateaus-basics.png" ||
+        !image.complete || image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+        !finiteRect(wrapperRect) || !finiteRect(imageRect) || wrapperPosition !== "relative" ||
+        ![wrapperClientLeft, wrapperClientTop].every(Number.isFinite) ||
+        ![viewportLeft, viewportTop, viewportWidth, viewportHeight].every(Number.isFinite) ||
+        viewportWidth <= 0 || viewportHeight <= 0 ||
+        (visual && (!Number.isFinite(visual.offsetLeft) || !Number.isFinite(visual.offsetTop)))) {
+        hideAll();
+        return;
+    }
+    const stopButton = getEnglishTTSFloatingStopButton();
+    let safeStyle = null;
+    try {
+        safeStyle = stopButton && window.getComputedStyle(stopButton);
+    } catch (error) {
+        safeStyle = null;
+    }
+    if (!stopButton || !safeStyle) {
+        hideAll();
+        return;
+    }
+    const readInset = name => {
+        const value = safeStyle ? parseFloat(safeStyle.getPropertyValue(name)) : 0;
+        return Number.isFinite(value) && value > 0 ? value : 0;
+    };
+    const inset = {
+        left: readInset("--english-tts-safe-left"),
+        right: readInset("--english-tts-safe-right"),
+        top: readInset("--english-tts-safe-top"),
+        bottom: readInset("--english-tts-safe-bottom")
+    };
+    const obstacles = [];
+    const selectors = [
+        ".control-bar", ".scribble-box",
+        ".english-image-tts-menu:not([hidden])",
+        "#english-tts-floating-stop:not([hidden])",
+        "#english-tts-panel:not([hidden])"
+    ];
+    document.querySelectorAll(selectors.join(",")).forEach(element => {
+        if (!element || element.hidden) {
+            return;
+        }
+        try {
+            const style = window.getComputedStyle(element);
+            const rect = element.getBoundingClientRect();
+            if (style.display === "none" || style.visibility === "hidden") {
+                return;
+            }
+            if (finiteRect(rect)) {
+                obstacles.push(rect);
+            } else {
+                obstacles.push(null);
+            }
+        } catch (error) {
+            obstacles.push(null);
+        }
+    });
+    if (obstacles.includes(null)) {
+        hideAll();
+        return;
+    }
+    const drawing = isEnglishImageTTSDrawingMode();
+    const candidateRects = new Map();
+    let positioningFailed = false;
+    buttons.forEach(button => {
+        const panelId = Number(button.getAttribute("data-image-tts-panel-id"));
+        const side = panelId === 1 || panelId === 3 ? "left" : "right";
+        const imageLeftInWrapper = imageRect.left - wrapperRect.left - wrapperClientLeft;
+        const imageTopInWrapper = imageRect.top - wrapperRect.top - wrapperClientTop;
+        const wrapperLocalLeft = side === "left"
+            ? imageLeftInWrapper - 8 - 44
+            : imageLeftInWrapper + imageRect.width + 8;
+        const wrapperLocalTop = imageTopInWrapper +
+            imageRect.height * (panelId <= 2 ? 0.25 : 0.75) - 22;
+        const left = String(wrapperLocalLeft) + "px";
+        const top = String(wrapperLocalTop) + "px";
+        if (button.style.left !== left) {
+            button.style.left = left;
+        }
+        if (button.style.top !== top) {
+            button.style.top = top;
+        }
+        if (button.style.width !== "44px") {
+            button.style.width = "44px";
+        }
+        if (button.style.height !== "44px") {
+            button.style.height = "44px";
+        }
+        button.style.visibility = "hidden";
+        button.hidden = false;
+        button.disabled = drawing;
+        button.style.pointerEvents = drawing ? "none" : "auto";
+        button.setAttribute("aria-disabled", String(drawing));
+        if (button.offsetParent !== wrapper) {
+            positioningFailed = true;
+        }
+        candidateRects.set(button, button.getBoundingClientRect());
+    });
+    if (positioningFailed) {
+        hideAll();
+        return;
+    }
+    const intersects = (first, second) =>
+        first.left < second.right && first.right > second.left &&
+        first.top < second.bottom && first.bottom > second.top;
+    buttons.forEach(button => {
+        const panelId = Number(button.getAttribute("data-image-tts-panel-id"));
+        const rect = candidateRects.get(button);
+        const sideSpace = panelId === 1 || panelId === 3
+            ? imageRect.left - (viewportLeft + inset.left)
+            : viewportLeft + viewportWidth - inset.right - imageRect.right;
+        const inSafeViewport = finiteRect(rect) &&
+            rect.left >= viewportLeft + inset.left + 8 &&
+            rect.right <= viewportLeft + viewportWidth - inset.right - 8 &&
+            rect.top >= viewportTop + inset.top + 8 &&
+            rect.bottom <= viewportTop + viewportHeight - inset.bottom - 8;
+        const hitsControl = finiteRect(rect) &&
+            obstacles.some(obstacle => intersects(rect, obstacle));
+        const hitsOtherButton = buttons.some(other => other !== button &&
+            finiteRect(candidateRects.get(other)) && intersects(rect, candidateRects.get(other)));
+        let clipped = false;
+        for (let ancestor = wrapper; ancestor; ancestor = ancestor.parentElement) {
+            let style;
+            try {
+                style = window.getComputedStyle(ancestor);
+            } catch (error) {
+                clipped = true;
+                break;
+            }
+            const containTokens = String(style.contain || "").split(/\s+/);
+            const clipsPaint = containTokens.some(token =>
+                ["paint", "strict", "content"].includes(token));
+            const clipsX = clipsPaint ||
+                ["hidden", "clip", "auto", "scroll"].includes(style.overflowX);
+            const clipsY = clipsPaint ||
+                ["hidden", "clip", "auto", "scroll"].includes(style.overflowY);
+            if (clipsX || clipsY) {
+                const ancestorRect = ancestor.getBoundingClientRect();
+                if (!finiteRect(ancestorRect) ||
+                    (clipsX && (rect.left < ancestorRect.left || rect.right > ancestorRect.right)) ||
+                    (clipsY && (rect.top < ancestorRect.top || rect.bottom > ancestorRect.bottom))) {
+                    clipped = true;
+                    break;
+                }
+            }
+            if (ancestor === document.body) {
+                break;
+            }
+        }
+        const visible = sideSpace >= 60 && inSafeViewport && !hitsControl &&
+            !hitsOtherButton && !clipped;
+        button.hidden = !visible;
+        button.style.visibility = visible ? "visible" : "hidden";
+    });
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
     if (!wrapper) {
         return;
@@ -13918,6 +14422,26 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
             if (image.complete && image.naturalWidth === 0) {
                 return;
             }
+            if (isEnglishPlateausImageTTSRecord(record)) {
+                record.panels.forEach(panel => {
+                    if (createEnglishImageTTSPlateausSideButton(wrapper, panel, record)) {
+                        added += 1;
+                    }
+                });
+                image.addEventListener("load", () =>
+                    layoutEnglishImageTTSPlateausSideButtons(wrapper), { once: true });
+                image.addEventListener("error", () => {
+                    wrapper.querySelectorAll(".image-tts-plateaus-side-trigger").forEach(button => {
+                        button.hidden = true;
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) {
+                        closeEnglishImageTTSMenu();
+                    }
+                }, { once: true });
+                layoutEnglishImageTTSPlateausSideButtons(wrapper);
+                return;
+            }
             record.panels.forEach(panel => {
                 panel.items.forEach(item => {
                     createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record);
@@ -14231,7 +14755,10 @@ function scheduleEnglishImageTTSLayout() {
     const requestFrame = window.requestAnimationFrame || (callback => window.setTimeout(callback, 16));
     englishImageTTSOverlayState.layoutFrame = requestFrame(() => {
         englishImageTTSOverlayState.layoutFrame = 0;
-        document.querySelectorAll("#ai-response .image-tts-overlay-wrapper").forEach(layoutEnglishImageTTSPanelSpeakers);
+        document.querySelectorAll("#ai-response .image-tts-overlay-wrapper").forEach(wrapper => {
+            layoutEnglishImageTTSPanelSpeakers(wrapper);
+            layoutEnglishImageTTSPlateausSideButtons(wrapper);
+        });
     });
 }
 
@@ -14433,6 +14960,9 @@ function getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishPlateausImageTTSItemText(record, item)) {
+        return item.ttsText;
+    }
     if (isEnglishCirculatorySystemImageTTSItemText(record, item)) {
         return item.ttsText;
     }
@@ -14544,6 +15074,11 @@ function speakEnglishImageTTSImageTextSequence(
     }
     const itemList = Array.isArray(items) ? items : [];
     const allItems = record ? record.panels.flatMap(panel => panel.items) : [];
+    const isPlateausImageText = Boolean(record &&
+        record.imageId === "plateaus-basics" &&
+        record.assetFile === "images/english/plateaus-basics.png");
+    const isPlateausSingleItemSequence = Boolean(isPlateausImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isPanelSequence = Boolean(record && record.panels.some(panel =>
         panel.items.length === itemList.length &&
         panel.items.every((item, index) => item === itemList[index])));
@@ -14659,6 +15194,7 @@ function speakEnglishImageTTSImageTextSequence(
         triggerPanel !== record.panels.find(panel => panel.panelId === triggerPanel.panelId) ||
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
         (!isPanelSequence && !isWholeImageSequence &&
+            !isPlateausSingleItemSequence &&
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
             !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence &&
             !isVolcanoesSingleItemSequence && !isSimpleMachinesSingleItemSequence &&
@@ -14717,6 +15253,16 @@ function speakEnglishImageTTSImageTextSequence(
         }
         trigger._englishImageTTSImageTextActivePanel = itemPanel;
         trigger._englishImageTTSImageTextActiveItem = item;
+        if (isPlateausImageText &&
+            !placeEnglishImageTTSImageTextStopButton(
+                getEnglishTTSFloatingStopButton(),
+                wrapper
+            )) {
+            cancelEnglishImageTTSImageTextSequence(true);
+            setEnglishTTSStatus("目前畫面沒有安全的 Stop 位置，未開始或已取消 Plateaus 朗讀。");
+            updateEnglishTTSControls();
+            return false;
+        }
         const speechText = step.text;
         if (!speechText) {
             cancelEnglishImageTTSImageTextSequence(true);
@@ -14957,6 +15503,10 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const clickedPanel = trigger && trigger._englishImageTTSImageTextPanel;
     const safePanel = safeRecord && safeRecord.panels.find(item =>
         item.panelId === (panel && panel.panelId));
+    const isPlateausImageText = Boolean(safeRecord && isEnglishPlateausImageTTSRecord(safeRecord));
+    const plateausImage = isPlateausImageText && wrapper
+        ? wrapper.querySelector("img")
+        : null;
     if (!trigger || !wrapper || !trigger.classList ||
         !trigger.classList.contains("image-tts-image-text-hit-area") ||
         !record || !trigger._englishImageTTSImageTextRecord ||
@@ -14966,6 +15516,10 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         !safePanel || safePanel !== panel ||
         !panel.items.includes(trigger._englishImageTTSImageTextItem) ||
         wrapper.dataset.imageTtsAssetFile !== safeRecord.assetFile ||
+        (isPlateausImageText && (!trigger.classList.contains("image-tts-plateaus-side-trigger") ||
+            !plateausImage || plateausImage.getAttribute("src") !== safeRecord.assetFile ||
+            !plateausImage.complete || plateausImage.naturalWidth !== 1254 ||
+            plateausImage.naturalHeight !== 1254)) ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         return;
     }
@@ -14995,6 +15549,63 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isPlateausImageText) {
+        const titleItem = panel.items.find(item => item.type === "label");
+        const sentenceItem = panel.items.find(item => item.type === "sentence");
+        if (!titleItem || !sentenceItem ||
+            !isEnglishPlateausImageTTSItemText(safeRecord, titleItem) ||
+            !isEnglishPlateausImageTTSItemText(safeRecord, sentenceItem)) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        menu.setAttribute("aria-label", "Plateaus 第 " + panel.panelId + " 格朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀標題",
+            "朗讀標題：" + titleItem.sourceText,
+            () => speakEnglishImageTTSImageTextSequence(
+                trigger, [titleItem], "已朗讀 Plateaus 標題。"
+            )
+        ));
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀句子",
+            "朗讀句子：" + sentenceItem.sourceText,
+            () => speakEnglishImageTTSImageTextSequence(
+                trigger, [sentenceItem], "已朗讀 Plateaus 句子。"
+            )
+        ));
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀本格",
+            "依序朗讀 Plateaus 第 " + panel.panelId + " 格標題與句子",
+            () => speakEnglishImageTTSImageTextSequence(
+                trigger, panel.items, "Plateaus 本格已朗讀完成。"
+            )
+        ));
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀全圖",
+            "依序朗讀 Plateaus 四格全部標題與句子",
+            () => speakEnglishImageTTSImageTextSequence(
+                trigger,
+                safeRecord.panels.flatMap(candidate => candidate.items),
+                "Plateaus 全圖已朗讀完成。"
+            )
+        ));
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (menu.hidden) {
+            return;
+        }
+        const firstButton = menu.firstChild;
+        if (firstButton) {
+            try {
+                firstButton.focus({ preventScroll: true });
+            } catch (error) {
+                firstButton.focus();
+            }
+        }
+        return;
     }
 
     const isChangingOfTheGuardImageText = safeRecord.imageId === "changing-of-the-guard-basics" &&
@@ -15862,6 +16473,129 @@ function positionEnglishImageTTSStoryControls(trigger, controls) {
     controls.style.visibility = "visible";
 }
 
+function positionEnglishPlateausImageTTSMenu(menu, trigger) {
+    if (!menu || !trigger || trigger.isConnected === false) {
+        return false;
+    }
+    const visual = window.visualViewport;
+    const viewportLeft = visual ? visual.offsetLeft : 0;
+    const viewportTop = visual ? visual.offsetTop : 0;
+    const viewportWidth = visual ? visual.width : window.innerWidth;
+    const viewportHeight = visual ? visual.height : window.innerHeight;
+    if (![viewportLeft, viewportTop, viewportWidth, viewportHeight].every(Number.isFinite) ||
+        viewportWidth <= 0 || viewportHeight <= 0) {
+        return false;
+    }
+    const stopButton = getEnglishTTSFloatingStopButton();
+    let safeStyle = null;
+    try {
+        safeStyle = stopButton && window.getComputedStyle(stopButton);
+    } catch (error) {
+        safeStyle = null;
+    }
+    if (!stopButton || !safeStyle) {
+        return false;
+    }
+    const readInset = name => {
+        const value = safeStyle ? parseFloat(safeStyle.getPropertyValue(name)) : 0;
+        return Number.isFinite(value) && value > 0 ? value : 0;
+    };
+    const margin = 8;
+    const safeLeft = viewportLeft + readInset("--english-tts-safe-left") + margin;
+    const safeRight = viewportLeft + viewportWidth - readInset("--english-tts-safe-right") - margin;
+    const safeTop = viewportTop + readInset("--english-tts-safe-top") + margin;
+    const safeBottom = viewportTop + viewportHeight - readInset("--english-tts-safe-bottom") - margin;
+    menu.style.visibility = "hidden";
+    const menuRect = menu.getBoundingClientRect();
+    const width = Math.min(menuRect.width || 260, safeRight - safeLeft);
+    const height = Math.min(menuRect.height || 200, safeBottom - safeTop);
+    if (![width, height].every(Number.isFinite) || width <= 0 || height <= 0 ||
+        safeRight - safeLeft < 44 || safeBottom - safeTop < 44) {
+        return false;
+    }
+    menu.style.maxWidth = String(width) + "px";
+    menu.style.maxHeight = String(height) + "px";
+    const obstacles = [];
+    const selectors = [
+        ".image-tts-plateaus-side-trigger", ".control-bar",
+        ".scribble-box", "#english-tts-floating-stop:not([hidden])",
+        "#english-tts-panel:not([hidden])"
+    ];
+    document.querySelectorAll(selectors.join(",")).forEach(element => {
+        if (!element || element === menu || element.hidden) {
+            return;
+        }
+        try {
+            const style = window.getComputedStyle(element);
+            const rect = element.getBoundingClientRect();
+            if (style.display === "none" || style.visibility === "hidden") {
+                return;
+            }
+            if (!rect || rect.width <= 0 || rect.height <= 0 ||
+                ![rect.left, rect.top, rect.right, rect.bottom].every(Number.isFinite)) {
+                obstacles.push(null);
+                return;
+            }
+            obstacles.push({
+                left: rect.left + viewportLeft,
+                top: rect.top + viewportTop,
+                right: rect.right + viewportLeft,
+                bottom: rect.bottom + viewportTop
+            });
+        } catch (error) {
+            obstacles.push(null);
+        }
+    });
+    if (obstacles.includes(null)) {
+        return false;
+    }
+    const triggerRect = trigger.getBoundingClientRect();
+    const candidates = [];
+    const maxLeft = safeRight - width;
+    const maxTop = safeBottom - height;
+    const addCandidate = (left, top) => {
+        if (left >= safeLeft && left <= maxLeft && top >= safeTop && top <= maxTop) {
+            candidates.push({ left, top });
+        }
+    };
+    const preferredLeft = triggerRect.right + viewportLeft + 8;
+    const preferredTop = triggerRect.top + viewportTop;
+    addCandidate(preferredLeft, preferredTop);
+    addCandidate(triggerRect.left + viewportLeft - width - 8, preferredTop);
+    const step = 20;
+    for (let top = safeTop; top <= maxTop; top += step) {
+        for (let left = safeLeft; left <= maxLeft; left += step) {
+            addCandidate(left, top);
+        }
+    }
+    addCandidate(maxLeft, maxTop);
+    const triggerCenterX = (triggerRect.left + triggerRect.right) / 2 + viewportLeft;
+    const triggerCenterY = (triggerRect.top + triggerRect.bottom) / 2 + viewportTop;
+    candidates.sort((first, second) => {
+        const firstDistance = Math.pow(first.left + width / 2 - triggerCenterX, 2) +
+            Math.pow(first.top + height / 2 - triggerCenterY, 2);
+        const secondDistance = Math.pow(second.left + width / 2 - triggerCenterX, 2) +
+            Math.pow(second.top + height / 2 - triggerCenterY, 2);
+        return firstDistance - secondDistance;
+    });
+    const intersects = (candidate, obstacle) =>
+        candidate.left < obstacle.right && candidate.left + width > obstacle.left &&
+        candidate.top < obstacle.bottom && candidate.top + height > obstacle.top;
+    const placement = candidates.find(candidate =>
+        !obstacles.some(obstacle => intersects(candidate, obstacle)));
+    if (!placement) {
+        return false;
+    }
+    menu.style.left = String(placement.left) + "px";
+    menu.style.top = String(placement.top) + "px";
+    menu.style.visibility = "visible";
+    const wrapper = trigger.closest(".image-tts-overlay-wrapper");
+    if (wrapper) {
+        layoutEnglishImageTTSPlateausSideButtons(wrapper);
+    }
+    return true;
+}
+
 function positionEnglishImageTTSMenu() {
     const menu = englishImageTTSOverlayState.menu;
     const trigger = englishImageTTSOverlayState.activeTrigger;
@@ -15930,6 +16664,12 @@ function positionEnglishImageTTSMenu() {
     menu.style.left = `${clamp(left, minLeft, maxLeft)}px`;
     menu.style.top = `${clamp(top, minTop, maxTop)}px`;
     menu.style.visibility = "visible";
+    if (trigger.classList &&
+        trigger.classList.contains("image-tts-plateaus-side-trigger") &&
+        !positionEnglishPlateausImageTTSMenu(menu, trigger)) {
+        closeEnglishImageTTSMenu();
+        setEnglishTTSStatus("目前畫面沒有可安全顯示朗讀選單的位置。");
+    }
 }
 
 function scheduleEnglishImageTTSMenuPosition() {
@@ -16025,10 +16765,12 @@ function initializeEnglishImageTTSOverlayControls() {
         }
     });
     window.addEventListener("resize", scheduleEnglishImageTTSLayout);
+    window.addEventListener("scroll", scheduleEnglishImageTTSLayout, true);
     window.addEventListener("scroll", scheduleEnglishImageTTSMenuPosition, true);
     if (window.visualViewport) {
         window.visualViewport.addEventListener("resize", scheduleEnglishImageTTSLayout);
         window.visualViewport.addEventListener("resize", scheduleEnglishImageTTSMenuPosition);
+        window.visualViewport.addEventListener("scroll", scheduleEnglishImageTTSLayout);
         window.visualViewport.addEventListener("scroll", scheduleEnglishImageTTSMenuPosition);
     }
 }
