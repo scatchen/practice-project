@@ -19544,4 +19544,275 @@ const imageTTSData = {
         ]
     },
 
+    "images/english/human-body-how-it-works-basics.png": {
+        imageId: "human-body-how-it-works-basics",
+        assetFile: "images/english/human-body-how-it-works-basics.png",
+        contentType: "image-text",
+        layout: "custom-human-body-how-it-works-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 1.0, yPct: 1.0, widthPct: 48.4, heightPct: 45.7 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Human Body\nand How the Body Works", ttsText: "Human Body\nand How the Body Works",
+                        bounds: { xPct: 4.0, yPct: 2.3, widthPct: 40.8, heightPct: 8.2 },
+                        tapRegion: { xPct: 3.85, yPct: 2.2, widthPct: 41.1, heightPct: 8.4 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Our bodies are amazing!", ttsText: "Our bodies are amazing!",
+                        bounds: { xPct: 3.6, yPct: 13.1, widthPct: 26.5, heightPct: 2.8 },
+                        tapRegion: { xPct: 3.45, yPct: 13.0, widthPct: 26.8, heightPct: 3.0 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "They help us move, think, feel\nand explore the world.", ttsText: "They help us move, think, feel\nand explore the world.",
+                        bounds: { xPct: 3.6, yPct: 16.5, widthPct: 30.0, heightPct: 4.6 },
+                        tapRegion: { xPct: 3.45, yPct: 16.4, widthPct: 30.3, heightPct: 4.8 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "Look inside\nyour body!", ttsText: "Look inside\nyour body!",
+                        bounds: { xPct: 37.3, yPct: 14.7, widthPct: 9.6, heightPct: 5.6 },
+                        tapRegion: { xPct: 37.15, yPct: 14.6, widthPct: 9.9, heightPct: 5.8 }
+                    },
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.6, yPct: 1.0, widthPct: 48.3, heightPct: 45.7 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "The Main Systems", ttsText: "The Main Systems",
+                        bounds: { xPct: 61.3, yPct: 2.2, widthPct: 28.2, heightPct: 3.6 },
+                        tapRegion: { xPct: 61.15, yPct: 2.1, widthPct: 28.5, heightPct: 3.8 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Your body has many systems that work together.", ttsText: "Your body has many systems that work together.",
+                        bounds: { xPct: 52.5, yPct: 6.6, widthPct: 44.0, heightPct: 2.5 },
+                        tapRegion: { xPct: 52.35, yPct: 6.5, widthPct: 44.3, heightPct: 2.7 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Nervous System", ttsText: "Nervous System",
+                        bounds: { xPct: 52.2, yPct: 10.9, widthPct: 13.2, heightPct: 2.5 },
+                        tapRegion: { xPct: 52.05, yPct: 10.8, widthPct: 13.5, heightPct: 2.7 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "Controls your\nthoughts, feelings\nand actions.", ttsText: "Controls your\nthoughts, feelings\nand actions.",
+                        bounds: { xPct: 52.4, yPct: 14.4, widthPct: 13.0, heightPct: 5.5 },
+                        tapRegion: { xPct: 52.25, yPct: 14.3, widthPct: 13.3, heightPct: 5.7 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Circulatory System", ttsText: "Circulatory System",
+                        bounds: { xPct: 83.4, yPct: 10.8, widthPct: 14.3, heightPct: 2.5 },
+                        tapRegion: { xPct: 83.25, yPct: 10.7, widthPct: 14.6, heightPct: 2.7 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "sentence",
+                        sourceText: "Moves blood,\noxygen and nutrients\nthrough your body.", ttsText: "Moves blood,\noxygen and nutrients\nthrough your body.",
+                        bounds: { xPct: 83.6, yPct: 14.2, widthPct: 13.1, heightPct: 5.5 },
+                        tapRegion: { xPct: 83.45, yPct: 14.1, widthPct: 13.4, heightPct: 5.7 }
+                    },
+                    {
+                        itemId: 7, readingOrder: 7, type: "label",
+                        sourceText: "Respiratory System", ttsText: "Respiratory System",
+                        bounds: { xPct: 52.2, yPct: 21.7, widthPct: 13.8, heightPct: 2.5 },
+                        tapRegion: { xPct: 52.05, yPct: 21.6, widthPct: 14.1, heightPct: 2.7 }
+                    },
+                    {
+                        itemId: 8, readingOrder: 8, type: "sentence",
+                        sourceText: "Helps you\nbreathe and get\noxygen.", ttsText: "Helps you\nbreathe and get\noxygen.",
+                        bounds: { xPct: 52.5, yPct: 25.0, widthPct: 12.2, heightPct: 5.8 },
+                        tapRegion: { xPct: 52.35, yPct: 24.9, widthPct: 12.5, heightPct: 6.0 }
+                    },
+                    {
+                        itemId: 9, readingOrder: 9, type: "label",
+                        sourceText: "Muscular System", ttsText: "Muscular System",
+                        bounds: { xPct: 83.5, yPct: 22.0, widthPct: 13.9, heightPct: 2.5 },
+                        tapRegion: { xPct: 83.35, yPct: 21.9, widthPct: 14.2, heightPct: 2.7 }
+                    },
+                    {
+                        itemId: 10, readingOrder: 10, type: "sentence",
+                        sourceText: "Helps you move\nand stay strong.", ttsText: "Helps you move\nand stay strong.",
+                        bounds: { xPct: 83.7, yPct: 25.3, widthPct: 12.8, heightPct: 4.5 },
+                        tapRegion: { xPct: 83.55, yPct: 25.2, widthPct: 13.1, heightPct: 4.7 }
+                    },
+                    {
+                        itemId: 11, readingOrder: 11, type: "label",
+                        sourceText: "Digestive System", ttsText: "Digestive System",
+                        bounds: { xPct: 52.2, yPct: 32.2, widthPct: 13.9, heightPct: 2.5 },
+                        tapRegion: { xPct: 52.05, yPct: 32.1, widthPct: 14.2, heightPct: 2.7 }
+                    },
+                    {
+                        itemId: 12, readingOrder: 12, type: "sentence",
+                        sourceText: "Breaks down food\nand gives you\nenergy.", ttsText: "Breaks down food\nand gives you\nenergy.",
+                        bounds: { xPct: 52.5, yPct: 35.7, widthPct: 12.3, heightPct: 5.7 },
+                        tapRegion: { xPct: 52.35, yPct: 35.6, widthPct: 12.6, heightPct: 5.9 }
+                    },
+                    {
+                        itemId: 13, readingOrder: 13, type: "label",
+                        sourceText: "Skeletal System", ttsText: "Skeletal System",
+                        bounds: { xPct: 83.5, yPct: 32.5, widthPct: 13.6, heightPct: 2.5 },
+                        tapRegion: { xPct: 83.35, yPct: 32.4, widthPct: 13.9, heightPct: 2.7 }
+                    },
+                    {
+                        itemId: 14, readingOrder: 14, type: "sentence",
+                        sourceText: "Gives your body\nstructure and\nprotects your\norgans.", ttsText: "Gives your body\nstructure and\nprotects your\norgans.",
+                        bounds: { xPct: 83.7, yPct: 36.0, widthPct: 13.1, heightPct: 6.0 },
+                        tapRegion: { xPct: 83.55, yPct: 35.9, widthPct: 13.4, heightPct: 6.2 }
+                    },
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 1.0, yPct: 48.1, widthPct: 48.4, heightPct: 49.9 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "How the Body Works", ttsText: "How the Body Works",
+                        bounds: { xPct: 7.8, yPct: 49.0, widthPct: 34.3, heightPct: 4.0 },
+                        tapRegion: { xPct: 7.65, yPct: 48.9, widthPct: 34.6, heightPct: 4.2 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Your body is always working, even when you rest!", ttsText: "Your body is always working, even when you rest!",
+                        bounds: { xPct: 3.0, yPct: 53.7, widthPct: 44.2, heightPct: 2.5 },
+                        tapRegion: { xPct: 2.85, yPct: 53.6, widthPct: 44.5, heightPct: 2.7 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "phrase",
+                        sourceText: "You eat...", ttsText: "You eat...",
+                        bounds: { xPct: 3.1, yPct: 57.8, widthPct: 12.0, heightPct: 2.4 },
+                        tapRegion: { xPct: 2.95, yPct: 57.7, widthPct: 12.3, heightPct: 2.6 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "sentence",
+                        sourceText: "Your digestive system\nturns food into energy.", ttsText: "Your digestive system\nturns food into energy.",
+                        bounds: { xPct: 5.1, yPct: 71.4, widthPct: 18.0, heightPct: 4.3 },
+                        tapRegion: { xPct: 4.95, yPct: 71.3, widthPct: 18.3, heightPct: 4.5 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "phrase",
+                        sourceText: "You rest...", ttsText: "You rest...",
+                        bounds: { xPct: 26.2, yPct: 57.8, widthPct: 13.0, heightPct: 2.4 },
+                        tapRegion: { xPct: 26.05, yPct: 57.7, widthPct: 13.3, heightPct: 2.6 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "sentence",
+                        sourceText: "Your body repairs\nand grows.", ttsText: "Your body repairs\nand grows.",
+                        bounds: { xPct: 27.0, yPct: 71.4, widthPct: 17.0, heightPct: 4.3 },
+                        tapRegion: { xPct: 26.85, yPct: 71.3, widthPct: 17.3, heightPct: 4.5 }
+                    },
+                    {
+                        itemId: 7, readingOrder: 7, type: "phrase",
+                        sourceText: "You move...", ttsText: "You move...",
+                        bounds: { xPct: 3.1, yPct: 78.7, widthPct: 13.0, heightPct: 2.4 },
+                        tapRegion: { xPct: 2.95, yPct: 78.6, widthPct: 13.3, heightPct: 2.6 }
+                    },
+                    {
+                        itemId: 8, readingOrder: 8, type: "sentence",
+                        sourceText: "Your muscles and bones\nhelp you stay active.", ttsText: "Your muscles and bones\nhelp you stay active.",
+                        bounds: { xPct: 4.5, yPct: 90.7, widthPct: 18.8, heightPct: 4.3 },
+                        tapRegion: { xPct: 4.35, yPct: 90.6, widthPct: 19.1, heightPct: 4.5 }
+                    },
+                    {
+                        itemId: 9, readingOrder: 9, type: "phrase",
+                        sourceText: "You think...", ttsText: "You think...",
+                        bounds: { xPct: 26.2, yPct: 78.7, widthPct: 13.0, heightPct: 2.4 },
+                        tapRegion: { xPct: 26.05, yPct: 78.6, widthPct: 13.3, heightPct: 2.6 }
+                    },
+                    {
+                        itemId: 10, readingOrder: 10, type: "sentence",
+                        sourceText: "Your brain helps you\nlearn and remember.", ttsText: "Your brain helps you\nlearn and remember.",
+                        bounds: { xPct: 27.0, yPct: 90.7, widthPct: 18.0, heightPct: 4.3 },
+                        tapRegion: { xPct: 26.85, yPct: 90.6, widthPct: 18.3, heightPct: 4.5 }
+                    },
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.6, yPct: 48.1, widthPct: 48.3, heightPct: 49.9 },
+                items: [
+                    {
+                        itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Keep Your Body Healthy", ttsText: "Keep Your Body Healthy",
+                        bounds: { xPct: 56.3, yPct: 49.0, widthPct: 38.0, heightPct: 4.0 },
+                        tapRegion: { xPct: 56.15, yPct: 48.9, widthPct: 38.3, heightPct: 4.2 }
+                    },
+                    {
+                        itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Good habits help your body work well.", ttsText: "Good habits help your body work well.",
+                        bounds: { xPct: 60.2, yPct: 53.7, widthPct: 29.8, heightPct: 2.5 },
+                        tapRegion: { xPct: 60.05, yPct: 53.6, widthPct: 30.1, heightPct: 2.7 }
+                    },
+                    {
+                        itemId: 3, readingOrder: 3, type: "label",
+                        sourceText: "Eat healthy food", ttsText: "Eat healthy food",
+                        bounds: { xPct: 54.0, yPct: 70.3, widthPct: 15.8, heightPct: 2.3 },
+                        tapRegion: { xPct: 53.85, yPct: 70.2, widthPct: 16.1, heightPct: 2.5 }
+                    },
+                    {
+                        itemId: 4, readingOrder: 4, type: "phrase",
+                        sourceText: "(fruits, vegetables, whole grains)", ttsText: "(fruits, vegetables, whole grains)",
+                        bounds: { xPct: 52.5, yPct: 72.8, widthPct: 19.1, heightPct: 3.0 },
+                        tapRegion: { xPct: 52.35, yPct: 72.7, widthPct: 19.4, heightPct: 3.2 }
+                    },
+                    {
+                        itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "Exercise regularly", ttsText: "Exercise regularly",
+                        bounds: { xPct: 78.5, yPct: 70.3, widthPct: 18.0, heightPct: 2.3 },
+                        tapRegion: { xPct: 78.35, yPct: 70.2, widthPct: 18.3, heightPct: 2.5 }
+                    },
+                    {
+                        itemId: 6, readingOrder: 6, type: "phrase",
+                        sourceText: "(keep your heart strong)", ttsText: "(keep your heart strong)",
+                        bounds: { xPct: 78.5, yPct: 72.8, widthPct: 18.4, heightPct: 2.8 },
+                        tapRegion: { xPct: 78.35, yPct: 72.7, widthPct: 18.7, heightPct: 3.0 }
+                    },
+                    {
+                        itemId: 7, readingOrder: 7, type: "label",
+                        sourceText: "Get enough sleep", ttsText: "Get enough sleep",
+                        bounds: { xPct: 54.5, yPct: 87.0, widthPct: 15.9, heightPct: 2.3 },
+                        tapRegion: { xPct: 54.35, yPct: 86.9, widthPct: 16.2, heightPct: 2.5 }
+                    },
+                    {
+                        itemId: 8, readingOrder: 8, type: "phrase",
+                        sourceText: "(helps your brain and body recover)", ttsText: "(helps your brain and body recover)",
+                        bounds: { xPct: 52.8, yPct: 89.5, widthPct: 18.4, heightPct: 2.7 },
+                        tapRegion: { xPct: 52.65, yPct: 89.4, widthPct: 18.7, heightPct: 2.9 }
+                    },
+                    {
+                        itemId: 9, readingOrder: 9, type: "label",
+                        sourceText: "Drink water", ttsText: "Drink water",
+                        bounds: { xPct: 79.5, yPct: 87.0, widthPct: 11.5, heightPct: 2.3 },
+                        tapRegion: { xPct: 79.35, yPct: 86.9, widthPct: 11.8, heightPct: 2.5 }
+                    },
+                    {
+                        itemId: 10, readingOrder: 10, type: "phrase",
+                        sourceText: "(keeps your body working)", ttsText: "(keeps your body working)",
+                        bounds: { xPct: 78.0, yPct: 89.5, widthPct: 19.1, heightPct: 2.7 },
+                        tapRegion: { xPct: 77.85, yPct: 89.4, widthPct: 19.4, heightPct: 2.9 }
+                    },
+                    {
+                        itemId: 11, readingOrder: 11, type: "sentence",
+                        sourceText: "A healthy body helps you live a happy life!", ttsText: "A healthy body helps you live a happy life!",
+                        bounds: { xPct: 57.2, yPct: 94.4, widthPct: 39.0, heightPct: 2.7 },
+                        tapRegion: { xPct: 57.05, yPct: 94.3, widthPct: 39.3, heightPct: 2.9 }
+                    },
+                ]
+            },
+        ]
+    },
+
 };

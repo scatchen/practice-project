@@ -9480,6 +9480,7 @@ function isEnglishEarthEnvironmentImageTTSItemText(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishHumanBodyHowItWorksImageTTSItemText(record, item)) return true;
     if (isEnglishEarthEnvironmentImageTTSItemText(record, item) ||
         isEnglishMoonPhasesImageTTSItemText(record, item) ||
         isEnglishStarsAndGalaxiesImageTTSItemText(record, item) ||
@@ -10038,6 +10039,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (record && record.imageId === "human-body-how-it-works-basics" &&
+        record.assetFile === "images/english/human-body-how-it-works-basics.png") {
+        return "Human Body and How the Body Works";
+    }
     if (record && record.imageId === "moon-phases-basics" &&
         record.assetFile === "images/english/moon-phases-basics.png") {
         return "Moon Phases";
@@ -11047,6 +11052,197 @@ function getEnglishVolcanoesImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+
+function getEnglishHumanBodyHowItWorksExpectedPanels() {
+    const makeBounds = (xPct, yPct, widthPct, heightPct) =>
+        ({ xPct, yPct, widthPct, heightPct });
+    return [
+        {
+            panelId: 1, bounds: makeBounds(1, 1, 48.4, 45.7),
+            items: [
+                ["label", "Human Body\nand How the Body Works", makeBounds(4, 2.3, 40.8, 8.2)],
+                ["sentence", "Our bodies are amazing!", makeBounds(3.6, 13.1, 26.5, 2.8)],
+                ["sentence", "They help us move, think, feel\nand explore the world.", makeBounds(3.6, 16.5, 30, 4.6)],
+                ["sentence", "Look inside\nyour body!", makeBounds(37.3, 14.7, 9.6, 5.6)]
+            ]
+        },
+        {
+            panelId: 2, bounds: makeBounds(50.6, 1, 48.3, 45.7),
+            items: [
+                ["label", "The Main Systems", makeBounds(61.3, 2.2, 28.2, 3.6)],
+                ["sentence", "Your body has many systems that work together.", makeBounds(52.5, 6.6, 44, 2.5)],
+                ["label", "Nervous System", makeBounds(52.2, 10.9, 13.2, 2.5)],
+                ["sentence", "Controls your\nthoughts, feelings\nand actions.", makeBounds(52.4, 14.4, 13, 5.5)],
+                ["label", "Circulatory System", makeBounds(83.4, 10.8, 14.3, 2.5)],
+                ["sentence", "Moves blood,\noxygen and nutrients\nthrough your body.", makeBounds(83.6, 14.2, 13.1, 5.5)],
+                ["label", "Respiratory System", makeBounds(52.2, 21.7, 13.8, 2.5)],
+                ["sentence", "Helps you\nbreathe and get\noxygen.", makeBounds(52.5, 25, 12.2, 5.8)],
+                ["label", "Muscular System", makeBounds(83.5, 22, 13.9, 2.5)],
+                ["sentence", "Helps you move\nand stay strong.", makeBounds(83.7, 25.3, 12.8, 4.5)],
+                ["label", "Digestive System", makeBounds(52.2, 32.2, 13.9, 2.5)],
+                ["sentence", "Breaks down food\nand gives you\nenergy.", makeBounds(52.5, 35.7, 12.3, 5.7)],
+                ["label", "Skeletal System", makeBounds(83.5, 32.5, 13.6, 2.5)],
+                ["sentence", "Gives your body\nstructure and\nprotects your\norgans.", makeBounds(83.7, 36, 13.1, 6)]
+            ]
+        },
+        {
+            panelId: 3, bounds: makeBounds(1, 48.1, 48.4, 49.9),
+            items: [
+                ["label", "How the Body Works", makeBounds(7.8, 49, 34.3, 4)],
+                ["sentence", "Your body is always working, even when you rest!", makeBounds(3, 53.7, 44.2, 2.5)],
+                ["phrase", "You eat...", makeBounds(3.1, 57.8, 12, 2.4)],
+                ["sentence", "Your digestive system\nturns food into energy.", makeBounds(5.1, 71.4, 18, 4.3)],
+                ["phrase", "You rest...", makeBounds(26.2, 57.8, 13, 2.4)],
+                ["sentence", "Your body repairs\nand grows.", makeBounds(27, 71.4, 17, 4.3)],
+                ["phrase", "You move...", makeBounds(3.1, 78.7, 13, 2.4)],
+                ["sentence", "Your muscles and bones\nhelp you stay active.", makeBounds(4.5, 90.7, 18.8, 4.3)],
+                ["phrase", "You think...", makeBounds(26.2, 78.7, 13, 2.4)],
+                ["sentence", "Your brain helps you\nlearn and remember.", makeBounds(27, 90.7, 18, 4.3)]
+            ]
+        },
+        {
+            panelId: 4, bounds: makeBounds(50.6, 48.1, 48.3, 49.9),
+            items: [
+                ["label", "Keep Your Body Healthy", makeBounds(56.3, 49, 38, 4)],
+                ["sentence", "Good habits help your body work well.", makeBounds(60.2, 53.7, 29.8, 2.5)],
+                ["label", "Eat healthy food", makeBounds(54, 70.3, 15.8, 2.3)],
+                ["phrase", "(fruits, vegetables, whole grains)", makeBounds(52.5, 72.8, 19.1, 3)],
+                ["label", "Exercise regularly", makeBounds(78.5, 70.3, 18, 2.3)],
+                ["phrase", "(keep your heart strong)", makeBounds(78.5, 72.8, 18.4, 2.8)],
+                ["label", "Get enough sleep", makeBounds(54.5, 87, 15.9, 2.3)],
+                ["phrase", "(helps your brain and body recover)", makeBounds(52.8, 89.5, 18.4, 2.7)],
+                ["label", "Drink water", makeBounds(79.5, 87, 11.5, 2.3)],
+                ["phrase", "(keeps your body working)", makeBounds(78, 89.5, 19.1, 2.7)],
+                ["sentence", "A healthy body helps you live a happy life!", makeBounds(57.2, 94.4, 39, 2.7)]
+            ]
+        }
+    ];
+}
+
+function isEnglishHumanBodyHowItWorksImageTTSItemText(record, item) {
+    if (!record || record.contentType !== "image-text" ||
+        record.imageId !== "human-body-how-it-works-basics" ||
+        record.assetFile !== "images/english/human-body-how-it-works-basics.png" ||
+        !item || item.sourceText !== item.ttsText || !Array.isArray(record.panels)) {
+        return false;
+    }
+    const panel = record.panels.find(candidate =>
+        candidate && Array.isArray(candidate.items) && candidate.items.includes(item));
+    const expectedPanel = getEnglishHumanBodyHowItWorksExpectedPanels()
+        .find(candidate => candidate.panelId === (panel && panel.panelId));
+    const expectedItem = panel && expectedPanel &&
+        expectedPanel.items[item.itemId - 1];
+    return Boolean(panel && expectedItem && item.readingOrder === item.itemId &&
+        item.type === expectedItem[0] && item.sourceText === expectedItem[1] &&
+        getEnglishTTSUnitText(item.sourceText));
+}
+
+function getEnglishHumanBodyHowItWorksImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/human-body-how-it-works-basics.png";
+    const expectedImageId = "human-body-how-it-works-basics";
+    const expectedPanels = getEnglishHumanBodyHowItWorksExpectedPanels();
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const roundPct = value => Math.round(value * 100) / 100;
+    const makeTapRegion = bounds => ({
+        xPct: roundPct(bounds.xPct - 0.15),
+        yPct: roundPct(bounds.yPct - 0.10),
+        widthPct: roundPct(bounds.widthPct + 0.30),
+        heightPct: roundPct(bounds.heightPct + 0.20)
+    });
+    const isValidBounds = value => hasExactKeys(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-human-body-how-it-works-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allTextBounds = [];
+    const allTapRegions = [];
+    const allItems = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 ||
+                item.readingOrder !== itemIndex + 1 || item.type !== expectedItem[0] ||
+                item.sourceText !== expectedItem[1] || item.ttsText !== item.sourceText ||
+                !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem[2]) ||
+                !matchesBounds(item.tapRegion, makeTapRegion(expectedItem[2])) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allTextBounds.push(item.bounds);
+            allTapRegions.push(item.tapRegion);
+            allItems.push(item);
+        }
+    }
+
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (const regions of [allTextBounds, allTapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) return null;
+            }
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            if (overlaps(allItems[left].bounds, allItems[right].tapRegion) ||
+                overlaps(allItems[left].tapRegion, allItems[right].bounds)) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -11091,6 +11287,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/earth-environment-basics.png";
     if (isEarthEnvironmentImageTextIdentity) {
         return getEnglishEarthEnvironmentImageTextRecord(record, assetFile);
+    }
+
+    const isHumanBodyHowItWorksImageTextIdentity =
+        record.imageId === "human-body-how-it-works-basics" ||
+        record.assetFile === "images/english/human-body-how-it-works-basics.png" ||
+        assetFile === "images/english/human-body-how-it-works-basics.png";
+    if (isHumanBodyHowItWorksImageTextIdentity) {
+        return getEnglishHumanBodyHowItWorksImageTextRecord(record, assetFile);
     }
 
     const isSpaceSolarSystemImageTextIdentity =
@@ -13359,6 +13563,10 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "simple-machines-basics" &&
         record.assetFile === "images/english/simple-machines-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isHumanBodyHowItWorksSingleItemSequence = Boolean(record &&
+        record.imageId === "human-body-how-it-works-basics" &&
+        record.assetFile === "images/english/human-body-how-it-works-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isEarthEnvironmentSingleItemSequence = Boolean(record &&
         record.imageId === "earth-environment-basics" &&
         record.assetFile === "images/english/earth-environment-basics.png" &&
@@ -13407,7 +13615,8 @@ function speakEnglishImageTTSImageTextSequence(
             !isSpaceTechnologySingleItemSequence && !isSpaceSolarSystemSingleItemSequence &&
             !isStarsAndGalaxiesSingleItemSequence &&
             !isMoonPhasesSingleItemSequence &&
-            !isEarthEnvironmentSingleItemSequence) ||
+            !isEarthEnvironmentSingleItemSequence &&
+            !isHumanBodyHowItWorksSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length ||
@@ -13874,6 +14083,27 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const isEarthEnvironmentImageText = safeRecord.imageId === "earth-environment-basics" &&
         safeRecord.assetFile === "images/english/earth-environment-basics.png";
     if (isEarthEnvironmentImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isHumanBodyHowItWorksImageText =
+        safeRecord.imageId === "human-body-how-it-works-basics" &&
+        safeRecord.assetFile === "images/english/human-body-how-it-works-basics.png";
+    if (isHumanBodyHowItWorksImageText) {
         const clickedItem = trigger._englishImageTTSImageTextItem;
         const panelItems = panel.items.slice().sort((left, right) =>
             Number(right === clickedItem) - Number(left === clickedItem));
