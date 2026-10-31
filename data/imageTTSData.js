@@ -20263,4 +20263,86 @@ const imageTTSData = {
             }
         ]
     },
+
+    "images/english/static-electricity-basics.png": {
+        imageId: "static-electricity-basics",
+        assetFile: "images/english/static-electricity-basics.png",
+        contentType: "image-text",
+        layout: "custom-static-electricity-title-plus-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        panels: [
+            {
+                panelId: 0, readingOrder: 1,
+                bounds: { xPct: 0, yPct: 0, widthPct: 100, heightPct: 11.5 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Static Electricity", ttsText: "Static Electricity",
+                        bounds: { xPct: 24.5, yPct: 1.3, widthPct: 42, heightPct: 8.7 },
+                        tapRegion: { xPct: 22.7, yPct: 0.8, widthPct: 44.8, heightPct: 10 } }
+                ]
+            },
+            {
+                panelId: 1, readingOrder: 2,
+                bounds: { xPct: 0.7, yPct: 11.7, widthPct: 49, heightPct: 42.4 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Rubbing can move\nelectric charges.", ttsText: "Rubbing can move\nelectric charges.",
+                        bounds: { xPct: 7.4, yPct: 13.5, widthPct: 26.4, heightPct: 9.6 },
+                        tapRegion: { xPct: 7.1, yPct: 13, widthPct: 27.1, heightPct: 10.7 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Rubbing can move\nelectric charges\nfrom one object\nto another.", ttsText: "Rubbing can move\nelectric charges\nfrom one object\nto another.",
+                        bounds: { xPct: 34.9, yPct: 38.7, widthPct: 13.6, heightPct: 10.5 },
+                        tapRegion: { xPct: 34.4, yPct: 38, widthPct: 14.6, heightPct: 11.8 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 3,
+                bounds: { xPct: 50.4, yPct: 11.7, widthPct: 49, heightPct: 42.4 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Opposite charges\nattract.", ttsText: "Opposite charges\nattract.",
+                        bounds: { xPct: 57, yPct: 13.4, widthPct: 23.6, heightPct: 12.5 },
+                        tapRegion: { xPct: 56.7, yPct: 12.9, widthPct: 24.6, heightPct: 13.5 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Opposite charges\nattract.", ttsText: "Opposite charges\nattract.",
+                        bounds: { xPct: 83.5, yPct: 30, widthPct: 13.7, heightPct: 6.5 },
+                        tapRegion: { xPct: 82.8, yPct: 29.3, widthPct: 15, heightPct: 7.8 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 4,
+                bounds: { xPct: 0.7, yPct: 54.7, widthPct: 49, heightPct: 43.9 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Like charges repel.", ttsText: "Like charges repel.",
+                        bounds: { xPct: 7.1, yPct: 56.3, widthPct: 30, heightPct: 5.1 },
+                        tapRegion: { xPct: 6.7, yPct: 55.7, widthPct: 31.1, heightPct: 6.4 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Like charges\nrepel.", ttsText: "Like charges\nrepel.",
+                        bounds: { xPct: 36, yPct: 76.1, widthPct: 12, heightPct: 8.9 },
+                        tapRegion: { xPct: 35.3, yPct: 75.4, widthPct: 13.5, heightPct: 10.3 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 5,
+                bounds: { xPct: 50.4, yPct: 54.7, widthPct: 49, heightPct: 43.9 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "A sudden flow of charges\nis called static discharge.",
+                        ttsText: "A sudden flow of charges\nis called static discharge.",
+                        bounds: { xPct: 56.8, yPct: 56.4, widthPct: 40.5, heightPct: 10.5 },
+                        tapRegion: { xPct: 56.4, yPct: 55.8, widthPct: 41.5, heightPct: 11.7 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A sudden flow of\ncharges is called\nstatic discharge.",
+                        ttsText: "A sudden flow of\ncharges is called\nstatic discharge.",
+                        bounds: { xPct: 83.2, yPct: 83.5, widthPct: 13.6, heightPct: 9 },
+                        tapRegion: { xPct: 82.5, yPct: 82.8, widthPct: 15, heightPct: 10.5 } }
+                ]
+            }
+        ]
+    }
+
 };

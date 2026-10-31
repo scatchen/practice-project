@@ -9514,8 +9514,33 @@ function isEnglishFrictionImageTTSItemText(record, item) {
         getEnglishTTSUnitText(item.ttsText);
 }
 
+function isEnglishStaticElectricityImageTTSItemText(record, item) {
+    const expectedAssetFile = "images/english/static-electricity-basics.png";
+    const expectedImageId = "static-electricity-basics";
+    if (!record || !item || typeof imageTTSData === "undefined" || !imageTTSData ||
+        typeof imageTTSData !== "object") {
+        return false;
+    }
+    const canonicalRecord = imageTTSData[expectedAssetFile];
+    if (!canonicalRecord || !Array.isArray(canonicalRecord.panels)) {
+        return false;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    return matchingIdentityKeys.length === 1 && matchingIdentityKeys[0] === expectedAssetFile &&
+        record.contentType === "image-text" && record.imageId === expectedImageId &&
+        record.assetFile === expectedAssetFile && record.panels === canonicalRecord.panels &&
+        item.sourceText === item.ttsText &&
+        record.panels.some(panel => panel.items.includes(item)) &&
+        getEnglishTTSUnitText(item.ttsText);
+}
+
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishFrictionImageTTSItemText(record, item) ||
+    if (isEnglishStaticElectricityImageTTSItemText(record, item) ||
+        isEnglishFrictionImageTTSItemText(record, item) ||
         isEnglishHumanBodyHowItWorksImageTTSItemText(record, item) ||
         isEnglishCirculatorySystemImageTTSItemText(record, item) ||
         isEnglishScientificMethodImageTTSItemText(record, item)) return true;
@@ -10067,7 +10092,9 @@ function isEnglishImageTTSFullTitleImageTextRecord(record) {
         (record.imageId === "hotel-check-in-and-business-hotel-basics" &&
             record.assetFile === "images/english/hotel-check-in-and-business-hotel-basics.png") ||
         (record.imageId === "circulatory-system-basics" &&
-            record.assetFile === "images/english/circulatory-system-basics.png")
+            record.assetFile === "images/english/circulatory-system-basics.png") ||
+        (record.imageId === "static-electricity-basics" &&
+            record.assetFile === "images/english/static-electricity-basics.png")
     ));
 }
 
@@ -10087,6 +10114,11 @@ function getEnglishImageTTSImageTextName(record) {
     if (record && record.imageId === "friction-basics" &&
         record.assetFile === "images/english/friction-basics.png") {
         return "Friction";
+    }
+
+    if (record && record.imageId === "static-electricity-basics" &&
+        record.assetFile === "images/english/static-electricity-basics.png") {
+        return "Static Electricity";
     }
 
     if (record && record.imageId === "scientific-method-basics" &&
@@ -11903,6 +11935,135 @@ function getEnglishFrictionImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishStaticElectricityImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/static-electricity-basics.png";
+    const expectedImageId = "static-electricity-basics";
+    const expectedPanels = [
+        {
+            panelId: 0, readingOrder: 1,
+            bounds: [0, 0, 100, 11.5],
+            items: [
+                ["phrase", "Static Electricity", [24.5, 1.3, 42, 8.7], [22.7, 0.8, 44.8, 10]]
+            ]
+        },
+        {
+            panelId: 1, readingOrder: 2,
+            bounds: [0.7, 11.7, 49, 42.4],
+            items: [
+                ["sentence", "Rubbing can move\nelectric charges.", [7.4, 13.5, 26.4, 9.6], [7.1, 13, 27.1, 10.7]],
+                ["sentence", "Rubbing can move\nelectric charges\nfrom one object\nto another.", [34.9, 38.7, 13.6, 10.5], [34.4, 38, 14.6, 11.8]]
+            ]
+        },
+        {
+            panelId: 2, readingOrder: 3,
+            bounds: [50.4, 11.7, 49, 42.4],
+            items: [
+                ["sentence", "Opposite charges\nattract.", [57, 13.4, 23.6, 12.5], [56.7, 12.9, 24.6, 13.5]],
+                ["sentence", "Opposite charges\nattract.", [83.5, 30, 13.7, 6.5], [82.8, 29.3, 15, 7.8]]
+            ]
+        },
+        {
+            panelId: 3, readingOrder: 4,
+            bounds: [0.7, 54.7, 49, 43.9],
+            items: [
+                ["sentence", "Like charges repel.", [7.1, 56.3, 30, 5.1], [6.7, 55.7, 31.1, 6.4]],
+                ["sentence", "Like charges\nrepel.", [36, 76.1, 12, 8.9], [35.3, 75.4, 13.5, 10.3]]
+            ]
+        },
+        {
+            panelId: 4, readingOrder: 5,
+            bounds: [50.4, 54.7, 49, 43.9],
+            items: [
+                ["sentence", "A sudden flow of charges\nis called static discharge.", [56.8, 56.4, 40.5, 10.5], [56.4, 55.8, 41.5, 11.7]],
+                ["sentence", "A sudden flow of\ncharges is called\nstatic discharge.", [83.2, 83.5, 13.6, 9], [82.5, 82.8, 15, 10.5]]
+            ]
+        }
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const isValidBounds = bounds => hasExactKeys(bounds, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(bounds[key]) && bounds[key] >= 0 && bounds[key] <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+    const matchesBounds = (actual, expected) => isValidBounds(actual) &&
+        boundsKeys.every((key, index) => actual[key] === expected[index]);
+    const contains = (outer, inner) => isValidBounds(outer) && isValidBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-static-electricity-title-plus-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+
+    const allItems = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel.panelId || panel.readingOrder !== expectedPanel.readingOrder ||
+            !matchesBounds(panel.bounds, expectedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel.items.length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel.items[itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 || item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem[0] || item.sourceText !== expectedItem[1] ||
+                item.ttsText !== item.sourceText || !getEnglishTTSUnitText(item.sourceText) ||
+                !matchesBounds(item.bounds, expectedItem[2]) ||
+                !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allItems.push(item);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            for (const leftRegion of [allItems[left].bounds, allItems[left].tapRegion]) {
+                for (const rightRegion of [allItems[right].bounds, allItems[right].tapRegion]) {
+                    if (overlaps(leftRegion, rightRegion)) return null;
+                }
+            }
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -11931,6 +12092,14 @@ function getEnglishImageTTSRecord(assetFile) {
         assetFile === "images/english/friction-basics.png";
     if (isFrictionImageTextIdentity) {
         return getEnglishFrictionImageTextRecord(record, assetFile);
+    }
+
+    const isStaticElectricityImageTextIdentity =
+        record.imageId === "static-electricity-basics" ||
+        record.assetFile === "images/english/static-electricity-basics.png" ||
+        assetFile === "images/english/static-electricity-basics.png";
+    if (isStaticElectricityImageTextIdentity) {
+        return getEnglishStaticElectricityImageTextRecord(record, assetFile);
     }
 
     const isScientificMethodImageTextIdentity =
@@ -14279,6 +14448,14 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "friction-basics" &&
         record.assetFile === "images/english/friction-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isChangingOfTheGuardSingleItemSequence = Boolean(record &&
+        record.imageId === "changing-of-the-guard-basics" &&
+        record.assetFile === "images/english/changing-of-the-guard-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const isStaticElectricitySingleItemSequence = Boolean(record &&
+        record.imageId === "static-electricity-basics" &&
+        record.assetFile === "images/english/static-electricity-basics.png" &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isScientificMethodSingleItemSequence = Boolean(record &&
         record.imageId === "scientific-method-basics" &&
         record.assetFile === "images/english/scientific-method-basics.png" &&
@@ -14329,6 +14506,8 @@ function speakEnglishImageTTSImageTextSequence(
             !isMoonPhasesSingleItemSequence &&
             !isCauseAndEffectInScienceSingleItemSequence &&
             !isFrictionSingleItemSequence &&
+            !isChangingOfTheGuardSingleItemSequence &&
+            !isStaticElectricitySingleItemSequence &&
             !isScientificMethodSingleItemSequence &&
             !isCirculatorySystemSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
@@ -14657,6 +14836,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         menu.removeChild(menu.firstChild);
     }
 
+    const isChangingOfTheGuardImageText = safeRecord.imageId === "changing-of-the-guard-basics" &&
+        safeRecord.assetFile === "images/english/changing-of-the-guard-basics.png";
+    if (isChangingOfTheGuardImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
     const isCirculatorySystemImageText = safeRecord.imageId === "circulatory-system-basics" &&
         safeRecord.assetFile === "images/english/circulatory-system-basics.png";
     if (isCirculatorySystemImageText) {
@@ -14784,6 +14983,29 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
             menu.appendChild(createEnglishImageTTSMenuButton(
                 "朗讀「" + itemLabel + "」",
                 "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger,
+                    [item],
+                    "已朗讀所選原圖文字。"
+                )
+            ));
+        });
+    }
+
+    const isStaticElectricityImageText = safeRecord.imageId === "static-electricity-basics" &&
+        safeRecord.assetFile === "images/english/static-electricity-basics.png";
+    if (isStaticElectricityImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel.items.slice().sort((left, right) =>
+            Number(right === clickedItem) - Number(left === clickedItem));
+        panelItems.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            const panelDescription = panel.panelId === 0
+                ? "全圖標題原圖文字："
+                : "第 " + panel.panelId + " 格原圖文字：";
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "朗讀「" + itemLabel + "」",
+                "朗讀" + panelDescription + item.sourceText,
                 () => speakEnglishImageTTSImageTextSequence(
                     trigger,
                     [item],
