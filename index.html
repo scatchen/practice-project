@@ -889,6 +889,11 @@ color: #111827;
             cursor: default;
         }
 
+        .image-tts-mountains-l-shape {
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 61.8056%, 87.1875% 61.8056%, 87.1875% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 61.8056%, 87.1875% 61.8056%, 87.1875% 100%, 0 100%);
+        }
+
         .image-tts-plateaus-side-trigger {
             position: absolute;
             z-index: 11;
@@ -10044,7 +10049,8 @@ function isEnglishAnimalsWildlifeImageTTSItemText(record,item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishEnergyTransformationsImageTTSItemText(record, item) ||
+    if (isEnglishMountainsImageTTSItemText(record, item) ||
+        isEnglishEnergyTransformationsImageTTSItemText(record, item) ||
         isEnglishAnimalsWildlifeImageTTSItemText(record,item) ||
         isEnglishPlainsImageTTSItemText(record, item) || isEnglishPlantsNatureAmpersandItem(record, item) ||
         isEnglishPlantsNatureImageTTSItemText(record, item) ||
@@ -10622,6 +10628,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishMountainsImageTTSRecord(record)) return "Mountains & Mountain Ranges";
     if (isEnglishEnergyTransformationsImageTTSRecord(record)) return "Energy Transformations";
     if (isEnglishAnimalsWildlifeImageTTSRecord(record)) return "Animals & Wildlife";
     if (isEnglishPlainsImageTTSRecord(record)) return "Plains";
@@ -13396,6 +13403,105 @@ function getEnglishAnimalsWildlifeImageTextRecord(record,assetFile) {
     return {...record,panels:record.panels};
 }
 
+const ENGLISH_MOUNTAINS_ASSET_FILE = "images/english/mountains-and-mountain-ranges-basics.png";
+const ENGLISH_MOUNTAINS_CLIP_PATH = "polygon(0 0, 100% 0, 100% 61.8056%, 87.1875% 61.8056%, 87.1875% 100%, 0 100%)";
+
+function getEnglishMountainsImageTTSExpectedPanels() {
+    const b = (xPct, yPct, widthPct, heightPct) => ({ xPct, yPct, widthPct, heightPct });
+    const sentences = ["A mountain is high land.", "The peak is the top of the mountain.",
+        "The slope goes down the mountain.", "A mountain range has many mountains."];
+    const regions = [b(1.30, 1.07, 45.96, 11.72), b(53.5, 0, 32, 14.4),
+        b(3.06, 51.37, 36.65, 14.16), b(52.21, 51.17, 35.81, 15.23)];
+    return sentences.map((sourceText, index) => ({
+        panelId: index + 1, readingOrder: index + 1,
+        bounds: b(index % 2 ? 50 : 0, index > 1 ? 50 : 0, 50, 50),
+        items: [{ itemId: 1, readingOrder: 1, type: "sentence", sourceText,
+            bounds: regions[index], tapRegion: regions[index],
+            tapRegionShape: index === 1
+                ? { type: "css-clip-path", clipPath: ENGLISH_MOUNTAINS_CLIP_PATH } : null }]
+    }));
+}
+
+function isEnglishMountainsImageTTSRecord(record) {
+    return Boolean(record && record.imageId === "mountains-and-mountain-ranges-basics" &&
+        record.assetFile === ENGLISH_MOUNTAINS_ASSET_FILE && record.contentType === "image-text" &&
+        record.layout === "custom-mountains-2x2-sentence-menu" &&
+        record.coordinateStatus === "estimated" && record.overlayRuntimeStatus === "not-tested");
+}
+
+function getEnglishMountainsImageTextRecord(record, assetFile) {
+    const file = ENGLISH_MOUNTAINS_ASSET_FILE, imageId = "mountains-and-mountain-ranges-basics";
+    const expected = getEnglishMountainsImageTTSExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" && !Array.isArray(value) &&
+        Object.keys(value).length === keys.length && keys.every(key =>
+            Object.prototype.hasOwnProperty.call(value, key));
+    const keys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const valid = value => exact(value, keys) && keys.every(key =>
+        Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const same = (actual, wanted) => valid(actual) && keys.every(key => actual[key] === wanted[key]);
+    const contains = (outer, inner) => valid(outer) && valid(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (a, b) => a.xPct < b.xPct + b.widthPct &&
+        a.xPct + a.widthPct > b.xPct && a.yPct < b.yPct + b.heightPct &&
+        a.yPct + a.heightPct > b.yPct;
+    if (!exact(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "sourceImageDimensions", "panels"]) ||
+        record.imageId !== imageId || record.assetFile !== file || assetFile !== file ||
+        !imageTTSData || !imageTTSData[file] || record.panels !== imageTTSData[file].panels ||
+        record.contentType !== "image-text" || record.layout !== "custom-mountains-2x2-sentence-menu" ||
+        record.transcriptStatus !== "verified" || record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== expected.length ||
+        ENGLISH_MOUNTAINS_CLIP_PATH !== "polygon(0 0, 100% 0, 100% 61.8056%, 87.1875% 61.8056%, 87.1875% 100%, 0 100%)") return null;
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate && (candidate.imageId === imageId || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry && (entry.id === imageId || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file || library.length !== 1 ||
+        library[0].id !== imageId || library[0].file !== file || library[0].category !== "english") return null;
+    const panelBounds = [], tapRegions = [];
+    for (let i = 0; i < expected.length; i += 1) {
+        const panel = record.panels[i], target = expected[i];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== target.panelId || panel.readingOrder !== target.readingOrder ||
+            !same(panel.bounds, target.bounds) || !Array.isArray(panel.items) || panel.items.length !== 1) return null;
+        panelBounds.push(panel.bounds);
+        const item = panel.items[0], wanted = target.items[0];
+        if (!exact(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion", "tapRegionShape"]) ||
+            item.itemId !== 1 || item.readingOrder !== 1 || item.type !== "sentence" ||
+            item.sourceText !== wanted.sourceText || item.ttsText !== item.sourceText ||
+            !getEnglishTTSUnitText(item.sourceText) || !same(item.bounds, wanted.bounds) ||
+            !same(item.tapRegion, wanted.bounds) || !contains(panel.bounds, item.bounds) ||
+            !contains(panel.bounds, item.tapRegion) || !contains(item.tapRegion, item.bounds)) return null;
+        if (i === 1) {
+            if (!exact(item.tapRegionShape, ["type", "clipPath"]) ||
+                item.tapRegionShape.type !== "css-clip-path" ||
+                item.tapRegionShape.clipPath !== ENGLISH_MOUNTAINS_CLIP_PATH) return null;
+        } else if (item.tapRegionShape !== null) return null;
+        tapRegions.push(item.tapRegion);
+    }
+    for (let i = 0; i < panelBounds.length; i += 1) {
+        for (let j = i + 1; j < panelBounds.length; j += 1) {
+            if (overlaps(panelBounds[i], panelBounds[j]) || overlaps(tapRegions[i], tapRegions[j])) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
+function isEnglishMountainsImageTTSItemText(record, item) {
+    if (!isEnglishMountainsImageTTSRecord(record) || !item || item.sourceText !== item.ttsText) return false;
+    const safe = getEnglishMountainsImageTextRecord(record, ENGLISH_MOUNTAINS_ASSET_FILE);
+    return Boolean(safe && record.panels.some(panel => Array.isArray(panel.items) && panel.items.includes(item)));
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -13403,6 +13509,10 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (record && (record.imageId === "mountains-and-mountain-ranges-basics" ||
+        record.assetFile === ENGLISH_MOUNTAINS_ASSET_FILE || assetFile === ENGLISH_MOUNTAINS_ASSET_FILE)) {
+        return getEnglishMountainsImageTextRecord(record, assetFile);
+    }
     const energyFile = "images/english/energy-transformations-basics.png";
     if (record && (record.imageId === "energy-transformations-basics" ||
         record.assetFile === energyFile || assetFile === energyFile)) {
@@ -15135,6 +15245,110 @@ function isEnglishKarstSideTriggerVisible(wrapper,trigger) {
         rect.top>=viewport.safeTop&&rect.bottom<=viewport.safeBottom);
 }
 
+function isEnglishMountainsClipPathSupported(button, clipPath) {
+    const css = typeof CSS !== "undefined" ? CSS : null;
+    if (!button || !button.style || !css || typeof css.supports !== "function" ||
+        clipPath !== ENGLISH_MOUNTAINS_CLIP_PATH) return false;
+    let supported = false;
+    try { supported = css.supports("clip-path", clipPath) || css.supports("-webkit-clip-path", clipPath); }
+    catch (error) { return false; }
+    if (!supported) return false;
+    try { button.style.clipPath = clipPath; button.style.webkitClipPath = clipPath; }
+    catch (error) { return false; }
+    const hasExpectedShape = value => {
+        const match = String(value || "").trim().match(/^polygon\((.*)\)$/i);
+        if (!match) return false;
+        let body = match[1].trim();
+        body = body.replace(/^(?:nonzero|evenodd)\s*,\s*/i, "");
+        const expected = [[0, 0], [100, 0], [100, 61.8056], [87.1875, 61.8056],
+            [87.1875, 100], [0, 100]];
+        const points = body.split(",").map(point => point.trim().split(/\s+/));
+        if (points.length !== expected.length || points.some(point => point.length !== 2)) return false;
+        return points.every((point, index) => point.every((coordinate, axis) => {
+            const parsed = coordinate.match(/^([+-]?(?:\d+(?:\.\d*)?|\.\d+))(?:%|px)?$/i);
+            if (!parsed) return false;
+            const value = Number(parsed[1]);
+            const isZero = expected[index][axis] === 0;
+            const hasPercent = /%$/.test(coordinate);
+            const hasPixels = /px$/i.test(coordinate);
+            return Number.isFinite(value) && Math.abs(value - expected[index][axis]) <= 0.0001 &&
+                (isZero || hasPercent && !hasPixels);
+        }));
+    };
+    const inlineValues = [button.style.clipPath, button.style.webkitClipPath];
+    try {
+        const computed = window.getComputedStyle(button);
+        if (computed) {
+            const computedValues = [computed.clipPath, computed.webkitClipPath,
+                computed.getPropertyValue && computed.getPropertyValue("clip-path"),
+                computed.getPropertyValue && computed.getPropertyValue("-webkit-clip-path")];
+            if (computedValues.some(value => String(value || "").trim())) {
+                return computedValues.some(hasExpectedShape);
+            }
+        }
+    } catch (error) {
+        // An accepted inline value still provides a usable readback on browsers
+        // that do not expose computed clip-path values through this API.
+    }
+    return inlineValues.some(hasExpectedShape);
+}
+
+function layoutEnglishImageTTSMountainsHitAreas(wrapper) {
+    const failClosed = buttons => { buttons.forEach(button => { button.hidden = true; }); return false; };
+    if (!wrapper || typeof wrapper.querySelectorAll !== "function") return false;
+    const buttons = Array.from(wrapper.querySelectorAll(".image-tts-mountains-hit-area"));
+    if (!wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== ENGLISH_MOUNTAINS_ASSET_FILE) {
+        return failClosed(buttons);
+    }
+    const record = getEnglishImageTTSRecord(ENGLISH_MOUNTAINS_ASSET_FILE);
+    const image = wrapper.querySelector("img"), rect = image && image.getBoundingClientRect();
+    if (!record || !image || image.getAttribute("src") !== ENGLISH_MOUNTAINS_ASSET_FILE ||
+        !image.complete || image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+        !rect || rect.width <= 0 || rect.height <= 0 || buttons.length !== 4) return failClosed(buttons);
+    const shapes = buttons.filter(button => button.classList && button.classList.contains("image-tts-mountains-l-shape"));
+    if (shapes.length !== 1) return failClosed(buttons);
+    for (const panel of record.panels) {
+        const item = panel.items[0];
+        const found = buttons.filter(button => button.getAttribute("data-image-tts-panel-id") === String(panel.panelId) &&
+            button.getAttribute("data-image-tts-item-id") === "1");
+        if (found.length !== 1) return failClosed(buttons);
+        const button = found[0];
+        if (!button.classList || !button.classList.contains("image-tts-image-text-hit-area") ||
+            !button._englishImageTTSImageTextRecord || button._englishImageTTSImageTextRecord.imageId !== record.imageId ||
+            button._englishImageTTSImageTextItem !== item || button._englishImageTTSImageTextPanel !== panel ||
+            button.classList.contains("image-tts-mountains-l-shape") !== Boolean(item.tapRegionShape)) return failClosed(buttons);
+        button.hidden = true;
+        button.style.left = item.tapRegion.xPct + "%";
+        button.style.top = item.tapRegion.yPct + "%";
+        button.style.width = item.tapRegion.widthPct + "%";
+        button.style.height = item.tapRegion.heightPct + "%";
+        button._englishMountainsClipPathReady = !item.tapRegionShape ||
+            isEnglishMountainsClipPathSupported(button, item.tapRegionShape.clipPath);
+    }
+    buttons.forEach(button => {
+        button.hidden = button.classList.contains("image-tts-mountains-l-shape") &&
+            !button._englishMountainsClipPathReady;
+    });
+    return true;
+}
+
+function createEnglishImageTTSMountainsHitArea(wrapper, panel, item, record) {
+    if (!wrapper || !panel || !item || !record || !isEnglishMountainsImageTTSItemText(record, item) ||
+        typeof wrapper.querySelectorAll !== "function") return null;
+    const existing = new Set(Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")));
+    createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record);
+    const created = Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area"))
+        .filter(button => !existing.has(button));
+    if (created.length !== 1) return null;
+    const button = created[0];
+    button.classList.add("image-tts-mountains-hit-area");
+    if (item.tapRegionShape) {
+        button.classList.add("image-tts-mountains-l-shape");
+        if (!isEnglishMountainsClipPathSupported(button, item.tapRegionShape.clipPath)) button.hidden = true;
+    }
+    return button;
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
     if (!wrapper) {
         return;
@@ -15842,6 +16056,27 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
 
         if (record.contentType === "image-text") {
             if (image.complete && image.naturalWidth === 0) return;
+            if (isEnglishMountainsImageTTSRecord(record)) {
+                const hasExpectedDimensions = () => image.getAttribute("src") === record.assetFile &&
+                    image.complete && image.naturalWidth === 1536 && image.naturalHeight === 1024;
+                if (image.complete && !hasExpectedDimensions()) return;
+                record.panels.forEach(panel => panel.items.forEach(item => {
+                    if (createEnglishImageTTSMountainsHitArea(wrapper, panel, item, record)) added += 1;
+                }));
+                const hideMountainsHitAreas = () => {
+                    wrapper.querySelectorAll(".image-tts-mountains-hit-area").forEach(button => { button.hidden = true; });
+                    if (englishImageTTSOverlayState.activeTrigger && wrapper.contains(englishImageTTSOverlayState.activeTrigger)) {
+                        closeEnglishImageTTSMenu();
+                    }
+                };
+                image.addEventListener("load", () => {
+                    if (!hasExpectedDimensions()) { hideMountainsHitAreas(); return; }
+                    layoutEnglishImageTTSMountainsHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", hideMountainsHitAreas, { once: true });
+                layoutEnglishImageTTSMountainsHitAreas(wrapper);
+                return;
+            }
             if (isEnglishPlainsImageTTSRecord(record)) {
                 const expectedFile = "images/english/plains-basics.png";
                 const hasExpectedDimensions = () => image.getAttribute("src") === expectedFile &&
@@ -16245,6 +16480,9 @@ function scheduleEnglishImageTTSLayout() {
             layoutEnglishImageTTSPanelSpeakers(wrapper);
             layoutEnglishImageTTSPlateausSideButtons(wrapper);
             layoutEnglishImageTTSKarstSideButtons(wrapper);
+            if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_MOUNTAINS_ASSET_FILE) {
+                layoutEnglishImageTTSMountainsHitAreas(wrapper);
+            }
         });
     });
 }
@@ -16462,6 +16700,7 @@ function getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item) {
  return [item.ttsText];
 }
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishMountainsImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishEnergyTransformationsImageTTSItemText(record, item)) {
         return item.ttsText;
     }
@@ -16611,6 +16850,16 @@ function speakEnglishImageTTSImageTextSequence(
         karstImage.getAttribute("src") === record.assetFile && karstImage.complete &&
         karstImage.naturalWidth === 1536 && karstImage.naturalHeight === 1024 &&
         karstButtons.length === 4 && isEnglishKarstSideTriggerVisible(wrapper, trigger));
+    const isMountainsImageText = Boolean(record && record.imageId === "mountains-and-mountain-ranges-basics" &&
+        record.assetFile === ENGLISH_MOUNTAINS_ASSET_FILE);
+    const mountainsImage = isMountainsImageText && wrapper ? wrapper.querySelector("img") : null;
+    const mountainsButtons = isMountainsImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".image-tts-mountains-hit-area")) : [];
+    const mountainsReady = !isMountainsImageText || Boolean(layoutEnglishImageTTSMountainsHitAreas(wrapper) &&
+        trigger && trigger.classList && trigger.classList.contains("image-tts-mountains-hit-area") &&
+        mountainsButtons.includes(trigger) && !trigger.hidden && mountainsImage &&
+        mountainsImage.getAttribute("src") === ENGLISH_MOUNTAINS_ASSET_FILE && mountainsImage.complete &&
+        mountainsImage.naturalWidth === 1536 && mountainsImage.naturalHeight === 1024 && mountainsButtons.length === 4);
     const isPlateausImageText = Boolean(record &&
         record.imageId === "plateaus-basics" &&
         record.assetFile === "images/english/plateaus-basics.png");
@@ -16755,7 +17004,7 @@ function speakEnglishImageTTSImageTextSequence(
             (item.sourceText !== item.ttsText &&
                 !isEnglishEnergyTransformationsImageTTSItemText(record, item)) ||
             !isEnglishImageTTSItemText(record, item)) ||
-        !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady ||
+        !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady || !mountainsReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
@@ -17054,6 +17303,13 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const karstImage = isKarstImageText && wrapper ? wrapper.querySelector("img") : null;
     const isPlainsImageText = Boolean(safeRecord && isEnglishPlainsImageTTSRecord(safeRecord));
     const plainsImage = isPlainsImageText && wrapper ? wrapper.querySelector("img") : null;
+    const isMountainsImageText = Boolean(safeRecord && isEnglishMountainsImageTTSRecord(safeRecord));
+    const mountainsImage = isMountainsImageText && wrapper ? wrapper.querySelector("img") : null;
+    const mountainsButtons = isMountainsImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".image-tts-mountains-hit-area")) : [];
+    const mountainsLayoutReady = !isMountainsImageText || Boolean(
+        layoutEnglishImageTTSMountainsHitAreas(wrapper) && mountainsButtons.length === 4 &&
+        mountainsButtons.includes(trigger) && !trigger.hidden);
     const karstLayoutReady = !isKarstImageText ||
         layoutEnglishImageTTSKarstSideButtons(wrapper);
     if (!trigger || !wrapper || !trigger.classList ||
@@ -17081,6 +17337,9 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
             plainsImage.getAttribute("src") !== safeRecord.assetFile ||
             !plainsImage.complete || plainsImage.naturalWidth !== 1536 ||
             plainsImage.naturalHeight !== 1024)) ||
+        (isMountainsImageText && (!mountainsImage || mountainsImage.getAttribute("src") !== safeRecord.assetFile ||
+            !mountainsImage.complete || mountainsImage.naturalWidth !== 1536 || mountainsImage.naturalHeight !== 1024 ||
+            !mountainsLayoutReady || !trigger.classList.contains("image-tts-mountains-hit-area"))) ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         return;
     }
@@ -17301,6 +17560,28 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
                 "已朗讀所選原圖文字。"
             )
         ));
+    }
+
+    if (isMountainsImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const allItems = safeRecord.panels.flatMap(candidate => candidate.items);
+        if (safeRecordName !== "Mountains & Mountain Ranges" || !clickedItem || panel.items.length !== 1 ||
+            panel.items[0] !== clickedItem || !isEnglishMountainsImageTTSItemText(safeRecord, clickedItem) ||
+            allItems.length !== 4 || allItems.some(item => !isEnglishMountainsImageTTSItemText(safeRecord, item))) {
+            closeEnglishImageTTSMenu(); return;
+        }
+        menu.setAttribute("aria-label", "Mountains & Mountain Ranges 第 " + panel.panelId + " 格朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton("🔊 朗讀此句", "朗讀完整句子：" + clickedItem.sourceText,
+            () => speakEnglishImageTTSImageTextSequence(trigger, [clickedItem], "所選 Mountains 句子已朗讀完成。")));
+        menu.appendChild(createEnglishImageTTSMenuButton("🔊 朗讀全圖",
+            "依四格順序朗讀 Mountains & Mountain Ranges 全部四句",
+            () => speakEnglishImageTTSImageTextSequence(trigger, allItems,
+                "Mountains & Mountain Ranges 全圖已朗讀完成。")));
+        menu.hidden = false; menu.style.visibility = "hidden"; positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); } catch (error) { menu.firstChild.focus(); }
+        }
+        return;
     }
 
     if (isPlainsImageText) {

@@ -21123,6 +21123,44 @@ const imageTTSData = {
                 ]
             }
         ]
-    }
+    },
+    "images/english/mountains-and-mountain-ranges-basics.png": {
+            imageId: "mountains-and-mountain-ranges-basics",
+            assetFile: "images/english/mountains-and-mountain-ranges-basics.png",
+            contentType: "image-text",
+            layout: "custom-mountains-2x2-sentence-menu",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1536, height: 1024 },
+            panels: [
+                { panelId: 1, readingOrder: 1, bounds: { xPct: 0, yPct: 0, widthPct: 50, heightPct: 50 }, items: [{
+                    itemId: 1, readingOrder: 1, type: "sentence",
+                    sourceText: "A mountain is high land.", ttsText: "A mountain is high land.",
+                    bounds: { xPct: 1.30, yPct: 1.07, widthPct: 45.96, heightPct: 11.72 },
+                    tapRegion: { xPct: 1.30, yPct: 1.07, widthPct: 45.96, heightPct: 11.72 }, tapRegionShape: null
+                }] },
+                { panelId: 2, readingOrder: 2, bounds: { xPct: 50, yPct: 0, widthPct: 50, heightPct: 50 }, items: [{
+                    itemId: 1, readingOrder: 1, type: "sentence",
+                    sourceText: "The peak is the top of the mountain.", ttsText: "The peak is the top of the mountain.",
+                    bounds: { xPct: 53.5, yPct: 0, widthPct: 32, heightPct: 14.4 },
+                    tapRegion: { xPct: 53.5, yPct: 0, widthPct: 32, heightPct: 14.4 },
+                    tapRegionShape: { type: "css-clip-path", clipPath: "polygon(0 0, 100% 0, 100% 61.8056%, 87.1875% 61.8056%, 87.1875% 100%, 0 100%)" }
+                }] },
+                { panelId: 3, readingOrder: 3, bounds: { xPct: 0, yPct: 50, widthPct: 50, heightPct: 50 }, items: [{
+                    itemId: 1, readingOrder: 1, type: "sentence",
+                    sourceText: "The slope goes down the mountain.", ttsText: "The slope goes down the mountain.",
+                    bounds: { xPct: 3.06, yPct: 51.37, widthPct: 36.65, heightPct: 14.16 },
+                    tapRegion: { xPct: 3.06, yPct: 51.37, widthPct: 36.65, heightPct: 14.16 }, tapRegionShape: null
+                }] },
+                { panelId: 4, readingOrder: 4, bounds: { xPct: 50, yPct: 50, widthPct: 50, heightPct: 50 }, items: [{
+                    itemId: 1, readingOrder: 1, type: "sentence",
+                    sourceText: "A mountain range has many mountains.", ttsText: "A mountain range has many mountains.",
+                    bounds: { xPct: 52.21, yPct: 51.17, widthPct: 35.81, heightPct: 15.23 },
+                    tapRegion: { xPct: 52.21, yPct: 51.17, widthPct: 35.81, heightPct: 15.23 }, tapRegionShape: null
+                }] }
+            ]
+        }
 
 };
