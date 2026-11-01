@@ -20704,6 +20704,99 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/plants-nature-basics.png": {
+        imageId: "plants-nature-basics",
+        assetFile: "images/english/plants-nature-basics.png",
+        contentType: "image-text",
+        layout: "custom-plants-nature-8-text-areas",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1312, height: 1199 },
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 7.2, yPct: 3.4, widthPct: 27.6, heightPct: 5.8 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "English Learning", ttsText: "English Learning",
+                        bounds: { xPct: 8.5, yPct: 4.2, widthPct: 24.5, heightPct: 4.0 },
+                        tapRegion: { xPct: 7.2, yPct: 3.4, widthPct: 27.6, heightPct: 5.8 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 12.5, yPct: 13.5, widthPct: 75.5, heightPct: 11.0 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Plants & Nature", ttsText: "Plants & Nature",
+                        bounds: { xPct: 13.9, yPct: 14.1, widthPct: 72.4, heightPct: 10.0 },
+                        tapRegion: { xPct: 12.5, yPct: 13.5, widthPct: 75.5, heightPct: 11.0 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 69.6, yPct: 48.3, widthPct: 20.2, heightPct: 11.4 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Plants make\nour world\nmore beautiful!", ttsText: "Plants make\nour world\nmore beautiful!",
+                        bounds: { xPct: 71.2, yPct: 49.1, widthPct: 16.7, heightPct: 9.7 },
+                        tapRegion: { xPct: 69.6, yPct: 48.3, widthPct: 20.2, heightPct: 11.4 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 5.5, yPct: 92.5, widthPct: 10.8, heightPct: 6.3 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "plants", ttsText: "plants",
+                        bounds: { xPct: 6.9, yPct: 94.1, widthPct: 8.0, heightPct: 3.2 },
+                        tapRegion: { xPct: 5.5, yPct: 92.5, widthPct: 10.8, heightPct: 6.3 } }
+                ]
+            },
+            {
+                panelId: 5, readingOrder: 5,
+                bounds: { xPct: 23.8, yPct: 92.5, widthPct: 9.5, heightPct: 6.3 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "trees", ttsText: "trees",
+                        bounds: { xPct: 25.2, yPct: 94.1, widthPct: 6.7, heightPct: 3.2 },
+                        tapRegion: { xPct: 23.8, yPct: 92.5, widthPct: 9.5, heightPct: 6.3 } }
+                ]
+            },
+            {
+                panelId: 6, readingOrder: 6,
+                bounds: { xPct: 39.8, yPct: 92.5, widthPct: 11.7, heightPct: 6.3 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "flowers", ttsText: "flowers",
+                        bounds: { xPct: 41.4, yPct: 94.1, widthPct: 9.1, heightPct: 3.2 },
+                        tapRegion: { xPct: 39.8, yPct: 92.5, widthPct: 11.7, heightPct: 6.3 } }
+                ]
+            },
+            {
+                panelId: 7, readingOrder: 7,
+                bounds: { xPct: 58.8, yPct: 92.5, widthPct: 11.4, heightPct: 6.3 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "nature", ttsText: "nature",
+                        bounds: { xPct: 60.4, yPct: 94.1, widthPct: 8.2, heightPct: 3.2 },
+                        tapRegion: { xPct: 58.8, yPct: 92.5, widthPct: 11.4, heightPct: 6.3 } }
+                ]
+            },
+            {
+                panelId: 8, readingOrder: 8,
+                bounds: { xPct: 74.5, yPct: 92.5, widthPct: 23.8, heightPct: 6.3 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "a greener future", ttsText: "a greener future",
+                        bounds: { xPct: 76.2, yPct: 94.1, widthPct: 19.4, heightPct: 3.2 },
+                        tapRegion: { xPct: 74.5, yPct: 92.5, widthPct: 23.8, heightPct: 6.3 } }
+                ]
+            }
+        ]
     }
 
 };

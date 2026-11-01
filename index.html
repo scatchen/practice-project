@@ -9383,6 +9383,137 @@ function getEnglishEarthEnvironmentImageTextRecord(record, assetFile) {
     }
     return { ...record, panels: record.panels };
 }
+
+function getEnglishPlantsNatureImageTextRecord(record, assetFile) {
+    const expectedAssetFile = "images/english/plants-nature-basics.png";
+    const expectedImageId = "plants-nature-basics";
+    const expectedPanels = [
+        [1, [7.2, 3.4, 27.6, 5.8], [
+            ["label", "English Learning", [8.5, 4.2, 24.5, 4.0], [7.2, 3.4, 27.6, 5.8]]
+        ]],
+        [2, [12.5, 13.5, 75.5, 11.0], [
+            ["label", "Plants & Nature", [13.9, 14.1, 72.4, 10.0], [12.5, 13.5, 75.5, 11.0]]
+        ]],
+        [3, [69.6, 48.3, 20.2, 11.4], [
+            ["sentence", "Plants make\nour world\nmore beautiful!",
+                [71.2, 49.1, 16.7, 9.7], [69.6, 48.3, 20.2, 11.4]]
+        ]],
+        [4, [5.5, 92.5, 10.8, 6.3], [
+            ["label", "plants", [6.9, 94.1, 8.0, 3.2], [5.5, 92.5, 10.8, 6.3]]
+        ]],
+        [5, [23.8, 92.5, 9.5, 6.3], [
+            ["label", "trees", [25.2, 94.1, 6.7, 3.2], [23.8, 92.5, 9.5, 6.3]]
+        ]],
+        [6, [39.8, 92.5, 11.7, 6.3], [
+            ["label", "flowers", [41.4, 94.1, 9.1, 3.2], [39.8, 92.5, 11.7, 6.3]]
+        ]],
+        [7, [58.8, 92.5, 11.4, 6.3], [
+            ["label", "nature", [60.4, 94.1, 8.2, 3.2], [58.8, 92.5, 11.4, 6.3]]
+        ]],
+        [8, [74.5, 92.5, 23.8, 6.3], [
+            ["phrase", "a greener future", [76.2, 94.1, 19.4, 3.2], [74.5, 92.5, 23.8, 6.3]]
+        ]]
+    ];
+    const hasExactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const matchesBounds = (actual, expected) => hasExactKeys(actual, boundsKeys) &&
+        boundsKeys.every((key, index) => Number.isFinite(actual[key]) && actual[key] === expected[index]) &&
+        actual.xPct >= 0 && actual.yPct >= 0 && actual.widthPct > 0 && actual.heightPct > 0 &&
+        actual.xPct + actual.widthPct <= 100 && actual.yPct + actual.heightPct <= 100;
+    const toBounds = values => ({
+        xPct: values[0], yPct: values[1], widthPct: values[2], heightPct: values[3]
+    });
+    const contains = (outer, inner) => matchesBounds(outer, [
+        outer.xPct, outer.yPct, outer.widthPct, outer.heightPct
+    ]) && matchesBounds(inner, [
+        inner.xPct, inner.yPct, inner.widthPct, inner.heightPct
+    ]) && inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+
+    if (!hasExactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"
+    ]) || record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        assetFile !== expectedAssetFile || !imageTTSData ||
+        record !== imageTTSData[expectedAssetFile] || record.contentType !== "image-text" ||
+        record.layout !== "custom-plants-nature-8-text-areas" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !hasExactKeys(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1312 || record.sourceImageDimensions.height !== 1199 ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) {
+        return null;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    if (matchingIdentityKeys.length !== 1 || matchingIdentityKeys[0] !== expectedAssetFile) {
+        return null;
+    }
+    const libraryMatches = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(item => item && (item.id === expectedImageId || item.file === expectedAssetFile))
+        : [];
+    if (libraryMatches.length !== 1 || libraryMatches[0].id !== expectedImageId ||
+        libraryMatches[0].file !== expectedAssetFile || libraryMatches[0].category !== "english") {
+        return null;
+    }
+
+    const allItems = [];
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expectedPanel = expectedPanels[panelIndex];
+        const panelBounds = toBounds(expectedPanel[1]);
+        if (!hasExactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expectedPanel[0] || panel.readingOrder !== panelIndex + 1 ||
+            !matchesBounds(panel.bounds, expectedPanel[1]) ||
+            !Array.isArray(panel.items) || panel.items.length !== expectedPanel[2].length) {
+            return null;
+        }
+        for (let itemIndex = 0; itemIndex < expectedPanel[2].length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const expectedItem = expectedPanel[2][itemIndex];
+            if (!hasExactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"
+            ]) || item.itemId !== itemIndex + 1 || item.readingOrder !== itemIndex + 1 ||
+                item.type !== expectedItem[0] || item.sourceText !== expectedItem[1] ||
+                item.ttsText !== item.sourceText ||
+                !(getEnglishTTSUnitText(item.sourceText) || isEnglishPlantsNatureAmpersandItem(record, item)) ||
+                !matchesBounds(item.bounds, expectedItem[2]) ||
+                !matchesBounds(item.tapRegion, expectedItem[3]) ||
+                !contains(panelBounds, item.bounds) || !contains(panelBounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds)) {
+                return null;
+            }
+            allItems.push(item);
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < allItems.length; left += 1) {
+        for (let right = left + 1; right < allItems.length; right += 1) {
+            if (overlaps(allItems[left].bounds, allItems[right].bounds) ||
+                overlaps(allItems[left].tapRegion, allItems[right].tapRegion) ||
+                overlaps(allItems[left].bounds, allItems[right].tapRegion) ||
+                overlaps(allItems[left].tapRegion, allItems[right].bounds)) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishSpaceTechnologyImageTextRecord(record, assetFile) {
     const expectedAssetFile = "images/english/space-technology-basics.png";
     const expectedImageId = "space-technology-basics";
@@ -9706,6 +9837,53 @@ function isEnglishEarthEnvironmentAmpersandItem(record, item) {
         item.sourceText === expectedText && item.ttsText === expectedText;
 }
 
+
+function isEnglishPlantsNatureImageTTSItemText(record, item) {
+    const expectedImageId = "plants-nature-basics";
+    const expectedAssetFile = "images/english/plants-nature-basics.png";
+    if (!record || !item || record.contentType !== "image-text" ||
+        record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        typeof imageTTSData === "undefined" || !imageTTSData ||
+        typeof imageTTSData !== "object") {
+        return false;
+    }
+    const canonicalRecord = imageTTSData[expectedAssetFile];
+    if (!canonicalRecord || record.panels !== canonicalRecord.panels ||
+        !getEnglishPlantsNatureImageTextRecord(canonicalRecord, expectedAssetFile) ||
+        !record.panels.some(panel => Array.isArray(panel.items) && panel.items.includes(item))) {
+        return false;
+    }
+    return item.sourceText === item.ttsText && Boolean(getEnglishTTSUnitText(item.sourceText));
+}
+
+function isEnglishPlantsNatureAmpersandItem(record, item) {
+    const expectedImageId = "plants-nature-basics";
+    const expectedAssetFile = "images/english/plants-nature-basics.png";
+    const expectedText = "Plants & Nature";
+    if (!record || !item || record.contentType !== "image-text" ||
+        record.imageId !== expectedImageId || record.assetFile !== expectedAssetFile ||
+        typeof imageTTSData === "undefined" || !imageTTSData ||
+        typeof imageTTSData !== "object") {
+        return false;
+    }
+    const canonicalRecord = imageTTSData[expectedAssetFile];
+    if (!canonicalRecord || !Array.isArray(canonicalRecord.panels)) {
+        return false;
+    }
+    const matchingIdentityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === expectedAssetFile || candidate &&
+            (candidate.imageId === expectedImageId || candidate.assetFile === expectedAssetFile);
+    });
+    return matchingIdentityKeys.length === 1 && matchingIdentityKeys[0] === expectedAssetFile &&
+        record.contentType === "image-text" && record.imageId === expectedImageId &&
+        record.assetFile === expectedAssetFile && record.panels === canonicalRecord.panels &&
+        record.panels.some(panel => panel.panelId === 2 && panel.readingOrder === 2 &&
+            Array.isArray(panel.items) && panel.items.length === 1 && panel.items[0] === item) &&
+        item.itemId === 1 && item.readingOrder === 1 && item.type === "label" &&
+        item.sourceText === expectedText && item.ttsText === expectedText;
+}
+
 function isEnglishEarthEnvironmentImageTTSItemText(record, item) {
     return Boolean(record && record.contentType === "image-text" &&
         record.imageId === "earth-environment-basics" &&
@@ -9848,7 +10026,9 @@ function isEnglishKarstImageTTSItemText(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishKarstImageTTSItemText(record, item) ||
+    if (isEnglishPlantsNatureAmpersandItem(record, item) ||
+        isEnglishPlantsNatureImageTTSItemText(record, item) ||
+        isEnglishKarstImageTTSItemText(record, item) ||
         isEnglishPlateausImageTTSItemText(record, item) ||
         isEnglishAirplaneWrightBrothersImageTTSItemText(record, item) ||
         isEnglishStaticElectricityImageTTSItemText(record, item) ||
@@ -10468,6 +10648,10 @@ function getEnglishImageTTSImageTextName(record) {
     if (record && record.imageId === "space-technology-basics" &&
         record.assetFile === "images/english/space-technology-basics.png") {
         return "Space Technology";
+    }
+    if (record && record.imageId === "plants-nature-basics" &&
+        record.assetFile === "images/english/plants-nature-basics.png") {
+        return "Plants and Nature";
     }
     if (record && record.imageId === "earth-environment-basics" &&
         record.assetFile === "images/english/earth-environment-basics.png") {
@@ -12733,6 +12917,11 @@ function getEnglishImageTTSRecord(assetFile) {
         !Array.isArray(record.panels)) {
         return null;
     }
+
+    const isPlantsNatureIdentity = record.imageId === "plants-nature-basics" ||
+        record.assetFile === "images/english/plants-nature-basics.png" ||
+        assetFile === "images/english/plants-nature-basics.png";
+    if (isPlantsNatureIdentity) return getEnglishPlantsNatureImageTextRecord(record, assetFile);
 
     const isKarstIdentity = record.imageId === "karst-landforms-basics" ||
         record.assetFile === "images/english/karst-landforms-basics.png" ||
@@ -15741,6 +15930,9 @@ function getEnglishImageTTSImageTextSpeechText(record, item) {
     }
     if (isEnglishCirculatorySystemImageTTSItemText(record, item)) {
         return item.ttsText;
+    }
+    if (isEnglishPlantsNatureAmpersandItem(record, item)) {
+        return "Plants and Nature";
     }
     if (isEnglishEarthEnvironmentAmpersandItem(record, item)) {
         return "Earth and Environment";
