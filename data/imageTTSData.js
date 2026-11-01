@@ -20461,6 +20461,71 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/karst-landforms-basics.png": {
+        imageId: "karst-landforms-basics",
+        assetFile: "images/english/karst-landforms-basics.png",
+        contentType: "image-text",
+        layout: "custom-karst-outside-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "calibrated",
+        overlayRuntimeStatus: "ipad-safari-tested",
+        sourceImageDimensions: { width: 1536, height: 1024 },
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 0.4, widthPct: 49.2, heightPct: 49.2 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Karst Landscape", ttsText: "Karst Landscape",
+                        bounds: { xPct: 7.5, yPct: 1.2, widthPct: 38, heightPct: 6.6 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Karst landscapes often form in limestone areas.",
+                        ttsText: "Karst landscapes often form in limestone areas.",
+                        bounds: { xPct: 1.5, yPct: 8.4, widthPct: 47, heightPct: 5.5 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50.4, yPct: 0.4, widthPct: 49.2, heightPct: 49.2 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Limestone Caves", ttsText: "Limestone Caves",
+                        bounds: { xPct: 57.5, yPct: 1.2, widthPct: 40.5, heightPct: 6.6 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Water slowly dissolves limestone and forms caves.",
+                        ttsText: "Water slowly dissolves limestone and forms caves.",
+                        bounds: { xPct: 51.8, yPct: 8.4, widthPct: 47.7, heightPct: 5.5 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.4, yPct: 50.4, widthPct: 49.2, heightPct: 49.2 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Sinkholes", ttsText: "Sinkholes",
+                        bounds: { xPct: 7.5, yPct: 51.2, widthPct: 30, heightPct: 6.6 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A sinkhole is a hole or depression in the ground.",
+                        ttsText: "A sinkhole is a hole or depression in the ground.",
+                        bounds: { xPct: 1.8, yPct: 58.2, widthPct: 46.5, heightPct: 5.5 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 50.4, yPct: 50.4, widthPct: 49.2, heightPct: 49.2 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Stalactites & Stalagmites", ttsText: "Stalactites & Stalagmites",
+                        bounds: { xPct: 57.8, yPct: 51.2, widthPct: 40.8, heightPct: 6.6 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Minerals build stalactites and stalagmites inside caves.",
+                        ttsText: "Minerals build stalactites and stalagmites inside caves.",
+                        bounds: { xPct: 51.8, yPct: 58.2, widthPct: 47.5, heightPct: 5.5 } }
+                ]
+            }
+        ]
     }
 
 };

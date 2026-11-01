@@ -930,6 +930,23 @@ color: #111827;
             opacity: 0.72;
         }
 
+        .image-tts-karst-side-trigger {
+            position: absolute; z-index: 11; display: inline-flex;
+            align-items: center; justify-content: center; box-sizing: border-box;
+            width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+            margin: 0; padding: 0; border: 2px solid #0c4a6e; border-radius: 12px;
+            appearance: none; -webkit-appearance: none; background: #ffffff;
+            color: #0f172a; font: 700 12px/1 Arial, sans-serif;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.4);
+            cursor: pointer; touch-action: manipulation;
+            user-select: none; -webkit-user-select: none;
+        }
+        .image-tts-karst-side-trigger[hidden] { display: none; }
+        .image-tts-karst-side-trigger:focus-visible {
+            outline: 3px solid #facc15; outline-offset: 2px;
+        }
+        .image-tts-karst-side-trigger:disabled { cursor: default; opacity: 0.72; }
+
         .image-tts-business-email-bubble-hit-area {
             position: absolute;
             z-index: 10;
@@ -3712,7 +3729,11 @@ function resetEnglishTTSFloatingStopButtonStyles(button) {
     button.classList.remove("is-image-tts-dialogue-stop-control");
     button.classList.remove("is-image-tts-story-stop-control");
     button.classList.remove("is-image-tts-teaching-stop-control");
+    const wasKarstStop=button.classList.contains("is-image-tts-karst-stop-control");
     button.classList.remove("is-image-tts-image-text-stop-control");
+    button.classList.remove("is-image-tts-karst-stop-control");
+    if(wasKarstStop){button.textContent="⏹ 停止朗讀";
+        button.setAttribute("aria-label","停止目前的英文朗讀");}
     button.style.position = "";
     button.style.zIndex = "";
     button.style.inset = "";
@@ -4341,6 +4362,10 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
         (typeof wrapper.contains === "function" && !wrapper.contains(trigger))) {
         return false;
     }
+    const isKarstImageText = record.imageId === "karst-landforms-basics" &&
+        record.assetFile === "images/english/karst-landforms-basics.png";
+    if (isKarstImageText)
+        return placeEnglishKarstImageTTSStopButton(button,wrapper,validatedRecord,safePanel);
     const isPlateausImageText = record.imageId === "plateaus-basics" &&
         record.assetFile === "images/english/plateaus-basics.png";
     const avoidRects = [];
@@ -4379,6 +4404,74 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
             stopControlClass: "is-image-tts-image-text-stop-control"
         }
     );
+}
+
+
+function placeEnglishKarstImageTTSStopButton(button,wrapper,record,panel) {
+    const fail=()=>{button.hidden=true;button.style.visibility="hidden";return false;};
+    const trigger=englishTTSState.activeSpeechTrigger, file="images/english/karst-landforms-basics.png";
+    if(!button||!wrapper||!trigger||!trigger.classList||
+        !trigger.classList.contains("image-tts-karst-side-trigger")||
+        !isEnglishKarstImageTTSRecord(record)||!getEnglishKarstImageTextRecord(record,file)||
+        wrapper.dataset.imageTtsAssetFile!==file||!wrapper.contains(trigger)||!panel||
+        !record.panels.includes(panel))return fail();
+    if(isEnglishImageTTSDrawingMode()){
+        const viewport=getEnglishKarstViewport(button);
+        let existingRect=null;
+        try{existingRect=button.getBoundingClientRect();}catch(error){}
+        if(!button.hidden&&button.classList.contains("is-image-tts-karst-stop-control")&&
+            button.style.position==="fixed"&&button.style.visibility==="visible"&&viewport&&
+            isKarstRect(existingRect)&&Math.abs(existingRect.width-44)<=0.5&&
+            Math.abs(existingRect.height-44)<=0.5&&existingRect.left>=viewport.safeLeft&&
+            existingRect.right<=viewport.safeRight&&existingRect.top>=viewport.safeTop&&
+            existingRect.bottom<=viewport.safeBottom)return true;
+    }
+    button.hidden=true;button.style.visibility="hidden";
+    clearEnglishTTSImageStopRow(button);
+    if(button.parentNode!==document.body)document.body.appendChild(button);
+    button.classList.add("is-image-tts-image-text-stop-control","is-image-tts-karst-stop-control");
+    button.textContent="⏹";button.setAttribute("aria-label","停止目前的英文朗讀");
+    button.style.position="fixed";button.style.zIndex="12200";
+    button.style.inset="auto";button.style.right="auto";button.style.bottom="auto";
+    button.style.transform="none";button.style.boxSizing="border-box";
+    button.style.width="44px";button.style.minWidth="44px";button.style.maxWidth="44px";
+    button.style.height="44px";button.style.minHeight="44px";button.style.maxHeight="44px";
+    button.style.padding="0";button.style.visibility="hidden";
+    const layoutReady=layoutEnglishImageTTSKarstSideButtons(wrapper);
+    const viewport=getEnglishKarstViewport(button),image=wrapper.querySelector("img");
+    const ir=image&&image.getBoundingClientRect();
+    const sides=Array.from(wrapper.querySelectorAll(".image-tts-karst-side-trigger"));
+    const anchorPanel=trigger._englishImageTTSImageTextPanel;
+    if(!layoutReady||!isEnglishKarstSideTriggerVisible(wrapper,trigger)||
+        !anchorPanel||anchorPanel!==record.panels.find(p=>p.panelId===anchorPanel.panelId)||
+        !viewport||!image||image.getAttribute("src")!==file||!image.complete||
+        image.naturalWidth!==1536||image.naturalHeight!==1024||!isKarstRect(ir)||
+        Math.abs(ir.width/ir.height-1.5)>0.005||sides.length!==4)return fail();
+    const side=anchorPanel.panelId===1||anchorPanel.panelId===3?"left":"right";
+    const imgLeft=ir.left,imgRight=ir.right,imgTop=ir.top;
+    const sideInset=side==="left"?viewport.insets.left:viewport.insets.right;
+    const sideSpace=side==="left"?imgLeft-(viewport.left+sideInset):
+        viewport.left+viewport.width-sideInset-imgRight;
+    if(sideSpace<60)return fail();
+    const left=side==="left"?viewport.safeLeft:imgRight+8;
+    const top=anchorPanel.panelId<=2?imgTop+ir.height*0.25+30:imgTop+ir.height*0.75-74;
+    if(left<viewport.safeLeft||left+44>viewport.safeRight||
+        top<viewport.safeTop||top+44>viewport.safeBottom)return fail();
+    button.hidden=false;
+    button.style.left=left+"px";button.style.top=top+"px";
+    const r=button.getBoundingClientRect();
+    if(!isKarstRect(r)||Math.abs(r.width-44)>0.5||Math.abs(r.height-44)>0.5)return fail();
+    const candidate={left:r.left,top:r.top,right:r.right,bottom:r.bottom};
+    const imageBox={left:imgLeft,top:imgTop,right:imgRight,bottom:ir.bottom};
+    const obstacles=getEnglishKarstObstacles([
+        ".control-bar",".brush-colors",".scribble-box",
+        ".english-image-story-controls:not([hidden])",".english-image-tts-menu:not([hidden])",
+        "#english-tts-panel:not([hidden])","#english-tts-floating-stop:not([hidden])",
+        ".image-tts-karst-side-trigger","#annotation-canvas"
+    ],viewport,button);
+    const intersects=(a,b)=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+    if(!obstacles||intersects(candidate,imageBox)||obstacles.some(o=>intersects(candidate,o)))return fail();
+    button.style.visibility="visible";return true;
 }
 
 function placeEnglishImageTTSTeachingStopButton(button, wrapper, panel) {
@@ -4500,7 +4593,8 @@ function updateEnglishTTSControls() {
             if (floatingStopButton.classList.contains("is-image-tts-dialogue-stop-control") ||
                 floatingStopButton.classList.contains("is-image-tts-story-stop-control") ||
                 floatingStopButton.classList.contains("is-image-tts-teaching-stop-control") ||
-                floatingStopButton.classList.contains("is-image-tts-image-text-stop-control")) {
+                floatingStopButton.classList.contains("is-image-tts-image-text-stop-control") ||
+                floatingStopButton.classList.contains("is-image-tts-karst-stop-control")) {
                 resetEnglishTTSFloatingStopButtonStyles(floatingStopButton);
             }
         }
@@ -4553,9 +4647,12 @@ function positionEnglishTTSFloatingStopButton() {
             const isPlateausTrigger = imageTextTrigger.classList.contains(
                 "image-tts-plateaus-side-trigger"
             );
-            if (isPlateausTrigger && isEnglishTTSPlaybackActive()) {
+            const isKarstTrigger=imageTextTrigger.classList.contains("image-tts-karst-side-trigger");
+            if ((isPlateausTrigger||isKarstTrigger)&&isEnglishTTSPlaybackActive()) {
                 stopEnglishSpeech();
-                setEnglishTTSStatus("畫面空間不足，已停止 Plateaus 朗讀。");
+                setEnglishTTSStatus(isKarstTrigger
+                    ?"畫面空間不足，已停止 Karst 朗讀。"
+                    :"畫面空間不足，已停止 Plateaus 朗讀。");
             }
         }
         return;
@@ -9702,8 +9799,25 @@ function isEnglishPlateausImageTTSItemText(record, item) {
         !Object.prototype.hasOwnProperty.call(item, "tapRegion"));
 }
 
+
+function isEnglishKarstImageTTSItemText(record, item) {
+    const file = "images/english/karst-landforms-basics.png";
+    if (!isEnglishKarstImageTTSRecord(record) || !item || !imageTTSData ||
+        !imageTTSData[file] || record.panels !== imageTTSData[file].panels ||
+        !getEnglishKarstImageTextRecord(record, file)) return false;
+    const panel = record.panels.find(candidate => candidate.items.includes(item));
+    const target = panel && getEnglishKarstImageTTSExpectedPanels()[panel.panelId - 1];
+    const n = panel && panel.items.indexOf(item);
+    const expectedItem = target && target.items[n];
+    return Boolean(expectedItem && item.itemId === n + 1 && item.readingOrder === n + 1 &&
+        item.type === expectedItem.type && item.sourceText === expectedItem.sourceText &&
+        item.ttsText === item.sourceText &&
+        (panel.panelId === 4 && n === 0 || getEnglishTTSUnitText(item.sourceText)));
+}
+
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishPlateausImageTTSItemText(record, item) ||
+    if (isEnglishKarstImageTTSItemText(record, item) ||
+        isEnglishPlateausImageTTSItemText(record, item) ||
         isEnglishAirplaneWrightBrothersImageTTSItemText(record, item) ||
         isEnglishStaticElectricityImageTTSItemText(record, item) ||
         isEnglishFrictionImageTTSItemText(record, item) ||
@@ -10274,6 +10388,10 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 function getEnglishImageTTSImageTextName(record) {
     if (isEnglishPlateausImageTTSRecord(record)) {
         return "Plateaus";
+    }
+    if (record && record.imageId === "karst-landforms-basics" &&
+        record.assetFile === "images/english/karst-landforms-basics.png") {
+        return "Karst Landforms";
     }
     if (record && record.imageId === "airplane-wright-brothers-basics" &&
         record.assetFile === "images/english/airplane-wright-brothers-basics.png") {
@@ -12479,6 +12597,97 @@ function getEnglishPlateausImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+
+function getEnglishKarstImageTTSExpectedPanels() {
+    const b = (xPct, yPct, widthPct, heightPct) => ({ xPct, yPct, widthPct, heightPct });
+    const item = (type, sourceText, bounds) => ({ type, sourceText, bounds });
+    return [
+        { panelId: 1, bounds: b(0.4, 0.4, 49.2, 49.2), items: [
+            item("label", "Karst Landscape", b(7.5, 1.2, 38, 6.6)),
+            item("sentence", "Karst landscapes often form in limestone areas.", b(1.5, 8.4, 47, 5.5))
+        ]},
+        { panelId: 2, bounds: b(50.4, 0.4, 49.2, 49.2), items: [
+            item("label", "Limestone Caves", b(57.5, 1.2, 40.5, 6.6)),
+            item("sentence", "Water slowly dissolves limestone and forms caves.", b(51.8, 8.4, 47.7, 5.5))
+        ]},
+        { panelId: 3, bounds: b(0.4, 50.4, 49.2, 49.2), items: [
+            item("label", "Sinkholes", b(7.5, 51.2, 30, 6.6)),
+            item("sentence", "A sinkhole is a hole or depression in the ground.", b(1.8, 58.2, 46.5, 5.5))
+        ]},
+        { panelId: 4, bounds: b(50.4, 50.4, 49.2, 49.2), items: [
+            item("label", "Stalactites & Stalagmites", b(57.8, 51.2, 40.8, 6.6)),
+            item("sentence", "Minerals build stalactites and stalagmites inside caves.", b(51.8, 58.2, 47.5, 5.5))
+        ]}
+    ];
+}
+function isEnglishKarstImageTTSRecord(record) {
+    return Boolean(record && record.imageId === "karst-landforms-basics" &&
+        record.assetFile === "images/english/karst-landforms-basics.png" &&
+        record.contentType === "image-text");
+}
+function getEnglishKarstImageTextRecord(record, assetFile) {
+    const file = "images/english/karst-landforms-basics.png";
+    const expected = getEnglishKarstImageTTSExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validBounds = value => exact(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const sameBounds = (a, b) => validBounds(a) &&
+        boundsKeys.every(key => a[key] === b[key]);
+    const within = (outer, inner) => validBounds(outer) && validBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    if (!exact(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"]) ||
+        record.imageId !== "karst-landforms-basics" || record.assetFile !== file ||
+        assetFile !== file || !imageTTSData || !imageTTSData[file] ||
+        record.panels !== imageTTSData[file].panels || record.contentType !== "image-text" ||
+        record.layout !== "custom-karst-outside-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "calibrated" ||
+        !["not-tested", "ipad-safari-tested"].includes(record.overlayRuntimeStatus) ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== 4) return null;
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === "karst-landforms-basics" || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === "karst-landforms-basics" || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file ||
+        library.length !== 1 || library[0].id !== "karst-landforms-basics" ||
+        library[0].file !== file || library[0].category !== "english") return null;
+    for (let p = 0; p < 4; p += 1) {
+        const panel = record.panels[p], target = expected[p];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== p + 1 || panel.readingOrder !== p + 1 ||
+            !sameBounds(panel.bounds, target.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== 2) return null;
+        for (let n = 0; n < 2; n += 1) {
+            const item = panel.items[n], targetItem = target.items[n];
+            const p4Title = p === 3 && n === 0 &&
+                item && item.sourceText === "Stalactites & Stalagmites";
+            if (!exact(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]) ||
+                item.itemId !== n + 1 || item.readingOrder !== n + 1 ||
+                item.type !== targetItem.type || item.sourceText !== targetItem.sourceText ||
+                item.ttsText !== item.sourceText ||
+                (!p4Title && !getEnglishTTSUnitText(item.sourceText)) ||
+                !sameBounds(item.bounds, targetItem.bounds) || !within(panel.bounds, item.bounds)) return null;
+        }
+    }
+    return { ...record, panels: record.panels };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -12492,6 +12701,11 @@ function getEnglishImageTTSRecord(assetFile) {
         !Array.isArray(record.panels)) {
         return null;
     }
+
+    const isKarstIdentity = record.imageId === "karst-landforms-basics" ||
+        record.assetFile === "images/english/karst-landforms-basics.png" ||
+        assetFile === "images/english/karst-landforms-basics.png";
+    if (isKarstIdentity) return getEnglishKarstImageTextRecord(record, assetFile);
 
     const isPlateausImageTextIdentity =
         record.imageId === "plateaus-basics" ||
@@ -13951,6 +14165,256 @@ function layoutEnglishImageTTSPlateausSideButtons(wrapper) {
     });
 }
 
+
+function getEnglishKarstViewport(button) {
+    const visual = window.visualViewport;
+    const left = visual ? visual.offsetLeft : 0, top = visual ? visual.offsetTop : 0;
+    const width = visual ? visual.width : window.innerWidth;
+    const height = visual ? visual.height : window.innerHeight;
+    if (![left, top, width, height].every(Number.isFinite) || width <= 0 || height <= 0)
+        return null;
+    let style;
+    try { style = button && window.getComputedStyle(button); } catch (error) { style = null; }
+    if (!style || !style.getPropertyValue) return null;
+    const inset = name => {
+        const raw = String(style.getPropertyValue(name) || "").trim();
+        const number = raw ? parseFloat(raw) : 0;
+        return Number.isFinite(number) && number >= 0 ? number : null;
+    };
+    const l=inset("--english-tts-safe-left"), r=inset("--english-tts-safe-right");
+    const t=inset("--english-tts-safe-top"), b=inset("--english-tts-safe-bottom");
+    if ([l,r,t,b].some(value => value === null)) return null;
+    const safeLeft=left+l+8, safeRight=left+width-r-8;
+    const safeTop=top+t+8, safeBottom=top+height-b-8;
+    return safeRight-safeLeft>=44 && safeBottom-safeTop>=44
+        ? {left,top,width,height,safeLeft,safeRight,safeTop,safeBottom,
+            insets:{left:l,right:r,top:t,bottom:b}} : null;
+}
+function getEnglishKarstRectState(element) {
+    if (!element) return { hidden: true, rect: null };
+    try {
+        for (let node=element; node; node=node.parentElement) {
+            if (node.hidden) return { hidden: true, rect: null };
+            const style=window.getComputedStyle(node);
+            if (!style || style.display==="none" || style.visibility==="hidden" ||
+                style.visibility==="collapse") return { hidden: true, rect: null };
+            if (node===document.body) break;
+        }
+        const rect=element.getBoundingClientRect();
+        if (!rect || ![rect.left,rect.top,rect.right,rect.bottom,rect.width,rect.height]
+            .every(Number.isFinite) || rect.width<=0 || rect.height<=0)
+            return { hidden: false, rect: null };
+        return { hidden: false, rect };
+    } catch (error) { return { hidden: false, rect: null }; }
+}
+function getEnglishKarstObstacles(selectors, viewport, excluded=null) {
+    const result=[]; let failed=false;
+    try {
+        document.querySelectorAll(selectors.join(",")).forEach(element => {
+            if (!element || element===excluded) return;
+            const state=getEnglishKarstRectState(element);
+            if (state.hidden) return;
+            if (!state.rect) { failed=true; return; }
+            if (element.id==="annotation-canvas") {
+                let style;
+                try { style=window.getComputedStyle(element); } catch (error) { failed=true; return; }
+                if (style && style.pointerEvents==="none") return;
+            }
+            result.push({left:state.rect.left, top:state.rect.top,
+                right:state.rect.right, bottom:state.rect.bottom});
+        });
+    } catch (error) { failed=true; }
+    return failed ? null : result;
+}
+function isKarstRect(rect) {
+    return Boolean(rect && [rect.left,rect.top,rect.right,rect.bottom,rect.width,rect.height]
+        .every(Number.isFinite) && rect.width>0 && rect.height>0);
+}
+function createEnglishImageTTSKarstSideButton(wrapper,panel,record) {
+    if (!wrapper || !panel || !isEnglishKarstImageTTSRecord(record) ||
+        panel.items.length!==2 || !isEnglishKarstImageTTSItemText(record,panel.items[0])) return null;
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="image-tts-image-text-hit-area image-tts-karst-side-trigger";
+    button.textContent=String(panel.panelId)+" 🔊";
+    button.hidden=true;
+    button.setAttribute("aria-label","P"+panel.panelId+" Karst Landforms，開啟本格英文朗讀選項");
+    button.setAttribute("aria-haspopup","true");
+    button.setAttribute("aria-expanded","false");
+    button.setAttribute("aria-controls","english-image-tts-menu");
+    button.setAttribute("data-english-tts-control","true");
+    button.setAttribute("data-image-tts-panel-id",String(panel.panelId));
+    button.setAttribute("data-image-tts-item-id","1");
+    button._englishImageTTSImageTextPanel=panel;
+    button._englishImageTTSImageTextItem=panel.items[0];
+    button._englishImageTTSImageTextRecord=record;
+    button._englishImageTTSImageTextActivePanel=panel;
+    button._englishImageTTSImageTextActiveItem=panel.items[0];
+    button.addEventListener("click",event=>{
+        event.stopPropagation();
+        if (button.hidden || button.disabled || appState.subjectMode!=="english" ||
+            isEnglishImageTTSDrawingMode()) return;
+        if (englishImageTTSOverlayState.activeTrigger===button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu(); return;
+        }
+        openEnglishImageTTSImageTextMenu(button,record,panel);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+function layoutEnglishImageTTSKarstSideButtons(wrapper) {
+    const buttons=wrapper && wrapper.querySelectorAll
+        ? Array.from(wrapper.querySelectorAll(".image-tts-karst-side-trigger")) : [];
+    const hideButton=button=>{
+        button.hidden=true; button.style.visibility="hidden"; button.disabled=true;
+        button.style.pointerEvents="none"; button.setAttribute("aria-disabled","true");
+    };
+    const hideAll=()=>buttons.forEach(hideButton);
+    const failAll=()=>{hideAll();return false;};
+    if (!wrapper || buttons.length!==4 || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile!=="images/english/karst-landforms-basics.png") {
+        return failAll();
+    }
+    if (isEnglishImageTTSDrawingMode()) {
+        if (englishImageTTSOverlayState.activeTrigger &&
+            wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+        return failAll();
+    }
+    const record=getEnglishImageTTSRecord(wrapper.dataset.imageTtsAssetFile);
+    const image=wrapper.querySelector("img");
+    const wr=wrapper.getBoundingClientRect(), ir=image && image.getBoundingClientRect();
+    let position="";
+    try { position=window.getComputedStyle(wrapper).position; } catch (error) {}
+    const viewport=getEnglishKarstViewport(getEnglishTTSFloatingStopButton());
+    if (!record || !image || image.getAttribute("src")!==record.assetFile ||
+        !image.complete || image.naturalWidth!==1536 || image.naturalHeight!==1024 ||
+        !isKarstRect(wr) || !isKarstRect(ir) || position!=="relative" || !viewport ||
+        !Number.isFinite(wrapper.clientLeft) || !Number.isFinite(wrapper.clientTop) ||
+        Math.abs(ir.width/ir.height-1.5)>0.005) return failAll();
+    const obstacles=getEnglishKarstObstacles([
+        ".control-bar",".brush-colors",".scribble-box",
+        ".english-image-story-controls:not([hidden])",".english-image-tts-menu:not([hidden])",
+        "#english-tts-floating-stop:not([hidden])","#english-tts-panel:not([hidden])","#annotation-canvas"
+    ],viewport,getEnglishTTSFloatingStopButton());
+    if (!obstacles) return failAll();
+
+    const ids=new Set(), rects=new Map(), failedButtons=new Set();
+    const imageLeft=ir.left, imageTop=ir.top, imageRight=ir.right;
+    const sideSpace={left:imageLeft-(viewport.left+viewport.insets.left),
+        right:viewport.left+viewport.width-viewport.insets.right-imageRight};
+    for (const button of buttons) {
+        const id=Number(button.getAttribute("data-image-tts-panel-id")), panel=record.panels[id-1];
+        if (![1,2,3,4].includes(id) || ids.has(id) || !panel ||
+            !button._englishImageTTSImageTextPanel ||
+            button._englishImageTTSImageTextPanel.panelId!==id ||
+            button._englishImageTTSImageTextItem!==panel.items[0] ||
+            !isEnglishKarstImageTTSItemText(record,panel.items[0])) return failAll();
+        ids.add(id);
+    }
+    if (ids.size!==4) return failAll();
+
+    for (const button of buttons) {
+        const id=Number(button.getAttribute("data-image-tts-panel-id"));
+        const side=id===1||id===3?"left":"right";
+        const localLeft=ir.left-wr.left-wrapper.clientLeft+(side==="left"?-52:ir.width+8);
+        const localTop=ir.top-wr.top-wrapper.clientTop+ir.height*(id<=2?0.25:0.75)-22;
+        Object.assign(button.style,{left:localLeft+"px",top:localTop+"px",width:"44px",height:"44px",
+            minWidth:"44px",minHeight:"44px",visibility:"hidden",pointerEvents:"auto"});
+        button.hidden=false; button.disabled=false;
+        button.setAttribute("aria-disabled","false");
+        if (button.offsetParent!==wrapper) {failedButtons.add(button);continue;}
+        let r;
+        try {r=button.getBoundingClientRect();} catch (error) {}
+        if (!isKarstRect(r)||Math.abs(r.width-44)>0.5||Math.abs(r.height-44)>0.5) {
+            failedButtons.add(button);continue;
+        }
+        rects.set(button,{left:r.left,top:r.top,right:r.right,bottom:r.bottom});
+    }
+    const intersects=(a,b)=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+    const imageBox={left:imageLeft,top:imageTop,right:imageRight,bottom:ir.bottom};
+    let globalFailure=false;
+    for (const button of buttons) {
+        const id=Number(button.getAttribute("data-image-tts-panel-id")), r=rects.get(button);
+        if (!r) continue;
+        const side=id===1||id===3?"left":"right";
+        const gap=side==="left"?imageLeft-r.right:r.left-imageRight;
+        const expectedTop=imageTop+ir.height*(id<=2?0.25:0.75)-22;
+        if (sideSpace[side]<60 || r.left<viewport.safeLeft || r.right>viewport.safeRight ||
+            r.top<viewport.safeTop || r.bottom>viewport.safeBottom ||
+            Math.abs(gap-8)>0.5 || Math.abs(r.top-expectedTop)>0.5 ||
+            intersects(r,imageBox)||obstacles.some(other=>intersects(r,other))) {
+            failedButtons.add(button);
+        }
+        for(let a=wrapper;a;a=a.parentElement) {
+            let s;
+            try{s=window.getComputedStyle(a);}catch(error){globalFailure=true;break;}
+            if(!s){globalFailure=true;break;}
+            if(s.display==="none"||s.visibility==="hidden"||s.visibility==="collapse") {
+                globalFailure=true;break;
+            }
+            if((s.clipPath&&s.clipPath!=="none")||(s.maskImage&&s.maskImage!=="none")) {
+                globalFailure=true;break;
+            }
+            const paint=String(s.contain||"").split(/\s+/).some(x=>["paint","strict","content"].includes(x));
+            const cx=paint||["hidden","clip","auto","scroll"].includes(s.overflowX);
+            const cy=paint||["hidden","clip","auto","scroll"].includes(s.overflowY);
+            if(cx||cy) {
+                let ar;
+                try {ar=a.getBoundingClientRect();} catch (error) {}
+                if(!isKarstRect(ar)) {globalFailure=true;break;}
+                if(cx&&(r.left<ar.left||r.right>ar.right)||
+                    cy&&(r.top<ar.top||r.bottom>ar.bottom)) failedButtons.add(button);
+            }
+            if(a===document.body)break;
+        }
+        if(globalFailure)break;
+    }
+    if(globalFailure) return failAll();
+    for(let i=0;i<buttons.length;i+=1) {
+        const a=buttons[i], ar=rects.get(a);
+        if(!ar)continue;
+        for(let j=i+1;j<buttons.length;j+=1) {
+            const b=buttons[j], br=rects.get(b);
+            if(br&&intersects(ar,br)) {
+                failedButtons.add(a);failedButtons.add(b);
+            }
+        }
+    }
+    buttons.forEach(button=>{
+        if(failedButtons.has(button)) {hideButton(button);return;}
+        button.hidden=false;button.disabled=false;
+        button.style.pointerEvents="auto";button.style.visibility="visible";
+        button.setAttribute("aria-disabled","false");
+    });
+    return true;
+}
+
+function isEnglishKarstSideTriggerVisible(wrapper,trigger) {
+    const file="images/english/karst-landforms-basics.png";
+    if(!wrapper||!trigger||trigger.isConnected===false||!wrapper.dataset||
+        wrapper.dataset.imageTtsAssetFile!==file||!wrapper.contains(trigger)||
+        !trigger.classList||!trigger.classList.contains("image-tts-karst-side-trigger"))return false;
+    const buttons=Array.from(wrapper.querySelectorAll(".image-tts-karst-side-trigger"));
+    const id=Number(trigger.getAttribute("data-image-tts-panel-id"));
+    const record=getEnglishImageTTSRecord(file),panel=record&&record.panels[id-1];
+    if(buttons.length!==4||!buttons.includes(trigger)||![1,2,3,4].includes(id)||
+        !panel||panel.panelId!==id||trigger.hidden||trigger.disabled||
+        trigger._englishImageTTSImageTextPanel!==panel||
+        trigger._englishImageTTSImageTextItem!==panel.items[0]||
+        !isEnglishKarstImageTTSItemText(record,panel.items[0]))return false;
+    let style;
+    try {style=window.getComputedStyle(trigger);} catch(error) {return false;}
+    if(!style||style.display==="none"||style.visibility==="hidden"||style.visibility==="collapse")
+        return false;
+    const viewport=getEnglishKarstViewport(trigger);
+    let rect;
+    try {rect=trigger.getBoundingClientRect();} catch(error) {return false;}
+    return Boolean(viewport&&isKarstRect(rect)&&Math.abs(rect.width-44)<=0.5&&
+        Math.abs(rect.height-44)<=0.5&&rect.left>=viewport.safeLeft&&rect.right<=viewport.safeRight&&
+        rect.top>=viewport.safeTop&&rect.bottom<=viewport.safeBottom);
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
     if (!wrapper) {
         return;
@@ -14422,6 +14886,19 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
             if (image.complete && image.naturalWidth === 0) {
                 return;
             }
+            if (isEnglishKarstImageTTSRecord(record)) {
+                record.panels.forEach(panel => {
+                    if (createEnglishImageTTSKarstSideButton(wrapper,panel,record)) added+=1;
+                });
+                image.addEventListener("load",()=>layoutEnglishImageTTSKarstSideButtons(wrapper),{once:true});
+                image.addEventListener("error",()=>{
+                    wrapper.querySelectorAll(".image-tts-karst-side-trigger").forEach(button=>button.hidden=true);
+                    if(englishImageTTSOverlayState.activeTrigger&&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger))closeEnglishImageTTSMenu();
+                },{once:true});
+                layoutEnglishImageTTSKarstSideButtons(wrapper);
+                return;
+            }
             if (isEnglishPlateausImageTTSRecord(record)) {
                 record.panels.forEach(panel => {
                     if (createEnglishImageTTSPlateausSideButton(wrapper, panel, record)) {
@@ -14758,6 +15235,7 @@ function scheduleEnglishImageTTSLayout() {
         document.querySelectorAll("#ai-response .image-tts-overlay-wrapper").forEach(wrapper => {
             layoutEnglishImageTTSPanelSpeakers(wrapper);
             layoutEnglishImageTTSPlateausSideButtons(wrapper);
+            layoutEnglishImageTTSKarstSideButtons(wrapper);
         });
     });
 }
@@ -14801,6 +15279,8 @@ function syncEnglishImageTTSDrawingMode() {
         button.style.pointerEvents = isDrawing ? "none" : "auto";
         button.setAttribute("aria-disabled", String(isDrawing));
     });
+    document.querySelectorAll("#ai-response .image-tts-overlay-wrapper").forEach(wrapper =>
+        layoutEnglishImageTTSKarstSideButtons(wrapper));
 }
 
 function buildEnglishImageTTSPanelText(panel) {
@@ -14960,6 +15440,10 @@ function getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishKarstImageTTSItemText(record, item)) {
+        return item.type === "label" && item.sourceText === "Stalactites & Stalagmites"
+            ? "Stalactites and Stalagmites" : item.ttsText;
+    }
     if (isEnglishPlateausImageTTSItemText(record, item)) {
         return item.ttsText;
     }
@@ -15074,6 +15558,19 @@ function speakEnglishImageTTSImageTextSequence(
     }
     const itemList = Array.isArray(items) ? items : [];
     const allItems = record ? record.panels.flatMap(panel => panel.items) : [];
+    const isKarstImageText = Boolean(record &&
+        record.imageId === "karst-landforms-basics" &&
+        record.assetFile === "images/english/karst-landforms-basics.png");
+    const isKarstSingleItemSequence = Boolean(isKarstImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const karstImage = isKarstImageText && wrapper ? wrapper.querySelector("img") : null;
+    const karstButtons = isKarstImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".image-tts-karst-side-trigger")) : [];
+    const karstReady = !isKarstImageText || Boolean(
+        layoutEnglishImageTTSKarstSideButtons(wrapper) && trigger && karstImage &&
+        karstImage.getAttribute("src") === record.assetFile && karstImage.complete &&
+        karstImage.naturalWidth === 1536 && karstImage.naturalHeight === 1024 &&
+        karstButtons.length === 4 && isEnglishKarstSideTriggerVisible(wrapper, trigger));
     const isPlateausImageText = Boolean(record &&
         record.imageId === "plateaus-basics" &&
         record.assetFile === "images/english/plateaus-basics.png");
@@ -15194,7 +15691,7 @@ function speakEnglishImageTTSImageTextSequence(
         triggerPanel !== record.panels.find(panel => panel.panelId === triggerPanel.panelId) ||
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
         (!isPanelSequence && !isWholeImageSequence &&
-            !isPlateausSingleItemSequence &&
+            !isPlateausSingleItemSequence && !isKarstSingleItemSequence &&
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
             !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence &&
             !isVolcanoesSingleItemSequence && !isSimpleMachinesSingleItemSequence &&
@@ -15211,7 +15708,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isHumanBodyHowItWorksSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
             !isEnglishImageTTSItemText(record, item)) ||
-        !isValidSelectedSpeechUnit || !playbackSteps.length ||
+        !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
@@ -15253,13 +15750,12 @@ function speakEnglishImageTTSImageTextSequence(
         }
         trigger._englishImageTTSImageTextActivePanel = itemPanel;
         trigger._englishImageTTSImageTextActiveItem = item;
-        if (isPlateausImageText &&
-            !placeEnglishImageTTSImageTextStopButton(
-                getEnglishTTSFloatingStopButton(),
-                wrapper
-            )) {
+        if ((isPlateausImageText || isKarstImageText) &&
+            !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(),wrapper)) {
             cancelEnglishImageTTSImageTextSequence(true);
-            setEnglishTTSStatus("目前畫面沒有安全的 Stop 位置，未開始或已取消 Plateaus 朗讀。");
+            setEnglishTTSStatus(isKarstImageText
+                ? "目前畫面沒有安全的 Stop 位置，未開始或已取消 Karst 朗讀。"
+                : "目前畫面沒有安全的 Stop 位置，未開始或已取消 Plateaus 朗讀。");
             updateEnglishTTSControls();
             return false;
         }
@@ -15507,6 +16003,10 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const plateausImage = isPlateausImageText && wrapper
         ? wrapper.querySelector("img")
         : null;
+    const isKarstImageText = Boolean(safeRecord && isEnglishKarstImageTTSRecord(safeRecord));
+    const karstImage = isKarstImageText && wrapper ? wrapper.querySelector("img") : null;
+    const karstLayoutReady = !isKarstImageText ||
+        layoutEnglishImageTTSKarstSideButtons(wrapper);
     if (!trigger || !wrapper || !trigger.classList ||
         !trigger.classList.contains("image-tts-image-text-hit-area") ||
         !record || !trigger._englishImageTTSImageTextRecord ||
@@ -15516,6 +16016,14 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         !safePanel || safePanel !== panel ||
         !panel.items.includes(trigger._englishImageTTSImageTextItem) ||
         wrapper.dataset.imageTtsAssetFile !== safeRecord.assetFile ||
+        (isKarstImageText && (!trigger.classList.contains("image-tts-karst-side-trigger") ||
+            !karstImage || karstImage.getAttribute("src") !== safeRecord.assetFile ||
+            !karstImage.complete || karstImage.naturalWidth !== 1536 ||
+            karstImage.naturalHeight !== 1024 ||
+            !isEnglishKarstImageTTSItemText(safeRecord,trigger._englishImageTTSImageTextItem) ||
+            !karstLayoutReady ||
+            wrapper.querySelectorAll(".image-tts-karst-side-trigger").length !== 4 ||
+            !isEnglishKarstSideTriggerVisible(wrapper,trigger))) ||
         (isPlateausImageText && (!trigger.classList.contains("image-tts-plateaus-side-trigger") ||
             !plateausImage || plateausImage.getAttribute("src") !== safeRecord.assetFile ||
             !plateausImage.complete || plateausImage.naturalWidth !== 1254 ||
@@ -15549,6 +16057,30 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+
+    if (isKarstImageText) {
+        const title=panel.items.find(item=>item.type==="label");
+        const sentence=panel.items.find(item=>item.type==="sentence");
+        if(!title||!sentence||!isEnglishKarstImageTTSItemText(safeRecord,title)||
+            !isEnglishKarstImageTTSItemText(safeRecord,sentence)){closeEnglishImageTTSMenu();return;}
+        menu.setAttribute("aria-label","Karst Landforms 第 "+panel.panelId+" 格朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton("🔊 朗讀標題","朗讀標題："+title.sourceText,
+            ()=>speakEnglishImageTTSImageTextSequence(trigger,[title],"已朗讀 Karst 標題。")));
+        menu.appendChild(createEnglishImageTTSMenuButton("🔊 朗讀句子","朗讀句子："+sentence.sourceText,
+            ()=>speakEnglishImageTTSImageTextSequence(trigger,[sentence],"已朗讀 Karst 句子。")));
+        menu.appendChild(createEnglishImageTTSMenuButton("🔊 朗讀本格",
+            "依序朗讀 Karst 第 "+panel.panelId+" 格標題與句子",
+            ()=>speakEnglishImageTTSImageTextSequence(trigger,panel.items,"Karst 本格已朗讀完成。")));
+        menu.appendChild(createEnglishImageTTSMenuButton("🔊 朗讀全圖","依序朗讀 Karst 四格全部標題與句子",
+            ()=>speakEnglishImageTTSImageTextSequence(trigger,
+                safeRecord.panels.flatMap(candidate=>candidate.items),"Karst 全圖已朗讀完成。")));
+        menu.hidden=false;menu.style.visibility="hidden";positionEnglishImageTTSMenu();
+        if(menu.hidden)return;
+        const first=menu.firstChild;
+        if(first){try{first.focus({preventScroll:true});}catch(error){first.focus();}}
+        return;
     }
 
     if (isPlateausImageText) {
@@ -16596,6 +17128,53 @@ function positionEnglishPlateausImageTTSMenu(menu, trigger) {
     return true;
 }
 
+
+function positionEnglishKarstImageTTSMenu(menu,trigger) {
+    if(!menu||!trigger||trigger.isConnected===false||!trigger.classList||
+        !trigger.classList.contains("image-tts-karst-side-trigger"))return false;
+    const wrapper=trigger.closest(".image-tts-overlay-wrapper");
+    const record=wrapper&&getEnglishImageTTSRecord(wrapper.dataset.imageTtsAssetFile);
+    const image=wrapper&&wrapper.querySelector("img");
+    if(!wrapper||!isEnglishKarstImageTTSRecord(record)||!image||
+        image.getAttribute("src")!=="images/english/karst-landforms-basics.png"||
+        !image.complete||image.naturalWidth!==1536||image.naturalHeight!==1024||
+        !layoutEnglishImageTTSKarstSideButtons(wrapper)||
+        !isEnglishKarstSideTriggerVisible(wrapper,trigger))return false;
+    const vp=getEnglishKarstViewport(getEnglishTTSFloatingStopButton());
+    if(!vp)return false;
+    menu.style.visibility="hidden";
+    menu.style.maxWidth=(vp.safeRight-vp.safeLeft)+"px";
+    menu.style.maxHeight=(vp.safeBottom-vp.safeTop)+"px";
+    const mr=menu.getBoundingClientRect();
+    const w=Math.min(mr.width||260,vp.safeRight-vp.safeLeft);
+    const h=Math.min(mr.height||200,vp.safeBottom-vp.safeTop);
+    if(!Number.isFinite(w)||!Number.isFinite(h)||w<=0||h<=0)return false;
+    const obs=getEnglishKarstObstacles([
+        ".image-tts-karst-side-trigger",".control-bar",".brush-colors",".scribble-box",
+        ".english-image-story-controls:not([hidden])","#english-tts-floating-stop:not([hidden])",
+        "#english-tts-panel:not([hidden])","#annotation-canvas"
+    ],vp,menu);
+    if(!obs)return false;
+    const tr=trigger.getBoundingClientRect();
+    if(!tr||tr.width<44||tr.height<44)return false;
+    const l=tr.left,r=tr.right,t=tr.top,b=tr.bottom;
+    const minL=vp.safeLeft,maxL=vp.safeRight-w,minT=vp.safeTop,maxT=vp.safeBottom-h;
+    if(maxL<minL||maxT<minT)return false;
+    const c=[];
+    const add=(left,top)=>{if(left>=minL&&left<=maxL&&top>=minT&&top<=maxT)c.push({left,top});};
+    add(r+8,t);add(l-w-8,t);add(l,b+8);add(l,t-h-8);
+    for(let top=minT;top<=maxT;top+=20)for(let left=minL;left<=maxL;left+=20)add(left,top);
+    add(maxL,maxT);
+    const dist=x=>Math.pow(x.left+w/2-(l+r)/2,2)+Math.pow(x.top+h/2-(t+b)/2,2);
+    c.sort((x,y)=>dist(x)-dist(y));
+    const hit=(x,o)=>x.left<o.right&&x.left+w>o.left&&x.top<o.bottom&&x.top+h>o.top;
+    const chosen=c.find(x=>!obs.some(o=>hit(x,o)));
+    if(!chosen)return false;
+    menu.style.left=chosen.left+"px";menu.style.top=chosen.top+"px";menu.style.visibility="visible";
+    return layoutEnglishImageTTSKarstSideButtons(wrapper)&&
+        isEnglishKarstSideTriggerVisible(wrapper,trigger);
+}
+
 function positionEnglishImageTTSMenu() {
     const menu = englishImageTTSOverlayState.menu;
     const trigger = englishImageTTSOverlayState.activeTrigger;
@@ -16664,6 +17243,12 @@ function positionEnglishImageTTSMenu() {
     menu.style.left = `${clamp(left, minLeft, maxLeft)}px`;
     menu.style.top = `${clamp(top, minTop, maxTop)}px`;
     menu.style.visibility = "visible";
+    if (trigger.classList && trigger.classList.contains("image-tts-karst-side-trigger") &&
+        !positionEnglishKarstImageTTSMenu(menu, trigger)) {
+        closeEnglishImageTTSMenu();
+        setEnglishTTSStatus("目前畫面沒有可安全顯示 Karst 朗讀選單的位置。");
+        return;
+    }
     if (trigger.classList &&
         trigger.classList.contains("image-tts-plateaus-side-trigger") &&
         !positionEnglishPlateausImageTTSMenu(menu, trigger)) {
