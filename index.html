@@ -10025,6 +10025,17 @@ function isEnglishKarstImageTTSItemText(record, item) {
         (panel.panelId === 4 && n === 0 || getEnglishTTSUnitText(item.sourceText)));
 }
 
+function isEnglishEnergyTransformationsImageTTSItemText(record, item) {
+    const file = "images/english/energy-transformations-basics.png";
+    if (!isEnglishEnergyTransformationsImageTTSRecord(record) || !item ||
+        !imageTTSData || !imageTTSData[file] || record.panels !== imageTTSData[file].panels) {
+        return false;
+    }
+    const safe = getEnglishEnergyTransformationsImageTextRecord(record, file);
+    return Boolean(safe && record.panels.some(panel =>
+        Array.isArray(panel.items) && panel.items.includes(item)));
+}
+
 function isEnglishAnimalsWildlifeImageTTSItemText(record,item) {
  const file="images/english/animals-wildlife-basics.png",canonical=typeof imageTTSData!=="undefined"&&imageTTSData?imageTTSData[file]:null;
  if(!isEnglishAnimalsWildlifeImageTTSRecord(record)||!item||!canonical||record.panels!==canonical.panels||item.sourceText!==item.ttsText)return false;
@@ -10033,7 +10044,8 @@ function isEnglishAnimalsWildlifeImageTTSItemText(record,item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishAnimalsWildlifeImageTTSItemText(record,item) || isEnglishPlantsNatureAmpersandItem(record, item) ||
+    if (isEnglishEnergyTransformationsImageTTSItemText(record, item) ||
+        isEnglishAnimalsWildlifeImageTTSItemText(record,item) || isEnglishPlantsNatureAmpersandItem(record, item) ||
         isEnglishPlantsNatureImageTTSItemText(record, item) ||
         isEnglishKarstImageTTSItemText(record, item) ||
         isEnglishPlateausImageTTSItemText(record, item) ||
@@ -10593,7 +10605,9 @@ function isEnglishImageTTSFullTitleImageTextRecord(record) {
         (record.imageId === "circulatory-system-basics" &&
             record.assetFile === "images/english/circulatory-system-basics.png") ||
         (record.imageId === "static-electricity-basics" &&
-            record.assetFile === "images/english/static-electricity-basics.png")
+            record.assetFile === "images/english/static-electricity-basics.png") ||
+        (record.imageId === "energy-transformations-basics" &&
+            record.assetFile === "images/english/energy-transformations-basics.png")
     ));
 }
 
@@ -10605,6 +10619,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishEnergyTransformationsImageTTSRecord(record)) return "Energy Transformations";
     if (isEnglishAnimalsWildlifeImageTTSRecord(record)) return "Animals & Wildlife";
     if (isEnglishPlateausImageTTSRecord(record)) {
         return "Plateaus";
@@ -12996,6 +13011,215 @@ function getEnglishAnimalsWildlifeExpectedPanels() {
     ];
 }
 
+function getEnglishEnergyTransformationsExpectedPanels() {
+    const b = (xPct, yPct, widthPct, heightPct) =>
+        ({ xPct, yPct, widthPct, heightPct });
+    const item = (itemId, type, sourceText, ttsText, itemBounds, tapRegion = null) => {
+        const result = {
+            itemId, readingOrder: itemId, type, sourceText, ttsText,
+            bounds: b(...itemBounds)
+        };
+        if (tapRegion) result.tapRegion = b(...tapRegion);
+        return result;
+    };
+    const panel = (panelId, readingOrder, panelBounds, items) =>
+        ({ panelId, readingOrder, bounds: b(...panelBounds), items });
+    return [
+        panel(0, 1, [0.4, 0.4, 99.2, 8.3], [
+            item(1, "phrase", "Energy Transformations", "Energy Transformations",
+                [21.8, 1.2, 42.2, 6.3])
+        ]),
+        panel(1, 2, [0.4, 9.2, 49.2, 43.8], [
+            item(1, "phrase", "1. Chemical Energy → Motion Energy",
+                "One: Chemical Energy to Motion Energy", [2.9, 11.1, 45.3, 4.1],
+                [0.9, 9.5, 48.3, 6.6]),
+            item(2, "sentence", "Food gives us chemical energy.",
+                "Food gives us chemical energy.", [7.0, 17.5, 29.0, 3.1]),
+            item(3, "sentence", "Our body changes it into motion energy.",
+                "Our body changes it into motion energy.", [7.0, 21.0, 35.5, 3.1]),
+            item(4, "label", "chemical energy", "chemical energy",
+                [5.1, 44.1, 11.4, 6.9]),
+            item(5, "label", "motion energy", "motion energy",
+                [32.1, 45.6, 10.9, 6.8])
+        ]),
+        panel(2, 3, [50.4, 9.2, 49.2, 43.8], [
+            item(1, "phrase", "2. Electrical Energy → Light Energy",
+                "Two: Electrical Energy to Light Energy", [53.2, 11.1, 41.7, 4.1],
+                [50.6, 9.5, 48.2, 6.6]),
+            item(2, "sentence", "A battery gives electrical energy.",
+                "A battery gives electrical energy.", [57.8, 17.5, 27.4, 3.1]),
+            item(3, "sentence", "The flashlight changes it into light energy.",
+                "The flashlight changes it into light energy.", [57.8, 21.0, 36.7, 3.1]),
+            item(4, "label", "electrical energy", "electrical energy",
+                [51.7, 44.5, 10.4, 6.8]),
+            item(5, "label", "light energy", "light energy",
+                [75.0, 44.8, 10.2, 6.8])
+        ]),
+        panel(3, 4, [0.4, 54.2, 49.2, 45.4], [
+            item(1, "phrase", "3. Electrical Energy → Heat Energy",
+                "Three: Electrical Energy to Heat Energy", [2.8, 56.3, 43.8, 4.1],
+                [0.9, 54.4, 48.3, 6.7]),
+            item(2, "sentence", "A rice cooker uses electrical energy.",
+                "A rice cooker uses electrical energy.", [7.3, 62.2, 30.3, 3.1]),
+            item(3, "sentence", "It changes it into heat energy to cook food.",
+                "It changes it into heat energy to cook food.", [7.3, 65.7, 36.0, 3.1]),
+            item(4, "label", "electrical energy", "electrical energy",
+                [2.6, 77.6, 9.4, 6.6]),
+            item(5, "label", "heat energy", "heat energy",
+                [19.3, 90.8, 10.0, 6.8])
+        ]),
+        panel(4, 5, [50.4, 54.2, 49.2, 45.4], [
+            item(1, "phrase", "4. Electrical Energy → Sound Energy",
+                "Four: Electrical Energy to Sound Energy", [53.2, 56.3, 42.2, 4.1],
+                [50.6, 54.4, 48.2, 6.7]),
+            item(2, "sentence", "A radio uses electrical energy.",
+                "A radio uses electrical energy.", [58.0, 62.2, 27.2, 3.1]),
+            item(3, "sentence", "It changes it into sound energy.",
+                "It changes it into sound energy.", [58.0, 65.7, 26.2, 3.1]),
+            item(4, "label", "electrical energy", "electrical energy",
+                [52.0, 78.4, 9.0, 6.9]),
+            item(5, "label", "sound energy", "sound energy",
+                [67.5, 90.8, 10.9, 6.8])
+        ])
+    ];
+}
+
+function isEnglishEnergyTransformationsImageTTSRecord(record) {
+    const file = "images/english/energy-transformations-basics.png";
+    return Boolean(record && record.imageId === "energy-transformations-basics" &&
+        record.assetFile === file && record.contentType === "image-text" &&
+        record.layout === "custom-energy-transformations-title-plus-2x2" &&
+        record.coordinateStatus === "estimated" &&
+        record.overlayRuntimeStatus === "not-tested" &&
+        typeof imageTTSData !== "undefined" && imageTTSData &&
+        imageTTSData[file] && record.panels === imageTTSData[file].panels);
+}
+
+function getEnglishEnergyTransformationsImageTextRecord(record, assetFile) {
+    const file = "images/english/energy-transformations-basics.png";
+    const expected = getEnglishEnergyTransformationsExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validBounds = value => exact(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) &&
+            value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 &&
+        value.yPct + value.heightPct <= 100;
+    const sameBounds = (actual, wanted) => validBounds(actual) &&
+        boundsKeys.every(key => actual[key] === wanted[key]);
+    const within = (outer, inner) => validBounds(outer) && validBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) =>
+        left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+    const topKeys = ["imageId", "assetFile", "contentType", "layout",
+        "transcriptStatus", "transcriptReviewMethod", "coordinateStatus",
+        "overlayRuntimeStatus", "sourceImageDimensions", "panels"];
+    if (!exact(record, topKeys) || record.imageId !== "energy-transformations-basics" ||
+        record.assetFile !== file || assetFile !== file ||
+        typeof imageTTSData === "undefined" || !imageTTSData ||
+        !imageTTSData[file] || record.panels !== imageTTSData[file].panels ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-energy-transformations-title-plus-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 ||
+        record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== expected.length) {
+        return null;
+    }
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === "energy-transformations-basics" ||
+                candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === "energy-transformations-basics" || entry.file === file))
+        : [];
+    if (identities.length !== 1 || identities[0] !== file ||
+        library.length !== 1 || library[0].id !== "energy-transformations-basics" ||
+        library[0].file !== file || library[0].category !== "english") {
+        return null;
+    }
+    const panelBounds = [];
+    const itemBounds = [];
+    const tapEntries = [];
+    let itemCount = 0;
+    for (let p = 0; p < expected.length; p += 1) {
+        const actualPanel = record.panels[p];
+        const wantedPanel = expected[p];
+        if (!exact(actualPanel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            actualPanel.panelId !== wantedPanel.panelId ||
+            actualPanel.readingOrder !== wantedPanel.readingOrder ||
+            !sameBounds(actualPanel.bounds, wantedPanel.bounds) ||
+            !Array.isArray(actualPanel.items) ||
+            actualPanel.items.length !== wantedPanel.items.length) {
+            return null;
+        }
+        panelBounds.push(actualPanel.bounds);
+        for (let n = 0; n < wantedPanel.items.length; n += 1) {
+            const actualItem = actualPanel.items[n];
+            const wantedItem = wantedPanel.items[n];
+            const hasTapRegion = Object.prototype.hasOwnProperty.call(wantedItem, "tapRegion");
+            const itemKeys = ["itemId", "readingOrder", "type", "sourceText",
+                "ttsText", "bounds"].concat(hasTapRegion ? ["tapRegion"] : []);
+            if (!exact(actualItem, itemKeys) ||
+                actualItem.itemId !== wantedItem.itemId ||
+                actualItem.readingOrder !== wantedItem.readingOrder ||
+                actualItem.type !== wantedItem.type ||
+                actualItem.sourceText !== wantedItem.sourceText ||
+                actualItem.ttsText !== wantedItem.ttsText ||
+                !getEnglishTTSUnitText(actualItem.ttsText) ||
+                !sameBounds(actualItem.bounds, wantedItem.bounds) ||
+                !within(actualPanel.bounds, actualItem.bounds)) {
+                return null;
+            }
+            itemBounds.push({ bounds: actualItem.bounds, item: actualItem });
+            if (hasTapRegion) {
+                if (!sameBounds(actualItem.tapRegion, wantedItem.tapRegion) ||
+                    !within(actualPanel.bounds, actualItem.tapRegion)) {
+                    return null;
+                }
+                tapEntries.push({ bounds: actualItem.tapRegion, item: actualItem });
+            }
+            itemCount += 1;
+        }
+    }
+    for (let left = 0; left < panelBounds.length; left += 1) {
+        for (let right = left + 1; right < panelBounds.length; right += 1) {
+            if (overlaps(panelBounds[left], panelBounds[right])) return null;
+        }
+    }
+    for (let left = 0; left < itemBounds.length; left += 1) {
+        for (let right = left + 1; right < itemBounds.length; right += 1) {
+            if (overlaps(itemBounds[left].bounds, itemBounds[right].bounds)) return null;
+        }
+    }
+    for (let left = 0; left < tapEntries.length; left += 1) {
+        for (let right = left + 1; right < tapEntries.length; right += 1) {
+            if (overlaps(tapEntries[left].bounds, tapEntries[right].bounds)) return null;
+        }
+        for (const item of itemBounds) {
+            if (item.item !== tapEntries[left].item &&
+                overlaps(tapEntries[left].bounds, item.bounds)) return null;
+        }
+    }
+    if (itemCount !== 21 || tapEntries.length !== 4) return null;
+    return { ...record, panels: record.panels };
+}
+
 function isEnglishAnimalsWildlifeImageTTSRecord(record) {
     const file="images/english/animals-wildlife-basics.png";
     const canonical=typeof imageTTSData!=="undefined"&&imageTTSData?imageTTSData[file]:null;
@@ -13037,6 +13261,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    const energyFile = "images/english/energy-transformations-basics.png";
+    if (record && (record.imageId === "energy-transformations-basics" ||
+        record.assetFile === energyFile || assetFile === energyFile)) {
+        return getEnglishEnergyTransformationsImageTextRecord(record, assetFile);
+    }
     const animalsFile="images/english/animals-wildlife-basics.png";
     if(record&&(record.imageId==="animals-wildlife-basics"||record.assetFile===animalsFile||assetFile===animalsFile))return getEnglishAnimalsWildlifeImageTextRecord(record,assetFile);
     if (!record || record.assetFile !== assetFile || record.transcriptStatus !== "verified" || record.coordinateStatus !== "calibrated" || !Array.isArray(record.panels)) return null;
@@ -16056,6 +16285,9 @@ function getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item) {
  return [item.ttsText];
 }
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishEnergyTransformationsImageTTSItemText(record, item)) {
+        return item.ttsText;
+    }
     if (isEnglishAnimalsWildlifeImageTTSItemText(record, item) &&
         (item.sourceText === "Animals & Wildlife" || item.sourceText === "Birds & Insects")) {
         return item.sourceText.replace(" & ", " and ");
@@ -16181,6 +16413,11 @@ function speakEnglishImageTTSImageTextSequence(
     }
     const itemList = Array.isArray(items) ? items : [];
     const allItems = record ? record.panels.flatMap(panel => panel.items) : [];
+    const isEnergyTransformationsImageText = Boolean(record &&
+        isEnglishEnergyTransformationsImageTTSRecord(record));
+    const isEnergyTransformationsSingleItemSequence = Boolean(
+        isEnergyTransformationsImageText && itemList.length === 1 &&
+        allItems.includes(itemList[0]));
     const isKarstImageText = Boolean(record &&
         record.imageId === "karst-landforms-basics" &&
         record.assetFile === "images/english/karst-landforms-basics.png");
@@ -16317,6 +16554,7 @@ function speakEnglishImageTTSImageTextSequence(
         triggerPanel !== record.panels.find(panel => panel.panelId === triggerPanel.panelId) ||
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
         (!isPanelSequence && !isWholeImageSequence &&
+            !isEnergyTransformationsSingleItemSequence &&
             !isPlateausSingleItemSequence && !isKarstSingleItemSequence &&
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
             !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence &&
@@ -16333,7 +16571,9 @@ function speakEnglishImageTTSImageTextSequence(
             !isAnimalsWildlifeSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
             !isHumanBodyHowItWorksSingleItemSequence) ||
-        itemList.some(item => !item || item.sourceText !== item.ttsText ||
+        itemList.some(item => !item ||
+            (item.sourceText !== item.ttsText &&
+                !isEnglishEnergyTransformationsImageTTSItemText(record, item)) ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
@@ -16684,6 +16924,59 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isEnglishEnergyTransformationsImageTTSRecord(safeRecord)) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        if (!panel || panel.panelId < 1 || panel.panelId > 4 ||
+            panel.items.length !== 5 || clickedItem !== panel.items[0] ||
+            !isEnglishEnergyTransformationsImageTTSItemText(safeRecord, clickedItem) ||
+            panel.items.some(item =>
+                !isEnglishEnergyTransformationsImageTTSItemText(safeRecord, item))) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        menu.setAttribute("aria-label",
+            "Energy Transformations 第 " + panel.panelId + " 格朗讀選項");
+        panel.items.forEach(item => {
+            const itemLabel = item.sourceText.replace(/\r?\n/g, " ");
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "🔊 朗讀「" + itemLabel + "」",
+                "朗讀第 " + panel.panelId + " 格原圖文字：" + item.sourceText,
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger, [item], "已朗讀所選 Energy Transformations 原圖文字。"
+                )
+            ));
+        });
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀本格",
+            "依序朗讀 Energy Transformations 第 " + panel.panelId + " 格五項原圖文字",
+            () => speakEnglishImageTTSImageTextSequence(
+                trigger, panel.items, "Energy Transformations 本格已朗讀完成。"
+            )
+        ));
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀全圖",
+            "依序朗讀 Energy Transformations 全圖 21 項原圖文字",
+            () => speakEnglishImageTTSImageTextSequence(
+                trigger,
+                safeRecord.panels.flatMap(candidate => candidate.items),
+                "Energy Transformations 全圖已朗讀完成。"
+            )
+        ));
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (menu.hidden) return;
+        const firstButton = menu.firstChild;
+        if (firstButton) {
+            try {
+                firstButton.focus({ preventScroll: true });
+            } catch (error) {
+                firstButton.focus();
+            }
+        }
+        return;
     }
 
     if(isEnglishAnimalsWildlifeImageTTSRecord(safeRecord)){

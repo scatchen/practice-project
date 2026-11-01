@@ -20937,6 +20937,128 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/energy-transformations-basics.png": {
+        imageId: "energy-transformations-basics",
+        assetFile: "images/english/energy-transformations-basics.png",
+        contentType: "image-text",
+        layout: "custom-energy-transformations-title-plus-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1536, height: 1024 },
+        panels: [
+            {
+                panelId: 0, readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 0.4, widthPct: 99.2, heightPct: 8.3 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "Energy Transformations", ttsText: "Energy Transformations",
+                        bounds: { xPct: 21.8, yPct: 1.2, widthPct: 42.2, heightPct: 6.3 } }
+                ]
+            },
+            {
+                panelId: 1, readingOrder: 2,
+                bounds: { xPct: 0.4, yPct: 9.2, widthPct: 49.2, heightPct: 43.8 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "1. Chemical Energy → Motion Energy",
+                        ttsText: "One: Chemical Energy to Motion Energy",
+                        bounds: { xPct: 2.9, yPct: 11.1, widthPct: 45.3, heightPct: 4.1 },
+                        tapRegion: { xPct: 0.9, yPct: 9.5, widthPct: 48.3, heightPct: 6.6 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Food gives us chemical energy.",
+                        ttsText: "Food gives us chemical energy.",
+                        bounds: { xPct: 7.0, yPct: 17.5, widthPct: 29.0, heightPct: 3.1 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "Our body changes it into motion energy.",
+                        ttsText: "Our body changes it into motion energy.",
+                        bounds: { xPct: 7.0, yPct: 21.0, widthPct: 35.5, heightPct: 3.1 } },
+                    { itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "chemical energy", ttsText: "chemical energy",
+                        bounds: { xPct: 5.1, yPct: 44.1, widthPct: 11.4, heightPct: 6.9 } },
+                    { itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "motion energy", ttsText: "motion energy",
+                        bounds: { xPct: 32.1, yPct: 45.6, widthPct: 10.9, heightPct: 6.8 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 3,
+                bounds: { xPct: 50.4, yPct: 9.2, widthPct: 49.2, heightPct: 43.8 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "2. Electrical Energy → Light Energy",
+                        ttsText: "Two: Electrical Energy to Light Energy",
+                        bounds: { xPct: 53.2, yPct: 11.1, widthPct: 41.7, heightPct: 4.1 },
+                        tapRegion: { xPct: 50.6, yPct: 9.5, widthPct: 48.2, heightPct: 6.6 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A battery gives electrical energy.",
+                        ttsText: "A battery gives electrical energy.",
+                        bounds: { xPct: 57.8, yPct: 17.5, widthPct: 27.4, heightPct: 3.1 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "The flashlight changes it into light energy.",
+                        ttsText: "The flashlight changes it into light energy.",
+                        bounds: { xPct: 57.8, yPct: 21.0, widthPct: 36.7, heightPct: 3.1 } },
+                    { itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "electrical energy", ttsText: "electrical energy",
+                        bounds: { xPct: 51.7, yPct: 44.5, widthPct: 10.4, heightPct: 6.8 } },
+                    { itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "light energy", ttsText: "light energy",
+                        bounds: { xPct: 75.0, yPct: 44.8, widthPct: 10.2, heightPct: 6.8 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 4,
+                bounds: { xPct: 0.4, yPct: 54.2, widthPct: 49.2, heightPct: 45.4 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "3. Electrical Energy → Heat Energy",
+                        ttsText: "Three: Electrical Energy to Heat Energy",
+                        bounds: { xPct: 2.8, yPct: 56.3, widthPct: 43.8, heightPct: 4.1 },
+                        tapRegion: { xPct: 0.9, yPct: 54.4, widthPct: 48.3, heightPct: 6.7 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A rice cooker uses electrical energy.",
+                        ttsText: "A rice cooker uses electrical energy.",
+                        bounds: { xPct: 7.3, yPct: 62.2, widthPct: 30.3, heightPct: 3.1 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "It changes it into heat energy to cook food.",
+                        ttsText: "It changes it into heat energy to cook food.",
+                        bounds: { xPct: 7.3, yPct: 65.7, widthPct: 36.0, heightPct: 3.1 } },
+                    { itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "electrical energy", ttsText: "electrical energy",
+                        bounds: { xPct: 2.6, yPct: 77.6, widthPct: 9.4, heightPct: 6.6 } },
+                    { itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "heat energy", ttsText: "heat energy",
+                        bounds: { xPct: 19.3, yPct: 90.8, widthPct: 10.0, heightPct: 6.8 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 5,
+                bounds: { xPct: 50.4, yPct: 54.2, widthPct: 49.2, heightPct: 45.4 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase",
+                        sourceText: "4. Electrical Energy → Sound Energy",
+                        ttsText: "Four: Electrical Energy to Sound Energy",
+                        bounds: { xPct: 53.2, yPct: 56.3, widthPct: 42.2, heightPct: 4.1 },
+                        tapRegion: { xPct: 50.6, yPct: 54.4, widthPct: 48.2, heightPct: 6.7 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "A radio uses electrical energy.",
+                        ttsText: "A radio uses electrical energy.",
+                        bounds: { xPct: 58.0, yPct: 62.2, widthPct: 27.2, heightPct: 3.1 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "It changes it into sound energy.",
+                        ttsText: "It changes it into sound energy.",
+                        bounds: { xPct: 58.0, yPct: 65.7, widthPct: 26.2, heightPct: 3.1 } },
+                    { itemId: 4, readingOrder: 4, type: "label",
+                        sourceText: "electrical energy", ttsText: "electrical energy",
+                        bounds: { xPct: 52.0, yPct: 78.4, widthPct: 9.0, heightPct: 6.9 } },
+                    { itemId: 5, readingOrder: 5, type: "label",
+                        sourceText: "sound energy", ttsText: "sound energy",
+                        bounds: { xPct: 67.5, yPct: 90.8, widthPct: 10.9, heightPct: 6.8 } }
+                ]
+            }
+        ]
     }
 
 };
