@@ -21059,6 +21059,70 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+
+    "images/english/plains-basics.png": {
+        imageId: "plains-basics",
+        assetFile: "images/english/plains-basics.png",
+        contentType: "image-text",
+        layout: "custom-plains-title-plus-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1536, height: 1024 },
+        panels: [
+            {
+                panelId: 0, readingOrder: 1,
+                bounds: { xPct: 0.7, yPct: 0.5, widthPct: 98.6, heightPct: 13.0 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Plains", ttsText: "Plains",
+                        bounds: { xPct: 31.0, yPct: 2.0, widthPct: 23.8, heightPct: 10.3 },
+                        tapRegion: { xPct: 31.0, yPct: 2.0, widthPct: 23.8, heightPct: 10.3 } }
+                ]
+            },
+            {
+                panelId: 1, readingOrder: 2,
+                bounds: { xPct: 0.7, yPct: 14.2, widthPct: 49.3, heightPct: 41.6 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "A plain is wide, flat land.", ttsText: "A plain is wide, flat land.",
+                        bounds: { xPct: 7.8, yPct: 16.2, widthPct: 40.4, heightPct: 7.6 },
+                        tapRegion: { xPct: 7.8, yPct: 16.2, widthPct: 40.4, heightPct: 7.6 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 3,
+                bounds: { xPct: 50.4, yPct: 14.2, widthPct: 48.9, heightPct: 41.6 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Plains are wide and flat.", ttsText: "Plains are wide and flat.",
+                        bounds: { xPct: 57.8, yPct: 16.2, widthPct: 39.2, heightPct: 7.6 },
+                        tapRegion: { xPct: 57.8, yPct: 16.2, widthPct: 39.2, heightPct: 7.6 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 4,
+                bounds: { xPct: 0.7, yPct: 56.6, widthPct: 49.3, heightPct: 42.9 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Grass can grow on a plain.", ttsText: "Grass can grow on a plain.",
+                        bounds: { xPct: 8.2, yPct: 58.5, widthPct: 40.0, heightPct: 7.7 },
+                        tapRegion: { xPct: 8.2, yPct: 58.5, widthPct: 40.0, heightPct: 7.7 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 5,
+                bounds: { xPct: 50.4, yPct: 56.6, widthPct: 48.9, heightPct: 42.9 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "People can live on plains.", ttsText: "People can live on plains.",
+                        bounds: { xPct: 58.1, yPct: 58.5, widthPct: 38.9, heightPct: 7.7 },
+                        tapRegion: { xPct: 58.1, yPct: 58.5, widthPct: 38.9, heightPct: 7.7 } }
+                ]
+            }
+        ]
     }
 
 };

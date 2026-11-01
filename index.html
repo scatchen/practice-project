@@ -10045,7 +10045,8 @@ function isEnglishAnimalsWildlifeImageTTSItemText(record,item) {
 
 function isEnglishImageTTSItemText(record, item) {
     if (isEnglishEnergyTransformationsImageTTSItemText(record, item) ||
-        isEnglishAnimalsWildlifeImageTTSItemText(record,item) || isEnglishPlantsNatureAmpersandItem(record, item) ||
+        isEnglishAnimalsWildlifeImageTTSItemText(record,item) ||
+        isEnglishPlainsImageTTSItemText(record, item) || isEnglishPlantsNatureAmpersandItem(record, item) ||
         isEnglishPlantsNatureImageTTSItemText(record, item) ||
         isEnglishKarstImageTTSItemText(record, item) ||
         isEnglishPlateausImageTTSItemText(record, item) ||
@@ -10607,7 +10608,9 @@ function isEnglishImageTTSFullTitleImageTextRecord(record) {
         (record.imageId === "static-electricity-basics" &&
             record.assetFile === "images/english/static-electricity-basics.png") ||
         (record.imageId === "energy-transformations-basics" &&
-            record.assetFile === "images/english/energy-transformations-basics.png")
+            record.assetFile === "images/english/energy-transformations-basics.png") ||
+        (record.imageId === "plains-basics" &&
+            record.assetFile === "images/english/plains-basics.png")
     ));
 }
 
@@ -10621,6 +10624,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 function getEnglishImageTTSImageTextName(record) {
     if (isEnglishEnergyTransformationsImageTTSRecord(record)) return "Energy Transformations";
     if (isEnglishAnimalsWildlifeImageTTSRecord(record)) return "Animals & Wildlife";
+    if (isEnglishPlainsImageTTSRecord(record)) return "Plains";
     if (isEnglishPlateausImageTTSRecord(record)) {
         return "Plateaus";
     }
@@ -12927,6 +12931,144 @@ function getEnglishKarstImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+
+function getEnglishPlainsImageTTSExpectedPanels() {
+    const b = (xPct, yPct, widthPct, heightPct) => ({ xPct, yPct, widthPct, heightPct });
+    const item = (type, sourceText, bounds) => ({
+        itemId: 1, readingOrder: 1, type, sourceText, ttsText: sourceText,
+        bounds: b(...bounds), tapRegion: b(...bounds)
+    });
+    return [
+        { panelId: 0, readingOrder: 1, bounds: b(0.7, 0.5, 98.6, 13.0),
+            items: [item("label", "Plains", [31.0, 2.0, 23.8, 10.3])] },
+        { panelId: 1, readingOrder: 2, bounds: b(0.7, 14.2, 49.3, 41.6),
+            items: [item("sentence", "A plain is wide, flat land.", [7.8, 16.2, 40.4, 7.6])] },
+        { panelId: 2, readingOrder: 3, bounds: b(50.4, 14.2, 48.9, 41.6),
+            items: [item("sentence", "Plains are wide and flat.", [57.8, 16.2, 39.2, 7.6])] },
+        { panelId: 3, readingOrder: 4, bounds: b(0.7, 56.6, 49.3, 42.9),
+            items: [item("sentence", "Grass can grow on a plain.", [8.2, 58.5, 40.0, 7.7])] },
+        { panelId: 4, readingOrder: 5, bounds: b(50.4, 56.6, 48.9, 42.9),
+            items: [item("sentence", "People can live on plains.", [58.1, 58.5, 38.9, 7.7])] }
+    ];
+}
+
+function isEnglishPlainsImageTTSRecord(record) {
+    return Boolean(record && record.imageId === "plains-basics" &&
+        record.assetFile === "images/english/plains-basics.png" &&
+        record.contentType === "image-text" &&
+        record.layout === "custom-plains-title-plus-2x2" &&
+        record.coordinateStatus === "estimated" &&
+        record.overlayRuntimeStatus === "not-tested");
+}
+
+function getEnglishPlainsImageTextRecord(record, assetFile) {
+    const file = "images/english/plains-basics.png";
+    const expected = getEnglishPlainsImageTTSExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validBounds = value => exact(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const sameBounds = (actual, wanted) => validBounds(actual) &&
+        boundsKeys.every(key => actual[key] === wanted[key]);
+    const contains = (outer, inner) => validBounds(outer) && validBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+    if (!exact(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"]) ||
+        record.imageId !== "plains-basics" || record.assetFile !== file || assetFile !== file ||
+        !imageTTSData || !imageTTSData[file] ||
+        record.panels !== imageTTSData[file].panels ||
+        record.contentType !== "image-text" || record.layout !== "custom-plains-title-plus-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== expected.length) {
+        return null;
+    }
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === "plains-basics" || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === "plains-basics" || entry.file === file))
+        : [];
+    if (identities.length !== 1 || identities[0] !== file ||
+        library.length !== 1 || library[0].id !== "plains-basics" ||
+        library[0].file !== file || library[0].category !== "english") {
+        return null;
+    }
+    const panelBounds = [];
+    const itemBounds = [];
+    const tapRegions = [];
+    let itemCount = 0;
+    for (let panelIndex = 0; panelIndex < expected.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const wantedPanel = expected[panelIndex];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== wantedPanel.panelId || panel.readingOrder !== wantedPanel.readingOrder ||
+            !sameBounds(panel.bounds, wantedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== 1) {
+            return null;
+        }
+        panelBounds.push(panel.bounds);
+        const item = panel.items[0];
+        const wantedItem = wantedPanel.items[0];
+        if (!exact(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"]) ||
+            item.itemId !== 1 || item.readingOrder !== 1 || item.type !== wantedItem.type ||
+            item.sourceText !== wantedItem.sourceText || item.ttsText !== item.sourceText ||
+            !getEnglishTTSUnitText(item.sourceText) ||
+            !sameBounds(item.bounds, wantedItem.bounds) ||
+            !sameBounds(item.tapRegion, wantedItem.tapRegion) ||
+            !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+            !contains(item.tapRegion, item.bounds)) {
+            return null;
+        }
+        itemBounds.push(item.bounds);
+        tapRegions.push(item.tapRegion);
+        itemCount += 1;
+    }
+    for (const regions of [panelBounds, itemBounds, tapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) return null;
+            }
+        }
+    }
+    for (let tapIndex = 0; tapIndex < tapRegions.length; tapIndex += 1) {
+        for (let itemIndex = 0; itemIndex < itemBounds.length; itemIndex += 1) {
+            if (tapIndex !== itemIndex && overlaps(tapRegions[tapIndex], itemBounds[itemIndex])) {
+                return null;
+            }
+        }
+    }
+    if (itemCount !== 5) return null;
+    return { ...record, panels: record.panels };
+}
+
+function isEnglishPlainsImageTTSItemText(record, item) {
+    const file = "images/english/plains-basics.png";
+    if (!isEnglishPlainsImageTTSRecord(record) || !item || item.sourceText !== item.ttsText) {
+        return false;
+    }
+    const safe = getEnglishPlainsImageTextRecord(record, file);
+    return Boolean(safe && record.panels.some(panel =>
+        Array.isArray(panel.items) && panel.items.includes(item)));
+}
+
 function getEnglishAnimalsWildlifeExpectedPanels() {
     return [
         { panelId: 1, readingOrder: 1, bounds: { xPct: 0.4, yPct: 0.4, widthPct: 74.6, heightPct: 15 }, items: [
@@ -13268,6 +13410,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
     const animalsFile="images/english/animals-wildlife-basics.png";
     if(record&&(record.imageId==="animals-wildlife-basics"||record.assetFile===animalsFile||assetFile===animalsFile))return getEnglishAnimalsWildlifeImageTextRecord(record,assetFile);
+    const plainsFile = "images/english/plains-basics.png";
+    if (record && (record.imageId === "plains-basics" ||
+        record.assetFile === plainsFile || assetFile === plainsFile)) {
+        return getEnglishPlainsImageTextRecord(record, assetFile);
+    }
     if (!record || record.assetFile !== assetFile || record.transcriptStatus !== "verified" || record.coordinateStatus !== "calibrated" || !Array.isArray(record.panels)) return null;
 
     const isPlantsNatureIdentity = record.imageId === "plants-nature-basics" ||
@@ -15695,6 +15842,36 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
 
         if (record.contentType === "image-text") {
             if (image.complete && image.naturalWidth === 0) return;
+            if (isEnglishPlainsImageTTSRecord(record)) {
+                const expectedFile = "images/english/plains-basics.png";
+                const hasExpectedDimensions = () => image.getAttribute("src") === expectedFile &&
+                    image.complete && image.naturalWidth === 1536 && image.naturalHeight === 1024;
+                if (image.complete && !hasExpectedDimensions()) return;
+                record.panels.forEach(panel => panel.items.forEach(item => {
+                    if (createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record)) added += 1;
+                }));
+                const hidePlainsHitAreas = () => {
+                    wrapper.querySelectorAll(".image-tts-image-text-hit-area").forEach(button => {
+                        button.hidden = true;
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) {
+                        closeEnglishImageTTSMenu();
+                    }
+                };
+                image.addEventListener("load", () => {
+                    if (!hasExpectedDimensions()) {
+                        hidePlainsHitAreas();
+                        return;
+                    }
+                    layoutEnglishImageTTSImageTextHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", hidePlainsHitAreas, { once: true });
+                if (image.complete && hasExpectedDimensions()) {
+                    layoutEnglishImageTTSImageTextHitAreas(wrapper);
+                }
+                return;
+            }
             if (isEnglishAnimalsWildlifeImageTTSRecord(record)) {
                 record.panels.forEach(panel=>panel.items.forEach(item=>{if(item.tapRegion&&createEnglishImageTTSImageTextHitArea(wrapper,panel,item,record))added++;}));
                 image.addEventListener("load",()=>layoutEnglishImageTTSImageTextHitAreas(wrapper),{once:true});
@@ -16288,6 +16465,9 @@ function getEnglishImageTTSImageTextSpeechText(record, item) {
     if (isEnglishEnergyTransformationsImageTTSItemText(record, item)) {
         return item.ttsText;
     }
+    if (isEnglishPlainsImageTTSItemText(record, item)) {
+        return item.ttsText;
+    }
     if (isEnglishAnimalsWildlifeImageTTSItemText(record, item) &&
         (item.sourceText === "Animals & Wildlife" || item.sourceText === "Birds & Insects")) {
         return item.sourceText.replace(" & ", " and ");
@@ -16872,6 +17052,8 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : null;
     const isKarstImageText = Boolean(safeRecord && isEnglishKarstImageTTSRecord(safeRecord));
     const karstImage = isKarstImageText && wrapper ? wrapper.querySelector("img") : null;
+    const isPlainsImageText = Boolean(safeRecord && isEnglishPlainsImageTTSRecord(safeRecord));
+    const plainsImage = isPlainsImageText && wrapper ? wrapper.querySelector("img") : null;
     const karstLayoutReady = !isKarstImageText ||
         layoutEnglishImageTTSKarstSideButtons(wrapper);
     if (!trigger || !wrapper || !trigger.classList ||
@@ -16895,6 +17077,10 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
             !plateausImage || plateausImage.getAttribute("src") !== safeRecord.assetFile ||
             !plateausImage.complete || plateausImage.naturalWidth !== 1254 ||
             plateausImage.naturalHeight !== 1254)) ||
+        (isPlainsImageText && (!plainsImage ||
+            plainsImage.getAttribute("src") !== safeRecord.assetFile ||
+            !plainsImage.complete || plainsImage.naturalWidth !== 1536 ||
+            plainsImage.naturalHeight !== 1024)) ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         return;
     }
@@ -17115,6 +17301,56 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
                 "已朗讀所選原圖文字。"
             )
         ));
+    }
+
+    if (isPlainsImageText) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        const allItems = safeRecord.panels.flatMap(candidate => candidate.items);
+        if (safeRecordName !== "Plains" || !clickedItem || panel.items.length !== 1 ||
+            panel.items[0] !== clickedItem || !isEnglishPlainsImageTTSItemText(safeRecord, clickedItem) ||
+            allItems.length !== 5 || allItems.some(item =>
+                !isEnglishPlainsImageTTSItemText(safeRecord, item))) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const isTitle = panel.panelId === 0;
+        menu.setAttribute("aria-label", isTitle
+            ? "Plains 全圖標題朗讀選項"
+            : "Plains 第 " + panel.panelId + " 格朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            isTitle ? "🔊 朗讀標題" : "🔊 朗讀此句",
+            isTitle ? "朗讀標題：Plains" : "朗讀句子：" + clickedItem.sourceText,
+            () => speakEnglishImageTTSImageTextSequence(
+                trigger, [clickedItem], isTitle ? "Plains 標題已朗讀完成。" : "所選句子已朗讀完成。"
+            )
+        ));
+        if (!isTitle) {
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "🔊 朗讀本格",
+                "朗讀 Plains 第 " + panel.panelId + " 格句子",
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger, panel.items, "Plains 本格已朗讀完成。"
+                )
+            ));
+        }
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀全圖",
+            "依序朗讀 Plains 標題與四個完整句子",
+            () => speakEnglishImageTTSImageTextSequence(
+                trigger, allItems, "Plains 全圖已朗讀完成。"
+            )
+        ));
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try {
+                menu.firstChild.focus({ preventScroll: true });
+            } catch (error) {
+                menu.firstChild.focus();
+            }
+        }
+        return;
     }
 
     const isHobbiesInterestsImageText = safeRecord.imageId === "hobbies-interests-basics" &&
