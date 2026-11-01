@@ -20797,6 +20797,146 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/animals-wildlife-basics.png": {
+        imageId: "animals-wildlife-basics",
+        assetFile: "images/english/animals-wildlife-basics.png",
+        contentType: "image-text",
+        layout: "custom-animals-wildlife-32-entry-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1312, height: 1199 },
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 0.4, widthPct: 74.6, heightPct: 15 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "phrase", sourceText: "Animals & Wildlife", ttsText: "Animals & Wildlife", bounds: { xPct: 8.7, yPct: 3.3, widthPct: 42, heightPct: 5.4 }, tapRegion: { xPct: 7.5, yPct: 2.5, widthPct: 45, heightPct: 7 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 75.1, yPct: 0.4, widthPct: 24.5, heightPct: 15.4 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence", sourceText: "Animals live in different places.\nThey have unique features and ways to survive in nature.", ttsText: "Animals live in different places.\nThey have unique features and ways to survive in nature.", bounds: { xPct: 76.5, yPct: 2.9, widthPct: 17.7, heightPct: 8 }, tapRegion: { xPct: 76, yPct: 2.4, widthPct: 19, heightPct: 8.5 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0.4, yPct: 16, widthPct: 42.6, heightPct: 25.6 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Forest Animals", ttsText: "Forest Animals", bounds: { xPct: 1.7, yPct: 18.2, widthPct: 18.2, heightPct: 3.8 }, tapRegion: { xPct: 1.3, yPct: 16, widthPct: 20.4, heightPct: 8 } },
+                    { itemId: 2, readingOrder: 2, type: "label", sourceText: "bear", ttsText: "bear", bounds: { xPct: 7.2, yPct: 37.2, widthPct: 5, heightPct: 2.2 }, tapRegion: { xPct: 6, yPct: 34.3, widthPct: 7.4, heightPct: 7.3 } },
+                    { itemId: 3, readingOrder: 3, type: "label", sourceText: "deer", ttsText: "deer", bounds: { xPct: 21.4, yPct: 36.7, widthPct: 4.2, heightPct: 2.2 }, tapRegion: { xPct: 20, yPct: 33.8, widthPct: 7.2, heightPct: 7.8 } },
+                    { itemId: 4, readingOrder: 4, type: "label", sourceText: "fox", ttsText: "fox", bounds: { xPct: 33.5, yPct: 37.2, widthPct: 4, heightPct: 2.2 }, tapRegion: { xPct: 32.1, yPct: 34.1, widthPct: 7.4, heightPct: 7.5 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 44, yPct: 16, widthPct: 55.6, heightPct: 25.9 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Ocean Animals", ttsText: "Ocean Animals", bounds: { xPct: 45.6, yPct: 18.2, widthPct: 18, heightPct: 3.8 }, tapRegion: { xPct: 44, yPct: 16, widthPct: 21.8, heightPct: 8 } },
+                    { itemId: 2, readingOrder: 2, type: "label", sourceText: "dolphin", ttsText: "dolphin", bounds: { xPct: 84.7, yPct: 28.3, widthPct: 6, heightPct: 2.2 }, tapRegion: { xPct: 83.4, yPct: 25, widthPct: 8.8, heightPct: 8 } },
+                    { itemId: 3, readingOrder: 3, type: "label", sourceText: "whale", ttsText: "whale", bounds: { xPct: 50.3, yPct: 34.3, widthPct: 5.4, heightPct: 2.3 }, tapRegion: { xPct: 48.7, yPct: 31, widthPct: 8.5, heightPct: 7.8 } },
+                    { itemId: 4, readingOrder: 4, type: "phrase", sourceText: "sea turtle", ttsText: "sea turtle", bounds: { xPct: 71.4, yPct: 34.5, widthPct: 7.2, heightPct: 2.2 }, tapRegion: { xPct: 70.5, yPct: 30.7, widthPct: 10, heightPct: 7.8 } },
+                    { itemId: 5, readingOrder: 5, type: "label", sourceText: "fish", ttsText: "fish", bounds: { xPct: 64.8, yPct: 39.6, widthPct: 3.5, heightPct: 2.2 }, tapRegion: { xPct: 63, yPct: 34, widthPct: 7.3, heightPct: 7.9 } },
+                    { itemId: 6, readingOrder: 6, type: "label", sourceText: "octopus", ttsText: "octopus", bounds: { xPct: 83.7, yPct: 39.4, widthPct: 5.8, heightPct: 2.2 }, tapRegion: { xPct: 82.2, yPct: 33.6, widthPct: 7.5, heightPct: 8 } }
+                ]
+            },
+            {
+                panelId: 5, readingOrder: 5,
+                bounds: { xPct: 0.4, yPct: 41.9, widthPct: 31.2, heightPct: 28.1 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Farm Animals", ttsText: "Farm Animals", bounds: { xPct: 1.6, yPct: 42.4, widthPct: 17.2, heightPct: 3.8 }, tapRegion: { xPct: 1.3, yPct: 41.9, widthPct: 18.9, heightPct: 8 } },
+                    { itemId: 2, readingOrder: 2, type: "label", sourceText: "cow", ttsText: "cow", bounds: { xPct: 5.2, yPct: 58.8, widthPct: 3.8, heightPct: 2.2 }, tapRegion: { xPct: 3.3, yPct: 55.5, widthPct: 7.4, heightPct: 8 } },
+                    { itemId: 3, readingOrder: 3, type: "label", sourceText: "sheep", ttsText: "sheep", bounds: { xPct: 16.5, yPct: 59, widthPct: 4.6, heightPct: 2.2 }, tapRegion: { xPct: 14.8, yPct: 54.4, widthPct: 7.5, heightPct: 7.4 } },
+                    { itemId: 4, readingOrder: 4, type: "label", sourceText: "pig", ttsText: "pig", bounds: { xPct: 25.3, yPct: 60.6, widthPct: 3.7, heightPct: 2.2 }, tapRegion: { xPct: 23.8, yPct: 56.5, widthPct: 7.4, heightPct: 8 } },
+                    { itemId: 5, readingOrder: 5, type: "label", sourceText: "chicken", ttsText: "chicken", bounds: { xPct: 14, yPct: 66.2, widthPct: 6, heightPct: 2.2 }, tapRegion: { xPct: 12.2, yPct: 63, widthPct: 9.2, heightPct: 7 } }
+                ]
+            },
+            {
+                panelId: 6, readingOrder: 6,
+                bounds: { xPct: 32, yPct: 41.9, widthPct: 36.4, heightPct: 28.1 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Wild Animals", ttsText: "Wild Animals", bounds: { xPct: 34.2, yPct: 42.4, widthPct: 16.1, heightPct: 3.8 }, tapRegion: { xPct: 33, yPct: 41.9, widthPct: 18.2, heightPct: 8 } },
+                    { itemId: 2, readingOrder: 2, type: "label", sourceText: "giraffe", ttsText: "giraffe", bounds: { xPct: 54, yPct: 49.7, widthPct: 5.2, heightPct: 2.2 }, tapRegion: { xPct: 52.4, yPct: 46.8, widthPct: 7, heightPct: 8 } },
+                    { itemId: 3, readingOrder: 3, type: "label", sourceText: "elephant", ttsText: "elephant", bounds: { xPct: 37.1, yPct: 58, widthPct: 7.4, heightPct: 2.2 }, tapRegion: { xPct: 35.8, yPct: 54.5, widthPct: 10, heightPct: 8 } },
+                    { itemId: 4, readingOrder: 4, type: "label", sourceText: "zebra", ttsText: "zebra", bounds: { xPct: 57.6, yPct: 64.2, widthPct: 5.2, heightPct: 2.2 }, tapRegion: { xPct: 56.2, yPct: 61.6, widthPct: 8, heightPct: 7.8 } },
+                    { itemId: 5, readingOrder: 5, type: "label", sourceText: "lion", ttsText: "lion", bounds: { xPct: 48.8, yPct: 65.4, widthPct: 4.1, heightPct: 2.2 }, tapRegion: { xPct: 47, yPct: 61.2, widthPct: 7, heightPct: 8 } }
+                ]
+            },
+            {
+                panelId: 7, readingOrder: 7,
+                bounds: { xPct: 68.6, yPct: 42.8, widthPct: 31, heightPct: 26.6 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Birds & Insects", ttsText: "Birds & Insects", bounds: { xPct: 69.7, yPct: 43.1, widthPct: 17.5, heightPct: 3.8 }, tapRegion: { xPct: 68.7, yPct: 42.8, widthPct: 19.5, heightPct: 8 } },
+                    { itemId: 2, readingOrder: 2, type: "label", sourceText: "bird", ttsText: "bird", bounds: { xPct: 91.7, yPct: 55.6, widthPct: 4.1, heightPct: 2.2 }, tapRegion: { xPct: 90.3, yPct: 52.4, widthPct: 7.5, heightPct: 8 } },
+                    { itemId: 3, readingOrder: 3, type: "label", sourceText: "eagle", ttsText: "eagle", bounds: { xPct: 78, yPct: 56.8, widthPct: 4.8, heightPct: 2.2 }, tapRegion: { xPct: 76.5, yPct: 53, widthPct: 7.7, heightPct: 7.6 } },
+                    { itemId: 4, readingOrder: 4, type: "label", sourceText: "butterfly", ttsText: "butterfly", bounds: { xPct: 83.8, yPct: 63.8, widthPct: 7, heightPct: 2.3 }, tapRegion: { xPct: 82, yPct: 61, widthPct: 9.5, heightPct: 7.8 } },
+                    { itemId: 5, readingOrder: 5, type: "label", sourceText: "bee", ttsText: "bee", bounds: { xPct: 92.8, yPct: 66.2, widthPct: 4.2, heightPct: 2.2 }, tapRegion: { xPct: 91.7, yPct: 62, widthPct: 7.5, heightPct: 7.4 } }
+                ]
+            },
+            {
+                panelId: 8, readingOrder: 8,
+                bounds: { xPct: 1.5, yPct: 70.2, widthPct: 23.8, heightPct: 21.6 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Example Questions 1", ttsText: "Example Questions 1", bounds: { xPct: 6.8, yPct: 71, widthPct: 13, heightPct: 2 }, tapRegion: { xPct: 1.9, yPct: 70.2, widthPct: 23.2, heightPct: 8.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence", sourceText: "Where do polar bears live?", ttsText: "Where do polar bears live?", bounds: { xPct: 3.7, yPct: 82.2, widthPct: 18.2, heightPct: 2.3 }, tapRegion: null },
+                    { itemId: 3, readingOrder: 3, type: "sentence", sourceText: "They live in the Arctic.", ttsText: "They live in the Arctic.", bounds: { xPct: 3.7, yPct: 86.8, widthPct: 18.2, heightPct: 2.2 }, tapRegion: null }
+                ]
+            },
+            {
+                panelId: 9, readingOrder: 9,
+                bounds: { xPct: 25.8, yPct: 70.2, widthPct: 23.8, heightPct: 21.6 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Example Questions 2", ttsText: "Example Questions 2", bounds: { xPct: 31.1, yPct: 71, widthPct: 13.1, heightPct: 2 }, tapRegion: { xPct: 26.1, yPct: 70.2, widthPct: 23.2, heightPct: 8.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence", sourceText: "Why do birds have feathers?", ttsText: "Why do birds have feathers?", bounds: { xPct: 27.8, yPct: 81.4, widthPct: 19.5, heightPct: 2.3 }, tapRegion: null },
+                    { itemId: 3, readingOrder: 3, type: "sentence", sourceText: "Feathers help them fly and keep warm.", ttsText: "Feathers help them fly and keep warm.", bounds: { xPct: 27.8, yPct: 85.8, widthPct: 19.7, heightPct: 4.5 }, tapRegion: null }
+                ]
+            },
+            {
+                panelId: 10, readingOrder: 10,
+                bounds: { xPct: 50, yPct: 70.2, widthPct: 23.8, heightPct: 21.6 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Example Questions 3", ttsText: "Example Questions 3", bounds: { xPct: 55.4, yPct: 71, widthPct: 13.3, heightPct: 2 }, tapRegion: { xPct: 50.3, yPct: 70.2, widthPct: 23.2, heightPct: 8.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence", sourceText: "What does a sea turtle eat?", ttsText: "What does a sea turtle eat?", bounds: { xPct: 51.9, yPct: 82.2, widthPct: 20.4, heightPct: 2.2 }, tapRegion: null },
+                    { itemId: 3, readingOrder: 3, type: "sentence", sourceText: "It eats seaweed and small animals.", ttsText: "It eats seaweed and small animals.", bounds: { xPct: 52, yPct: 87.1, widthPct: 20.1, heightPct: 2.2 }, tapRegion: null }
+                ]
+            },
+            {
+                panelId: 11, readingOrder: 11,
+                bounds: { xPct: 74.5, yPct: 70.2, widthPct: 24, heightPct: 21.6 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Example Questions 4", ttsText: "Example Questions 4", bounds: { xPct: 79.4, yPct: 71, widthPct: 13.5, heightPct: 2 }, tapRegion: { xPct: 74.8, yPct: 70.2, widthPct: 23.4, heightPct: 8.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence", sourceText: "How do animals survive in the wild?", ttsText: "How do animals survive in the wild?", bounds: { xPct: 76.6, yPct: 81, widthPct: 20.3, heightPct: 3.7 }, tapRegion: null },
+                    { itemId: 3, readingOrder: 3, type: "sentence", sourceText: "They find food, water and shelter.", ttsText: "They find food, water and shelter.", bounds: { xPct: 76.6, yPct: 86.8, widthPct: 20.4, heightPct: 2.3 }, tapRegion: null }
+                ]
+            },
+            {
+                panelId: 12, readingOrder: 12,
+                bounds: { xPct: 0.4, yPct: 92, widthPct: 99.2, heightPct: 8 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Key Words", ttsText: "Key Words", bounds: { xPct: 5.5, yPct: 94.5, widthPct: 7.8, heightPct: 2 }, tapRegion: { xPct: 4.6, yPct: 92, widthPct: 8.7, heightPct: 8 } },
+                    { itemId: 2, readingOrder: 2, type: "label", sourceText: "animal", ttsText: "animal", bounds: { xPct: 22.1, yPct: 94.1, widthPct: 5, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 3, readingOrder: 3, type: "label", sourceText: "wildlife", ttsText: "wildlife", bounds: { xPct: 29, yPct: 94.1, widthPct: 5.2, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 4, readingOrder: 4, type: "label", sourceText: "habitat", ttsText: "habitat", bounds: { xPct: 36.1, yPct: 94.1, widthPct: 5, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 5, readingOrder: 5, type: "label", sourceText: "forest", ttsText: "forest", bounds: { xPct: 43.1, yPct: 94.1, widthPct: 4.5, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 6, readingOrder: 6, type: "label", sourceText: "ocean", ttsText: "ocean", bounds: { xPct: 50.4, yPct: 94.1, widthPct: 4.6, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 7, readingOrder: 7, type: "label", sourceText: "farm", ttsText: "farm", bounds: { xPct: 57.1, yPct: 94.1, widthPct: 3.2, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 8, readingOrder: 8, type: "label", sourceText: "bird", ttsText: "bird", bounds: { xPct: 63.2, yPct: 94.1, widthPct: 2.7, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 9, readingOrder: 9, type: "label", sourceText: "insect", ttsText: "insect", bounds: { xPct: 67.5, yPct: 94.1, widthPct: 4.3, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 10, readingOrder: 10, type: "label", sourceText: "mammal", ttsText: "mammal", bounds: { xPct: 73.2, yPct: 94.1, widthPct: 4.4, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 11, readingOrder: 11, type: "label", sourceText: "reptile", ttsText: "reptile", bounds: { xPct: 79.2, yPct: 94.1, widthPct: 4.6, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 12, readingOrder: 12, type: "label", sourceText: "fish", ttsText: "fish", bounds: { xPct: 22.2, yPct: 96.8, widthPct: 2.5, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 13, readingOrder: 13, type: "label", sourceText: "survival", ttsText: "survival", bounds: { xPct: 25.6, yPct: 96.8, widthPct: 5.4, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 14, readingOrder: 14, type: "label", sourceText: "feature", ttsText: "feature", bounds: { xPct: 32.3, yPct: 96.8, widthPct: 4.7, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 15, readingOrder: 15, type: "label", sourceText: "environment", ttsText: "environment", bounds: { xPct: 38.3, yPct: 96.8, widthPct: 7.4, heightPct: 1.9 }, tapRegion: null },
+                    { itemId: 16, readingOrder: 16, type: "label", sourceText: "ecosystem", ttsText: "ecosystem", bounds: { xPct: 46.8, yPct: 96.8, widthPct: 5.6, heightPct: 1.9 }, tapRegion: null }
+                ]
+            }
+        ]
     }
 
 };

@@ -10025,8 +10025,15 @@ function isEnglishKarstImageTTSItemText(record, item) {
         (panel.panelId === 4 && n === 0 || getEnglishTTSUnitText(item.sourceText)));
 }
 
+function isEnglishAnimalsWildlifeImageTTSItemText(record,item) {
+ const file="images/english/animals-wildlife-basics.png",canonical=typeof imageTTSData!=="undefined"&&imageTTSData?imageTTSData[file]:null;
+ if(!isEnglishAnimalsWildlifeImageTTSRecord(record)||!item||!canonical||record.panels!==canonical.panels||item.sourceText!==item.ttsText)return false;
+ const safe=getEnglishAnimalsWildlifeImageTextRecord(record,file);
+ return Boolean(safe&&record.panels.some(p=>Array.isArray(p.items)&&p.items.includes(item)));
+}
+
 function isEnglishImageTTSItemText(record, item) {
-    if (isEnglishPlantsNatureAmpersandItem(record, item) ||
+    if (isEnglishAnimalsWildlifeImageTTSItemText(record,item) || isEnglishPlantsNatureAmpersandItem(record, item) ||
         isEnglishPlantsNatureImageTTSItemText(record, item) ||
         isEnglishKarstImageTTSItemText(record, item) ||
         isEnglishPlateausImageTTSItemText(record, item) ||
@@ -10598,6 +10605,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishAnimalsWildlifeImageTTSRecord(record)) return "Animals & Wildlife";
     if (isEnglishPlateausImageTTSRecord(record)) {
         return "Plateaus";
     }
@@ -12904,6 +12912,124 @@ function getEnglishKarstImageTextRecord(record, assetFile) {
     return { ...record, panels: record.panels };
 }
 
+function getEnglishAnimalsWildlifeExpectedPanels() {
+    return [
+        { panelId: 1, readingOrder: 1, bounds: { xPct: 0.4, yPct: 0.4, widthPct: 74.6, heightPct: 15 }, items: [
+                { type: "phrase", sourceText: "Animals & Wildlife", tapRegion: { xPct: 7.5, yPct: 2.5, widthPct: 45, heightPct: 7 } }
+            ] },
+        { panelId: 2, readingOrder: 2, bounds: { xPct: 75.1, yPct: 0.4, widthPct: 24.5, heightPct: 15.4 }, items: [
+                { type: "sentence", sourceText: "Animals live in different places.\nThey have unique features and ways to survive in nature.", tapRegion: { xPct: 76, yPct: 2.4, widthPct: 19, heightPct: 8.5 } }
+            ] },
+        { panelId: 3, readingOrder: 3, bounds: { xPct: 0.4, yPct: 16, widthPct: 42.6, heightPct: 25.6 }, items: [
+                { type: "label", sourceText: "Forest Animals", tapRegion: { xPct: 1.3, yPct: 16, widthPct: 20.4, heightPct: 8 } },
+                { type: "label", sourceText: "bear", tapRegion: { xPct: 6, yPct: 34.3, widthPct: 7.4, heightPct: 7.3 } },
+                { type: "label", sourceText: "deer", tapRegion: { xPct: 20, yPct: 33.8, widthPct: 7.2, heightPct: 7.8 } },
+                { type: "label", sourceText: "fox", tapRegion: { xPct: 32.1, yPct: 34.1, widthPct: 7.4, heightPct: 7.5 } }
+            ] },
+        { panelId: 4, readingOrder: 4, bounds: { xPct: 44, yPct: 16, widthPct: 55.6, heightPct: 25.9 }, items: [
+                { type: "label", sourceText: "Ocean Animals", tapRegion: { xPct: 44, yPct: 16, widthPct: 21.8, heightPct: 8 } },
+                { type: "label", sourceText: "dolphin", tapRegion: { xPct: 83.4, yPct: 25, widthPct: 8.8, heightPct: 8 } },
+                { type: "label", sourceText: "whale", tapRegion: { xPct: 48.7, yPct: 31, widthPct: 8.5, heightPct: 7.8 } },
+                { type: "phrase", sourceText: "sea turtle", tapRegion: { xPct: 70.5, yPct: 30.7, widthPct: 10, heightPct: 7.8 } },
+                { type: "label", sourceText: "fish", tapRegion: { xPct: 63, yPct: 34, widthPct: 7.3, heightPct: 7.9 } },
+                { type: "label", sourceText: "octopus", tapRegion: { xPct: 82.2, yPct: 33.6, widthPct: 7.5, heightPct: 8 } }
+            ] },
+        { panelId: 5, readingOrder: 5, bounds: { xPct: 0.4, yPct: 41.9, widthPct: 31.2, heightPct: 28.1 }, items: [
+                { type: "label", sourceText: "Farm Animals", tapRegion: { xPct: 1.3, yPct: 41.9, widthPct: 18.9, heightPct: 8 } },
+                { type: "label", sourceText: "cow", tapRegion: { xPct: 3.3, yPct: 55.5, widthPct: 7.4, heightPct: 8 } },
+                { type: "label", sourceText: "sheep", tapRegion: { xPct: 14.8, yPct: 54.4, widthPct: 7.5, heightPct: 7.4 } },
+                { type: "label", sourceText: "pig", tapRegion: { xPct: 23.8, yPct: 56.5, widthPct: 7.4, heightPct: 8 } },
+                { type: "label", sourceText: "chicken", tapRegion: { xPct: 12.2, yPct: 63, widthPct: 9.2, heightPct: 7 } }
+            ] },
+        { panelId: 6, readingOrder: 6, bounds: { xPct: 32, yPct: 41.9, widthPct: 36.4, heightPct: 28.1 }, items: [
+                { type: "label", sourceText: "Wild Animals", tapRegion: { xPct: 33, yPct: 41.9, widthPct: 18.2, heightPct: 8 } },
+                { type: "label", sourceText: "giraffe", tapRegion: { xPct: 52.4, yPct: 46.8, widthPct: 7, heightPct: 8 } },
+                { type: "label", sourceText: "elephant", tapRegion: { xPct: 35.8, yPct: 54.5, widthPct: 10, heightPct: 8 } },
+                { type: "label", sourceText: "zebra", tapRegion: { xPct: 56.2, yPct: 61.6, widthPct: 8, heightPct: 7.8 } },
+                { type: "label", sourceText: "lion", tapRegion: { xPct: 47, yPct: 61.2, widthPct: 7, heightPct: 8 } }
+            ] },
+        { panelId: 7, readingOrder: 7, bounds: { xPct: 68.6, yPct: 42.8, widthPct: 31, heightPct: 26.6 }, items: [
+                { type: "label", sourceText: "Birds & Insects", tapRegion: { xPct: 68.7, yPct: 42.8, widthPct: 19.5, heightPct: 8 } },
+                { type: "label", sourceText: "bird", tapRegion: { xPct: 90.3, yPct: 52.4, widthPct: 7.5, heightPct: 8 } },
+                { type: "label", sourceText: "eagle", tapRegion: { xPct: 76.5, yPct: 53, widthPct: 7.7, heightPct: 7.6 } },
+                { type: "label", sourceText: "butterfly", tapRegion: { xPct: 82, yPct: 61, widthPct: 9.5, heightPct: 7.8 } },
+                { type: "label", sourceText: "bee", tapRegion: { xPct: 91.7, yPct: 62, widthPct: 7.5, heightPct: 7.4 } }
+            ] },
+        { panelId: 8, readingOrder: 8, bounds: { xPct: 1.5, yPct: 70.2, widthPct: 23.8, heightPct: 21.6 }, items: [
+                { type: "label", sourceText: "Example Questions 1", tapRegion: { xPct: 1.9, yPct: 70.2, widthPct: 23.2, heightPct: 8.2 } },
+                { type: "sentence", sourceText: "Where do polar bears live?" },
+                { type: "sentence", sourceText: "They live in the Arctic." }
+            ] },
+        { panelId: 9, readingOrder: 9, bounds: { xPct: 25.8, yPct: 70.2, widthPct: 23.8, heightPct: 21.6 }, items: [
+                { type: "label", sourceText: "Example Questions 2", tapRegion: { xPct: 26.1, yPct: 70.2, widthPct: 23.2, heightPct: 8.2 } },
+                { type: "sentence", sourceText: "Why do birds have feathers?" },
+                { type: "sentence", sourceText: "Feathers help them fly and keep warm." }
+            ] },
+        { panelId: 10, readingOrder: 10, bounds: { xPct: 50, yPct: 70.2, widthPct: 23.8, heightPct: 21.6 }, items: [
+                { type: "label", sourceText: "Example Questions 3", tapRegion: { xPct: 50.3, yPct: 70.2, widthPct: 23.2, heightPct: 8.2 } },
+                { type: "sentence", sourceText: "What does a sea turtle eat?" },
+                { type: "sentence", sourceText: "It eats seaweed and small animals." }
+            ] },
+        { panelId: 11, readingOrder: 11, bounds: { xPct: 74.5, yPct: 70.2, widthPct: 24, heightPct: 21.6 }, items: [
+                { type: "label", sourceText: "Example Questions 4", tapRegion: { xPct: 74.8, yPct: 70.2, widthPct: 23.4, heightPct: 8.2 } },
+                { type: "sentence", sourceText: "How do animals survive in the wild?" },
+                { type: "sentence", sourceText: "They find food, water and shelter." }
+            ] },
+        { panelId: 12, readingOrder: 12, bounds: { xPct: 0.4, yPct: 92, widthPct: 99.2, heightPct: 8 }, items: [
+                { type: "label", sourceText: "Key Words", tapRegion: { xPct: 4.6, yPct: 92, widthPct: 8.7, heightPct: 8 } },
+                { type: "label", sourceText: "animal" },
+                { type: "label", sourceText: "wildlife" },
+                { type: "label", sourceText: "habitat" },
+                { type: "label", sourceText: "forest" },
+                { type: "label", sourceText: "ocean" },
+                { type: "label", sourceText: "farm" },
+                { type: "label", sourceText: "bird" },
+                { type: "label", sourceText: "insect" },
+                { type: "label", sourceText: "mammal" },
+                { type: "label", sourceText: "reptile" },
+                { type: "label", sourceText: "fish" },
+                { type: "label", sourceText: "survival" },
+                { type: "label", sourceText: "feature" },
+                { type: "label", sourceText: "environment" },
+                { type: "label", sourceText: "ecosystem" }
+            ] }
+    ];
+}
+
+function isEnglishAnimalsWildlifeImageTTSRecord(record) {
+    const file="images/english/animals-wildlife-basics.png";
+    const canonical=typeof imageTTSData!=="undefined"&&imageTTSData?imageTTSData[file]:null;
+    return Boolean(record&&canonical&&record.imageId==="animals-wildlife-basics"&&record.assetFile===file&&record.contentType==="image-text"&&record.layout==="custom-animals-wildlife-32-entry-menu"&&record.coordinateStatus==="estimated"&&record.overlayRuntimeStatus==="not-tested"&&record.panels===canonical.panels);
+}
+function getEnglishAnimalsWildlifeImageTextRecord(record,assetFile) {
+    const file="images/english/animals-wildlife-basics.png", expected=getEnglishAnimalsWildlifeExpectedPanels();
+    const exact=(v,ks)=>v&&typeof v==="object"&&!Array.isArray(v)&&Object.keys(v).length===ks.length&&ks.every(k=>Object.prototype.hasOwnProperty.call(v,k));
+    const ks=["xPct","yPct","widthPct","heightPct"];
+    const valid=b=>exact(b,ks)&&ks.every(k=>Number.isFinite(b[k])&&b[k]>=0&&b[k]<=100)&&b.widthPct>0&&b.heightPct>0&&b.xPct+b.widthPct<=100&&b.yPct+b.heightPct<=100;
+    const same=(a,b)=>valid(a)&&ks.every(k=>a[k]===b[k]);
+    const within=(a,b)=>valid(a)&&valid(b)&&b.xPct>=a.xPct&&b.yPct>=a.yPct&&b.xPct+b.widthPct<=a.xPct+a.widthPct&&b.yPct+b.heightPct<=a.yPct+a.heightPct;
+    const overlaps=(a,b)=>a.xPct<b.xPct+b.widthPct&&a.xPct+a.widthPct>b.xPct&&a.yPct<b.yPct+b.heightPct&&a.yPct+a.heightPct>b.yPct;
+    if(!exact(record,["imageId","assetFile","contentType","layout","transcriptStatus","transcriptReviewMethod","coordinateStatus","overlayRuntimeStatus","sourceImageDimensions","panels"])||record.imageId!=="animals-wildlife-basics"||record.assetFile!==file||assetFile!==file||!imageTTSData||!imageTTSData[file]||record.panels!==imageTTSData[file].panels||record.contentType!=="image-text"||record.layout!=="custom-animals-wildlife-32-entry-menu"||record.transcriptStatus!=="verified"||record.transcriptReviewMethod!=="manual-visual-no-OCR"||record.coordinateStatus!=="estimated"||record.overlayRuntimeStatus!=="not-tested"||!exact(record.sourceImageDimensions,["width","height"])||record.sourceImageDimensions.width!==1312||record.sourceImageDimensions.height!==1199||!Array.isArray(record.panels)||record.panels.length!==expected.length)return null;
+    const ids=Object.keys(imageTTSData).filter(k=>{const c=imageTTSData[k];return k===file||c&&(c.imageId==="animals-wildlife-basics"||c.assetFile===file);});
+    const lib=typeof diagramMap!=="undefined"&&Array.isArray(diagramMap)?diagramMap.filter(e=>e&&(e.id==="animals-wildlife-basics"||e.file===file)):[];
+    if(ids.length!==1||ids[0]!==file||lib.length!==1||lib[0].id!=="animals-wildlife-basics"||lib[0].file!==file||lib[0].category!=="english")return null;
+    const pbs=[],taps=[];let count=0;
+    for(let p=0;p<expected.length;p++){
+        const panel=record.panels[p],target=expected[p];
+        if(!exact(panel,["panelId","readingOrder","bounds","items"])||panel.panelId!==target.panelId||panel.readingOrder!==target.readingOrder||!same(panel.bounds,target.bounds)||!Array.isArray(panel.items)||panel.items.length!==target.items.length)return null;
+        pbs.push(panel.bounds);
+        for(let n=0;n<target.items.length;n++){
+            const item=panel.items[n],want=target.items[n],wantTap=want.tapRegion||null;
+            if(!exact(item,["itemId","readingOrder","type","sourceText","ttsText","bounds","tapRegion"])||item.itemId!==n+1||item.readingOrder!==n+1||item.type!==want.type||item.sourceText!==want.sourceText||item.ttsText!==item.sourceText||(!["Animals & Wildlife","Birds & Insects"].includes(item.sourceText)&&!getEnglishTTSUnitText(item.sourceText))||!valid(item.bounds)||!within(panel.bounds,item.bounds)||(wantTap?(!same(item.tapRegion,wantTap)||!within(panel.bounds,item.tapRegion)):item.tapRegion!==null))return null;
+            if(item.tapRegion)taps.push(item.tapRegion);count++;
+        }
+    }
+    for(let i=0;i<pbs.length;i++)for(let j=i+1;j<pbs.length;j++)if(overlaps(pbs[i],pbs[j]))return null;
+    for(let i=0;i<taps.length;i++)for(let j=i+1;j<taps.length;j++)if(overlaps(taps[i],taps[j]))return null;
+    if(count!==55||taps.length!==32||record.panels.slice(7,11).some(p=>p.items.length!==3)||record.panels[11].items.length!==16)return null;
+    return {...record,panels:record.panels};
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -12911,12 +13037,9 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
-    if (!record || record.assetFile !== assetFile ||
-        record.transcriptStatus !== "verified" ||
-        record.coordinateStatus !== "calibrated" ||
-        !Array.isArray(record.panels)) {
-        return null;
-    }
+    const animalsFile="images/english/animals-wildlife-basics.png";
+    if(record&&(record.imageId==="animals-wildlife-basics"||record.assetFile===animalsFile||assetFile===animalsFile))return getEnglishAnimalsWildlifeImageTextRecord(record,assetFile);
+    if (!record || record.assetFile !== assetFile || record.transcriptStatus !== "verified" || record.coordinateStatus !== "calibrated" || !Array.isArray(record.panels)) return null;
 
     const isPlantsNatureIdentity = record.imageId === "plants-nature-basics" ||
         record.assetFile === "images/english/plants-nature-basics.png" ||
@@ -15342,8 +15465,12 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
-            if (image.complete && image.naturalWidth === 0) {
-                return;
+            if (image.complete && image.naturalWidth === 0) return;
+            if (isEnglishAnimalsWildlifeImageTTSRecord(record)) {
+                record.panels.forEach(panel=>panel.items.forEach(item=>{if(item.tapRegion&&createEnglishImageTTSImageTextHitArea(wrapper,panel,item,record))added++;}));
+                image.addEventListener("load",()=>layoutEnglishImageTTSImageTextHitAreas(wrapper),{once:true});
+                image.addEventListener("error",()=>{wrapper.querySelectorAll(".image-tts-image-text-hit-area").forEach(b=>{b.hidden=true;});if(englishImageTTSOverlayState.activeTrigger&&wrapper.contains(englishImageTTSOverlayState.activeTrigger))closeEnglishImageTTSMenu();},{once:true});
+                layoutEnglishImageTTSImageTextHitAreas(wrapper);return;
             }
             if (isEnglishKarstImageTTSRecord(record)) {
                 record.panels.forEach(panel => {
@@ -15920,7 +16047,19 @@ function getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item) {
     return item.ttsText.split(/\r?\n/).map(unit => getEnglishTTSUnitText(unit)).filter(Boolean);
 }
 
+function getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item) {
+ if(!isEnglishAnimalsWildlifeImageTTSRecord(record)||!item)return null;
+ const p=record.panels.find(candidate=>candidate.items.includes(item));if(!p)return null;
+ if(item.sourceText==="Animals & Wildlife")return ["Animals and Wildlife"];
+ if(item.sourceText==="Birds & Insects")return ["Birds and Insects"];
+ if(p.panelId===2&&item.itemId===1)return ["Animals live in different places.","They have unique features and ways to survive in nature."];
+ return [item.ttsText];
+}
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishAnimalsWildlifeImageTTSItemText(record, item) &&
+        (item.sourceText === "Animals & Wildlife" || item.sourceText === "Birds & Insects")) {
+        return item.sourceText.replace(" & ", " and ");
+    }
     if (isEnglishKarstImageTTSItemText(record, item)) {
         return item.type === "label" && item.sourceText === "Stalactites & Stalagmites"
             ? "Stalactites and Stalagmites" : item.ttsText;
@@ -16141,6 +16280,7 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "circulatory-system-basics" &&
         record.assetFile === "images/english/circulatory-system-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isAnimalsWildlifeSingleItemSequence=Boolean(isEnglishAnimalsWildlifeImageTTSRecord(record)&&itemList.length===1&&allItems.includes(itemList[0]));
     const dailyLifeSteps = isDailyLifeRoutinesImageText
         ? itemList.flatMap(item => getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item)
             .map(text => ({ item, text })))
@@ -16157,13 +16297,15 @@ function speakEnglishImageTTSImageTextSequence(
             item,
             text: item ? getEnglishImageTTSImageTextSpeechText(record, item) : null,
             speechSegments: item
-                ? (record.imageId === "stars-and-galaxies-basics" &&
-                    record.assetFile === "images/english/stars-and-galaxies-basics.png"
-                    ? getEnglishStarsAndGalaxiesImageTextSpeechSegments(record, item)
-                    : (record.imageId === "space-solar-system-basics" &&
-                        record.assetFile === "images/english/space-solar-system-basics.png"
-                        ? getEnglishSpaceSolarSystemImageTextSpeechSegments(record, item)
-                        : getEnglishSimpleMachinesImageTextSpeechSegments(record, item)))
+                ? (isEnglishAnimalsWildlifeImageTTSRecord(record)
+                    ? getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item)
+                    : (record.imageId === "stars-and-galaxies-basics" &&
+                        record.assetFile === "images/english/stars-and-galaxies-basics.png"
+                        ? getEnglishStarsAndGalaxiesImageTextSpeechSegments(record, item)
+                        : (record.imageId === "space-solar-system-basics" &&
+                            record.assetFile === "images/english/space-solar-system-basics.png"
+                            ? getEnglishSpaceSolarSystemImageTextSpeechSegments(record, item)
+                            : getEnglishSimpleMachinesImageTextSpeechSegments(record, item))))
                 : null
         }));
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
@@ -16188,6 +16330,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isStaticElectricitySingleItemSequence &&
             !isScientificMethodSingleItemSequence &&
             !isCirculatorySystemSingleItemSequence &&
+            !isAnimalsWildlifeSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
             !isHumanBodyHowItWorksSingleItemSequence) ||
         itemList.some(item => !item || item.sourceText !== item.ttsText ||
@@ -16543,6 +16686,27 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         menu.removeChild(menu.firstChild);
     }
 
+    if(isEnglishAnimalsWildlifeImageTTSRecord(safeRecord)){
+        const clicked=trigger._englishImageTTSImageTextItem;
+        if(!clicked||!panel.items.includes(clicked)||!clicked.tapRegion||!isEnglishAnimalsWildlifeImageTTSItemText(safeRecord,clicked)){closeEnglishImageTTSMenu();return;}
+        const all=safeRecord.panels.flatMap(p=>p.items),label=clicked.sourceText.replace(/\r?\n/g," ");
+        const add=(text,desc,items,done)=>menu.appendChild(createEnglishImageTTSMenuButton(text,desc,()=>speakEnglishImageTTSImageTextSequence(trigger,items,done)));
+        menu.setAttribute("aria-label","Animals & Wildlife 原圖英文朗讀選項");
+        if(panel.panelId>=8&&panel.panelId<=11){const [title,q,a]=panel.items;if(!title||!q||!a){closeEnglishImageTTSMenu();return;}
+            add("🔊 朗讀卡片標題","朗讀 "+title.sourceText,[title],"卡片標題已朗讀完成。");
+            add("🔊 朗讀問題","朗讀問題："+q.sourceText,[q],"問題已朗讀完成。");
+            add("🔊 朗讀答案","朗讀答案："+a.sourceText,[a],"答案已朗讀完成。");
+            add("🔊 依序朗讀整張卡","依序朗讀卡片標題、問題與答案",panel.items,"Example Questions 卡片已朗讀完成。");
+        }else if(panel.panelId===12){const words=panel.items.slice(1);
+            add("🔊 朗讀 Key Words 標題","朗讀 Key Words",[panel.items[0]],"Key Words 標題已朗讀完成。");
+            words.forEach(item=>add("🔊 朗讀「"+item.sourceText+"」","朗讀關鍵字："+item.sourceText,[item],"關鍵字已朗讀完成。"));
+            add("🔊 依序朗讀 15 個關鍵字","依圖片順序朗讀全部 15 個 Key Words",words,"15 個 Key Words 已朗讀完成。");
+        }else if(panel.panelId===2)add("🔊 朗讀介紹段落（兩句）","兩句之間停頓約 0.5 秒",panel.items,"介紹段落已朗讀完成。");
+        else{add("🔊 朗讀「"+label+"」","朗讀所選原圖文字："+label,[clicked],"所選原圖文字已朗讀完成。");if(panel.items.length>1)add("🔊 依序朗讀本區全部英文","依序朗讀本區標題與動物名稱",panel.items,"本區已朗讀完成。");}
+        add("🔊 依序朗讀全圖 55 項","依圖片順序朗讀全部英文項目",all,"Animals & Wildlife 全圖已朗讀完成。");
+        menu.hidden=false;menu.style.visibility="hidden";positionEnglishImageTTSMenu();if(menu.hidden)return;
+        const first=menu.firstChild;if(first){try{first.focus({preventScroll:true});}catch(error){first.focus();}}return;
+    }
 
     if (isKarstImageText) {
         const title=panel.items.find(item=>item.type==="label");
