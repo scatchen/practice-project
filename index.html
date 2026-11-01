@@ -978,6 +978,37 @@ color: #111827;
             cursor: default;
         }
 
+        .image-tts-making-plans-bubble-hit-area {
+            position: absolute;
+            z-index: 11;
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 4px;
+            appearance: none;
+            -webkit-appearance: none;
+            background: transparent;
+            color: transparent;
+            cursor: pointer;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .image-tts-making-plans-bubble-hit-area[hidden] {
+            display: none;
+        }
+
+        .image-tts-making-plans-bubble-hit-area:focus-visible {
+            outline: 3px solid #facc15;
+            outline-offset: -3px;
+        }
+
+        .image-tts-making-plans-bubble-hit-area:disabled {
+            cursor: default;
+        }
+
         .image-tts-dialogue-speaker-below {
             box-sizing: border-box;
         }
@@ -3662,7 +3693,8 @@ function rememberEnglishSpeechTrigger(trigger) {
         englishTTSState.activeSpeechTrigger._englishImageTTSPanel;
     const hasStoryTriggerClass = englishTTSState.activeSpeechTrigger &&
         englishTTSState.activeSpeechTrigger.classList &&
-        englishTTSState.activeSpeechTrigger.classList.contains("image-tts-story-panel-hit-area");
+        (englishTTSState.activeSpeechTrigger.classList.contains("image-tts-story-panel-hit-area") ||
+            englishTTSState.activeSpeechTrigger.classList.contains("image-tts-making-plans-bubble-hit-area"));
     const storyPanelId = englishTTSState.activeSpeechTrigger &&
         englishTTSState.activeSpeechTrigger.getAttribute("data-image-tts-panel-id");
     englishTTSState.activeImageTTSStoryPanel = englishTTSState.activeImageTTSWrapper &&
@@ -14637,6 +14669,244 @@ function getEnglishBusinessEmailBubblePanels(record, assetFile) {
     return bubbles;
 }
 
+const ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE =
+    "images/english/making-plans-with-friends-basics.png";
+const ENGLISH_MAKING_PLANS_BUBBLE_IMAGE_ID = "making-plans-with-friends-basics";
+const ENGLISH_MAKING_PLANS_BUBBLE_SOURCE_DIMENSIONS = Object.freeze({ width: 1024, height: 1536 });
+
+function getEnglishMakingPlansBubbleTTSInteractions(record, assetFile) {
+    if (assetFile !== ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE ||
+        typeof imageTTSData === "undefined" || !imageTTSData || typeof imageTTSData !== "object") {
+        return null;
+    }
+
+    const sourceRecord = imageTTSData[ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE];
+    const matchingKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return candidate && (candidate.imageId === ENGLISH_MAKING_PLANS_BUBBLE_IMAGE_ID ||
+            candidate.assetFile === ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE);
+    });
+    const hasExactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value) &&
+        Object.keys(value).length === keys.length && keys.every(key =>
+            Object.prototype.hasOwnProperty.call(value, key));
+    const isBounds = bounds => hasExactKeys(bounds, ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        [bounds.xPct, bounds.yPct, bounds.widthPct, bounds.heightPct].every(value =>
+            Number.isFinite(value) && value >= 0 && value <= 100) &&
+        bounds.widthPct > 0 && bounds.heightPct > 0 &&
+        bounds.xPct + bounds.widthPct <= 100 && bounds.yPct + bounds.heightPct <= 100;
+
+    if (!record || !sourceRecord || matchingKeys.length !== 1 ||
+        matchingKeys[0] !== ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE ||
+        record.imageId !== ENGLISH_MAKING_PLANS_BUBBLE_IMAGE_ID ||
+        record.assetFile !== ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE ||
+        sourceRecord.imageId !== ENGLISH_MAKING_PLANS_BUBBLE_IMAGE_ID ||
+        sourceRecord.assetFile !== ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE ||
+        record.contentType !== "story" || sourceRecord.contentType !== "story" ||
+        record.layout !== "2x6" || sourceRecord.layout !== "2x6" ||
+        !hasExactKeys(sourceRecord.sourceImageDimensions, ["width", "height"]) ||
+        !hasExactKeys(record.sourceImageDimensions, ["width", "height"]) ||
+        sourceRecord.sourceImageDimensions.width !== ENGLISH_MAKING_PLANS_BUBBLE_SOURCE_DIMENSIONS.width ||
+        sourceRecord.sourceImageDimensions.height !== ENGLISH_MAKING_PLANS_BUBBLE_SOURCE_DIMENSIONS.height ||
+        record.sourceImageDimensions.width !== ENGLISH_MAKING_PLANS_BUBBLE_SOURCE_DIMENSIONS.width ||
+        record.sourceImageDimensions.height !== ENGLISH_MAKING_PLANS_BUBBLE_SOURCE_DIMENSIONS.height ||
+        !Array.isArray(record.panels) || record.panels.length !== 12 ||
+        !Array.isArray(sourceRecord.panels) || sourceRecord.panels.length !== 12) {
+        return null;
+    }
+
+    const expectedBubbleCounts = [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2];
+    const interactions = [];
+    const tapRegions = [];
+    const bubbleIds = new Set();
+    for (let index = 0; index < 12; index += 1) {
+        const panel = record.panels[index];
+        const sourcePanel = sourceRecord.panels[index];
+        if (!panel || panel !== sourcePanel || panel.panelId !== index + 1 ||
+            panel.readingOrder !== index + 1 || !isBounds(panel.bounds) ||
+            !Array.isArray(panel.sentences) || !panel.sentences.length ||
+            !panel.sentences.every(sentence => typeof sentence === "string" && getEnglishTTSUnitText(sentence)) ||
+            typeof panel.text !== "string" || panel.text !== panel.sentences.join(" ") ||
+            !Array.isArray(panel.speechBubbles) ||
+            panel.speechBubbles.length !== expectedBubbleCounts[index]) {
+            return null;
+        }
+
+        const dialogueBubbles = [];
+        for (let bubbleIndex = 0; bubbleIndex < panel.speechBubbles.length; bubbleIndex += 1) {
+            const bubble = panel.speechBubbles[bubbleIndex];
+            const isThought = index === 4 && bubbleIndex === 1;
+            const expectedId = index === 11
+                ? `dialogue-${bubbleIndex === 0 ? 12 : 13}`
+                : (isThought ? "thought-5" : `dialogue-${index + 1}`);
+            const expectedKind = isThought ? "thought" : "dialogue";
+            if (!hasExactKeys(bubble, ["bubbleId", "kind", "sourceText", "sentences", "tapRegion", "tapRegionStatus"]) ||
+                bubble.bubbleId !== expectedId || bubbleIds.has(bubble.bubbleId) ||
+                bubble.kind !== expectedKind || typeof bubble.sourceText !== "string" ||
+                !getEnglishTTSUnitText(bubble.sourceText) || !Array.isArray(bubble.sentences) ||
+                !bubble.sentences.length || !bubble.sentences.every(sentence =>
+                    typeof sentence === "string" && getEnglishTTSUnitText(sentence)) ||
+                bubble.sourceText !== bubble.sentences.join(" ") ||
+                bubble.tapRegionStatus !== "visually-calibrated-to-1024x1536-source" ||
+                !isBounds(bubble.tapRegion)) {
+                return null;
+            }
+
+            const expectedSentences = isThought
+                ? ["Morning Busy..."]
+                : (index === 11
+                    ? (bubbleIndex === 0 ? panel.sentences.slice(0, 3) : panel.sentences.slice(3))
+                    : panel.sentences);
+            if (bubble.sentences.length !== expectedSentences.length ||
+                bubble.sentences.some((sentence, sentenceIndex) => sentence !== expectedSentences[sentenceIndex]) ||
+                bubble.tapRegion.xPct < panel.bounds.xPct ||
+                bubble.tapRegion.yPct < panel.bounds.yPct ||
+                bubble.tapRegion.xPct + bubble.tapRegion.widthPct > panel.bounds.xPct + panel.bounds.widthPct ||
+                bubble.tapRegion.yPct + bubble.tapRegion.heightPct > panel.bounds.yPct + panel.bounds.heightPct) {
+                return null;
+            }
+
+            for (const previous of tapRegions) {
+                if (bubble.tapRegion.xPct < previous.xPct + previous.widthPct &&
+                    bubble.tapRegion.xPct + bubble.tapRegion.widthPct > previous.xPct &&
+                    bubble.tapRegion.yPct < previous.yPct + previous.heightPct &&
+                    bubble.tapRegion.yPct + bubble.tapRegion.heightPct > previous.yPct) {
+                    return null;
+                }
+            }
+            bubbleIds.add(bubble.bubbleId);
+            tapRegions.push(bubble.tapRegion);
+            interactions.push({ panel, bubble });
+            if (!isThought) {
+                dialogueBubbles.push(bubble);
+            }
+        }
+
+        const dialogueSentences = dialogueBubbles.flatMap(bubble => bubble.sentences);
+        if (dialogueSentences.length !== panel.sentences.length ||
+            dialogueSentences.some((sentence, sentenceIndex) => sentence !== panel.sentences[sentenceIndex])) {
+            return null;
+        }
+    }
+
+    return interactions.length === 14 &&
+        interactions.filter(item => item.bubble.kind === "dialogue").length === 13 &&
+        interactions.filter(item => item.bubble.kind === "thought").length === 1
+        ? interactions
+        : null;
+}
+
+function getEnglishMakingPlansFullStorySentences(record, assetFile) {
+    const interactions = getEnglishMakingPlansBubbleTTSInteractions(record, assetFile);
+    const expectedPanelSentenceCounts = [1, 2, 2, 2, 1, 2, 2, 3, 2, 3, 2, 4];
+    if (!interactions || !record || !Array.isArray(record.panels) || record.panels.length !== 12) {
+        return null;
+    }
+
+    const orderedPanels = record.panels.slice().sort((first, second) => first.readingOrder - second.readingOrder);
+    if (orderedPanels.some((panel, index) => panel !== record.panels[index] ||
+        panel.panelId !== index + 1 || panel.readingOrder !== index + 1 ||
+        !Array.isArray(panel.sentences) || panel.sentences.length !== expectedPanelSentenceCounts[index])) {
+        return null;
+    }
+
+    const sentences = orderedPanels.flatMap(panel =>
+        panel.sentences.map(sentence => getEnglishTTSUnitText(sentence)));
+    const dialogueSentences = interactions
+        .filter(item => item.bubble.kind === "dialogue")
+        .flatMap(item => item.bubble.sentences.map(sentence => getEnglishTTSUnitText(sentence)));
+    if (sentences.length !== 26 || sentences.some(sentence => !sentence) ||
+        dialogueSentences.length !== 26 ||
+        dialogueSentences.some((sentence, index) => sentence !== sentences[index])) {
+        return null;
+    }
+    return sentences;
+}
+
+function createEnglishMakingPlansBubbleHitArea(wrapper, image, panel, bubble) {
+    const button = document.createElement("button");
+    const region = bubble.tapRegion;
+    button.type = "button";
+    button.className = "image-tts-making-plans-bubble-hit-area";
+    if (bubble.kind === "thought") {
+        button.classList.add("image-tts-making-plans-thought-bubble-hit-area");
+    }
+    button.textContent = "";
+    button.hidden = true;
+    button.disabled = isEnglishImageTTSDrawingMode();
+    const bubbleLabel = bubble.kind === "thought" ? "獨立思考泡泡" : "對話泡泡";
+    button.setAttribute("aria-label",
+        `第 ${panel.panelId} 格${bubbleLabel}「${bubble.sourceText}」，開啟泡泡朗讀選項`);
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("data-image-tts-bubble-id", bubble.bubbleId);
+    button.setAttribute("aria-disabled", String(button.disabled));
+    button.style.pointerEvents = button.disabled ? "none" : "auto";
+    button.style.left = `${region.xPct}%`;
+    button.style.top = `${region.yPct}%`;
+    button.style.width = `${region.widthPct}%`;
+    button.style.height = `${region.heightPct}%`;
+    button._englishImageTTSPanel = panel;
+    button._englishImageTTSMakingPlansPanel = panel;
+    button._englishImageTTSMakingPlansBubble = bubble;
+    button._englishImageTTSMenuImage = image;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+            return;
+        }
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishImageTTSMakingPlansBubbleMenu(button, panel, bubble);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
+function layoutEnglishMakingPlansBubbleHitAreas(wrapper) {
+    if (!wrapper) {
+        return false;
+    }
+    const buttons = Array.from(wrapper.querySelectorAll(".image-tts-making-plans-bubble-hit-area"));
+    if (!buttons.length) {
+        return false;
+    }
+    const hideAll = () => buttons.forEach(button => { button.hidden = true; });
+    const assetFile = wrapper.dataset && wrapper.dataset.imageTtsAssetFile;
+    const image = wrapper.querySelector("img");
+    const imageRect = image && image.getBoundingClientRect();
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const record = assetFile === ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE
+        ? getEnglishImageTTSRecord(assetFile)
+        : null;
+    const interactions = record ? getEnglishMakingPlansBubbleTTSInteractions(record, assetFile) : null;
+    const scaleX = image && image.naturalWidth ? imageRect.width / image.naturalWidth : 0;
+    const scaleY = image && image.naturalHeight ? imageRect.height / image.naturalHeight : 0;
+    const alignedImage = imageRect && wrapperRect &&
+        Math.abs(imageRect.left - wrapperRect.left) <= 0.5 &&
+        Math.abs(imageRect.top - wrapperRect.top) <= 0.5 &&
+        Math.abs(imageRect.width - wrapperRect.width) <= 0.5 &&
+        Math.abs(imageRect.height - wrapperRect.height) <= 0.5 &&
+        Number.isFinite(scaleX) && Number.isFinite(scaleY) && scaleX > 0 && scaleY > 0 &&
+        Math.abs(scaleX - scaleY) <= Math.max(scaleX, scaleY) * 0.005;
+    if (!image || !image.complete || image.naturalWidth !== 1024 || image.naturalHeight !== 1536 ||
+        !imageRect || !wrapperRect || imageRect.width <= 0 || imageRect.height <= 0 ||
+        wrapperRect.width <= 0 || wrapperRect.height <= 0 || !alignedImage ||
+        !interactions || buttons.length !== interactions.length ||
+        buttons.some((button, index) => button._englishImageTTSMakingPlansPanel !== interactions[index].panel ||
+            button._englishImageTTSMakingPlansBubble !== interactions[index].bubble)) {
+        hideAll();
+        return false;
+    }
+    buttons.forEach(button => { button.hidden = false; });
+    return true;
+}
+
 function getEnglishBusinessEmailStopPanel(trigger, wrapper) {
     if (!trigger || !wrapper || wrapper.isConnected === false ||
         wrapper.dataset.imageTtsAssetFile !== ENGLISH_BUSINESS_EMAIL_BUBBLE_ASSET_FILE ||
@@ -15020,12 +15290,29 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
                 createEnglishImageTTSStoryPanelHitArea(wrapper, panel, controls);
                 added += 1;
             });
+            const makingPlansBubbles = assetFile === ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE
+                ? getEnglishMakingPlansBubbleTTSInteractions(record, assetFile)
+                : null;
+            if (makingPlansBubbles) {
+                makingPlansBubbles.forEach(({ panel, bubble }) => {
+                    createEnglishMakingPlansBubbleHitArea(wrapper, image, panel, bubble);
+                    added += 1;
+                });
+                image.addEventListener("load", () => layoutEnglishMakingPlansBubbleHitAreas(wrapper), { once: true });
+                layoutEnglishMakingPlansBubbleHitAreas(wrapper);
+            }
             image.addEventListener("error", () => {
                 wrapper.querySelectorAll(".image-tts-story-panel-hit-area").forEach(button => {
                     button.hidden = true;
                 });
+                wrapper.querySelectorAll(".image-tts-making-plans-bubble-hit-area").forEach(button => {
+                    button.hidden = true;
+                });
                 controls.hidden = true;
-                if (englishImageTTSOverlayState.activeStoryControls === controls) {
+                if (englishImageTTSOverlayState.activeStoryControls === controls ||
+                    (wrapper.dataset.imageTtsAssetFile === ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE &&
+                        englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger))) {
                     closeEnglishImageTTSMenu();
                 }
             }, { once: true });
@@ -15275,6 +15562,11 @@ function syncEnglishImageTTSDrawingMode() {
         button.setAttribute("aria-disabled", String(isDrawing));
     });
     document.querySelectorAll("#ai-response .image-tts-business-email-bubble-hit-area").forEach(button => {
+        button.disabled = isDrawing;
+        button.style.pointerEvents = isDrawing ? "none" : "auto";
+        button.setAttribute("aria-disabled", String(isDrawing));
+    });
+    document.querySelectorAll("#ai-response .image-tts-making-plans-bubble-hit-area").forEach(button => {
         button.disabled = isDrawing;
         button.style.pointerEvents = isDrawing ? "none" : "auto";
         button.setAttribute("aria-disabled", String(isDrawing));
@@ -16835,12 +17127,135 @@ function openEnglishImageTTSBubbleMenu(trigger, panel, bubbleSpeech) {
     }
 }
 
+function openEnglishImageTTSMakingPlansBubbleMenu(trigger, panel, bubble) {
+    const wrapper = trigger && typeof trigger.closest === "function"
+        ? trigger.closest(".image-tts-overlay-wrapper")
+        : null;
+    const assetFile = wrapper && wrapper.dataset.imageTtsAssetFile;
+    const safeRecord = assetFile ? getEnglishImageTTSRecord(assetFile) : null;
+    const interactions = safeRecord
+        ? getEnglishMakingPlansBubbleTTSInteractions(safeRecord, assetFile)
+        : null;
+    const fullStorySentences = safeRecord
+        ? getEnglishMakingPlansFullStorySentences(safeRecord, assetFile)
+        : null;
+    const validated = interactions && interactions.find(item =>
+        item.panel.panelId === panel.panelId && item.bubble.bubbleId === bubble.bubbleId);
+    const panelContent = buildEnglishImageTTSPanelText(panel);
+    const bubbleSentences = bubble && Array.isArray(bubble.sentences)
+        ? bubble.sentences.map(sentence => getEnglishTTSUnitText(sentence))
+        : [];
+    if (!trigger || !panel || !bubble || !wrapper ||
+        assetFile !== ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE ||
+        trigger._englishImageTTSMakingPlansPanel !== panel ||
+        trigger._englishImageTTSMakingPlansBubble !== bubble ||
+        !validated || validated.panel !== panel || validated.bubble !== bubble ||
+        !panelContent || !panelContent.fullText || !panelContent.sentences.length ||
+        panelContent.sentences.some(sentence => !sentence) ||
+        !bubbleSentences.length || bubbleSentences.some(sentence => !sentence) ||
+        appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+        return;
+    }
+
+    cancelEnglishImageTTSStorySequenceForDifferentTrigger(trigger);
+    closeEnglishImageTTSMenu();
+    const menu = englishImageTTSOverlayState.menu;
+    if (!menu) {
+        return;
+    }
+    englishImageTTSOverlayState.activeTrigger = trigger;
+    menu.classList.remove("is-tap-regions-dialogue");
+    trigger.setAttribute("aria-expanded", "true");
+    const bubbleLabel = bubble.kind === "thought" ? "思考泡泡" : "對話泡泡";
+    menu.setAttribute("aria-label", `第 ${panel.panelId} 格${bubbleLabel}朗讀選項`);
+    while (menu.firstChild) {
+        menu.removeChild(menu.firstChild);
+    }
+
+    const readBubbleButton = createEnglishImageTTSMenuButton(
+        "🔊 朗讀此泡泡",
+        `朗讀第 ${panel.panelId} 格${bubbleLabel}：${bubble.sourceText}`,
+        () => speakEnglishImageTTSStorySequence(trigger, bubbleSentences, bubble.sourceText)
+    );
+    menu.appendChild(readBubbleButton);
+    menu.appendChild(createEnglishImageTTSMenuButton(
+        "🔊 朗讀此格原有對話",
+        `依序朗讀第 ${panel.panelId} 格原有對話，不含獨立思考泡泡`,
+        () => speakEnglishImageTTSStorySequence(trigger, panelContent.sentences, panelContent.fullText)
+    ));
+    if (fullStorySentences) {
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀整張圖／全故事",
+            "依閱讀順序朗讀 Making Plans with Friends 全圖 12 格、26 句故事，不含獨立思考泡泡",
+            () => speakEnglishImageTTSStorySequence(
+                trigger,
+                fullStorySentences,
+                fullStorySentences.join(" ")
+            )
+        ));
+    }
+
+    if (bubbleSentences.length > 1) {
+        const sentenceToggle = createEnglishImageTTSMenuButton(
+            "單句",
+            `展開第 ${panel.panelId} 格泡泡中的單句`,
+            () => {
+                const sentenceList = menu.querySelector(".english-image-tts-sentences");
+                if (!sentenceList) {
+                    return;
+                }
+                sentenceList.hidden = !sentenceList.hidden;
+                sentenceToggle.setAttribute("aria-expanded", String(!sentenceList.hidden));
+                scheduleEnglishImageTTSMenuPosition();
+            }
+        );
+        sentenceToggle.setAttribute("aria-expanded", "false");
+        const sentenceList = document.createElement("div");
+        sentenceList.className = "english-image-tts-sentences";
+        sentenceList.hidden = true;
+        bubbleSentences.forEach((sentence, index) => {
+            sentenceList.appendChild(createEnglishImageTTSMenuButton(
+                `🔊 第 ${index + 1} 句`,
+                `朗讀第 ${panel.panelId} 格${bubbleLabel}第 ${index + 1} 句：${sentence}`,
+                () => speakEnglishImageTTSFromPanel(trigger, sentence)
+            ));
+        });
+        menu.appendChild(sentenceToggle);
+        menu.appendChild(sentenceList);
+    }
+
+    menu.appendChild(createEnglishImageTTSMenuButton(
+        "關閉",
+        `關閉第 ${panel.panelId} 格泡泡朗讀選單`,
+        () => closeEnglishImageTTSMenu(true)
+    ));
+    menu.hidden = false;
+    menu.style.visibility = "hidden";
+    positionEnglishImageTTSMenu();
+    try {
+        readBubbleButton.focus({ preventScroll: true });
+    } catch (error) {
+        readBubbleButton.focus();
+    }
+}
+
 function openEnglishImageTTSStoryControls(trigger, panel, controls) {
     if (!trigger || !panel || !controls || appState.subjectMode !== "english" ||
         isEnglishImageTTSDrawingMode()) {
         return;
     }
     cancelEnglishImageTTSStorySequenceForDifferentTrigger(trigger);
+    const triggerWrapper = typeof trigger.closest === "function"
+        ? trigger.closest(".image-tts-overlay-wrapper")
+        : null;
+    const assetFile = triggerWrapper && triggerWrapper.dataset
+        ? triggerWrapper.dataset.imageTtsAssetFile
+        : "";
+    const isMakingPlans = assetFile === ENGLISH_MAKING_PLANS_BUBBLE_ASSET_FILE;
+    const record = isMakingPlans ? getEnglishImageTTSRecord(assetFile) : null;
+    const fullStorySentences = record
+        ? getEnglishMakingPlansFullStorySentences(record, assetFile)
+        : null;
     const content = buildEnglishImageTTSPanelText(panel);
     const panelSentences = Array.isArray(panel.sentences)
         ? panel.sentences.map(sentence => typeof sentence === "string" ? getEnglishTTSUnitText(sentence) : null)
@@ -16873,10 +17288,21 @@ function openEnglishImageTTSStoryControls(trigger, panel, controls) {
     const actions = document.createElement("div");
     actions.className = "english-image-story-controls-actions";
     actions.appendChild(createEnglishImageTTSMenuButton(
-        "🔊 朗讀整段",
+        isMakingPlans ? "🔊 朗讀本格全部句子" : "🔊 朗讀整段",
         `朗讀第 ${panel.panelId} 格完整英文故事`,
         () => speakEnglishImageTTSStorySequence(trigger, sentences, fullText)
     ));
+    if (fullStorySentences) {
+        actions.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀整張圖／全故事",
+            "依閱讀順序朗讀 Making Plans with Friends 全圖 12 格、26 句故事，不含獨立思考泡泡",
+            () => speakEnglishImageTTSStorySequence(
+                trigger,
+                fullStorySentences,
+                fullStorySentences.join(" ")
+            )
+        ));
+    }
 
     const sentenceToggle = createEnglishImageTTSMenuButton(
         "單句",

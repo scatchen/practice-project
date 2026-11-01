@@ -5192,6 +5192,7 @@ const imageTTSData = {
         transcriptReviewMethod: "manual-visual-no-OCR",
         coordinateStatus: "calibrated",
         overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1024, height: 1536 },
         panels: [
             {
                 panelId: 1,
@@ -5200,6 +5201,18 @@ const imageTTSData = {
                 text: "Hey, do you want to hang out this Saturday?",
                 sentences: ["Hey, do you want to hang out this Saturday?"],
                 bounds: { xPct: 28.8086, yPct: 0.6510, widthPct: 36.1328, heightPct: 16.6667 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-1",
+                        kind: "dialogue",
+                        sourceText: "Hey, do you want to hang out this Saturday?",
+                        sentences: [
+                            "Hey, do you want to hang out this Saturday?"
+                        ],
+                        tapRegion: { xPct: 34.9609, yPct: 1.1068, widthPct: 24.3164, heightPct: 4.1667 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5212,6 +5225,19 @@ const imageTTSData = {
                     "What do you have in mind?"
                 ],
                 bounds: { xPct: 66.8945, yPct: 0.6510, widthPct: 32.2266, heightPct: 16.6667 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-2",
+                        kind: "dialogue",
+                        sourceText: "That sounds good! What do you have in mind?",
+                        sentences: [
+                            "That sounds good!",
+                            "What do you have in mind?"
+                        ],
+                        tapRegion: { xPct: 73.6328, yPct: 1.1719, widthPct: 21.4844, heightPct: 5.5990 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5224,6 +5250,19 @@ const imageTTSData = {
                     "The reviews are great!"
                 ],
                 bounds: { xPct: 28.8086, yPct: 18.9453, widthPct: 36.1328, heightPct: 15.6250 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-3",
+                        kind: "dialogue",
+                        sourceText: "I'm thinking we could go to a new café downtown. The reviews are great!",
+                        sentences: [
+                            "I'm thinking we could go to a new café downtown.",
+                            "The reviews are great!"
+                        ],
+                        tapRegion: { xPct: 34.9609, yPct: 19.5312, widthPct: 27.3438, heightPct: 5.5339 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5236,6 +5275,19 @@ const imageTTSData = {
                     "What time should we meet?"
                 ],
                 bounds: { xPct: 66.8945, yPct: 18.9453, widthPct: 32.2266, heightPct: 15.6250 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-4",
+                        kind: "dialogue",
+                        sourceText: "Nice! What time should we meet?",
+                        sentences: [
+                            "Nice!",
+                            "What time should we meet?"
+                        ],
+                        tapRegion: { xPct: 73.6328, yPct: 19.5312, widthPct: 17.9688, heightPct: 4.4271 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5245,6 +5297,28 @@ const imageTTSData = {
                 text: "I'd love to, but I'm not available in the morning.",
                 sentences: ["I'd love to, but I'm not available in the morning."],
                 bounds: { xPct: 28.8086, yPct: 35.8724, widthPct: 36.1328, heightPct: 15.4948 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-5",
+                        kind: "dialogue",
+                        sourceText: "I'd love to, but I'm not available in the morning.",
+                        sentences: [
+                            "I'd love to, but I'm not available in the morning."
+                        ],
+                        tapRegion: { xPct: 35.1562, yPct: 36.5885, widthPct: 27.9297, heightPct: 3.8411 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    },
+                    {
+                        bubbleId: "thought-5",
+                        kind: "thought",
+                        sourceText: "Morning Busy...",
+                        sentences: [
+                            "Morning Busy..."
+                        ],
+                        tapRegion: { xPct: 52.3438, yPct: 42.4479, widthPct: 11.5234, heightPct: 6.7708 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5257,6 +5331,19 @@ const imageTTSData = {
                     "How about we meet in the afternoon instead?"
                 ],
                 bounds: { xPct: 66.8945, yPct: 35.8724, widthPct: 32.2266, heightPct: 15.4948 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-6",
+                        kind: "dialogue",
+                        sourceText: "No problem. How about we meet in the afternoon instead?",
+                        sentences: [
+                            "No problem.",
+                            "How about we meet in the afternoon instead?"
+                        ],
+                        tapRegion: { xPct: 73.5352, yPct: 36.8490, widthPct: 24.3164, heightPct: 6.9661 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5269,6 +5356,19 @@ const imageTTSData = {
                     "We can grab some lunch and then check out the café."
                 ],
                 bounds: { xPct: 28.8086, yPct: 52.7995, widthPct: 36.1328, heightPct: 15.3646 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-7",
+                        kind: "dialogue",
+                        sourceText: "That could work! We can grab some lunch and then check out the café.",
+                        sentences: [
+                            "That could work!",
+                            "We can grab some lunch and then check out the café."
+                        ],
+                        tapRegion: { xPct: 35.0586, yPct: 53.2552, widthPct: 27.4414, heightPct: 5.2083 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5282,6 +5382,20 @@ const imageTTSData = {
                     "Does that work for you?"
                 ],
                 bounds: { xPct: 66.8945, yPct: 52.7995, widthPct: 32.2266, heightPct: 15.3646 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-8",
+                        kind: "dialogue",
+                        sourceText: "Great! Let's meet at 1 p.m. at the station. Does that work for you?",
+                        sentences: [
+                            "Great!",
+                            "Let's meet at 1 p.m. at the station.",
+                            "Does that work for you?"
+                        ],
+                        tapRegion: { xPct: 73.4375, yPct: 53.2552, widthPct: 23.8281, heightPct: 5.4036 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5294,6 +5408,19 @@ const imageTTSData = {
                     "I have a family commitment at 1 p.m."
                 ],
                 bounds: { xPct: 28.8086, yPct: 69.7266, widthPct: 36.1328, heightPct: 14.1927 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-9",
+                        kind: "dialogue",
+                        sourceText: "Actually, something just came up. I have a family commitment at 1 p.m.",
+                        sentences: [
+                            "Actually, something just came up.",
+                            "I have a family commitment at 1 p.m."
+                        ],
+                        tapRegion: { xPct: 35.0586, yPct: 70.0521, widthPct: 28.2227, heightPct: 4.9479 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5307,6 +5434,20 @@ const imageTTSData = {
                     "What's another time that works for you?"
                 ],
                 bounds: { xPct: 66.8945, yPct: 69.7266, widthPct: 32.2266, heightPct: 14.1927 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-10",
+                        kind: "dialogue",
+                        sourceText: "I see. We'll need to reschedule then. What's another time that works for you?",
+                        sentences: [
+                            "I see.",
+                            "We'll need to reschedule then.",
+                            "What's another time that works for you?"
+                        ],
+                        tapRegion: { xPct: 73.6328, yPct: 70.0521, widthPct: 21.0938, heightPct: 7.2266 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5319,6 +5460,19 @@ const imageTTSData = {
                     "That gives me enough time, and we can still enjoy the café."
                 ],
                 bounds: { xPct: 28.8086, yPct: 85.4818, widthPct: 36.1328, heightPct: 13.6719 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-11",
+                        kind: "dialogue",
+                        sourceText: "How about we meet at 4 p.m. instead? That gives me enough time, and we can still enjoy the café.",
+                        sentences: [
+                            "How about we meet at 4 p.m. instead?",
+                            "That gives me enough time, and we can still enjoy the café."
+                        ],
+                        tapRegion: { xPct: 35.0586, yPct: 86.0677, widthPct: 16.6016, heightPct: 5.4036 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             },
             {
@@ -5333,6 +5487,30 @@ const imageTTSData = {
                     "Looking forward to it!"
                 ],
                 bounds: { xPct: 66.8945, yPct: 85.4818, widthPct: 32.2266, heightPct: 13.6719 },
+                speechBubbles: [
+                    {
+                        bubbleId: "dialogue-12",
+                        kind: "dialogue",
+                        sourceText: "Perfect! Let's go with 4 p.m. I'll see you at the station!",
+                        sentences: [
+                            "Perfect!",
+                            "Let's go with 4 p.m.",
+                            "I'll see you at the station!"
+                        ],
+                        tapRegion: { xPct: 73.2422, yPct: 86.0677, widthPct: 24.4141, heightPct: 4.0365 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    },
+                    {
+                        bubbleId: "dialogue-13",
+                        kind: "dialogue",
+                        sourceText: "Looking forward to it!",
+                        sentences: [
+                            "Looking forward to it!"
+                        ],
+                        tapRegion: { xPct: 92.7734, yPct: 91.4714, widthPct: 6.2500, heightPct: 5.0130 },
+                        tapRegionStatus: "visually-calibrated-to-1024x1536-source"
+                    }
+                ],
                 contentReviewStatus: "verified-against-image"
             }
         ]
