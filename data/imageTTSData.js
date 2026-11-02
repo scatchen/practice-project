@@ -21218,6 +21218,56 @@ const imageTTSData = {
                 tapRegion: { xPct: 54.0, yPct: 50.4, widthPct: 43.5, heightPct: 8.0 }
             }
         ]
+    },
+
+    "images/english/water-cycle-basics.png": {
+        imageId: "water-cycle-basics",
+        assetFile: "images/english/water-cycle-basics.png",
+        contentType: "image-text",
+        layout: "custom-water-cycle-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1312, height: 1199 },
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0, yPct: 0, widthPct: 50, heightPct: 50 },
+                items: [{ itemId: 1, readingOrder: 1, type: "sentence",
+                    sourceText: "The sun heats water\nin oceans, lakes and rivers.\nThe water changes from liquid\nto water vapor (gas).",
+                    ttsText: "The sun heats water\nin oceans, lakes and rivers.\nThe water changes from liquid\nto water vapor (gas).",
+                    bounds: { xPct: 3.85, yPct: 9.45, widthPct: 29.10, heightPct: 12.85 },
+                    tapRegion: { xPct: 3.85, yPct: 9.45, widthPct: 29.10, heightPct: 12.85 } }]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 50, yPct: 0, widthPct: 50, heightPct: 50 },
+                items: [{ itemId: 1, readingOrder: 1, type: "sentence",
+                    sourceText: "Water vapor cools down\nand changes back into tiny\nliquid droplets, forming clouds.",
+                    ttsText: "Water vapor cools down\nand changes back into tiny\nliquid droplets, forming clouds.",
+                    bounds: { xPct: 53.75, yPct: 9.45, widthPct: 29.65, heightPct: 10.55 },
+                    tapRegion: { xPct: 53.75, yPct: 9.45, widthPct: 29.65, heightPct: 10.55 } }]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 50, yPct: 50, widthPct: 50, heightPct: 50 },
+                items: [{ itemId: 1, readingOrder: 1, type: "sentence",
+                    sourceText: "The droplets become larger\nand fall to Earth as rain, snow,\nsleet or hail.",
+                    ttsText: "The droplets become larger\nand fall to Earth as rain, snow,\nsleet or hail.",
+                    bounds: { xPct: 61.80, yPct: 58.90, widthPct: 33.00, heightPct: 9.00 },
+                    tapRegion: { xPct: 61.80, yPct: 58.90, widthPct: 33.00, heightPct: 9.00 } }]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 0, yPct: 50, widthPct: 50, heightPct: 50 },
+                items: [{ itemId: 1, readingOrder: 1, type: "sentence",
+                    sourceText: "Water collects in oceans,\nlakes, rivers, and underground\n(groundwater), ready to start\nthe cycle again.",
+                    ttsText: "Water collects in oceans,\nlakes, rivers, and underground\n(groundwater), ready to start\nthe cycle again.",
+                    bounds: { xPct: 4.15, yPct: 59.55, widthPct: 30.35, heightPct: 11.65 },
+                    tapRegion: { xPct: 4.15, yPct: 59.55, widthPct: 30.35, heightPct: 11.65 } }]
+            }
+        ]
     }
 
 };

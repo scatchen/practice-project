@@ -3736,6 +3736,16 @@ function rememberEnglishSpeechTrigger(trigger) {
 }
 
 function scheduleEnglishTTSFloatingStopPosition() {
+    const waterCycleTrigger = englishTTSState.imageTextSequenceTrigger;
+    if (waterCycleTrigger && isEnglishWaterCycleImageTTSRecord(
+        waterCycleTrigger._englishImageTTSImageTextRecord
+    )) {
+        const waterCycleWrapper = typeof waterCycleTrigger.closest === "function"
+            ? waterCycleTrigger.closest(".image-tts-overlay-wrapper") : null;
+        layoutEnglishWaterCycleImageTTSHitAreas(waterCycleWrapper);
+        ensureEnglishWaterCycleImageTTSStopPosition(waterCycleTrigger, waterCycleWrapper);
+        return;
+    }
     if (englishTTSState.stopPositionFrame) {
         return;
     }
@@ -3767,10 +3777,14 @@ function resetEnglishTTSFloatingStopButtonStyles(button) {
     button.classList.remove("is-image-tts-story-stop-control");
     button.classList.remove("is-image-tts-teaching-stop-control");
     const wasKarstStop=button.classList.contains("is-image-tts-karst-stop-control");
+    const wasWaterCycleStop = button.classList.contains("is-image-tts-water-cycle-stop-control");
     button.classList.remove("is-image-tts-image-text-stop-control");
     button.classList.remove("is-image-tts-karst-stop-control");
-    if(wasKarstStop){button.textContent="⏹ 停止朗讀";
-        button.setAttribute("aria-label","停止目前的英文朗讀");}
+    button.classList.remove("is-image-tts-water-cycle-stop-control");
+    if (wasKarstStop || wasWaterCycleStop) {
+        button.textContent = "⏹ 停止朗讀";
+        button.setAttribute("aria-label", "停止目前的英文朗讀");
+    }
     button.style.position = "";
     button.style.zIndex = "";
     button.style.inset = "";
@@ -3780,10 +3794,13 @@ function resetEnglishTTSFloatingStopButtonStyles(button) {
     button.style.bottom = "";
     button.style.transform = "";
     button.style.width = "";
+    button.style.height = "";
     button.style.minWidth = "";
     button.style.minHeight = "";
     button.style.maxWidth = "";
     button.style.maxHeight = "";
+    button.style.padding = "";
+    button.style.boxSizing = "";
     button.style.visibility = "";
 }
 
@@ -4018,6 +4035,15 @@ function placeEnglishImageTTSStoryStopButton(button, wrapper, panel, placementOp
         document.body.appendChild(button);
     }
     button.classList.add(placementOptions.stopControlClass || "is-image-tts-story-stop-control");
+    if (placementOptions.fixedStopSize === true) {
+        button.classList.add("is-image-tts-water-cycle-stop-control");
+        button.textContent = "⏹";
+        button.setAttribute("aria-label", "停止 Water Cycle 英文朗讀");
+        button.style.width = "44px";
+        button.style.height = "52px";
+        button.style.padding = "0";
+        button.style.boxSizing = "border-box";
+    }
     button.hidden = false;
     button.style.position = "fixed";
     button.style.zIndex = "12200";
@@ -4056,10 +4082,13 @@ function placeEnglishImageTTSStoryStopButton(button, wrapper, panel, placementOp
     const margin = 8;
     const safeWidth = Math.max(1, viewportWidth - safeInsets.left - safeInsets.right - margin * 2);
     const safeHeight = Math.max(1, viewportHeight - safeInsets.top - safeInsets.bottom - margin * 2);
-    button.style.minWidth = "0";
-    button.style.maxWidth = String(safeWidth) + "px";
-    button.style.minHeight = String(Math.min(52, safeHeight)) + "px";
-    button.style.maxHeight = String(safeHeight) + "px";
+    button.style.minWidth = placementOptions.fixedStopSize === true ? "44px" : "0";
+    button.style.maxWidth = placementOptions.fixedStopSize === true
+        ? "44px" : String(safeWidth) + "px";
+    button.style.minHeight = placementOptions.fixedStopSize === true
+        ? "52px" : String(Math.min(52, safeHeight)) + "px";
+    button.style.maxHeight = placementOptions.fixedStopSize === true
+        ? "52px" : String(safeHeight) + "px";
     button.style.visibility = "hidden";
 
     const measured = button.getBoundingClientRect();
@@ -4444,6 +4473,172 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
 }
 
 
+function placeEnglishWaterCycleImageTTSStopButton(button, wrapper) {
+    const fail = () => {
+        if (button) {
+            button.hidden = true;
+            if (button.style) button.style.visibility = "hidden";
+        }
+        return false;
+    };
+    const trigger = englishTTSState.imageTextSequenceTrigger || englishTTSState.activeSpeechTrigger;
+    const record = trigger && trigger._englishImageTTSImageTextRecord;
+    const activePanel = trigger && (trigger._englishImageTTSImageTextActivePanel ||
+        trigger._englishImageTTSImageTextPanel);
+    const activeItem = trigger && (trigger._englishImageTTSImageTextActiveItem ||
+        trigger._englishImageTTSImageTextItem);
+    const safeRecord = getEnglishImageTTSRecord(ENGLISH_WATER_CYCLE_ASSET_FILE);
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    if (!button || !wrapper || wrapper.isConnected === false || !trigger ||
+        !trigger.classList || !trigger.classList.contains("image-tts-image-text-hit-area") ||
+        !safeRecord || record !== safeRecord || !isEnglishWaterCycleImageTTSRecord(record) ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_WATER_CYCLE_ASSET_FILE ||
+        (typeof wrapper.contains === "function" && !wrapper.contains(trigger)) ||
+        !activePanel || !activeItem || activePanel !== record.panels.find(panel =>
+            panel.panelId === activePanel.panelId) || !activePanel.items.includes(activeItem) ||
+        !isEnglishWaterCycleImageTTSItemText(record, activeItem) ||
+        !image || image.getAttribute("src") !== ENGLISH_WATER_CYCLE_ASSET_FILE ||
+        !image.complete || image.naturalWidth !== 1312 || image.naturalHeight !== 1199) return fail();
+    let imageRect;
+    try { imageRect = image.getBoundingClientRect(); } catch (error) { return fail(); }
+    if (!imageRect || imageRect.width <= 0 || imageRect.height <= 0 ||
+        ![imageRect.left, imageRect.top, imageRect.width, imageRect.height].every(Number.isFinite)) return fail();
+
+    const controls = [];
+    const selectors = [
+        ".control-bar", ".brush-colors", ".scribble-box",
+        ".english-image-story-controls:not([hidden])",
+        ".english-image-tts-menu:not([hidden])", "#english-tts-panel:not([hidden])",
+        "button:not(#english-tts-floating-stop)", "[role=button]"
+    ];
+    const seen = new Set();
+    try {
+        document.querySelectorAll(selectors.join(",")).forEach(element => {
+            if (!element || element === button || seen.has(element) || element.hidden) return;
+            seen.add(element);
+            const style = window.getComputedStyle(element);
+            if (!style || style.display === "none" || style.visibility === "hidden" ||
+                style.visibility === "collapse") return;
+            const rect = element.getBoundingClientRect();
+            if (!rect || ![rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height]
+                .every(Number.isFinite)) throw new Error("unreadable visible control");
+            if (rect.width > 0 && rect.height > 0) {
+                controls.push({ left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom });
+            }
+        });
+    } catch (error) { return fail(); }
+
+    const imageBounds = { xPct: 0, yPct: 0, widthPct: 100, heightPct: 100 };
+    const tapRegions = record.panels.map(panel => panel.items[0].tapRegion);
+    const placed = placeEnglishImageTTSStoryStopButton(button, wrapper, {
+        bounds: imageBounds,
+        avoidBounds: tapRegions,
+        avoidRects: controls
+    }, {
+        preferBelow: true,
+        scanForClearPosition: true,
+        strictAvoidance: true,
+        fixedStopSize: true,
+        stopControlClass: "is-image-tts-image-text-stop-control"
+    });
+    if (!placed || button.hidden || button.disabled || button.isConnected === false ||
+        button.getAttribute("aria-disabled") === "true") return fail();
+
+    const visual = window.visualViewport;
+    const viewportLeft = visual ? visual.offsetLeft : 0;
+    const viewportTop = visual ? visual.offsetTop : 0;
+    const viewportWidth = visual ? visual.width : window.innerWidth;
+    const viewportHeight = visual ? visual.height : window.innerHeight;
+    if (![viewportLeft, viewportTop, viewportWidth, viewportHeight].every(Number.isFinite) ||
+        viewportWidth <= 0 || viewportHeight <= 0) return fail();
+    const readInset = name => {
+        try {
+            const value = parseFloat(window.getComputedStyle(button).getPropertyValue(name));
+            return Number.isFinite(value) && value > 0 ? value : 0;
+        } catch (error) { return 0; }
+    };
+    const safeLeft = viewportLeft + readInset("--english-tts-safe-left") + 8;
+    const safeRight = viewportLeft + viewportWidth - readInset("--english-tts-safe-right") - 8;
+    const safeTop = viewportTop + readInset("--english-tts-safe-top") + 8;
+    const safeBottom = viewportTop + viewportHeight - readInset("--english-tts-safe-bottom") - 8;
+    let buttonRect, buttonStyle;
+    try {
+        buttonRect = button.getBoundingClientRect();
+        buttonStyle = window.getComputedStyle(button);
+    } catch (error) { return fail(); }
+    if (!buttonRect || !buttonStyle || buttonStyle.display === "none" ||
+        buttonStyle.visibility !== "visible" || buttonStyle.pointerEvents === "none" ||
+        ![buttonRect.left, buttonRect.top, buttonRect.right, buttonRect.bottom,
+            buttonRect.width, buttonRect.height].every(Number.isFinite) ||
+        buttonRect.width < 44 || buttonRect.height < 44 ||
+        typeof document.elementFromPoint !== "function") return fail();
+    const hitInset = Math.min(6, buttonRect.width / 4, buttonRect.height / 4);
+    const hitCenterX = buttonRect.left + buttonRect.width / 2;
+    const hitCenterY = buttonRect.top + buttonRect.height / 2;
+    const hitPoints = [
+        [hitCenterX, hitCenterY],
+        [buttonRect.left + hitInset, hitCenterY],
+        [buttonRect.right - hitInset, hitCenterY],
+        [hitCenterX, buttonRect.top + hitInset],
+        [hitCenterX, buttonRect.bottom - hitInset]
+    ];
+    try {
+        for (const point of hitPoints) {
+            const hit = document.elementFromPoint(point[0], point[1]);
+            if (!hit || hit !== button &&
+                !(typeof button.contains === "function" && button.contains(hit))) return fail();
+        }
+    } catch (error) { return fail(); }
+    const actual = {
+        left: buttonRect.left + viewportLeft, right: buttonRect.right + viewportLeft,
+        top: buttonRect.top + viewportTop, bottom: buttonRect.bottom + viewportTop
+    };
+    if (actual.left < safeLeft || actual.right > safeRight ||
+        actual.top < safeTop || actual.bottom > safeBottom) return fail();
+    const intersects = obstacle => actual.left < obstacle.right && actual.right > obstacle.left &&
+        actual.top < obstacle.bottom && actual.bottom > obstacle.top;
+    const imageActual = {
+        left: imageRect.left + viewportLeft, right: imageRect.right + viewportLeft,
+        top: imageRect.top + viewportTop, bottom: imageRect.bottom + viewportTop
+    };
+    if (intersects(imageActual)) return fail();
+    for (const obstacle of controls) {
+        const shifted = {
+            left: obstacle.left + viewportLeft, right: obstacle.right + viewportLeft,
+            top: obstacle.top + viewportTop, bottom: obstacle.bottom + viewportTop
+        };
+        if (intersects(shifted)) return fail();
+    }
+    const imageLeft = imageRect.left + viewportLeft;
+    const imageTop = imageRect.top + viewportTop;
+    for (const bounds of tapRegions) {
+        const tapRect = {
+            left: imageLeft + imageRect.width * bounds.xPct / 100,
+            top: imageTop + imageRect.height * bounds.yPct / 100,
+            right: imageLeft + imageRect.width * (bounds.xPct + bounds.widthPct) / 100,
+            bottom: imageTop + imageRect.height * (bounds.yPct + bounds.heightPct) / 100
+        };
+        if (intersects(tapRect)) return fail();
+    }
+    return true;
+}
+
+function ensureEnglishWaterCycleImageTTSStopPosition(trigger, wrapper) {
+    if (!trigger || englishTTSState.imageTextSequenceTrigger !== trigger ||
+        !isEnglishWaterCycleImageTTSRecord(trigger._englishImageTTSImageTextRecord)) return false;
+    if (placeEnglishWaterCycleImageTTSStopButton(getEnglishTTSFloatingStopButton(), wrapper)) return true;
+    cancelEnglishImageTTSImageTextSequence(true);
+    const button = getEnglishTTSFloatingStopButton();
+    if (button) {
+        button.hidden = true;
+        if (button.style) button.style.visibility = "hidden";
+    }
+    setEnglishTTSStatus("目前畫面沒有安全且可見的 Stop 位置，Water Cycle 朗讀已拒絕或取消。");
+    updateEnglishTTSControls();
+    return false;
+}
+
 function placeEnglishKarstImageTTSStopButton(button,wrapper,record,panel) {
     const fail=()=>{button.hidden=true;button.style.visibility="hidden";return false;};
     const trigger=englishTTSState.activeSpeechTrigger, file="images/english/karst-landforms-basics.png";
@@ -4651,6 +4846,15 @@ function updateEnglishTTSControls() {
 function positionEnglishTTSFloatingStopButton() {
     const button = getEnglishTTSFloatingStopButton();
     if (!button || appState.subjectMode !== "english") {
+        return;
+    }
+    const waterCycleSequenceTrigger = englishTTSState.imageTextSequenceTrigger;
+    if (waterCycleSequenceTrigger && isEnglishWaterCycleImageTTSRecord(
+        waterCycleSequenceTrigger._englishImageTTSImageTextRecord
+    )) {
+        const waterCycleWrapper = typeof waterCycleSequenceTrigger.closest === "function"
+            ? waterCycleSequenceTrigger.closest(".image-tts-overlay-wrapper") : null;
+        ensureEnglishWaterCycleImageTTSStopPosition(waterCycleSequenceTrigger, waterCycleWrapper);
         return;
     }
 
@@ -5259,6 +5463,8 @@ function speakEnglishText(
         return false;
     }
 
+    const expectedImageTextSequenceTrigger = imageTextSequenceGeneration === null
+        ? null : englishTTSState.imageTextSequenceTrigger;
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.voice = voice;
     utterance.lang = voice.lang || "en-US";
@@ -5310,6 +5516,17 @@ function speakEnglishText(
         englishTTSState.synthesis.cancel();
         englishTTSState.activeUtterance = utterance;
         updateEnglishTTSControls();
+        if (imageTextSequenceGeneration !== null &&
+            (imageTextSequenceGeneration !== englishTTSState.imageTextSequenceGeneration ||
+                !expectedImageTextSequenceTrigger ||
+                englishTTSState.imageTextSequenceTrigger !== expectedImageTextSequenceTrigger ||
+                englishTTSState.activeSpeechTrigger !== expectedImageTextSequenceTrigger ||
+                englishTTSState.activeUtterance !== utterance)) {
+            if (englishTTSState.activeUtterance === utterance) {
+                englishTTSState.activeUtterance = null;
+            }
+            return false;
+        }
         englishTTSState.synthesis.speak(utterance);
         return true;
     } catch (error) {
@@ -10058,7 +10275,132 @@ function isEnglishAnimalsWildlifeImageTTSItemText(record,item) {
  return Boolean(safe&&record.panels.some(p=>Array.isArray(p.items)&&p.items.includes(item)));
 }
 
+const ENGLISH_WATER_CYCLE_ASSET_FILE = "images/english/water-cycle-basics.png";
+const ENGLISH_WATER_CYCLE_IMAGE_ID = "water-cycle-basics";
+
+function isEnglishWaterCycleImageTTSRecord(record) {
+    return Boolean(record && record.imageId === ENGLISH_WATER_CYCLE_IMAGE_ID &&
+        record.assetFile === ENGLISH_WATER_CYCLE_ASSET_FILE);
+}
+
+function getEnglishWaterCycleImageTextRecord(record, assetFile) {
+    const expectedPanels = [
+        {
+            panelId: 1,
+            bounds: { xPct: 0, yPct: 0, widthPct: 50, heightPct: 50 },
+            sourceText: "The sun heats water\nin oceans, lakes and rivers.\nThe water changes from liquid\nto water vapor (gas).",
+            tapRegion: { xPct: 3.85, yPct: 9.45, widthPct: 29.10, heightPct: 12.85 }
+        },
+        {
+            panelId: 2,
+            bounds: { xPct: 50, yPct: 0, widthPct: 50, heightPct: 50 },
+            sourceText: "Water vapor cools down\nand changes back into tiny\nliquid droplets, forming clouds.",
+            tapRegion: { xPct: 53.75, yPct: 9.45, widthPct: 29.65, heightPct: 10.55 }
+        },
+        {
+            panelId: 3,
+            bounds: { xPct: 50, yPct: 50, widthPct: 50, heightPct: 50 },
+            sourceText: "The droplets become larger\nand fall to Earth as rain, snow,\nsleet or hail.",
+            tapRegion: { xPct: 61.80, yPct: 58.90, widthPct: 33.00, heightPct: 9.00 }
+        },
+        {
+            panelId: 4,
+            bounds: { xPct: 0, yPct: 50, widthPct: 50, heightPct: 50 },
+            sourceText: "Water collects in oceans,\nlakes, rivers, and underground\n(groundwater), ready to start\nthe cycle again.",
+            tapRegion: { xPct: 4.15, yPct: 59.55, widthPct: 30.35, heightPct: 11.65 }
+        }
+    ];
+    const exactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value) &&
+        Object.keys(value).length === keys.length && keys.every(key =>
+            Object.prototype.hasOwnProperty.call(value, key));
+    const sameBounds = (actual, expected) => exactKeys(actual,
+        ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        ["xPct", "yPct", "widthPct", "heightPct"].every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct && left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+    if (assetFile !== ENGLISH_WATER_CYCLE_ASSET_FILE ||
+        typeof imageTTSData === "undefined" || !imageTTSData ||
+        imageTTSData[ENGLISH_WATER_CYCLE_ASSET_FILE] !== record || !record ||
+        !isEnglishWaterCycleImageTTSRecord(record)) return null;
+    const matchingKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === ENGLISH_WATER_CYCLE_ASSET_FILE || candidate &&
+            (candidate.imageId === ENGLISH_WATER_CYCLE_IMAGE_ID ||
+                candidate.assetFile === ENGLISH_WATER_CYCLE_ASSET_FILE);
+    });
+    const libraryMatches = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_WATER_CYCLE_IMAGE_ID ||
+                entry.file === ENGLISH_WATER_CYCLE_ASSET_FILE))
+        : [];
+    if (matchingKeys.length !== 1 || matchingKeys[0] !== ENGLISH_WATER_CYCLE_ASSET_FILE ||
+        libraryMatches.length !== 1 || libraryMatches[0].id !== ENGLISH_WATER_CYCLE_IMAGE_ID ||
+        libraryMatches[0].file !== ENGLISH_WATER_CYCLE_ASSET_FILE ||
+        !exactKeys(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+            "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+            "sourceImageDimensions", "panels"]) ||
+        record.contentType !== "image-text" || record.layout !== "custom-water-cycle-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exactKeys(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1312 || record.sourceImageDimensions.height !== 1199 ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) return null;
+
+    const allTapRegions = [];
+    for (let index = 0; index < expectedPanels.length; index += 1) {
+        const panel = record.panels[index];
+        const expected = expectedPanels[index];
+        if (!exactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expected.panelId || panel.readingOrder !== index + 1 ||
+            !sameBounds(panel.bounds, expected.bounds) || !Array.isArray(panel.items) ||
+            panel.items.length !== 1) return null;
+        const item = panel.items[0];
+        const tapRegion = expected.tapRegion;
+        if (!exactKeys(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText",
+                "bounds", "tapRegion"]) || item.itemId !== 1 || item.readingOrder !== 1 ||
+            item.type !== "sentence" || item.sourceText !== expected.sourceText ||
+            item.ttsText !== item.sourceText || !getEnglishTTSUnitText(item.sourceText) ||
+            !sameBounds(item.bounds, tapRegion) || !sameBounds(item.tapRegion, tapRegion) ||
+            !contains(panel.bounds, item.bounds) || !contains(item.tapRegion, item.bounds)) return null;
+        allTapRegions.push(item.tapRegion);
+    }
+    for (let left = 0; left < allTapRegions.length; left += 1) {
+        for (let right = left + 1; right < allTapRegions.length; right += 1) {
+            if (overlaps(allTapRegions[left], allTapRegions[right])) return null;
+        }
+    }
+    return record;
+}
+
+function isEnglishWaterCycleImageTTSItemText(record, item) {
+    const file = ENGLISH_WATER_CYCLE_ASSET_FILE;
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[file] : null;
+    const safeRecord = canonical && getEnglishWaterCycleImageTextRecord(canonical, file);
+    return Boolean(safeRecord && record === canonical && item && item.sourceText === item.ttsText &&
+        safeRecord.panels.some(panel => panel.items.includes(item)));
+}
+
+function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
+    if (!isEnglishWaterCycleImageTTSItemText(record, item)) return [];
+    const panel = record.panels.find(candidate => candidate.items.includes(item));
+    const segments = [
+        ["The sun heats water in oceans, lakes and rivers.",
+            "The water changes from liquid to water vapor (gas)."],
+        ["Water vapor cools down and changes back into tiny liquid droplets, forming clouds."],
+        ["The droplets become larger and fall to Earth as rain, snow, sleet or hail."],
+        ["Water collects in oceans, lakes, rivers, and underground (groundwater), ready to start the cycle again."]
+    ];
+    return panel ? segments[panel.panelId - 1].slice() : [];
+}
+
 function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishWaterCycleImageTTSItemText(record, item)) return true;
     if (isEnglishMountainsImageTTSItemText(record, item) ||
         isEnglishEnergyTransformationsImageTTSItemText(record, item) ||
         isEnglishAnimalsWildlifeImageTTSItemText(record,item) ||
@@ -10638,6 +10980,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishWaterCycleImageTTSRecord(record)) return "Water Cycle";
     if (isEnglishMountainsImageTTSRecord(record)) return "Mountains & Mountain Ranges";
     if (isEnglishEnergyTransformationsImageTTSRecord(record)) return "Energy Transformations";
     if (isEnglishAnimalsWildlifeImageTTSRecord(record)) return "Animals & Wildlife";
@@ -13617,6 +13960,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_WATER_CYCLE_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_WATER_CYCLE_IMAGE_ID ||
+            record.assetFile === ENGLISH_WATER_CYCLE_ASSET_FILE)) {
+        return getEnglishWaterCycleImageTextRecord(record, assetFile);
+    }
     const campingFile = "images/english/camping-basics.png";
     if (assetFile === campingFile || record &&
         (record.imageId === "camping-basics" || record.assetFile === campingFile)) {
@@ -15462,8 +15810,124 @@ function createEnglishImageTTSMountainsHitArea(wrapper, panel, item, record) {
     return button;
 }
 
+function reserveEnglishWaterCycleImageTTSStopArea(wrapper) {
+    const file = ENGLISH_WATER_CYCLE_ASSET_FILE;
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    if (!wrapper || wrapper.isConnected === false || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== file || !image ||
+        image.getAttribute("src") !== file || !image.complete ||
+        image.naturalWidth !== 1312 || image.naturalHeight !== 1199) return false;
+
+    const visual = window.visualViewport;
+    const viewportLeft = visual && Number.isFinite(visual.offsetLeft) ? visual.offsetLeft : 0;
+    const viewportWidth = visual && Number.isFinite(visual.width) && visual.width > 0
+        ? visual.width : window.innerWidth;
+    const stopButton = getEnglishTTSFloatingStopButton();
+    const styleSource = stopButton || document.documentElement;
+    const readInset = name => {
+        try {
+            const value = parseFloat(window.getComputedStyle(styleSource).getPropertyValue(name));
+            return Number.isFinite(value) && value > 0 ? value : 0;
+        } catch (error) { return 0; }
+    };
+    const safeLeft = viewportLeft + readInset("--english-tts-safe-left") + 8;
+    const safeRight = viewportLeft + viewportWidth - readInset("--english-tts-safe-right") - 8;
+    let wrapperRect, imageRect;
+    try {
+        wrapperRect = wrapper.getBoundingClientRect();
+        imageRect = image.getBoundingClientRect();
+    } catch (error) { return false; }
+    if (!wrapperRect || !imageRect ||
+        ![wrapperRect.left, wrapperRect.right, wrapperRect.width,
+            imageRect.left, imageRect.right, imageRect.width].every(Number.isFinite) ||
+        wrapperRect.width <= 0 || imageRect.width < 535 || safeRight <= safeLeft) return false;
+
+    const hasSideLane = rect => rect.left + viewportLeft - safeLeft >= 52 ||
+        safeRight - (rect.right + viewportLeft) >= 52;
+    if (hasSideLane(imageRect)) return true;
+
+    const availableWidth = Math.min(wrapperRect.width, 1200, safeRight - safeLeft);
+    let targetWidth = Math.min(imageRect.width, availableWidth - 104);
+    let useLeftAlignment = false;
+    if (targetWidth < 535) {
+        targetWidth = Math.min(imageRect.width, safeRight -
+            (wrapperRect.left + viewportLeft) - 52, wrapperRect.width);
+        useLeftAlignment = true;
+    }
+    if (!Number.isFinite(targetWidth) || targetWidth < 535) return false;
+
+    image.style.width = String(targetWidth) + "px";
+    image.style.maxWidth = "1200px";
+    image.style.height = "auto";
+    image.style.margin = useLeftAlignment ? "0 auto 0 0" : "0 auto";
+    try { imageRect = image.getBoundingClientRect(); } catch (error) { return false; }
+    if (!imageRect || ![imageRect.left, imageRect.right, imageRect.width, imageRect.height]
+        .every(Number.isFinite) || imageRect.width < 535 || imageRect.height <= 0 ||
+        Math.abs(imageRect.height - imageRect.width * 1199 / 1312) >
+            Math.max(1, imageRect.height * 0.01)) return false;
+    return hasSideLane(imageRect);
+}
+
+function layoutEnglishWaterCycleImageTTSHitAreas(wrapper) {
+    const failClosed = buttons => {
+        buttons.forEach(button => { button.hidden = true; });
+        return false;
+    };
+    if (!wrapper || typeof wrapper.querySelectorAll !== "function") return false;
+    const buttons = Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area"));
+    const file = ENGLISH_WATER_CYCLE_ASSET_FILE;
+    if (!wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== file || buttons.length !== 4) {
+        return failClosed(buttons);
+    }
+    const record = getEnglishImageTTSRecord(file);
+    const image = wrapper.querySelector("img");
+    let imageRect;
+    try { imageRect = image && image.getBoundingClientRect(); } catch (error) { return failClosed(buttons); }
+    if (!record || !image || image.getAttribute("src") !== file || !image.complete ||
+        image.naturalWidth !== 1312 || image.naturalHeight !== 1199 || !imageRect ||
+        ![imageRect.left, imageRect.top, imageRect.width, imageRect.height].every(Number.isFinite) ||
+        imageRect.width < 535 || imageRect.height <= 0) return failClosed(buttons);
+    reserveEnglishWaterCycleImageTTSStopArea(wrapper);
+    try { imageRect = image.getBoundingClientRect(); } catch (error) { return failClosed(buttons); }
+    if (!imageRect || ![imageRect.left, imageRect.top, imageRect.width, imageRect.height]
+        .every(Number.isFinite) || imageRect.width < 535 || imageRect.height <= 0) {
+        return failClosed(buttons);
+    }
+    const expectedHeight = imageRect.width * 1199 / 1312;
+    if (Math.abs(imageRect.height - expectedHeight) > Math.max(1, expectedHeight * 0.01)) {
+        return failClosed(buttons);
+    }
+    for (const panel of record.panels) {
+        const item = panel.items[0];
+        const found = buttons.filter(button =>
+            button.getAttribute("data-image-tts-panel-id") === String(panel.panelId) &&
+            button.getAttribute("data-image-tts-item-id") === String(item.itemId));
+        if (found.length !== 1) return failClosed(buttons);
+        const button = found[0];
+        if (!button.classList || !button.classList.contains("image-tts-image-text-hit-area") ||
+            button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== panel ||
+            button._englishImageTTSImageTextItem !== item ||
+            button.style.left !== item.tapRegion.xPct + "%" ||
+            button.style.top !== item.tapRegion.yPct + "%" ||
+            button.style.width !== item.tapRegion.widthPct + "%" ||
+            button.style.height !== item.tapRegion.heightPct + "%") return failClosed(buttons);
+        button.hidden = false;
+        let rect;
+        try { rect = button.getBoundingClientRect(); } catch (error) { return failClosed(buttons); }
+        if (!rect || !Number.isFinite(rect.width) || !Number.isFinite(rect.height) ||
+            rect.width < 44 || rect.height < 44) return failClosed(buttons);
+    }
+    return true;
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
     if (!wrapper) {
+        return;
+    }
+    if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_WATER_CYCLE_ASSET_FILE) {
+        layoutEnglishWaterCycleImageTTSHitAreas(wrapper);
         return;
     }
     const image = wrapper.querySelector("img");
@@ -16168,6 +16632,30 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishWaterCycleImageTTSRecord(record)) {
+                const expectedFile = ENGLISH_WATER_CYCLE_ASSET_FILE;
+                const hasExpectedDimensions = () => image.getAttribute("src") === expectedFile &&
+                    image.complete && image.naturalWidth === 1312 && image.naturalHeight === 1199;
+                const hideWaterCycleHitAreas = () => {
+                    wrapper.querySelectorAll(".image-tts-image-text-hit-area").forEach(button => {
+                        button.hidden = true;
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+                };
+                if (image.complete && !hasExpectedDimensions()) return;
+                record.panels.forEach(panel => panel.items.forEach(item => {
+                    if (createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record)) added += 1;
+                }));
+                image.addEventListener("load", () => {
+                    if (!hasExpectedDimensions() || !layoutEnglishWaterCycleImageTTSHitAreas(wrapper)) {
+                        hideWaterCycleHitAreas();
+                    }
+                }, { once: true });
+                image.addEventListener("error", hideWaterCycleHitAreas, { once: true });
+                layoutEnglishWaterCycleImageTTSHitAreas(wrapper);
+                return;
+            }
             if (image.complete && image.naturalWidth === 0) return;
             if (isEnglishMountainsImageTTSRecord(record)) {
                 const hasExpectedDimensions = () => image.getAttribute("src") === record.assetFile &&
@@ -16813,6 +17301,7 @@ function getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item) {
  return [item.ttsText];
 }
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishWaterCycleImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishMountainsImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishEnergyTransformationsImageTTSItemText(record, item)) {
         return item.ttsText;
@@ -16945,6 +17434,9 @@ function speakEnglishImageTTSImageTextSequence(
     }
     const itemList = Array.isArray(items) ? items : [];
     const allItems = record ? record.panels.flatMap(panel => panel.items) : [];
+    const isWaterCycleImageText = isEnglishWaterCycleImageTTSRecord(record);
+    const isWaterCycleSingleItemSequence = Boolean(isWaterCycleImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isEnergyTransformationsImageText = Boolean(record &&
         isEnglishEnergyTransformationsImageTTSRecord(record));
     const isEnergyTransformationsSingleItemSequence = Boolean(
@@ -17064,19 +17556,26 @@ function speakEnglishImageTTSImageTextSequence(
         ? itemList.flatMap(item => getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, item)
             .map(text => ({ item, text })))
         : null;
+    const waterCycleSpeechUnits = isWaterCycleSingleItemSequence
+        ? getEnglishWaterCycleImageTextSpeechSegments(record, itemList[0]) : [];
     const isValidSelectedSpeechUnit = selectedSpeechUnitText === null ||
         (isDailyLifeRoutinesSingleItemSequence &&
             getEnglishDailyLifeRoutinesImageTextSpeechUnits(record, itemList[0])
-                .includes(selectedSpeechUnitText));
+                .includes(selectedSpeechUnitText)) ||
+        (isWaterCycleSingleItemSequence && waterCycleSpeechUnits.includes(selectedSpeechUnitText));
     const playbackSteps = isDailyLifeRoutinesImageText
         ? (selectedSpeechUnitText === null
             ? dailyLifeSteps
             : [{ item: itemList[0], text: selectedSpeechUnitText }])
-        : itemList.map(item => ({
+        : (isWaterCycleSingleItemSequence && selectedSpeechUnitText !== null
+            ? [{ item: itemList[0], text: selectedSpeechUnitText }]
+            : itemList.map(item => ({
             item,
             text: item ? getEnglishImageTTSImageTextSpeechText(record, item) : null,
             speechSegments: item
-                ? (isEnglishAnimalsWildlifeImageTTSRecord(record)
+                ? (isWaterCycleImageText
+                    ? getEnglishWaterCycleImageTextSpeechSegments(record, item)
+                    : (isEnglishAnimalsWildlifeImageTTSRecord(record)
                     ? getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item)
                     : (record.imageId === "stars-and-galaxies-basics" &&
                         record.assetFile === "images/english/stars-and-galaxies-basics.png"
@@ -17084,9 +17583,9 @@ function speakEnglishImageTTSImageTextSequence(
                         : (record.imageId === "space-solar-system-basics" &&
                             record.assetFile === "images/english/space-solar-system-basics.png"
                             ? getEnglishSpaceSolarSystemImageTextSpeechSegments(record, item)
-                            : getEnglishSimpleMachinesImageTextSpeechSegments(record, item))))
+                            : getEnglishSimpleMachinesImageTextSpeechSegments(record, item)))))
                 : null
-        }));
+        })));
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
     if (!trigger || !wrapper || !record || !trigger.classList ||
         !trigger.classList.contains("image-tts-image-text-hit-area") ||
@@ -17097,6 +17596,7 @@ function speakEnglishImageTTSImageTextSequence(
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
         (!isPanelSequence && !isWholeImageSequence &&
             !isEnergyTransformationsSingleItemSequence &&
+            !isWaterCycleSingleItemSequence &&
             !isPlateausSingleItemSequence && !isKarstSingleItemSequence &&
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
             !isFamilyBasicsSingleItemSequence && !isWeatherInstrumentsSingleItemSequence &&
@@ -17159,6 +17659,15 @@ function speakEnglishImageTTSImageTextSequence(
         }
         trigger._englishImageTTSImageTextActivePanel = itemPanel;
         trigger._englishImageTTSImageTextActiveItem = item;
+        if (isWaterCycleImageText) {
+            if (!layoutEnglishWaterCycleImageTTSHitAreas(wrapper)) {
+                cancelEnglishImageTTSImageTextSequence(true);
+                setEnglishTTSStatus("Water Cycle 圖片位置無法安全顯示朗讀控制，已拒絕播放。");
+                updateEnglishTTSControls();
+                return false;
+            }
+            if (!ensureEnglishWaterCycleImageTTSStopPosition(trigger, wrapper)) return false;
+        }
         if ((isPlateausImageText || isKarstImageText) &&
             !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(),wrapper)) {
             cancelEnglishImageTTSImageTextSequence(true);
@@ -17185,8 +17694,12 @@ function speakEnglishImageTTSImageTextSequence(
         let speechSegmentIndex = 0;
         const playSpeechSegment = () => {
             if (generation !== englishTTSState.imageTextSequenceGeneration) return false;
+            if (isWaterCycleImageText &&
+                !ensureEnglishWaterCycleImageTTSStopPosition(trigger, wrapper)) return false;
             const started = speakEnglishText(speechSegments[speechSegmentIndex], () => {
                 if (generation !== englishTTSState.imageTextSequenceGeneration) return;
+                if (isWaterCycleImageText &&
+                    !ensureEnglishWaterCycleImageTTSStopPosition(trigger, wrapper)) return;
                 if (appState.subjectMode !== "english" || trigger.isConnected === false) {
                     cancelEnglishImageTTSImageTextSequence(true);
                     return;
@@ -17457,6 +17970,9 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         return;
     }
 
+    if (isEnglishWaterCycleImageTTSRecord(safeRecord)) {
+        layoutEnglishWaterCycleImageTTSHitAreas(wrapper);
+    }
     cancelEnglishImageTTSStorySequenceForDifferentTrigger(trigger);
     if (englishTTSState.dialogueSequenceTrigger &&
         englishTTSState.dialogueSequenceTrigger !== trigger) {
@@ -17533,6 +18049,50 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
             } catch (error) {
                 firstButton.focus();
             }
+        }
+        return;
+    }
+
+    if (isEnglishWaterCycleImageTTSRecord(safeRecord)) {
+        const clickedItem = trigger._englishImageTTSImageTextItem;
+        if (!clickedItem || !panel.items.includes(clickedItem) || panel.items.length !== 1 ||
+            !isEnglishWaterCycleImageTTSItemText(safeRecord, clickedItem)) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const allItems = safeRecord.panels.flatMap(candidate => candidate.items);
+        const segments = getEnglishWaterCycleImageTextSpeechSegments(safeRecord, clickedItem);
+        const add = (label, description, items, completion, selectedUnit = null) => {
+            menu.appendChild(createEnglishImageTTSMenuButton(label, description, () =>
+                speakEnglishImageTTSImageTextSequence(trigger, items, completion, selectedUnit)));
+        };
+        menu.setAttribute("aria-label", "Water Cycle 第 " + panel.panelId + " 格原圖英文朗讀選項");
+        if (panel.panelId === 1) {
+            if (segments.length !== 2) { closeEnglishImageTTSMenu(); return; }
+            add("🔊 朗讀第一句", "只朗讀：" + segments[0], [clickedItem],
+                "已朗讀 Water Cycle 第一格第一句。", segments[0]);
+            add("🔊 朗讀第二句", "只朗讀：" + segments[1], [clickedItem],
+                "已朗讀 Water Cycle 第一格第二句。", segments[1]);
+            add("🔊 朗讀本格完整兩句", "依序朗讀第一格的兩個完整句子",
+                panel.items, "Water Cycle 第一格已朗讀完成。");
+        } else {
+            if (segments.length !== 1) { closeEnglishImageTTSMenu(); return; }
+            const label = clickedItem.sourceText.replace(/\r?\n/g, " ");
+            add("🔊 朗讀「" + label + "」", "只朗讀所選完整句：" + segments[0],
+                [clickedItem], "已朗讀所選 Water Cycle 句子。", segments[0]);
+            add("🔊 朗讀本格", "朗讀第 " + panel.panelId + " 格的完整句子",
+                panel.items, "Water Cycle 本格已朗讀完成。");
+        }
+        add("🔊 朗讀全圖五句", "依序朗讀 Water Cycle 全圖的五個完整句子",
+            allItems, "Water Cycle 全圖已朗讀完成。");
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (menu.hidden) return;
+        const firstButton = menu.firstChild;
+        if (firstButton) {
+            try { firstButton.focus({ preventScroll: true }); }
+            catch (error) { firstButton.focus(); }
         }
         return;
     }
@@ -19344,6 +19904,7 @@ function initializeEnglishTTS() {
     window.addEventListener("resize", scheduleEnglishFloatingButtonPosition);
     window.addEventListener("scroll", scheduleEnglishTTSFloatingStopPosition, true);
     window.addEventListener("resize", scheduleEnglishTTSFloatingStopPosition);
+    window.addEventListener("orientationchange", scheduleEnglishTTSFloatingStopPosition);
     if (window.visualViewport) {
         window.visualViewport.addEventListener("scroll", scheduleEnglishFloatingButtonPosition);
         window.visualViewport.addEventListener("resize", scheduleEnglishFloatingButtonPosition);
