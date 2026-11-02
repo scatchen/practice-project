@@ -4521,6 +4521,14 @@ function placeEnglishImageTTSTeachingStopButton(button, wrapper, panel) {
         value.widthPct > 0 && value.heightPct > 0 &&
         value.xPct + value.widthPct <= 100 &&
         value.yPct + value.heightPct <= 100;
+    const isCampingPanel3TextException = record &&
+        record.contentType === "teaching-sentences" &&
+        record.imageId === "camping-basics" &&
+        record.assetFile === "images/english/camping-basics.png" &&
+        Array.isArray(record.panels) && record.panels[2] === panel &&
+        panel && panel.panelId === 3 && panel.sentence &&
+        panel.sentence.sourceText === "We cook food and sit\naround the campfire." &&
+        panel.sentence.ttsText === "We cook food and sit around the campfire.";
     if (!button || !wrapper || wrapper.isConnected === false ||
         !trigger || !trigger.classList ||
         !trigger.classList.contains("image-tts-teaching-sentence-hit-area") ||
@@ -4544,11 +4552,13 @@ function placeEnglishImageTTSTeachingStopButton(button, wrapper, panel) {
             (record.imageId === "venice-carnival-basics" &&
                 record.assetFile === "images/english/venice-carnival-basics.png") ||
             (record.imageId === "oktoberfest-basics" &&
-                record.assetFile === "images/english/oktoberfest-basics.png")
+                record.assetFile === "images/english/oktoberfest-basics.png") ||
+            (record.imageId === "camping-basics" &&
+                record.assetFile === "images/english/camping-basics.png")
         ) ||
         !Array.isArray(record.panels) || !record.panels.includes(panel) ||
         !panel.sentence || !panel.sentence.sourceText ||
-        panel.sentence.ttsText !== panel.sentence.sourceText ||
+        (panel.sentence.ttsText !== panel.sentence.sourceText && !isCampingPanel3TextException) ||
         !isValidBounds(bounds) ||
         !wrapper.dataset ||
         wrapper.dataset.imageTtsAssetFile !== record.assetFile ||
@@ -13502,6 +13512,104 @@ function isEnglishMountainsImageTTSItemText(record, item) {
     return Boolean(safe && record.panels.some(panel => Array.isArray(panel.items) && panel.items.includes(item)));
 }
 
+function getEnglishCampingTeachingTTSExpectedPanels() {
+    const bounds = (xPct, yPct, widthPct, heightPct) =>
+        ({ xPct, yPct, widthPct, heightPct });
+    const rows = [
+        [1, 1, bounds(0, 0, 50, 50), "We arrive at the campsite.", "We arrive at the campsite.", bounds(2.4, 1.5, 46.8, 8.0)],
+        [2, 2, bounds(50, 0, 50, 50), "We put up a tent.", "We put up a tent.", bounds(57.5, 1.5, 37.2, 8.0)],
+        [3, 3, bounds(0, 50, 50, 50), "We cook food and sit\naround the campfire.", "We cook food and sit around the campfire.", bounds(4.4, 50.2, 42.0, 11.8)],
+        [4, 4, bounds(50, 50, 50, 50), "We enjoy nature together.", "We enjoy nature together.", bounds(54.0, 50.4, 43.5, 8.0)]
+    ];
+    return rows.map(([panelId, readingOrder, panelBounds, sourceText, ttsText, tapRegion]) => ({
+        panelId, readingOrder, bounds: panelBounds,
+        sentence: { sourceText, ttsText, bounds: { ...tapRegion } },
+        tapRegion: { ...tapRegion }
+    }));
+}
+
+function getEnglishCampingTeachingTTSRecord(record, assetFile) {
+    const file = "images/english/camping-basics.png";
+    const imageId = "camping-basics";
+    const expected = getEnglishCampingTeachingTTSExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const boundsKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validBounds = value => exact(value, boundsKeys) &&
+        boundsKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const sameBounds = (actual, wanted) => validBounds(actual) &&
+        boundsKeys.every(key => actual[key] === wanted[key]);
+    const contains = (outer, inner) => validBounds(outer) && validBounds(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (left, right) => left.xPct < right.xPct + right.widthPct &&
+        left.xPct + left.widthPct > right.xPct &&
+        left.yPct < right.yPct + right.heightPct &&
+        left.yPct + left.heightPct > right.yPct;
+    const topKeys = ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"];
+    if (!exact(record, topKeys) || record.imageId !== imageId ||
+        record.assetFile !== file || assetFile !== file ||
+        typeof imageTTSData === "undefined" || !imageTTSData || imageTTSData[file] !== record ||
+        record.contentType !== "teaching-sentences" ||
+        record.layout !== "custom-camping-2x2-teaching-sentence" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1312 || record.sourceImageDimensions.height !== 1199 ||
+        !Array.isArray(record.panels) || record.panels.length !== expected.length) {
+        return null;
+    }
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === imageId || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry && (entry.id === imageId || entry.file === file))
+        : [];
+    if (identities.length !== 1 || identities[0] !== file ||
+        library.length !== 1 || library[0].id !== imageId ||
+        library[0].file !== file || library[0].category !== "english") {
+        return null;
+    }
+    const panelBounds = [], tapRegions = [];
+    for (let index = 0; index < expected.length; index += 1) {
+        const panel = record.panels[index], wanted = expected[index];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "sentence", "tapRegion"]) ||
+            panel.panelId !== wanted.panelId || panel.readingOrder !== wanted.readingOrder ||
+            !sameBounds(panel.bounds, wanted.bounds) ||
+            !exact(panel.sentence, ["sourceText", "ttsText", "bounds"]) ||
+            panel.sentence.sourceText !== wanted.sentence.sourceText ||
+            panel.sentence.ttsText !== wanted.sentence.ttsText ||
+            panel.sentence.sourceText.replace(/\s+/g, " ") !== panel.sentence.ttsText ||
+            !getEnglishTTSUnitText(panel.sentence.ttsText) ||
+            !sameBounds(panel.sentence.bounds, wanted.sentence.bounds) ||
+            !sameBounds(panel.tapRegion, wanted.tapRegion) ||
+            !contains(panel.bounds, panel.sentence.bounds) ||
+            !contains(panel.bounds, panel.tapRegion) ||
+            !contains(panel.tapRegion, panel.sentence.bounds)) {
+            return null;
+        }
+        panelBounds.push(panel.bounds);
+        tapRegions.push(panel.tapRegion);
+    }
+    for (let left = 0; left < expected.length; left += 1) {
+        for (let right = left + 1; right < expected.length; right += 1) {
+            if (overlaps(panelBounds[left], panelBounds[right]) ||
+                overlaps(tapRegions[left], tapRegions[right])) return null;
+        }
+    }
+    return record;
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -13509,6 +13617,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    const campingFile = "images/english/camping-basics.png";
+    if (assetFile === campingFile || record &&
+        (record.imageId === "camping-basics" || record.assetFile === campingFile)) {
+        return getEnglishCampingTeachingTTSRecord(record, assetFile);
+    }
     if (record && (record.imageId === "mountains-and-mountain-ranges-basics" ||
         record.assetFile === ENGLISH_MOUNTAINS_ASSET_FILE || assetFile === ENGLISH_MOUNTAINS_ASSET_FILE)) {
         return getEnglishMountainsImageTextRecord(record, assetFile);
@@ -18051,12 +18164,16 @@ function openEnglishImageTTSTeachingSentenceMenu(trigger, record, panel) {
         assetFile === "images/english/oktoberfest-basics.png" &&
         record && record.imageId === "oktoberfest-basics" && safeRecord &&
         safeRecord.imageId === "oktoberfest-basics" && safeRecord.assetFile === assetFile);
+    const isCampingTeachingAsset = Boolean(
+        assetFile === "images/english/camping-basics.png" &&
+        record && record.imageId === "camping-basics" && safeRecord &&
+        safeRecord.imageId === "camping-basics" && safeRecord.assetFile === assetFile);
     if (!trigger || !wrapper ||
         (!isAfternoonTeaTeachingAsset && !isGermanChristmasMarketsTeachingAsset &&
             !isStPatricksDayTeachingAsset && !isFlamencoTeachingAsset &&
             !isMaoriHakaTeachingAsset && !isHalloweenTeachingAsset &&
             !isThanksgivingTeachingAsset && !isVeniceCarnivalTeachingAsset &&
-            !isOktoberfestTeachingAsset) ||
+            !isOktoberfestTeachingAsset && !isCampingTeachingAsset) ||
         !record || record !== trigger._englishImageTTSTeachingRecord ||
         !panel || panel !== trigger._englishImageTTSTeachingPanel ||
         !record.panels.includes(panel) || !safePanel ||
@@ -18077,7 +18194,9 @@ function openEnglishImageTTSTeachingSentenceMenu(trigger, record, panel) {
     }
     const sentenceText = panel.sentence.ttsText;
     const sequenceTexts = safeRecord.panels.map(item => item.sentence.ttsText);
-    const teachingTitle = isAfternoonTeaTeachingAsset
+    const teachingTitle = isCampingTeachingAsset
+        ? "Camping"
+        : isAfternoonTeaTeachingAsset
         ? "Afternoon Tea"
         : isGermanChristmasMarketsTeachingAsset ? "German Christmas Markets"
             : isStPatricksDayTeachingAsset ? "St. Patrick’s Day"
@@ -18099,18 +18218,36 @@ function openEnglishImageTTSTeachingSentenceMenu(trigger, record, panel) {
         `朗讀此句：${panel.sentence.sourceText}`,
         () => speakEnglishImageTTSFromPanel(trigger, sentenceText)
     );
-    const sequenceButton = createEnglishImageTTSMenuButton(
-        "🔊 依序朗讀本圖 4 句教學句",
-        "依序朗讀本圖 4 句教學句",
-        () => speakEnglishImageTTSSequence(
-            trigger,
-            sequenceTexts,
-            `${teachingTitle} 教學句已朗讀完成。`,
-            "依序朗讀本圖教學句中，句間停頓 0.5 秒。"
-        )
-    );
     menu.appendChild(sentenceButton);
-    menu.appendChild(sequenceButton);
+    if (isCampingTeachingAsset) {
+        const panelButton = createEnglishImageTTSMenuButton(
+            "🔊 朗讀本格",
+            "朗讀第 " + panel.panelId + " 格完整句子：" + panel.sentence.sourceText,
+            () => speakEnglishImageTTSFromPanel(trigger, sentenceText)
+        );
+        const fullImageButton = createEnglishImageTTSMenuButton(
+            "🔊 依序朗讀全圖 1→4",
+            "依左上、右上、左下、右下順序朗讀全圖四句；句間停頓 0.5 秒。",
+            () => speakEnglishImageTTSSequence(
+                trigger, sequenceTexts,
+                "Camping 全圖四句已朗讀完成。",
+                "依序朗讀 Camping 全圖 1 至 4 句，句間停頓 0.5 秒。"
+            )
+        );
+        menu.appendChild(panelButton);
+        menu.appendChild(fullImageButton);
+    } else {
+        const sequenceButton = createEnglishImageTTSMenuButton(
+            "🔊 依序朗讀本圖 4 句教學句",
+            "依序朗讀本圖 4 句教學句",
+            () => speakEnglishImageTTSSequence(
+                trigger, sequenceTexts,
+                `${teachingTitle} 教學句已朗讀完成。`,
+                "依序朗讀本圖教學句中，句間停頓 0.5 秒。"
+            )
+        );
+        menu.appendChild(sequenceButton);
+    }
     menu.hidden = false;
     menu.style.visibility = "hidden";
     positionEnglishImageTTSMenu();

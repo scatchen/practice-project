@@ -21161,6 +21161,63 @@ const imageTTSData = {
                     tapRegion: { xPct: 52.21, yPct: 51.17, widthPct: 35.81, heightPct: 15.23 }, tapRegionShape: null
                 }] }
             ]
-        }
+        },
+    "images/english/camping-basics.png": {
+        imageId: "camping-basics",
+        assetFile: "images/english/camping-basics.png",
+        contentType: "teaching-sentences",
+        layout: "custom-camping-2x2-teaching-sentence",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1312, height: 1199 },
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0, yPct: 0, widthPct: 50, heightPct: 50 },
+                sentence: {
+                    sourceText: "We arrive at the campsite.",
+                    ttsText: "We arrive at the campsite.",
+                    bounds: { xPct: 2.4, yPct: 1.5, widthPct: 46.8, heightPct: 8.0 }
+                },
+                tapRegion: { xPct: 2.4, yPct: 1.5, widthPct: 46.8, heightPct: 8.0 }
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 50, yPct: 0, widthPct: 50, heightPct: 50 },
+                sentence: {
+                    sourceText: "We put up a tent.",
+                    ttsText: "We put up a tent.",
+                    bounds: { xPct: 57.5, yPct: 1.5, widthPct: 37.2, heightPct: 8.0 }
+                },
+                tapRegion: { xPct: 57.5, yPct: 1.5, widthPct: 37.2, heightPct: 8.0 }
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0, yPct: 50, widthPct: 50, heightPct: 50 },
+                sentence: {
+                    sourceText: "We cook food and sit\naround the campfire.",
+                    ttsText: "We cook food and sit around the campfire.",
+                    bounds: { xPct: 4.4, yPct: 50.2, widthPct: 42.0, heightPct: 11.8 }
+                },
+                tapRegion: { xPct: 4.4, yPct: 50.2, widthPct: 42.0, heightPct: 11.8 }
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 50, yPct: 50, widthPct: 50, heightPct: 50 },
+                sentence: {
+                    sourceText: "We enjoy nature together.",
+                    ttsText: "We enjoy nature together.",
+                    bounds: { xPct: 54.0, yPct: 50.4, widthPct: 43.5, heightPct: 8.0 }
+                },
+                tapRegion: { xPct: 54.0, yPct: 50.4, widthPct: 43.5, heightPct: 8.0 }
+            }
+        ]
+    }
 
 };
