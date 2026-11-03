@@ -1289,7 +1289,8 @@ color: #111827;
         #english-tts-floating-stop.is-image-tts-story-stop-control,
         #english-tts-floating-stop.is-image-tts-teaching-stop-control,
         #english-tts-floating-stop.is-image-tts-image-text-stop-control,
-        #english-tts-floating-stop.is-image-tts-animals-adaptation-stop-control {
+        #english-tts-floating-stop.is-image-tts-animals-adaptation-stop-control,
+        #english-tts-floating-stop.is-image-tts-human-health-stop-control {
             position: fixed;
             z-index: 12200;
             box-sizing: border-box;
@@ -3386,6 +3387,7 @@ const englishTTSState = {
     imageTTSStopObserver: null,
     imageTTSStopCleanupFrame: 0,
     animalsAdaptationViewportCleanup: null,
+    humanHealthViewportCleanup: null,
     stopPositionFrame: 0,
     responseObserver: null,
     collocationReplayTimer: 0,
@@ -3415,7 +3417,8 @@ const englishImageTTSOverlayState = {
     storyControlsSequence: 0,
     layoutFrame: 0,
     menuPositionFrame: 0,
-    animalsAdaptationLayoutSettleTimer: 0
+    animalsAdaptationLayoutSettleTimer: 0,
+    humanHealthLayoutSettleTimer: 0
 };
 
 const ENGLISH_TTS_VOICE_KEY = "practiceProject.englishTTS.voice";
@@ -3783,11 +3786,14 @@ function resetEnglishTTSFloatingStopButtonStyles(button) {
     const wasWaterCycleStop = button.classList.contains("is-image-tts-water-cycle-stop-control");
     const wasAnimalsAdaptationStop =
         button.classList.contains("is-image-tts-animals-adaptation-stop-control");
+    const wasHumanHealthStop =
+        button.classList.contains("is-image-tts-human-health-stop-control");
+    button.classList.remove("is-image-tts-human-health-stop-control");
     button.classList.remove("is-image-tts-animals-adaptation-stop-control");
     button.classList.remove("is-image-tts-image-text-stop-control");
     button.classList.remove("is-image-tts-karst-stop-control");
     button.classList.remove("is-image-tts-water-cycle-stop-control");
-    if (wasKarstStop || wasWaterCycleStop || wasAnimalsAdaptationStop) {
+    if (wasKarstStop || wasWaterCycleStop || wasAnimalsAdaptationStop || wasHumanHealthStop) {
         button.textContent = "⏹ 停止朗讀";
         button.setAttribute("aria-label", "停止目前的英文朗讀");
     }
@@ -4530,6 +4536,170 @@ function placeEnglishAnimalsAdaptationImageTTSStopButton(button, wrapper, record
     return true;
 }
 
+
+function placeEnglishHumanHealthNutritionImageTTSStopButton(button, wrapper, record, panel, item) {
+    const fail = () => {
+        if (button) {
+            button.hidden = true;
+            if (button.style) button.style.visibility = "hidden";
+        }
+        return false;
+    };
+    const file = "images/english/human-health-and-nutrition-basics.png";
+    const trigger = englishTTSState.activeSpeechTrigger;
+    const canonicalRecord = getEnglishImageTTSRecord(file);
+    const triggerRecord = trigger && trigger._englishImageTTSImageTextRecord;
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    if (!button || !wrapper || wrapper.isConnected === false || !trigger ||
+        !trigger.classList || !trigger.classList.contains("image-tts-image-text-hit-area") ||
+        !isEnglishHumanHealthNutritionImageTTSRecord(record) || !canonicalRecord ||
+        canonicalRecord.panels !== record.panels ||
+        wrapper.dataset.imageTtsAssetFile !== file ||
+        !panel || panel !== record.panels.find(candidate => candidate.panelId === panel.panelId) ||
+        !panel.items.includes(item) || item !== panel.items.find(candidate => candidate === item) ||
+        !isEnglishHumanHealthNutritionImageTTSItemText(record, item) ||
+        !isEnglishHumanHealthNutritionImageTTSRecord(triggerRecord) ||
+        triggerRecord.panels !== record.panels ||
+        !trigger._englishImageTTSImageTextActivePanel ||
+        trigger._englishImageTTSImageTextActivePanel !== record.panels.find(candidate =>
+            candidate.panelId === trigger._englishImageTTSImageTextActivePanel.panelId) ||
+        !trigger._englishImageTTSImageTextActiveItem ||
+        trigger._englishImageTTSImageTextActiveItem !== item ||
+        !image || image.getAttribute("src") !== file || !image.complete ||
+        image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+        typeof document.elementFromPoint !== "function") return fail();
+    let imageRect;
+    try { imageRect = image.getBoundingClientRect(); } catch (error) { return fail(); }
+    if (!imageRect || ![imageRect.left, imageRect.top, imageRect.right, imageRect.bottom,
+        imageRect.width, imageRect.height].every(Number.isFinite) ||
+        imageRect.width < 540 || imageRect.height <= 0) return fail();
+
+    const avoidRects = [];
+    try {
+        document.querySelectorAll(
+            ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+            ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+            "button:not(#english-tts-floating-stop), [role='button'], input, select, textarea"
+        ).forEach(element => {
+            if (!element || element === button || element.hidden) return;
+            const style = window.getComputedStyle(element);
+            if (!style || style.display === "none" || style.visibility === "hidden" ||
+                style.visibility === "collapse") return;
+            const rect = element.getBoundingClientRect();
+            if (!rect || ![rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height]
+                .every(Number.isFinite)) throw new Error("Unreadable visible control");
+            if (rect.width > 0 && rect.height > 0) {
+                avoidRects.push({ left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom });
+            }
+        });
+    } catch (error) {
+        return fail();
+    }
+
+    const placed = placeEnglishImageTTSStoryStopButton(button, wrapper, {
+        bounds: { xPct: 0, yPct: 0, widthPct: 100, heightPct: 100 },
+        avoidRects
+    }, {
+        preferBelow: true,
+        scanForClearPosition: true,
+        strictAvoidance: true,
+        fixedStopSize: true,
+        fixedStopClass: "is-image-tts-human-health-stop-control",
+        fixedStopWidth: 52,
+        fixedStopHeight: 52,
+        fixedStopText: "⏹",
+        fixedStopAriaLabel: "停止 Human Health and Nutrition 英文朗讀",
+        stopControlClass: "is-image-tts-human-health-stop-control"
+    });
+    if (!placed || button.hidden || button.disabled || button.isConnected === false ||
+        button.getAttribute("aria-disabled") === "true") return fail();
+
+    const viewport = window.visualViewport;
+    const viewportLeft = viewport && Number.isFinite(viewport.offsetLeft) ? viewport.offsetLeft : 0;
+    const viewportTop = viewport && Number.isFinite(viewport.offsetTop) ? viewport.offsetTop : 0;
+    const viewportWidth = viewport && Number.isFinite(viewport.width) && viewport.width > 0
+        ? viewport.width : window.innerWidth;
+    const viewportHeight = viewport && Number.isFinite(viewport.height) && viewport.height > 0
+        ? viewport.height : window.innerHeight;
+    const inset = name => {
+        try {
+            const value = parseFloat(window.getComputedStyle(button).getPropertyValue(name));
+            return Number.isFinite(value) && value > 0 ? value : 0;
+        } catch (error) { return 0; }
+    };
+    const safeLeft = viewportLeft + inset("--english-tts-safe-left") + 8;
+    const safeTop = viewportTop + inset("--english-tts-safe-top") + 8;
+    const safeRight = viewportLeft + viewportWidth - inset("--english-tts-safe-right") - 8;
+    const safeBottom = viewportTop + viewportHeight - inset("--english-tts-safe-bottom") - 8;
+    let rect, style;
+    try {
+        rect = button.getBoundingClientRect();
+        style = window.getComputedStyle(button);
+    } catch (error) { return fail(); }
+    if (!rect || !style || style.display === "none" || style.visibility !== "visible" ||
+        style.pointerEvents === "none" || rect.width < 52 || rect.height < 52 ||
+        rect.left < safeLeft || rect.top < safeTop || rect.right > safeRight || rect.bottom > safeBottom ||
+        (rect.left < imageRect.right && rect.right > imageRect.left &&
+            rect.top < imageRect.bottom && rect.bottom > imageRect.top) ||
+        avoidRects.some(blocked => rect.left < blocked.right && rect.right > blocked.left &&
+            rect.top < blocked.bottom && rect.bottom > blocked.top)) return fail();
+
+    const insetHit = Math.min(6, rect.width / 4, rect.height / 4);
+    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    const points = [[cx, cy], [rect.left + insetHit, cy], [rect.right - insetHit, cy],
+        [cx, rect.top + insetHit], [cx, rect.bottom - insetHit]];
+    try {
+        for (const point of points) {
+            const hit = document.elementFromPoint(point[0], point[1]);
+            if (!hit || hit !== button && !(typeof button.contains === "function" && button.contains(hit))) {
+                return fail();
+            }
+        }
+    } catch (error) { return fail(); }
+    return true;
+}
+
+function failEnglishHumanHealthNutritionImageTTSSequence(trigger) {
+    const active = englishTTSState.imageTextSequenceTrigger === trigger;
+    if (active) cancelEnglishImageTTSImageTextSequence(true);
+    setEnglishTTSStatus("Human Health & Nutrition：沒有可見、位於圖片外且可實際點擊的 Stop 位置，朗讀已拒絕或取消。");
+    updateEnglishTTSControls();
+    return false;
+}
+
+function watchEnglishHumanHealthNutritionImageTTSViewport(trigger, wrapper, generation) {
+    const check = () => {
+        if (generation !== englishTTSState.imageTextSequenceGeneration ||
+            englishTTSState.imageTextSequenceTrigger !== trigger) return;
+        const record = trigger && trigger._englishImageTTSImageTextRecord;
+        const panel = trigger && trigger._englishImageTTSImageTextActivePanel;
+        const item = trigger && trigger._englishImageTTSImageTextActiveItem;
+        if (!placeEnglishHumanHealthNutritionImageTTSStopButton(
+            getEnglishTTSFloatingStopButton(), wrapper, record, panel, item)) {
+            failEnglishHumanHealthNutritionImageTTSSequence(trigger);
+        }
+    };
+    const viewport = window.visualViewport;
+    const targets = [[window, "scroll", true], [window, "resize", false],
+        [window, "orientationchange", false], [document, "scroll", true]];
+    if (viewport) {
+        targets.push([viewport, "scroll", false], [viewport, "resize", false]);
+    }
+    targets.forEach(([target, type, capture]) => {
+        if (target && typeof target.addEventListener === "function") {
+            target.addEventListener(type, check, capture);
+        }
+    });
+    englishTTSState.humanHealthViewportCleanup = () => {
+        targets.forEach(([target, type, capture]) => {
+            if (target && typeof target.removeEventListener === "function") {
+                target.removeEventListener(type, check, capture);
+            }
+        });
+    };
+}
+
 function failEnglishAnimalsAdaptationImageTTSSequence(trigger) {
     const active = englishTTSState.imageTextSequenceTrigger === trigger;
     if (active) cancelEnglishImageTTSImageTextSequence(true);
@@ -4593,6 +4763,14 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
         wrapper.dataset.imageTtsAssetFile !== record.assetFile ||
         (typeof wrapper.contains === "function" && !wrapper.contains(trigger))) {
         return false;
+    }
+    const isHumanHealthNutritionImageText =
+        record.imageId === "human-health-and-nutrition-basics" &&
+        record.assetFile === "images/english/human-health-and-nutrition-basics.png";
+    if (isHumanHealthNutritionImageText) {
+        return placeEnglishHumanHealthNutritionImageTTSStopButton(
+            button, wrapper, validatedRecord, safePanel, safeItem
+        );
     }
     const isAnimalsAdaptationImageText = record.imageId === "animals-and-adaptation-basics" &&
         record.assetFile === "images/english/animals-and-adaptation-basics.png";
@@ -5010,7 +5188,8 @@ function updateEnglishTTSControls() {
                 floatingStopButton.classList.contains("is-image-tts-teaching-stop-control") ||
                 floatingStopButton.classList.contains("is-image-tts-image-text-stop-control") ||
                 floatingStopButton.classList.contains("is-image-tts-karst-stop-control") ||
-                floatingStopButton.classList.contains("is-image-tts-animals-adaptation-stop-control")) {
+                floatingStopButton.classList.contains("is-image-tts-animals-adaptation-stop-control") ||
+                floatingStopButton.classList.contains("is-image-tts-human-health-stop-control")) {
                 resetEnglishTTSFloatingStopButtonStyles(floatingStopButton);
             }
         }
@@ -5076,6 +5255,9 @@ function positionEnglishTTSFloatingStopButton() {
             const isAnimalsAdaptationTrigger =
                 imageTextTrigger._englishImageTTSImageTextRecord &&
                 imageTextTrigger._englishImageTTSImageTextRecord.imageId === "animals-and-adaptation-basics";
+            const isHumanHealthNutritionTrigger =
+                imageTextTrigger._englishImageTTSImageTextRecord &&
+                imageTextTrigger._englishImageTTSImageTextRecord.imageId === "human-health-and-nutrition-basics";
             if ((isPlateausTrigger || isKarstTrigger) && isEnglishTTSPlaybackActive()) {
                 stopEnglishSpeech();
                 setEnglishTTSStatus(isKarstTrigger
@@ -5083,6 +5265,8 @@ function positionEnglishTTSFloatingStopButton() {
                     : "畫面空間不足，已停止 Plateaus 朗讀。");
             } else if (isAnimalsAdaptationTrigger && isEnglishTTSPlaybackActive()) {
                 failEnglishAnimalsAdaptationImageTTSSequence(imageTextTrigger);
+            } else if (isHumanHealthNutritionTrigger && isEnglishTTSPlaybackActive()) {
+                failEnglishHumanHealthNutritionImageTTSSequence(imageTextTrigger);
             }
         }
         return;
@@ -5474,13 +5658,19 @@ function cancelEnglishImageTTSDialogueSequence(cancelCurrentUtterance = false) {
 function cancelEnglishImageTTSImageTextSequence(cancelCurrentUtterance = false) {
     const sequenceTrigger = englishTTSState.imageTextSequenceTrigger;
     const viewportCleanup = englishTTSState.animalsAdaptationViewportCleanup;
-    const hadSequence = Boolean(sequenceTrigger || englishTTSState.imageTextSequenceTimer || viewportCleanup);
+    const humanHealthViewportCleanup = englishTTSState.humanHealthViewportCleanup;
+    const hadSequence = Boolean(sequenceTrigger || englishTTSState.imageTextSequenceTimer ||
+        viewportCleanup || humanHealthViewportCleanup);
     if (!hadSequence) {
         return;
     }
     if (viewportCleanup) {
         englishTTSState.animalsAdaptationViewportCleanup = null;
         viewportCleanup();
+    }
+    if (humanHealthViewportCleanup) {
+        englishTTSState.humanHealthViewportCleanup = null;
+        humanHealthViewportCleanup();
     }
     if (englishTTSState.imageTextSequenceTimer) {
         window.clearTimeout(englishTTSState.imageTextSequenceTimer);
@@ -10585,6 +10775,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 
 function isEnglishImageTTSItemText(record, item) {
     if (isEnglishWaterCycleImageTTSItemText(record, item)) return true;
+    if (isEnglishHumanHealthNutritionImageTTSItemText(record, item)) return true;
     if (isEnglishMountainsImageTTSItemText(record, item) ||
         isEnglishEnergyTransformationsImageTTSItemText(record, item) ||
         isEnglishAnimalsAdaptationImageTTSItemText(record, item) ||
@@ -11167,6 +11358,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishHumanHealthNutritionImageTTSRecord(record)) return "Human Health & Nutrition";
     if (isEnglishAnimalsAdaptationImageTTSRecord(record)) return "Animals & Adaptation";
     if (isEnglishWaterCycleImageTTSRecord(record)) return "Water Cycle";
     if (isEnglishMountainsImageTTSRecord(record)) return "Mountains & Mountain Ranges";
@@ -14067,6 +14259,194 @@ function isEnglishAnimalsAdaptationImageTTSItemText(record, item) {
         safe.panels.some(panel => panel.items.includes(item)));
 }
 
+
+function getEnglishHumanHealthNutritionExpectedPanels() {
+    const b = (xPct, yPct, widthPct, heightPct) => ({ xPct, yPct, widthPct, heightPct });
+    return [
+        { panelId: 0, readingOrder: 1, bounds: b(0.4, 0.4, 99.2, 13.2), items: [
+            { itemId: 1, readingOrder: 1, type: "label",
+                sourceText: "Human Health and Nutrition", bounds: b(2.8, 2, 45.6, 5.8) },
+            { itemId: 2, readingOrder: 2, type: "phrase",
+                sourceText: "Healthy food • Regular exercise • A better you!",
+                bounds: b(5.1, 9.2, 41.1, 3.4) }
+        ] },
+        { panelId: 1, readingOrder: 2, bounds: b(0.78125, 0.87890625, 48.69791667, 50.68359375), items: [
+            { itemId: 1, readingOrder: 1, type: "label", sourceText: "Healthy Food",
+                bounds: b(3.2, 14.4, 17.5, 4.5) },
+            { itemId: 2, readingOrder: 2, type: "sentence",
+                sourceText: "Fruits, vegetables,\nwhole grains, and\nprotein give us\nenergy and nutrients.",
+                bounds: b(20.8, 15.2, 22.8, 15.1),
+                tapRegion: b(27.2135, 15.8203, 9.1146, 13.6719) }
+        ] },
+        { panelId: 2, readingOrder: 3, bounds: b(50.65104167, 1.07421875, 48.69791667, 50.29296875), items: [
+            { itemId: 1, readingOrder: 1, type: "label", sourceText: "Regular Exercise",
+                bounds: b(53.4, 2.4, 22, 5.6) },
+            { itemId: 2, readingOrder: 2, type: "sentence",
+                sourceText: "Exercise keeps\nour heart healthy,\nstrengthens our body,\nand makes us feel\nhappier!",
+                bounds: b(76, 9.4, 16, 14.7),
+                tapRegion: b(77.2135, 9.7656, 9.1146, 13.6719) }
+        ] },
+        { panelId: 3, readingOrder: 4, bounds: b(0.78125, 53.02734375, 48.69791667, 45.3125), items: [
+            { itemId: 1, readingOrder: 1, type: "label", sourceText: "Healthy Lifestyle",
+                bounds: b(3.2, 54.3, 23.5, 6.2) },
+            { itemId: 2, readingOrder: 2, type: "sentence",
+                sourceText: "Enough sleep,\nless stress,\nand good habits\nhelp us stay healthy.",
+                bounds: b(27.1, 54.8, 18.5, 16.8),
+                tapRegion: b(31.1198, 56.4453, 9.1146, 13.6719) }
+        ] },
+        { panelId: 4, readingOrder: 5, bounds: b(50.65104167, 52.9296875, 48.6328125, 45.41015625), items: [
+            { itemId: 1, readingOrder: 1, type: "label", sourceText: "A Healthy You",
+                bounds: b(52.5, 54.3, 22, 6.2) },
+            { itemId: 2, readingOrder: 2, type: "sentence",
+                sourceText: "Good nutrition,\nexercise and rest\nhelp us grow, learn\nand enjoy life!",
+                bounds: b(74.8, 54.5, 22.3, 17.3),
+                tapRegion: b(81.640625, 56.4453, 9.1146, 13.6719) }
+        ] }
+    ].map(panel => ({ ...panel, items: panel.items.map(item => ({ ...item, ttsText: item.sourceText })) }));
+}
+
+function isEnglishHumanHealthNutritionImageTTSRecord(record) {
+    const file = "images/english/human-health-and-nutrition-basics.png";
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData ? imageTTSData[file] : null;
+    return Boolean(record && canonical &&
+        record.imageId === "human-health-and-nutrition-basics" && record.assetFile === file &&
+        record.contentType === "image-text" &&
+        record.layout === "custom-human-health-nutrition-2x2-bubble-menu" &&
+        record.coordinateStatus === "estimated" && record.overlayRuntimeStatus === "not-tested" &&
+        record.panels === canonical.panels);
+}
+
+function getEnglishHumanHealthNutritionImageTextRecord(record, assetFile) {
+    const file = "images/english/human-health-and-nutrition-basics.png";
+    const expected = getEnglishHumanHealthNutritionExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" && !Array.isArray(value) &&
+        Object.keys(value).length === keys.length && keys.every(key =>
+            Object.prototype.hasOwnProperty.call(value, key));
+    const keys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const valid = value => exact(value, keys) && keys.every(key =>
+        Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const same = (actual, wanted) => valid(actual) && keys.every(key => actual[key] === wanted[key]);
+    const contains = (outer, inner) => valid(outer) && valid(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (a, b) => a.xPct < b.xPct + b.widthPct &&
+        a.xPct + a.widthPct > b.xPct && a.yPct < b.yPct + b.heightPct &&
+        a.yPct + a.heightPct > b.yPct;
+    const topKeys = ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "sourceImageDimensions", "panels"];
+    if (!exact(record, topKeys) || record.imageId !== "human-health-and-nutrition-basics" ||
+        record.assetFile !== file || assetFile !== file || typeof imageTTSData === "undefined" ||
+        !imageTTSData || imageTTSData[file] !== record || record.contentType !== "image-text" ||
+        record.layout !== "custom-human-health-nutrition-2x2-bubble-menu" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== expected.length) return null;
+
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === "human-health-and-nutrition-basics" || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === "human-health-and-nutrition-basics" || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file || library.length !== 1 ||
+        library[0].id !== "human-health-and-nutrition-basics" ||
+        library[0].file !== file || library[0].category !== "english") return null;
+
+    const panelBounds = [], itemBounds = [], tapRegions = [];
+    let tapCount = 0;
+    for (let p = 0; p < expected.length; p += 1) {
+        const panel = record.panels[p], wanted = expected[p];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== wanted.panelId || panel.readingOrder !== wanted.readingOrder ||
+            !same(panel.bounds, wanted.bounds) || !Array.isArray(panel.items) ||
+            panel.items.length !== wanted.items.length) return null;
+        panelBounds.push(panel.bounds);
+        for (let i = 0; i < wanted.items.length; i += 1) {
+            const item = panel.items[i], target = wanted.items[i];
+            const hasTap = Object.prototype.hasOwnProperty.call(target, "tapRegion");
+            const itemKeys = ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]
+                .concat(hasTap ? ["tapRegion"] : []);
+            if (!exact(item, itemKeys) || item.itemId !== target.itemId ||
+                item.readingOrder !== target.readingOrder || item.type !== target.type ||
+                item.sourceText !== target.sourceText || item.ttsText !== item.sourceText ||
+                item.sourceText.length === 0 || !same(item.bounds, target.bounds) ||
+                !contains(panel.bounds, item.bounds)) return null;
+            if (!(panel.panelId === 0 && item.itemId === 2) &&
+                !getEnglishTTSUnitText(item.ttsText)) return null;
+            itemBounds.push(item.bounds);
+            if (hasTap) {
+                if (!same(item.tapRegion, target.tapRegion) ||
+                    !contains(panel.bounds, item.tapRegion) ||
+                    !contains(item.bounds, item.tapRegion)) return null;
+                for (const width of [540, 600, 768]) {
+                    const cssHeight = width * 1024 / 1536;
+                    if (item.tapRegion.widthPct * width / 100 < 44 ||
+                        item.tapRegion.heightPct * cssHeight / 100 < 44) return null;
+                }
+                tapRegions.push(item.tapRegion);
+                tapCount += 1;
+            }
+        }
+    }
+    for (let i = 0; i < panelBounds.length; i += 1) {
+        for (let j = i + 1; j < panelBounds.length; j += 1) {
+            if (record.panels[i].panelId !== 0 && record.panels[j].panelId !== 0 &&
+                overlaps(panelBounds[i], panelBounds[j])) return null;
+        }
+    }
+    for (let i = 0; i < itemBounds.length; i += 1) {
+        for (let j = i + 1; j < itemBounds.length; j += 1) {
+            if (overlaps(itemBounds[i], itemBounds[j])) return null;
+        }
+    }
+    for (let i = 0; i < tapRegions.length; i += 1) {
+        for (let j = i + 1; j < tapRegions.length; j += 1) {
+            if (overlaps(tapRegions[i], tapRegions[j])) return null;
+        }
+    }
+    if (tapCount !== 4) return null;
+    return { ...record, panels: record.panels };
+}
+
+function isEnglishHumanHealthNutritionImageTTSItemText(record, item) {
+    if (!isEnglishHumanHealthNutritionImageTTSRecord(record) || !item ||
+        item.sourceText !== item.ttsText) return false;
+    const file = "images/english/human-health-and-nutrition-basics.png";
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData ? imageTTSData[file] : null;
+    const safe = canonical && getEnglishHumanHealthNutritionImageTextRecord(canonical, file);
+    return Boolean(safe && record.panels === safe.panels &&
+        safe.panels.some(panel => panel.items.includes(item)));
+}
+
+function getEnglishHumanHealthNutritionImageTextSpeechSegments(record, item) {
+    if (!isEnglishHumanHealthNutritionImageTTSItemText(record, item)) return null;
+    const panel = record.panels.find(candidate => candidate.items.includes(item));
+    if (!panel) return null;
+    if (panel.panelId === 0 && item.itemId === 2) {
+        return ["Healthy food", "Regular exercise", "A better you!"];
+    }
+    if (item.type === "sentence") {
+        return splitEnglishImageTTSText(item.ttsText);
+    }
+    const text = getEnglishTTSUnitText(item.ttsText);
+    return text ? [text] : null;
+}
+
+function getEnglishHumanHealthNutritionImageTextSpeechPause(record, item, segmentIndex) {
+    const segments = getEnglishHumanHealthNutritionImageTextSpeechSegments(record, item);
+    if (!segments || !Number.isInteger(segmentIndex) ||
+        segmentIndex < 0 || segmentIndex >= segments.length) return null;
+    return item.type === "sentence" ? 500 : 300;
+}
+
 function isEnglishAnimalsWildlifeImageTTSRecord(record) {
     const file="images/english/animals-wildlife-basics.png";
     const canonical=typeof imageTTSData!=="undefined"&&imageTTSData?imageTTSData[file]:null;
@@ -14305,6 +14685,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    const humanHealthFile = "images/english/human-health-and-nutrition-basics.png";
+    if (assetFile === humanHealthFile || record &&
+        (record.imageId === "human-health-and-nutrition-basics" || record.assetFile === humanHealthFile)) {
+        return getEnglishHumanHealthNutritionImageTextRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_WATER_CYCLE_ASSET_FILE || record &&
         (record.imageId === ENGLISH_WATER_CYCLE_IMAGE_ID ||
             record.assetFile === ENGLISH_WATER_CYCLE_ASSET_FILE)) {
@@ -16536,8 +16921,224 @@ function layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper) {
     savedStyles.clear();
     return enabledCount === candidates.length;
 }
+
+function layoutEnglishHumanHealthNutritionImageTTSHitAreas(wrapper) {
+    const file = "images/english/human-health-and-nutrition-basics.png";
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    const savedStyles = new Map();
+    const hide = button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+    };
+    const restore = () => savedStyles.forEach((style, button) => {
+        button.style.visibility = style.visibility;
+        button.style.opacity = style.opacity;
+        button.style.pointerEvents = style.pointerEvents;
+    });
+    const fail = () => {
+        restore();
+        buttons.forEach(hide);
+        return false;
+    };
+    buttons.forEach(hide);
+    if (!wrapper || !wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== file ||
+        !image || image.getAttribute("src") !== file || !image.complete ||
+        image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+        buttons.length !== 4 || isEnglishImageTTSDrawingMode() ||
+        typeof document.elementFromPoint !== "function") return fail();
+
+    const record = getEnglishImageTTSRecord(file);
+    if (!record || !isEnglishHumanHealthNutritionImageTTSRecord(record) ||
+        record.sourceImageDimensions.width !== 1536 ||
+        record.sourceImageDimensions.height !== 1024) return fail();
+    let imageRect, wrapperRect;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+    } catch (error) { return fail(); }
+    const finiteRect = rect => rect &&
+        [rect.left, rect.top, rect.width, rect.height, rect.right, rect.bottom].every(Number.isFinite) &&
+        rect.width > 0 && rect.height > 0;
+    if (!finiteRect(imageRect) || !finiteRect(wrapperRect) || imageRect.width < 540 ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 ||
+        Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 ||
+        Math.abs(imageRect.height - wrapperRect.height) > 1 ||
+        Math.abs(imageRect.height - imageRect.width * 1024 / 1536) >
+            Math.max(1, imageRect.height * 0.01)) return fail();
+
+    const toRect = bounds => ({
+        left: imageRect.left + imageRect.width * bounds.xPct / 100,
+        top: imageRect.top + imageRect.height * bounds.yPct / 100,
+        right: imageRect.left + imageRect.width * (bounds.xPct + bounds.widthPct) / 100,
+        bottom: imageRect.top + imageRect.height * (bounds.yPct + bounds.heightPct) / 100
+    });
+    const inside = (inner, outer, tolerance = 0.75) =>
+        inner.left >= outer.left - tolerance && inner.top >= outer.top - tolerance &&
+        inner.right <= outer.right + tolerance && inner.bottom <= outer.bottom + tolerance;
+    const overlaps = (a, b) => a.left < b.right && a.right > b.left &&
+        a.top < b.bottom && a.bottom > b.top;
+    const entries = record.panels.flatMap(panel => panel.items
+        .filter(item => item.tapRegion).map(item => ({ panel, item })));
+    if (entries.length !== 4) return fail();
+    const buttonsByKey = new Map();
+    for (const button of buttons) {
+        const key = button.getAttribute("data-image-tts-panel-id") + ":" +
+            button.getAttribute("data-image-tts-item-id");
+        if (buttonsByKey.has(key)) return fail();
+        buttonsByKey.set(key, button);
+    }
+    const candidates = [];
+    for (const { panel, item } of entries) {
+        const key = String(panel.panelId) + ":" + String(item.itemId);
+        const button = buttonsByKey.get(key);
+        const tap = item.tapRegion;
+        if (!button || !isEnglishHumanHealthNutritionImageTTSItemText(record, item) ||
+            !isEnglishHumanHealthNutritionImageTTSRecord(button._englishImageTTSImageTextRecord) ||
+            button._englishImageTTSImageTextRecord.panels !== record.panels ||
+            button._englishImageTTSImageTextPanel !== panel ||
+            button._englishImageTTSImageTextItem !== item ||
+            button.style.left !== tap.xPct + "%" || button.style.top !== tap.yPct + "%" ||
+            button.style.width !== tap.widthPct + "%" || button.style.height !== tap.heightPct + "%") {
+            return fail();
+        }
+        const expectedRect = toRect(tap);
+        const panelRect = toRect(panel.bounds);
+        if (expectedRect.right - expectedRect.left < 44 ||
+            expectedRect.bottom - expectedRect.top < 44 ||
+            !inside(expectedRect, imageRect) || !inside(expectedRect, panelRect)) return fail();
+        candidates.push({ button, panel, item, expectedRect, panelRect });
+    }
+    if (buttonsByKey.size !== 4 || candidates.length !== 4) return fail();
+    for (let i = 0; i < candidates.length; i += 1) {
+        for (let j = i + 1; j < candidates.length; j += 1) {
+            if (overlaps(candidates[i].expectedRect, candidates[j].expectedRect)) return fail();
+        }
+    }
+
+    for (const { button } of candidates) {
+        savedStyles.set(button, {
+            visibility: button.style.visibility,
+            opacity: button.style.opacity,
+            pointerEvents: button.style.pointerEvents
+        });
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.visibility = "visible";
+        button.style.opacity = "0";
+        button.style.pointerEvents = "auto";
+    }
+    const viewport = window.visualViewport;
+    const viewportRect = viewport
+        ? { left: viewport.offsetLeft, top: viewport.offsetTop,
+            right: viewport.offsetLeft + viewport.width, bottom: viewport.offsetTop + viewport.height }
+        : { left: 0, top: 0,
+            right: document.documentElement && document.documentElement.clientWidth || window.innerWidth,
+            bottom: document.documentElement && document.documentElement.clientHeight || window.innerHeight };
+    if (![viewportRect.left, viewportRect.top, viewportRect.right, viewportRect.bottom].every(Number.isFinite) ||
+        viewportRect.right <= viewportRect.left || viewportRect.bottom <= viewportRect.top) return fail();
+
+    const menu = englishImageTTSOverlayState.menu;
+    let menuVisible = false;
+    if (menu && englishImageTTSOverlayState.activeTrigger && menu.id === "english-image-tts-menu" &&
+        !menu.hidden && menu.isConnected !== false) {
+        try {
+            const menuStyle = window.getComputedStyle(menu);
+            menuVisible = Boolean(menuStyle && menuStyle.display !== "none" &&
+                menuStyle.visibility === "visible" && menuStyle.pointerEvents !== "none");
+        } catch (error) { menuVisible = false; }
+    }
+    const hitTest = (button, rect) => {
+        const visible = {
+            left: Math.max(rect.left, viewportRect.left),
+            top: Math.max(rect.top, viewportRect.top),
+            right: Math.min(rect.right, viewportRect.right),
+            bottom: Math.min(rect.bottom, viewportRect.bottom)
+        };
+        const width = visible.right - visible.left, height = visible.bottom - visible.top;
+        if (width < 44 || height < 44) return null;
+        const insetX = Math.min(6, width / 4), insetY = Math.min(6, height / 4);
+        const cx = (visible.left + visible.right) / 2, cy = (visible.top + visible.bottom) / 2;
+        const points = [[cx, cy], [visible.left + insetX, cy], [visible.right - insetX, cy],
+            [cx, visible.top + insetY], [cx, visible.bottom - insetY]];
+        try {
+            for (const [x, y] of points) {
+                const hit = document.elementFromPoint(x, y);
+                if (hit === button || button.contains(hit)) continue;
+                const selectedAppMenuMasksTrigger = menuVisible &&
+                    englishImageTTSOverlayState.activeTrigger === button &&
+                    (hit === menu || menu.contains(hit));
+                if (!selectedAppMenuMasksTrigger) return false;
+            }
+            return true;
+        } catch (error) { return false; }
+    };
+    const stagedHits = new Map();
+    const measured = [];
+    try {
+        for (const candidate of candidates) {
+            const button = candidate.button;
+            const style = window.getComputedStyle(button);
+            const rect = button.getBoundingClientRect();
+            if (button.hidden || !button.disabled || !style || style.display === "none" ||
+                style.visibility !== "visible" || style.pointerEvents === "none" ||
+                Number(style.opacity) !== 0 || !finiteRect(rect) || rect.width < 44 || rect.height < 44 ||
+                !inside(rect, imageRect) || !inside(rect, candidate.panelRect) ||
+                ["left", "top", "right", "bottom"].some(name =>
+                    Math.abs(rect[name] - candidate.expectedRect[name]) > 1)) return fail();
+            measured.push({ ...candidate, rect });
+            stagedHits.set(button, hitTest(button, rect));
+        }
+    } catch (error) { return fail(); }
+    restore();
+
+    const finalRects = new Map();
+    try {
+        for (const candidate of measured) {
+            const style = window.getComputedStyle(candidate.button);
+            const rect = candidate.button.getBoundingClientRect();
+            if (candidate.button.hidden || !candidate.button.disabled || !style ||
+                style.display === "none" || style.visibility === "hidden" ||
+                style.pointerEvents === "none" || !finiteRect(rect) || rect.width < 44 ||
+                rect.height < 44 || !inside(rect, imageRect) || !inside(rect, candidate.panelRect) ||
+                ["left", "top", "right", "bottom"].some(name =>
+                    Math.abs(rect[name] - candidate.expectedRect[name]) > 1)) return fail();
+            finalRects.set(candidate.button, rect);
+        }
+    } catch (error) { return fail(); }
+    for (let i = 0; i < measured.length; i += 1) {
+        for (let j = i + 1; j < measured.length; j += 1) {
+            if (overlaps(finalRects.get(measured[i].button), finalRects.get(measured[j].button))) return fail();
+        }
+    }
+    let enabledCount = 0;
+    for (const candidate of measured) {
+        const finalHit = hitTest(candidate.button, finalRects.get(candidate.button));
+        if (stagedHits.get(candidate.button) === true && finalHit === true) {
+            candidate.button.hidden = false;
+            candidate.button.disabled = false;
+            candidate.button.setAttribute("aria-disabled", "false");
+            enabledCount += 1;
+        } else {
+            hide(candidate.button);
+        }
+    }
+    savedStyles.clear();
+    return enabledCount > 0;
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
     if (!wrapper) {
+        return;
+    }
+    if (wrapper.dataset &&
+        wrapper.dataset.imageTtsAssetFile === "images/english/human-health-and-nutrition-basics.png") {
+        layoutEnglishHumanHealthNutritionImageTTSHitAreas(wrapper);
         return;
     }
     if (wrapper.dataset &&
@@ -16575,15 +17176,19 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record) {
     button.hidden = true;
     const isFullTitleImageText = isEnglishImageTTSFullTitleImageTextRecord(record);
     const panelLabel = getEnglishImageTTSImageTextPanelLabel(record, panel);
+    const isHumanHealthBubble = isEnglishHumanHealthNutritionImageTTSRecord(record) &&
+        panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 2;
     const isAnimalsAdaptationBubble = isEnglishAnimalsAdaptationImageTTSRecord(record) &&
         panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 2;
-    button.setAttribute("aria-label", isAnimalsAdaptationBubble
+    button.setAttribute("aria-label", isHumanHealthBubble
         ? "第 " + panel.panelId + " 格泡泡：" + item.sourceText + "，開啟泡泡朗讀選項"
-        : (isFullTitleImageText
-            ? panelLabel + "第 " + item.readingOrder + " 項原圖文字：" +
-                item.sourceText + "，開啟朗讀選項"
-            : "第 " + panel.panelId + " 格第 " + item.readingOrder +
-                " 項原圖文字：" + item.sourceText + "，開啟本格朗讀選項"));
+        : (isAnimalsAdaptationBubble
+            ? "第 " + panel.panelId + " 格泡泡：" + item.sourceText + "，開啟泡泡朗讀選項"
+            : (isFullTitleImageText
+                ? panelLabel + "第 " + item.readingOrder + " 項原圖文字：" +
+                    item.sourceText + "，開啟朗讀選項"
+                : "第 " + panel.panelId + " 格第 " + item.readingOrder +
+                    " 項原圖文字：" + item.sourceText + "，開啟本格朗讀選項")));
     button.setAttribute("aria-haspopup", "true");
     button.setAttribute("aria-expanded", "false");
     button.setAttribute("aria-controls", "english-image-tts-menu");
@@ -16601,7 +17206,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record) {
     button._englishImageTTSImageTextActiveItem = item;
     button.addEventListener("click", event => {
         event.stopPropagation();
-        if ((isEnglishAnimalsAdaptationImageTTSRecord(record) && button.hidden) ||
+        if (((isEnglishAnimalsAdaptationImageTTSRecord(record) ||
+            isEnglishHumanHealthNutritionImageTTSRecord(record)) && button.hidden) ||
             button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
             return;
         }
@@ -17362,6 +17968,33 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
                 layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper);
                 return;
             }
+
+            if (isEnglishHumanHealthNutritionImageTTSRecord(record)) {
+                const expectedFile = "images/english/human-health-and-nutrition-basics.png";
+                const expectedDimensions = () => image.getAttribute("src") === expectedFile &&
+                    image.complete && image.naturalWidth === 1536 && image.naturalHeight === 1024;
+                const hideHumanHealthHitAreas = () => {
+                    wrapper.querySelectorAll(".image-tts-image-text-hit-area").forEach(button => {
+                        button.hidden = true;
+                        button.disabled = true;
+                        button.setAttribute("aria-disabled", "true");
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+                };
+                if (image.complete && !expectedDimensions()) return;
+                record.panels.forEach(panel => panel.items.forEach(item => {
+                    if (item.tapRegion &&
+                        createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record)) added += 1;
+                }));
+                image.addEventListener("load", () => {
+                    if (!expectedDimensions()) { hideHumanHealthHitAreas(); return; }
+                    layoutEnglishHumanHealthNutritionImageTTSHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", hideHumanHealthHitAreas, { once: true });
+                layoutEnglishHumanHealthNutritionImageTTSHitAreas(wrapper);
+                return;
+            }
             if (isEnglishAnimalsWildlifeImageTTSRecord(record)) {
                 record.panels.forEach(panel=>panel.items.forEach(item=>{if(item.tapRegion&&createEnglishImageTTSImageTextHitArea(wrapper,panel,item,record))added++;}));
                 image.addEventListener("load",()=>layoutEnglishImageTTSImageTextHitAreas(wrapper),{once:true});
@@ -17736,6 +18369,15 @@ function scheduleEnglishImageTTSLayout() {
             '#ai-response .image-tts-overlay-wrapper[data-image-tts-asset-file="images/english/animals-and-adaptation-basics.png"]'
         ).forEach(wrapper => layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper));
     }, 160);
+    if (englishImageTTSOverlayState.humanHealthLayoutSettleTimer) {
+        window.clearTimeout(englishImageTTSOverlayState.humanHealthLayoutSettleTimer);
+    }
+    englishImageTTSOverlayState.humanHealthLayoutSettleTimer = window.setTimeout(() => {
+        englishImageTTSOverlayState.humanHealthLayoutSettleTimer = 0;
+        document.querySelectorAll(
+            '#ai-response .image-tts-overlay-wrapper[data-image-tts-asset-file="images/english/human-health-and-nutrition-basics.png"]'
+        ).forEach(wrapper => layoutEnglishHumanHealthNutritionImageTTSHitAreas(wrapper));
+    }, 160);
     if (englishImageTTSOverlayState.layoutFrame) {
         return;
     }
@@ -17752,6 +18394,10 @@ function scheduleEnglishImageTTSLayout() {
             if (wrapper.dataset &&
                 wrapper.dataset.imageTtsAssetFile === "images/english/animals-and-adaptation-basics.png") {
                 layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper);
+            }
+            if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === "images/english/human-health-and-nutrition-basics.png") {
+                layoutEnglishHumanHealthNutritionImageTTSHitAreas(wrapper);
             }
         });
     });
@@ -17806,6 +18452,10 @@ function syncEnglishImageTTSDrawingMode() {
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === "images/english/animals-and-adaptation-basics.png") {
             layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper);
+        }
+        if (wrapper.dataset &&
+            wrapper.dataset.imageTtsAssetFile === "images/english/human-health-and-nutrition-basics.png") {
+            layoutEnglishHumanHealthNutritionImageTTSHitAreas(wrapper);
         }
     });
 }
@@ -18024,6 +18674,13 @@ function getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item) {
  return [item.ttsText];
 }
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishHumanHealthNutritionImageTTSItemText(record, item)) {
+        const panel = record.panels.find(candidate => candidate.items.includes(item));
+        if (panel && panel.panelId === 0 && item.itemId === 2) {
+            return "Healthy food. Regular exercise. A better you!";
+        }
+        return getEnglishTTSUnitText(item.ttsText);
+    }
     if (isEnglishWaterCycleImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishMountainsImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishEnergyTransformationsImageTTSItemText(record, item)) {
@@ -18274,6 +18931,19 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "circulatory-system-basics" &&
         record.assetFile === "images/english/circulatory-system-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isHumanHealthNutritionImageText = Boolean(
+        record && isEnglishHumanHealthNutritionImageTTSRecord(record)
+    );
+    const isHumanHealthNutritionSingleItemSequence = Boolean(isHumanHealthNutritionImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const humanHealthImage = isHumanHealthNutritionImageText ? wrapper.querySelector("img") : null;
+    const humanHealthImageReady = !isHumanHealthNutritionImageText || Boolean(
+        wrapper.dataset.imageTtsAssetFile === "images/english/human-health-and-nutrition-basics.png" &&
+        humanHealthImage &&
+        humanHealthImage.getAttribute("src") === "images/english/human-health-and-nutrition-basics.png" &&
+        humanHealthImage.complete && humanHealthImage.naturalWidth === 1536 &&
+        humanHealthImage.naturalHeight === 1024
+    );
     const isAnimalsAdaptationImageText = Boolean(
         record && isEnglishAnimalsAdaptationImageTTSRecord(record)
     );
@@ -18323,6 +18993,11 @@ function speakEnglishImageTTSImageTextSequence(
                             : getEnglishSimpleMachinesImageTextSpeechSegments(record, item))))))
                 : null
         })));
+    if (isHumanHealthNutritionImageText) {
+        playbackSteps.forEach(step => {
+            step.speechSegments = getEnglishHumanHealthNutritionImageTextSpeechSegments(record, step.item);
+        });
+    }
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
     if (!trigger || !wrapper || !record || !trigger.classList ||
         !trigger.classList.contains("image-tts-image-text-hit-area") ||
@@ -18349,6 +19024,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isCirculatorySystemSingleItemSequence &&
             !isAnimalsWildlifeSingleItemSequence &&
             !isAnimalsAdaptationSingleItemSequence &&
+            !isHumanHealthNutritionSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
             !isHumanBodyHowItWorksSingleItemSequence) ||
         itemList.some(item => !item ||
@@ -18357,7 +19033,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady || !mountainsReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
-        !animalsAdaptationImageReady ||
+        !animalsAdaptationImageReady || !humanHealthImageReady ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
@@ -18373,6 +19049,9 @@ function speakEnglishImageTTSImageTextSequence(
     englishTTSState.imageTextSequenceTrigger = trigger;
     if (isAnimalsAdaptationImageText) {
         watchEnglishAnimalsAdaptationImageTTSViewport(trigger, wrapper, generation);
+    }
+    if (isHumanHealthNutritionImageText) {
+        watchEnglishHumanHealthNutritionImageTTSViewport(trigger, wrapper, generation);
     }
     let itemIndex = 0;
 
@@ -18401,6 +19080,12 @@ function speakEnglishImageTTSImageTextSequence(
         }
         trigger._englishImageTTSImageTextActivePanel = itemPanel;
         trigger._englishImageTTSImageTextActiveItem = item;
+        if (isHumanHealthNutritionImageText &&
+            !placeEnglishImageTTSImageTextStopButton(
+                getEnglishTTSFloatingStopButton(), wrapper
+            )) {
+            return failEnglishHumanHealthNutritionImageTTSSequence(trigger);
+        }
         if (isAnimalsAdaptationImageText &&
             !placeEnglishImageTTSImageTextStopButton(
                 getEnglishTTSFloatingStopButton(), wrapper
@@ -18444,13 +19129,20 @@ function speakEnglishImageTTSImageTextSequence(
             if (generation !== englishTTSState.imageTextSequenceGeneration) return false;
             if (isWaterCycleImageText &&
                 !ensureEnglishWaterCycleImageTTSStopPosition(trigger, wrapper)) return false;
+            if (isHumanHealthNutritionImageText &&
+                !placeEnglishImageTTSImageTextStopButton(
+                    getEnglishTTSFloatingStopButton(), wrapper
+                )) {
+                return failEnglishHumanHealthNutritionImageTTSSequence(trigger);
+            }
             if (isAnimalsAdaptationImageText &&
                 !placeEnglishImageTTSImageTextStopButton(
                     getEnglishTTSFloatingStopButton(), wrapper
                 )) {
                 return failEnglishAnimalsAdaptationImageTTSSequence(trigger);
             }
-            if (isAnimalsAdaptationImageText && !getSelectedLocalEnglishVoice()) {
+            if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText) &&
+                !getSelectedLocalEnglishVoice()) {
                 cancelEnglishImageTTSImageTextSequence(true);
                 setEnglishTTSStatus("本機英文聲線尚未載入；iPad Safari 可能仍在載入，請稍後再次點選朗讀。此功能只使用本機英文聲線。");
                 updateEnglishTTSControls();
@@ -18460,6 +19152,13 @@ function speakEnglishImageTTSImageTextSequence(
                 if (generation !== englishTTSState.imageTextSequenceGeneration) return;
                 if (isWaterCycleImageText &&
                     !ensureEnglishWaterCycleImageTTSStopPosition(trigger, wrapper)) return;
+                if (isHumanHealthNutritionImageText &&
+                    !placeEnglishImageTTSImageTextStopButton(
+                        getEnglishTTSFloatingStopButton(), wrapper
+                    )) {
+                    failEnglishHumanHealthNutritionImageTTSSequence(trigger);
+                    return;
+                }
                 if (isAnimalsAdaptationImageText &&
                     !placeEnglishImageTTSImageTextStopButton(
                         getEnglishTTSFloatingStopButton(), wrapper
@@ -18474,14 +19173,20 @@ function speakEnglishImageTTSImageTextSequence(
                 if (speechSegmentIndex + 1 < speechSegments.length) {
                     const previousSpeechSegmentIndex = speechSegmentIndex;
                     speechSegmentIndex += 1;
-                    const delay = isAnimalsAdaptationImageText
-                        ? getEnglishAnimalsAdaptationImageTextSpeechPause(
+                    const delay = isHumanHealthNutritionImageText
+                        ? getEnglishHumanHealthNutritionImageTextSpeechPause(
                             record, item, previousSpeechSegmentIndex
                         )
-                        : 500;
+                        : (isAnimalsAdaptationImageText
+                            ? getEnglishAnimalsAdaptationImageTextSpeechPause(
+                                record, item, previousSpeechSegmentIndex
+                            )
+                            : 500);
                     if (delay !== 300 && delay !== 500) {
                         cancelEnglishImageTTSImageTextSequence(true);
-                        setEnglishTTSStatus("Animals & Adaptation：朗讀段落類型無法確認，已取消。");
+                        setEnglishTTSStatus(isHumanHealthNutritionImageText
+                            ? "Human Health & Nutrition：朗讀段落類型無法確認，已取消。"
+                            : "Animals & Adaptation：朗讀段落類型無法確認，已取消。");
                         updateEnglishTTSControls();
                         return;
                     }
@@ -18496,7 +19201,9 @@ function speakEnglishImageTTSImageTextSequence(
                     }, delay);
                     setEnglishTTSStatus(delay === 500
                         ? "原圖文字朗讀中，單一文字區內完整句後停頓 0.5 秒。"
-                        : "Animals & Adaptation：動物名稱後停頓 0.3 秒。");
+                        : (isHumanHealthNutritionImageText
+                            ? "Human Health & Nutrition：標題或短片語後停頓 0.3 秒。"
+                            : "Animals & Adaptation：動物名稱後停頓 0.3 秒。"));
                     updateEnglishTTSControls();
                     return;
                 }
@@ -18534,7 +19241,8 @@ function speakEnglishImageTTSImageTextSequence(
             }, null, null, null, generation);
             if (!started && generation === englishTTSState.imageTextSequenceGeneration) {
                 cancelEnglishImageTTSImageTextSequence();
-                if (isAnimalsAdaptationImageText && !englishTTSState.voices.length) {
+                if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText) &&
+                    !englishTTSState.voices.length) {
                     setEnglishTTSStatus("本機英文聲線尚未載入；iPad Safari 可能仍在載入，請稍後再次點選朗讀。此功能只使用本機英文聲線。");
                 }
                 updateEnglishTTSControls();
@@ -18725,6 +19433,16 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const mountainsLayoutReady = !isMountainsImageText || Boolean(
         layoutEnglishImageTTSMountainsHitAreas(wrapper) && mountainsButtons.length === 4 &&
         mountainsButtons.includes(trigger) && !trigger.hidden);
+    const isHumanHealthNutritionImageText = Boolean(safeRecord &&
+        isEnglishHumanHealthNutritionImageTTSRecord(safeRecord));
+    const humanHealthImage = isHumanHealthNutritionImageText && wrapper
+        ? wrapper.querySelector("img") : null;
+    const humanHealthButtons = isHumanHealthNutritionImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
+    const humanHealthLayoutReady = !isHumanHealthNutritionImageText || Boolean(
+        layoutEnglishHumanHealthNutritionImageTTSHitAreas(wrapper) &&
+        humanHealthButtons.length === 4 && humanHealthButtons.includes(trigger) &&
+        !trigger.hidden && !trigger.disabled);
     const karstLayoutReady = !isKarstImageText ||
         layoutEnglishImageTTSKarstSideButtons(wrapper);
     if (!trigger || !wrapper || !trigger.classList ||
@@ -18736,6 +19454,11 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         !safePanel || safePanel !== panel ||
         !panel.items.includes(trigger._englishImageTTSImageTextItem) ||
         wrapper.dataset.imageTtsAssetFile !== safeRecord.assetFile ||
+        (isHumanHealthNutritionImageText && (!humanHealthImage ||
+            humanHealthImage.getAttribute("src") !== safeRecord.assetFile ||
+            !humanHealthImage.complete || humanHealthImage.naturalWidth !== 1536 ||
+            humanHealthImage.naturalHeight !== 1024 || !humanHealthLayoutReady ||
+            humanHealthButtons.length !== 4 || !humanHealthButtons.includes(trigger))) ||
         (isKarstImageText && (!trigger.classList.contains("image-tts-karst-side-trigger") ||
             !karstImage || karstImage.getAttribute("src") !== safeRecord.assetFile ||
             !karstImage.complete || karstImage.naturalWidth !== 1536 ||
@@ -18936,6 +19659,53 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         add("🔊 朗讀全圖（標題、四格與底部補充句）",
             "依序朗讀全圖標題、副標、四格動物文字和底部補充句",
             allItems, "Animals & Adaptation 全圖已朗讀完成。");
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (menu.hidden) return;
+        const firstButton = menu.firstChild;
+        if (firstButton) {
+            try { firstButton.focus({ preventScroll: true }); }
+            catch (error) { firstButton.focus(); }
+        }
+        return;
+    }
+
+
+    if (isEnglishHumanHealthNutritionImageTTSRecord(safeRecord)) {
+        const clicked = trigger._englishImageTTSImageTextItem;
+        const allItems = safeRecord.panels.flatMap(candidate => candidate.items);
+        const titlePanel = safeRecord.panels.find(candidate => candidate.panelId === 0);
+        const title = titlePanel && titlePanel.items[0];
+        const subtitle = titlePanel && titlePanel.items[1];
+        const hitAreas = Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area"));
+        const image = wrapper.querySelector("img");
+        if (!clicked || panel.panelId < 1 || panel.panelId > 4 ||
+            panel.items.length !== 2 || clicked !== panel.items[1] ||
+            !isEnglishHumanHealthNutritionImageTTSItemText(safeRecord, clicked) ||
+            !title || !subtitle || allItems.length !== 10 ||
+            allItems.some(item => !isEnglishHumanHealthNutritionImageTTSItemText(safeRecord, item)) ||
+            !image || image.getAttribute("src") !== safeRecord.assetFile || !image.complete ||
+            image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+            hitAreas.length !== 4 || !hitAreas.includes(trigger) || trigger.hidden || trigger.disabled) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const add = (label, description, items, completion) =>
+            menu.appendChild(createEnglishImageTTSMenuButton(label, description, () =>
+                speakEnglishImageTTSImageTextSequence(trigger, items, completion)));
+        menu.setAttribute("aria-label",
+            "Human Health & Nutrition 第 " + panel.panelId + " 格朗讀選項");
+        add("🔊 朗讀此泡泡", "只朗讀所點擊的原圖英文泡泡",
+            [clicked], "Human Health & Nutrition 泡泡已朗讀完成。");
+        add("🔊 朗讀本格", "依序朗讀 " + panel.items[0].sourceText + " 與本格泡泡",
+            panel.items, "Human Health & Nutrition 第 " + panel.panelId + " 格已朗讀完成。");
+        add("🔊 朗讀全圖標題", "Human Health and Nutrition",
+            [title], "Human Health & Nutrition 全圖標題已朗讀完成。");
+        add("🔊 朗讀全圖副標", "朗讀副標的三個短片語",
+            [subtitle], "Human Health & Nutrition 全圖副標已朗讀完成。");
+        add("🔊 朗讀全圖", "依序朗讀標題、副標、四格格名與泡泡",
+            allItems, "Human Health & Nutrition 全圖已朗讀完成。");
         menu.hidden = false;
         menu.style.visibility = "hidden";
         positionEnglishImageTTSMenu();

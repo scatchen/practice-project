@@ -21365,4 +21365,89 @@ const imageTTSData = {
         ]
     },
 
+
+    "images/english/human-health-and-nutrition-basics.png": {
+        imageId: "human-health-and-nutrition-basics",
+        assetFile: "images/english/human-health-and-nutrition-basics.png",
+        contentType: "image-text",
+        layout: "custom-human-health-nutrition-2x2-bubble-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1536, height: 1024 },
+        panels: [
+            {
+                panelId: 0, readingOrder: 1,
+                bounds: { xPct: 0.4, yPct: 0.4, widthPct: 99.2, heightPct: 13.2 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Human Health and Nutrition",
+                        ttsText: "Human Health and Nutrition",
+                        bounds: { xPct: 2.8, yPct: 2, widthPct: 45.6, heightPct: 5.8 } },
+                    { itemId: 2, readingOrder: 2, type: "phrase",
+                        sourceText: "Healthy food • Regular exercise • A better you!",
+                        ttsText: "Healthy food • Regular exercise • A better you!",
+                        bounds: { xPct: 5.1, yPct: 9.2, widthPct: 41.1, heightPct: 3.4 } }
+                ]
+            },
+            {
+                panelId: 1, readingOrder: 2,
+                bounds: { xPct: 0.78125, yPct: 0.87890625, widthPct: 48.69791667, heightPct: 50.68359375 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Healthy Food", ttsText: "Healthy Food",
+                        bounds: { xPct: 3.2, yPct: 14.4, widthPct: 17.5, heightPct: 4.5 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Fruits, vegetables,\nwhole grains, and\nprotein give us\nenergy and nutrients.",
+                        ttsText: "Fruits, vegetables,\nwhole grains, and\nprotein give us\nenergy and nutrients.",
+                        bounds: { xPct: 20.8, yPct: 15.2, widthPct: 22.8, heightPct: 15.1 },
+                        tapRegion: { xPct: 27.2135, yPct: 15.8203, widthPct: 9.1146, heightPct: 13.6719 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 3,
+                bounds: { xPct: 50.65104167, yPct: 1.07421875, widthPct: 48.69791667, heightPct: 50.29296875 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Regular Exercise", ttsText: "Regular Exercise",
+                        bounds: { xPct: 53.4, yPct: 2.4, widthPct: 22, heightPct: 5.6 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Exercise keeps\nour heart healthy,\nstrengthens our body,\nand makes us feel\nhappier!",
+                        ttsText: "Exercise keeps\nour heart healthy,\nstrengthens our body,\nand makes us feel\nhappier!",
+                        bounds: { xPct: 76, yPct: 9.4, widthPct: 16, heightPct: 14.7 },
+                        tapRegion: { xPct: 77.2135, yPct: 9.7656, widthPct: 9.1146, heightPct: 13.6719 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 4,
+                bounds: { xPct: 0.78125, yPct: 53.02734375, widthPct: 48.69791667, heightPct: 45.3125 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Healthy Lifestyle", ttsText: "Healthy Lifestyle",
+                        bounds: { xPct: 3.2, yPct: 54.3, widthPct: 23.5, heightPct: 6.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Enough sleep,\nless stress,\nand good habits\nhelp us stay healthy.",
+                        ttsText: "Enough sleep,\nless stress,\nand good habits\nhelp us stay healthy.",
+                        bounds: { xPct: 27.1, yPct: 54.8, widthPct: 18.5, heightPct: 16.8 },
+                        tapRegion: { xPct: 31.1198, yPct: 56.4453, widthPct: 9.1146, heightPct: 13.6719 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 5,
+                bounds: { xPct: 50.65104167, yPct: 52.9296875, widthPct: 48.6328125, heightPct: 45.41015625 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "A Healthy You", ttsText: "A Healthy You",
+                        bounds: { xPct: 52.5, yPct: 54.3, widthPct: 22, heightPct: 6.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Good nutrition,\nexercise and rest\nhelp us grow, learn\nand enjoy life!",
+                        ttsText: "Good nutrition,\nexercise and rest\nhelp us grow, learn\nand enjoy life!",
+                        bounds: { xPct: 74.8, yPct: 54.5, widthPct: 22.3, heightPct: 17.3 },
+                        tapRegion: { xPct: 81.640625, yPct: 56.4453, widthPct: 9.1146, heightPct: 13.6719 } }
+                ]
+            }
+        ]
+    },
+
 };
