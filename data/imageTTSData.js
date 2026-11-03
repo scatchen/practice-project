@@ -21269,5 +21269,100 @@ const imageTTSData = {
             }
         ]
     }
+,
+    "images/english/animals-and-adaptation-basics.png": {
+        imageId: "animals-and-adaptation-basics",
+        assetFile: "images/english/animals-and-adaptation-basics.png",
+        contentType: "image-text",
+        layout: "custom-animals-adaptation-2x2-fact-bubble-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1312, height: 1199 },
+        panels: [
+            {
+                panelId: 0, readingOrder: 1,
+                bounds: { xPct: 0, yPct: 0, widthPct: 100, heightPct: 13.2 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Animals and Adaptation", ttsText: "Animals and Adaptation",
+                        bounds: { xPct: 25.0, yPct: 1.3, widthPct: 50.0, heightPct: 5.8 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Animals have special features that help them survive in their environments.",
+                        ttsText: "Animals have special features that help them survive in their environments.",
+                        bounds: { xPct: 15.5, yPct: 8.1, widthPct: 69.5, heightPct: 4.4 } }
+                ]
+            },
+            {
+                panelId: 1, readingOrder: 2,
+                bounds: { xPct: 0, yPct: 14, widthPct: 50, heightPct: 40 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Polar Bear\nThick fur and a layer of fat\nhelp it stay warm in the cold.",
+                        ttsText: "Polar Bear\nThick fur and a layer of fat\nhelp it stay warm in the cold.",
+                        bounds: { xPct: 2.2, yPct: 15.2, widthPct: 30.8, heightPct: 11.2 },
+                        tapRegion: { xPct: 2.2, yPct: 15.2, widthPct: 30.8, heightPct: 11.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "It's\nso cold\nhere!", ttsText: "It's\nso cold\nhere!",
+                        bounds: { xPct: 33.8, yPct: 26.6, widthPct: 9.65, heightPct: 10.6 },
+                        tapRegion: { xPct: 33.8, yPct: 26.6, widthPct: 9.65, heightPct: 10.6 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 3,
+                bounds: { xPct: 50, yPct: 14, widthPct: 50, heightPct: 40 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Camel\nIt can go a long time without water\nand has a hump to store fat.",
+                        ttsText: "Camel\nIt can go a long time without water\nand has a hump to store fat.",
+                        bounds: { xPct: 51.9, yPct: 15.2, widthPct: 34.8, heightPct: 11.2 },
+                        tapRegion: { xPct: 51.9, yPct: 15.2, widthPct: 34.8, heightPct: 11.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "It can\nsurvive in\nthe desert!", ttsText: "It can\nsurvive in\nthe desert!",
+                        bounds: { xPct: 84.8, yPct: 34.6, widthPct: 12.8, heightPct: 11.1 },
+                        tapRegion: { xPct: 84.8, yPct: 34.6, widthPct: 12.8, heightPct: 11.1 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 4,
+                bounds: { xPct: 0, yPct: 55, widthPct: 50, heightPct: 38 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Sea Turtle\nIts flippers help it swim,\nand its shell protects its body.",
+                        ttsText: "Sea Turtle\nIts flippers help it swim,\nand its shell protects its body.",
+                        bounds: { xPct: 2.2, yPct: 55.9, widthPct: 30.8, heightPct: 10.9 },
+                        tapRegion: { xPct: 2.2, yPct: 55.9, widthPct: 30.8, heightPct: 10.9 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "It's\namazing!", ttsText: "It's\namazing!",
+                        bounds: { xPct: 36.8, yPct: 69.6, widthPct: 10.6, heightPct: 10.6 },
+                        tapRegion: { xPct: 36.8, yPct: 69.6, widthPct: 10.6, heightPct: 10.6 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 5,
+                bounds: { xPct: 50, yPct: 55, widthPct: 50, heightPct: 38 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Cheetah\nIts strong legs and flexible spine\nhelp it run very fast.",
+                        ttsText: "Cheetah\nIts strong legs and flexible spine\nhelp it run very fast.",
+                        bounds: { xPct: 51.9, yPct: 56.0, widthPct: 33.4, heightPct: 10.7 },
+                        tapRegion: { xPct: 51.9, yPct: 56.0, widthPct: 33.4, heightPct: 10.7 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "It can run\nup to 100 km\nper hour!", ttsText: "It can run\nup to 100 km\nper hour!",
+                        bounds: { xPct: 85.6, yPct: 73.9, widthPct: 12.6, heightPct: 10.8 },
+                        tapRegion: { xPct: 85.6, yPct: 73.9, widthPct: 12.6, heightPct: 10.8 } }
+                ]
+            },
+            {
+                panelId: 5, readingOrder: 6,
+                bounds: { xPct: 0, yPct: 93.4, widthPct: 100, heightPct: 6.6 },
+                items: [{ itemId: 1, readingOrder: 1, type: "sentence",
+                    sourceText: "Different environments → Different challenges → Amazing adaptations!",
+                    ttsText: "Different environments → Different challenges → Amazing adaptations!",
+                    bounds: { xPct: 13.5, yPct: 94.2, widthPct: 73, heightPct: 3.5 } }]
+            }
+        ]
+    },
 
 };
