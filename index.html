@@ -3388,6 +3388,7 @@ const englishTTSState = {
     imageTTSStopCleanupFrame: 0,
     animalsAdaptationViewportCleanup: null,
     humanHealthViewportCleanup: null,
+    typhoonsViewportCleanup: null,
     stopPositionFrame: 0,
     responseObserver: null,
     collocationReplayTimer: 0,
@@ -3418,7 +3419,8 @@ const englishImageTTSOverlayState = {
     layoutFrame: 0,
     menuPositionFrame: 0,
     animalsAdaptationLayoutSettleTimer: 0,
-    humanHealthLayoutSettleTimer: 0
+    humanHealthLayoutSettleTimer: 0,
+    typhoonsLayoutSettleTimer: 0
 };
 
 const ENGLISH_TTS_VOICE_KEY = "practiceProject.englishTTS.voice";
@@ -3788,12 +3790,16 @@ function resetEnglishTTSFloatingStopButtonStyles(button) {
         button.classList.contains("is-image-tts-animals-adaptation-stop-control");
     const wasHumanHealthStop =
         button.classList.contains("is-image-tts-human-health-stop-control");
+    const wasTyphoonsStop =
+        button.classList.contains("is-image-tts-typhoons-stop-control");
     button.classList.remove("is-image-tts-human-health-stop-control");
+    button.classList.remove("is-image-tts-typhoons-stop-control");
     button.classList.remove("is-image-tts-animals-adaptation-stop-control");
     button.classList.remove("is-image-tts-image-text-stop-control");
     button.classList.remove("is-image-tts-karst-stop-control");
     button.classList.remove("is-image-tts-water-cycle-stop-control");
-    if (wasKarstStop || wasWaterCycleStop || wasAnimalsAdaptationStop || wasHumanHealthStop) {
+    if (wasKarstStop || wasWaterCycleStop || wasAnimalsAdaptationStop ||
+        wasHumanHealthStop || wasTyphoonsStop) {
         button.textContent = "⏹ 停止朗讀";
         button.setAttribute("aria-label", "停止目前的英文朗讀");
     }
@@ -4660,6 +4666,154 @@ function placeEnglishHumanHealthNutritionImageTTSStopButton(button, wrapper, rec
     return true;
 }
 
+
+function placeEnglishTyphoonsImageTTSStopButton(button, wrapper, record, panel, item) {
+    const fail = () => {
+        if (button) { button.hidden = true; button.style.visibility = "hidden"; }
+        return false;
+    };
+    const trigger = englishTTSState.activeSpeechTrigger;
+    const canonical = getEnglishImageTTSRecord(ENGLISH_TYPHOONS_ASSET_FILE);
+    const image = wrapper && wrapper.querySelector("img");
+    if (!button || !wrapper || wrapper.isConnected === false || !trigger ||
+        !isEnglishTyphoonsImageTTSRecord(record) || !canonical ||
+        canonical.panels !== record.panels || wrapper.dataset.imageTtsAssetFile !== ENGLISH_TYPHOONS_ASSET_FILE ||
+        !panel || panel !== record.panels.find(candidate => candidate.panelId === panel.panelId) ||
+        !item || !panel.items.includes(item) ||
+        !isEnglishTyphoonsImageTTSItemText(record, item) ||
+        trigger._englishImageTTSImageTextRecord.panels !== record.panels ||
+        trigger._englishImageTTSImageTextActivePanel !== panel ||
+        trigger._englishImageTTSImageTextActiveItem !== item ||
+        !image || image.getAttribute("src") !== ENGLISH_TYPHOONS_ASSET_FILE ||
+        !image.complete || image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+        typeof document.elementFromPoint !== "function") return fail();
+    let imageRect;
+    try { imageRect = image.getBoundingClientRect(); } catch (error) { return fail(); }
+    if (!imageRect || ![imageRect.left, imageRect.top, imageRect.right, imageRect.bottom,
+        imageRect.width, imageRect.height].every(Number.isFinite) ||
+        imageRect.width < 528 || imageRect.height < 352) return fail();
+
+    const avoidRects = [];
+    try {
+        document.querySelectorAll(
+            ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+            ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+            "#english-tts-speak-selection:not([hidden]), button:not(#english-tts-floating-stop), " +
+            "[role='button'], input, select, textarea"
+        ).forEach(element => {
+            if (!element || element === button || wrapper.contains(element) || element.hidden) return;
+            const style = window.getComputedStyle(element);
+            if (!style || style.display === "none" ||
+                style.visibility === "hidden" || style.visibility === "collapse") return;
+            const rect = element.getBoundingClientRect();
+            if (!rect || ![rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height]
+                .every(Number.isFinite)) throw new Error("Unreadable visible control");
+            if (rect.width > 0 && rect.height > 0) {
+                avoidRects.push({ left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom });
+            }
+        });
+    } catch (error) { return fail(); }
+
+    const placed = placeEnglishImageTTSStoryStopButton(button, wrapper, {
+        bounds: panel.bounds,
+        avoidBounds: [{ xPct: 0, yPct: 0, widthPct: 100, heightPct: 100 }],
+        avoidRects
+    }, {
+        preferBelow: true,
+        scanForClearPosition: true,
+        strictAvoidance: true,
+        fixedStopSize: true,
+        fixedStopClass: "is-image-tts-typhoons-stop-control",
+        fixedStopWidth: 52,
+        fixedStopHeight: 52,
+        fixedStopText: "⏹",
+        fixedStopAriaLabel: "停止 Typhoons & Tropical Storms 英文朗讀",
+        stopControlClass: "is-image-tts-typhoons-stop-control"
+    });
+    if (!placed || button.hidden || button.disabled || button.isConnected === false ||
+        button.getAttribute("aria-disabled") === "true") return fail();
+
+    const visual = window.visualViewport;
+    const left = visual && Number.isFinite(visual.offsetLeft) ? visual.offsetLeft : 0;
+    const top = visual && Number.isFinite(visual.offsetTop) ? visual.offsetTop : 0;
+    const width = visual && Number.isFinite(visual.width) && visual.width > 0
+        ? visual.width : window.innerWidth;
+    const height = visual && Number.isFinite(visual.height) && visual.height > 0
+        ? visual.height : window.innerHeight;
+    const inset = name => {
+        try {
+            const n = parseFloat(window.getComputedStyle(button).getPropertyValue(name));
+            return Number.isFinite(n) && n > 0 ? n : 0;
+        } catch (error) { return 0; }
+    };
+    let rect, style;
+    try { rect = button.getBoundingClientRect(); style = window.getComputedStyle(button); }
+    catch (error) { return fail(); }
+    const safeLeft = left + inset("--english-tts-safe-left") + 8;
+    const safeTop = top + inset("--english-tts-safe-top") + 8;
+    const safeRight = left + width - inset("--english-tts-safe-right") - 8;
+    const safeBottom = top + height - inset("--english-tts-safe-bottom") - 8;
+    const intersects = (a, b) => a.left < b.right && a.right > b.left &&
+        a.top < b.bottom && a.bottom > b.top;
+    if (!rect || !style || style.display === "none" || style.visibility !== "visible" ||
+        style.pointerEvents === "none" || rect.width < 52 || rect.height < 52 ||
+        rect.left < safeLeft || rect.top < safeTop || rect.right > safeRight || rect.bottom > safeBottom ||
+        intersects(rect, imageRect) || avoidRects.some(other => intersects(rect, other))) return fail();
+    const insetHit = Math.min(6, rect.width / 4, rect.height / 4);
+    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    const points = [[cx, cy], [rect.left + insetHit, cy], [rect.right - insetHit, cy],
+        [cx, rect.top + insetHit], [cx, rect.bottom - insetHit]];
+    try {
+        for (const [x, y] of points) {
+            const hit = document.elementFromPoint(x, y);
+            if (!hit || hit !== button && !(typeof button.contains === "function" && button.contains(hit))) {
+                return fail();
+            }
+        }
+    } catch (error) { return fail(); }
+    return true;
+}
+
+function failEnglishTyphoonsImageTTSSequence(trigger) {
+    if (englishTTSState.imageTextSequenceTrigger === trigger) {
+        cancelEnglishImageTTSImageTextSequence(true);
+    }
+    setEnglishTTSStatus("Typhoons & Tropical Storms：沒有可見、位於圖片外且可實際點擊的 Stop 位置，朗讀已拒絕或取消。");
+    updateEnglishTTSControls();
+    return false;
+}
+
+function watchEnglishTyphoonsImageTTSViewport(trigger, wrapper, generation) {
+    const check = () => {
+        if (generation !== englishTTSState.imageTextSequenceGeneration ||
+            englishTTSState.imageTextSequenceTrigger !== trigger) return;
+        const panel = trigger._englishImageTTSImageTextActivePanel;
+        const item = trigger._englishImageTTSImageTextActiveItem;
+        if (!placeEnglishTyphoonsImageTTSStopButton(
+            getEnglishTTSFloatingStopButton(), wrapper,
+            trigger._englishImageTTSImageTextRecord, panel, item)) {
+            failEnglishTyphoonsImageTTSSequence(trigger);
+        }
+    };
+    const visual = window.visualViewport;
+    const targets = [[window, "scroll", true], [window, "resize", false],
+        [window, "orientationchange", false], [document, "scroll", true]];
+    if (visual) targets.push([visual, "scroll", false], [visual, "resize", false]);
+    targets.forEach(([target, type, capture]) => {
+        if (target && typeof target.addEventListener === "function") {
+            target.addEventListener(type, check, capture);
+        }
+    });
+    englishTTSState.typhoonsViewportCleanup = () => {
+        targets.forEach(([target, type, capture]) => {
+            if (target && typeof target.removeEventListener === "function") {
+                target.removeEventListener(type, check, capture);
+            }
+        });
+    };
+}
+
+
 function failEnglishHumanHealthNutritionImageTTSSequence(trigger) {
     const active = englishTTSState.imageTextSequenceTrigger === trigger;
     if (active) cancelEnglishImageTTSImageTextSequence(true);
@@ -4763,6 +4917,13 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
         wrapper.dataset.imageTtsAssetFile !== record.assetFile ||
         (typeof wrapper.contains === "function" && !wrapper.contains(trigger))) {
         return false;
+    }
+    const isTyphoonsImageText = record.imageId === ENGLISH_TYPHOONS_IMAGE_ID &&
+        record.assetFile === ENGLISH_TYPHOONS_ASSET_FILE;
+    if (isTyphoonsImageText) {
+        return placeEnglishTyphoonsImageTTSStopButton(
+            button, wrapper, validatedRecord, safePanel, safeItem
+        );
     }
     const isHumanHealthNutritionImageText =
         record.imageId === "human-health-and-nutrition-basics" &&
@@ -5189,7 +5350,8 @@ function updateEnglishTTSControls() {
                 floatingStopButton.classList.contains("is-image-tts-image-text-stop-control") ||
                 floatingStopButton.classList.contains("is-image-tts-karst-stop-control") ||
                 floatingStopButton.classList.contains("is-image-tts-animals-adaptation-stop-control") ||
-                floatingStopButton.classList.contains("is-image-tts-human-health-stop-control")) {
+                floatingStopButton.classList.contains("is-image-tts-human-health-stop-control") ||
+                floatingStopButton.classList.contains("is-image-tts-typhoons-stop-control")) {
                 resetEnglishTTSFloatingStopButtonStyles(floatingStopButton);
             }
         }
@@ -5255,6 +5417,8 @@ function positionEnglishTTSFloatingStopButton() {
             const isAnimalsAdaptationTrigger =
                 imageTextTrigger._englishImageTTSImageTextRecord &&
                 imageTextTrigger._englishImageTTSImageTextRecord.imageId === "animals-and-adaptation-basics";
+            const isTyphoonsTrigger = imageTextTrigger._englishImageTTSImageTextRecord &&
+                imageTextTrigger._englishImageTTSImageTextRecord.imageId === ENGLISH_TYPHOONS_IMAGE_ID;
             const isHumanHealthNutritionTrigger =
                 imageTextTrigger._englishImageTTSImageTextRecord &&
                 imageTextTrigger._englishImageTTSImageTextRecord.imageId === "human-health-and-nutrition-basics";
@@ -5267,6 +5431,8 @@ function positionEnglishTTSFloatingStopButton() {
                 failEnglishAnimalsAdaptationImageTTSSequence(imageTextTrigger);
             } else if (isHumanHealthNutritionTrigger && isEnglishTTSPlaybackActive()) {
                 failEnglishHumanHealthNutritionImageTTSSequence(imageTextTrigger);
+            } else if (isTyphoonsTrigger && isEnglishTTSPlaybackActive()) {
+                failEnglishTyphoonsImageTTSSequence(imageTextTrigger);
             }
         }
         return;
@@ -5659,8 +5825,9 @@ function cancelEnglishImageTTSImageTextSequence(cancelCurrentUtterance = false) 
     const sequenceTrigger = englishTTSState.imageTextSequenceTrigger;
     const viewportCleanup = englishTTSState.animalsAdaptationViewportCleanup;
     const humanHealthViewportCleanup = englishTTSState.humanHealthViewportCleanup;
+    const typhoonsViewportCleanup = englishTTSState.typhoonsViewportCleanup;
     const hadSequence = Boolean(sequenceTrigger || englishTTSState.imageTextSequenceTimer ||
-        viewportCleanup || humanHealthViewportCleanup);
+        viewportCleanup || humanHealthViewportCleanup || typhoonsViewportCleanup);
     if (!hadSequence) {
         return;
     }
@@ -5671,6 +5838,10 @@ function cancelEnglishImageTTSImageTextSequence(cancelCurrentUtterance = false) 
     if (humanHealthViewportCleanup) {
         englishTTSState.humanHealthViewportCleanup = null;
         humanHealthViewportCleanup();
+    }
+    if (typhoonsViewportCleanup) {
+        englishTTSState.typhoonsViewportCleanup = null;
+        typhoonsViewportCleanup();
     }
     if (englishTTSState.imageTextSequenceTimer) {
         window.clearTimeout(englishTTSState.imageTextSequenceTimer);
@@ -10775,6 +10946,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 
 function isEnglishImageTTSItemText(record, item) {
     if (isEnglishWaterCycleImageTTSItemText(record, item)) return true;
+    if (isEnglishTyphoonsImageTTSItemText(record, item)) return true;
     if (isEnglishHumanHealthNutritionImageTTSItemText(record, item)) return true;
     if (isEnglishMountainsImageTTSItemText(record, item) ||
         isEnglishEnergyTransformationsImageTTSItemText(record, item) ||
@@ -11358,6 +11530,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishTyphoonsImageTTSRecord(record)) return "Typhoons & Tropical Storms";
     if (isEnglishHumanHealthNutritionImageTTSRecord(record)) return "Human Health & Nutrition";
     if (isEnglishAnimalsAdaptationImageTTSRecord(record)) return "Animals & Adaptation";
     if (isEnglishWaterCycleImageTTSRecord(record)) return "Water Cycle";
@@ -14447,6 +14620,189 @@ function getEnglishHumanHealthNutritionImageTextSpeechPause(record, item, segmen
     return item.type === "sentence" ? 500 : 300;
 }
 
+
+const ENGLISH_TYPHOONS_ASSET_FILE =
+    "images/english/typhoons-and-tropical-storms-basics.png";
+const ENGLISH_TYPHOONS_IMAGE_ID = "typhoons-and-tropical-storms-basics";
+
+function getEnglishTyphoonsExpectedPanels() {
+    const b = (x, y, width, height) => ({
+        xPct: x / 1536 * 100, yPct: y / 1024 * 100,
+        widthPct: width / 1536 * 100, heightPct: height / 1024 * 100
+    });
+    const item = (itemId, type, sourceText, bounds, tapRegion = null) => ({
+        itemId, readingOrder: itemId, type, sourceText, ttsText: sourceText,
+        bounds, ...(tapRegion ? { tapRegion } : {})
+    });
+    return [
+        { panelId: 1, readingOrder: 1, bounds: b(4, 4, 761, 507), items: [
+            item(1, "label", "Warm Ocean Water Heats the Air", b(112, 18, 620, 58)),
+            item(2, "sentence", "Warm ocean water\nheats the air,\nso the warm, moist air\nrises.",
+                b(420, 103, 320, 163), b(500, 124, 128, 128))
+        ] },
+        { panelId: 2, readingOrder: 2, bounds: b(773, 4, 759, 507), items: [
+            item(1, "label", "Low Pressure and Growing Storm", b(884, 18, 620, 58)),
+            item(2, "sentence", "The rising warm air\ncreates a low pressure\narea. More warm, moist\nair moves in, and\nthe storm grows\nstronger.",
+                b(1217, 98, 301, 228), b(1360, 145, 128, 128))
+        ] },
+        { panelId: 3, readingOrder: 3, bounds: b(4, 519, 761, 501), items: [
+            item(1, "label", "Strong Winds and Heavy Rain", b(115, 532, 560, 58)),
+            item(2, "sentence", "The storm has\nstrong winds,\nheavy rain,\nand a spiral shape\nwith an eye\nin the center.",
+                b(516, 744, 238, 228), b(580, 790, 128, 128))
+        ] },
+        { panelId: 4, readingOrder: 4, bounds: b(773, 519, 759, 501), items: [
+            item(1, "label", "Moves Across the Ocean and Land", b(884, 532, 620, 58)),
+            item(2, "sentence", "Typhoons usually move\nover the ocean and can\nlater reach land, bringing\nstrong winds and heavy rain.",
+                b(802, 842, 354, 144), b(850, 855, 128, 128))
+        ] }
+    ];
+}
+
+function isEnglishTyphoonsImageTTSRecord(record) {
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_TYPHOONS_ASSET_FILE] : null;
+    return Boolean(record && canonical && record === canonical &&
+        record.imageId === ENGLISH_TYPHOONS_IMAGE_ID &&
+        record.assetFile === ENGLISH_TYPHOONS_ASSET_FILE &&
+        record.contentType === "image-text" &&
+        record.layout === "custom-typhoons-2x2-bubble-menu" &&
+        record.coordinateStatus === "estimated" &&
+        record.overlayRuntimeStatus === "not-tested" &&
+        record.panels === canonical.panels);
+}
+
+function getEnglishTyphoonsImageTextRecord(record, assetFile) {
+    const file = ENGLISH_TYPHOONS_ASSET_FILE;
+    const expected = getEnglishTyphoonsExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const rectKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validRect = value => exact(value, rectKeys) &&
+        rectKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const sameRect = (actual, wanted) => validRect(actual) &&
+        rectKeys.every(key => actual[key] === wanted[key]);
+    const contains = (outer, inner) => validRect(outer) && validRect(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (a, b) => a.xPct < b.xPct + b.widthPct &&
+        a.xPct + a.widthPct > b.xPct && a.yPct < b.yPct + b.heightPct &&
+        a.yPct + a.heightPct > b.yPct;
+    if (!exact(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"]) ||
+        record.imageId !== ENGLISH_TYPHOONS_IMAGE_ID || record.assetFile !== file ||
+        assetFile !== file || typeof imageTTSData === "undefined" ||
+        !imageTTSData || imageTTSData[file] !== record ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-typhoons-2x2-bubble-menu" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 ||
+        record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== 4) return null;
+
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === ENGLISH_TYPHOONS_IMAGE_ID || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_TYPHOONS_IMAGE_ID || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file ||
+        library.length !== 1 || library[0].id !== ENGLISH_TYPHOONS_IMAGE_ID ||
+        library[0].file !== file || library[0].category !== "english") return null;
+
+    const panelBounds = [], bubbleBounds = [], tapRegions = [];
+    let tapCount = 0;
+    for (let p = 0; p < expected.length; p += 1) {
+        const panel = record.panels[p], wantedPanel = expected[p];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== wantedPanel.panelId ||
+            panel.readingOrder !== wantedPanel.readingOrder ||
+            !sameRect(panel.bounds, wantedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== 2) return null;
+        panelBounds.push(panel.bounds);
+        for (let i = 0; i < wantedPanel.items.length; i += 1) {
+            const item = panel.items[i], wanted = wantedPanel.items[i];
+            const hasTap = Object.prototype.hasOwnProperty.call(wanted, "tapRegion");
+            const itemKeys = ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]
+                .concat(hasTap ? ["tapRegion"] : []);
+            if (!exact(item, itemKeys) || item.itemId !== wanted.itemId ||
+                item.readingOrder !== wanted.readingOrder || item.type !== wanted.type ||
+                item.sourceText !== wanted.sourceText || item.ttsText !== item.sourceText ||
+                !sameRect(item.bounds, wanted.bounds) || !contains(panel.bounds, item.bounds) ||
+                !getEnglishTTSUnitText(item.ttsText)) return null;
+            if (hasTap) {
+                if (item.type !== "sentence" || !sameRect(item.tapRegion, wanted.tapRegion) ||
+                    !contains(panel.bounds, item.tapRegion) ||
+                    !contains(item.bounds, item.tapRegion)) return null;
+                for (const width of [528, 540, 600, 768]) {
+                    const height = width * 1024 / 1536;
+                    if (item.tapRegion.widthPct * width / 100 + 1e-7 < 44 ||
+                        item.tapRegion.heightPct * height / 100 + 1e-7 < 44) return null;
+                }
+                bubbleBounds.push(item.bounds);
+                tapRegions.push(item.tapRegion);
+                tapCount += 1;
+            }
+        }
+    }
+    for (let i = 0; i < panelBounds.length; i += 1) {
+        for (let j = i + 1; j < panelBounds.length; j += 1) {
+            if (overlaps(panelBounds[i], panelBounds[j])) return null;
+        }
+    }
+    for (const group of [bubbleBounds, tapRegions]) {
+        for (let i = 0; i < group.length; i += 1) {
+            for (let j = i + 1; j < group.length; j += 1) {
+                if (overlaps(group[i], group[j])) return null;
+            }
+        }
+    }
+    return tapCount === 4 ? record : null;
+}
+
+function isEnglishTyphoonsImageTTSItemText(record, item) {
+    if (!isEnglishTyphoonsImageTTSRecord(record) || !item ||
+        item.sourceText !== item.ttsText) return false;
+    const canonical = imageTTSData[ENGLISH_TYPHOONS_ASSET_FILE];
+    const safe = canonical && getEnglishTyphoonsImageTextRecord(canonical, ENGLISH_TYPHOONS_ASSET_FILE);
+    return Boolean(safe && record.panels === safe.panels &&
+        safe.panels.some(panel => panel.items.includes(item)));
+}
+
+function getEnglishTyphoonsImageTextSpeechSegments(record, item) {
+    if (!isEnglishTyphoonsImageTTSItemText(record, item)) return null;
+    const panel = record.panels.find(candidate => candidate.items.includes(item));
+    if (!panel) return null;
+    if (item.type === "label") return [item.ttsText];
+    const expected = {
+        1: ["Warm ocean water heats the air, so the warm, moist air rises."],
+        2: ["The rising warm air creates a low pressure area.",
+            "More warm, moist air moves in, and the storm grows stronger."],
+        3: ["The storm has strong winds, heavy rain, and a spiral shape with an eye in the center."],
+        4: ["Typhoons usually move over the ocean and can later reach land, bringing strong winds and heavy rain."]
+    };
+    return item.type === "sentence" && expected[panel.panelId]
+        ? expected[panel.panelId].slice() : null;
+}
+
+function getEnglishTyphoonsImageTextSpeechPause(record, item, segmentIndex) {
+    const segments = getEnglishTyphoonsImageTextSpeechSegments(record, item);
+    if (!segments || !Number.isInteger(segmentIndex) ||
+        segmentIndex < 0 || segmentIndex >= segments.length) return null;
+    if (item.type === "label") return 300;
+    return item.type === "sentence" ? 500 : null;
+}
+
 function isEnglishAnimalsWildlifeImageTTSRecord(record) {
     const file="images/english/animals-wildlife-basics.png";
     const canonical=typeof imageTTSData!=="undefined"&&imageTTSData?imageTTSData[file]:null;
@@ -14685,6 +15041,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_TYPHOONS_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_TYPHOONS_IMAGE_ID ||
+            record.assetFile === ENGLISH_TYPHOONS_ASSET_FILE)) {
+        return getEnglishTyphoonsImageTextRecord(record, assetFile);
+    }
     const humanHealthFile = "images/english/human-health-and-nutrition-basics.png";
     if (assetFile === humanHealthFile || record &&
         (record.imageId === "human-health-and-nutrition-basics" || record.assetFile === humanHealthFile)) {
@@ -17132,8 +17493,296 @@ function layoutEnglishHumanHealthNutritionImageTTSHitAreas(wrapper) {
     return enabledCount > 0;
 }
 
+
+function layoutEnglishTyphoonsImageTTSHitAreas(wrapper) {
+    const file = ENGLISH_TYPHOONS_ASSET_FILE;
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    const hide = button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+    };
+    const failAll = () => {
+        buttons.forEach(hide);
+        if (englishImageTTSOverlayState.activeTrigger &&
+            wrapper && wrapper.contains(englishImageTTSOverlayState.activeTrigger)) {
+            closeEnglishImageTTSMenu();
+        }
+        return false;
+    };
+    if (!wrapper || !wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== file) {
+        return failAll();
+    }
+    if (!image) return failAll();
+    if (image.getAttribute("src") !== file) return failAll();
+    if (!image.complete) return failAll();
+    if (image.naturalWidth !== 1536 || image.naturalHeight !== 1024) {
+        return failAll();
+    }
+    if (buttons.length !== 4) return failAll();
+    if (isEnglishImageTTSDrawingMode()) return failAll();
+    if (typeof document.elementFromPoint !== "function") return failAll();
+
+    const record = getEnglishImageTTSRecord(file);
+    let imageRect, wrapperRect;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+    } catch (error) { return failAll(); }
+    const finiteRect = rect => rect &&
+        ["left", "top", "right", "bottom", "width", "height"].every(key =>
+            Number.isFinite(rect[key])) && rect.width > 0 && rect.height > 0;
+    if (!record || !isEnglishTyphoonsImageTTSRecord(record) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024 ||
+        !finiteRect(imageRect) || !finiteRect(wrapperRect) ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 ||
+        Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 ||
+        Math.abs(imageRect.height - wrapperRect.height) > 1 ||
+        Math.abs(imageRect.height - imageRect.width * 1024 / 1536) >
+            Math.max(0.5, imageRect.height * 0.005)) return failAll();
+    const toRect = bounds => ({
+        left: imageRect.left + imageRect.width * bounds.xPct / 100,
+        top: imageRect.top + imageRect.height * bounds.yPct / 100,
+        right: imageRect.left + imageRect.width * (bounds.xPct + bounds.widthPct) / 100,
+        bottom: imageRect.top + imageRect.height * (bounds.yPct + bounds.heightPct) / 100
+    });
+    const contains = (outer, inner, tolerance = 0.75) =>
+        inner.left >= outer.left - tolerance && inner.top >= outer.top - tolerance &&
+        inner.right <= outer.right + tolerance && inner.bottom <= outer.bottom + tolerance;
+    const overlaps = (a, b) => a.left < b.right && a.right > b.left &&
+        a.top < b.bottom && a.bottom > b.top;
+    const cssPercentMatches = (value, expected) => {
+        if (typeof value !== "string" || !Number.isFinite(expected)) return false;
+        const normalized = value.trim();
+        if (!/^(?:\d+(?:\.\d*)?|\.\d+)%$/.test(normalized)) return false;
+        const actual = Number(normalized.slice(0, -1));
+        return Number.isFinite(actual) && Math.abs(actual - expected) <= 1e-5;
+    };
+    const entries = record.panels.map(panel => ({ panel, item: panel.items[1] }));
+    if (entries.length !== 4 || entries.some(entry => !entry.item || !entry.item.tapRegion)) {
+        return failAll();
+    }
+    const byKey = new Map();
+    for (const button of buttons) {
+        const key = button.getAttribute("data-image-tts-panel-id") + ":" +
+            button.getAttribute("data-image-tts-item-id");
+        if (byKey.has(key)) return failAll();
+        byKey.set(key, button);
+    }
+    const candidates = [];
+    for (const { panel, item } of entries) {
+        const button = byKey.get(String(panel.panelId) + ":" + String(item.itemId));
+        const expectedRect = toRect(item.tapRegion);
+        const panelRect = toRect(panel.bounds);
+        if (!button || !isEnglishTyphoonsImageTTSItemText(record, item) ||
+            button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== panel ||
+            button._englishImageTTSImageTextItem !== item ||
+            !button.style ||
+            !cssPercentMatches(button.style.left, item.tapRegion.xPct) ||
+            !cssPercentMatches(button.style.top, item.tapRegion.yPct) ||
+            !cssPercentMatches(button.style.width, item.tapRegion.widthPct) ||
+            !cssPercentMatches(button.style.height, item.tapRegion.heightPct) ||
+            expectedRect.right - expectedRect.left + 1e-7 < 44 ||
+            expectedRect.bottom - expectedRect.top + 1e-7 < 44 ||
+            !contains(imageRect, expectedRect) || !contains(panelRect, expectedRect)) return failAll();
+        candidates.push({ button, panel, item, expectedRect, panelRect });
+    }
+    if (byKey.size !== 4 || candidates.length !== 4) return failAll();
+    for (let i = 0; i < candidates.length; i += 1) {
+        for (let j = i + 1; j < candidates.length; j += 1) {
+            if (overlaps(candidates[i].expectedRect, candidates[j].expectedRect)) return failAll();
+        }
+    }
+    const saved = new Map();
+    for (const { button } of candidates) {
+        if (!button.style) return failAll();
+        saved.set(button, {
+            visibility: button.style.visibility, opacity: button.style.opacity,
+            pointerEvents: button.style.pointerEvents
+        });
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.visibility = "visible";
+        button.style.opacity = "0";
+        button.style.pointerEvents = "auto";
+    }
+    const visual = window.visualViewport;
+    const viewportRect = visual
+        ? { left: visual.offsetLeft, top: visual.offsetTop,
+            right: visual.offsetLeft + visual.width, bottom: visual.offsetTop + visual.height }
+        : { left: 0, top: 0,
+            right: document.documentElement && document.documentElement.clientWidth || window.innerWidth,
+            bottom: document.documentElement && document.documentElement.clientHeight || window.innerHeight };
+    if (![viewportRect.left, viewportRect.top, viewportRect.right, viewportRect.bottom].every(Number.isFinite) ||
+        viewportRect.right <= viewportRect.left || viewportRect.bottom <= viewportRect.top) return failAll();
+
+    const menu = englishImageTTSOverlayState.menu;
+    let visibleAppMenu = false;
+    if (menu && englishImageTTSOverlayState.activeTrigger && menu.id === "english-image-tts-menu" &&
+        !menu.hidden && menu.isConnected !== false) {
+        try {
+            const style = window.getComputedStyle(menu);
+            visibleAppMenu = Boolean(style && style.display !== "none" &&
+                style.visibility === "visible" && style.pointerEvents !== "none");
+        } catch (error) { visibleAppMenu = false; }
+    }
+    const visiblePoints = rect => {
+        const left = Math.max(rect.left, viewportRect.left);
+        const top = Math.max(rect.top, viewportRect.top);
+        const right = Math.min(rect.right, viewportRect.right);
+        const bottom = Math.min(rect.bottom, viewportRect.bottom);
+        const width = right - left, height = bottom - top;
+        if (width < 44 || height < 44) return null;
+        const insetX = Math.min(6, width / 4), insetY = Math.min(6, height / 4);
+        const cx = (left + right) / 2, cy = (top + bottom) / 2;
+        return [[cx, cy], [left + insetX, cy], [right - insetX, cy],
+            [cx, top + insetY], [cx, bottom - insetY]];
+    };
+    const hitTest = (button, rect) => {
+        const points = visiblePoints(rect);
+        if (!points) return null;
+        let allPassed = true;
+        try {
+            for (const [x, y] of points) {
+                const hit = document.elementFromPoint(x, y);
+                let allowed = hit === button || button.contains(hit);
+                if (!allowed) {
+                    const appMenuCoversSelectedTrigger = visibleAppMenu &&
+                        englishImageTTSOverlayState.activeTrigger === button &&
+                        (hit === menu || menu.contains(hit));
+                    allowed = appMenuCoversSelectedTrigger;
+                }
+                if (!allowed) allPassed = false;
+            }
+        } catch (error) {
+            allPassed = false;
+        }
+        return allPassed;
+    };
+    const staged = new Map(), measured = [];
+    const hasHiddenAncestor = element => {
+        let ancestor = element && element.parentElement;
+        while (ancestor) {
+            if (ancestor.hidden || (typeof ancestor.hasAttribute === "function" &&
+                ancestor.hasAttribute("hidden"))) return true;
+            const ancestorStyle = window.getComputedStyle(ancestor);
+            if (ancestorStyle && ancestorStyle.display === "none") return true;
+            ancestor = ancestor.parentElement;
+        }
+        return false;
+    };
+    try {
+        for (const candidate of candidates) {
+            const { button, expectedRect, panelRect } = candidate;
+            const style = window.getComputedStyle(button);
+            const rect = button.getBoundingClientRect();
+            if (button.hidden || !button.disabled || !style ||
+                style.display === "none" || style.visibility !== "visible" ||
+                style.pointerEvents === "none" || Number(style.opacity) !== 0 ||
+                !finiteRect(rect) || rect.width + 1e-7 < 44 || rect.height + 1e-7 < 44 ||
+                !contains(imageRect, rect) || !contains(panelRect, rect) ||
+                ["left", "top", "right", "bottom"].some(key =>
+                    Math.abs(rect[key] - expectedRect[key]) > 1)) return failAll();
+            const ownControls = document.querySelectorAll(
+                ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+                ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+                "#english-tts-speak-selection:not([hidden]), button:not(#english-tts-floating-stop), " +
+                "[role='button'], input, select, textarea"
+            );
+            let obstructed = false;
+            for (const element of ownControls) {
+                if (!element || element === button || wrapper.contains(element) ||
+                    element.hidden) continue;
+                const controlStyle = window.getComputedStyle(element);
+                if (!controlStyle || controlStyle.display === "none" ||
+                    controlStyle.visibility === "hidden" || controlStyle.visibility === "collapse") continue;
+                const controlRect = element.getBoundingClientRect();
+                const numericRect = controlRect &&
+                    ["left", "top", "right", "bottom", "width", "height"]
+                        .every(key => Number.isFinite(controlRect[key]));
+                const isExactZeroRect = Boolean(numericRect &&
+                    controlRect.width === 0 && controlRect.height === 0 &&
+                    controlRect.right === controlRect.left &&
+                    controlRect.bottom === controlRect.top);
+                // A hidden ancestor makes this finite, exact 0×0 box non-visible.
+                if (isExactZeroRect && hasHiddenAncestor(element)) {
+                    continue;
+                }
+                if (!finiteRect(controlRect)) return failAll();
+                const isSelectedMenu = visibleAppMenu &&
+                    englishImageTTSOverlayState.activeTrigger === button &&
+                    (element === menu || menu.contains(element));
+                if (!isSelectedMenu && overlaps(rect, controlRect)) {
+                    obstructed = true;
+                }
+            }
+            measured.push({ ...candidate, rect, obstructed });
+            staged.set(button, obstructed ? false : hitTest(button, rect));
+        }
+    } catch (error) { return failAll(); }
+    saved.forEach((style, button) => {
+        button.style.visibility = style.visibility;
+        button.style.opacity = style.opacity;
+        button.style.pointerEvents = style.pointerEvents;
+    });
+    const finalRects = new Map();
+    try {
+        for (const candidate of measured) {
+            const { button, expectedRect, panelRect } = candidate;
+            const style = window.getComputedStyle(button);
+            const rect = button.getBoundingClientRect();
+            if (button.hidden || !button.disabled || !style || style.display === "none" ||
+                style.visibility === "hidden" || style.pointerEvents === "none" ||
+                !finiteRect(rect) || rect.width + 1e-7 < 44 || rect.height + 1e-7 < 44 ||
+                !contains(imageRect, rect) || !contains(panelRect, rect) ||
+                ["left", "top", "right", "bottom"].some(key =>
+                    Math.abs(rect[key] - expectedRect[key]) > 1)) return failAll();
+            finalRects.set(button, rect);
+        }
+    } catch (error) { return failAll(); }
+    for (let i = 0; i < measured.length; i += 1) {
+        for (let j = i + 1; j < measured.length; j += 1) {
+            if (overlaps(finalRects.get(measured[i].button), finalRects.get(measured[j].button))) {
+                return failAll();
+            }
+        }
+    }
+    let enabled = 0, closeBlockedMenu = false;
+    for (const candidate of measured) {
+        const ok = !candidate.obstructed && staged.get(candidate.button) === true &&
+            hitTest(candidate.button, finalRects.get(candidate.button)) === true;
+        if (ok) {
+            candidate.button.hidden = false;
+            candidate.button.disabled = false;
+            candidate.button.setAttribute("aria-disabled", "false");
+            enabled += 1;
+        } else {
+            hide(candidate.button);
+            if (englishImageTTSOverlayState.activeTrigger === candidate.button) closeBlockedMenu = true;
+        }
+    }
+    saved.clear();
+    if (closeBlockedMenu) closeEnglishImageTTSMenu();
+    return enabled > 0;
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
+    if (wrapper && wrapper.dataset &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_TYPHOONS_ASSET_FILE) {
+        layoutEnglishTyphoonsImageTTSHitAreas(wrapper);
+        return;
+    }
     if (!wrapper) {
+        return;
+    }
+    if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_TYPHOONS_ASSET_FILE) {
+        layoutEnglishTyphoonsImageTTSHitAreas(wrapper);
         return;
     }
     if (wrapper.dataset &&
@@ -17176,19 +17825,23 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record) {
     button.hidden = true;
     const isFullTitleImageText = isEnglishImageTTSFullTitleImageTextRecord(record);
     const panelLabel = getEnglishImageTTSImageTextPanelLabel(record, panel);
+    const isTyphoonsBubble = isEnglishTyphoonsImageTTSRecord(record) &&
+        panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 2;
     const isHumanHealthBubble = isEnglishHumanHealthNutritionImageTTSRecord(record) &&
         panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 2;
     const isAnimalsAdaptationBubble = isEnglishAnimalsAdaptationImageTTSRecord(record) &&
         panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 2;
-    button.setAttribute("aria-label", isHumanHealthBubble
-        ? "第 " + panel.panelId + " 格泡泡：" + item.sourceText + "，開啟泡泡朗讀選項"
-        : (isAnimalsAdaptationBubble
+    button.setAttribute("aria-label", isTyphoonsBubble
+        ? "Typhoons & Tropical Storms 第 " + panel.panelId + " 格泡泡，開啟朗讀選項"
+        : (isHumanHealthBubble
             ? "第 " + panel.panelId + " 格泡泡：" + item.sourceText + "，開啟泡泡朗讀選項"
-            : (isFullTitleImageText
-                ? panelLabel + "第 " + item.readingOrder + " 項原圖文字：" +
-                    item.sourceText + "，開啟朗讀選項"
-                : "第 " + panel.panelId + " 格第 " + item.readingOrder +
-                    " 項原圖文字：" + item.sourceText + "，開啟本格朗讀選項")));
+            : (isAnimalsAdaptationBubble
+                ? "第 " + panel.panelId + " 格泡泡：" + item.sourceText + "，開啟泡泡朗讀選項"
+                : (isFullTitleImageText
+                    ? panelLabel + "第 " + item.readingOrder + " 項原圖文字：" +
+                        item.sourceText + "，開啟朗讀選項"
+                    : "第 " + panel.panelId + " 格第 " + item.readingOrder +
+                        " 項原圖文字：" + item.sourceText + "，開啟本格朗讀選項"))));
     button.setAttribute("aria-haspopup", "true");
     button.setAttribute("aria-expanded", "false");
     button.setAttribute("aria-controls", "english-image-tts-menu");
@@ -17207,7 +17860,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record) {
     button.addEventListener("click", event => {
         event.stopPropagation();
         if (((isEnglishAnimalsAdaptationImageTTSRecord(record) ||
-            isEnglishHumanHealthNutritionImageTTSRecord(record)) && button.hidden) ||
+            isEnglishHumanHealthNutritionImageTTSRecord(record) ||
+            isEnglishTyphoonsImageTTSRecord(record)) && button.hidden) ||
             button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
             return;
         }
@@ -17969,6 +18623,35 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
                 return;
             }
 
+            if (isEnglishTyphoonsImageTTSRecord(record)) {
+                const hasExpectedDimensions = () => image.getAttribute("src") === ENGLISH_TYPHOONS_ASSET_FILE &&
+                    image.complete && image.naturalWidth === 1536 && image.naturalHeight === 1024;
+                const hideTyphoonsHitAreas = () => {
+                    wrapper.querySelectorAll(".image-tts-image-text-hit-area").forEach(button => {
+                        button.hidden = true;
+                        button.disabled = true;
+                        button.setAttribute("aria-disabled", "true");
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+                };
+                if (image.complete && !hasExpectedDimensions()) {
+                    hideTyphoonsHitAreas();
+                    return;
+                }
+                record.panels.forEach(panel => panel.items.forEach(item => {
+                    if (item.tapRegion &&
+                        createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record)) added += 1;
+                }));
+                image.addEventListener("load", () => {
+                    if (!hasExpectedDimensions()) { hideTyphoonsHitAreas(); return; }
+                    layoutEnglishTyphoonsImageTTSHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", () => hideTyphoonsHitAreas(), { once: true });
+                layoutEnglishTyphoonsImageTTSHitAreas(wrapper);
+                return;
+            }
+
             if (isEnglishHumanHealthNutritionImageTTSRecord(record)) {
                 const expectedFile = "images/english/human-health-and-nutrition-basics.png";
                 const expectedDimensions = () => image.getAttribute("src") === expectedFile &&
@@ -18372,6 +19055,15 @@ function scheduleEnglishImageTTSLayout() {
     if (englishImageTTSOverlayState.humanHealthLayoutSettleTimer) {
         window.clearTimeout(englishImageTTSOverlayState.humanHealthLayoutSettleTimer);
     }
+    if (englishImageTTSOverlayState.typhoonsLayoutSettleTimer) {
+        window.clearTimeout(englishImageTTSOverlayState.typhoonsLayoutSettleTimer);
+    }
+    englishImageTTSOverlayState.typhoonsLayoutSettleTimer = window.setTimeout(() => {
+        englishImageTTSOverlayState.typhoonsLayoutSettleTimer = 0;
+        document.querySelectorAll(
+            '#ai-response .image-tts-overlay-wrapper[data-image-tts-asset-file="images/english/typhoons-and-tropical-storms-basics.png"]'
+        ).forEach(wrapper => layoutEnglishTyphoonsImageTTSHitAreas(wrapper));
+    }, 160);
     englishImageTTSOverlayState.humanHealthLayoutSettleTimer = window.setTimeout(() => {
         englishImageTTSOverlayState.humanHealthLayoutSettleTimer = 0;
         document.querySelectorAll(
@@ -18394,6 +19086,9 @@ function scheduleEnglishImageTTSLayout() {
             if (wrapper.dataset &&
                 wrapper.dataset.imageTtsAssetFile === "images/english/animals-and-adaptation-basics.png") {
                 layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper);
+            }
+            if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_TYPHOONS_ASSET_FILE) {
+                layoutEnglishTyphoonsImageTTSHitAreas(wrapper);
             }
             if (wrapper.dataset &&
                 wrapper.dataset.imageTtsAssetFile === "images/english/human-health-and-nutrition-basics.png") {
@@ -18452,6 +19147,9 @@ function syncEnglishImageTTSDrawingMode() {
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === "images/english/animals-and-adaptation-basics.png") {
             layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper);
+        }
+        if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_TYPHOONS_ASSET_FILE) {
+            layoutEnglishTyphoonsImageTTSHitAreas(wrapper);
         }
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === "images/english/human-health-and-nutrition-basics.png") {
@@ -18674,6 +19372,12 @@ function getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item) {
  return [item.ttsText];
 }
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishTyphoonsImageTTSItemText(record, item)) {
+        return getEnglishTTSUnitText(item.ttsText);
+    }
+    if (isEnglishHumanHealthNutritionImageTTSItemText(record, item)) {
+        return getEnglishTTSUnitText(item.ttsText);
+    }
     if (isEnglishHumanHealthNutritionImageTTSItemText(record, item)) {
         const panel = record.panels.find(candidate => candidate.items.includes(item));
         if (panel && panel.panelId === 0 && item.itemId === 2) {
@@ -18931,6 +19635,15 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "circulatory-system-basics" &&
         record.assetFile === "images/english/circulatory-system-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isTyphoonsImageText = Boolean(record && isEnglishTyphoonsImageTTSRecord(record));
+    const isTyphoonsSingleItemSequence = Boolean(isTyphoonsImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const typhoonsImage = isTyphoonsImageText ? wrapper.querySelector("img") : null;
+    const typhoonsImageReady = !isTyphoonsImageText || Boolean(
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_TYPHOONS_ASSET_FILE &&
+        typhoonsImage && typhoonsImage.getAttribute("src") === ENGLISH_TYPHOONS_ASSET_FILE &&
+        typhoonsImage.complete && typhoonsImage.naturalWidth === 1536 &&
+        typhoonsImage.naturalHeight === 1024);
     const isHumanHealthNutritionImageText = Boolean(
         record && isEnglishHumanHealthNutritionImageTTSRecord(record)
     );
@@ -18993,6 +19706,11 @@ function speakEnglishImageTTSImageTextSequence(
                             : getEnglishSimpleMachinesImageTextSpeechSegments(record, item))))))
                 : null
         })));
+    if (isTyphoonsImageText) {
+        playbackSteps.forEach(step => {
+            step.speechSegments = getEnglishTyphoonsImageTextSpeechSegments(record, step.item);
+        });
+    }
     if (isHumanHealthNutritionImageText) {
         playbackSteps.forEach(step => {
             step.speechSegments = getEnglishHumanHealthNutritionImageTextSpeechSegments(record, step.item);
@@ -19025,6 +19743,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isAnimalsWildlifeSingleItemSequence &&
             !isAnimalsAdaptationSingleItemSequence &&
             !isHumanHealthNutritionSingleItemSequence &&
+            !isTyphoonsSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
             !isHumanBodyHowItWorksSingleItemSequence) ||
         itemList.some(item => !item ||
@@ -19033,7 +19752,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady || !mountainsReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
-        !animalsAdaptationImageReady || !humanHealthImageReady ||
+        !animalsAdaptationImageReady || !humanHealthImageReady || !typhoonsImageReady ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
@@ -19049,6 +19768,9 @@ function speakEnglishImageTTSImageTextSequence(
     englishTTSState.imageTextSequenceTrigger = trigger;
     if (isAnimalsAdaptationImageText) {
         watchEnglishAnimalsAdaptationImageTTSViewport(trigger, wrapper, generation);
+    }
+    if (isTyphoonsImageText) {
+        watchEnglishTyphoonsImageTTSViewport(trigger, wrapper, generation);
     }
     if (isHumanHealthNutritionImageText) {
         watchEnglishHumanHealthNutritionImageTTSViewport(trigger, wrapper, generation);
@@ -19080,6 +19802,10 @@ function speakEnglishImageTTSImageTextSequence(
         }
         trigger._englishImageTTSImageTextActivePanel = itemPanel;
         trigger._englishImageTTSImageTextActiveItem = item;
+        if (isTyphoonsImageText &&
+            !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+            return failEnglishTyphoonsImageTTSSequence(trigger);
+        }
         if (isHumanHealthNutritionImageText &&
             !placeEnglishImageTTSImageTextStopButton(
                 getEnglishTTSFloatingStopButton(), wrapper
@@ -19129,6 +19855,10 @@ function speakEnglishImageTTSImageTextSequence(
             if (generation !== englishTTSState.imageTextSequenceGeneration) return false;
             if (isWaterCycleImageText &&
                 !ensureEnglishWaterCycleImageTTSStopPosition(trigger, wrapper)) return false;
+            if (isTyphoonsImageText &&
+                !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+                return failEnglishTyphoonsImageTTSSequence(trigger);
+            }
             if (isHumanHealthNutritionImageText &&
                 !placeEnglishImageTTSImageTextStopButton(
                     getEnglishTTSFloatingStopButton(), wrapper
@@ -19141,7 +19871,7 @@ function speakEnglishImageTTSImageTextSequence(
                 )) {
                 return failEnglishAnimalsAdaptationImageTTSSequence(trigger);
             }
-            if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText) &&
+            if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText || isTyphoonsImageText) &&
                 !getSelectedLocalEnglishVoice()) {
                 cancelEnglishImageTTSImageTextSequence(true);
                 setEnglishTTSStatus("本機英文聲線尚未載入；iPad Safari 可能仍在載入，請稍後再次點選朗讀。此功能只使用本機英文聲線。");
@@ -19152,6 +19882,11 @@ function speakEnglishImageTTSImageTextSequence(
                 if (generation !== englishTTSState.imageTextSequenceGeneration) return;
                 if (isWaterCycleImageText &&
                     !ensureEnglishWaterCycleImageTTSStopPosition(trigger, wrapper)) return;
+                if (isTyphoonsImageText &&
+                    !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+                    failEnglishTyphoonsImageTTSSequence(trigger);
+                    return;
+                }
                 if (isHumanHealthNutritionImageText &&
                     !placeEnglishImageTTSImageTextStopButton(
                         getEnglishTTSFloatingStopButton(), wrapper
@@ -19173,7 +19908,9 @@ function speakEnglishImageTTSImageTextSequence(
                 if (speechSegmentIndex + 1 < speechSegments.length) {
                     const previousSpeechSegmentIndex = speechSegmentIndex;
                     speechSegmentIndex += 1;
-                    const delay = isHumanHealthNutritionImageText
+                    const delay = isTyphoonsImageText
+                        ? getEnglishTyphoonsImageTextSpeechPause(record, item, previousSpeechSegmentIndex)
+                        : (isHumanHealthNutritionImageText
                         ? getEnglishHumanHealthNutritionImageTextSpeechPause(
                             record, item, previousSpeechSegmentIndex
                         )
@@ -19181,12 +19918,14 @@ function speakEnglishImageTTSImageTextSequence(
                             ? getEnglishAnimalsAdaptationImageTextSpeechPause(
                                 record, item, previousSpeechSegmentIndex
                             )
-                            : 500);
+                            : 500));
                     if (delay !== 300 && delay !== 500) {
                         cancelEnglishImageTTSImageTextSequence(true);
-                        setEnglishTTSStatus(isHumanHealthNutritionImageText
+                        setEnglishTTSStatus(isTyphoonsImageText
+                            ? "Typhoons & Tropical Storms：朗讀段落類型無法確認，已取消。"
+                            : (isHumanHealthNutritionImageText
                             ? "Human Health & Nutrition：朗讀段落類型無法確認，已取消。"
-                            : "Animals & Adaptation：朗讀段落類型無法確認，已取消。");
+                            : "Animals & Adaptation：朗讀段落類型無法確認，已取消。"));
                         updateEnglishTTSControls();
                         return;
                     }
@@ -19199,11 +19938,15 @@ function speakEnglishImageTTSImageTextSequence(
                         }
                         playSpeechSegment();
                     }, delay);
-                    setEnglishTTSStatus(delay === 500
+                    setEnglishTTSStatus(isTyphoonsImageText
+                        ? (delay === 500
+                            ? "Typhoons & Tropical Storms 朗讀中，完整句子間停頓 0.5 秒。"
+                            : "Typhoons & Tropical Storms：短標題後停頓 0.3 秒。")
+                        : (delay === 500
                         ? "原圖文字朗讀中，單一文字區內完整句後停頓 0.5 秒。"
                         : (isHumanHealthNutritionImageText
                             ? "Human Health & Nutrition：標題或短片語後停頓 0.3 秒。"
-                            : "Animals & Adaptation：動物名稱後停頓 0.3 秒。"));
+                            : "Animals & Adaptation：動物名稱後停頓 0.3 秒。")));
                     updateEnglishTTSControls();
                     return;
                 }
@@ -19214,14 +19957,18 @@ function speakEnglishImageTTSImageTextSequence(
                     finishSequence();
                     return;
                 }
-                const delay = isAnimalsAdaptationImageText
+                const delay = isTyphoonsImageText
+                    ? getEnglishTyphoonsImageTextSpeechPause(record, previousItem, previousSpeechSegmentIndex)
+                    : (isAnimalsAdaptationImageText
                     ? getEnglishAnimalsAdaptationImageTextSpeechPause(
                         record, previousItem, previousSpeechSegmentIndex
                     )
-                    : previousItem.type === "sentence" ? 500 : 300;
+                    : previousItem.type === "sentence" ? 500 : 300);
                 if (delay !== 300 && delay !== 500) {
                     cancelEnglishImageTTSImageTextSequence(true);
-                    setEnglishTTSStatus("Animals & Adaptation：朗讀段落類型無法確認，已取消。");
+                    setEnglishTTSStatus(isTyphoonsImageText
+                        ? "Typhoons & Tropical Storms：朗讀段落類型無法確認，已取消。"
+                        : "Animals & Adaptation：朗讀段落類型無法確認，已取消。");
                     updateEnglishTTSControls();
                     return;
                 }
@@ -19230,9 +19977,13 @@ function speakEnglishImageTTSImageTextSequence(
                     if (generation !== englishTTSState.imageTextSequenceGeneration) return;
                     playNext();
                 }, delay);
-                setEnglishTTSStatus(delay === 500
-                    ? "原圖文字朗讀中，完整句後停頓 0.5 秒。"
-                    : "原圖文字朗讀中，標籤或片語後停頓 0.3 秒。");
+                setEnglishTTSStatus(isTyphoonsImageText
+                    ? (delay === 500
+                        ? "Typhoons & Tropical Storms 朗讀中，完整句子間停頓 0.5 秒。"
+                        : "Typhoons & Tropical Storms：短標題後停頓 0.3 秒。")
+                    : (delay === 500
+                        ? "原圖文字朗讀中，完整句後停頓 0.5 秒。"
+                        : "原圖文字朗讀中，標籤或片語後停頓 0.3 秒。"));
                 updateEnglishTTSControls();
             }, true, () => {
                 if (generation === englishTTSState.imageTextSequenceGeneration) {
@@ -19241,7 +19992,7 @@ function speakEnglishImageTTSImageTextSequence(
             }, null, null, null, generation);
             if (!started && generation === englishTTSState.imageTextSequenceGeneration) {
                 cancelEnglishImageTTSImageTextSequence();
-                if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText) &&
+                if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText || isTyphoonsImageText) &&
                     !englishTTSState.voices.length) {
                     setEnglishTTSStatus("本機英文聲線尚未載入；iPad Safari 可能仍在載入，請稍後再次點選朗讀。此功能只使用本機英文聲線。");
                 }
@@ -19433,6 +20184,13 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const mountainsLayoutReady = !isMountainsImageText || Boolean(
         layoutEnglishImageTTSMountainsHitAreas(wrapper) && mountainsButtons.length === 4 &&
         mountainsButtons.includes(trigger) && !trigger.hidden);
+    const isTyphoonsImageText = Boolean(safeRecord && isEnglishTyphoonsImageTTSRecord(safeRecord));
+    const typhoonsImage = isTyphoonsImageText && wrapper ? wrapper.querySelector("img") : null;
+    const typhoonsButtons = isTyphoonsImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
+    const typhoonsLayoutReady = !isTyphoonsImageText || Boolean(
+        layoutEnglishTyphoonsImageTTSHitAreas(wrapper) && typhoonsButtons.length === 4 &&
+        typhoonsButtons.includes(trigger) && !trigger.hidden && !trigger.disabled);
     const isHumanHealthNutritionImageText = Boolean(safeRecord &&
         isEnglishHumanHealthNutritionImageTTSRecord(safeRecord));
     const humanHealthImage = isHumanHealthNutritionImageText && wrapper
@@ -19454,6 +20212,11 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         !safePanel || safePanel !== panel ||
         !panel.items.includes(trigger._englishImageTTSImageTextItem) ||
         wrapper.dataset.imageTtsAssetFile !== safeRecord.assetFile ||
+        (isTyphoonsImageText && (!typhoonsImage ||
+            typhoonsImage.getAttribute("src") !== ENGLISH_TYPHOONS_ASSET_FILE ||
+            !typhoonsImage.complete || typhoonsImage.naturalWidth !== 1536 ||
+            typhoonsImage.naturalHeight !== 1024 || !typhoonsLayoutReady ||
+            typhoonsButtons.length !== 4 || !typhoonsButtons.includes(trigger))) ||
         (isHumanHealthNutritionImageText && (!humanHealthImage ||
             humanHealthImage.getAttribute("src") !== safeRecord.assetFile ||
             !humanHealthImage.complete || humanHealthImage.naturalWidth !== 1536 ||
@@ -19671,6 +20434,44 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         return;
     }
 
+
+
+    if (isEnglishTyphoonsImageTTSRecord(safeRecord)) {
+        const clicked = trigger._englishImageTTSImageTextItem;
+        const allItems = safeRecord.panels.flatMap(candidate => candidate.items);
+        const hitAreas = Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area"));
+        const image = wrapper.querySelector("img");
+        if (!clicked || panel.panelId < 1 || panel.panelId > 4 ||
+            panel.items.length !== 2 || clicked !== panel.items[1] ||
+            !isEnglishTyphoonsImageTTSItemText(safeRecord, clicked) ||
+            !image || image.getAttribute("src") !== ENGLISH_TYPHOONS_ASSET_FILE ||
+            !image.complete || image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+            allItems.length !== 8 ||
+            allItems.some(item => !isEnglishTyphoonsImageTTSItemText(safeRecord, item)) ||
+            hitAreas.length !== 4 || !hitAreas.includes(trigger) || trigger.hidden || trigger.disabled) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const add = (label, description, items, completion) =>
+            menu.appendChild(createEnglishImageTTSMenuButton(label, description, () =>
+                speakEnglishImageTTSImageTextSequence(trigger, items, completion)));
+        menu.setAttribute("aria-label",
+            "Typhoons & Tropical Storms 第 " + panel.panelId + " 格朗讀選項");
+        add("🔊 朗讀此泡泡", "只朗讀所點擊的 Typhoons 原圖英文泡泡",
+            [clicked], "Typhoons & Tropical Storms 泡泡已朗讀完成。");
+        add("🔊 朗讀本格", "依序朗讀本格標題與泡泡",
+            panel.items, "Typhoons & Tropical Storms 第 " + panel.panelId + " 格已朗讀完成。");
+        add("🔊 朗讀全圖", "依 P1 至 P4 順序朗讀四格標題與五個完整句子",
+            allItems, "Typhoons & Tropical Storms 全圖已朗讀完成。");
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
+    }
 
     if (isEnglishHumanHealthNutritionImageTTSRecord(safeRecord)) {
         const clicked = trigger._englishImageTTSImageTextItem;
@@ -21218,6 +22019,10 @@ function closeEnglishImageTTSMenu(restoreFocus = false) {
             if (wrapper.dataset &&
                 wrapper.dataset.imageTtsAssetFile === "images/english/animals-and-adaptation-basics.png") {
                 layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper);
+            }
+            if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === ENGLISH_TYPHOONS_ASSET_FILE) {
+                layoutEnglishTyphoonsImageTTSHitAreas(wrapper);
             }
         });
     }

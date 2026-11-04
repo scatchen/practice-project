@@ -21450,4 +21450,94 @@ const imageTTSData = {
         ]
     },
 
+
+    "images/english/typhoons-and-tropical-storms-basics.png": {
+        imageId: "typhoons-and-tropical-storms-basics",
+        assetFile: "images/english/typhoons-and-tropical-storms-basics.png",
+        contentType: "image-text",
+        layout: "custom-typhoons-2x2-bubble-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1536, height: 1024 },
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 4 / 1536 * 100, yPct: 4 / 1024 * 100,
+                    widthPct: 761 / 1536 * 100, heightPct: 507 / 1024 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Warm Ocean Water Heats the Air",
+                        ttsText: "Warm Ocean Water Heats the Air",
+                        bounds: { xPct: 112 / 1536 * 100, yPct: 18 / 1024 * 100,
+                            widthPct: 620 / 1536 * 100, heightPct: 58 / 1024 * 100 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Warm ocean water\nheats the air,\nso the warm, moist air\nrises.",
+                        ttsText: "Warm ocean water\nheats the air,\nso the warm, moist air\nrises.",
+                        bounds: { xPct: 420 / 1536 * 100, yPct: 103 / 1024 * 100,
+                            widthPct: 320 / 1536 * 100, heightPct: 163 / 1024 * 100 },
+                        tapRegion: { xPct: 500 / 1536 * 100, yPct: 124 / 1024 * 100,
+                            widthPct: 128 / 1536 * 100, heightPct: 128 / 1024 * 100 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 773 / 1536 * 100, yPct: 4 / 1024 * 100,
+                    widthPct: 759 / 1536 * 100, heightPct: 507 / 1024 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Low Pressure and Growing Storm",
+                        ttsText: "Low Pressure and Growing Storm",
+                        bounds: { xPct: 884 / 1536 * 100, yPct: 18 / 1024 * 100,
+                            widthPct: 620 / 1536 * 100, heightPct: 58 / 1024 * 100 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "The rising warm air\ncreates a low pressure\narea. More warm, moist\nair moves in, and\nthe storm grows\nstronger.",
+                        ttsText: "The rising warm air\ncreates a low pressure\narea. More warm, moist\nair moves in, and\nthe storm grows\nstronger.",
+                        bounds: { xPct: 1217 / 1536 * 100, yPct: 98 / 1024 * 100,
+                            widthPct: 301 / 1536 * 100, heightPct: 228 / 1024 * 100 },
+                        tapRegion: { xPct: 1360 / 1536 * 100, yPct: 145 / 1024 * 100,
+                            widthPct: 128 / 1536 * 100, heightPct: 128 / 1024 * 100 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 4 / 1536 * 100, yPct: 519 / 1024 * 100,
+                    widthPct: 761 / 1536 * 100, heightPct: 501 / 1024 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Strong Winds and Heavy Rain",
+                        ttsText: "Strong Winds and Heavy Rain",
+                        bounds: { xPct: 115 / 1536 * 100, yPct: 532 / 1024 * 100,
+                            widthPct: 560 / 1536 * 100, heightPct: 58 / 1024 * 100 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "The storm has\nstrong winds,\nheavy rain,\nand a spiral shape\nwith an eye\nin the center.",
+                        ttsText: "The storm has\nstrong winds,\nheavy rain,\nand a spiral shape\nwith an eye\nin the center.",
+                        bounds: { xPct: 516 / 1536 * 100, yPct: 744 / 1024 * 100,
+                            widthPct: 238 / 1536 * 100, heightPct: 228 / 1024 * 100 },
+                        tapRegion: { xPct: 580 / 1536 * 100, yPct: 790 / 1024 * 100,
+                            widthPct: 128 / 1536 * 100, heightPct: 128 / 1024 * 100 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 773 / 1536 * 100, yPct: 519 / 1024 * 100,
+                    widthPct: 759 / 1536 * 100, heightPct: 501 / 1024 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Moves Across the Ocean and Land",
+                        ttsText: "Moves Across the Ocean and Land",
+                        bounds: { xPct: 884 / 1536 * 100, yPct: 532 / 1024 * 100,
+                            widthPct: 620 / 1536 * 100, heightPct: 58 / 1024 * 100 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Typhoons usually move\nover the ocean and can\nlater reach land, bringing\nstrong winds and heavy rain.",
+                        ttsText: "Typhoons usually move\nover the ocean and can\nlater reach land, bringing\nstrong winds and heavy rain.",
+                        bounds: { xPct: 802 / 1536 * 100, yPct: 842 / 1024 * 100,
+                            widthPct: 354 / 1536 * 100, heightPct: 144 / 1024 * 100 },
+                        tapRegion: { xPct: 850 / 1536 * 100, yPct: 855 / 1024 * 100,
+                            widthPct: 128 / 1536 * 100, heightPct: 128 / 1024 * 100 } }
+                ]
+            }
+        ]
+    },
 };
