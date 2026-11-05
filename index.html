@@ -3389,6 +3389,7 @@ const englishTTSState = {
     animalsAdaptationViewportCleanup: null,
     humanHealthViewportCleanup: null,
     typhoonsViewportCleanup: null,
+    xraysViewportCleanup: null,
     stopPositionFrame: 0,
     responseObserver: null,
     collocationReplayTimer: 0,
@@ -3420,7 +3421,8 @@ const englishImageTTSOverlayState = {
     menuPositionFrame: 0,
     animalsAdaptationLayoutSettleTimer: 0,
     humanHealthLayoutSettleTimer: 0,
-    typhoonsLayoutSettleTimer: 0
+    typhoonsLayoutSettleTimer: 0,
+    xraysLayoutSettleTimer: 0
 };
 
 const ENGLISH_TTS_VOICE_KEY = "practiceProject.englishTTS.voice";
@@ -4774,6 +4776,153 @@ function placeEnglishTyphoonsImageTTSStopButton(button, wrapper, record, panel, 
     return true;
 }
 
+function placeEnglishXRaysImageTTSStopButton(button, wrapper, record, panel, item) {
+    const fail = () => {
+        if (button) { button.hidden = true; button.style.visibility = "hidden"; }
+        return false;
+    };
+    const trigger = englishTTSState.activeSpeechTrigger;
+    const canonical = getEnglishImageTTSRecord(ENGLISH_XRAYS_ASSET_FILE);
+    const image = wrapper && wrapper.querySelector("img");
+    if (!button || !wrapper || wrapper.isConnected === false || !trigger ||
+        !isEnglishXRaysImageTTSRecord(record) || !canonical ||
+        canonical.panels !== record.panels || wrapper.dataset.imageTtsAssetFile !== ENGLISH_XRAYS_ASSET_FILE ||
+        !panel || panel !== record.panels.find(candidate => candidate.panelId === panel.panelId) ||
+        !item || !panel.items.includes(item) ||
+        !isEnglishXRaysImageTTSItemText(record, item) ||
+        trigger._englishImageTTSImageTextRecord.panels !== record.panels ||
+        trigger._englishImageTTSImageTextActivePanel !== panel ||
+        trigger._englishImageTTSImageTextActiveItem !== item ||
+        !image || image.getAttribute("src") !== ENGLISH_XRAYS_ASSET_FILE ||
+        !image.complete || image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+        typeof document.elementFromPoint !== "function") return fail();
+    let imageRect;
+    try { imageRect = image.getBoundingClientRect(); } catch (error) { return fail(); }
+    if (!imageRect || ![imageRect.left, imageRect.top, imageRect.right, imageRect.bottom,
+        imageRect.width, imageRect.height].every(Number.isFinite) ||
+        imageRect.width < 528 || imageRect.height < 352) return fail();
+
+    const avoidRects = [];
+    try {
+        document.querySelectorAll(
+            ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+            ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+            "#english-tts-speak-selection:not([hidden]), button:not(#english-tts-floating-stop), " +
+            "[role='button'], input, select, textarea"
+        ).forEach(element => {
+            if (!element || element === button || wrapper.contains(element) || element.hidden) return;
+            const style = window.getComputedStyle(element);
+            if (!style || style.display === "none" ||
+                style.visibility === "hidden" || style.visibility === "collapse") return;
+            const rect = element.getBoundingClientRect();
+            if (!rect || ![rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height]
+                .every(Number.isFinite)) throw new Error("Unreadable visible control");
+            if (rect.width > 0 && rect.height > 0) {
+                avoidRects.push({ left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom });
+            }
+        });
+    } catch (error) { return fail(); }
+
+    const placed = placeEnglishImageTTSStoryStopButton(button, wrapper, {
+        bounds: { xPct: 0, yPct: 0, widthPct: 100, heightPct: 100 },
+        avoidBounds: [{ xPct: 0, yPct: 0, widthPct: 100, heightPct: 100 }],
+        avoidRects
+    }, {
+        preferBelow: true,
+        scanForClearPosition: true,
+        strictAvoidance: true,
+        fixedStopSize: true,
+        fixedStopClass: "is-image-tts-xrays-stop-control",
+        fixedStopWidth: 52,
+        fixedStopHeight: 52,
+        fixedStopText: "⏹",
+        fixedStopAriaLabel: "停止 X-rays 英文朗讀",
+        stopControlClass: "is-image-tts-xrays-stop-control"
+    });
+    if (!placed || button.hidden || button.disabled || button.isConnected === false ||
+        button.getAttribute("aria-disabled") === "true") return fail();
+
+    const visual = window.visualViewport;
+    const left = visual && Number.isFinite(visual.offsetLeft) ? visual.offsetLeft : 0;
+    const top = visual && Number.isFinite(visual.offsetTop) ? visual.offsetTop : 0;
+    const width = visual && Number.isFinite(visual.width) && visual.width > 0
+        ? visual.width : window.innerWidth;
+    const height = visual && Number.isFinite(visual.height) && visual.height > 0
+        ? visual.height : window.innerHeight;
+    const inset = name => {
+        try {
+            const n = parseFloat(window.getComputedStyle(button).getPropertyValue(name));
+            return Number.isFinite(n) && n > 0 ? n : 0;
+        } catch (error) { return 0; }
+    };
+    let rect, style;
+    try { rect = button.getBoundingClientRect(); style = window.getComputedStyle(button); }
+    catch (error) { return fail(); }
+    const safeLeft = left + inset("--english-tts-safe-left") + 8;
+    const safeTop = top + inset("--english-tts-safe-top") + 8;
+    const safeRight = left + width - inset("--english-tts-safe-right") - 8;
+    const safeBottom = top + height - inset("--english-tts-safe-bottom") - 8;
+    const intersects = (a, b) => a.left < b.right && a.right > b.left &&
+        a.top < b.bottom && a.bottom > b.top;
+    if (!rect || !style || style.display === "none" || style.visibility !== "visible" ||
+        style.pointerEvents === "none" || rect.width < 52 || rect.height < 52 ||
+        rect.left < safeLeft || rect.top < safeTop || rect.right > safeRight || rect.bottom > safeBottom ||
+        intersects(rect, imageRect) || avoidRects.some(other => intersects(rect, other))) return fail();
+    const insetHit = Math.min(6, rect.width / 4, rect.height / 4);
+    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    const points = [[cx, cy], [rect.left + insetHit, cy], [rect.right - insetHit, cy],
+        [cx, rect.top + insetHit], [cx, rect.bottom - insetHit]];
+    try {
+        for (const [x, y] of points) {
+            const hit = document.elementFromPoint(x, y);
+            if (!hit || hit !== button && !(typeof button.contains === "function" && button.contains(hit))) {
+                return fail();
+            }
+        }
+    } catch (error) { return fail(); }
+    return true;
+}
+
+
+function failEnglishXRaysImageTTSSequence(trigger) {
+    if (englishTTSState.imageTextSequenceTrigger === trigger) {
+        cancelEnglishImageTTSImageTextSequence(true);
+    }
+    setEnglishTTSStatus("X-rays：找不到可見、位於圖片外且可實際點擊的 Stop 位置，朗讀已拒絕或取消。");
+    updateEnglishTTSControls();
+    return false;
+}
+
+function watchEnglishXRaysImageTTSViewport(trigger, wrapper, generation) {
+    const check = () => {
+        if (generation !== englishTTSState.imageTextSequenceGeneration ||
+            englishTTSState.imageTextSequenceTrigger !== trigger) return;
+        const panel = trigger._englishImageTTSImageTextActivePanel;
+        const item = trigger._englishImageTTSImageTextActiveItem;
+        if (!placeEnglishXRaysImageTTSStopButton(
+            getEnglishTTSFloatingStopButton(), wrapper,
+            trigger._englishImageTTSImageTextRecord, panel, item)) {
+            failEnglishXRaysImageTTSSequence(trigger);
+        }
+    };
+    const visual = window.visualViewport;
+    const targets = [[window, "scroll", true], [window, "resize", false],
+        [window, "orientationchange", false], [document, "scroll", true]];
+    if (visual) targets.push([visual, "scroll", false], [visual, "resize", false]);
+    targets.forEach(([target, type, capture]) => {
+        if (target && typeof target.addEventListener === "function") {
+            target.addEventListener(type, check, capture);
+        }
+    });
+    englishTTSState.xraysViewportCleanup = () => {
+        targets.forEach(([target, type, capture]) => {
+            if (target && typeof target.removeEventListener === "function") {
+                target.removeEventListener(type, check, capture);
+            }
+        });
+    };
+}
+
 function failEnglishTyphoonsImageTTSSequence(trigger) {
     if (englishTTSState.imageTextSequenceTrigger === trigger) {
         cancelEnglishImageTTSImageTextSequence(true);
@@ -4920,6 +5069,12 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
     }
     const isTyphoonsImageText = record.imageId === ENGLISH_TYPHOONS_IMAGE_ID &&
         record.assetFile === ENGLISH_TYPHOONS_ASSET_FILE;
+    if (record.imageId === ENGLISH_XRAYS_IMAGE_ID &&
+        record.assetFile === ENGLISH_XRAYS_ASSET_FILE) {
+        return placeEnglishXRaysImageTTSStopButton(
+            button, wrapper, validatedRecord, safePanel, safeItem
+        );
+    }
     if (isTyphoonsImageText) {
         return placeEnglishTyphoonsImageTTSStopButton(
             button, wrapper, validatedRecord, safePanel, safeItem
@@ -5826,8 +5981,10 @@ function cancelEnglishImageTTSImageTextSequence(cancelCurrentUtterance = false) 
     const viewportCleanup = englishTTSState.animalsAdaptationViewportCleanup;
     const humanHealthViewportCleanup = englishTTSState.humanHealthViewportCleanup;
     const typhoonsViewportCleanup = englishTTSState.typhoonsViewportCleanup;
+    const xraysViewportCleanup = englishTTSState.xraysViewportCleanup;
     const hadSequence = Boolean(sequenceTrigger || englishTTSState.imageTextSequenceTimer ||
-        viewportCleanup || humanHealthViewportCleanup || typhoonsViewportCleanup);
+        viewportCleanup || humanHealthViewportCleanup || typhoonsViewportCleanup ||
+        xraysViewportCleanup);
     if (!hadSequence) {
         return;
     }
@@ -5842,6 +5999,10 @@ function cancelEnglishImageTTSImageTextSequence(cancelCurrentUtterance = false) 
     if (typhoonsViewportCleanup) {
         englishTTSState.typhoonsViewportCleanup = null;
         typhoonsViewportCleanup();
+    }
+    if (xraysViewportCleanup) {
+        englishTTSState.xraysViewportCleanup = null;
+        xraysViewportCleanup();
     }
     if (englishTTSState.imageTextSequenceTimer) {
         window.clearTimeout(englishTTSState.imageTextSequenceTimer);
@@ -10945,6 +11106,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishXRaysImageTTSItemText(record, item)) return true;
     if (isEnglishWaterCycleImageTTSItemText(record, item)) return true;
     if (isEnglishTyphoonsImageTTSItemText(record, item)) return true;
     if (isEnglishHumanHealthNutritionImageTTSItemText(record, item)) return true;
@@ -11531,6 +11693,9 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 
 function getEnglishImageTTSImageTextName(record) {
     if (isEnglishTyphoonsImageTTSRecord(record)) return "Typhoons & Tropical Storms";
+    if (isEnglishXRaysImageTTSRecord(record)) {
+        return "X-rays — Wilhelm Röntgen";
+    }
     if (isEnglishHumanHealthNutritionImageTTSRecord(record)) return "Human Health & Nutrition";
     if (isEnglishAnimalsAdaptationImageTTSRecord(record)) return "Animals & Adaptation";
     if (isEnglishWaterCycleImageTTSRecord(record)) return "Water Cycle";
@@ -14803,6 +14968,249 @@ function getEnglishTyphoonsImageTextSpeechPause(record, item, segmentIndex) {
     return item.type === "sentence" ? 500 : null;
 }
 
+
+const ENGLISH_XRAYS_ASSET_FILE = "images/english/x-ray-wilhelm-rontgen-basics.png";
+const ENGLISH_XRAYS_IMAGE_ID = "x-ray-wilhelm-rontgen-basics";
+function getEnglishXRaysExpectedPanels() {
+    const b = (x, y, width, height) => ({
+        xPct: x / 1254 * 100, yPct: y / 1254 * 100,
+        widthPct: width / 1254 * 100, heightPct: height / 1254 * 100
+    });
+    const tap = (xPct, yPct, widthPct, heightPct) => ({
+        xPct, yPct, widthPct, heightPct
+    });
+    const item = (itemId, type, sourceText, bounds, tapRegion = null) => ({
+        itemId, readingOrder: itemId, type, sourceText, ttsText: sourceText,
+        bounds, ...(tapRegion ? { tapRegion } : {})
+    });
+    return [
+        { panelId: 1, readingOrder: 1, bounds: b(4, 4, 618, 611), items: [
+            item(1, "label", "Before X-rays", b(142, 25, 336, 52),
+                tap(10.765550, 0.797448, 28.309410, 13.476874)),
+            item(2, "sentence", "Doctors could only guess\nwhat was inside the body.",
+                b(50, 95, 420, 85))
+        ] },
+        { panelId: 2, readingOrder: 2, bounds: b(632, 4, 618, 611), items: [
+            item(1, "label", "Wilhelm Röntgen’s discovery", b(760, 22, 464, 54),
+                tap(71.770335, 7.177033, 26.315789, 10.366826)),
+            item(2, "sentence",
+                "In 1895, Wilhelm Röntgen discovered\na new kind of ray that could pass\nthrough some materials.",
+                b(668, 94, 546, 116))
+        ] },
+        { panelId: 3, readingOrder: 3, bounds: b(4, 628, 618, 622), items: [
+            item(1, "label", "Seeing inside the body", b(140, 650, 432, 58),
+                tap(3.588517, 58.771930, 13.955343, 11.802233)),
+            item(2, "sentence",
+                "X-rays can pass through soft tissue\nbut are more easily absorbed\nby bones, so they can create images\nof the skeleton.",
+                b(49, 726, 555, 165))
+        ] },
+        { panelId: 4, readingOrder: 4, bounds: b(632, 628, 618, 622), items: [
+            item(1, "label", "Changing medicine", b(770, 650, 404, 56),
+                tap(52.631579, 58.851675, 13.556619, 13.237640)),
+            item(2, "sentence",
+                "X-rays help doctors find broken bones\nand see inside the body.",
+                b(665, 720, 548, 76)),
+            item(3, "sentence", "They greatly improved\nmedical diagnosis\nand treatment.",
+                b(665, 802, 330, 112))
+        ] }
+    ];
+}
+
+function getEnglishXRaysExpectedTapRegions() {
+    const panels = getEnglishXRaysExpectedPanels();
+    const primary = panels.map(panel => ({
+        regionId: "p" + panel.panelId + "-title-main",
+        panelId: panel.panelId,
+        menuOwnerItemId: 1,
+        coveredItemIds: [1],
+        bounds: panel.items[0].tapRegion,
+        source: "primary"
+    }));
+    return primary.concat([
+        { regionId: "p3-body-mid-a", panelId: 3, menuOwnerItemId: 1,
+            coveredItemIds: [2],
+            bounds: { xPct: 18.341308, yPct: 57.974482,
+                widthPct: 8.452951, heightPct: 8.452951 }, source: "auxiliary" },
+        { regionId: "p3-body-mid-b", panelId: 3, menuOwnerItemId: 1,
+            coveredItemIds: [2],
+            bounds: { xPct: 27.591707, yPct: 57.974482,
+                widthPct: 8.452951, heightPct: 8.452951 }, source: "auxiliary" },
+        { regionId: "p4-body-upper-right", panelId: 4, menuOwnerItemId: 1,
+            coveredItemIds: [2],
+            bounds: { xPct: 66.985646, yPct: 57.416268,
+                widthPct: 8.452951, heightPct: 8.452951 }, source: "auxiliary" }
+    ]);
+}
+
+function getEnglishXRaysImageTTSRegions(record) {
+    if (!record || !Array.isArray(record.panels)) return [];
+    const expected = getEnglishXRaysExpectedTapRegions();
+    return expected.map(region => {
+        const panel = record.panels.find(candidate => candidate.panelId === region.panelId);
+        const item = panel && panel.items.find(candidate =>
+            candidate.itemId === region.menuOwnerItemId);
+        const actual = region.source === "primary"
+            ? item && item.tapRegion
+            : Array.isArray(record.tapRegions)
+                ? record.tapRegions.find(candidate => candidate.regionId === region.regionId)
+                : null;
+        return {
+            regionId: region.regionId,
+            panelId: region.panelId,
+            menuOwnerItemId: region.menuOwnerItemId,
+            coveredItemIds: region.coveredItemIds.slice(),
+            bounds: region.source === "primary" ? actual : actual && actual.bounds,
+            panel,
+            item,
+            source: region.source
+        };
+    });
+}
+
+function isEnglishXRaysImageTTSRecord(record) {
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_XRAYS_ASSET_FILE] : null;
+    return Boolean(record && canonical && record === canonical &&
+        record.imageId === ENGLISH_XRAYS_IMAGE_ID &&
+        record.assetFile === ENGLISH_XRAYS_ASSET_FILE &&
+        record.contentType === "image-text" &&
+        record.layout === "custom-xrays-2x2-text-menu" &&
+        record.coordinateStatus === "estimated" &&
+        record.overlayRuntimeStatus === "not-tested" &&
+        record.panels === canonical.panels);
+}
+
+function getEnglishXRaysImageTextRecord(record, assetFile) {
+    const file = ENGLISH_XRAYS_ASSET_FILE;
+    const expected = getEnglishXRaysExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const rectKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validRect = value => exact(value, rectKeys) &&
+        rectKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const sameRect = (actual, wanted) => validRect(actual) &&
+        rectKeys.every(key => actual[key] === wanted[key]);
+    const contains = (outer, inner) => validRect(outer) && validRect(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (a, b) => a.xPct < b.xPct + b.widthPct &&
+        a.xPct + a.widthPct > b.xPct && a.yPct < b.yPct + b.heightPct &&
+        a.yPct + a.heightPct > b.yPct;
+    if (!exact(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels", "tapRegions"]) ||
+        record.imageId !== ENGLISH_XRAYS_IMAGE_ID || record.assetFile !== file ||
+        assetFile !== file || typeof imageTTSData === "undefined" ||
+        !imageTTSData || imageTTSData[file] !== record ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-xrays-2x2-text-menu" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1254 ||
+        record.sourceImageDimensions.height !== 1254 ||
+        !Array.isArray(record.panels) || record.panels.length !== 4 ||
+        !Array.isArray(record.tapRegions) || record.tapRegions.length !== 3) return null;
+
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === ENGLISH_XRAYS_IMAGE_ID || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_XRAYS_IMAGE_ID || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file ||
+        library.length !== 1 || library[0].id !== ENGLISH_XRAYS_IMAGE_ID ||
+        library[0].file !== file || library[0].category !== "english") return null;
+
+    const panelBounds = [], tapRegions = [];
+    let tapCount = 0;
+    for (let p = 0; p < expected.length; p += 1) {
+        const panel = record.panels[p], wantedPanel = expected[p];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== wantedPanel.panelId ||
+            panel.readingOrder !== wantedPanel.readingOrder ||
+            !sameRect(panel.bounds, wantedPanel.bounds) ||
+            !Array.isArray(panel.items) || panel.items.length !== wantedPanel.items.length) return null;
+        panelBounds.push(panel.bounds);
+        for (let i = 0; i < wantedPanel.items.length; i += 1) {
+            const item = panel.items[i], wanted = wantedPanel.items[i];
+            const hasTap = Object.prototype.hasOwnProperty.call(wanted, "tapRegion");
+            const keys = ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]
+                .concat(hasTap ? ["tapRegion"] : []);
+            if (!exact(item, keys) || item.itemId !== wanted.itemId ||
+                item.readingOrder !== wanted.readingOrder || item.type !== wanted.type ||
+                item.sourceText !== wanted.sourceText || item.ttsText !== item.sourceText ||
+                !sameRect(item.bounds, wanted.bounds) || !contains(panel.bounds, item.bounds) ||
+                !getEnglishTTSUnitText(item.ttsText)) return null;
+            if (hasTap) {
+                if (item.type !== "label" || item.itemId !== 1 ||
+                    !sameRect(item.tapRegion, wanted.tapRegion) ||
+                    !contains(panel.bounds, item.tapRegion)) return null;
+                for (const width of [540, 600, 768]) {
+                    if (item.tapRegion.widthPct * width / 100 + 1e-7 < 44 ||
+                        item.tapRegion.heightPct * width / 100 + 1e-7 < 44) return null;
+                }
+                tapRegions.push(item.tapRegion);
+                tapCount += 1;
+            }
+        }
+    }
+    const expectedAuxiliaryRegions = getEnglishXRaysExpectedTapRegions()
+        .filter(region => region.source === "auxiliary");
+    for (let index = 0; index < expectedAuxiliaryRegions.length; index += 1) {
+        const region = record.tapRegions[index];
+        const wanted = expectedAuxiliaryRegions[index];
+        const panel = record.panels.find(candidate => candidate.panelId === wanted.panelId);
+        const owner = panel && panel.items.find(item => item.itemId === wanted.menuOwnerItemId);
+        const covered = panel && wanted.coveredItemIds.map(itemId =>
+            panel.items.find(item => item.itemId === itemId));
+        if (!exact(region, ["regionId", "panelId", "menuOwnerItemId", "coveredItemIds", "bounds"]) ||
+            region.regionId !== wanted.regionId || region.panelId !== wanted.panelId ||
+            region.menuOwnerItemId !== wanted.menuOwnerItemId ||
+            !Array.isArray(region.coveredItemIds) ||
+            region.coveredItemIds.length !== wanted.coveredItemIds.length ||
+            region.coveredItemIds.some((itemId, itemIndex) =>
+                itemId !== wanted.coveredItemIds[itemIndex]) ||
+            !owner || owner.type !== "label" || !covered || covered.some(item => !item) ||
+            !sameRect(region.bounds, wanted.bounds) || !contains(panel.bounds, region.bounds)) return null;
+        for (const width of [540, 600, 768]) {
+            if (region.bounds.widthPct * width / 100 + 1e-7 < 44 ||
+                region.bounds.heightPct * width / 100 + 1e-7 < 44) return null;
+        }
+        tapRegions.push(region.bounds);
+        tapCount += 1;
+    }
+    for (let i = 0; i < panelBounds.length; i += 1) {
+        for (let j = i + 1; j < panelBounds.length; j += 1) {
+            if (overlaps(panelBounds[i], panelBounds[j])) return null;
+        }
+    }
+    for (let i = 0; i < tapRegions.length; i += 1) {
+        for (let j = i + 1; j < tapRegions.length; j += 1) {
+            if (overlaps(tapRegions[i], tapRegions[j])) return null;
+        }
+    }
+    return tapCount === 7 ? record : null;
+}
+
+function isEnglishXRaysImageTTSItemText(record, item) {
+    if (!isEnglishXRaysImageTTSRecord(record) || !item ||
+        item.sourceText !== item.ttsText) return false;
+    const canonical = imageTTSData[ENGLISH_XRAYS_ASSET_FILE];
+    const safe = canonical &&
+        getEnglishXRaysImageTextRecord(canonical, ENGLISH_XRAYS_ASSET_FILE);
+    return Boolean(safe && record.panels === safe.panels &&
+        safe.panels.some(panel => panel.items.includes(item)));
+}
+
 function isEnglishAnimalsWildlifeImageTTSRecord(record) {
     const file="images/english/animals-wildlife-basics.png";
     const canonical=typeof imageTTSData!=="undefined"&&imageTTSData?imageTTSData[file]:null;
@@ -15045,6 +15453,10 @@ function getEnglishImageTTSRecord(assetFile) {
         (record.imageId === ENGLISH_TYPHOONS_IMAGE_ID ||
             record.assetFile === ENGLISH_TYPHOONS_ASSET_FILE)) {
         return getEnglishTyphoonsImageTextRecord(record, assetFile);
+    }
+    if (assetFile === ENGLISH_XRAYS_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_XRAYS_IMAGE_ID || record.assetFile === ENGLISH_XRAYS_ASSET_FILE)) {
+        return getEnglishXRaysImageTextRecord(record, assetFile);
     }
     const humanHealthFile = "images/english/human-health-and-nutrition-basics.png";
     if (assetFile === humanHealthFile || record &&
@@ -17772,7 +18184,404 @@ function layoutEnglishTyphoonsImageTTSHitAreas(wrapper) {
     return enabled > 0;
 }
 
+function layoutEnglishXRaysImageTTSHitAreas(wrapper) {
+    const file = ENGLISH_XRAYS_ASSET_FILE;
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    const expectedRegions = getEnglishXRaysExpectedTapRegions();
+    const hide = button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+    };
+    const gateKey = region => [region.panelId, region.menuOwnerItemId, region.regionId].join(":");
+    const buttonRegionKey = button => [
+        button && button.getAttribute("data-image-tts-panel-id") || "?",
+        button && button.getAttribute("data-image-tts-item-id") || "?",
+        button && button.getAttribute("data-image-tts-region-id") || "?"
+    ].join(":");
+    const failAll = () => {
+        buttons.forEach(hide);
+        if (englishImageTTSOverlayState.activeTrigger &&
+            wrapper && wrapper.contains(englishImageTTSOverlayState.activeTrigger)) {
+            closeEnglishImageTTSMenu();
+        }
+        return false;
+    };
+    const finishLocal = (enabled = 0) => {
+        let closeBlockedMenu = false;
+        buttons.forEach(button => {
+            hide(button);
+            if (englishImageTTSOverlayState.activeTrigger === button) closeBlockedMenu = true;
+        });
+        if (closeBlockedMenu) closeEnglishImageTTSMenu();
+        return enabled > 0;
+    };
+    if (!wrapper || !wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== file) {
+        return failAll();
+    }
+    if (!image) return failAll();
+    if (image.getAttribute("src") !== file) {
+        return failAll();
+    }
+    if (image.complete && (image.naturalWidth !== 1254 || image.naturalHeight !== 1254)) {
+        return failAll();
+    }
+    if (buttons.length !== 7) return failAll();
+
+    const record = getEnglishImageTTSRecord(file);
+    if (!record || !isEnglishXRaysImageTTSRecord(record)) {
+        return failAll();
+    }
+    if (record.sourceImageDimensions.width !== 1254 || record.sourceImageDimensions.height !== 1254) {
+        return failAll();
+    }
+    if (image.complete && (image.naturalWidth !== record.sourceImageDimensions.width ||
+        image.naturalHeight !== record.sourceImageDimensions.height)) {
+        return failAll();
+    }
+
+    const regions = getEnglishXRaysImageTTSRegions(record);
+    if (regions.length !== 7 || expectedRegions.length !== 7 ||
+        regions.some(region => !region.panel || !region.item || !region.bounds)) {
+        return failAll();
+    }
+    const byKey = new Map();
+    for (const button of buttons) {
+        const key = buttonRegionKey(button);
+        if (key.endsWith(":?") || byKey.has(key)) return failAll();
+        byKey.set(key, button);
+    }
+    const candidates = [];
+    for (const region of regions) {
+        const key = gateKey(region);
+        const button = byKey.get(key);
+        if (!button) return failAll();
+        const expected = expectedRegions.find(candidate => candidate.regionId === region.regionId);
+        if (!expected || expected.panelId !== region.panelId ||
+            expected.menuOwnerItemId !== region.menuOwnerItemId ||
+            expected.coveredItemIds.length !== region.coveredItemIds.length ||
+            expected.coveredItemIds.some((itemId, index) => itemId !== region.coveredItemIds[index]) ||
+            ["xPct", "yPct", "widthPct", "heightPct"].some(prop =>
+                region.bounds[prop] !== expected.bounds[prop])) {
+            return failAll();
+        }
+        if (button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== region.panel ||
+            button._englishImageTTSImageTextItem !== region.item ||
+            !button._englishImageTTSImageTextRegion ||
+            button._englishImageTTSImageTextRegion.regionId !== region.regionId ||
+            button._englishImageTTSImageTextRegion.panel !== region.panel ||
+            button._englishImageTTSImageTextRegion.item !== region.item ||
+            button.getAttribute("data-image-tts-region-id") !== region.regionId ||
+            button.getAttribute("data-image-tts-panel-id") !== String(region.panelId) ||
+            button.getAttribute("data-image-tts-item-id") !== String(region.menuOwnerItemId)) {
+            return failAll();
+        }
+        candidates.push({ button, region });
+    }
+    if (byKey.size !== 7 || candidates.length !== 7) {
+        return failAll();
+    }
+    const expectedKeys = expectedRegions.map(gateKey);
+    if (expectedKeys.some(key => !byKey.has(key)) ||
+        Array.from(byKey.keys()).some(key => !expectedKeys.includes(key))) {
+        return failAll();
+    }
+
+    const markLocal = (candidate, code) => {
+        if (candidate && !candidate.issue) candidate.issue = code;
+    };
+    if (isEnglishImageTTSDrawingMode()) {
+        candidates.forEach(candidate => {
+            candidate.issue = "DRAWING_MODE";
+        });
+        return finishLocal();
+    }
+    if (!image.complete) {
+        candidates.forEach(candidate => {
+            candidate.issue = "IMAGE_NOT_READY";
+        });
+        return finishLocal();
+    }
+
+    let imageRect, wrapperRect;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+    } catch (error) {
+        candidates.forEach(candidate => {
+            candidate.issue = "IMAGE_OR_WRAPPER_RECT_READ_FAILED";
+        });
+        return finishLocal();
+    }
+    const finiteRect = rect => rect &&
+        ["left", "top", "right", "bottom", "width", "height"].every(key =>
+            Number.isFinite(rect[key])) && rect.width > 0 && rect.height > 0;
+    const toRect = (base, bounds) => ({
+        left: base.left + base.width * bounds.xPct / 100,
+        top: base.top + base.height * bounds.yPct / 100,
+        right: base.left + base.width * (bounds.xPct + bounds.widthPct) / 100,
+        bottom: base.top + base.height * (bounds.yPct + bounds.heightPct) / 100
+    });
+    const contains = (outer, inner, tolerance = 0.75) =>
+        inner.left >= outer.left - tolerance && inner.top >= outer.top - tolerance &&
+        inner.right <= outer.right + tolerance && inner.bottom <= outer.bottom + tolerance;
+    const overlaps = (a, b) => a.left < b.right && a.right > b.left &&
+        a.top < b.bottom && a.bottom > b.top;
+    const cssPercentMatches = (value, expected) => {
+        if (typeof value !== "string" || !Number.isFinite(expected)) return false;
+        const normalized = value.trim();
+        if (!/^(?:\d+(?:\.\d*)?|\.\d+)%$/.test(normalized)) return false;
+        const actual = Number(normalized.slice(0, -1));
+        return Number.isFinite(actual) && Math.abs(actual - expected) <= 1e-5;
+    };
+    let viewportRect;
+    try {
+        const visual = window.visualViewport;
+        viewportRect = visual
+            ? { left: visual.offsetLeft, top: visual.offsetTop,
+                right: visual.offsetLeft + visual.width, bottom: visual.offsetTop + visual.height }
+            : { left: 0, top: 0,
+                right: document.documentElement && document.documentElement.clientWidth || window.innerWidth,
+                bottom: document.documentElement && document.documentElement.clientHeight || window.innerHeight };
+    } catch (error) { viewportRect = null; }
+    if (!finiteRect(imageRect) || !finiteRect(wrapperRect)) {
+        candidates.forEach(candidate => {
+            candidate.issue = "IMAGE_OR_WRAPPER_RECT_INVALID";
+        });
+        return finishLocal();
+    }
+    if (!viewportRect || ![viewportRect.left, viewportRect.top,
+        viewportRect.right, viewportRect.bottom].every(Number.isFinite) ||
+        viewportRect.right <= viewportRect.left || viewportRect.bottom <= viewportRect.top) {
+        candidates.forEach(candidate => {
+            candidate.issue = "VIEWPORT_INVALID";
+        });
+        return finishLocal();
+    }
+    const viewportIntersection = rect => {
+        const intersection = {
+            left: Math.max(rect.left, viewportRect.left),
+            top: Math.max(rect.top, viewportRect.top),
+            right: Math.min(rect.right, viewportRect.right),
+            bottom: Math.min(rect.bottom, viewportRect.bottom)
+        };
+        intersection.width = intersection.right - intersection.left;
+        intersection.height = intersection.bottom - intersection.top;
+        return intersection;
+    };
+    const visiblePoints = rect => {
+        const visible = viewportIntersection(rect);
+        if (visible.width < 44 || visible.height < 44) return null;
+        const insetX = Math.min(6, visible.width / 4);
+        const insetY = Math.min(6, visible.height / 4);
+        const cx = (visible.left + visible.right) / 2;
+        const cy = (visible.top + visible.bottom) / 2;
+        return [[cx, cy], [visible.left + insetX, cy], [visible.right - insetX, cy],
+            [cx, visible.top + insetY], [cx, visible.bottom - insetY]];
+    };
+    const menu = englishImageTTSOverlayState.menu;
+    let visibleAppMenu = false;
+    if (menu && englishImageTTSOverlayState.activeTrigger && menu.id === "english-image-tts-menu" &&
+        !menu.hidden && menu.isConnected !== false) {
+        try {
+            const style = window.getComputedStyle(menu);
+            visibleAppMenu = Boolean(style && style.display !== "none" &&
+                style.visibility === "visible" && style.pointerEvents !== "none");
+        } catch (error) { visibleAppMenu = false; }
+    }
+    const hitTest = (candidate, rect) => {
+        const points = visiblePoints(rect);
+        if (!points || typeof document.elementFromPoint !== "function") return false;
+        let allPassed = true;
+        try {
+            for (const [x, y] of points) {
+                const hit = document.elementFromPoint(x, y);
+                let allowed = hit === candidate.button || candidate.button.contains(hit);
+                if (!allowed && visibleAppMenu &&
+                    englishImageTTSOverlayState.activeTrigger === candidate.button &&
+                    (hit === menu || menu.contains(hit))) allowed = true;
+                if (!allowed) allPassed = false;
+            }
+        } catch (error) {
+            allPassed = false;
+        }
+        return allPassed;
+    };
+    const saved = new Map();
+    for (const candidate of candidates) {
+        const { button, region } = candidate;
+        candidate.expectedRect = toRect(imageRect, region.bounds);
+        candidate.panelRect = toRect(imageRect, region.panel.bounds);
+        if (!cssPercentMatches(button.style && button.style.left, region.bounds.xPct) ||
+            !cssPercentMatches(button.style && button.style.top, region.bounds.yPct) ||
+            !cssPercentMatches(button.style && button.style.width, region.bounds.widthPct) ||
+            !cssPercentMatches(button.style && button.style.height, region.bounds.heightPct)) {
+            markLocal(candidate, "CSSOM_PERCENT_MISMATCH");
+        }
+        const { expectedRect, panelRect } = candidate;
+        const visible = viewportIntersection(expectedRect);
+        candidate.visibleIntersection = visible;
+        if (expectedRect.right - expectedRect.left < 44 ||
+            expectedRect.bottom - expectedRect.top < 44) markLocal(candidate, "TARGET_UNDER_44");
+        else if (visible.width < 44 || visible.height < 44) markLocal(candidate, "VIEWPORT_INTERSECTION_UNDER_44");
+        if (!contains(imageRect, expectedRect)) markLocal(candidate, "TARGET_OUTSIDE_IMAGE");
+        if (!contains(panelRect, expectedRect)) markLocal(candidate, "TARGET_OUTSIDE_PANEL");
+        saved.set(button, {
+            visibility: button.style && button.style.visibility,
+            opacity: button.style && button.style.opacity,
+            pointerEvents: button.style && button.style.pointerEvents
+        });
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        if (button.style) {
+            button.style.visibility = "visible";
+            button.style.opacity = "0";
+            button.style.pointerEvents = "auto";
+        }
+    }
+
+    const hasHiddenAncestor = element => {
+        let ancestor = element && element.parentElement;
+        while (ancestor) {
+            if (ancestor.hidden || (typeof ancestor.hasAttribute === "function" &&
+                ancestor.hasAttribute("hidden"))) return true;
+            const style = window.getComputedStyle(ancestor);
+            if (style && style.display === "none") return true;
+            ancestor = ancestor.parentElement;
+        }
+        return false;
+    };
+    let controls = [], controlScanFailed = false;
+    try {
+        controls = Array.from(document.querySelectorAll(
+            ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+            ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+            "#english-tts-speak-selection:not([hidden]), button:not(#english-tts-floating-stop), " +
+            "[role='button'], input, select, textarea"
+        ));
+    } catch (error) { controlScanFailed = true; }
+    const measured = [];
+    for (const candidate of candidates) {
+        const { button, expectedRect, panelRect } = candidate;
+        if (!candidate.issue && controlScanFailed) markLocal(candidate, "CONTROL_SCAN_FAILED");
+        try {
+            const style = window.getComputedStyle(button);
+            const rect = button.getBoundingClientRect();
+            candidate.rect = rect;
+            if (!candidate.issue && (!style || button.hidden || style.display === "none" ||
+                style.visibility !== "visible" || style.pointerEvents === "none" ||
+                Number(style.opacity) !== 0 || hasHiddenAncestor(button))) {
+                markLocal(candidate, "BUTTON_NOT_VISIBLE_DURING_CHECK");
+            }
+            if (!candidate.issue && (!finiteRect(rect) || rect.width < 44 || rect.height < 44)) {
+                markLocal(candidate, "BUTTON_RECT_UNDER_44_OR_INVALID");
+            }
+            if (!candidate.issue && !contains(imageRect, rect)) markLocal(candidate, "BUTTON_OUTSIDE_IMAGE");
+            if (!candidate.issue && !contains(panelRect, rect)) markLocal(candidate, "BUTTON_OUTSIDE_PANEL");
+            if (!candidate.issue && ["left", "top", "right", "bottom"].some(key =>
+                Math.abs(rect[key] - expectedRect[key]) > 1)) {
+                markLocal(candidate, "ACTUAL_RECT_MISMATCH");
+            }
+            let obstructed = false;
+            if (!candidate.issue) {
+                for (const element of controls) {
+                    if (!element || element === button || wrapper.contains(element) || element.hidden) continue;
+                    const controlStyle = window.getComputedStyle(element);
+                    if (!controlStyle || controlStyle.display === "none" ||
+                        controlStyle.visibility === "hidden" || controlStyle.visibility === "collapse") continue;
+                    const controlRect = element.getBoundingClientRect();
+                    const numericRect = controlRect &&
+                        ["left", "top", "right", "bottom", "width", "height"]
+                            .every(key => Number.isFinite(controlRect[key]));
+                    const zeroRect = Boolean(numericRect && controlRect.width === 0 &&
+                        controlRect.height === 0 && controlRect.right === controlRect.left &&
+                        controlRect.bottom === controlRect.top);
+                    if (zeroRect && hasHiddenAncestor(element)) continue;
+                    if (!finiteRect(controlRect)) {
+                        obstructed = true;
+                        candidate.obstructionCode = "CONTROL_RECT_UNREADABLE";
+                        break;
+                    }
+                    const selectedMenu = visibleAppMenu &&
+                        englishImageTTSOverlayState.activeTrigger === button &&
+                        (element === menu || menu.contains(element));
+                    if (!selectedMenu && overlaps(rect, controlRect)) {
+                        obstructed = true;
+                        candidate.obstructionCode = "CONTROL_OVERLAP";
+                        break;
+                    }
+                }
+            }
+            candidate.obstructed = obstructed;
+            if (!candidate.issue && obstructed) markLocal(candidate, candidate.obstructionCode);
+            if (!candidate.issue && !hitTest(candidate, rect)) {
+                markLocal(candidate, "INITIAL_FIVE_POINT_HIT_FAIL");
+            }
+        } catch (error) {
+            markLocal(candidate, "MEASUREMENT_EXCEPTION");
+        }
+        if (!candidate.issue) measured.push(candidate);
+    }
+    saved.forEach((style, button) => {
+        if (!button.style) return;
+        button.style.visibility = style.visibility || "";
+        button.style.opacity = style.opacity || "";
+        button.style.pointerEvents = style.pointerEvents || "";
+    });
+
+    for (let left = 0; left < measured.length; left += 1) {
+        for (let right = left + 1; right < measured.length; right += 1) {
+            if (overlaps(measured[left].rect, measured[right].rect)) {
+                markLocal(measured[left], "ACTUAL_REGION_OVERLAP");
+                markLocal(measured[right], "ACTUAL_REGION_OVERLAP");
+            }
+        }
+    }
+    let enabled = 0, closeBlockedMenu = false;
+    for (const candidate of candidates) {
+        if (!candidate.issue) {
+            try {
+                const style = window.getComputedStyle(candidate.button);
+                const rect = candidate.button.getBoundingClientRect();
+                if (!style || !finiteRect(rect) || style.display === "none" ||
+                    style.visibility === "hidden" || style.pointerEvents === "none" ||
+                    rect.width < 44 || rect.height < 44 ||
+                    !contains(imageRect, rect) || !contains(candidate.panelRect, rect) ||
+                    ["left", "top", "right", "bottom"].some(key =>
+                        Math.abs(rect[key] - candidate.expectedRect[key]) > 1)) {
+                    markLocal(candidate, "FINAL_RECT_OR_STYLE_CHECK_FAILED");
+                } else if (!hitTest(candidate, rect)) {
+                    markLocal(candidate, "FINAL_FIVE_POINT_HIT_FAIL");
+                }
+            } catch (error) {
+                markLocal(candidate, "FINAL_MEASUREMENT_EXCEPTION");
+            }
+        }
+        if (!candidate.issue) {
+            candidate.button.hidden = false;
+            candidate.button.disabled = false;
+            candidate.button.setAttribute("aria-disabled", "false");
+            enabled += 1;
+        } else {
+            hide(candidate.button);
+            if (englishImageTTSOverlayState.activeTrigger === candidate.button) closeBlockedMenu = true;
+        }
+    }
+    if (closeBlockedMenu) closeEnglishImageTTSMenu();
+    return enabled > 0;
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
+    if (wrapper && wrapper.dataset &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_XRAYS_ASSET_FILE) {
+        layoutEnglishXRaysImageTTSHitAreas(wrapper);
+        return;
+    }
     if (wrapper && wrapper.dataset &&
         wrapper.dataset.imageTtsAssetFile === ENGLISH_TYPHOONS_ASSET_FILE) {
         layoutEnglishTyphoonsImageTTSHitAreas(wrapper);
@@ -17813,8 +18622,8 @@ function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
     });
 }
 
-function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record) {
-    const tapRegion = item && item.tapRegion;
+function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, region = null) {
+    const tapRegion = region && region.bounds || item && item.tapRegion;
     if (!wrapper || !panel || !item || !tapRegion) {
         return null;
     }
@@ -17825,6 +18634,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record) {
     button.hidden = true;
     const isFullTitleImageText = isEnglishImageTTSFullTitleImageTextRecord(record);
     const panelLabel = getEnglishImageTTSImageTextPanelLabel(record, panel);
+    const isXRaysTextArea = isEnglishXRaysImageTTSRecord(record) &&
+        panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 1;
     const isTyphoonsBubble = isEnglishTyphoonsImageTTSRecord(record) &&
         panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 2;
     const isHumanHealthBubble = isEnglishHumanHealthNutritionImageTTSRecord(record) &&
@@ -17842,12 +18653,18 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record) {
                         item.sourceText + "，開啟朗讀選項"
                     : "第 " + panel.panelId + " 格第 " + item.readingOrder +
                         " 項原圖文字：" + item.sourceText + "，開啟本格朗讀選項"))));
+    if (isXRaysTextArea) {
+        button.setAttribute("aria-label", "X-rays 第 " + panel.panelId + " 格主文字區，開啟朗讀選項");
+    }
     button.setAttribute("aria-haspopup", "true");
     button.setAttribute("aria-expanded", "false");
     button.setAttribute("aria-controls", "english-image-tts-menu");
     button.setAttribute("data-english-tts-control", "true");
     button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
     button.setAttribute("data-image-tts-item-id", String(item.itemId));
+    if (isEnglishXRaysImageTTSRecord(record) && region && region.regionId) {
+        button.setAttribute("data-image-tts-region-id", region.regionId);
+    }
     button.style.left = tapRegion.xPct + "%";
     button.style.top = tapRegion.yPct + "%";
     button.style.width = tapRegion.widthPct + "%";
@@ -17855,13 +18672,15 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record) {
     button._englishImageTTSImageTextPanel = panel;
     button._englishImageTTSImageTextItem = item;
     button._englishImageTTSImageTextRecord = record;
+    button._englishImageTTSImageTextRegion = region;
     button._englishImageTTSImageTextActivePanel = panel;
     button._englishImageTTSImageTextActiveItem = item;
     button.addEventListener("click", event => {
         event.stopPropagation();
         if (((isEnglishAnimalsAdaptationImageTTSRecord(record) ||
             isEnglishHumanHealthNutritionImageTTSRecord(record) ||
-            isEnglishTyphoonsImageTTSRecord(record)) && button.hidden) ||
+            isEnglishTyphoonsImageTTSRecord(record) ||
+            isEnglishXRaysImageTTSRecord(record)) && button.hidden) ||
             button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
             return;
         }
@@ -18493,9 +19312,7 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         const record = getEnglishImageTTSRecord(assetFile);
-        if (!record) {
-            return;
-        }
+        if (!record) return;
 
         if (record.contentType === "teaching-sentences") {
             if (image.complete && image.naturalWidth === 0) {
@@ -18620,6 +19437,41 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
                 }, { once: true });
                 image.addEventListener("error", hideAnimalHitAreas, { once: true });
                 layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper);
+                return;
+            }
+
+            if (isEnglishXRaysImageTTSRecord(record)) {
+                const hasExpectedDimensions = () => image.getAttribute("src") === ENGLISH_XRAYS_ASSET_FILE &&
+                    image.complete && image.naturalWidth === 1254 && image.naturalHeight === 1254;
+                const hideXRaysHitAreas = () => {
+                    wrapper.querySelectorAll(".image-tts-image-text-hit-area").forEach(button => {
+                        button.hidden = true;
+                        button.disabled = true;
+                        button.setAttribute("aria-disabled", "true");
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+                };
+                if (image.complete && !hasExpectedDimensions()) {
+                    hideXRaysHitAreas();
+                    return;
+                }
+                getEnglishXRaysImageTTSRegions(record).forEach(region => {
+                    if (region.panel && region.item && region.bounds &&
+                        createEnglishImageTTSImageTextHitArea(
+                            wrapper, region.panel, region.item, record, region)) {
+                        added += 1;
+                    }
+                });
+                image.addEventListener("load", () => {
+                    if (!hasExpectedDimensions()) {
+                        hideXRaysHitAreas();
+                        return;
+                    }
+                    layoutEnglishXRaysImageTTSHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", hideXRaysHitAreas, { once: true });
+                layoutEnglishXRaysImageTTSHitAreas(wrapper);
                 return;
             }
 
@@ -19055,6 +19907,15 @@ function scheduleEnglishImageTTSLayout() {
     if (englishImageTTSOverlayState.humanHealthLayoutSettleTimer) {
         window.clearTimeout(englishImageTTSOverlayState.humanHealthLayoutSettleTimer);
     }
+    if (englishImageTTSOverlayState.xraysLayoutSettleTimer) {
+        window.clearTimeout(englishImageTTSOverlayState.xraysLayoutSettleTimer);
+    }
+    englishImageTTSOverlayState.xraysLayoutSettleTimer = window.setTimeout(() => {
+        englishImageTTSOverlayState.xraysLayoutSettleTimer = 0;
+        document.querySelectorAll(
+            '#ai-response .image-tts-overlay-wrapper[data-image-tts-asset-file="images/english/x-ray-wilhelm-rontgen-basics.png"]'
+        ).forEach(wrapper => layoutEnglishXRaysImageTTSHitAreas(wrapper));
+    }, 160);
     if (englishImageTTSOverlayState.typhoonsLayoutSettleTimer) {
         window.clearTimeout(englishImageTTSOverlayState.typhoonsLayoutSettleTimer);
     }
@@ -19086,6 +19947,10 @@ function scheduleEnglishImageTTSLayout() {
             if (wrapper.dataset &&
                 wrapper.dataset.imageTtsAssetFile === "images/english/animals-and-adaptation-basics.png") {
                 layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper);
+            }
+            if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === ENGLISH_XRAYS_ASSET_FILE) {
+                layoutEnglishXRaysImageTTSHitAreas(wrapper);
             }
             if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_TYPHOONS_ASSET_FILE) {
                 layoutEnglishTyphoonsImageTTSHitAreas(wrapper);
@@ -19147,6 +20012,9 @@ function syncEnglishImageTTSDrawingMode() {
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === "images/english/animals-and-adaptation-basics.png") {
             layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper);
+        }
+        if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_XRAYS_ASSET_FILE) {
+            layoutEnglishXRaysImageTTSHitAreas(wrapper);
         }
         if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_TYPHOONS_ASSET_FILE) {
             layoutEnglishTyphoonsImageTTSHitAreas(wrapper);
@@ -19635,6 +20503,15 @@ function speakEnglishImageTTSImageTextSequence(
         record.imageId === "circulatory-system-basics" &&
         record.assetFile === "images/english/circulatory-system-basics.png" &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isXRaysImageText = Boolean(record && isEnglishXRaysImageTTSRecord(record));
+    const isXRaysSingleItemSequence = Boolean(isXRaysImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const xraysImage = isXRaysImageText ? wrapper.querySelector("img") : null;
+    const xraysImageReady = !isXRaysImageText || Boolean(
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_XRAYS_ASSET_FILE &&
+        xraysImage && xraysImage.getAttribute("src") === ENGLISH_XRAYS_ASSET_FILE &&
+        xraysImage.complete && xraysImage.naturalWidth === 1254 &&
+        xraysImage.naturalHeight === 1254);
     const isTyphoonsImageText = Boolean(record && isEnglishTyphoonsImageTTSRecord(record));
     const isTyphoonsSingleItemSequence = Boolean(isTyphoonsImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
@@ -19743,6 +20620,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isAnimalsWildlifeSingleItemSequence &&
             !isAnimalsAdaptationSingleItemSequence &&
             !isHumanHealthNutritionSingleItemSequence &&
+            !isXRaysSingleItemSequence &&
             !isTyphoonsSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
             !isHumanBodyHowItWorksSingleItemSequence) ||
@@ -19753,7 +20631,7 @@ function speakEnglishImageTTSImageTextSequence(
         !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady || !mountainsReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
         !animalsAdaptationImageReady || !humanHealthImageReady || !typhoonsImageReady ||
-        appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
+        !xraysImageReady || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
     }
@@ -19771,6 +20649,9 @@ function speakEnglishImageTTSImageTextSequence(
     }
     if (isTyphoonsImageText) {
         watchEnglishTyphoonsImageTTSViewport(trigger, wrapper, generation);
+    }
+    if (isXRaysImageText) {
+        watchEnglishXRaysImageTTSViewport(trigger, wrapper, generation);
     }
     if (isHumanHealthNutritionImageText) {
         watchEnglishHumanHealthNutritionImageTTSViewport(trigger, wrapper, generation);
@@ -19805,6 +20686,10 @@ function speakEnglishImageTTSImageTextSequence(
         if (isTyphoonsImageText &&
             !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
             return failEnglishTyphoonsImageTTSSequence(trigger);
+        }
+        if (isXRaysImageText &&
+            !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+            return failEnglishXRaysImageTTSSequence(trigger);
         }
         if (isHumanHealthNutritionImageText &&
             !placeEnglishImageTTSImageTextStopButton(
@@ -19859,6 +20744,10 @@ function speakEnglishImageTTSImageTextSequence(
                 !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
                 return failEnglishTyphoonsImageTTSSequence(trigger);
             }
+            if (isXRaysImageText &&
+                !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+                return failEnglishXRaysImageTTSSequence(trigger);
+            }
             if (isHumanHealthNutritionImageText &&
                 !placeEnglishImageTTSImageTextStopButton(
                     getEnglishTTSFloatingStopButton(), wrapper
@@ -19871,8 +20760,8 @@ function speakEnglishImageTTSImageTextSequence(
                 )) {
                 return failEnglishAnimalsAdaptationImageTTSSequence(trigger);
             }
-            if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText || isTyphoonsImageText) &&
-                !getSelectedLocalEnglishVoice()) {
+            if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText ||
+                isTyphoonsImageText || isXRaysImageText) && !getSelectedLocalEnglishVoice()) {
                 cancelEnglishImageTTSImageTextSequence(true);
                 setEnglishTTSStatus("本機英文聲線尚未載入；iPad Safari 可能仍在載入，請稍後再次點選朗讀。此功能只使用本機英文聲線。");
                 updateEnglishTTSControls();
@@ -19885,6 +20774,11 @@ function speakEnglishImageTTSImageTextSequence(
                 if (isTyphoonsImageText &&
                     !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
                     failEnglishTyphoonsImageTTSSequence(trigger);
+                    return;
+                }
+                if (isXRaysImageText &&
+                    !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+                    failEnglishXRaysImageTTSSequence(trigger);
                     return;
                 }
                 if (isHumanHealthNutritionImageText &&
@@ -19992,8 +20886,8 @@ function speakEnglishImageTTSImageTextSequence(
             }, null, null, null, generation);
             if (!started && generation === englishTTSState.imageTextSequenceGeneration) {
                 cancelEnglishImageTTSImageTextSequence();
-                if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText || isTyphoonsImageText) &&
-                    !englishTTSState.voices.length) {
+                if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText ||
+                    isTyphoonsImageText || isXRaysImageText) && !englishTTSState.voices.length) {
                     setEnglishTTSStatus("本機英文聲線尚未載入；iPad Safari 可能仍在載入，請稍後再次點選朗讀。此功能只使用本機英文聲線。");
                 }
                 updateEnglishTTSControls();
@@ -20435,6 +21329,58 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     }
 
 
+
+    if (isEnglishXRaysImageTTSRecord(safeRecord)) {
+        const clicked = trigger._englishImageTTSImageTextItem;
+        const allItems = safeRecord.panels.flatMap(candidate => candidate.items);
+        const hitAreas = Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area"));
+        const image = wrapper.querySelector("img");
+        const expectedCount = panel && panel.panelId === 4 ? 3 : 2;
+        const layoutReady = layoutEnglishXRaysImageTTSHitAreas(wrapper);
+        if (!panel || panel.panelId < 1 || panel.panelId > 4 ||
+            panel.items.length !== expectedCount || clicked !== panel.items[0] ||
+            !isEnglishXRaysImageTTSItemText(safeRecord, clicked) ||
+            !image || image.getAttribute("src") !== ENGLISH_XRAYS_ASSET_FILE ||
+            !image.complete || image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+            allItems.length !== 9 ||
+            allItems.some(item => !isEnglishXRaysImageTTSItemText(safeRecord, item)) ||
+            hitAreas.length !== 7 || !hitAreas.includes(trigger) ||
+            !layoutReady || trigger.hidden || trigger.disabled) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const add = (label, description, items, completion) =>
+            menu.appendChild(createEnglishImageTTSMenuButton(label, description, () =>
+                speakEnglishImageTTSImageTextSequence(trigger, items, completion)));
+        menu.setAttribute("aria-label",
+            "X-rays 第 " + panel.panelId + " 格主文字區朗讀選項");
+        panel.items.forEach((item, index) => {
+            if (item.type === "label") {
+                add("🔊 朗讀此文字區",
+                    "只朗讀第 " + panel.panelId + " 格短標題：" + item.sourceText,
+                    [item], "已朗讀 X-rays 第 " + panel.panelId + " 格短標題。");
+            } else {
+                const sentenceNumber = panel.items.filter(candidate =>
+                    candidate.type === "sentence").indexOf(item) + 1;
+                add("🔊 朗讀此句" + (panel.items.filter(candidate =>
+                    candidate.type === "sentence").length > 1 ? "（" + sentenceNumber + "）" : ""),
+                    "只朗讀第 " + panel.panelId + " 格完整句：" + item.sourceText,
+                    [item], "已朗讀 X-rays 第 " + panel.panelId + " 格所選句子。");
+            }
+        });
+        add("🔊 朗讀本格", "依序朗讀本格短標題與完整句子",
+            panel.items, "X-rays 第 " + panel.panelId + " 格已朗讀完成。");
+        add("🔊 朗讀全圖", "依 P1 至 P4 順序朗讀四格的四個短標題與五個完整句子",
+            allItems, "X-rays 全圖已朗讀完成。");
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
+    }
 
     if (isEnglishTyphoonsImageTTSRecord(safeRecord)) {
         const clicked = trigger._englishImageTTSImageTextItem;

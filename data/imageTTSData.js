@@ -21540,4 +21540,121 @@ const imageTTSData = {
             }
         ]
     },
+
+    "images/english/x-ray-wilhelm-rontgen-basics.png": {
+        imageId: "x-ray-wilhelm-rontgen-basics",
+        assetFile: "images/english/x-ray-wilhelm-rontgen-basics.png",
+        contentType: "image-text",
+        layout: "custom-xrays-2x2-text-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1254, height: 1254 },
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 4 / 1254 * 100, yPct: 4 / 1254 * 100,
+                    widthPct: 618 / 1254 * 100, heightPct: 611 / 1254 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Before X-rays", ttsText: "Before X-rays",
+                        bounds: { xPct: 142 / 1254 * 100, yPct: 25 / 1254 * 100,
+                            widthPct: 336 / 1254 * 100, heightPct: 52 / 1254 * 100 },
+                        tapRegion: { xPct: 10.765550, yPct: 0.797448,
+                            widthPct: 28.309410, heightPct: 13.476874 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "Doctors could only guess\nwhat was inside the body.",
+                        ttsText: "Doctors could only guess\nwhat was inside the body.",
+                        bounds: { xPct: 50 / 1254 * 100, yPct: 95 / 1254 * 100,
+                            widthPct: 420 / 1254 * 100, heightPct: 85 / 1254 * 100 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 632 / 1254 * 100, yPct: 4 / 1254 * 100,
+                    widthPct: 618 / 1254 * 100, heightPct: 611 / 1254 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Wilhelm Röntgen’s discovery", ttsText: "Wilhelm Röntgen’s discovery",
+                        bounds: { xPct: 760 / 1254 * 100, yPct: 22 / 1254 * 100,
+                            widthPct: 464 / 1254 * 100, heightPct: 54 / 1254 * 100 },
+                        tapRegion: { xPct: 71.770335, yPct: 7.177033,
+                            widthPct: 26.315789, heightPct: 10.366826 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "In 1895, Wilhelm Röntgen discovered\na new kind of ray that could pass\nthrough some materials.",
+                        ttsText: "In 1895, Wilhelm Röntgen discovered\na new kind of ray that could pass\nthrough some materials.",
+                        bounds: { xPct: 668 / 1254 * 100, yPct: 94 / 1254 * 100,
+                            widthPct: 546 / 1254 * 100, heightPct: 116 / 1254 * 100 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 4 / 1254 * 100, yPct: 628 / 1254 * 100,
+                    widthPct: 618 / 1254 * 100, heightPct: 622 / 1254 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Seeing inside the body", ttsText: "Seeing inside the body",
+                        bounds: { xPct: 140 / 1254 * 100, yPct: 650 / 1254 * 100,
+                            widthPct: 432 / 1254 * 100, heightPct: 58 / 1254 * 100 },
+                        tapRegion: { xPct: 3.588517, yPct: 58.771930,
+                            widthPct: 13.955343, heightPct: 11.802233 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "X-rays can pass through soft tissue\nbut are more easily absorbed\nby bones, so they can create images\nof the skeleton.",
+                        ttsText: "X-rays can pass through soft tissue\nbut are more easily absorbed\nby bones, so they can create images\nof the skeleton.",
+                        bounds: { xPct: 49 / 1254 * 100, yPct: 726 / 1254 * 100,
+                            widthPct: 555 / 1254 * 100, heightPct: 165 / 1254 * 100 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 632 / 1254 * 100, yPct: 628 / 1254 * 100,
+                    widthPct: 618 / 1254 * 100, heightPct: 622 / 1254 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "Changing medicine", ttsText: "Changing medicine",
+                        bounds: { xPct: 770 / 1254 * 100, yPct: 650 / 1254 * 100,
+                            widthPct: 404 / 1254 * 100, heightPct: 56 / 1254 * 100 },
+                        tapRegion: { xPct: 52.631579, yPct: 58.851675,
+                            widthPct: 13.556619, heightPct: 13.237640 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "X-rays help doctors find broken bones\nand see inside the body.",
+                        ttsText: "X-rays help doctors find broken bones\nand see inside the body.",
+                        bounds: { xPct: 665 / 1254 * 100, yPct: 720 / 1254 * 100,
+                            widthPct: 548 / 1254 * 100, heightPct: 76 / 1254 * 100 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence",
+                        sourceText: "They greatly improved\nmedical diagnosis\nand treatment.",
+                        ttsText: "They greatly improved\nmedical diagnosis\nand treatment.",
+                        bounds: { xPct: 665 / 1254 * 100, yPct: 802 / 1254 * 100,
+                            widthPct: 330 / 1254 * 100, heightPct: 112 / 1254 * 100 } }
+                ]
+            }
+        ],
+        tapRegions: [
+            {
+                regionId: "p3-body-mid-a",
+                panelId: 3,
+                menuOwnerItemId: 1,
+                coveredItemIds: [2],
+                bounds: { xPct: 18.341308, yPct: 57.974482,
+                    widthPct: 8.452951, heightPct: 8.452951 }
+            },
+            {
+                regionId: "p3-body-mid-b",
+                panelId: 3,
+                menuOwnerItemId: 1,
+                coveredItemIds: [2],
+                bounds: { xPct: 27.591707, yPct: 57.974482,
+                    widthPct: 8.452951, heightPct: 8.452951 }
+            },
+            {
+                regionId: "p4-body-upper-right",
+                panelId: 4,
+                menuOwnerItemId: 1,
+                coveredItemIds: [2],
+                bounds: { xPct: 66.985646, yPct: 57.416268,
+                    widthPct: 8.452951, heightPct: 8.452951 }
+            }
+        ]
+    },
 };
