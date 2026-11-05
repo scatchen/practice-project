@@ -3390,6 +3390,7 @@ const englishTTSState = {
     humanHealthViewportCleanup: null,
     typhoonsViewportCleanup: null,
     xraysViewportCleanup: null,
+    muscularSystemViewportCleanup: null,
     stopPositionFrame: 0,
     responseObserver: null,
     collocationReplayTimer: 0,
@@ -4884,6 +4885,146 @@ function placeEnglishXRaysImageTTSStopButton(button, wrapper, record, panel, ite
 }
 
 
+function placeEnglishMuscularSystemImageTTSStopButton(button, wrapper, record, panel, item) {
+    const fail = () => {
+        if (button) { button.hidden = true; button.style.visibility = "hidden"; }
+        return false;
+    };
+    const trigger = englishTTSState.activeSpeechTrigger;
+    const canonical = getEnglishImageTTSRecord(ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE);
+    const image = wrapper && wrapper.querySelector("img");
+    if (!button || !wrapper || wrapper.isConnected === false || !trigger ||
+        !isEnglishMuscularSystemImageTTSRecord(record) || !canonical ||
+        canonical.panels !== record.panels || wrapper.dataset.imageTtsAssetFile !== ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE ||
+        !panel || panel !== record.panels.find(candidate => candidate.panelId === panel.panelId) ||
+        !item || !panel.items.includes(item) || !isEnglishMuscularSystemImageTTSItemText(record, item) ||
+        trigger._englishImageTTSImageTextRecord !== record ||
+        trigger._englishImageTTSImageTextActivePanel !== panel ||
+        trigger._englishImageTTSImageTextActiveItem !== item ||
+        !image || image.getAttribute("src") !== ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE ||
+        !image.complete || image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+        typeof document.elementFromPoint !== "function" ||
+        (!isEnglishImageTTSDrawingMode() &&
+            !layoutEnglishMuscularSystemImageTTSHitAreas(wrapper))) return fail();
+    let imageRect;
+    try { imageRect = image.getBoundingClientRect(); } catch (error) { return fail(); }
+    if (!imageRect || ![imageRect.left, imageRect.top, imageRect.right, imageRect.bottom,
+        imageRect.width, imageRect.height].every(Number.isFinite) ||
+        imageRect.width < 528 || imageRect.height < 352) return fail();
+    const avoidRects = [];
+    try {
+        document.querySelectorAll(
+            ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+            ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+            "#english-tts-speak-selection:not([hidden]), button:not(#english-tts-floating-stop), " +
+            "[role='button'], input, select, textarea").forEach(element => {
+            if (!element || element === button || wrapper.contains(element) || element.hidden) return;
+            const style = window.getComputedStyle(element);
+            if (!style || style.display === "none" || style.visibility === "hidden" ||
+                style.visibility === "collapse") return;
+            const rect = element.getBoundingClientRect();
+            if (!rect || ![rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height]
+                .every(Number.isFinite)) throw new Error("Unreadable visible control");
+            if (rect.width > 0 && rect.height > 0) {
+                avoidRects.push({ left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom });
+            }
+        });
+    } catch (error) { return fail(); }
+    if (!placeEnglishImageTTSStoryStopButton(button, wrapper, {
+        bounds: { xPct: 0, yPct: 0, widthPct: 100, heightPct: 100 },
+        avoidBounds: [{ xPct: 0, yPct: 0, widthPct: 100, heightPct: 100 }],
+        avoidRects
+    }, {
+        preferBelow: true, scanForClearPosition: true, strictAvoidance: true,
+        fixedStopSize: true, fixedStopClass: "is-image-tts-image-text-stop-control",
+        fixedStopWidth: 52, fixedStopHeight: 52, fixedStopText: "⏹",
+        fixedStopAriaLabel: "停止 The Muscular System & Muscles 英文朗讀",
+        stopControlClass: "is-image-tts-image-text-stop-control"
+    })) return fail();
+    if (button.hidden || button.disabled || button.isConnected === false ||
+        button.getAttribute("aria-disabled") === "true") return fail();
+    const visual = window.visualViewport;
+    const left = visual && Number.isFinite(visual.offsetLeft) ? visual.offsetLeft : 0;
+    const top = visual && Number.isFinite(visual.offsetTop) ? visual.offsetTop : 0;
+    const width = visual && Number.isFinite(visual.width) && visual.width > 0
+        ? visual.width : window.innerWidth;
+    const height = visual && Number.isFinite(visual.height) && visual.height > 0
+        ? visual.height : window.innerHeight;
+    const inset = name => {
+        try {
+            const value = parseFloat(window.getComputedStyle(button).getPropertyValue(name));
+            return Number.isFinite(value) && value > 0 ? value : 0;
+        } catch (error) { return 0; }
+    };
+    let rect, style;
+    try { rect = button.getBoundingClientRect(); style = window.getComputedStyle(button); }
+    catch (error) { return fail(); }
+    const safeLeft = left + inset("--english-tts-safe-left") + 8;
+    const safeTop = top + inset("--english-tts-safe-top") + 8;
+    const safeRight = left + width - inset("--english-tts-safe-right") - 8;
+    const safeBottom = top + height - inset("--english-tts-safe-bottom") - 8;
+    const intersects = (a, b) => a.left < b.right && a.right > b.left &&
+        a.top < b.bottom && a.bottom > b.top;
+    if (!rect || !style ||
+        ![rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height].every(Number.isFinite) ||
+        Math.abs(rect.width - (rect.right - rect.left)) > 0.75 ||
+        Math.abs(rect.height - (rect.bottom - rect.top)) > 0.75 ||
+        style.display === "none" || style.visibility !== "visible" ||
+        style.pointerEvents === "none" || rect.width < 52 || rect.height < 52 ||
+        rect.left < safeLeft || rect.top < safeTop || rect.right > safeRight || rect.bottom > safeBottom ||
+        intersects(rect, imageRect) || avoidRects.some(other => intersects(rect, other))) return fail();
+    const insetHit = Math.min(6, rect.width / 4, rect.height / 4);
+    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    const points = [[cx, cy], [rect.left + insetHit, cy], [rect.right - insetHit, cy],
+        [cx, rect.top + insetHit], [cx, rect.bottom - insetHit]];
+    try {
+        for (const [x, y] of points) {
+            const hit = document.elementFromPoint(x, y);
+            if (!hit || hit !== button && !button.contains(hit)) return fail();
+        }
+    } catch (error) { return fail(); }
+    return true;
+}
+
+function failEnglishMuscularSystemImageTTSSequence(trigger) {
+    if (englishTTSState.imageTextSequenceTrigger === trigger) {
+        cancelEnglishImageTTSImageTextSequence(true);
+    }
+    setEnglishTTSStatus("The Muscular System & Muscles：找不到可見、位於圖片外且可實際點擊的 Stop 位置，朗讀已拒絕或取消。");
+    updateEnglishTTSControls();
+    return false;
+}
+
+function watchEnglishMuscularSystemImageTTSViewport(trigger, wrapper, generation) {
+    const check = () => {
+        if (generation !== englishTTSState.imageTextSequenceGeneration ||
+            englishTTSState.imageTextSequenceTrigger !== trigger) return;
+        const panel = trigger._englishImageTTSImageTextActivePanel;
+        const item = trigger._englishImageTTSImageTextActiveItem;
+        if (!placeEnglishMuscularSystemImageTTSStopButton(
+            getEnglishTTSFloatingStopButton(), wrapper,
+            trigger._englishImageTTSImageTextRecord, panel, item)) {
+            failEnglishMuscularSystemImageTTSSequence(trigger);
+        }
+    };
+    const visual = window.visualViewport;
+    const targets = [[window, "scroll", true], [window, "resize", false],
+        [window, "orientationchange", false], [document, "scroll", true]];
+    if (visual) targets.push([visual, "scroll", false], [visual, "resize", false]);
+    targets.forEach(([target, type, capture]) => {
+        if (target && typeof target.addEventListener === "function") {
+            target.addEventListener(type, check, capture);
+        }
+    });
+    englishTTSState.muscularSystemViewportCleanup = () => {
+        targets.forEach(([target, type, capture]) => {
+            if (target && typeof target.removeEventListener === "function") {
+                target.removeEventListener(type, check, capture);
+            }
+        });
+    };
+}
+
 function failEnglishXRaysImageTTSSequence(trigger) {
     if (englishTTSState.imageTextSequenceTrigger === trigger) {
         cancelEnglishImageTTSImageTextSequence(true);
@@ -5069,6 +5210,12 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
     }
     const isTyphoonsImageText = record.imageId === ENGLISH_TYPHOONS_IMAGE_ID &&
         record.assetFile === ENGLISH_TYPHOONS_ASSET_FILE;
+    if (record.imageId === ENGLISH_MUSCULAR_SYSTEM_IMAGE_ID &&
+        record.assetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE) {
+        return placeEnglishMuscularSystemImageTTSStopButton(
+            button, wrapper, validatedRecord, safePanel, safeItem
+        );
+    }
     if (record.imageId === ENGLISH_XRAYS_IMAGE_ID &&
         record.assetFile === ENGLISH_XRAYS_ASSET_FILE) {
         return placeEnglishXRaysImageTTSStopButton(
@@ -5982,9 +6129,10 @@ function cancelEnglishImageTTSImageTextSequence(cancelCurrentUtterance = false) 
     const humanHealthViewportCleanup = englishTTSState.humanHealthViewportCleanup;
     const typhoonsViewportCleanup = englishTTSState.typhoonsViewportCleanup;
     const xraysViewportCleanup = englishTTSState.xraysViewportCleanup;
+    const muscularSystemViewportCleanup = englishTTSState.muscularSystemViewportCleanup;
     const hadSequence = Boolean(sequenceTrigger || englishTTSState.imageTextSequenceTimer ||
         viewportCleanup || humanHealthViewportCleanup || typhoonsViewportCleanup ||
-        xraysViewportCleanup);
+        xraysViewportCleanup || muscularSystemViewportCleanup);
     if (!hadSequence) {
         return;
     }
@@ -6003,6 +6151,10 @@ function cancelEnglishImageTTSImageTextSequence(cancelCurrentUtterance = false) 
     if (xraysViewportCleanup) {
         englishTTSState.xraysViewportCleanup = null;
         xraysViewportCleanup();
+    }
+    if (muscularSystemViewportCleanup) {
+        englishTTSState.muscularSystemViewportCleanup = null;
+        muscularSystemViewportCleanup();
     }
     if (englishTTSState.imageTextSequenceTimer) {
         window.clearTimeout(englishTTSState.imageTextSequenceTimer);
@@ -11106,6 +11258,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishMuscularSystemImageTTSItemText(record, item)) return true;
     if (isEnglishXRaysImageTTSItemText(record, item)) return true;
     if (isEnglishWaterCycleImageTTSItemText(record, item)) return true;
     if (isEnglishTyphoonsImageTTSItemText(record, item)) return true;
@@ -11692,6 +11845,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishMuscularSystemImageTTSRecord(record)) return "The Muscular System & Muscles";
     if (isEnglishTyphoonsImageTTSRecord(record)) return "Typhoons & Tropical Storms";
     if (isEnglishXRaysImageTTSRecord(record)) {
         return "X-rays — Wilhelm Röntgen";
@@ -15211,6 +15365,226 @@ function isEnglishXRaysImageTTSItemText(record, item) {
         safe.panels.some(panel => panel.items.includes(item)));
 }
 
+const ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE =
+    "images/english/muscular-system-and-muscles-basics.png";
+const ENGLISH_MUSCULAR_SYSTEM_IMAGE_ID = "muscular-system-and-muscles-basics";
+function getEnglishMuscularSystemExpectedPanels() {
+    const b = (x, y, width, height) => ({
+        xPct: x / 1536 * 100, yPct: y / 1024 * 100,
+        widthPct: width / 1536 * 100, heightPct: height / 1024 * 100
+    });
+    return [
+        { panelId: 1, readingOrder: 1, bounds: b(4, 130, 759, 442), items: [
+            [1, "label", "The Muscular System & Muscles"],
+            [2, "label", "Muscles"],
+            [3, "sentence", "muscles\nhelp us move\nour body."],
+            [4, "sentence", "Muscles are soft\ntissues in our body."],
+            [5, "sentence", "They can contract\nand relax to help\nus move."],
+            [6, "label", "chest muscle"],
+            [7, "label", "arm muscle"],
+            [8, "label", "leg muscle"]
+        ] },
+        { panelId: 2, readingOrder: 2, bounds: b(773, 130, 759, 442), items: [
+            [1, "label", "Muscles Contract"],
+            [2, "sentence", "Muscles can\ncontract\n(tighten) and\nrelax to\ncreate\nmovement."],
+            [3, "label", "relaxed muscle"],
+            [4, "label", "contracted muscle"],
+            [5, "label", "muscle relaxed"],
+            [6, "label", "muscle contracted"]
+        ] },
+        { panelId: 3, readingOrder: 3, bounds: b(4, 584, 759, 436), items: [
+            [1, "label", "Muscles & Bones"],
+            [2, "sentence", "Muscles are\nattached to bones\nwith tendons."],
+            [3, "sentence", "When a muscle\ncontracts, it pulls\non a bone and\nmoves the joint."],
+            [4, "label", "muscle"],
+            [5, "label", "tendon"],
+            [6, "label", "joint"],
+            [7, "label", "bone"]
+        ] },
+        { panelId: 4, readingOrder: 4, bounds: b(773, 584, 759, 436), items: [
+            [1, "label", "Movement"],
+            [2, "sentence", "Muscles work with\nbones and joints\nto help us move\nin many ways."],
+            [3, "sentence", "Muscles help us\nwalk, run, jump, lift,\nand do many activities\nevery day."]
+        ] }
+    ];
+}
+
+function getEnglishMuscularSystemExpectedTapRegions() {
+    const b = (x, y, width, height) => ({
+        xPct: x / 1536 * 100, yPct: y / 1024 * 100,
+        widthPct: width / 1536 * 100, heightPct: height / 1024 * 100
+    });
+    return [
+        { regionId: "p1-main-text", panelId: 1, menuOwnerItemId: 2,
+            coveredItemIds: [3], bounds: b(34, 202, 151, 128) },
+        { regionId: "p1-speech-bubble", panelId: 1, menuOwnerItemId: 2,
+            coveredItemIds: [4, 5], bounds: b(448, 190, 282, 173) },
+        { regionId: "p2-speech-bubble", panelId: 2, menuOwnerItemId: 1,
+            coveredItemIds: [2], bounds: b(1356, 233, 150, 203) },
+        { regionId: "p3-speech-bubble", panelId: 3, menuOwnerItemId: 1,
+            coveredItemIds: [3], bounds: b(524, 686, 205, 144) },
+        { regionId: "p4-speech-bubble", panelId: 4, menuOwnerItemId: 1,
+            coveredItemIds: [3], bounds: b(1246, 611, 264, 145) }
+    ];
+}
+
+function isEnglishMuscularSystemImageTTSRecord(record) {
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE] : null;
+    return Boolean(record && canonical && record === canonical &&
+        record.imageId === ENGLISH_MUSCULAR_SYSTEM_IMAGE_ID &&
+        record.assetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE &&
+        record.contentType === "image-text" &&
+        record.layout === "custom-muscular-system-2x2-text-menu" &&
+        record.coordinateStatus === "estimated" &&
+        record.overlayRuntimeStatus === "not-tested" && record.panels === canonical.panels);
+}
+
+function getEnglishMuscularSystemImageTextRecord(record, assetFile) {
+    const file = ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE;
+    const expected = getEnglishMuscularSystemExpectedPanels();
+    const expectedRegions = getEnglishMuscularSystemExpectedTapRegions();
+    const exact = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const rectKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validRect = value => exact(value, rectKeys) &&
+        rectKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const sameRect = (actual, wanted) => validRect(actual) &&
+        rectKeys.every(key => actual[key] === wanted[key]);
+    const contains = (outer, inner) => validRect(outer) && validRect(inner) &&
+        inner.xPct >= outer.xPct - 1e-7 && inner.yPct >= outer.yPct - 1e-7 &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct + 1e-7 &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct + 1e-7;
+    const overlaps = (a, b) => a.xPct < b.xPct + b.widthPct &&
+        a.xPct + a.widthPct > b.xPct && a.yPct < b.yPct + b.heightPct &&
+        a.yPct + a.heightPct > b.yPct;
+    if (!exact(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels", "tapRegions"]) ||
+        record.imageId !== ENGLISH_MUSCULAR_SYSTEM_IMAGE_ID || record.assetFile !== file ||
+        assetFile !== file || typeof imageTTSData === "undefined" || !imageTTSData ||
+        imageTTSData[file] !== record || record.contentType !== "image-text" ||
+        record.layout !== "custom-muscular-system-2x2-text-menu" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== 4 ||
+        !Array.isArray(record.tapRegions) || record.tapRegions.length !== expectedRegions.length) return null;
+
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === ENGLISH_MUSCULAR_SYSTEM_IMAGE_ID || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_MUSCULAR_SYSTEM_IMAGE_ID || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file || library.length !== 1 ||
+        library[0].id !== ENGLISH_MUSCULAR_SYSTEM_IMAGE_ID || library[0].file !== file ||
+        library[0].category !== "english") return null;
+
+    const panelBounds = [], textBounds = [];
+    let itemCount = 0;
+    for (let p = 0; p < expected.length; p += 1) {
+        const panel = record.panels[p], wantedPanel = expected[p];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== wantedPanel.panelId || panel.readingOrder !== wantedPanel.readingOrder ||
+            !sameRect(panel.bounds, wantedPanel.bounds) || !Array.isArray(panel.items) ||
+            panel.items.length !== wantedPanel.items.length) return null;
+        panelBounds.push(panel.bounds);
+        for (let i = 0; i < wantedPanel.items.length; i += 1) {
+            const item = panel.items[i], [itemId, type, sourceText] = wantedPanel.items[i];
+            const isCanonicalAmpersandTitle = Boolean(item && (
+                p === 0 && itemId === 1 && type === "label" &&
+                    sourceText === "The Muscular System & Muscles" &&
+                    item.sourceText === "The Muscular System & Muscles" &&
+                    item.ttsText === "The Muscular System & Muscles" ||
+                p === 2 && itemId === 1 && type === "label" &&
+                    sourceText === "Muscles & Bones" &&
+                    item.sourceText === "Muscles & Bones" &&
+                    item.ttsText === "Muscles & Bones"));
+            if (!exact(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]) ||
+                item.itemId !== itemId || item.readingOrder !== i + 1 || item.type !== type ||
+                item.sourceText !== sourceText || item.ttsText !== sourceText ||
+                !validRect(item.bounds) || !contains({ xPct: 0, yPct: 0,
+                    widthPct: 100, heightPct: 100 }, item.bounds) ||
+                !(p === 0 && itemId === 1) && !contains(panel.bounds, item.bounds) ||
+                !(isCanonicalAmpersandTitle || getEnglishTTSUnitText(item.ttsText))) return null;
+            textBounds.push(item.bounds);
+            itemCount += 1;
+        }
+    }
+    if (itemCount !== 24) return null;
+    for (let i = 0; i < panelBounds.length; i += 1) {
+        for (let j = i + 1; j < panelBounds.length; j += 1) {
+            if (overlaps(panelBounds[i], panelBounds[j])) return null;
+        }
+    }
+    for (let i = 0; i < textBounds.length; i += 1) {
+        for (let j = i + 1; j < textBounds.length; j += 1) {
+            if (overlaps(textBounds[i], textBounds[j])) return null;
+        }
+    }
+
+    const tapRegions = [];
+    for (let index = 0; index < expectedRegions.length; index += 1) {
+        const region = record.tapRegions[index], wanted = expectedRegions[index];
+        const panel = record.panels.find(candidate => candidate.panelId === wanted.panelId);
+        const owner = panel && panel.items.find(item => item.itemId === wanted.menuOwnerItemId);
+        const covered = panel && wanted.coveredItemIds.map(itemId =>
+            panel.items.find(item => item.itemId === itemId));
+        if (!exact(region, ["regionId", "panelId", "menuOwnerItemId", "coveredItemIds", "bounds"]) ||
+            region.regionId !== wanted.regionId || region.panelId !== wanted.panelId ||
+            region.menuOwnerItemId !== wanted.menuOwnerItemId || !owner || owner.type !== "label" ||
+            !Array.isArray(region.coveredItemIds) ||
+            region.coveredItemIds.length !== wanted.coveredItemIds.length ||
+            region.coveredItemIds.some((id, itemIndex) => id !== wanted.coveredItemIds[itemIndex]) ||
+            !sameRect(region.bounds, wanted.bounds) || !contains(panel.bounds, region.bounds) ||
+            !covered || covered.some(item => !item || !contains(region.bounds, item.bounds))) return null;
+        for (const width of [528, 540, 600, 768, 900]) {
+            const height = width * 1024 / 1536;
+            if (region.bounds.widthPct * width / 100 + 1e-7 < 44 ||
+                region.bounds.heightPct * height / 100 + 1e-7 < 44) return null;
+        }
+        tapRegions.push(region.bounds);
+    }
+    for (let i = 0; i < tapRegions.length; i += 1) {
+        for (let j = i + 1; j < tapRegions.length; j += 1) {
+            if (overlaps(tapRegions[i], tapRegions[j])) return null;
+        }
+    }
+    return record;
+}
+
+function getEnglishMuscularSystemImageTTSRegions(record) {
+    if (!isEnglishMuscularSystemImageTTSRecord(record)) return [];
+    return getEnglishMuscularSystemExpectedTapRegions().map(wanted => {
+        const panel = record.panels.find(candidate => candidate.panelId === wanted.panelId);
+        const item = panel && panel.items.find(candidate => candidate.itemId === wanted.menuOwnerItemId);
+        const actual = record.tapRegions.find(candidate => candidate.regionId === wanted.regionId);
+        return {
+            regionId: wanted.regionId, panelId: wanted.panelId,
+            menuOwnerItemId: wanted.menuOwnerItemId,
+            coveredItemIds: wanted.coveredItemIds.slice(), bounds: actual && actual.bounds,
+            panel, item
+        };
+    });
+}
+
+function isEnglishMuscularSystemImageTTSItemText(record, item) {
+    if (!isEnglishMuscularSystemImageTTSRecord(record) || !item ||
+        item.sourceText !== item.ttsText) return false;
+    const safe = getEnglishMuscularSystemImageTextRecord(
+        imageTTSData[ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE], ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE);
+    return Boolean(safe && record.panels === safe.panels &&
+        safe.panels.some(panel => panel.items.includes(item)));
+}
+
 function isEnglishAnimalsWildlifeImageTTSRecord(record) {
     const file="images/english/animals-wildlife-basics.png";
     const canonical=typeof imageTTSData!=="undefined"&&imageTTSData?imageTTSData[file]:null;
@@ -15449,6 +15823,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_MUSCULAR_SYSTEM_IMAGE_ID ||
+            record.assetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE)) {
+        return getEnglishMuscularSystemImageTextRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_TYPHOONS_ASSET_FILE || record &&
         (record.imageId === ENGLISH_TYPHOONS_IMAGE_ID ||
             record.assetFile === ENGLISH_TYPHOONS_ASSET_FILE)) {
@@ -18184,6 +18563,280 @@ function layoutEnglishTyphoonsImageTTSHitAreas(wrapper) {
     return enabled > 0;
 }
 
+function layoutEnglishMuscularSystemImageTTSHitAreas(wrapper) {
+    const file = ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE;
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    const expected = getEnglishMuscularSystemExpectedTapRegions();
+    const hide = button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+    };
+    const failAll = () => {
+        buttons.forEach(hide);
+        if (englishImageTTSOverlayState.activeTrigger && wrapper &&
+            wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+        return false;
+    };
+    const finishLocal = (enabled = 0, closeBlockedMenu = false) => {
+        if (closeBlockedMenu) closeEnglishImageTTSMenu();
+        return enabled > 0;
+    };
+    if (!wrapper || !wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== file) return failAll();
+    if (!image || image.getAttribute("src") !== file) return failAll();
+    if (buttons.length !== 5) return failAll();
+    if (image.complete && (image.naturalWidth !== 1536 || image.naturalHeight !== 1024)) return failAll();
+    const record = getEnglishImageTTSRecord(file);
+    if (!record || !isEnglishMuscularSystemImageTTSRecord(record) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024) {
+        return failAll();
+    }
+    const regions = getEnglishMuscularSystemImageTTSRegions(record);
+    if (regions.length !== expected.length || regions.some(region =>
+        !region.panel || !region.item || !region.bounds)) return failAll();
+    const keyOf = (panelId, itemId, regionId) => [panelId, itemId, regionId].join(":");
+    const byKey = new Map();
+    for (const button of buttons) {
+        const key = keyOf(button.getAttribute("data-image-tts-panel-id"),
+            button.getAttribute("data-image-tts-item-id"),
+            button.getAttribute("data-image-tts-region-id"));
+        if (key.includes("null") || key.includes("undefined") || byKey.has(key)) return failAll();
+        byKey.set(key, button);
+    }
+    const candidates = [];
+    for (const region of regions) {
+        const button = byKey.get(keyOf(region.panelId, region.menuOwnerItemId, region.regionId));
+        const wanted = expected.find(candidate => candidate.regionId === region.regionId);
+        if (!button || !wanted || wanted.panelId !== region.panelId ||
+            wanted.menuOwnerItemId !== region.menuOwnerItemId ||
+            ["xPct", "yPct", "widthPct", "heightPct"].some(key =>
+                region.bounds[key] !== wanted.bounds[key]) ||
+            button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== region.panel ||
+            button._englishImageTTSImageTextItem !== region.item ||
+            !button._englishImageTTSImageTextRegion ||
+            button._englishImageTTSImageTextRegion.regionId !== region.regionId ||
+            button.getAttribute("data-image-tts-panel-id") !== String(region.panelId) ||
+            button.getAttribute("data-image-tts-item-id") !== String(region.menuOwnerItemId) ||
+            button.getAttribute("data-image-tts-region-id") !== region.regionId) return failAll();
+        candidates.push({ button, region });
+    }
+    if (byKey.size !== expected.length || candidates.length !== expected.length ||
+        expected.some(region => !byKey.has(keyOf(region.panelId, region.menuOwnerItemId, region.regionId)))) {
+        return failAll();
+    }
+    if (isEnglishImageTTSDrawingMode()) {
+        candidates.forEach(candidate => hide(candidate.button));
+        return false;
+    }
+    if (!image.complete || image.naturalWidth !== 1536 || image.naturalHeight !== 1024) {
+        candidates.forEach(candidate => hide(candidate.button));
+        return false;
+    }
+    const finiteRect = rect => rect &&
+        ["left", "top", "right", "bottom", "width", "height"].every(key =>
+            Number.isFinite(rect[key])) && rect.width > 0 && rect.height > 0;
+    const toRect = (base, bounds) => ({
+        left: base.left + base.width * bounds.xPct / 100,
+        top: base.top + base.height * bounds.yPct / 100,
+        right: base.left + base.width * (bounds.xPct + bounds.widthPct) / 100,
+        bottom: base.top + base.height * (bounds.yPct + bounds.heightPct) / 100
+    });
+    const contains = (outer, inner, tolerance = 0.75) =>
+        inner.left >= outer.left - tolerance && inner.top >= outer.top - tolerance &&
+        inner.right <= outer.right + tolerance && inner.bottom <= outer.bottom + tolerance;
+    const overlaps = (a, b) => a.left < b.right && a.right > b.left &&
+        a.top < b.bottom && a.bottom > b.top;
+    const percentMatches = (actual, expectedValue) => {
+        if (typeof actual !== "string" || !/^(?:\d+(?:\.\d*)?|\.\d+)%$/.test(actual.trim())) return false;
+        return Math.abs(Number(actual.trim().slice(0, -1)) - expectedValue) <= 1e-5;
+    };
+    let imageRect, wrapperRect, viewport;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+        const visual = window.visualViewport;
+        viewport = visual
+            ? { left: visual.offsetLeft, top: visual.offsetTop,
+                right: visual.offsetLeft + visual.width, bottom: visual.offsetTop + visual.height }
+            : { left: 0, top: 0,
+                right: document.documentElement && document.documentElement.clientWidth || window.innerWidth,
+                bottom: document.documentElement && document.documentElement.clientHeight || window.innerHeight };
+    } catch (error) { return failAll(); }
+    if (!finiteRect(imageRect) || !finiteRect(wrapperRect) || !viewport ||
+        ![viewport.left, viewport.top, viewport.right, viewport.bottom].every(Number.isFinite) ||
+        viewport.right <= viewport.left || viewport.bottom <= viewport.top) return failAll();
+    const intersectViewport = rect => ({
+        left: Math.max(rect.left, viewport.left), top: Math.max(rect.top, viewport.top),
+        right: Math.min(rect.right, viewport.right), bottom: Math.min(rect.bottom, viewport.bottom),
+        width: Math.min(rect.right, viewport.right) - Math.max(rect.left, viewport.left),
+        height: Math.min(rect.bottom, viewport.bottom) - Math.max(rect.top, viewport.top)
+    });
+    const menu = englishImageTTSOverlayState.menu;
+    let visibleMenu = false;
+    if (menu && englishImageTTSOverlayState.activeTrigger && !menu.hidden && menu.isConnected !== false) {
+        try {
+            const style = window.getComputedStyle(menu);
+            visibleMenu = Boolean(style && style.display !== "none" && style.visibility === "visible" &&
+                style.pointerEvents !== "none");
+        } catch (error) { visibleMenu = false; }
+    }
+    const saved = new Map();
+    const localIssues = new Map();
+    const markLocal = button => {
+        if (!localIssues.has(button)) localIssues.set(button, true);
+    };
+    for (const { button, region } of candidates) {
+        const expectedRect = toRect(imageRect, region.bounds);
+        const panelRect = toRect(imageRect, region.panel.bounds);
+        button._muscularExpectedRect = expectedRect;
+        if (!percentMatches(button.style.left, region.bounds.xPct) ||
+            !percentMatches(button.style.top, region.bounds.yPct) ||
+            !percentMatches(button.style.width, region.bounds.widthPct) ||
+            !percentMatches(button.style.height, region.bounds.heightPct)) markLocal(button);
+        const visible = intersectViewport(expectedRect);
+        if (expectedRect.right - expectedRect.left < 44 || expectedRect.bottom - expectedRect.top < 44) markLocal(button);
+        if (visible.width < 44 || visible.height < 44) markLocal(button);
+        if (!contains(imageRect, expectedRect) || !contains(panelRect, expectedRect) ||
+            !contains(wrapperRect, expectedRect)) markLocal(button);
+        saved.set(button, {
+            visibility: button.style.visibility, opacity: button.style.opacity,
+            pointerEvents: button.style.pointerEvents
+        });
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.visibility = "visible";
+        button.style.opacity = "0";
+        button.style.pointerEvents = "auto";
+    }
+    let controls = [], scanFailed = false;
+    try {
+        controls = Array.from(document.querySelectorAll(
+            ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+            ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+            "#english-tts-speak-selection:not([hidden]), button:not(#english-tts-floating-stop), " +
+            "[role='button'], input, select, textarea"));
+    } catch (error) { scanFailed = true; }
+    const hasHiddenAncestor = element => {
+        let current = element && element.parentElement;
+        while (current) {
+            if (current.hidden || current.hasAttribute && current.hasAttribute("hidden")) return true;
+            const style = window.getComputedStyle(current);
+            if (style && style.display === "none") return true;
+            current = current.parentElement;
+        }
+        return false;
+    };
+    const hitTest = (button, rect) => {
+        const visible = intersectViewport(rect);
+        if (visible.width < 44 || visible.height < 44) return false;
+        if (typeof document.elementFromPoint !== "function") return false;
+        const insetX = Math.min(6, visible.width / 4), insetY = Math.min(6, visible.height / 4);
+        const cx = (visible.left + visible.right) / 2, cy = (visible.top + visible.bottom) / 2;
+        const points = [[cx, cy], [visible.left + insetX, cy], [visible.right - insetX, cy],
+            [cx, visible.top + insetY], [cx, visible.bottom - insetY]];
+        try {
+            return points.every(([x, y]) => {
+                const hit = document.elementFromPoint(x, y);
+                const allowed = hit === button || button.contains(hit) || visibleMenu &&
+                    englishImageTTSOverlayState.activeTrigger === button && (hit === menu || menu.contains(hit));
+                return allowed;
+            });
+        } catch (error) {
+            return false;
+        }
+    };
+    const measured = [];
+    for (const { button } of candidates) {
+        if (scanFailed) markLocal(button);
+        try {
+            const style = window.getComputedStyle(button), rect = button.getBoundingClientRect();
+            const expectedRect = button._muscularExpectedRect;
+            const region = candidates.find(candidate => candidate.button === button).region;
+            const panelRect = toRect(imageRect, region.panel.bounds);
+            if (!style || button.hidden || style.display === "none" || style.visibility !== "visible" ||
+                style.pointerEvents === "none" || Number(style.opacity) !== 0 || hasHiddenAncestor(button) ||
+                !finiteRect(rect) || rect.width < 44 || rect.height < 44 ||
+                !contains(imageRect, rect) || !contains(panelRect, rect) || !contains(wrapperRect, rect) ||
+                ["left", "top", "right", "bottom"].some(key => Math.abs(rect[key] - expectedRect[key]) > 1)) {
+                markLocal(button);
+            }
+            for (const element of controls) {
+                if (!element || element === button || wrapper.contains(element) || element.hidden) continue;
+                const controlStyle = window.getComputedStyle(element);
+                if (!controlStyle || controlStyle.display === "none" ||
+                    controlStyle.visibility === "hidden" || controlStyle.visibility === "collapse") continue;
+                const controlRect = element.getBoundingClientRect();
+                const finiteZeroAreaRect = Boolean(controlRect &&
+                    ["left", "top", "right", "bottom", "width", "height"].every(key =>
+                        Number.isFinite(controlRect[key])) &&
+                    controlRect.width >= 0 && controlRect.height >= 0 &&
+                    controlRect.width === controlRect.right - controlRect.left &&
+                    controlRect.height === controlRect.bottom - controlRect.top &&
+                    (controlRect.width === 0 || controlRect.height === 0));
+                if (finiteZeroAreaRect) {
+                    // Continue with each collected control so visible parent or overlay candidates are still checked.
+                    continue;
+                }
+                if (!finiteRect(controlRect)) {
+                    markLocal(button);
+                    break;
+                }
+                const allowedMenu = visibleMenu && englishImageTTSOverlayState.activeTrigger === button &&
+                    (element === menu || menu.contains(element));
+                if (!allowedMenu && overlaps(rect, controlRect)) {
+                    markLocal(button);
+                    break;
+                }
+            }
+            if (!hitTest(button, rect)) markLocal(button);
+            if (!localIssues.has(button)) measured.push({ button, rect });
+        } catch (error) { markLocal(button); }
+    }
+    for (let i = 0; i < measured.length; i += 1) {
+        for (let j = i + 1; j < measured.length; j += 1) {
+            if (overlaps(measured[i].rect, measured[j].rect)) {
+                markLocal(measured[i].button);
+                markLocal(measured[j].button);
+            }
+        }
+    }
+    saved.forEach((style, button) => {
+        button.style.visibility = style.visibility || "";
+        button.style.opacity = style.opacity || "";
+        button.style.pointerEvents = style.pointerEvents || "";
+    });
+    let enabled = 0, closeBlockedMenu = false;
+    for (const { button } of candidates) {
+        if (!localIssues.has(button)) {
+            try {
+                const style = window.getComputedStyle(button), rect = button.getBoundingClientRect();
+                const expectedRect = button._muscularExpectedRect;
+                if (!style || !finiteRect(rect) || style.display === "none" ||
+                    style.visibility === "hidden" || style.pointerEvents === "none" ||
+                    rect.width < 44 || rect.height < 44 ||
+                    ["left", "top", "right", "bottom"].some(key => Math.abs(rect[key] - expectedRect[key]) > 1) ||
+                    !hitTest(button, rect)) markLocal(button);
+            } catch (error) { markLocal(button); }
+        }
+        if (!localIssues.has(button)) {
+            button.hidden = false;
+            button.disabled = false;
+            button.setAttribute("aria-disabled", "false");
+            enabled += 1;
+        } else {
+            hide(button);
+            if (englishImageTTSOverlayState.activeTrigger === button) closeBlockedMenu = true;
+        }
+        delete button._muscularExpectedRect;
+    }
+    return finishLocal(enabled, closeBlockedMenu);
+}
+
 function layoutEnglishXRaysImageTTSHitAreas(wrapper) {
     const file = ENGLISH_XRAYS_ASSET_FILE;
     const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
@@ -18578,6 +19231,11 @@ function layoutEnglishXRaysImageTTSHitAreas(wrapper) {
 
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
     if (wrapper && wrapper.dataset &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE) {
+        layoutEnglishMuscularSystemImageTTSHitAreas(wrapper);
+        return;
+    }
+    if (wrapper && wrapper.dataset &&
         wrapper.dataset.imageTtsAssetFile === ENGLISH_XRAYS_ASSET_FILE) {
         layoutEnglishXRaysImageTTSHitAreas(wrapper);
         return;
@@ -18636,6 +19294,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
     const panelLabel = getEnglishImageTTSImageTextPanelLabel(record, panel);
     const isXRaysTextArea = isEnglishXRaysImageTTSRecord(record) &&
         panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 1;
+    const isMuscularSystemTextArea = isEnglishMuscularSystemImageTTSRecord(record) &&
+        region && region.regionId;
     const isTyphoonsBubble = isEnglishTyphoonsImageTTSRecord(record) &&
         panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 2;
     const isHumanHealthBubble = isEnglishHumanHealthNutritionImageTTSRecord(record) &&
@@ -18656,13 +19316,18 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
     if (isXRaysTextArea) {
         button.setAttribute("aria-label", "X-rays 第 " + panel.panelId + " 格主文字區，開啟朗讀選項");
     }
+    if (isMuscularSystemTextArea) {
+        button.setAttribute("aria-label", "The Muscular System & Muscles 第 " +
+            panel.panelId + " 格文字區，開啟朗讀選項");
+    }
     button.setAttribute("aria-haspopup", "true");
     button.setAttribute("aria-expanded", "false");
     button.setAttribute("aria-controls", "english-image-tts-menu");
     button.setAttribute("data-english-tts-control", "true");
     button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
     button.setAttribute("data-image-tts-item-id", String(item.itemId));
-    if (isEnglishXRaysImageTTSRecord(record) && region && region.regionId) {
+    if ((isEnglishXRaysImageTTSRecord(record) ||
+        isEnglishMuscularSystemImageTTSRecord(record)) && region && region.regionId) {
         button.setAttribute("data-image-tts-region-id", region.regionId);
     }
     button.style.left = tapRegion.xPct + "%";
@@ -18680,7 +19345,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
         if (((isEnglishAnimalsAdaptationImageTTSRecord(record) ||
             isEnglishHumanHealthNutritionImageTTSRecord(record) ||
             isEnglishTyphoonsImageTTSRecord(record) ||
-            isEnglishXRaysImageTTSRecord(record)) && button.hidden) ||
+            isEnglishXRaysImageTTSRecord(record) ||
+            isEnglishMuscularSystemImageTTSRecord(record)) && button.hidden) ||
             button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
             return;
         }
@@ -19300,19 +19966,27 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         if (!wrapper) {
             return;
         }
+        const assetFile = image.getAttribute("src");
         if (wrapper.dataset.englishImageTtsEnhanced === "true") {
             return;
         }
         wrapper.dataset.englishImageTtsEnhanced = "true";
 
-        const assetFile = image.getAttribute("src");
         wrapper.dataset.imageTtsAssetFile = assetFile || "";
-        if (appState.subjectMode !== "english" || !englishTTSState.supported || !assetFile) {
+        if (appState.subjectMode !== "english") {
+            return;
+        }
+        if (!englishTTSState.supported) {
+            return;
+        }
+        if (!assetFile) {
             return;
         }
 
         const record = getEnglishImageTTSRecord(assetFile);
-        if (!record) return;
+        if (!record) {
+            return;
+        }
 
         if (record.contentType === "teaching-sentences") {
             if (image.complete && image.naturalWidth === 0) {
@@ -19337,6 +20011,39 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishMuscularSystemImageTTSRecord(record)) {
+                const hasExpectedDimensions = () => image.getAttribute("src") ===
+                    ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE && image.complete &&
+                    image.naturalWidth === 1536 && image.naturalHeight === 1024;
+                const hideMuscularSystemHitAreas = () => {
+                    wrapper.querySelectorAll(".image-tts-image-text-hit-area").forEach(button => {
+                        button.hidden = true;
+                        button.disabled = true;
+                        button.setAttribute("aria-disabled", "true");
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+                };
+                if (image.complete && !hasExpectedDimensions()) {
+                    return;
+                }
+                getEnglishMuscularSystemImageTTSRegions(record).forEach(region => {
+                    if (createEnglishImageTTSImageTextHitArea(
+                        wrapper, region.panel, region.item, record, region)) added += 1;
+                });
+                image.addEventListener("load", () => {
+                    if (!hasExpectedDimensions()) {
+                        hideMuscularSystemHitAreas();
+                        return;
+                    }
+                    if (!layoutEnglishMuscularSystemImageTTSHitAreas(wrapper)) hideMuscularSystemHitAreas();
+                }, { once: true });
+                image.addEventListener("error", () => {
+                    hideMuscularSystemHitAreas();
+                }, { once: true });
+                layoutEnglishMuscularSystemImageTTSHitAreas(wrapper);
+                return;
+            }
             if (isEnglishWaterCycleImageTTSRecord(record)) {
                 const expectedFile = ENGLISH_WATER_CYCLE_ASSET_FILE;
                 const hasExpectedDimensions = () => image.getAttribute("src") === expectedFile &&
@@ -19941,6 +20648,10 @@ function scheduleEnglishImageTTSLayout() {
             layoutEnglishImageTTSPanelSpeakers(wrapper);
             layoutEnglishImageTTSPlateausSideButtons(wrapper);
             layoutEnglishImageTTSKarstSideButtons(wrapper);
+            if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE) {
+                layoutEnglishMuscularSystemImageTTSHitAreas(wrapper);
+            }
             if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_MOUNTAINS_ASSET_FILE) {
                 layoutEnglishImageTTSMountainsHitAreas(wrapper);
             }
@@ -20009,6 +20720,10 @@ function syncEnglishImageTTSDrawingMode() {
     });
     document.querySelectorAll("#ai-response .image-tts-overlay-wrapper").forEach(wrapper => {
         layoutEnglishImageTTSKarstSideButtons(wrapper);
+        if (wrapper.dataset &&
+            wrapper.dataset.imageTtsAssetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE) {
+            layoutEnglishMuscularSystemImageTTSHitAreas(wrapper);
+        }
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === "images/english/animals-and-adaptation-basics.png") {
             layoutEnglishAnimalsAdaptationImageTTSHitAreas(wrapper);
@@ -20240,6 +20955,18 @@ function getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item) {
  return [item.ttsText];
 }
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishMuscularSystemImageTTSItemText(record, item)) {
+        const panel = record.panels.find(candidate => candidate.items.includes(item));
+        if (panel && panel.panelId === 1 && item.itemId === 1 && item.type === "label" &&
+            item.sourceText === "The Muscular System & Muscles" &&
+            item.ttsText === "The Muscular System & Muscles") {
+            return "The Muscular System and Muscles";
+        }
+        if (panel && panel.panelId === 3 && item.itemId === 1 && item.type === "label" &&
+            item.sourceText === "Muscles & Bones" && item.ttsText === "Muscles & Bones") {
+            return "Muscles and Bones";
+        }
+    }
     if (isEnglishTyphoonsImageTTSItemText(record, item)) {
         return getEnglishTTSUnitText(item.ttsText);
     }
@@ -20425,6 +21152,17 @@ function speakEnglishImageTTSImageTextSequence(
     const isPanelSequence = Boolean(record && record.panels.some(panel =>
         panel.items.length === itemList.length &&
         panel.items.every((item, index) => item === itemList[index])));
+    const isMuscularSystemImageText = Boolean(record &&
+        isEnglishMuscularSystemImageTTSRecord(record));
+    const isMuscularSystemSingleItemSequence = Boolean(isMuscularSystemImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const isMuscularSystemPanelSequence = Boolean(isMuscularSystemImageText &&
+        record.panels.some(panel => {
+            const units = panel.panelId === 1
+                ? panel.items.filter(item => item.itemId !== 1) : panel.items;
+            return units.length === itemList.length &&
+                units.every((item, index) => item === itemList[index]);
+        }));
     const isWholeImageSequence = Boolean(record && allItems.length === itemList.length &&
         allItems.every((item, index) => item === itemList[index]));
     const isHobbiesSingleItemSequence = Boolean(record &&
@@ -20512,6 +21250,15 @@ function speakEnglishImageTTSImageTextSequence(
         xraysImage && xraysImage.getAttribute("src") === ENGLISH_XRAYS_ASSET_FILE &&
         xraysImage.complete && xraysImage.naturalWidth === 1254 &&
         xraysImage.naturalHeight === 1254);
+    const muscularImage = isMuscularSystemImageText ? wrapper.querySelector("img") : null;
+    const muscularButtons = isMuscularSystemImageText
+        ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
+    const muscularImageReady = !isMuscularSystemImageText || Boolean(
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE &&
+        muscularImage && muscularImage.getAttribute("src") === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE &&
+        muscularImage.complete && muscularImage.naturalWidth === 1536 && muscularImage.naturalHeight === 1024 &&
+        layoutEnglishMuscularSystemImageTTSHitAreas(wrapper) && muscularButtons.length === 5 &&
+        trigger && muscularButtons.includes(trigger) && !trigger.hidden && !trigger.disabled);
     const isTyphoonsImageText = Boolean(record && isEnglishTyphoonsImageTTSRecord(record));
     const isTyphoonsSingleItemSequence = Boolean(isTyphoonsImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
@@ -20601,7 +21348,7 @@ function speakEnglishImageTTSImageTextSequence(
         !triggerPanel ||
         triggerPanel !== record.panels.find(panel => panel.panelId === triggerPanel.panelId) ||
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
-        (!isPanelSequence && !isWholeImageSequence &&
+        (!isPanelSequence && !isMuscularSystemPanelSequence && !isWholeImageSequence &&
             !isEnergyTransformationsSingleItemSequence &&
             !isWaterCycleSingleItemSequence &&
             !isPlateausSingleItemSequence && !isKarstSingleItemSequence &&
@@ -20620,6 +21367,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isAnimalsWildlifeSingleItemSequence &&
             !isAnimalsAdaptationSingleItemSequence &&
             !isHumanHealthNutritionSingleItemSequence &&
+            !isMuscularSystemSingleItemSequence &&
             !isXRaysSingleItemSequence &&
             !isTyphoonsSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
@@ -20631,6 +21379,7 @@ function speakEnglishImageTTSImageTextSequence(
         !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady || !mountainsReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
         !animalsAdaptationImageReady || !humanHealthImageReady || !typhoonsImageReady ||
+        !muscularImageReady ||
         !xraysImageReady || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
@@ -20652,6 +21401,9 @@ function speakEnglishImageTTSImageTextSequence(
     }
     if (isXRaysImageText) {
         watchEnglishXRaysImageTTSViewport(trigger, wrapper, generation);
+    }
+    if (isMuscularSystemImageText) {
+        watchEnglishMuscularSystemImageTTSViewport(trigger, wrapper, generation);
     }
     if (isHumanHealthNutritionImageText) {
         watchEnglishHumanHealthNutritionImageTTSViewport(trigger, wrapper, generation);
@@ -20690,6 +21442,10 @@ function speakEnglishImageTTSImageTextSequence(
         if (isXRaysImageText &&
             !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
             return failEnglishXRaysImageTTSSequence(trigger);
+        }
+        if (isMuscularSystemImageText &&
+            !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+            return failEnglishMuscularSystemImageTTSSequence(trigger);
         }
         if (isHumanHealthNutritionImageText &&
             !placeEnglishImageTTSImageTextStopButton(
@@ -20748,6 +21504,10 @@ function speakEnglishImageTTSImageTextSequence(
                 !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
                 return failEnglishXRaysImageTTSSequence(trigger);
             }
+            if (isMuscularSystemImageText &&
+                !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+                return failEnglishMuscularSystemImageTTSSequence(trigger);
+            }
             if (isHumanHealthNutritionImageText &&
                 !placeEnglishImageTTSImageTextStopButton(
                     getEnglishTTSFloatingStopButton(), wrapper
@@ -20761,7 +21521,8 @@ function speakEnglishImageTTSImageTextSequence(
                 return failEnglishAnimalsAdaptationImageTTSSequence(trigger);
             }
             if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText ||
-                isTyphoonsImageText || isXRaysImageText) && !getSelectedLocalEnglishVoice()) {
+                isTyphoonsImageText || isXRaysImageText || isMuscularSystemImageText) &&
+                !getSelectedLocalEnglishVoice()) {
                 cancelEnglishImageTTSImageTextSequence(true);
                 setEnglishTTSStatus("本機英文聲線尚未載入；iPad Safari 可能仍在載入，請稍後再次點選朗讀。此功能只使用本機英文聲線。");
                 updateEnglishTTSControls();
@@ -20779,6 +21540,11 @@ function speakEnglishImageTTSImageTextSequence(
                 if (isXRaysImageText &&
                     !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
                     failEnglishXRaysImageTTSSequence(trigger);
+                    return;
+                }
+                if (isMuscularSystemImageText &&
+                    !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+                    failEnglishMuscularSystemImageTTSSequence(trigger);
                     return;
                 }
                 if (isHumanHealthNutritionImageText &&
@@ -20887,7 +21653,8 @@ function speakEnglishImageTTSImageTextSequence(
             if (!started && generation === englishTTSState.imageTextSequenceGeneration) {
                 cancelEnglishImageTTSImageTextSequence();
                 if ((isAnimalsAdaptationImageText || isHumanHealthNutritionImageText ||
-                    isTyphoonsImageText || isXRaysImageText) && !englishTTSState.voices.length) {
+                    isTyphoonsImageText || isXRaysImageText || isMuscularSystemImageText) &&
+                    !englishTTSState.voices.length) {
                     setEnglishTTSStatus("本機英文聲線尚未載入；iPad Safari 可能仍在載入，請稍後再次點選朗讀。此功能只使用本機英文聲線。");
                 }
                 updateEnglishTTSControls();
@@ -21167,6 +21934,80 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isEnglishMuscularSystemImageTTSRecord(safeRecord)) {
+        const clicked = trigger._englishImageTTSImageTextItem;
+        const region = trigger._englishImageTTSImageTextRegion;
+        const allItems = safeRecord.panels.flatMap(candidate => candidate.items);
+        const panelItems = panel && panel.panelId === 1
+            ? panel.items.filter(item => item.itemId !== 1)
+            : panel && panel.items.slice();
+        const image = wrapper.querySelector("img");
+        const hitAreas = Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area"));
+        const layoutReady = layoutEnglishMuscularSystemImageTTSHitAreas(wrapper);
+        const safeRegion = region && getEnglishMuscularSystemImageTTSRegions(safeRecord)
+            .find(candidate => candidate.regionId === region.regionId);
+        if (!panel || panel.panelId < 1 || panel.panelId > 4 || !clicked ||
+            clicked !== panel.items.find(item => item.itemId === safeRegion?.menuOwnerItemId) ||
+            !safeRegion || safeRegion.panel !== panel ||
+            trigger._englishImageTTSImageTextRecord !== safeRecord ||
+            !isEnglishMuscularSystemImageTTSItemText(safeRecord, clicked) ||
+            !image || image.getAttribute("src") !== ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE ||
+            !image.complete || image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+            allItems.length !== 24 || allItems.some(item =>
+                !isEnglishMuscularSystemImageTTSItemText(safeRecord, item)) ||
+            !panelItems || panelItems.length !== panel.items.length - (panel.panelId === 1 ? 1 : 0) ||
+            hitAreas.length !== 5 || !hitAreas.includes(trigger) ||
+            !layoutReady || trigger.hidden || trigger.disabled) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const fullImage = allItems;
+        const add = (label, description, items, completion) =>
+            menu.appendChild(createEnglishImageTTSMenuButton(label, description, () =>
+                speakEnglishImageTTSImageTextSequence(trigger, items, completion)));
+        menu.setAttribute("aria-label",
+            "Muscular System 第 " + panel.panelId + " 格朗讀選項");
+        add("🔊 朗讀本格", "依原圖順序朗讀第 " + panel.panelId + " 格標題、正文與標籤",
+            panelItems, "Muscular System 第 " + panel.panelId + " 格已朗讀完成。");
+        add("🔊 朗讀全圖", "先讀全圖標題，再依左上、右上、左下、右下順序朗讀四格",
+            fullImage, "The Muscular System & Muscles 全圖已朗讀完成。");
+        const sentenceToggle = createEnglishImageTTSMenuButton(
+            "單項選讀",
+            "展開第 " + panel.panelId + " 格的格標題、完整句子和標籤",
+            () => {
+                const list = menu.querySelector(".english-image-tts-sentences");
+                if (!list) return;
+                list.hidden = !list.hidden;
+                sentenceToggle.setAttribute("aria-expanded", String(!list.hidden));
+                scheduleEnglishImageTTSMenuPosition();
+            }
+        );
+        sentenceToggle.setAttribute("aria-expanded", "false");
+        const list = document.createElement("div");
+        list.className = "english-image-tts-sentences";
+        list.hidden = true;
+        panelItems.forEach((item, index) => {
+            list.appendChild(createEnglishImageTTSMenuButton(
+                "🔊 第 " + (index + 1) + " 項：" + item.sourceText.replace(/\r?\n/g, " "),
+                "單獨朗讀原圖文字：「" + item.sourceText + "」",
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger, [item], "已朗讀 Muscular System 所選文字。")));
+        });
+        menu.appendChild(sentenceToggle);
+        menu.appendChild(list);
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (menu.hidden) {
+            return;
+        }
+        if (menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
     }
 
     if (isEnglishEnergyTransformationsImageTTSRecord(safeRecord)) {
