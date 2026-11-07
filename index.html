@@ -3423,7 +3423,8 @@ const englishImageTTSOverlayState = {
     animalsAdaptationLayoutSettleTimer: 0,
     humanHealthLayoutSettleTimer: 0,
     typhoonsLayoutSettleTimer: 0,
-    xraysLayoutSettleTimer: 0
+    xraysLayoutSettleTimer: 0,
+    solarLayoutSettleTimer: 0
 };
 
 const ENGLISH_TTS_VOICE_KEY = "practiceProject.englishTTS.voice";
@@ -5341,6 +5342,11 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
     }
     const isTyphoonsImageText = record.imageId === ENGLISH_TYPHOONS_IMAGE_ID &&
         record.assetFile === ENGLISH_TYPHOONS_ASSET_FILE;
+    if (isEnglishSolarEnergyImageTTSRecord(record)) {
+        return placeEnglishSolarEnergyImageTTSStopButton(
+            button, wrapper, validatedRecord, safePanel, safeItem
+        );
+    }
     if (isEnglishCyclingImageTTSRecord(record)) {
         return placeEnglishCyclingImageTTSStopButton(
             button, wrapper, validatedRecord, safePanel, safeItem
@@ -5798,7 +5804,21 @@ function updateEnglishTTSControls() {
 
 function positionEnglishTTSFloatingStopButton() {
     const button = getEnglishTTSFloatingStopButton();
-    if (!button || appState.subjectMode !== "english") {
+    if (appState.subjectMode !== "english") {
+        return;
+    }
+    const solarSequenceTrigger = englishTTSState.imageTextSequenceTrigger;
+    if (solarSequenceTrigger && isEnglishSolarEnergyImageTTSRecord(
+        solarSequenceTrigger._englishImageTTSImageTextRecord
+    )) {
+        const solarWrapper = typeof solarSequenceTrigger.closest === "function"
+            ? solarSequenceTrigger.closest(".image-tts-overlay-wrapper") : null;
+        if (!button || !placeEnglishImageTTSImageTextStopButton(button, solarWrapper)) {
+            failEnglishSolarEnergyImageTTSSequence(solarSequenceTrigger);
+        }
+        return;
+    }
+    if (!button) {
         return;
     }
     const cyclingSequenceTrigger = englishTTSState.imageTextSequenceTrigger;
@@ -11405,6 +11425,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishSolarEnergyImageTTSItemText(record, item)) return true;
     if (isEnglishCyclingImageTTSItemText(record, item)) return true;
     if (isEnglishMuscularSystemImageTTSItemText(record, item)) return true;
     if (isEnglishXRaysImageTTSItemText(record, item)) return true;
@@ -11993,6 +12014,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishSolarEnergyImageTTSRecord(record)) return "Solar Energy";
     if (isEnglishCyclingImageTTSRecord(record)) return "Cycling and Riding a Bike";
     if (isEnglishMuscularSystemImageTTSRecord(record)) return "The Muscular System & Muscles";
     if (isEnglishTyphoonsImageTTSRecord(record)) return "Typhoons & Tropical Storms";
@@ -16113,6 +16135,311 @@ function getEnglishCampingTeachingTTSRecord(record, assetFile) {
     return record;
 }
 
+
+const ENGLISH_SOLAR_ENERGY_ASSET_FILE = "images/english/solar-energy-basics.png";
+const ENGLISH_SOLAR_ENERGY_IMAGE_ID = "solar-energy-basics";
+
+function getEnglishSolarEnergyExpectedPanels() {
+    const b = (x, y, width, height) => ({
+        xPct: x / 1254 * 100, yPct: y / 1254 * 100,
+        widthPct: width / 1254 * 100, heightPct: height / 1254 * 100
+    });
+    const item = (itemId, type, sourceText, textBounds, tapBounds) => ({
+        itemId, readingOrder: itemId, type, sourceText, ttsText: sourceText,
+        bounds: b(...textBounds), tapRegion: b(...tapBounds)
+    });
+    return [
+        { panelId: 1, readingOrder: 1, bounds: b(12, 10, 613, 612), items: [
+            item(1, "sentence", "The sun gives us light.",
+                [83, 48, 510, 54], [76, 18, 526, 105])
+        ] },
+        { panelId: 2, readingOrder: 2, bounds: b(633, 10, 611, 612), items: [
+            item(1, "sentence", "Solar panels collect sunlight.",
+                [719, 43, 480, 101], [710, 38, 502, 111])
+        ] },
+        { panelId: 3, readingOrder: 3, bounds: b(12, 633, 613, 611), items: [
+            item(1, "sentence", "Solar energy makes electricity.",
+                [120, 661, 437, 105], [114, 650, 447, 126])
+        ] },
+        { panelId: 4, readingOrder: 4, bounds: b(633, 633, 611, 611), items: [
+            item(1, "sentence", "We use solar energy at home.",
+                [709, 662, 487, 102], [704, 650, 492, 126]),
+            item(2, "label", "Clean Energy",
+                [1076, 850, 132, 78], [1070, 820, 144, 110])
+        ] }
+    ];
+}
+
+function isEnglishSolarEnergyImageTTSRecord(record) {
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_SOLAR_ENERGY_ASSET_FILE] : null;
+    return Boolean(record && canonical && record === canonical &&
+        record.imageId === ENGLISH_SOLAR_ENERGY_IMAGE_ID &&
+        record.assetFile === ENGLISH_SOLAR_ENERGY_ASSET_FILE &&
+        record.contentType === "image-text" &&
+        record.layout === "custom-solar-energy-2x2-five-text-areas" &&
+        record.coordinateStatus === "estimated" &&
+        record.overlayRuntimeStatus === "not-tested" &&
+        record.panels === canonical.panels);
+}
+
+function getEnglishSolarEnergyImageTextRecord(record, assetFile) {
+    const file = ENGLISH_SOLAR_ENERGY_ASSET_FILE;
+    const expected = getEnglishSolarEnergyExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const rectKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validRect = value => exact(value, rectKeys) &&
+        rectKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const sameRect = (actual, wanted) => validRect(actual) &&
+        rectKeys.every(key => actual[key] === wanted[key]);
+    const contains = (outer, inner) => validRect(outer) && validRect(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (a, b) => a.xPct < b.xPct + b.widthPct &&
+        a.xPct + a.widthPct > b.xPct && a.yPct < b.yPct + b.heightPct &&
+        a.yPct + a.heightPct > b.yPct;
+    if (!exact(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"]) ||
+        record.imageId !== ENGLISH_SOLAR_ENERGY_IMAGE_ID ||
+        record.assetFile !== file || assetFile !== file ||
+        typeof imageTTSData === "undefined" || !imageTTSData ||
+        imageTTSData[file] !== record || record.contentType !== "image-text" ||
+        record.layout !== "custom-solar-energy-2x2-five-text-areas" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1254 ||
+        record.sourceImageDimensions.height !== 1254 ||
+        !Array.isArray(record.panels) || record.panels.length !== 4) return null;
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === ENGLISH_SOLAR_ENERGY_IMAGE_ID || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_SOLAR_ENERGY_IMAGE_ID || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file ||
+        library.length !== 1 || library[0].id !== ENGLISH_SOLAR_ENERGY_IMAGE_ID ||
+        library[0].file !== file || library[0].category !== "english") return null;
+
+    const panelBounds = [], textBounds = [], tapRegions = [];
+    let itemCount = 0;
+    for (let p = 0; p < expected.length; p += 1) {
+        const panel = record.panels[p], wantedPanel = expected[p];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== wantedPanel.panelId || panel.readingOrder !== wantedPanel.readingOrder ||
+            !sameRect(panel.bounds, wantedPanel.bounds) || !Array.isArray(panel.items) ||
+            panel.items.length !== wantedPanel.items.length) return null;
+        panelBounds.push(panel.bounds);
+        for (let i = 0; i < wantedPanel.items.length; i += 1) {
+            const item = panel.items[i], wanted = wantedPanel.items[i];
+            if (!exact(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText",
+                "bounds", "tapRegion"]) ||
+                item.itemId !== wanted.itemId || item.readingOrder !== wanted.readingOrder ||
+                item.type !== wanted.type || item.sourceText !== wanted.sourceText ||
+                item.ttsText !== wanted.sourceText || !sameRect(item.bounds, wanted.bounds) ||
+                !sameRect(item.tapRegion, wanted.tapRegion) ||
+                !contains({ xPct: 0, yPct: 0, widthPct: 100, heightPct: 100 }, item.bounds) ||
+                !contains(panel.bounds, item.bounds) || !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds) || !getEnglishTTSUnitText(item.ttsText)) return null;
+            for (const width of [528, 900, 998, 1024]) {
+                if (item.tapRegion.widthPct * width / 100 + 1e-7 < 44 ||
+                    item.tapRegion.heightPct * width / 100 + 1e-7 < 44) return null;
+            }
+            textBounds.push(item.bounds);
+            tapRegions.push(item.tapRegion);
+            itemCount += 1;
+        }
+    }
+    if (itemCount !== 5) return null;
+    for (const regions of [panelBounds, textBounds, tapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) return null;
+            }
+        }
+    }
+    for (let tapIndex = 0; tapIndex < tapRegions.length; tapIndex += 1) {
+        for (let textIndex = 0; textIndex < textBounds.length; textIndex += 1) {
+            if (tapIndex !== textIndex && overlaps(tapRegions[tapIndex], textBounds[textIndex])) {
+                return null;
+            }
+        }
+    }
+    return record;
+}
+
+function getEnglishSolarEnergyImageTTSRegions(record) {
+    if (!isEnglishSolarEnergyImageTTSRecord(record)) return [];
+    return record.panels.flatMap(panel => panel.items.map(item => ({
+        regionId: "solar-p" + panel.panelId + "-i" + item.itemId,
+        panelId: panel.panelId, itemId: item.itemId,
+        bounds: item.tapRegion, panel, item
+    })));
+}
+
+function isEnglishSolarEnergyImageTTSItemText(record, item) {
+    if (!isEnglishSolarEnergyImageTTSRecord(record) || !item ||
+        item.sourceText !== item.ttsText) return false;
+    const safe = getEnglishSolarEnergyImageTextRecord(
+        imageTTSData[ENGLISH_SOLAR_ENERGY_ASSET_FILE], ENGLISH_SOLAR_ENERGY_ASSET_FILE);
+    return Boolean(safe && record.panels === safe.panels &&
+        safe.panels.some(panel => panel.items.includes(item)));
+}
+
+function isEnglishSolarEnergyPlaybackItemReady(wrapper, record, panel, item,
+    requireInteractiveHitArea = true, sequenceTrigger = null) {
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    if (!wrapper || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_SOLAR_ENERGY_ASSET_FILE ||
+        !isEnglishSolarEnergyImageTTSRecord(record) || !panel ||
+        !record.panels.includes(panel) || !item || !panel.items.includes(item) ||
+        !isEnglishSolarEnergyImageTTSItemText(record, item) ||
+        !image || image.getAttribute("src") !== ENGLISH_SOLAR_ENERGY_ASSET_FILE ||
+        image.complete !== true || image.naturalWidth !== 1254 || image.naturalHeight !== 1254) return false;
+    if (isEnglishImageTTSDrawingMode()) return true;
+    const layoutReady = layoutEnglishSolarEnergyImageTTSHitAreas(wrapper);
+    if (!requireInteractiveHitArea) {
+        return Boolean(layoutReady || sequenceTrigger &&
+            englishTTSState.imageTextSequenceTrigger === sequenceTrigger);
+    }
+    if (!layoutReady) return false;
+    const button = Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area"))
+        .find(candidate => candidate._englishImageTTSImageTextItem === item);
+    return Boolean(button && !button.hidden && !button.disabled &&
+        button._englishImageTTSImageTextRecord === record &&
+        button._englishImageTTSImageTextPanel === panel);
+}
+
+function placeEnglishSolarEnergyImageTTSStopButton(button, wrapper, record, panel, item) {
+    const fail = () => {
+        if (button) {
+            button.hidden = true;
+            if (button.style) button.style.visibility = "hidden";
+        }
+        return false;
+    };
+    const trigger = englishTTSState.imageTextSequenceTrigger ||
+        englishTTSState.activeSpeechTrigger;
+    const activePanel = trigger && (trigger._englishImageTTSImageTextActivePanel ||
+        trigger._englishImageTTSImageTextPanel);
+    const activeItem = trigger && (trigger._englishImageTTSImageTextActiveItem ||
+        trigger._englishImageTTSImageTextItem);
+    const image = wrapper && wrapper.querySelector("img");
+    if (!button || !wrapper || wrapper.isConnected === false || !trigger ||
+        !trigger.classList || !trigger.classList.contains("image-tts-image-text-hit-area") ||
+        !isEnglishSolarEnergyImageTTSRecord(record) ||
+        getEnglishImageTTSRecord(ENGLISH_SOLAR_ENERGY_ASSET_FILE) !== record ||
+        trigger._englishImageTTSImageTextRecord !== record ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_SOLAR_ENERGY_ASSET_FILE ||
+        !wrapper.contains(trigger) || !panel || activePanel !== panel ||
+        !record.panels.includes(panel) || !item || activeItem !== item ||
+        !panel.items.includes(item) || !isEnglishSolarEnergyImageTTSItemText(record, item) ||
+        !image || image.getAttribute("src") !== ENGLISH_SOLAR_ENERGY_ASSET_FILE ||
+        image.complete !== true || image.naturalWidth !== 1254 || image.naturalHeight !== 1254) return fail();
+    let imageRect;
+    try { imageRect = image.getBoundingClientRect(); } catch (error) { return fail(); }
+    if (!imageRect || ![imageRect.left, imageRect.top, imageRect.right, imageRect.bottom,
+        imageRect.width, imageRect.height].every(Number.isFinite) ||
+        imageRect.width <= 0 || imageRect.height <= 0) return fail();
+    const avoidRects = [];
+    try {
+        document.querySelectorAll(
+            ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+            ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+            "#english-tts-speak-selection:not([hidden]), button:not(#english-tts-floating-stop), " +
+            "[role='button'], input, select, textarea"
+        ).forEach(element => {
+            if (!element || element === button || element.hidden || wrapper.contains(element)) return;
+            const style = window.getComputedStyle(element);
+            if (!style || style.display === "none" || style.visibility === "hidden" ||
+                style.visibility === "collapse") return;
+            const rect = element.getBoundingClientRect();
+            if (!rect || ![rect.left, rect.top, rect.right, rect.bottom,
+                rect.width, rect.height].every(Number.isFinite)) throw new Error("Unreadable control");
+            if (rect.width > 0 && rect.height > 0) {
+                avoidRects.push({ left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom });
+            }
+        });
+    } catch (error) { return fail(); }
+    if (!placeEnglishImageTTSStoryStopButton(button, wrapper, {
+        bounds: panel.bounds,
+        avoidBounds: [{ xPct: 0, yPct: 0, widthPct: 100, heightPct: 100 }],
+        avoidRects
+    }, {
+        preferBelow: true, scanForClearPosition: true, strictAvoidance: true,
+        fixedStopSize: true, fixedStopClass: "is-image-tts-image-text-stop-control",
+        fixedStopWidth: 52, fixedStopHeight: 52, fixedStopText: "⏹",
+        fixedStopAriaLabel: "停止 Solar Energy 英文朗讀",
+        stopControlClass: "is-image-tts-image-text-stop-control"
+    })) return fail();
+    const visual = window.visualViewport;
+    const left = visual && Number.isFinite(visual.offsetLeft) ? visual.offsetLeft : 0;
+    const top = visual && Number.isFinite(visual.offsetTop) ? visual.offsetTop : 0;
+    const width = visual && Number.isFinite(visual.width) && visual.width > 0
+        ? visual.width : window.innerWidth;
+    const height = visual && Number.isFinite(visual.height) && visual.height > 0
+        ? visual.height : window.innerHeight;
+    const inset = name => {
+        try {
+            const value = parseFloat(window.getComputedStyle(button).getPropertyValue(name));
+            return Number.isFinite(value) && value > 0 ? value : 0;
+        } catch (error) { return 0; }
+    };
+    let rect, style;
+    try { rect = button.getBoundingClientRect(); style = window.getComputedStyle(button); }
+    catch (error) { return fail(); }
+    const safeLeft = left + inset("--english-tts-safe-left") + 8;
+    const safeTop = top + inset("--english-tts-safe-top") + 8;
+    const safeRight = left + width - inset("--english-tts-safe-right") - 8;
+    const safeBottom = top + height - inset("--english-tts-safe-bottom") - 8;
+    const intersects = (a, b) => a.left < b.right && a.right > b.left &&
+        a.top < b.bottom && a.bottom > b.top;
+    if (!rect || !style ||
+        ![rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height].every(Number.isFinite) ||
+        Math.abs(rect.width - 52) > 0.5 || Math.abs(rect.height - 52) > 0.5 ||
+        style.display === "none" || style.visibility !== "visible" ||
+        style.pointerEvents === "none" || rect.left < safeLeft || rect.top < safeTop ||
+        rect.right > safeRight || rect.bottom > safeBottom || intersects(rect, imageRect) ||
+        avoidRects.some(other => intersects(rect, other)) ||
+        typeof document.elementFromPoint !== "function") return fail();
+    const insetHit = Math.min(6, rect.width / 4, rect.height / 4);
+    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    const points = [[cx, cy], [rect.left + insetHit, cy], [rect.right - insetHit, cy],
+        [cx, rect.top + insetHit], [cx, rect.bottom - insetHit]];
+    try {
+        for (const [x, y] of points) {
+            const hit = document.elementFromPoint(x, y);
+            if (!hit || hit !== button && !button.contains(hit)) return fail();
+        }
+    } catch (error) { return fail(); }
+    return true;
+}
+
+function failEnglishSolarEnergyImageTTSSequence(trigger) {
+    if (englishTTSState.imageTextSequenceTrigger === trigger) {
+        cancelEnglishImageTTSImageTextSequence(true);
+    }
+    const button = getEnglishTTSFloatingStopButton();
+    if (button) {
+        button.hidden = true;
+        if (button.style) button.style.visibility = "hidden";
+    }
+    setEnglishTTSStatus("Solar Energy：找不到安全、可見且可實際點擊的 52 CSS px Stop，朗讀已拒絕或取消。");
+    updateEnglishTTSControls();
+    return false;
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -16120,6 +16447,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_SOLAR_ENERGY_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_SOLAR_ENERGY_IMAGE_ID ||
+            record.assetFile === ENGLISH_SOLAR_ENERGY_ASSET_FILE)) {
+        return getEnglishSolarEnergyImageTextRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_CYCLING_ASSET_FILE || record &&
         (record.imageId === ENGLISH_CYCLING_IMAGE_ID ||
             record.assetFile === ENGLISH_CYCLING_ASSET_FILE)) {
@@ -19531,7 +19863,296 @@ function layoutEnglishXRaysImageTTSHitAreas(wrapper) {
     return enabled > 0;
 }
 
+
+function layoutEnglishSolarEnergyImageTTSHitAreas(wrapper) {
+    const file = ENGLISH_SOLAR_ENERGY_ASSET_FILE;
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    const hide = button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.visibility = "hidden";
+        button.style.pointerEvents = "none";
+    };
+    const failAll = () => {
+        buttons.forEach(hide);
+        if (englishImageTTSOverlayState.activeTrigger &&
+            wrapper && wrapper.contains(englishImageTTSOverlayState.activeTrigger)) {
+            closeEnglishImageTTSMenu();
+        }
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper && wrapper.contains(active)) {
+            failEnglishSolarEnergyImageTTSSequence(active);
+        }
+        return false;
+    };
+    if (!wrapper || !wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== file ||
+        !image || image.getAttribute("src") !== file || image.complete !== true ||
+        image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+        buttons.length !== 5 || typeof document.elementFromPoint !== "function") return failAll();
+    const record = getEnglishImageTTSRecord(file);
+    if (!record || !getEnglishSolarEnergyImageTextRecord(record, file) ||
+        record.sourceImageDimensions.width !== 1254 ||
+        record.sourceImageDimensions.height !== 1254) return failAll();
+    const regions = getEnglishSolarEnergyImageTTSRegions(record);
+    if (regions.length !== 5) return failAll();
+
+    const byKey = new Map();
+    for (const button of buttons) {
+        const key = [button.getAttribute("data-image-tts-panel-id"),
+            button.getAttribute("data-image-tts-item-id"),
+            button.getAttribute("data-image-tts-region-id")].join(":");
+        if (key.includes("null") || key.includes("undefined") || byKey.has(key)) return failAll();
+        byKey.set(key, button);
+    }
+    const candidates = [];
+    for (const region of regions) {
+        const key = [region.panelId, region.itemId, region.regionId].join(":");
+        const button = byKey.get(key);
+        if (!button || button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== region.panel ||
+            button._englishImageTTSImageTextItem !== region.item ||
+            !button._englishImageTTSImageTextRegion ||
+            button._englishImageTTSImageTextRegion.regionId !== region.regionId ||
+            button._englishImageTTSImageTextRegion.panel !== region.panel ||
+            button._englishImageTTSImageTextItem !== region.item ||
+            button.getAttribute("data-image-tts-panel-id") !== String(region.panelId) ||
+            button.getAttribute("data-image-tts-item-id") !== String(region.itemId) ||
+            button.getAttribute("data-image-tts-region-id") !== region.regionId) return failAll();
+        candidates.push({ button, region });
+    }
+    if (byKey.size !== 5 || candidates.length !== 5) return failAll();
+
+    if (isEnglishImageTTSDrawingMode()) {
+        candidates.forEach(candidate => hide(candidate.button));
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper.contains(active) &&
+            !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+            failEnglishSolarEnergyImageTTSSequence(active);
+        }
+        return false;
+    }
+
+    const finiteRect = rect => rect &&
+        ["left", "top", "right", "bottom", "width", "height"].every(key =>
+            Number.isFinite(rect[key])) &&
+        rect.width > 0 && rect.height > 0 &&
+        Math.abs(rect.width - (rect.right - rect.left)) <= 0.75 &&
+        Math.abs(rect.height - (rect.bottom - rect.top)) <= 0.75;
+    const toRect = (base, bounds) => ({
+        left: base.left + base.width * bounds.xPct / 100,
+        top: base.top + base.height * bounds.yPct / 100,
+        right: base.left + base.width * (bounds.xPct + bounds.widthPct) / 100,
+        bottom: base.top + base.height * (bounds.yPct + bounds.heightPct) / 100
+    });
+    const contains = (outer, inner, tolerance = 0.75) =>
+        inner.left >= outer.left - tolerance && inner.top >= outer.top - tolerance &&
+        inner.right <= outer.right + tolerance && inner.bottom <= outer.bottom + tolerance;
+    const overlaps = (a, b) => a.left < b.right && a.right > b.left &&
+        a.top < b.bottom && a.bottom > b.top;
+    const percentMatches = (actual, expected) => typeof actual === "string" &&
+        /^(?:\d+(?:\.\d*)?|\.\d+)%$/.test(actual.trim()) &&
+        Math.abs(Number(actual.trim().slice(0, -1)) - expected) <= 1e-5;
+    let imageRect, wrapperRect, viewport;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+        const visual = window.visualViewport;
+        const width = visual ? visual.width :
+            (document.documentElement && document.documentElement.clientWidth || window.innerWidth);
+        const height = visual ? visual.height :
+            (document.documentElement && document.documentElement.clientHeight || window.innerHeight);
+        viewport = visual
+            ? { left: visual.offsetLeft, top: visual.offsetTop,
+                right: visual.offsetLeft + width, bottom: visual.offsetTop + height }
+            : { left: 0, top: 0, right: width, bottom: height };
+    } catch (error) { return failAll(); }
+    if (!finiteRect(imageRect) || !finiteRect(wrapperRect) ||
+        Math.abs(imageRect.width / imageRect.height - 1) > 0.005 ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 ||
+        Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 ||
+        Math.abs(imageRect.height - wrapperRect.height) > 1 ||
+        !viewport || ![viewport.left, viewport.top, viewport.right, viewport.bottom].every(Number.isFinite) ||
+        viewport.right <= viewport.left || viewport.bottom <= viewport.top) return failAll();
+
+    const intersection = rect => ({
+        left: Math.max(rect.left, viewport.left), top: Math.max(rect.top, viewport.top),
+        right: Math.min(rect.right, viewport.right), bottom: Math.min(rect.bottom, viewport.bottom)
+    });
+    const menu = englishImageTTSOverlayState.menu;
+    let visibleMenu = false;
+    if (menu && englishImageTTSOverlayState.activeTrigger &&
+        menu.id === "english-image-tts-menu" && !menu.hidden && menu.isConnected !== false) {
+        try {
+            const style = window.getComputedStyle(menu);
+            visibleMenu = Boolean(style && style.display !== "none" &&
+                style.visibility === "visible" && style.pointerEvents !== "none");
+        } catch (error) { visibleMenu = false; }
+    }
+
+    const controls = [];
+    let controlScanFailed = false;
+    try {
+        document.querySelectorAll(
+            ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+            ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+            "#english-tts-speak-selection:not([hidden]), button:not(#english-tts-floating-stop), " +
+            "[role='button'], input, select, textarea, #annotation-canvas"
+        ).forEach(element => {
+            if (!element || element.hidden || wrapper.contains(element)) return;
+            const style = window.getComputedStyle(element);
+            if (!style || style.display === "none" || style.visibility === "hidden" ||
+                style.visibility === "collapse" || style.pointerEvents === "none") return;
+            const rect = element.getBoundingClientRect();
+            const finite = rect && ["left", "top", "right", "bottom", "width", "height"]
+                .every(key => Number.isFinite(rect[key])) &&
+                rect.width >= 0 && rect.height >= 0 &&
+                Math.abs(rect.width - (rect.right - rect.left)) <= 0.75 &&
+                Math.abs(rect.height - (rect.bottom - rect.top)) <= 0.75;
+            if (!finite) { controlScanFailed = true; return; }
+            if (rect.width > 0 && rect.height > 0) controls.push({ element, rect });
+        });
+    } catch (error) { controlScanFailed = true; }
+
+    const localIssues = new Set();
+    const saved = new Map();
+    for (const { button, region } of candidates) {
+        const expectedRect = toRect(imageRect, region.bounds);
+        const panelRect = toRect(imageRect, region.panel.bounds);
+        button._englishSolarExpectedRect = expectedRect;
+        button._englishSolarPanelRect = panelRect;
+        if (!percentMatches(button.style.left, region.bounds.xPct) ||
+            !percentMatches(button.style.top, region.bounds.yPct) ||
+            !percentMatches(button.style.width, region.bounds.widthPct) ||
+            !percentMatches(button.style.height, region.bounds.heightPct) ||
+            expectedRect.right - expectedRect.left < 44 ||
+            expectedRect.bottom - expectedRect.top < 44 ||
+            !contains(imageRect, expectedRect) || !contains(wrapperRect, expectedRect) ||
+            !contains(panelRect, expectedRect)) localIssues.add(button);
+        if (controlScanFailed) localIssues.add(button);
+        saved.set(button, {
+            visibility: button.style.visibility, opacity: button.style.opacity,
+            pointerEvents: button.style.pointerEvents
+        });
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.visibility = "visible";
+        button.style.opacity = "0";
+        button.style.pointerEvents = "auto";
+    }
+    const hasHiddenAncestor = element => {
+        let current = element && element.parentElement;
+        while (current) {
+            if (current.hidden || current.hasAttribute && current.hasAttribute("hidden")) return true;
+            let style;
+            try { style = window.getComputedStyle(current); } catch (error) { return true; }
+            if (!style || style.display === "none" ||
+                style.visibility === "hidden" || style.visibility === "collapse") return true;
+            current = current.parentElement;
+        }
+        return false;
+    };
+    const hitTest = (button, rect) => {
+        const visible = intersection(rect);
+        const width = visible.right - visible.left, height = visible.bottom - visible.top;
+        if (width < 44 || height < 44) return false;
+        const insetX = Math.min(6, width / 4), insetY = Math.min(6, height / 4);
+        const cx = (visible.left + visible.right) / 2;
+        const cy = (visible.top + visible.bottom) / 2;
+        const points = [[cx, cy], [visible.left + insetX, cy], [visible.right - insetX, cy],
+            [cx, visible.top + insetY], [cx, visible.bottom - insetY]];
+        try {
+            return points.every(([x, y]) => {
+                const hit = document.elementFromPoint(x, y);
+                const menuHit = visibleMenu && englishImageTTSOverlayState.activeTrigger === button &&
+                    (hit === menu || menu.contains(hit));
+                return hit === button || button.contains(hit) || menuHit;
+            });
+        } catch (error) { return false; }
+    };
+
+    const measured = [];
+    for (const candidate of candidates) {
+        const { button, region } = candidate;
+        const expectedRect = button._englishSolarExpectedRect;
+        const panelRect = button._englishSolarPanelRect;
+        try {
+            const style = window.getComputedStyle(button);
+            const rect = button.getBoundingClientRect();
+            const visible = intersection(rect);
+            if (!style || button.hidden || style.display === "none" ||
+                style.visibility !== "visible" || style.pointerEvents === "none" ||
+                Number(style.opacity) !== 0 || hasHiddenAncestor(button) || !finiteRect(rect) ||
+                rect.width < 44 || rect.height < 44 ||
+                visible.right - visible.left < 44 || visible.bottom - visible.top < 44 ||
+                !contains(imageRect, rect) || !contains(wrapperRect, rect) ||
+                !contains(panelRect, rect) ||
+                ["left", "top", "right", "bottom"].some(key =>
+                    Math.abs(rect[key] - expectedRect[key]) > 1)) localIssues.add(button);
+            for (const control of controls) {
+                if (wrapper.contains(control.element)) continue;
+                const allowedMenu = visibleMenu && englishImageTTSOverlayState.activeTrigger === button &&
+                    (control.element === menu || menu.contains(control.element));
+                if (!allowedMenu && overlaps(rect, control.rect)) localIssues.add(button);
+            }
+            if (!hitTest(button, rect)) localIssues.add(button);
+            if (!localIssues.has(button)) measured.push({ button, rect, region });
+        } catch (error) { localIssues.add(button); }
+    }
+    for (let left = 0; left < measured.length; left += 1) {
+        for (let right = left + 1; right < measured.length; right += 1) {
+            if (overlaps(measured[left].rect, measured[right].rect)) {
+                localIssues.add(measured[left].button);
+                localIssues.add(measured[right].button);
+            }
+        }
+    }
+    saved.forEach((style, button) => {
+        button.style.visibility = style.visibility || "";
+        button.style.opacity = style.opacity || "";
+    });
+    let enabled = 0, closeBlockedMenu = false;
+    for (const { button } of candidates) {
+        if (!localIssues.has(button)) {
+            button.hidden = false;
+            button.disabled = false;
+            button.setAttribute("aria-disabled", "false");
+            button.style.visibility = "visible";
+            button.style.pointerEvents = "auto";
+            enabled += 1;
+        } else {
+            hide(button);
+            if (englishImageTTSOverlayState.activeTrigger === button) closeBlockedMenu = true;
+        }
+        delete button._englishSolarExpectedRect;
+        delete button._englishSolarPanelRect;
+    }
+    if (closeBlockedMenu) closeEnglishImageTTSMenu();
+    const active = englishTTSState.imageTextSequenceTrigger;
+    if (active && wrapper.contains(active)) {
+        const item = active._englishImageTTSImageTextActiveItem;
+        const selected = candidates.find(candidate => candidate.region.item === item);
+        // A hidden entry can no longer open its menu, but a started sequence may continue
+        // while its separately validated Stop control remains safe and reachable.
+        if (!selected ||
+            !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+            failEnglishSolarEnergyImageTTSSequence(active);
+        }
+    }
+    return enabled > 0;
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
+    if (wrapper && wrapper.dataset &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_SOLAR_ENERGY_ASSET_FILE) {
+        layoutEnglishSolarEnergyImageTTSHitAreas(wrapper);
+        return;
+    }
     if (wrapper && wrapper.dataset &&
         wrapper.dataset.imageTtsAssetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE) {
         layoutEnglishMuscularSystemImageTTSHitAreas(wrapper);
@@ -19894,7 +20515,9 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
         panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 2;
     const isAnimalsAdaptationBubble = isEnglishAnimalsAdaptationImageTTSRecord(record) &&
         panel.panelId >= 1 && panel.panelId <= 4 && item.itemId === 2;
-    button.setAttribute("aria-label", isTyphoonsBubble
+    button.setAttribute("aria-label", isEnglishSolarEnergyImageTTSRecord(record)
+        ? "Solar Energy 第 " + panel.panelId + " 格原圖文字「" + item.sourceText + "」，開啟獨立朗讀選項"
+        : (isTyphoonsBubble
         ? "Typhoons & Tropical Storms 第 " + panel.panelId + " 格泡泡，開啟朗讀選項"
         : (isHumanHealthBubble
             ? "第 " + panel.panelId + " 格泡泡：" + item.sourceText + "，開啟泡泡朗讀選項"
@@ -19904,7 +20527,7 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
                     ? panelLabel + "第 " + item.readingOrder + " 項原圖文字：" +
                         item.sourceText + "，開啟朗讀選項"
                     : "第 " + panel.panelId + " 格第 " + item.readingOrder +
-                        " 項原圖文字：" + item.sourceText + "，開啟本格朗讀選項"))));
+                        " 項原圖文字：" + item.sourceText + "，開啟本格朗讀選項")))));
     if (isXRaysTextArea) {
         button.setAttribute("aria-label", "X-rays 第 " + panel.panelId + " 格主文字區，開啟朗讀選項");
     }
@@ -19919,7 +20542,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
     button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
     button.setAttribute("data-image-tts-item-id", String(item.itemId));
     if ((isEnglishXRaysImageTTSRecord(record) ||
-        isEnglishMuscularSystemImageTTSRecord(record)) && region && region.regionId) {
+        isEnglishMuscularSystemImageTTSRecord(record) ||
+        isEnglishSolarEnergyImageTTSRecord(record)) && region && region.regionId) {
         button.setAttribute("data-image-tts-region-id", region.regionId);
     }
     button.style.left = tapRegion.xPct + "%";
@@ -19938,7 +20562,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
             isEnglishHumanHealthNutritionImageTTSRecord(record) ||
             isEnglishTyphoonsImageTTSRecord(record) ||
             isEnglishXRaysImageTTSRecord(record) ||
-            isEnglishMuscularSystemImageTTSRecord(record)) && button.hidden) ||
+            isEnglishMuscularSystemImageTTSRecord(record) ||
+            isEnglishSolarEnergyImageTTSRecord(record)) && button.hidden) ||
             button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
             return;
         }
@@ -20603,6 +21228,35 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishSolarEnergyImageTTSRecord(record)) {
+                const hasExpectedDimensions = () => image.getAttribute("src") ===
+                    ENGLISH_SOLAR_ENERGY_ASSET_FILE && image.complete === true &&
+                    image.naturalWidth === 1254 && image.naturalHeight === 1254;
+                const hideSolarHitAreas = () => {
+                    wrapper.querySelectorAll(".image-tts-image-text-hit-area").forEach(button => {
+                        button.hidden = true;
+                        button.disabled = true;
+                        button.setAttribute("aria-disabled", "true");
+                        button.style.pointerEvents = "none";
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+                    const active = englishTTSState.imageTextSequenceTrigger;
+                    if (active && wrapper.contains(active)) failEnglishSolarEnergyImageTTSSequence(active);
+                };
+                if (image.complete && !hasExpectedDimensions()) return;
+                getEnglishSolarEnergyImageTTSRegions(record).forEach(region => {
+                    if (createEnglishImageTTSImageTextHitArea(
+                        wrapper, region.panel, region.item, record, region)) added += 1;
+                });
+                image.addEventListener("load", () => {
+                    if (!hasExpectedDimensions()) { hideSolarHitAreas(); return; }
+                    layoutEnglishSolarEnergyImageTTSHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", hideSolarHitAreas, { once: true });
+                layoutEnglishSolarEnergyImageTTSHitAreas(wrapper);
+                return;
+            }
             if (isEnglishMuscularSystemImageTTSRecord(record)) {
                 const hasExpectedDimensions = () => image.getAttribute("src") ===
                     ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE && image.complete &&
@@ -21235,6 +21889,15 @@ function scheduleEnglishImageTTSLayout() {
     if (englishImageTTSOverlayState.humanHealthLayoutSettleTimer) {
         window.clearTimeout(englishImageTTSOverlayState.humanHealthLayoutSettleTimer);
     }
+    if (englishImageTTSOverlayState.solarLayoutSettleTimer) {
+        window.clearTimeout(englishImageTTSOverlayState.solarLayoutSettleTimer);
+    }
+    englishImageTTSOverlayState.solarLayoutSettleTimer = window.setTimeout(() => {
+        englishImageTTSOverlayState.solarLayoutSettleTimer = 0;
+        document.querySelectorAll(
+            '#ai-response .image-tts-overlay-wrapper[data-image-tts-asset-file="images/english/solar-energy-basics.png"]'
+        ).forEach(wrapper => layoutEnglishSolarEnergyImageTTSHitAreas(wrapper));
+    }, 160);
     if (englishImageTTSOverlayState.xraysLayoutSettleTimer) {
         window.clearTimeout(englishImageTTSOverlayState.xraysLayoutSettleTimer);
     }
@@ -21269,6 +21932,10 @@ function scheduleEnglishImageTTSLayout() {
             layoutEnglishImageTTSPanelSpeakers(wrapper);
             layoutEnglishImageTTSPlateausSideButtons(wrapper);
             layoutEnglishImageTTSKarstSideButtons(wrapper);
+            if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === ENGLISH_SOLAR_ENERGY_ASSET_FILE) {
+                layoutEnglishSolarEnergyImageTTSHitAreas(wrapper);
+            }
             if (wrapper.dataset &&
                 wrapper.dataset.imageTtsAssetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE) {
                 layoutEnglishMuscularSystemImageTTSHitAreas(wrapper);
@@ -21345,6 +22012,10 @@ function syncEnglishImageTTSDrawingMode() {
     });
     document.querySelectorAll("#ai-response .image-tts-overlay-wrapper").forEach(wrapper => {
         layoutEnglishImageTTSKarstSideButtons(wrapper);
+        if (wrapper.dataset &&
+            wrapper.dataset.imageTtsAssetFile === ENGLISH_SOLAR_ENERGY_ASSET_FILE) {
+            layoutEnglishSolarEnergyImageTTSHitAreas(wrapper);
+        }
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_MUSCULAR_SYSTEM_ASSET_FILE) {
             layoutEnglishMuscularSystemImageTTSHitAreas(wrapper);
@@ -21584,6 +22255,7 @@ function getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item) {
  return [item.ttsText];
 }
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishSolarEnergyImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishCyclingImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishMuscularSystemImageTTSItemText(record, item)) {
         const panel = record.panels.find(candidate => candidate.items.includes(item));
@@ -21785,6 +22457,9 @@ function speakEnglishImageTTSImageTextSequence(
     const isMuscularSystemImageText = Boolean(record &&
         isEnglishMuscularSystemImageTTSRecord(record));
     const isCyclingImageText = Boolean(record && isEnglishCyclingImageTTSRecord(record));
+    const isSolarImageText = Boolean(record && isEnglishSolarEnergyImageTTSRecord(record));
+    const isSolarSingleItemSequence = Boolean(isSolarImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isCyclingSingleItemSequence = Boolean(isCyclingImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
     const isMuscularSystemSingleItemSequence = Boolean(isMuscularSystemImageText &&
@@ -21901,6 +22576,24 @@ function speakEnglishImageTTSImageTextSequence(
         cyclingImage.complete && cyclingImage.naturalWidth === 1448 && cyclingImage.naturalHeight === 1086 &&
         layoutEnglishCyclingImageTTSHitAreas(wrapper) && cyclingButtons.length === 6 &&
         trigger && cyclingButtons.includes(trigger) && !trigger.hidden && !trigger.disabled);
+    const solarImage = isSolarImageText ? wrapper.querySelector("img") : null;
+    const solarButtons = isSolarImageText
+        ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
+    const solarTriggerPanel = isSolarImageText && trigger
+        ? trigger._englishImageTTSImageTextPanel : null;
+    const solarTriggerItem = isSolarImageText && trigger
+        ? trigger._englishImageTTSImageTextItem : null;
+    const solarImageReady = !isSolarImageText || Boolean(
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_SOLAR_ENERGY_ASSET_FILE &&
+        solarImage && solarImage.getAttribute("src") === ENGLISH_SOLAR_ENERGY_ASSET_FILE &&
+        solarImage.complete && solarImage.naturalWidth === 1254 && solarImage.naturalHeight === 1254 &&
+        layoutEnglishSolarEnergyImageTTSHitAreas(wrapper) && solarButtons.length === 5 &&
+        trigger && solarButtons.includes(trigger) &&
+        trigger._englishImageTTSImageTextRecord === record &&
+        record.panels.includes(solarTriggerPanel) && trigger._englishImageTTSImageTextPanel === solarTriggerPanel &&
+        solarTriggerPanel.items.includes(solarTriggerItem) && trigger._englishImageTTSImageTextItem === solarTriggerItem &&
+        itemList.includes(solarTriggerItem) && isEnglishSolarEnergyImageTTSItemText(record, solarTriggerItem) &&
+        !trigger.hidden && !trigger.disabled);
     const isTyphoonsImageText = Boolean(record && isEnglishTyphoonsImageTTSRecord(record));
     const isTyphoonsSingleItemSequence = Boolean(isTyphoonsImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
@@ -21993,6 +22686,7 @@ function speakEnglishImageTTSImageTextSequence(
         (!isPanelSequence && !isMuscularSystemPanelSequence && !isWholeImageSequence &&
             !isCyclingSingleItemSequence &&
             !isEnergyTransformationsSingleItemSequence &&
+            !isSolarSingleItemSequence &&
             !isWaterCycleSingleItemSequence &&
             !isPlateausSingleItemSequence && !isKarstSingleItemSequence &&
             !isHobbiesSingleItemSequence && !isDailyLifeRoutinesSingleItemSequence &&
@@ -22022,7 +22716,7 @@ function speakEnglishImageTTSImageTextSequence(
         !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady || !mountainsReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
         !animalsAdaptationImageReady || !humanHealthImageReady || !typhoonsImageReady ||
-        !muscularImageReady || !cyclingImageReady ||
+        !muscularImageReady || !cyclingImageReady || !solarImageReady ||
         !xraysImageReady || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
@@ -22078,6 +22772,12 @@ function speakEnglishImageTTSImageTextSequence(
         }
         trigger._englishImageTTSImageTextActivePanel = itemPanel;
         trigger._englishImageTTSImageTextActiveItem = item;
+        if (isSolarImageText &&
+            (!isEnglishSolarEnergyPlaybackItemReady(wrapper, record, itemPanel, item, false, trigger) ||
+                !placeEnglishImageTTSImageTextStopButton(
+                    getEnglishTTSFloatingStopButton(), wrapper))) {
+            return failEnglishSolarEnergyImageTTSSequence(trigger);
+        }
         if (isCyclingImageText &&
             !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
             return failEnglishCyclingImageTTSSequence(trigger);
@@ -22143,6 +22843,12 @@ function speakEnglishImageTTSImageTextSequence(
             if (generation !== englishTTSState.imageTextSequenceGeneration) return false;
             if (isWaterCycleImageText &&
                 !ensureEnglishWaterCycleImageTTSStopPosition(trigger, wrapper)) return false;
+            if (isSolarImageText &&
+                (!isEnglishSolarEnergyPlaybackItemReady(wrapper, record, itemPanel, item, false, trigger) ||
+                    !placeEnglishImageTTSImageTextStopButton(
+                        getEnglishTTSFloatingStopButton(), wrapper))) {
+                return failEnglishSolarEnergyImageTTSSequence(trigger);
+            }
             if (isCyclingImageText &&
                 !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
                 return failEnglishCyclingImageTTSSequence(trigger);
@@ -22183,6 +22889,12 @@ function speakEnglishImageTTSImageTextSequence(
                 if (generation !== englishTTSState.imageTextSequenceGeneration) return;
                 if (isWaterCycleImageText &&
                     !ensureEnglishWaterCycleImageTTSStopPosition(trigger, wrapper)) return;
+                if (isSolarImageText &&
+                    (!isEnglishSolarEnergyPlaybackItemReady(wrapper, record, itemPanel, item, false, trigger) ||
+                        !placeEnglishImageTTSImageTextStopButton(
+                            getEnglishTTSFloatingStopButton(), wrapper))) {
+                    return failEnglishSolarEnergyImageTTSSequence(trigger);
+                }
                 if (isCyclingImageText &&
                     !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
                     failEnglishCyclingImageTTSSequence(trigger);
@@ -22590,6 +23302,57 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isEnglishSolarEnergyImageTTSRecord(safeRecord)) {
+        const clicked = trigger._englishImageTTSImageTextItem;
+        const allItems = safeRecord.panels.flatMap(candidate => candidate.items);
+        const hitAreas = Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area"));
+        const image = wrapper.querySelector("img");
+        const layoutReady = layoutEnglishSolarEnergyImageTTSHitAreas(wrapper);
+        const enabledFor = item => hitAreas.some(button =>
+            button._englishImageTTSImageTextRecord === safeRecord &&
+            button._englishImageTTSImageTextItem === item &&
+            !button.hidden && !button.disabled);
+        if (!panel || panel !== safeRecord.panels.find(candidate =>
+                candidate.panelId === panel.panelId) ||
+            !clicked || !panel.items.includes(clicked) ||
+            trigger._englishImageTTSImageTextRecord !== safeRecord ||
+            trigger._englishImageTTSImageTextPanel !== panel ||
+            trigger._englishImageTTSImageTextItem !== clicked ||
+            !isEnglishSolarEnergyImageTTSItemText(safeRecord, clicked) ||
+            !image || image.getAttribute("src") !== ENGLISH_SOLAR_ENERGY_ASSET_FILE ||
+            !image.complete || image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+            allItems.length !== 5 || allItems.some(item =>
+                !isEnglishSolarEnergyImageTTSItemText(safeRecord, item)) ||
+            hitAreas.length !== 5 || !hitAreas.includes(trigger) || !layoutReady ||
+            !enabledFor(clicked) || trigger.hidden || trigger.disabled) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const add = (label, description, items, completion) =>
+            menu.appendChild(createEnglishImageTTSMenuButton(label, description, () =>
+                speakEnglishImageTTSImageTextSequence(trigger, items, completion)));
+        menu.setAttribute("aria-label", "Solar Energy 第 " + panel.panelId + " 格朗讀選項");
+        panel.items.filter(enabledFor).forEach(item => {
+            add("🔊 朗讀「" + item.sourceText + "」",
+                "單獨朗讀 Solar Energy 原圖文字：「" + item.sourceText + "」",
+                [item], "已朗讀所選 Solar Energy 原圖文字。");
+        });
+        if (panel.items.every(enabledFor)) {
+            add("🔊 朗讀本格", "依原圖順序朗讀第 " + panel.panelId + " 格文字",
+                panel.items, "Solar Energy 第 " + panel.panelId + " 格已朗讀完成。");
+        }
+        add("🔊 朗讀全圖（P1 至 P4）",
+            "依序朗讀四格英文句子，並獨立朗讀 P4 Clean Energy 標籤",
+            allItems, "Solar Energy 全圖已朗讀完成。");
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (menu.hidden || !menu.firstChild) return;
+        try { menu.firstChild.focus({ preventScroll: true }); }
+        catch (error) { menu.firstChild.focus(); }
+        return;
     }
 
     if (isEnglishCyclingImageTTSRecord(safeRecord)) {

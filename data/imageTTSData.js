@@ -21901,4 +21901,77 @@ const imageTTSData = {
             }
         ]
     },
+
+    "images/english/solar-energy-basics.png": {
+        imageId: "solar-energy-basics",
+        assetFile: "images/english/solar-energy-basics.png",
+        contentType: "image-text",
+        layout: "custom-solar-energy-2x2-five-text-areas",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1254, height: 1254 },
+        panels: [
+            { panelId: 1, readingOrder: 1,
+                bounds: { xPct: 12 / 1254 * 100, yPct: 10 / 1254 * 100,
+                    widthPct: 613 / 1254 * 100, heightPct: 612 / 1254 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "The sun gives us light.",
+                        ttsText: "The sun gives us light.",
+                        bounds: { xPct: 83 / 1254 * 100, yPct: 48 / 1254 * 100,
+                            widthPct: 510 / 1254 * 100, heightPct: 54 / 1254 * 100 },
+                        tapRegion: { xPct: 76 / 1254 * 100, yPct: 18 / 1254 * 100,
+                            widthPct: 526 / 1254 * 100, heightPct: 105 / 1254 * 100 } }
+                ]
+            },
+            { panelId: 2, readingOrder: 2,
+                bounds: { xPct: 633 / 1254 * 100, yPct: 10 / 1254 * 100,
+                    widthPct: 611 / 1254 * 100, heightPct: 612 / 1254 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Solar panels collect sunlight.",
+                        ttsText: "Solar panels collect sunlight.",
+                        bounds: { xPct: 719 / 1254 * 100, yPct: 43 / 1254 * 100,
+                            widthPct: 480 / 1254 * 100, heightPct: 101 / 1254 * 100 },
+                        tapRegion: { xPct: 710 / 1254 * 100, yPct: 38 / 1254 * 100,
+                            widthPct: 502 / 1254 * 100, heightPct: 111 / 1254 * 100 } }
+                ]
+            },
+            { panelId: 3, readingOrder: 3,
+                bounds: { xPct: 12 / 1254 * 100, yPct: 633 / 1254 * 100,
+                    widthPct: 613 / 1254 * 100, heightPct: 611 / 1254 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "Solar energy makes electricity.",
+                        ttsText: "Solar energy makes electricity.",
+                        bounds: { xPct: 120 / 1254 * 100, yPct: 661 / 1254 * 100,
+                            widthPct: 437 / 1254 * 100, heightPct: 105 / 1254 * 100 },
+                        tapRegion: { xPct: 114 / 1254 * 100, yPct: 650 / 1254 * 100,
+                            widthPct: 447 / 1254 * 100, heightPct: 126 / 1254 * 100 } }
+                ]
+            },
+            { panelId: 4, readingOrder: 4,
+                bounds: { xPct: 633 / 1254 * 100, yPct: 633 / 1254 * 100,
+                    widthPct: 611 / 1254 * 100, heightPct: 611 / 1254 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "We use solar energy at home.",
+                        ttsText: "We use solar energy at home.",
+                        bounds: { xPct: 709 / 1254 * 100, yPct: 662 / 1254 * 100,
+                            widthPct: 487 / 1254 * 100, heightPct: 102 / 1254 * 100 },
+                        tapRegion: { xPct: 704 / 1254 * 100, yPct: 650 / 1254 * 100,
+                            widthPct: 492 / 1254 * 100, heightPct: 126 / 1254 * 100 } },
+                    { itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "Clean Energy",
+                        ttsText: "Clean Energy",
+                        bounds: { xPct: 1076 / 1254 * 100, yPct: 850 / 1254 * 100,
+                            widthPct: 132 / 1254 * 100, heightPct: 78 / 1254 * 100 },
+                        tapRegion: { xPct: 1070 / 1254 * 100, yPct: 820 / 1254 * 100,
+                            widthPct: 144 / 1254 * 100, heightPct: 110 / 1254 * 100 } }
+                ]
+            }
+        ]
+    },
 };
