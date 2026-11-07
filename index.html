@@ -25874,6 +25874,7 @@ answer = answer.replace(/\n{3,}/g, "\n\n");
             "</div>";
 
         enhanceEnglishImageTTSOverlays(responseDiv);
+        enhanceEnglishHikingImageTTSOverlays(responseDiv);
 
         if (appState.subjectMode === "english") {
             const answerRoot = responseDiv.querySelector(".ai-answer-text");
@@ -26190,5 +26191,859 @@ canvas.addEventListener("pointerleave", function() {
 
 initializeEnglishTTS();
 initializeEnglishImageTTSOverlayControls();
+
+const ENGLISH_HIKING_ASSET_FILE = "images/english/hiking-basics.png";
+const ENGLISH_HIKING_IMAGE_ID = "hiking-basics";
+const englishHikingImageTTSState = {
+    initialized: false,
+    activeSequence: null,
+    layoutFrame: 0,
+    stopFrame: 0,
+    activeTimer: 0
+};
+
+function getEnglishHikingExpectedPanels() {
+    const b = (x, y, width, height) => ({
+        xPct: x / 1448 * 100, yPct: y / 1086 * 100,
+        widthPct: width / 1448 * 100, heightPct: height / 1086 * 100
+    });
+    const item = (itemId, type, sourceText, textBounds, tapBounds) => ({
+        itemId, readingOrder: itemId, type, sourceText, ttsText: sourceText,
+        bounds: b(...textBounds), tapRegion: b(...tapBounds)
+    });
+    return [
+        { panelId: 1, readingOrder: 1, bounds: b(12, 10, 706, 527), items: [
+            item(1, "label", "HIKING TRAIL", [112, 82, 115, 73], [104, 29, 126, 126]),
+            item(2, "sentence", "We start our hike on a trail.",
+                [101, 469, 532, 25], [96, 408, 548, 122])
+        ] },
+        { panelId: 2, readingOrder: 2, bounds: b(730, 10, 708, 527), items: [
+            item(1, "sentence", "We walk along the mountain trail.",
+                [793, 469, 583, 25], [785, 408, 600, 122])
+        ] },
+        { panelId: 3, readingOrder: 3, bounds: b(12, 548, 706, 524), items: [
+            item(1, "sentence", "We enjoy the beautiful nature.",
+                [120, 1010, 506, 33], [110, 948, 530, 122])
+        ] },
+        { panelId: 4, readingOrder: 4, bounds: b(730, 548, 708, 524), items: [
+            item(1, "sentence", "We enjoy the view from the top.",
+                [826, 1010, 548, 33], [815, 948, 570, 122])
+        ] }
+    ];
+}
+
+function getEnglishHikingImageTextRecord(record, assetFile) {
+    const file = ENGLISH_HIKING_ASSET_FILE;
+    const expected = getEnglishHikingExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const rectKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validRect = value => exact(value, rectKeys) &&
+        rectKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const sameRect = (actual, wanted) => validRect(actual) &&
+        rectKeys.every(key => actual[key] === wanted[key]);
+    const contains = (outer, inner) => validRect(outer) && validRect(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (a, b) => a.xPct < b.xPct + b.widthPct &&
+        a.xPct + a.widthPct > b.xPct && a.yPct < b.yPct + b.heightPct &&
+        a.yPct + a.heightPct > b.yPct;
+    if (!exact(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"]) ||
+        record.imageId !== ENGLISH_HIKING_IMAGE_ID || record.assetFile !== file || assetFile !== file ||
+        typeof imageTTSData === "undefined" || !imageTTSData || imageTTSData[file] !== record ||
+        record.contentType !== "image-text" || record.layout !== "custom-hiking-2x2-five-text-areas" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1448 || record.sourceImageDimensions.height !== 1086 ||
+        !Array.isArray(record.panels) || record.panels.length !== 4) return null;
+
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === ENGLISH_HIKING_IMAGE_ID || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_HIKING_IMAGE_ID || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file || library.length !== 1 ||
+        library[0].id !== ENGLISH_HIKING_IMAGE_ID || library[0].file !== file ||
+        library[0].category !== "english") return null;
+
+    const panelBounds = [], textBounds = [], tapRegions = [];
+    let itemCount = 0;
+    for (let p = 0; p < expected.length; p += 1) {
+        const panel = record.panels[p], wantedPanel = expected[p];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== wantedPanel.panelId || panel.readingOrder !== wantedPanel.readingOrder ||
+            !sameRect(panel.bounds, wantedPanel.bounds) || !Array.isArray(panel.items) ||
+            panel.items.length !== wantedPanel.items.length) return null;
+        panelBounds.push(panel.bounds);
+        for (let i = 0; i < wantedPanel.items.length; i += 1) {
+            const item = panel.items[i], wanted = wantedPanel.items[i];
+            if (!exact(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"]) ||
+                item.itemId !== wanted.itemId || item.readingOrder !== wanted.readingOrder ||
+                item.type !== wanted.type || item.sourceText !== wanted.sourceText ||
+                item.ttsText !== wanted.sourceText || !sameRect(item.bounds, wanted.bounds) ||
+                !sameRect(item.tapRegion, wanted.tapRegion) || !contains(panel.bounds, item.bounds) ||
+                !contains(panel.bounds, item.tapRegion) || !contains(item.tapRegion, item.bounds) ||
+                !getEnglishTTSUnitText(item.ttsText)) return null;
+            for (const width of [528, 900, 998, 1024]) {
+                if (item.tapRegion.widthPct * width / 100 + 1e-7 < 44 ||
+                    item.tapRegion.heightPct * width / 100 + 1e-7 < 44) return null;
+            }
+            textBounds.push(item.bounds);
+            tapRegions.push(item.tapRegion);
+            itemCount += 1;
+        }
+    }
+    if (itemCount !== 5) return null;
+    for (const regions of [panelBounds, textBounds, tapRegions]) {
+        for (let left = 0; left < regions.length; left += 1) {
+            for (let right = left + 1; right < regions.length; right += 1) {
+                if (overlaps(regions[left], regions[right])) return null;
+            }
+        }
+    }
+    for (let tapIndex = 0; tapIndex < tapRegions.length; tapIndex += 1) {
+        for (let textIndex = 0; textIndex < textBounds.length; textIndex += 1) {
+            if (tapIndex !== textIndex && overlaps(tapRegions[tapIndex], textBounds[textIndex])) return null;
+        }
+    }
+    return record;
+}
+
+function isEnglishHikingImageTTSRecord(record) {
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_HIKING_ASSET_FILE] : null;
+    return Boolean(record && canonical && record === canonical &&
+        record.imageId === ENGLISH_HIKING_IMAGE_ID && record.assetFile === ENGLISH_HIKING_ASSET_FILE &&
+        record.contentType === "image-text" && record.layout === "custom-hiking-2x2-five-text-areas" &&
+        record.coordinateStatus === "estimated" && record.overlayRuntimeStatus === "not-tested" &&
+        record.panels === canonical.panels);
+}
+
+function isEnglishHikingImageTTSItemText(record, item) {
+    if (!isEnglishHikingImageTTSRecord(record) || !item || item.sourceText !== item.ttsText) return false;
+    const safe = getEnglishHikingImageTextRecord(
+        imageTTSData[ENGLISH_HIKING_ASSET_FILE], ENGLISH_HIKING_ASSET_FILE);
+    return Boolean(safe && record.panels === safe.panels &&
+        safe.panels.some(panel => panel.items.includes(item)));
+}
+
+function getEnglishHikingImageTTSRegions(record) {
+    if (!isEnglishHikingImageTTSRecord(record)) return [];
+    return record.panels.flatMap(panel => panel.items.map(item => ({
+        regionId: "hiking-p" + panel.panelId + "-i" + item.itemId,
+        panelId: panel.panelId, itemId: item.itemId, bounds: item.tapRegion, panel, item
+    })));
+}
+
+function hideEnglishHikingImageTTSButton(button) {
+    if (!button) return;
+    button.hidden = true;
+    button.disabled = true;
+    button.setAttribute("aria-disabled", "true");
+    button.style.pointerEvents = "none";
+    button.style.visibility = "hidden";
+}
+
+function getEnglishHikingImageTTSViewport(stopButton) {
+    try {
+        const visual = window.visualViewport;
+        const left = visual && Number.isFinite(visual.offsetLeft) ? visual.offsetLeft : 0;
+        const top = visual && Number.isFinite(visual.offsetTop) ? visual.offsetTop : 0;
+        const width = visual && Number.isFinite(visual.width) && visual.width > 0
+            ? visual.width : document.documentElement && document.documentElement.clientWidth || window.innerWidth;
+        const height = visual && Number.isFinite(visual.height) && visual.height > 0
+            ? visual.height : document.documentElement && document.documentElement.clientHeight || window.innerHeight;
+        const safeInset = name => {
+            const value = parseFloat(window.getComputedStyle(stopButton).getPropertyValue(name));
+            return Number.isFinite(value) && value > 0 ? value : 0;
+        };
+        if (![left, top, width, height].every(Number.isFinite) || width <= 0 || height <= 0) return null;
+        const insets = {
+            left: safeInset("--english-tts-safe-left"), top: safeInset("--english-tts-safe-top"),
+            right: safeInset("--english-tts-safe-right"), bottom: safeInset("--english-tts-safe-bottom")
+        };
+        return { left, top, width, height, right: left + width, bottom: top + height,
+            safeLeft: left + insets.left + 8, safeTop: top + insets.top + 8,
+            safeRight: left + width - insets.right - 8, safeBottom: top + height - insets.bottom - 8,
+            insets };
+    } catch (error) { return null; }
+}
+
+function getEnglishHikingImageTTSControlRects(wrapper, includeStop = false) {
+    const controls = [];
+    let failed = false;
+    try {
+        document.querySelectorAll(
+            ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+            ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+            "#english-tts-speak-selection:not([hidden]), #english-tts-floating-stop:not([hidden]), " +
+            "button:not(#english-tts-floating-stop), " +
+            "[role='button'], input, select, textarea, #annotation-canvas"
+        ).forEach(element => {
+            if (!element || element.id === "annotation-canvas" || element.hidden ||
+                element.id === "english-tts-floating-stop" && !includeStop || element.classList &&
+                element.classList.contains("image-tts-hiking-hit-area")) return;
+            const style = window.getComputedStyle(element);
+            if (!style || style.display === "none" || style.visibility === "hidden" ||
+                style.visibility === "collapse" || style.pointerEvents === "none") return;
+            const rect = element.getBoundingClientRect();
+            if (!rect || ![rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height]
+                .every(Number.isFinite) || rect.width < 0 || rect.height < 0 ||
+                Math.abs(rect.width - (rect.right - rect.left)) > 0.75 ||
+                Math.abs(rect.height - (rect.bottom - rect.top)) > 0.75) {
+                failed = true;
+                return;
+            }
+            if (rect.width > 0 && rect.height > 0) controls.push({
+                element, left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom
+            });
+        });
+    } catch (error) { failed = true; }
+    return failed ? null : controls;
+}
+
+function isEnglishHikingImageTTSRect(rect) {
+    return Boolean(rect && [rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height]
+        .every(Number.isFinite) && rect.width > 0 && rect.height > 0 &&
+        Math.abs(rect.width - (rect.right - rect.left)) <= 0.75 &&
+        Math.abs(rect.height - (rect.bottom - rect.top)) <= 0.75);
+}
+
+function getEnglishHikingImageTTSImageRect(image) {
+    const rect = image && image.getBoundingClientRect();
+    return isEnglishHikingImageTTSRect(rect) ? rect : null;
+}
+
+function hideEnglishHikingImageTTSStopButton() {
+    const button = getEnglishTTSFloatingStopButton();
+    if (!button) return;
+    button.hidden = true;
+    button.style.visibility = "hidden";
+    button.style.pointerEvents = "none";
+}
+
+function failEnglishHikingImageTTSSequence(message) {
+    const active = englishHikingImageTTSState.activeSequence;
+    if (active) {
+        englishHikingImageTTSState.activeSequence = null;
+        if (englishHikingImageTTSState.activeTimer) {
+            window.clearInterval(englishHikingImageTTSState.activeTimer);
+            englishHikingImageTTSState.activeTimer = 0;
+        }
+        if (englishTTSState.imageTextSequenceTrigger === active.trigger) {
+            cancelEnglishImageTTSImageTextSequence(true);
+        }
+    }
+    englishTTSState.activeImageTTSStoryPanel = null;
+    englishTTSState.activeImageTTSWrapper = null;
+    englishTTSState.activeSpeechIsImageTTS = false;
+    hideEnglishHikingImageTTSStopButton();
+    if (message) setEnglishTTSStatus(message);
+    updateEnglishTTSControls();
+    return false;
+}
+
+function isEnglishHikingImageTTSStopSafe(button, wrapper, record, item) {
+    const image = wrapper && wrapper.querySelector("img");
+    const imageRect = getEnglishHikingImageTTSImageRect(image);
+    const rect = button && button.getBoundingClientRect();
+    let style, viewport, controls;
+    try {
+        style = button && window.getComputedStyle(button);
+        viewport = getEnglishHikingImageTTSViewport(button);
+        controls = getEnglishHikingImageTTSControlRects(wrapper);
+    } catch (error) { return false; }
+    if (!button || button.hidden || !style || !viewport || !imageRect || !isEnglishHikingImageTTSRect(rect) ||
+        !controls || !isEnglishHikingImageTTSRecord(record) ||
+        !isEnglishHikingImageTTSItemText(record, item) || Math.abs(rect.width - 52) > 0.5 ||
+        Math.abs(rect.height - 52) > 0.5 || style.display === "none" || style.visibility !== "visible" ||
+        style.pointerEvents === "none" || rect.left < viewport.safeLeft || rect.right > viewport.safeRight ||
+        rect.top < viewport.safeTop || rect.bottom > viewport.safeBottom ||
+        rect.left < imageRect.right && rect.right > imageRect.left &&
+            rect.top < imageRect.bottom && rect.bottom > imageRect.top ||
+        controls.some(control => rect.left < control.right && rect.right > control.left &&
+            rect.top < control.bottom && rect.bottom > control.top) ||
+        typeof document.elementFromPoint !== "function") return false;
+    const inset = Math.min(6, rect.width / 4, rect.height / 4);
+    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    const points = [[cx, cy], [rect.left + inset, cy], [rect.right - inset, cy],
+        [cx, rect.top + inset], [cx, rect.bottom - inset]];
+    try {
+        return points.every(([x, y]) => {
+            const hit = document.elementFromPoint(x, y);
+            return hit === button || button.contains(hit);
+        });
+    } catch (error) { return false; }
+}
+
+function placeEnglishHikingImageTTSStopButton(sequence) {
+    if (!sequence || englishHikingImageTTSState.activeSequence !== sequence ||
+        !sequence.wrapper || sequence.wrapper.isConnected === false ||
+        !isEnglishHikingImageTTSRecord(sequence.record)) return false;
+    const image = sequence.wrapper.querySelector("img");
+    if (!image || image.getAttribute("src") !== ENGLISH_HIKING_ASSET_FILE ||
+        image.complete !== true || image.naturalWidth !== 1448 || image.naturalHeight !== 1086 ||
+        sequence.wrapper.dataset.imageTtsAssetFile !== ENGLISH_HIKING_ASSET_FILE) return false;
+    const panel = sequence.record.panels.find(candidate => candidate.items.includes(sequence.items[sequence.index]));
+    const imageRect = getEnglishHikingImageTTSImageRect(image);
+    const button = getEnglishTTSFloatingStopButton();
+    if (!panel || !imageRect || !button) return false;
+    const stopPanel = {
+        bounds: panel.bounds,
+        avoidBounds: sequence.record.panels.flatMap(candidate => candidate.items.map(item => item.bounds)),
+        avoidRects: [{ left: imageRect.left, top: imageRect.top, right: imageRect.right, bottom: imageRect.bottom }]
+    };
+    englishTTSState.activeImageTTSWrapper = sequence.wrapper;
+    englishTTSState.activeImageTTSStoryPanel = stopPanel;
+    englishTTSState.activeSpeechIsImageTTS = true;
+    button.classList.add("is-image-tts-hiking-stop-control");
+    const placed = placeEnglishImageTTSStoryStopButton(button, sequence.wrapper, stopPanel, {
+        fixedStopSize: true,
+        fixedStopWidth: 52,
+        fixedStopHeight: 52,
+        fixedStopText: "⏹",
+        fixedStopAriaLabel: "停止 Hiking 健行英文朗讀",
+        fixedStopClass: "is-image-tts-hiking-stop-control",
+        stopControlClass: "is-image-tts-hiking-stop-control",
+        preferBelow: true,
+        scanForClearPosition: true,
+        strictAvoidance: true
+    });
+    if (!placed) {
+        button.hidden = true;
+        button.style.visibility = "hidden";
+        return false;
+    }
+    button.style.width = "52px";
+    button.style.height = "52px";
+    button.style.minWidth = "52px";
+    button.style.maxWidth = "52px";
+    button.style.minHeight = "52px";
+    button.style.maxHeight = "52px";
+    button.style.visibility = "visible";
+    button.style.pointerEvents = "auto";
+    return isEnglishHikingImageTTSStopSafe(button, sequence.wrapper, sequence.record,
+        sequence.items[sequence.index]);
+}
+
+function isEnglishHikingImageTTSSequenceCurrent(sequence) {
+    if (!sequence || englishHikingImageTTSState.activeSequence !== sequence ||
+        englishTTSState.imageTextSequenceGeneration !== sequence.generation ||
+        englishTTSState.imageTextSequenceTrigger !== sequence.trigger ||
+        appState.subjectMode !== "english" || !sequence.wrapper ||
+        sequence.wrapper.isConnected === false || !sequence.wrapper.dataset ||
+        sequence.wrapper.dataset.imageTtsAssetFile !== ENGLISH_HIKING_ASSET_FILE ||
+        !isEnglishHikingImageTTSRecord(sequence.record) ||
+        imageTTSData[ENGLISH_HIKING_ASSET_FILE] !== sequence.record) return false;
+    const image = sequence.wrapper.querySelector("img");
+    return Boolean(image && image.getAttribute("src") === ENGLISH_HIKING_ASSET_FILE &&
+        image.complete === true && image.naturalWidth === 1448 && image.naturalHeight === 1086 &&
+        sequence.items.every(item => isEnglishHikingImageTTSItemText(sequence.record, item)));
+}
+
+function finishEnglishHikingImageTTSSequence(sequence, message) {
+    if (!sequence || englishHikingImageTTSState.activeSequence !== sequence) return;
+    englishHikingImageTTSState.activeSequence = null;
+    if (englishHikingImageTTSState.activeTimer) {
+        window.clearInterval(englishHikingImageTTSState.activeTimer);
+        englishHikingImageTTSState.activeTimer = 0;
+    }
+    englishTTSState.activeImageTTSStoryPanel = null;
+    englishTTSState.activeImageTTSWrapper = null;
+    englishTTSState.activeSpeechIsImageTTS = false;
+    if (englishTTSState.imageTextSequenceTrigger === sequence.trigger) {
+        cancelEnglishImageTTSImageTextSequence(false);
+    }
+    hideEnglishHikingImageTTSStopButton();
+    if (message) setEnglishTTSStatus(message);
+    updateEnglishTTSControls();
+}
+
+function speakNextEnglishHikingImageTTSUnit(sequence) {
+    if (!isEnglishHikingImageTTSSequenceCurrent(sequence)) {
+        return failEnglishHikingImageTTSSequence("Hiking 圖片或朗讀資料已改變，已取消朗讀。");
+    }
+    if (!placeEnglishHikingImageTTSStopButton(sequence)) {
+        return failEnglishHikingImageTTSSequence(
+            "Hiking：找不到安全、可見且可實際點擊的 52 CSS px Stop，朗讀已拒絕或取消。"
+        );
+    }
+    const item = sequence.items[sequence.index];
+    const text = getEnglishTTSUnitText(item && item.ttsText);
+    if (!text || !isEnglishHikingImageTTSItemText(sequence.record, item)) {
+        return failEnglishHikingImageTTSSequence("Hiking 原圖文字資料不完整，已取消朗讀。");
+    }
+    const started = speakEnglishText(text, () => {
+        if (!isEnglishHikingImageTTSSequenceCurrent(sequence)) return;
+        if (sequence.index >= sequence.items.length - 1) {
+            finishEnglishHikingImageTTSSequence(sequence, sequence.completionMessage);
+            return;
+        }
+        const previous = sequence.items[sequence.index];
+        sequence.index += 1;
+        const pause = previous.type === "label" ? 300 : 500;
+        englishTTSState.imageTextSequenceTimer = window.setTimeout(() => {
+            englishTTSState.imageTextSequenceTimer = 0;
+            speakNextEnglishHikingImageTTSUnit(sequence);
+        }, pause);
+    }, true, () => failEnglishHikingImageTTSSequence("Hiking 語音播放失敗，已取消後續單位。"),
+    englishTTSState.storySequenceGeneration, englishTTSState.answerSequenceGeneration,
+    englishTTSState.dialogueSequenceGeneration, sequence.generation);
+    if (!started) return failEnglishHikingImageTTSSequence("Hiking 語音無法開始，已取消朗讀。");
+    placeEnglishHikingImageTTSStopButton(sequence);
+    return true;
+}
+
+function startEnglishHikingImageTTSSequence(trigger, wrapper, record, panel, items, completionMessage) {
+    const safeRecord = getEnglishHikingImageTextRecord(record, ENGLISH_HIKING_ASSET_FILE);
+    const allItems = safeRecord ? safeRecord.panels.flatMap(candidate => candidate.items) : [];
+    const isExactList = candidateItems => Array.isArray(items) && Array.isArray(candidateItems) &&
+        candidateItems.length === items.length && candidateItems.every((item, index) => item === items[index]);
+    const isSingleItem = items && items.length === 1 && allItems.includes(items[0]);
+    const isPanelList = safeRecord && safeRecord.panels.some(candidate => candidate === panel &&
+        isExactList(candidate.items));
+    const isFullImageList = allItems.length === 5 && isExactList(allItems);
+    if (!trigger || !wrapper || !panel || !Array.isArray(items) || !items.length ||
+        appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode() ||
+        !englishTTSState.supported || !englishTTSState.synthesis ||
+        !isEnglishHikingImageTTSRecord(record) || allItems.length !== 5 ||
+        !safeRecord.panels.includes(panel) || !isEnglishHikingImageTTSButtonReady(
+            wrapper, trigger, trigger._englishHikingImageTTSPanel, trigger._englishHikingImageTTSItem) ||
+        !trigger._englishHikingImageTTSItem || !items.includes(trigger._englishHikingImageTTSItem) ||
+        !(isSingleItem || isPanelList || isFullImageList) ||
+        items.some(item => !allItems.includes(item) || !isEnglishHikingImageTTSItemText(record, item)) ||
+        !wrapper.contains(trigger) || trigger.hidden || trigger.disabled ||
+        trigger._englishHikingImageTTSRecord !== record ||
+        !layoutEnglishHikingImageTTSHitAreas(wrapper) ||
+        !isEnglishHikingImageTTSButtonReady(wrapper, trigger, panel, trigger._englishHikingImageTTSItem)) {
+        setEnglishTTSStatus("Hiking 目前沒有可安全播放的英文項目。");
+        return false;
+    }
+    cancelEnglishImageTTSStorySequence();
+    cancelEnglishImageTTSDialogueSequence(true);
+    cancelEnglishImageTTSImageTextSequence(true);
+    cancelEnglishCollocationReplay();
+    cancelEnglishAnswerTTSSequence(true);
+    englishTTSState.imageTextSequenceGeneration += 1;
+    const sequence = {
+        trigger, wrapper, record, items: items.slice(), index: 0,
+        generation: englishTTSState.imageTextSequenceGeneration,
+        completionMessage: completionMessage || "Hiking 英文朗讀完成。"
+    };
+    englishHikingImageTTSState.activeSequence = sequence;
+    englishTTSState.imageTextSequenceTrigger = trigger;
+    rememberEnglishSpeechTrigger(trigger);
+    englishTTSState.activeImageTTSWrapper = wrapper;
+    englishTTSState.activeSpeechIsImageTTS = true;
+    if (!placeEnglishHikingImageTTSStopButton(sequence)) {
+        return failEnglishHikingImageTTSSequence(
+            "Hiking：找不到安全、可見且可實際點擊的 52 CSS px Stop，朗讀已拒絕。"
+        );
+    }
+    if (englishHikingImageTTSState.activeTimer) window.clearInterval(englishHikingImageTTSState.activeTimer);
+    englishHikingImageTTSState.activeTimer = window.setInterval(() => {
+        const active = englishHikingImageTTSState.activeSequence;
+        if (!active) return;
+        if (!isEnglishHikingImageTTSSequenceCurrent(active) ||
+            !placeEnglishHikingImageTTSStopButton(active)) {
+            failEnglishHikingImageTTSSequence(
+                "Hiking：Stop 已無安全位置，或圖片／朗讀資料改變，已取消朗讀。"
+            );
+        }
+    }, 250);
+    setEnglishTTSStatus("正在依 Hiking 原圖順序朗讀。");
+    return speakNextEnglishHikingImageTTSUnit(sequence);
+}
+
+function isEnglishHikingImageTTSButtonReady(wrapper, button, panel, item) {
+    if (!wrapper || !button || !panel || !item || button.hidden || button.disabled ||
+        button._englishHikingImageTTSPanel !== panel || button._englishHikingImageTTSItem !== item ||
+        button._englishHikingImageTTSRecord !== imageTTSData[ENGLISH_HIKING_ASSET_FILE] ||
+        !isEnglishHikingImageTTSItemText(button._englishHikingImageTTSRecord, item)) return false;
+    let style;
+    try { style = window.getComputedStyle(button); } catch (error) { return false; }
+    return Boolean(style && style.visibility === "visible" && style.display !== "none" &&
+        style.pointerEvents !== "none" && button.getAttribute("aria-disabled") === "false");
+}
+
+function openEnglishHikingImageTTSMenu(trigger, wrapper, record, panel, item) {
+    if (!layoutEnglishHikingImageTTSHitAreas(wrapper) ||
+        !isEnglishHikingImageTTSButtonReady(wrapper, trigger, panel, item) ||
+        appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) return false;
+    const current = englishHikingImageTTSState.activeSequence;
+    if (current && current.trigger !== trigger) {
+        failEnglishHikingImageTTSSequence("已切換至其他 Hiking 文字，停止原朗讀。");
+    }
+    closeEnglishImageTTSMenu();
+    const menu = englishImageTTSOverlayState.menu || document.getElementById("english-image-tts-menu");
+    if (!menu) return false;
+    englishImageTTSOverlayState.menu = menu;
+    englishImageTTSOverlayState.activeTrigger = trigger;
+    trigger.setAttribute("aria-expanded", "true");
+    menu.classList.remove("is-tap-regions-dialogue");
+    menu.setAttribute("aria-label", "Hiking 第 " + panel.panelId + " 格原圖文字朗讀選項");
+    while (menu.firstChild) menu.removeChild(menu.firstChild);
+    const add = (label, description, sequenceItems, completionMessage) => {
+        menu.appendChild(createEnglishImageTTSMenuButton(label, description, () => {
+            closeEnglishImageTTSMenu();
+            startEnglishHikingImageTTSSequence(
+                trigger, wrapper, record, panel, sequenceItems, completionMessage
+            );
+        }));
+    };
+    const itemName = item.type === "label" ? "標籤「" + item.sourceText + "」" : "「" + item.sourceText + "」";
+    add("🔊 朗讀" + itemName, "單獨朗讀 Hiking 原圖文字：「" + item.sourceText + "」",
+        [item], "已朗讀所選 Hiking 原圖文字。");
+    add("🔊 朗讀本格", "依 Hiking 原圖順序朗讀第 " + panel.panelId + " 格文字",
+        panel.items, "Hiking 第 " + panel.panelId + " 格已朗讀完成。");
+    const allItems = record.panels.flatMap(candidate => candidate.items);
+    add("🔊 朗讀全圖", "依序朗讀 HIKING TRAIL 與 P1 至 P4 全部英文文字",
+        allItems, "Hiking 全圖已朗讀完成。");
+    menu.hidden = false;
+    menu.style.visibility = "hidden";
+    positionEnglishImageTTSMenu();
+    if (menu.hidden || !menu.firstChild) return false;
+    try { menu.firstChild.focus({ preventScroll: true }); }
+    catch (error) { menu.firstChild.focus(); }
+    return true;
+}
+
+function createEnglishHikingImageTTSButton(wrapper, image, panel, item, record, region) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-hiking-hit-area";
+    button.hidden = true;
+    button.disabled = true;
+    button.setAttribute("aria-label", (item.type === "label" ? "Hiking 路標標籤：" :
+        "Hiking 第 " + panel.panelId + " 格英文：") + item.sourceText + "，開啟朗讀選項");
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("aria-disabled", "true");
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("data-image-tts-item-id", String(item.itemId));
+    button.setAttribute("data-image-tts-region-id", region.regionId);
+    button._englishHikingImageTTSRecord = record;
+    button._englishHikingImageTTSPanel = panel;
+    button._englishHikingImageTTSItem = item;
+    button._englishHikingImageTTSRegion = region;
+    Object.assign(button.style, {
+        position: "absolute", left: region.bounds.xPct + "%", top: region.bounds.yPct + "%",
+        width: region.bounds.widthPct + "%", height: region.bounds.heightPct + "%",
+        minWidth: "0", minHeight: "0", margin: "0", padding: "0", border: "0",
+        background: "transparent", opacity: "0", zIndex: "4", boxSizing: "border-box",
+        cursor: "pointer", touchAction: "manipulation", pointerEvents: "none", visibility: "hidden"
+    });
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (!isEnglishHikingImageTTSButtonReady(wrapper, button, panel, item) ||
+            appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) return;
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishHikingImageTTSMenu(button, wrapper, record, panel, item);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
+function layoutEnglishHikingImageTTSHitAreas(wrapper) {
+    const buttons = wrapper && wrapper.querySelectorAll
+        ? Array.from(wrapper.querySelectorAll(".image-tts-hiking-hit-area")) : [];
+    const hideAll = () => buttons.forEach(hideEnglishHikingImageTTSButton);
+    if (!wrapper || !wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== ENGLISH_HIKING_ASSET_FILE) {
+        hideAll();
+        return false;
+    }
+    const image = wrapper.querySelector("img");
+    const record = imageTTSData && imageTTSData[ENGLISH_HIKING_ASSET_FILE];
+    const safeRecord = getEnglishHikingImageTextRecord(record, ENGLISH_HIKING_ASSET_FILE);
+    if (!safeRecord || buttons.length !== 5 || !image || image.getAttribute("src") !== ENGLISH_HIKING_ASSET_FILE ||
+        image.complete !== true || image.naturalWidth !== 1448 || image.naturalHeight !== 1086 ||
+        typeof document.elementFromPoint !== "function") {
+        hideAll();
+        const active = englishHikingImageTTSState.activeSequence;
+        if (active && active.wrapper === wrapper) {
+            failEnglishHikingImageTTSSequence("Hiking 圖片身份或尺寸無效，已隱藏觸控區並取消朗讀。");
+        }
+        if (englishImageTTSOverlayState.activeTrigger && wrapper.contains(englishImageTTSOverlayState.activeTrigger)) {
+            closeEnglishImageTTSMenu();
+        }
+        return false;
+    }
+    if (appState.subjectMode !== "english") {
+        hideAll();
+        if (englishImageTTSOverlayState.activeTrigger && wrapper.contains(englishImageTTSOverlayState.activeTrigger)) {
+            closeEnglishImageTTSMenu();
+        }
+        const active = englishHikingImageTTSState.activeSequence;
+        if (active && active.wrapper === wrapper) {
+            failEnglishHikingImageTTSSequence("已離開英文模式，Hiking 朗讀已取消。");
+        }
+        return false;
+    }
+    const regions = getEnglishHikingImageTTSRegions(safeRecord);
+    if (regions.length !== 5) { hideAll(); return false; }
+    const byKey = new Map();
+    for (const button of buttons) {
+        const key = [button.getAttribute("data-image-tts-panel-id"),
+            button.getAttribute("data-image-tts-item-id"), button.getAttribute("data-image-tts-region-id")].join(":");
+        if (key.includes("null") || key.includes("undefined") || byKey.has(key)) { hideAll(); return false; }
+        byKey.set(key, button);
+    }
+    const candidates = [];
+    for (const region of regions) {
+        const key = [region.panelId, region.itemId, region.regionId].join(":");
+        const button = byKey.get(key);
+        if (!button || button._englishHikingImageTTSRecord !== safeRecord ||
+            button._englishHikingImageTTSPanel !== region.panel || button._englishHikingImageTTSItem !== region.item ||
+            !button._englishHikingImageTTSRegion || button._englishHikingImageTTSRegion.regionId !== region.regionId ||
+            button.getAttribute("data-image-tts-panel-id") !== String(region.panelId) ||
+            button.getAttribute("data-image-tts-item-id") !== String(region.itemId) ||
+            button.getAttribute("data-image-tts-region-id") !== region.regionId) { hideAll(); return false; }
+        candidates.push({ button, region });
+    }
+    if (byKey.size !== 5 || candidates.length !== 5) { hideAll(); return false; }
+    if (isEnglishImageTTSDrawingMode()) {
+        hideAll();
+        if (englishImageTTSOverlayState.activeTrigger && wrapper.contains(englishImageTTSOverlayState.activeTrigger)) {
+            closeEnglishImageTTSMenu();
+        }
+        const active = englishHikingImageTTSState.activeSequence;
+        if (active && active.wrapper === wrapper && !placeEnglishHikingImageTTSStopButton(active)) {
+            failEnglishHikingImageTTSSequence("Hiking：繪圖工具遮擋 Stop，已停止朗讀。");
+        }
+        return false;
+    }
+    let imageRect, wrapperRect, wrapperStyle, viewport, controls;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+        wrapperStyle = window.getComputedStyle(wrapper);
+        viewport = getEnglishHikingImageTTSViewport(getEnglishTTSFloatingStopButton());
+        controls = getEnglishHikingImageTTSControlRects(wrapper, true);
+    } catch (error) { hideAll(); return false; }
+    if (!isEnglishHikingImageTTSRect(imageRect) || !isEnglishHikingImageTTSRect(wrapperRect) ||
+        !wrapperStyle || wrapperStyle.position !== "relative" || !viewport || !controls ||
+        Math.abs(imageRect.width / imageRect.height - 4 / 3) > 0.005 ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 || Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 || Math.abs(imageRect.height - wrapperRect.height) > 1) {
+        hideAll();
+        return false;
+    }
+    const intersection = rect => ({
+        left: Math.max(rect.left, viewport.safeLeft), top: Math.max(rect.top, viewport.safeTop),
+        right: Math.min(rect.right, viewport.safeRight), bottom: Math.min(rect.bottom, viewport.safeBottom)
+    });
+    const toRect = (base, bounds) => ({
+        left: base.left + base.width * bounds.xPct / 100,
+        top: base.top + base.height * bounds.yPct / 100,
+        right: base.left + base.width * (bounds.xPct + bounds.widthPct) / 100,
+        bottom: base.top + base.height * (bounds.yPct + bounds.heightPct) / 100
+    });
+    const intersects = (a, b) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+    const failed = new Set();
+    for (const { button, region } of candidates) {
+        const expected = toRect(imageRect, region.bounds);
+        const panelRect = toRect(imageRect, region.panel.bounds);
+        const tapWidth = expected.right - expected.left, tapHeight = expected.bottom - expected.top;
+        Object.assign(button.style, {
+            left: region.bounds.xPct + "%", top: region.bounds.yPct + "%",
+            width: region.bounds.widthPct + "%", height: region.bounds.heightPct + "%",
+            visibility: "hidden", pointerEvents: "auto"
+        });
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        let rect;
+        try { rect = button.getBoundingClientRect(); } catch (error) { failed.add(button); continue; }
+        const visible = intersection(rect);
+        const visibleWidth = visible.right - visible.left, visibleHeight = visible.bottom - visible.top;
+        const otherText = safeRecord.panels.flatMap(candidate => candidate.items)
+            .filter(candidate => candidate !== region.item).map(candidate => toRect(imageRect, candidate.bounds));
+        if (!isEnglishHikingImageTTSRect(rect) || Math.abs(rect.left - expected.left) > 1 ||
+            Math.abs(rect.top - expected.top) > 1 || Math.abs(rect.right - expected.right) > 1 ||
+            Math.abs(rect.bottom - expected.bottom) > 1 || tapWidth < 44 || tapHeight < 44 ||
+            visibleWidth < 44 || visibleHeight < 44 ||
+            expected.left < imageRect.left || expected.top < imageRect.top ||
+            expected.right > imageRect.right || expected.bottom > imageRect.bottom ||
+            expected.left < panelRect.left || expected.top < panelRect.top ||
+            expected.right > panelRect.right || expected.bottom > panelRect.bottom ||
+            otherText.some(textRect => intersects(expected, textRect)) ||
+            controls.some(control => intersects(expected, control))) failed.add(button);
+    }
+    for (let left = 0; left < candidates.length; left += 1) {
+        for (let right = left + 1; right < candidates.length; right += 1) {
+            const first = candidates[left].button.getBoundingClientRect();
+            const second = candidates[right].button.getBoundingClientRect();
+            if (intersects(first, second)) { failed.add(candidates[left].button); failed.add(candidates[right].button); }
+        }
+    }
+    for (const { button } of candidates) {
+        if (failed.has(button)) { hideEnglishHikingImageTTSButton(button); continue; }
+        button.disabled = false;
+        button.setAttribute("aria-disabled", "false");
+        button.hidden = false;
+        button.style.visibility = "visible";
+        button.style.pointerEvents = "auto";
+        let style, rect;
+        try { style = window.getComputedStyle(button); rect = button.getBoundingClientRect(); }
+        catch (error) { hideEnglishHikingImageTTSButton(button); continue; }
+        if (!style || style.display === "none" || style.visibility !== "visible" ||
+            style.pointerEvents === "none" || !isEnglishHikingImageTTSRect(rect)) {
+            hideEnglishHikingImageTTSButton(button);
+            continue;
+        }
+        const safe = intersection(rect);
+        const insetX = Math.min(6, (safe.right - safe.left) / 4);
+        const insetY = Math.min(6, (safe.bottom - safe.top) / 4);
+        const cx = (safe.left + safe.right) / 2, cy = (safe.top + safe.bottom) / 2;
+        const points = [[cx, cy], [safe.left + insetX, cy], [safe.right - insetX, cy],
+            [cx, safe.top + insetY], [cx, safe.bottom - insetY]];
+        let hit = false;
+        try { hit = points.every(([x, y]) => {
+            const target = document.elementFromPoint(x, y);
+            return target === button || button.contains(target);
+        }); } catch (error) { hit = false; }
+        if (!hit) hideEnglishHikingImageTTSButton(button);
+    }
+    const menuTrigger = englishImageTTSOverlayState.activeTrigger;
+    if (menuTrigger && wrapper.contains(menuTrigger) && (menuTrigger.hidden || menuTrigger.disabled)) {
+        closeEnglishImageTTSMenu();
+    }
+    const active = englishHikingImageTTSState.activeSequence;
+    if (active && active.wrapper === wrapper && !placeEnglishHikingImageTTSStopButton(active)) {
+        failEnglishHikingImageTTSSequence("Hiking：目前畫面沒有安全可點擊的 Stop，已取消朗讀。");
+    }
+    return candidates.some(candidate => !candidate.button.hidden && !candidate.button.disabled);
+}
+
+function isEnglishHikingImageTTSButtonSafe(wrapper, item) {
+    if (!layoutEnglishHikingImageTTSHitAreas(wrapper)) return null;
+    return Array.from(wrapper.querySelectorAll(".image-tts-hiking-hit-area")).find(button =>
+        button._englishHikingImageTTSItem === item &&
+        isEnglishHikingImageTTSButtonReady(wrapper, button, button._englishHikingImageTTSPanel, item)) || null;
+}
+
+function attachEnglishHikingImageTTSWrapper(wrapper, image) {
+    if (!wrapper || !image || wrapper._englishHikingImageTTSAttached) return;
+    wrapper._englishHikingImageTTSAttached = true;
+    image.addEventListener("load", () => layoutEnglishHikingImageTTSHitAreas(wrapper));
+    image.addEventListener("error", () => {
+        Array.from(wrapper.querySelectorAll(".image-tts-hiking-hit-area"))
+            .forEach(hideEnglishHikingImageTTSButton);
+        const active = englishHikingImageTTSState.activeSequence;
+        if (active && active.wrapper === wrapper) {
+            failEnglishHikingImageTTSSequence("Hiking 圖片載入失敗，已取消朗讀。");
+        }
+    });
+    if (typeof ResizeObserver === "function") {
+        const observer = new ResizeObserver(() => scheduleEnglishHikingImageTTSLayout(wrapper));
+        observer.observe(wrapper);
+        observer.observe(image);
+        wrapper._englishHikingImageTTSResizeObserver = observer;
+    }
+    if (typeof MutationObserver === "function") {
+        const observer = new MutationObserver(() => scheduleEnglishHikingImageTTSLayout(wrapper));
+        observer.observe(image, { attributes: true, attributeFilter: ["src"] });
+        observer.observe(wrapper, { attributes: true, attributeFilter: ["data-image-tts-asset-file"] });
+        wrapper._englishHikingImageTTSMutationObserver = observer;
+    }
+}
+
+function enhanceEnglishHikingImageTTSOverlays(responseRoot) {
+    if (!responseRoot || typeof responseRoot.querySelectorAll !== "function" ||
+        appState.subjectMode !== "english" || !englishTTSState.supported) return 0;
+    const active = englishHikingImageTTSState.activeSequence;
+    if (active && active.wrapper && active.wrapper.isConnected === false) {
+        failEnglishHikingImageTTSSequence("Hiking 圖片已移除，朗讀已取消。");
+    }
+    let added = 0;
+    Array.from(responseRoot.querySelectorAll("img")).forEach(image => {
+        if (image.getAttribute("src") !== ENGLISH_HIKING_ASSET_FILE) return;
+        const wrapper = image.closest(".image-tts-overlay-wrapper") || wrapEnglishImageForTTS(image);
+        if (!wrapper) return;
+        wrapper.dataset.imageTtsAssetFile = image.getAttribute("src");
+        const record = getEnglishHikingImageTextRecord(
+            imageTTSData && imageTTSData[ENGLISH_HIKING_ASSET_FILE], ENGLISH_HIKING_ASSET_FILE);
+        const existing = Array.from(wrapper.querySelectorAll(".image-tts-hiking-hit-area"));
+        if (!record) { existing.forEach(hideEnglishHikingImageTTSButton); return; }
+        const regions = getEnglishHikingImageTTSRegions(record);
+        if (existing.length === 0) {
+            regions.forEach(region => {
+                if (createEnglishHikingImageTTSButton(
+                    wrapper, image, region.panel, region.item, record, region)) added += 1;
+            });
+        }
+        attachEnglishHikingImageTTSWrapper(wrapper, image);
+        layoutEnglishHikingImageTTSHitAreas(wrapper);
+    });
+    return added;
+}
+
+function scheduleEnglishHikingImageTTSLayout(wrapper = null) {
+    if (englishHikingImageTTSState.layoutFrame) return;
+    const requestFrame = window.requestAnimationFrame || (callback => window.setTimeout(callback, 16));
+    englishHikingImageTTSState.layoutFrame = requestFrame(() => {
+        englishHikingImageTTSState.layoutFrame = 0;
+        if (wrapper) layoutEnglishHikingImageTTSHitAreas(wrapper);
+        else document.querySelectorAll(
+            '.image-tts-overlay-wrapper[data-image-tts-asset-file="' + ENGLISH_HIKING_ASSET_FILE + '"]'
+        ).forEach(candidate => layoutEnglishHikingImageTTSHitAreas(candidate));
+    });
+}
+
+function initializeEnglishHikingImageTTS() {
+    if (englishHikingImageTTSState.initialized) return;
+    englishHikingImageTTSState.initialized = true;
+    const style = document.createElement("style");
+    style.textContent = "#english-tts-floating-stop.is-image-tts-hiking-stop-control{" +
+        "box-sizing:border-box!important;width:52px!important;min-width:52px!important;max-width:52px!important;" +
+        "height:52px!important;min-height:52px!important;max-height:52px!important;padding:0!important}" +
+        ".image-tts-hiking-hit-area:focus-visible{opacity:.2!important;outline:3px solid #facc15;outline-offset:-3px}";
+    (document.head || document.documentElement).appendChild(style);
+    const relayout = () => scheduleEnglishHikingImageTTSLayout();
+    window.addEventListener("resize", relayout, { passive: true });
+    window.addEventListener("orientationchange", relayout, { passive: true });
+    window.addEventListener("scroll", relayout, { passive: true, capture: true });
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", relayout, { passive: true });
+        window.visualViewport.addEventListener("scroll", relayout, { passive: true });
+    }
+    document.body.addEventListener("click", () => window.setTimeout(relayout, 0), true);
+    const stopButton = getEnglishTTSFloatingStopButton();
+    if (stopButton) stopButton.addEventListener("click", () => window.setTimeout(() => {
+        const active = englishHikingImageTTSState.activeSequence;
+        if (active && englishTTSState.imageTextSequenceGeneration !== active.generation) {
+            englishHikingImageTTSState.activeSequence = null;
+            if (englishHikingImageTTSState.activeTimer) {
+                window.clearInterval(englishHikingImageTTSState.activeTimer);
+                englishHikingImageTTSState.activeTimer = 0;
+            }
+            englishTTSState.activeImageTTSStoryPanel = null;
+            englishTTSState.activeImageTTSWrapper = null;
+            englishTTSState.activeSpeechIsImageTTS = false;
+            hideEnglishHikingImageTTSStopButton();
+        }
+    }, 0));
+    const responseRoot = document.getElementById("ai-response");
+    if (responseRoot) enhanceEnglishHikingImageTTSOverlays(responseRoot);
+}
+
+initializeEnglishHikingImageTTS();
 
 </script>

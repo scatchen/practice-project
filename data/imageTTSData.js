@@ -21974,4 +21974,79 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/hiking-basics.png": {
+        imageId: "hiking-basics",
+        assetFile: "images/english/hiking-basics.png",
+        contentType: "image-text",
+        layout: "custom-hiking-2x2-five-text-areas",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1448, height: 1086 },
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: { xPct: 12 / 1448 * 100, yPct: 10 / 1086 * 100,
+                    widthPct: 706 / 1448 * 100, heightPct: 527 / 1086 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label",
+                        sourceText: "HIKING TRAIL", ttsText: "HIKING TRAIL",
+                        bounds: { xPct: 112 / 1448 * 100, yPct: 82 / 1086 * 100,
+                            widthPct: 115 / 1448 * 100, heightPct: 73 / 1086 * 100 },
+                        tapRegion: { xPct: 104 / 1448 * 100, yPct: 29 / 1086 * 100,
+                            widthPct: 126 / 1448 * 100, heightPct: 126 / 1086 * 100 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence",
+                        sourceText: "We start our hike on a trail.",
+                        ttsText: "We start our hike on a trail.",
+                        bounds: { xPct: 101 / 1448 * 100, yPct: 469 / 1086 * 100,
+                            widthPct: 532 / 1448 * 100, heightPct: 25 / 1086 * 100 },
+                        tapRegion: { xPct: 96 / 1448 * 100, yPct: 408 / 1086 * 100,
+                            widthPct: 548 / 1448 * 100, heightPct: 122 / 1086 * 100 } }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: { xPct: 730 / 1448 * 100, yPct: 10 / 1086 * 100,
+                    widthPct: 708 / 1448 * 100, heightPct: 527 / 1086 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "We walk along the mountain trail.",
+                        ttsText: "We walk along the mountain trail.",
+                        bounds: { xPct: 793 / 1448 * 100, yPct: 469 / 1086 * 100,
+                            widthPct: 583 / 1448 * 100, heightPct: 25 / 1086 * 100 },
+                        tapRegion: { xPct: 785 / 1448 * 100, yPct: 408 / 1086 * 100,
+                            widthPct: 600 / 1448 * 100, heightPct: 122 / 1086 * 100 } }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: { xPct: 12 / 1448 * 100, yPct: 548 / 1086 * 100,
+                    widthPct: 706 / 1448 * 100, heightPct: 524 / 1086 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "We enjoy the beautiful nature.",
+                        ttsText: "We enjoy the beautiful nature.",
+                        bounds: { xPct: 120 / 1448 * 100, yPct: 1010 / 1086 * 100,
+                            widthPct: 506 / 1448 * 100, heightPct: 33 / 1086 * 100 },
+                        tapRegion: { xPct: 110 / 1448 * 100, yPct: 948 / 1086 * 100,
+                            widthPct: 530 / 1448 * 100, heightPct: 122 / 1086 * 100 } }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: { xPct: 730 / 1448 * 100, yPct: 548 / 1086 * 100,
+                    widthPct: 708 / 1448 * 100, heightPct: 524 / 1086 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "We enjoy the view from the top.",
+                        ttsText: "We enjoy the view from the top.",
+                        bounds: { xPct: 826 / 1448 * 100, yPct: 1010 / 1086 * 100,
+                            widthPct: 548 / 1448 * 100, heightPct: 33 / 1086 * 100 },
+                        tapRegion: { xPct: 815 / 1448 * 100, yPct: 948 / 1086 * 100,
+                            widthPct: 570 / 1448 * 100, heightPct: 122 / 1086 * 100 } }
+                ]
+            }
+        ]
+    },
 };
