@@ -21825,4 +21825,80 @@ const imageTTSData = {
                     widthPct: 264 / 1536 * 100, heightPct: 145 / 1024 * 100 } }
         ]
     },
+    "images/english/cycling-and-riding-a-bike-basics.png": {
+        imageId: "cycling-and-riding-a-bike-basics",
+        assetFile: "images/english/cycling-and-riding-a-bike-basics.png",
+        contentType: "image-text",
+        layout: "custom-cycling-riding-bike-2x2-six-text-areas",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1448, height: 1086 },
+        panels: [
+            { panelId: 1, readingOrder: 1,
+                bounds: { xPct: 0 / 1448 * 100, yPct: 0 / 1086 * 100,
+                    widthPct: 718 / 1448 * 100, heightPct: 538 / 1086 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "We get ready to ride a bike.", ttsText: "We get ready to ride a bike.",
+                        bounds: { xPct: 67 / 1448 * 100, yPct: 40 / 1086 * 100,
+                            widthPct: 620 / 1448 * 100, heightPct: 46 / 1086 * 100 },
+                        tapRegion: { xPct: 35 / 1448 * 100, yPct: 24 / 1086 * 100,
+                            widthPct: 662 / 1448 * 100, heightPct: 82 / 1086 * 100 } }
+                ]
+            },
+            { panelId: 2, readingOrder: 2,
+                bounds: { xPct: 730 / 1448 * 100, yPct: 0 / 1086 * 100,
+                    widthPct: 718 / 1448 * 100, heightPct: 538 / 1086 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "We ride our bikes along the bike path.",
+                        ttsText: "We ride our bikes along the bike path.",
+                        bounds: { xPct: 903 / 1448 * 100, yPct: 32 / 1086 * 100,
+                            widthPct: 454 / 1448 * 100, heightPct: 94 / 1086 * 100 },
+                        tapRegion: { xPct: 837 / 1448 * 100, yPct: 24 / 1086 * 100,
+                            widthPct: 534 / 1448 * 100, heightPct: 116 / 1086 * 100 } },
+                    { itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "BIKE PATH", ttsText: "BIKE PATH",
+                        bounds: { xPct: 1330 / 1448 * 100, yPct: 254 / 1086 * 100,
+                            widthPct: 58 / 1448 * 100, heightPct: 47 / 1086 * 100 },
+                        tapRegion: { xPct: 1317 / 1448 * 100, yPct: 175 / 1086 * 100,
+                            widthPct: 82 / 1448 * 100, heightPct: 132 / 1086 * 100 } }
+                ]
+            },
+            { panelId: 3, readingOrder: 3,
+                bounds: { xPct: 0 / 1448 * 100, yPct: 548 / 1086 * 100,
+                    widthPct: 718 / 1448 * 100, heightPct: 538 / 1086 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "We enjoy riding our bikes outdoors.",
+                        ttsText: "We enjoy riding our bikes outdoors.",
+                        bounds: { xPct: 87 / 1448 * 100, yPct: 576 / 1086 * 100,
+                            widthPct: 556 / 1448 * 100, heightPct: 94 / 1086 * 100 },
+                        tapRegion: { xPct: 49 / 1448 * 100, yPct: 569 / 1086 * 100,
+                            widthPct: 632 / 1448 * 100, heightPct: 116 / 1086 * 100 } }
+                ]
+            },
+            { panelId: 4, readingOrder: 4,
+                bounds: { xPct: 730 / 1448 * 100, yPct: 548 / 1086 * 100,
+                    widthPct: 718 / 1448 * 100, heightPct: 538 / 1086 * 100 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "sentence",
+                        sourceText: "We wear helmets and ride safely.",
+                        ttsText: "We wear helmets and ride safely.",
+                        bounds: { xPct: 900 / 1448 * 100, yPct: 577 / 1086 * 100,
+                            widthPct: 385 / 1448 * 100, heightPct: 94 / 1086 * 100 },
+                        tapRegion: { xPct: 838 / 1448 * 100, yPct: 570 / 1086 * 100,
+                            widthPct: 458 / 1448 * 100, heightPct: 123 / 1086 * 100 } },
+                    { itemId: 2, readingOrder: 2, type: "label",
+                        sourceText: "STOP", ttsText: "STOP",
+                        bounds: { xPct: 1340 / 1448 * 100, yPct: 675 / 1086 * 100,
+                            widthPct: 82 / 1448 * 100, heightPct: 57 / 1086 * 100 },
+                        tapRegion: { xPct: 1329 / 1448 * 100, yPct: 653 / 1086 * 100,
+                            widthPct: 100 / 1448 * 100, heightPct: 104 / 1086 * 100 } }
+                ]
+            }
+        ]
+    },
 };
