@@ -5382,6 +5382,7 @@ const diagramMap = [
 },
 {
     id: "telephone-alexander-graham-bell-basics",
+    searchable: false,
     title: "The Telephone — Alexander Graham Bell 貝爾與電話",
     keywords: [
         "電話", "電話發明", "貝爾", "亞歷山大·格拉漢姆·貝爾",
@@ -5416,6 +5417,33 @@ const diagramMap = [
     related: [
         "simple-physics-basics"
     ]
+},
+{
+    id: "telephone-alexander-graham-bell-tts-ready-v2",
+    title: "The Telephone — Alexander Graham Bell (12-Panel Story, V2) 貝爾與電話（新版十二格故事）",
+    keywords: [
+        "電話", "電話發明", "貝爾", "亞歷山大·格拉漢姆·貝爾", "通訊", "遠距離通訊",
+        "新版電話教學圖", "電話十二格故事", "電話通訊史",
+        "telephone", "Telephone V2", "telephone 12-panel story",
+        "Alexander Graham Bell", "Alexander Graham", "Bell", "Bell's telephone", "early telephone",
+        "first telephone", "telephone invention", "invention of the telephone",
+        "history of the telephone", "long distance communication",
+        "Who invented the telephone",
+        "Who was Alexander Graham Bell",
+        "What did Alexander Graham Bell invent",
+        "How did the telephone work",
+        "What was the first telephone",
+        "Why was the telephone important",
+        "How did the telephone change communication"
+    ],
+    file: "images/english/telephone-alexander-graham-bell-tts-ready-v2.png",
+    alt: "The Telephone — Alexander Graham Bell (V2) 英文教學圖，以十二格故事呈現貝爾與電話發明、聲音轉為訊號再傳回聲音，以及電話如何改變人們的溝通；新版直式圖，含三級程度與互動朗讀。",
+    category: "english",
+    grade: 7,
+    chapter: "Historical Inventions & Inventors 歷史上的重要發明與發明家",
+    concept: "Telephone V2 十二格連續故事：貝爾與電話發明、聲音如何轉換並傳送、電話如何改變遠距離溝通，並提供三級程度的英文對話與互動朗讀。",
+    difficulty: 2,
+    related: []
 },
 {
     id: "airplane-wright-brothers-basics",
@@ -16893,7 +16921,7 @@ function normalizeImageSearchEnglish(text) {
 }
 
 function buildImageSearchIndex(diagrams) {
-    return diagrams.map((item, itemIndex) => {
+    return diagrams.filter(item => item.searchable !== false).map((item, itemIndex) => {
         const chineseKeywords = [];
         const englishGroups = new Map();
         for (let ordinal = 0; ordinal < item.keywords.length; ordinal += 1) {
@@ -16947,7 +16975,7 @@ function imageSearchSparseContentTerms(text) {
 
 function buildImageSearchSparseIndex(diagrams) {
     const records = diagrams.map((item, itemIndex) => ({ item, itemIndex }))
-        .filter(({ item }) => item.category === "english")
+        .filter(({ item }) => item.category === "english" && item.searchable !== false)
         .map(({ item, itemIndex }) => {
             const fields = new Map();
             const addField = (text, weight) => {

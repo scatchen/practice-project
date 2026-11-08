@@ -22049,4 +22049,424 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/telephone-alexander-graham-bell-basics.png": {
+        imageId: "telephone-alexander-graham-bell-basics",
+        title: "The Telephone — Alexander Graham Bell 貝爾與電話",
+        assetFile: "images/english/telephone-alexander-graham-bell-basics.png",
+        contentType: "image-text",
+        layout: "custom-telephone-2x2-sequence-only",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1536, height: 1024 },
+        titleItem: {
+            itemId: "telephone-title",
+            readingOrder: 1,
+            type: "label",
+            sourceText: "The Telephone — Alexander Graham Bell",
+            ttsText: "The Telephone — Alexander Graham Bell",
+            sequenceOnly: true,
+            bounds: { xPct: 163 / 1536 * 100, yPct: 14 / 1024 * 100,
+                widthPct: 1210 / 1536 * 100, heightPct: 60 / 1024 * 100 },
+            textFragments: [
+                { text: "The Telephone — Alexander Graham Bell",
+                    bounds: { xPct: 163 / 1536 * 100, yPct: 14 / 1024 * 100,
+                        widthPct: 1210 / 1536 * 100, heightPct: 60 / 1024 * 100 } }
+            ]
+        },
+        canonicalSequence: [
+            "telephone-title",
+            "telephone-p1-heading", "telephone-p1-narration",
+            "telephone-p2-heading", "telephone-p2-narration", "telephone-p2-label",
+            "telephone-p3-heading", "telephone-p3-narration", "telephone-p3-hello-left",
+            "telephone-p3-electrical-signals", "telephone-p3-hello-right",
+            "telephone-p4-heading", "telephone-p4-narration"
+        ],
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 8 / 1536 * 100, yPct: 96 / 1024 * 100,
+                    widthPct: 756 / 1536 * 100, heightPct: 460 / 1024 * 100 },
+                heading: {
+                    itemId: "telephone-p1-heading", readingOrder: 1, type: "label",
+                    sourceText: "Before the telephone", ttsText: "Before the telephone",
+                    sequenceOnly: true,
+                    bounds: { xPct: 108 / 1536 * 100, yPct: 110 / 1024 * 100,
+                        widthPct: 476 / 1536 * 100, heightPct: 40 / 1024 * 100 },
+                    textFragments: [
+                        { text: "Before the telephone",
+                            bounds: { xPct: 108 / 1536 * 100, yPct: 110 / 1024 * 100,
+                                widthPct: 476 / 1536 * 100, heightPct: 40 / 1024 * 100 } }
+                    ]
+                },
+                items: [
+                    {
+                        itemId: "telephone-p1-narration", readingOrder: 1, type: "sentence",
+                        sourceText: "People wanted to communicate over long distances.",
+                        ttsText: "People wanted to communicate over long distances.",
+                        sequenceOnly: false,
+                        bounds: { xPct: 107 / 1536 * 100, yPct: 164 / 1024 * 100,
+                            widthPct: 526 / 1536 * 100, heightPct: 83 / 1024 * 100 },
+                        textFragments: [
+                            { text: "People wanted to communicate",
+                                bounds: { xPct: 107 / 1536 * 100, yPct: 164 / 1024 * 100,
+                                    widthPct: 526 / 1536 * 100, heightPct: 42 / 1024 * 100 } },
+                            { text: "over long distances.",
+                                bounds: { xPct: 107 / 1536 * 100, yPct: 205 / 1024 * 100,
+                                    widthPct: 335 / 1536 * 100, heightPct: 42 / 1024 * 100 } }
+                        ],
+                        tapRegion: { xPct: 96 / 1536 * 100, yPct: 156 / 1024 * 100,
+                            widthPct: 552 / 1536 * 100, heightPct: 132 / 1024 * 100 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 775 / 1536 * 100, yPct: 96 / 1024 * 100,
+                    widthPct: 753 / 1536 * 100, heightPct: 460 / 1024 * 100 },
+                heading: {
+                    itemId: "telephone-p2-heading", readingOrder: 1, type: "label",
+                    sourceText: "Alexander Graham Bell", ttsText: "Alexander Graham Bell",
+                    sequenceOnly: true,
+                    bounds: { xPct: 883 / 1536 * 100, yPct: 109 / 1024 * 100,
+                        widthPct: 526 / 1536 * 100, heightPct: 43 / 1024 * 100 },
+                    textFragments: [
+                        { text: "Alexander Graham Bell",
+                            bounds: { xPct: 883 / 1536 * 100, yPct: 109 / 1024 * 100,
+                                widthPct: 526 / 1536 * 100, heightPct: 43 / 1024 * 100 } }
+                    ]
+                },
+                items: [
+                    {
+                        itemId: "telephone-p2-narration", readingOrder: 1, type: "sentence",
+                        sourceText: "Alexander Graham Bell worked on a device for sending voices.",
+                        ttsText: "Alexander Graham Bell worked on a device for sending voices.",
+                        sequenceOnly: false,
+                        bounds: { xPct: 807 / 1536 * 100, yPct: 176 / 1024 * 100,
+                            widthPct: 583 / 1536 * 100, heightPct: 78 / 1024 * 100 },
+                        textFragments: [
+                            { text: "Alexander Graham Bell worked on",
+                                bounds: { xPct: 807 / 1536 * 100, yPct: 176 / 1024 * 100,
+                                    widthPct: 583 / 1536 * 100, heightPct: 36 / 1024 * 100 } },
+                            { text: "a device for sending voices.",
+                                bounds: { xPct: 807 / 1536 * 100, yPct: 216 / 1024 * 100,
+                                    widthPct: 469 / 1536 * 100, heightPct: 38 / 1024 * 100 } }
+                        ],
+                        tapRegion: { xPct: 795 / 1536 * 100, yPct: 166 / 1024 * 100,
+                            widthPct: 596 / 1536 * 100, heightPct: 91 / 1024 * 100 }
+                    },
+                    {
+                        itemId: "telephone-p2-label", readingOrder: 2, type: "label",
+                        sourceText: "TELEPHONE", ttsText: "TELEPHONE", sequenceOnly: false,
+                        bounds: { xPct: 1337 / 1536 * 100, yPct: 259 / 1024 * 100,
+                            widthPct: 137 / 1536 * 100, heightPct: 23 / 1024 * 100 },
+                        textFragments: [
+                            { text: "TELEPHONE",
+                                bounds: { xPct: 1337 / 1536 * 100, yPct: 259 / 1024 * 100,
+                                    widthPct: 137 / 1536 * 100, heightPct: 23 / 1024 * 100 } }
+                        ],
+                        tapRegion: { xPct: 1334 / 1536 * 100, yPct: 257 / 1024 * 100,
+                            widthPct: 143 / 1536 * 100, heightPct: 74 / 1024 * 100 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 8 / 1536 * 100, yPct: 567 / 1024 * 100,
+                    widthPct: 756 / 1536 * 100, heightPct: 447 / 1024 * 100 },
+                heading: {
+                    itemId: "telephone-p3-heading", readingOrder: 1, type: "label",
+                    sourceText: "How the telephone worked", ttsText: "How the telephone worked",
+                    sequenceOnly: true,
+                    bounds: { xPct: 107 / 1536 * 100, yPct: 579 / 1024 * 100,
+                        widthPct: 562 / 1536 * 100, heightPct: 46 / 1024 * 100 },
+                    textFragments: [
+                        { text: "How the telephone worked",
+                            bounds: { xPct: 107 / 1536 * 100, yPct: 579 / 1024 * 100,
+                                widthPct: 562 / 1536 * 100, heightPct: 46 / 1024 * 100 } }
+                    ]
+                },
+                items: [
+                    {
+                        itemId: "telephone-p3-narration", readingOrder: 1, type: "sentence",
+                        sourceText: "A person's voice could travel through electrical signals.",
+                        ttsText: "A person's voice could travel through electrical signals.",
+                        sequenceOnly: false,
+                        bounds: { xPct: 106 / 1536 * 100, yPct: 640 / 1024 * 100,
+                            widthPct: 500 / 1536 * 100, heightPct: 83 / 1024 * 100 },
+                        textFragments: [
+                            { text: "A person’s voice could travel",
+                                bounds: { xPct: 106 / 1536 * 100, yPct: 640 / 1024 * 100,
+                                    widthPct: 500 / 1536 * 100, heightPct: 41 / 1024 * 100 } },
+                            { text: "through electrical signals.",
+                                bounds: { xPct: 106 / 1536 * 100, yPct: 683 / 1024 * 100,
+                                    widthPct: 441 / 1536 * 100, heightPct: 40 / 1024 * 100 } }
+                        ],
+                        tapRegion: { xPct: 96 / 1536 * 100, yPct: 631 / 1024 * 100,
+                            widthPct: 550 / 1536 * 100, heightPct: 98 / 1024 * 100 }
+                    },
+                    {
+                        itemId: "telephone-p3-hello-left", readingOrder: 2, type: "phrase",
+                        sourceText: "Hello!", ttsText: "Hello!", sequenceOnly: false,
+                        bounds: { xPct: 195 / 1536 * 100, yPct: 753 / 1024 * 100,
+                            widthPct: 92 / 1536 * 100, heightPct: 39 / 1024 * 100 },
+                        textFragments: [
+                            { text: "Hello!", bounds: { xPct: 195 / 1536 * 100,
+                                yPct: 753 / 1024 * 100, widthPct: 92 / 1536 * 100,
+                                heightPct: 39 / 1024 * 100 } }
+                        ],
+                        tapRegion: { xPct: 176 / 1536 * 100, yPct: 729 / 1024 * 100,
+                            widthPct: 128 / 1536 * 100, heightPct: 98 / 1024 * 100 }
+                    },
+                    {
+                        itemId: "telephone-p3-electrical-signals", readingOrder: 3, type: "label",
+                        sourceText: "electrical signals", ttsText: "electrical signals", sequenceOnly: false,
+                        bounds: { xPct: 348 / 1536 * 100, yPct: 834 / 1024 * 100,
+                            widthPct: 112 / 1536 * 100, heightPct: 62 / 1024 * 100 },
+                        textFragments: [
+                            { text: "electrical", bounds: { xPct: 348 / 1536 * 100,
+                                yPct: 834 / 1024 * 100, widthPct: 112 / 1536 * 100,
+                                heightPct: 31 / 1024 * 100 } },
+                            { text: "signals", bounds: { xPct: 353 / 1536 * 100,
+                                yPct: 866 / 1024 * 100, widthPct: 101 / 1536 * 100,
+                                heightPct: 30 / 1024 * 100 } }
+                        ],
+                        tapRegion: { xPct: 320 / 1536 * 100, yPct: 815 / 1024 * 100,
+                            widthPct: 160 / 1536 * 100, heightPct: 128 / 1024 * 100 }
+                    },
+                    {
+                        itemId: "telephone-p3-hello-right", readingOrder: 4, type: "phrase",
+                        sourceText: "Hello!", ttsText: "Hello!", sequenceOnly: false,
+                        bounds: { xPct: 501 / 1536 * 100, yPct: 758 / 1024 * 100,
+                            widthPct: 97 / 1536 * 100, heightPct: 40 / 1024 * 100 },
+                        textFragments: [
+                            { text: "Hello!", bounds: { xPct: 501 / 1536 * 100,
+                                yPct: 758 / 1024 * 100, widthPct: 97 / 1536 * 100,
+                                heightPct: 40 / 1024 * 100 } }
+                        ],
+                        tapRegion: { xPct: 486 / 1536 * 100, yPct: 729 / 1024 * 100,
+                            widthPct: 128 / 1536 * 100, heightPct: 98 / 1024 * 100 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 775 / 1536 * 100, yPct: 567 / 1024 * 100,
+                    widthPct: 753 / 1536 * 100, heightPct: 447 / 1024 * 100 },
+                heading: {
+                    itemId: "telephone-p4-heading", readingOrder: 1, type: "label",
+                    sourceText: "Impact", ttsText: "Impact", sequenceOnly: true,
+                    bounds: { xPct: 881 / 1536 * 100, yPct: 580 / 1024 * 100,
+                        widthPct: 198 / 1536 * 100, heightPct: 42 / 1024 * 100 },
+                    textFragments: [
+                        { text: "Impact", bounds: { xPct: 881 / 1536 * 100,
+                            yPct: 580 / 1024 * 100, widthPct: 198 / 1536 * 100,
+                            heightPct: 42 / 1024 * 100 } }
+                    ]
+                },
+                items: [
+                    {
+                        itemId: "telephone-p4-narration", readingOrder: 1, type: "sentence",
+                        sourceText: "The telephone changed communication around the world.",
+                        ttsText: "The telephone changed communication around the world.",
+                        sequenceOnly: false,
+                        bounds: { xPct: 880 / 1536 * 100, yPct: 638 / 1024 * 100,
+                            widthPct: 466 / 1536 * 100, heightPct: 78 / 1024 * 100 },
+                        textFragments: [
+                            { text: "The telephone changed",
+                                bounds: { xPct: 880 / 1536 * 100, yPct: 638 / 1024 * 100,
+                                    widthPct: 347 / 1536 * 100, heightPct: 38 / 1024 * 100 } },
+                            { text: "communication around the world.",
+                                bounds: { xPct: 907 / 1536 * 100, yPct: 679 / 1024 * 100,
+                                    widthPct: 439 / 1536 * 100, heightPct: 37 / 1024 * 100 } }
+                        ],
+                        tapRegion: { xPct: 860 / 1536 * 100, yPct: 629 / 1024 * 100,
+                            widthPct: 510 / 1536 * 100, heightPct: 132 / 1024 * 100 }
+                    }
+                ]
+            }
+        ]
+    },
+    "images/english/telephone-alexander-graham-bell-tts-ready-v2.png": {
+        imageId: "telephone-alexander-graham-bell-tts-ready-v2",
+        title: "Telephone V2 — Alexander Graham Bell",
+        assetFile: "images/english/telephone-alexander-graham-bell-tts-ready-v2.png",
+        contentType: "image-text", layout: "custom-telephone-v2-p1-p12",
+        transcriptStatus: "verified", transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated", overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1024, height: 1536 },
+        panels: [
+            { panelId: 1, readingOrder: 1, bounds: { xPct: 220/1024*100, yPct: 120/1536*100, widthPct: 400/1024*100, heightPct: 226/1536*100 }, items: [{
+                itemId: "telephone-v2-p1-narration", readingOrder: 1, type: "sentence",
+                sourceText: "People wanted to communicate over long distances.",
+                ttsText: "People wanted to communicate over long distances.",
+                bounds: { xPct: 270/1024*100, yPct: 140/1536*100, widthPct: 178/1024*100, heightPct: 90/1536*100 },
+                textFragments: [
+                    { text: "People wanted to", bounds: { xPct: 274/1024*100, yPct: 143/1536*100, widthPct: 174/1024*100, heightPct: 31/1536*100 } },
+                    { text: "communicate over", bounds: { xPct: 270/1024*100, yPct: 174/1536*100, widthPct: 178/1024*100, heightPct: 32/1536*100 } },
+                    { text: "long distances.", bounds: { xPct: 274/1024*100, yPct: 206/1536*100, widthPct: 162/1024*100, heightPct: 24/1536*100 } }
+                ],
+                tapRegion: { xPct: 270/1024*100, yPct: 120/1536*100, widthPct: 178/1024*100, heightPct: 112/1536*100 }
+            }]},
+            { panelId: 2, readingOrder: 2, bounds: { xPct: 630/1024*100, yPct: 120/1536*100, widthPct: 394/1024*100, heightPct: 226/1536*100 }, items: [{
+                itemId: "telephone-v2-p2-narration", readingOrder: 1, type: "sentence",
+                sourceText: "Alexander Graham Bell was interested in sending sound through wires.",
+                ttsText: "Alexander Graham Bell was interested in sending sound through wires.",
+                bounds: { xPct: 662/1024*100, yPct: 140/1536*100, widthPct: 164/1024*100, heightPct: 137/1536*100 },
+                textFragments: [
+                    { text: "Alexander", bounds: { xPct: 663/1024*100, yPct: 143/1536*100, widthPct: 118/1024*100, heightPct: 26/1536*100 } },
+                    { text: "Graham Bell", bounds: { xPct: 667/1024*100, yPct: 170/1536*100, widthPct: 125/1024*100, heightPct: 26/1536*100 } },
+                    { text: "was interested in", bounds: { xPct: 663/1024*100, yPct: 197/1536*100, widthPct: 157/1024*100, heightPct: 26/1536*100 } },
+                    { text: "sending sound", bounds: { xPct: 673/1024*100, yPct: 224/1536*100, widthPct: 130/1024*100, heightPct: 26/1536*100 } },
+                    { text: "through wires.", bounds: { xPct: 663/1024*100, yPct: 251/1536*100, widthPct: 139/1024*100, heightPct: 26/1536*100 } }
+                ],
+                tapRegion: { xPct: 653/1024*100, yPct: 133/1536*100, widthPct: 180/1024*100, heightPct: 152/1536*100 }
+            }]},
+            { panelId: 3, readingOrder: 3, bounds: { xPct: 220/1024*100, yPct: 354/1536*100, widthPct: 400/1024*100, heightPct: 229/1536*100 }, items: [{
+                itemId: "telephone-v2-p3-narration", readingOrder: 1, type: "sentence",
+                sourceText: "Bell did many experiments to turn sound into signals.",
+                ttsText: "Bell did many experiments to turn sound into signals.",
+                bounds: { xPct: 270/1024*100, yPct: 374/1536*100, widthPct: 157/1024*100, heightPct: 107/1536*100 },
+                textFragments: [
+                    { text: "Bell did many", bounds: { xPct: 270/1024*100, yPct: 374/1536*100, widthPct: 152/1024*100, heightPct: 26/1536*100 } },
+                    { text: "experiments", bounds: { xPct: 278/1024*100, yPct: 401/1536*100, widthPct: 131/1024*100, heightPct: 26/1536*100 } },
+                    { text: "to turn sound", bounds: { xPct: 278/1024*100, yPct: 428/1536*100, widthPct: 132/1024*100, heightPct: 26/1536*100 } },
+                    { text: "into signals.", bounds: { xPct: 278/1024*100, yPct: 455/1536*100, widthPct: 126/1024*100, heightPct: 26/1536*100 } }
+                ],
+                tapRegion: { xPct: 261/1024*100, yPct: 365/1536*100, widthPct: 178/1024*100, heightPct: 125/1536*100 }
+            }]},
+            { panelId: 4, readingOrder: 4, bounds: { xPct: 630/1024*100, yPct: 354/1536*100, widthPct: 394/1024*100, heightPct: 229/1536*100 }, items: [
+                {
+                    itemId: "telephone-v2-p4-narration", readingOrder: 1, type: "sentence",
+                    sourceText: "In 1876, Bell made the first successful telephone call.",
+                    ttsText: "In 1876, Bell made the first successful telephone call.",
+                    bounds: { xPct: 675/1024*100, yPct: 369/1536*100, widthPct: 137/1024*100, heightPct: 108/1536*100 },
+                    textFragments: [
+                        { text: "In 1876, Bell", bounds: { xPct: 675/1024*100, yPct: 369/1536*100, widthPct: 137/1024*100, heightPct: 25/1536*100 } },
+                        { text: "made the first", bounds: { xPct: 680/1024*100, yPct: 396/1536*100, widthPct: 128/1024*100, heightPct: 25/1536*100 } },
+                        { text: "successful", bounds: { xPct: 686/1024*100, yPct: 423/1536*100, widthPct: 109/1024*100, heightPct: 25/1536*100 } },
+                        { text: "telephone call.", bounds: { xPct: 676/1024*100, yPct: 450/1536*100, widthPct: 136/1024*100, heightPct: 25/1536*100 } }
+                    ],
+                    tapRegion: { xPct: 665/1024*100, yPct: 360/1536*100, widthPct: 160/1024*100, heightPct: 125/1536*100 }
+                },
+                {
+                    itemId: "telephone-v2-p4-hello-bubble", readingOrder: 2, type: "label",
+                    sourceText: "Hello!", ttsText: "Hello!",
+                    bounds: { xPct: 924/1024*100, yPct: 380/1536*100, widthPct: 79/1024*100, heightPct: 31/1536*100 },
+                    textFragments: [{ text: "Hello!", bounds: { xPct: 924/1024*100, yPct: 380/1536*100, widthPct: 79/1024*100, heightPct: 31/1536*100 } }],
+                    tapRegion: { xPct: 889/1024*100, yPct: 360/1536*100, widthPct: 119/1024*100, heightPct: 66/1536*100 }
+                }
+            ]},
+            { panelId: 5, readingOrder: 5, bounds: { xPct: 220/1024*100, yPct: 593/1536*100, widthPct: 400/1024*100, heightPct: 203/1536*100 }, items: [
+                {
+                    itemId: "telephone-v2-p5-narration", readingOrder: 1, type: "sentence",
+                    sourceText: "A telephone changes sound (voice) into an electrical signal.", ttsText: "A telephone changes sound (voice) into an electrical signal.",
+                    bounds: { xPct: 265/1024*100, yPct: 609/1536*100, widthPct: 150/1024*100, heightPct: 141/1536*100 },
+                    textFragments: [{ text: "A telephone changes sound (voice) into an electrical signal.", bounds: { xPct: 265/1024*100, yPct: 609/1536*100, widthPct: 150/1024*100, heightPct: 141/1536*100 } }],
+                    tapRegion: { xPct: 255/1024*100, yPct: 600/1536*100, widthPct: 174/1024*100, heightPct: 159/1536*100 }
+                }
+            ]},
+            { panelId: 6, readingOrder: 6, bounds: { xPct: 630/1024*100, yPct: 593/1536*100, widthPct: 394/1024*100, heightPct: 203/1536*100 }, items: [
+                {
+                    itemId: "telephone-v2-p6-narration", readingOrder: 1, type: "sentence",
+                    sourceText: "The signal travels through a wire to another telephone.", ttsText: "The signal travels through a wire to another telephone.",
+                    bounds: { xPct: 646/1024*100, yPct: 608/1536*100, widthPct: 103/1024*100, heightPct: 171/1536*100 },
+                    textFragments: [{ text: "The signal travels through a wire to another telephone.", bounds: { xPct: 646/1024*100, yPct: 608/1536*100, widthPct: 103/1024*100, heightPct: 171/1536*100 } }],
+                    tapRegion: { xPct: 638/1024*100, yPct: 600/1536*100, widthPct: 119/1024*100, heightPct: 188/1536*100 }
+                }
+            ]},
+            { panelId: 7, readingOrder: 7, bounds: { xPct: 220/1024*100, yPct: 806/1536*100, widthPct: 400/1024*100, heightPct: 207/1536*100 }, items: [
+                {
+                    itemId: "telephone-v2-p7-narration", readingOrder: 1, type: "sentence",
+                    sourceText: "At the other end, the signal changes back into sound, so people can hear each other.", ttsText: "At the other end, the signal changes back into sound, so people can hear each other.",
+                    bounds: { xPct: 267/1024*100, yPct: 815/1536*100, widthPct: 173/1024*100, heightPct: 169/1536*100 },
+                    textFragments: [{ text: "At the other end, the signal changes back into sound, so people can hear each other.", bounds: { xPct: 267/1024*100, yPct: 815/1536*100, widthPct: 173/1024*100, heightPct: 169/1536*100 } }],
+                    tapRegion: { xPct: 256/1024*100, yPct: 812/1536*100, widthPct: 186/1024*100, heightPct: 184/1536*100 }
+                },
+                {
+                    itemId: "telephone-v2-p7-hear-you-bubble", readingOrder: 2, type: "label",
+                    sourceText: "I can hear you now!", ttsText: "I can hear you now!",
+                    bounds: { xPct: 526/1024*100, yPct: 827/1536*100, widthPct: 81/1024*100, heightPct: 85/1536*100 },
+                    textFragments: [{ text: "I can hear you now!", bounds: { xPct: 526/1024*100, yPct: 827/1536*100, widthPct: 81/1024*100, heightPct: 85/1536*100 } }],
+                    tapRegion: { xPct: 520/1024*100, yPct: 821/1536*100, widthPct: 92/1024*100, heightPct: 95/1536*100 }
+                }
+            ]},
+            { panelId: 8, readingOrder: 8, bounds: { xPct: 630/1024*100, yPct: 806/1536*100, widthPct: 394/1024*100, heightPct: 207/1536*100 }, items: [
+                {
+                    itemId: "telephone-v2-p8-narration", readingOrder: 1, type: "sentence",
+                    sourceText: "The telephone quickly spread and became an important invention.", ttsText: "The telephone quickly spread and became an important invention.",
+                    bounds: { xPct: 669/1024*100, yPct: 817/1536*100, widthPct: 158/1024*100, heightPct: 131/1536*100 },
+                    textFragments: [{ text: "The telephone quickly spread and became an important invention.", bounds: { xPct: 669/1024*100, yPct: 817/1536*100, widthPct: 158/1024*100, heightPct: 131/1536*100 } }],
+                    tapRegion: { xPct: 657/1024*100, yPct: 813/1536*100, widthPct: 180/1024*100, heightPct: 142/1536*100 }
+                }
+            ]},
+            { panelId: 9, readingOrder: 9, bounds: { xPct: 220/1024*100, yPct: 1020/1536*100, widthPct: 400/1024*100, heightPct: 210/1536*100 }, items: [{
+                itemId: "telephone-v2-p9-narration", readingOrder: 1, type: "sentence",
+                sourceText: "The telephone made it easier and faster for people to share information.",
+                ttsText: "The telephone made it easier and faster for people to share information.",
+                bounds: { xPct: 258/1024*100, yPct: 1036/1536*100, widthPct: 158/1024*100, heightPct: 143/1536*100 },
+                textFragments: [
+                    { text: "The telephone", bounds: { xPct: 267/1024*100, yPct: 1036/1536*100, widthPct: 137/1024*100, heightPct: 26/1536*100 } },
+                    { text: "made it easier", bounds: { xPct: 267/1024*100, yPct: 1064/1536*100, widthPct: 145/1024*100, heightPct: 26/1536*100 } },
+                    { text: "and faster for", bounds: { xPct: 267/1024*100, yPct: 1092/1536*100, widthPct: 137/1024*100, heightPct: 26/1536*100 } },
+                    { text: "people to share", bounds: { xPct: 267/1024*100, yPct: 1120/1536*100, widthPct: 146/1024*100, heightPct: 26/1536*100 } },
+                    { text: "information.", bounds: { xPct: 258/1024*100, yPct: 1148/1536*100, widthPct: 153/1024*100, heightPct: 31/1536*100 } }
+                ],
+                tapRegion: { xPct: 258/1024*100, yPct: 1028/1536*100, widthPct: 160/1024*100, heightPct: 160/1536*100 }
+            }]},
+            { panelId: 10, readingOrder: 10, bounds: { xPct: 630/1024*100, yPct: 1020/1536*100, widthPct: 394/1024*100, heightPct: 210/1536*100 }, items: [{
+                itemId: "telephone-v2-p10-narration", readingOrder: 1, type: "sentence",
+                sourceText: "It connected families, friends, businesses, and governments across great distances.",
+                ttsText: "It connected families, friends, businesses, and governments across great distances.",
+                bounds: { xPct: 674/1024*100, yPct: 1032/1536*100, widthPct: 148/1024*100, heightPct: 169/1536*100 },
+                textFragments: [
+                    { text: "It connected", bounds: { xPct: 680/1024*100, yPct: 1032/1536*100, widthPct: 138/1024*100, heightPct: 26/1536*100 } },
+                    { text: "families, friends,", bounds: { xPct: 674/1024*100, yPct: 1060/1536*100, widthPct: 145/1024*100, heightPct: 26/1536*100 } },
+                    { text: "businesses, and", bounds: { xPct: 674/1024*100, yPct: 1088/1536*100, widthPct: 143/1024*100, heightPct: 26/1536*100 } },
+                    { text: "governments", bounds: { xPct: 674/1024*100, yPct: 1116/1536*100, widthPct: 140/1024*100, heightPct: 26/1536*100 } },
+                    { text: "across great", bounds: { xPct: 674/1024*100, yPct: 1144/1536*100, widthPct: 138/1024*100, heightPct: 26/1536*100 } },
+                    { text: "distances.", bounds: { xPct: 674/1024*100, yPct: 1172/1536*100, widthPct: 112/1024*100, heightPct: 26/1536*100 } }
+                ],
+                tapRegion: { xPct: 674/1024*100, yPct: 1028/1536*100, widthPct: 148/1024*100, heightPct: 184/1536*100 }
+            }]},
+            { panelId: 11, readingOrder: 11, bounds: { xPct: 220/1024*100, yPct: 1240/1536*100, widthPct: 400/1024*100, heightPct: 248/1536*100 }, items: [{
+                itemId: "telephone-v2-p11-narration", readingOrder: 1, type: "sentence",
+                sourceText: "The telephone revolutionized communication and changed people’s daily lives.",
+                ttsText: "The telephone revolutionized communication and changed people’s daily lives.",
+                bounds: { xPct: 266/1024*100, yPct: 1256/1536*100, widthPct: 154/1024*100, heightPct: 175/1536*100 },
+                textFragments: [
+                    { text: "The telephone", bounds: { xPct: 267/1024*100, yPct: 1256/1536*100, widthPct: 137/1024*100, heightPct: 26/1536*100 } },
+                    { text: "revolutionized", bounds: { xPct: 266/1024*100, yPct: 1284/1536*100, widthPct: 153/1024*100, heightPct: 26/1536*100 } },
+                    { text: "communication", bounds: { xPct: 267/1024*100, yPct: 1312/1536*100, widthPct: 151/1024*100, heightPct: 26/1536*100 } },
+                    { text: "and changed", bounds: { xPct: 266/1024*100, yPct: 1340/1536*100, widthPct: 139/1024*100, heightPct: 26/1536*100 } },
+                    { text: "people’s daily", bounds: { xPct: 266/1024*100, yPct: 1368/1536*100, widthPct: 126/1024*100, heightPct: 26/1536*100 } },
+                    { text: "lives.", bounds: { xPct: 266/1024*100, yPct: 1396/1536*100, widthPct: 62/1024*100, heightPct: 26/1536*100 } }
+                ],
+                tapRegion: { xPct: 263/1024*100, yPct: 1248/1536*100, widthPct: 158/1024*100, heightPct: 190/1536*100 }
+            }]},
+            { panelId: 12, readingOrder: 12, bounds: { xPct: 630/1024*100, yPct: 1240/1536*100, widthPct: 394/1024*100, heightPct: 248/1536*100 }, items: [{
+                itemId: "telephone-v2-p12-narration", readingOrder: 1, type: "sentence",
+                sourceText: "Today, phones continue to develop, from landlines to smartphones, keeping the world closely connected.",
+                ttsText: "Today, phones continue to develop, from landlines to smartphones, keeping the world closely connected.",
+                bounds: { xPct: 674/1024*100, yPct: 1252/1536*100, widthPct: 166/1024*100, heightPct: 212/1536*100 },
+                textFragments: [
+                    { text: "Today, phones", bounds: { xPct: 681/1024*100, yPct: 1252/1536*100, widthPct: 153/1024*100, heightPct: 26/1536*100 } },
+                    { text: "continue to", bounds: { xPct: 674/1024*100, yPct: 1280/1536*100, widthPct: 130/1024*100, heightPct: 26/1536*100 } },
+                    { text: "develop, from", bounds: { xPct: 674/1024*100, yPct: 1308/1536*100, widthPct: 142/1024*100, heightPct: 26/1536*100 } },
+                    { text: "landlines to", bounds: { xPct: 674/1024*100, yPct: 1336/1536*100, widthPct: 141/1024*100, heightPct: 26/1536*100 } },
+                    { text: "smartphones,", bounds: { xPct: 674/1024*100, yPct: 1364/1536*100, widthPct: 151/1024*100, heightPct: 26/1536*100 } },
+                    { text: "keeping the world", bounds: { xPct: 674/1024*100, yPct: 1392/1536*100, widthPct: 166/1024*100, heightPct: 26/1536*100 } },
+                    { text: "closely connected.", bounds: { xPct: 674/1024*100, yPct: 1420/1536*100, widthPct: 166/1024*100, heightPct: 30/1536*100 } }
+                ],
+                tapRegion: { xPct: 674/1024*100, yPct: 1248/1536*100, widthPct: 166/1024*100, heightPct: 220/1536*100 }
+            }]}
+
+        ]
+    }
+
 };
