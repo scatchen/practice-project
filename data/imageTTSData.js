@@ -22467,6 +22467,276 @@ const imageTTSData = {
             }]}
 
         ]
-    }
+    },
 
+    "images/english/excretory-system-and-kidneys-basics-tts-ready.png": {
+        imageId: "excretory-system-and-kidneys-basics",
+        title: "The Excretory System & Kidneys",
+        assetFile: "images/english/excretory-system-and-kidneys-basics-tts-ready.png",
+        contentType: "image-text",
+        layout: "custom-excretory-system-kidneys-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1536, height: 1024 },
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 0/1536*100, yPct: 158/1024*100, widthPct: 745/1536*100, heightPct: 400/1024*100 },
+                items: [
+                    {
+                        itemId: "excretory-p1-kidney-function",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "We have two kidneys. They filter waste from our blood and help keep our body clean and balanced.",
+                        ttsText: "We have two kidneys. They filter waste from our blood and help keep our body clean and balanced.",
+                        bounds: { xPct: 43/1536*100, yPct: 253/1024*100, widthPct: 192/1536*100, heightPct: 200/1024*100 },
+                        textFragments: [
+                            { text: "We have two", bounds: { xPct: 46/1536*100, yPct: 257/1024*100, widthPct: 181/1536*100, heightPct: 24/1024*100 } },
+                            { text: "kidneys. They", bounds: { xPct: 46/1536*100, yPct: 285/1024*100, widthPct: 181/1536*100, heightPct: 24/1024*100 } },
+                            { text: "filter waste", bounds: { xPct: 46/1536*100, yPct: 313/1024*100, widthPct: 181/1536*100, heightPct: 24/1024*100 } },
+                            { text: "from our blood", bounds: { xPct: 46/1536*100, yPct: 341/1024*100, widthPct: 181/1536*100, heightPct: 24/1024*100 } },
+                            { text: "and help keep", bounds: { xPct: 46/1536*100, yPct: 369/1024*100, widthPct: 181/1536*100, heightPct: 24/1024*100 } },
+                            { text: "our body clean", bounds: { xPct: 46/1536*100, yPct: 397/1024*100, widthPct: 181/1536*100, heightPct: 24/1024*100 } },
+                            { text: "and balanced.", bounds: { xPct: 46/1536*100, yPct: 425/1024*100, widthPct: 181/1536*100, heightPct: 24/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 38/1536*100, yPct: 246/1024*100, widthPct: 202/1536*100, heightPct: 214/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p1-kidney-right-label",
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "Kidney (right)",
+                        ttsText: "Kidney (right)",
+                        bounds: { xPct: 281/1536*100, yPct: 324/1024*100, widthPct: 88/1536*100, heightPct: 61/1024*100 },
+                        textFragments: [
+                            { text: "Kidney", bounds: { xPct: 295/1536*100, yPct: 331/1024*100, widthPct: 60/1536*100, heightPct: 22/1024*100 } },
+                            { text: "(right)", bounds: { xPct: 295/1536*100, yPct: 358/1024*100, widthPct: 60/1536*100, heightPct: 22/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 273/1536*100, yPct: 318/1024*100, widthPct: 106/1536*100, heightPct: 72/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p1-kidney-left-label",
+                        readingOrder: 3,
+                        type: "label",
+                        sourceText: "Kidney (left)",
+                        ttsText: "Kidney (left)",
+                        bounds: { xPct: 624/1536*100, yPct: 226/1024*100, widthPct: 82/1536*100, heightPct: 58/1024*100 },
+                        textFragments: [
+                            { text: "Kidney", bounds: { xPct: 633/1536*100, yPct: 232/1024*100, widthPct: 64/1536*100, heightPct: 22/1024*100 } },
+                            { text: "(left)", bounds: { xPct: 633/1536*100, yPct: 260/1024*100, widthPct: 64/1536*100, heightPct: 22/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 615/1536*100, yPct: 218/1024*100, widthPct: 100/1536*100, heightPct: 74/1024*100 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 752/1536*100, yPct: 158/1024*100, widthPct: 784/1536*100, heightPct: 400/1024*100 },
+                items: [
+                    {
+                        itemId: "excretory-p2-filtering-explanation",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "Blood carries wastes from our body to the kidneys. The kidneys remove wastes and extra water from the blood to form urine.",
+                        ttsText: "Blood carries wastes from our body to the kidneys. The kidneys remove wastes and extra water from the blood to form urine.",
+                        bounds: { xPct: 795/1536*100, yPct: 255/1024*100, widthPct: 197/1536*100, heightPct: 253/1024*100 },
+                        textFragments: [
+                            { text: "Blood carries", bounds: { xPct: 800/1536*100, yPct: 258/1024*100, widthPct: 186/1536*100, heightPct: 24/1024*100 } },
+                            { text: "wastes from", bounds: { xPct: 800/1536*100, yPct: 285/1024*100, widthPct: 186/1536*100, heightPct: 24/1024*100 } },
+                            { text: "our body to", bounds: { xPct: 800/1536*100, yPct: 312/1024*100, widthPct: 186/1536*100, heightPct: 24/1024*100 } },
+                            { text: "the kidneys.", bounds: { xPct: 800/1536*100, yPct: 339/1024*100, widthPct: 186/1536*100, heightPct: 24/1024*100 } },
+                            { text: "The kidneys", bounds: { xPct: 800/1536*100, yPct: 366/1024*100, widthPct: 186/1536*100, heightPct: 24/1024*100 } },
+                            { text: "remove wastes", bounds: { xPct: 800/1536*100, yPct: 393/1024*100, widthPct: 186/1536*100, heightPct: 24/1024*100 } },
+                            { text: "and extra water", bounds: { xPct: 800/1536*100, yPct: 420/1024*100, widthPct: 186/1536*100, heightPct: 24/1024*100 } },
+                            { text: "from the blood", bounds: { xPct: 800/1536*100, yPct: 447/1024*100, widthPct: 186/1536*100, heightPct: 24/1024*100 } },
+                            { text: "to form urine.", bounds: { xPct: 800/1536*100, yPct: 474/1024*100, widthPct: 186/1536*100, heightPct: 24/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 786/1536*100, yPct: 248/1024*100, widthPct: 212/1536*100, heightPct: 270/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p2-blood-with-wastes-label",
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "Blood with wastes (goes in)",
+                        ttsText: "Blood with wastes (goes in)",
+                        bounds: { xPct: 1034/1536*100, yPct: 254/1024*100, widthPct: 91/1536*100, heightPct: 113/1024*100 },
+                        textFragments: [
+                            { text: "Blood", bounds: { xPct: 1045/1536*100, yPct: 258/1024*100, widthPct: 73/1536*100, heightPct: 24/1024*100 } },
+                            { text: "with", bounds: { xPct: 1045/1536*100, yPct: 286/1024*100, widthPct: 73/1536*100, heightPct: 24/1024*100 } },
+                            { text: "wastes", bounds: { xPct: 1045/1536*100, yPct: 314/1024*100, widthPct: 73/1536*100, heightPct: 24/1024*100 } },
+                            { text: "(goes in)", bounds: { xPct: 1045/1536*100, yPct: 342/1024*100, widthPct: 73/1536*100, heightPct: 24/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 1028/1536*100, yPct: 248/1024*100, widthPct: 103/1536*100, heightPct: 125/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p2-kidney-cutaway-label",
+                        readingOrder: 3,
+                        type: "label",
+                        sourceText: "Kidney (cutaway)",
+                        ttsText: "Kidney (cutaway)",
+                        bounds: { xPct: 1400/1536*100, yPct: 181/1024*100, widthPct: 115/1536*100, heightPct: 57/1024*100 },
+                        textFragments: [
+                            { text: "Kidney", bounds: { xPct: 1410/1536*100, yPct: 184/1024*100, widthPct: 92/1536*100, heightPct: 22/1024*100 } },
+                            { text: "(cutaway)", bounds: { xPct: 1410/1536*100, yPct: 212/1024*100, widthPct: 92/1536*100, heightPct: 22/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 1392/1536*100, yPct: 173/1024*100, widthPct: 130/1536*100, heightPct: 74/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p2-cleaner-blood-label",
+                        readingOrder: 4,
+                        type: "label",
+                        sourceText: "Cleaner blood (goes out)",
+                        ttsText: "Cleaner blood (goes out)",
+                        bounds: { xPct: 1103/1536*100, yPct: 402/1024*100, widthPct: 91/1536*100, heightPct: 82/1024*100 },
+                        textFragments: [
+                            { text: "Cleaner", bounds: { xPct: 1110/1536*100, yPct: 406/1024*100, widthPct: 78/1536*100, heightPct: 22/1024*100 } },
+                            { text: "blood", bounds: { xPct: 1110/1536*100, yPct: 434/1024*100, widthPct: 78/1536*100, heightPct: 22/1024*100 } },
+                            { text: "(goes out)", bounds: { xPct: 1110/1536*100, yPct: 462/1024*100, widthPct: 78/1536*100, heightPct: 22/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 1095/1536*100, yPct: 395/1024*100, widthPct: 110/1536*100, heightPct: 99/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p2-wastes-form-urine-label",
+                        readingOrder: 5,
+                        type: "label",
+                        sourceText: "Wastes and extra water form urine.",
+                        ttsText: "Wastes and extra water form urine.",
+                        bounds: { xPct: 1393/1536*100, yPct: 417/1024*100, widthPct: 115/1536*100, heightPct: 118/1024*100 },
+                        textFragments: [
+                            { text: "Wastes", bounds: { xPct: 1402/1536*100, yPct: 423/1024*100, widthPct: 98/1536*100, heightPct: 24/1024*100 } },
+                            { text: "and extra", bounds: { xPct: 1402/1536*100, yPct: 451/1024*100, widthPct: 98/1536*100, heightPct: 24/1024*100 } },
+                            { text: "water", bounds: { xPct: 1402/1536*100, yPct: 479/1024*100, widthPct: 98/1536*100, heightPct: 24/1024*100 } },
+                            { text: "form urine.", bounds: { xPct: 1402/1536*100, yPct: 507/1024*100, widthPct: 98/1536*100, heightPct: 24/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 1375/1536*100, yPct: 410/1024*100, widthPct: 140/1536*100, heightPct: 128/1024*100 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 0/1536*100, yPct: 572/1024*100, widthPct: 750/1536*100, heightPct: 447/1024*100 },
+                items: [
+                    {
+                        itemId: "excretory-p3-urine-pathway-explanation",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "The waste liquid (urine) flows from the kidneys, through the ureters, to the bladder. It then leaves the body through the urethra.",
+                        ttsText: "The waste liquid (urine) flows from the kidneys, through the ureters, to the bladder. It then leaves the body through the urethra.",
+                        bounds: { xPct: 44/1536*100, yPct: 671/1024*100, widthPct: 198/1536*100, heightPct: 260/1024*100 },
+                        textFragments: [
+                            { text: "The waste liquid", bounds: { xPct: 46/1536*100, yPct: 675/1024*100, widthPct: 188/1536*100, heightPct: 24/1024*100 } },
+                            { text: "(urine) flows", bounds: { xPct: 46/1536*100, yPct: 703/1024*100, widthPct: 188/1536*100, heightPct: 24/1024*100 } },
+                            { text: "from the kidneys,", bounds: { xPct: 46/1536*100, yPct: 731/1024*100, widthPct: 188/1536*100, heightPct: 24/1024*100 } },
+                            { text: "through the", bounds: { xPct: 46/1536*100, yPct: 759/1024*100, widthPct: 188/1536*100, heightPct: 24/1024*100 } },
+                            { text: "ureters, to the", bounds: { xPct: 46/1536*100, yPct: 787/1024*100, widthPct: 188/1536*100, heightPct: 24/1024*100 } },
+                            { text: "bladder. It then", bounds: { xPct: 46/1536*100, yPct: 815/1024*100, widthPct: 188/1536*100, heightPct: 24/1024*100 } },
+                            { text: "leaves the body", bounds: { xPct: 46/1536*100, yPct: 843/1024*100, widthPct: 188/1536*100, heightPct: 24/1024*100 } },
+                            { text: "through the", bounds: { xPct: 46/1536*100, yPct: 871/1024*100, widthPct: 188/1536*100, heightPct: 24/1024*100 } },
+                            { text: "urethra.", bounds: { xPct: 46/1536*100, yPct: 899/1024*100, widthPct: 188/1536*100, heightPct: 24/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 36/1536*100, yPct: 662/1024*100, widthPct: 218/1536*100, heightPct: 278/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p3-kidney-label",
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "Kidney",
+                        ttsText: "Kidney",
+                        bounds: { xPct: 603/1536*100, yPct: 613/1024*100, widthPct: 69/1536*100, heightPct: 24/1024*100 },
+                        textFragments: [
+                            { text: "Kidney", bounds: { xPct: 604/1536*100, yPct: 615/1024*100, widthPct: 65/1536*100, heightPct: 20/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 588/1536*100, yPct: 605/1024*100, widthPct: 113/1536*100, heightPct: 55/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p3-ureter-label",
+                        readingOrder: 3,
+                        type: "label",
+                        sourceText: "Ureter (carries urine to the bladder)",
+                        ttsText: "Ureter (carries urine to the bladder)",
+                        bounds: { xPct: 573/1536*100, yPct: 686/1024*100, widthPct: 159/1536*100, heightPct: 96/1024*100 },
+                        textFragments: [
+                            { text: "Ureter", bounds: { xPct: 579/1536*100, yPct: 693/1024*100, widthPct: 134/1536*100, heightPct: 24/1024*100 } },
+                            { text: "(carries urine", bounds: { xPct: 579/1536*100, yPct: 721/1024*100, widthPct: 145/1536*100, heightPct: 24/1024*100 } },
+                            { text: "to the bladder)", bounds: { xPct: 579/1536*100, yPct: 749/1024*100, widthPct: 145/1536*100, heightPct: 24/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 558/1536*100, yPct: 679/1024*100, widthPct: 180/1536*100, heightPct: 124/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p3-bladder-label",
+                        readingOrder: 4,
+                        type: "label",
+                        sourceText: "Bladder (stores urine)",
+                        ttsText: "Bladder (stores urine)",
+                        bounds: { xPct: 577/1536*100, yPct: 836/1024*100, widthPct: 147/1536*100, heightPct: 57/1024*100 },
+                        textFragments: [
+                            { text: "Bladder", bounds: { xPct: 580/1536*100, yPct: 837/1024*100, widthPct: 137/1536*100, heightPct: 24/1024*100 } },
+                            { text: "(stores urine)", bounds: { xPct: 580/1536*100, yPct: 865/1024*100, widthPct: 137/1536*100, heightPct: 24/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 558/1536*100, yPct: 821/1024*100, widthPct: 180/1536*100, heightPct: 84/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p3-urethra-label",
+                        readingOrder: 5,
+                        type: "label",
+                        sourceText: "Urethra (lets urine leave the body)",
+                        ttsText: "Urethra (lets urine leave the body)",
+                        bounds: { xPct: 579/1536*100, yPct: 924/1024*100, widthPct: 151/1536*100, heightPct: 86/1024*100 },
+                        textFragments: [
+                            { text: "Urethra", bounds: { xPct: 581/1536*100, yPct: 926/1024*100, widthPct: 143/1536*100, heightPct: 22/1024*100 } },
+                            { text: "(lets urine", bounds: { xPct: 581/1536*100, yPct: 954/1024*100, widthPct: 143/1536*100, heightPct: 22/1024*100 } },
+                            { text: "leave the body)", bounds: { xPct: 581/1536*100, yPct: 982/1024*100, widthPct: 143/1536*100, heightPct: 22/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 558/1536*100, yPct: 913/1024*100, widthPct: 181/1536*100, heightPct: 98/1024*100 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 752/1536*100, yPct: 572/1024*100, widthPct: 784/1536*100, heightPct: 447/1024*100 },
+                items: [
+                    {
+                        itemId: "excretory-p4-waste-removal-explanation",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "Getting rid of wastes keeps our body clean, prevents harmful build-up, and helps us stay healthy and full of energy.",
+                        ttsText: "Getting rid of wastes keeps our body clean, prevents harmful build-up, and helps us stay healthy and full of energy.",
+                        bounds: { xPct: 800/1536*100, yPct: 674/1024*100, widthPct: 196/1536*100, heightPct: 234/1024*100 },
+                        textFragments: [
+                            { text: "Getting rid of", bounds: { xPct: 802/1536*100, yPct: 679/1024*100, widthPct: 187/1536*100, heightPct: 24/1024*100 } },
+                            { text: "wastes keeps", bounds: { xPct: 802/1536*100, yPct: 707/1024*100, widthPct: 187/1536*100, heightPct: 24/1024*100 } },
+                            { text: "our body clean,", bounds: { xPct: 802/1536*100, yPct: 735/1024*100, widthPct: 187/1536*100, heightPct: 24/1024*100 } },
+                            { text: "prevents harmful", bounds: { xPct: 802/1536*100, yPct: 763/1024*100, widthPct: 187/1536*100, heightPct: 24/1024*100 } },
+                            { text: "build-up, and", bounds: { xPct: 802/1536*100, yPct: 791/1024*100, widthPct: 187/1536*100, heightPct: 24/1024*100 } },
+                            { text: "helps us stay", bounds: { xPct: 802/1536*100, yPct: 819/1024*100, widthPct: 187/1536*100, heightPct: 24/1024*100 } },
+                            { text: "healthy and", bounds: { xPct: 802/1536*100, yPct: 847/1024*100, widthPct: 187/1536*100, heightPct: 24/1024*100 } },
+                            { text: "full of energy.", bounds: { xPct: 802/1536*100, yPct: 875/1024*100, widthPct: 187/1536*100, heightPct: 24/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 792/1536*100, yPct: 666/1024*100, widthPct: 210/1536*100, heightPct: 248/1024*100 }
+                    },
+                    {
+                        itemId: "excretory-p4-clean-body-thought-bubble",
+                        readingOrder: 2,
+                        type: "bubble",
+                        sourceText: "A clean body helps us feel good, stay active, and learn better!",
+                        ttsText: "A clean body helps us feel good, stay active, and learn better!",
+                        bounds: { xPct: 1204/1536*100, yPct: 626/1024*100, widthPct: 220/1536*100, heightPct: 127/1024*100 },
+                        textFragments: [
+                            { text: "A clean body", bounds: { xPct: 1210/1536*100, yPct: 632/1024*100, widthPct: 180/1536*100, heightPct: 24/1024*100 } },
+                            { text: "helps us feel", bounds: { xPct: 1210/1536*100, yPct: 662/1024*100, widthPct: 180/1536*100, heightPct: 24/1024*100 } },
+                            { text: "good, stay active,", bounds: { xPct: 1207/1536*100, yPct: 692/1024*100, widthPct: 194/1536*100, heightPct: 24/1024*100 } },
+                            { text: "and learn better!", bounds: { xPct: 1207/1536*100, yPct: 722/1024*100, widthPct: 194/1536*100, heightPct: 24/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 1135/1536*100, yPct: 602/1024*100, widthPct: 300/1536*100, heightPct: 162/1024*100 }
+                    }
+                ]
+            }
+        ]
+    }
 };

@@ -1481,7 +1481,7 @@ const diagramMap = [
         "身體如何排出廢物",
         "泌尿系統如何運作"
     ],
-    file: "images/english/excretory-system-and-kidneys-basics.png",
+    file: "images/english/excretory-system-and-kidneys-basics-tts-ready.png",
     alt: "The Excretory System & Kidneys 排泄系統與腎臟英文教學圖，介紹腎臟過濾血液、移除代謝廢物、尿液形成與尿液經由輸尿管到膀胱再排出體外的基本概念",
     category: "english",
     grade: 7,

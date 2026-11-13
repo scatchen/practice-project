@@ -11446,6 +11446,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 function isEnglishImageTTSItemText(record, item) {
     const telephoneV2P1Test = window.englishTelephoneV2P1Test;
     if (telephoneV2P1Test && telephoneV2P1Test.isItem(record, item)) return true;
+    if (isEnglishExcretorySystemImageTTSItemText(record, item)) return true;
     if (isEnglishSolarEnergyImageTTSItemText(record, item)) return true;
     if (isEnglishCyclingImageTTSItemText(record, item)) return true;
     if (isEnglishMuscularSystemImageTTSItemText(record, item)) return true;
@@ -12039,6 +12040,7 @@ function getEnglishImageTTSImageTextName(record) {
     if (telephoneV2P1Test && telephoneV2P1Test.isRecord(record)) {
         return "Telephone V2";
     }
+    if (isEnglishExcretorySystemImageTTSRecord(record)) return "The Excretory System & Kidneys";
     if (isEnglishSolarEnergyImageTTSRecord(record)) return "Solar Energy";
     if (isEnglishCyclingImageTTSRecord(record)) return "Cycling and Riding a Bike";
     if (isEnglishMuscularSystemImageTTSRecord(record)) return "The Muscular System & Muscles";
@@ -16465,6 +16467,147 @@ function failEnglishSolarEnergyImageTTSSequence(trigger) {
     return false;
 }
 
+
+const ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE =
+    "images/english/excretory-system-and-kidneys-basics-tts-ready.png";
+const ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID = "excretory-system-and-kidneys-basics";
+const ENGLISH_EXCRETORY_SYSTEM_PANEL_ENTRY_PIXELS = Object.freeze([
+    Object.freeze({ panelId: 1, x: 20, y: 250, width: 218, height: 210 }),
+    Object.freeze({ panelId: 2, x: 780, y: 248, width: 220, height: 164 }),
+    Object.freeze({ panelId: 3, x: 22, y: 658, width: 242, height: 174 }),
+    Object.freeze({ panelId: 4, x: 780, y: 664, width: 220, height: 248 })
+]);
+
+function getEnglishExcretorySystemPanelEntryBounds(panelId) {
+    const region = ENGLISH_EXCRETORY_SYSTEM_PANEL_ENTRY_PIXELS.find(item =>
+        item.panelId === panelId);
+    if (!region) return null;
+    return {
+        xPct: region.x / 1536 * 100,
+        yPct: region.y / 1024 * 100,
+        widthPct: region.width / 1536 * 100,
+        heightPct: region.height / 1024 * 100
+    };
+}
+
+function getEnglishExcretorySystemImageTTSRecord(record, assetFile) {
+    const expectedKeys = [
+        "imageId", "title", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"
+    ];
+    const exactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const isRect = rect => exactKeys(rect, ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        [rect.xPct, rect.yPct, rect.widthPct, rect.heightPct].every(value =>
+            Number.isFinite(value) && value >= 0 && value <= 100) &&
+        rect.widthPct > 0 && rect.heightPct > 0 &&
+        rect.xPct + rect.widthPct <= 100 && rect.yPct + rect.heightPct <= 100;
+    const contains = (outer, inner) => isRect(outer) && isRect(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const normalize = value => String(value || "").replace(/\s+/g, " ").trim();
+
+    if (assetFile !== ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE ||
+        typeof imageTTSData === "undefined" || !imageTTSData ||
+        record !== imageTTSData[ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE] ||
+        !exactKeys(record, expectedKeys) ||
+        record.imageId !== ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
+        record.title !== "The Excretory System & Kidneys" ||
+        record.assetFile !== ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-excretory-system-kidneys-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !exactKeys(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 ||
+        record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== 4) return null;
+
+    const matchingKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE ||
+            candidate && (candidate.imageId === ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
+                candidate.assetFile === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE);
+    });
+    if (matchingKeys.length !== 1 ||
+        matchingKeys[0] !== ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE) return null;
+
+    const unitIds = new Set();
+    for (let panelIndex = 0; panelIndex < record.panels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        if (!exactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== panelIndex + 1 || panel.readingOrder !== panelIndex + 1 ||
+            !isRect(panel.bounds) || !Array.isArray(panel.items) ||
+            panel.items.length < 1 || panel.items.length > 20 ||
+            !contains(panel.bounds, getEnglishExcretorySystemPanelEntryBounds(panel.panelId))) {
+            return null;
+        }
+
+        let hasMainSentence = false;
+        for (let itemIndex = 0; itemIndex < panel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            if (!exactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText",
+                "bounds", "textFragments", "tapRegion"
+            ]) || typeof item.itemId !== "string" || !item.itemId ||
+                item.readingOrder !== itemIndex + 1 ||
+                !["sentence", "label", "bubble"].includes(item.type) ||
+                typeof item.sourceText !== "string" || !item.sourceText.trim() ||
+                item.ttsText !== item.sourceText || !isRect(item.bounds) ||
+                !isRect(item.tapRegion) || !contains(panel.bounds, item.bounds) ||
+                !contains(item.tapRegion, item.bounds) ||
+                !Array.isArray(item.textFragments) || !item.textFragments.length) return null;
+            const unitKey = panel.panelId + ":" + item.itemId;
+            if (unitIds.has(unitKey)) return null;
+            unitIds.add(unitKey);
+            hasMainSentence = hasMainSentence || item.type === "sentence";
+
+            let fragments = "";
+            for (const fragment of item.textFragments) {
+                if (!exactKeys(fragment, ["text", "bounds"]) ||
+                    typeof fragment.text !== "string" || !fragment.text.trim() ||
+                    !isRect(fragment.bounds) || !contains(item.bounds, fragment.bounds) ||
+                    !contains(item.tapRegion, fragment.bounds)) return null;
+                fragments += (fragments ? " " : "") + fragment.text;
+            }
+            if (normalize(fragments) !== normalize(item.sourceText)) return null;
+        }
+        if (!hasMainSentence) return null;
+    }
+    return record;
+}
+
+function isEnglishExcretorySystemImageTTSRecord(record) {
+    return Boolean(record &&
+        getEnglishExcretorySystemImageTTSRecord(
+            record, ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE) === record);
+}
+
+function isEnglishExcretorySystemImageTTSItemText(record, item) {
+    return Boolean(isEnglishExcretorySystemImageTTSRecord(record) && item &&
+        record.panels.some(panel => panel.items.includes(item)));
+}
+
+function getEnglishExcretorySystemPanelMenuOptions(record, panel) {
+    if (!isEnglishExcretorySystemImageTTSRecord(record) ||
+        !panel || record.panels.find(candidate => candidate.panelId === panel.panelId) !== panel) {
+        return null;
+    }
+    return {
+        fullItems: panel.items.slice(),
+        choices: panel.items.map(item => ({
+            item,
+            kind: item.type === "bubble" ? "bubble" :
+                item.type === "label" ? "label" : "sentence"
+        }))
+    };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -16472,6 +16615,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
+            record.assetFile === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE)) {
+        return getEnglishExcretorySystemImageTTSRecord(record, assetFile);
+    }
     const telephoneV2P1Test = window.englishTelephoneV2P1Test;
     if (telephoneV2P1Test && telephoneV2P1Test.matchesIdentity(record, assetFile)) {
         return telephoneV2P1Test.getRecord(record, assetFile);
@@ -20178,6 +20326,10 @@ function layoutEnglishSolarEnergyImageTTSHitAreas(wrapper) {
 
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
     if (wrapper && wrapper.dataset &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE) {
+        return layoutEnglishExcretorySystemPanelHitAreas(wrapper);
+    }
+    if (wrapper && wrapper.dataset &&
         wrapper.dataset.imageTtsAssetFile === ENGLISH_SOLAR_ENERGY_ASSET_FILE) {
         layoutEnglishSolarEnergyImageTTSHitAreas(wrapper);
         return;
@@ -20520,6 +20672,116 @@ function layoutEnglishCyclingImageTTSHitAreas(wrapper) {
     }
     if (closeBlockedMenu) closeEnglishImageTTSMenu();
     return enabled > 0;
+}
+
+
+function layoutEnglishExcretorySystemPanelHitAreas(wrapper) {
+    if (!wrapper || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE) return false;
+    const image = wrapper.querySelector("img");
+    const record = getEnglishExcretorySystemImageTTSRecord(
+        imageTTSData && imageTTSData[ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE],
+        ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE);
+    const buttons = Array.from(wrapper.querySelectorAll(".excretory-system-panel-hit-area"));
+    const ready = Boolean(image && isEnglishExcretorySystemFormalSearchImage(image) &&
+        record && image.complete === true && image.naturalWidth === 1536 &&
+        image.naturalHeight === 1024 && buttons.length === 4);
+    if (!ready) {
+        buttons.forEach(button => {
+            button.hidden = true;
+            button.disabled = true;
+            button.setAttribute("aria-disabled", "true");
+            button.style.pointerEvents = "none";
+        });
+        return false;
+    }
+
+    const imageRect = image.getBoundingClientRect();
+    buttons.forEach(button => {
+        const panelId = Number(button.getAttribute("data-image-tts-panel-id"));
+        const region = ENGLISH_EXCRETORY_SYSTEM_PANEL_ENTRY_PIXELS.find(item =>
+            item.panelId === panelId);
+        if (!region) {
+            button.hidden = true;
+            button.disabled = true;
+            button.style.pointerEvents = "none";
+            return;
+        }
+        button.style.left = region.x / 1536 * 100 + "%";
+        button.style.top = region.y / 1024 * 100 + "%";
+        button.style.width = region.width / 1536 * 100 + "%";
+        button.style.height = region.height / 1024 * 100 + "%";
+        // 以可見圖片的 CSS 像素估算觸區；hidden 按鈕本身的 rect 永遠是 0。
+        const renderedWidth = imageRect.width * region.width / 1536;
+        const renderedHeight = imageRect.height * region.height / 1024;
+        const enabled = drawMode === "select" && appState.subjectMode === "english" &&
+            renderedWidth >= 44 && renderedHeight >= 44;
+        button.hidden = !enabled;
+        button.disabled = !enabled;
+        button.setAttribute("aria-disabled", String(!enabled));
+        button.style.pointerEvents = enabled ? "auto" : "none";
+    });
+    return buttons.every(button => !button.hidden && !button.disabled);
+}
+
+function isEnglishExcretorySystemPanelTriggerReady(trigger) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    const record = getEnglishExcretorySystemImageTTSRecord(
+        imageTTSData && imageTTSData[ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE],
+        ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE);
+    const panel = trigger && trigger._englishImageTTSImageTextPanel;
+    const buttons = wrapper
+        ? Array.from(wrapper.querySelectorAll(".excretory-system-panel-hit-area")) : [];
+    if (!wrapper || !image || !record || !isEnglishExcretorySystemFormalSearchImage(image) ||
+        trigger._englishImageTTSImageTextRecord !== record ||
+        !trigger.classList || !trigger.classList.contains("excretory-system-panel-hit-area") ||
+        buttons.length !== 4 || !buttons.includes(trigger) ||
+        !panel || record.panels[panel.panelId - 1] !== panel ||
+        trigger._englishImageTTSImageTextItem !== panel.items.find(item => item.type === "sentence") ||
+        trigger._englishImageTTSImageTextActivePanel !== panel ||
+        !layoutEnglishExcretorySystemPanelHitAreas(wrapper) ||
+        trigger.hidden || trigger.disabled) return false;
+    return true;
+}
+
+function createEnglishExcretorySystemPanelHitArea(wrapper, panel, record) {
+    const firstSentence = panel && panel.items.find(item => item.type === "sentence");
+    if (!wrapper || !panel || !firstSentence ||
+        !isEnglishExcretorySystemImageTTSRecord(record) ||
+        !isEnglishExcretorySystemFormalSearchImage(wrapper.querySelector("img"))) return null;
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-image-text-hit-area excretory-system-panel-hit-area";
+    button.hidden = true;
+    button.disabled = true;
+    button.setAttribute("aria-disabled", "true");
+    button.setAttribute("aria-label",
+        "第 " + panel.panelId + " 格主要正文區，開啟本格完整內容、單句與標籤朗讀選項");
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("data-image-tts-item-id", firstSentence.itemId);
+    button._englishImageTTSImageTextRecord = record;
+    button._englishImageTTSImageTextPanel = panel;
+    button._englishImageTTSImageTextItem = firstSentence;
+    button._englishImageTTSImageTextActivePanel = panel;
+    button._englishImageTTSImageTextActiveItem = firstSentence;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (!isEnglishExcretorySystemPanelTriggerReady(button)) return;
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishImageTTSImageTextMenu(button, record, panel);
+    });
+    wrapper.appendChild(button);
+    return button;
 }
 
 function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, region = null) {
@@ -21333,6 +21595,7 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
     }
 
     function renderResponse(responseRoot, question, headingText, answerHTML) {
+        ENGLISH_EXCRETORY_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         expireCurrentContext();
         const renderGeneration = ++generation;
         const diagrams = typeof question === "string" ? getDiagramInfo(question) : [];
@@ -21371,6 +21634,27 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 ? v2Specs[0]
                 : null;
 
+        const matchingExcretoryEntries = Array.isArray(diagramMap)
+            ? diagramMap.filter(entry => entry &&
+                (entry.id === ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
+                    entry.file === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE))
+            : [];
+        const canonicalExcretoryEntry = matchingExcretoryEntries.length === 1 &&
+            matchingExcretoryEntries[0].id === ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID &&
+            matchingExcretoryEntries[0].file === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE
+                ? matchingExcretoryEntries[0]
+                : null;
+        const returnedExcretoryCount = canonicalExcretoryEntry
+            ? diagrams.filter(diagram => diagram === canonicalExcretoryEntry).length
+            : 0;
+        const excretorySpecs = specs.filter(spec =>
+            spec.imageData.file === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE);
+        const trustedExcretorySpec = canonicalExcretoryEntry &&
+            returnedExcretoryCount === 1 && excretorySpecs.length === 1 &&
+            excretorySpecs[0].diagram === canonicalExcretoryEntry
+                ? excretorySpecs[0]
+                : null;
+
         responseRoot.replaceChildren();
         const heading = document.createElement("h2");
         heading.textContent = headingText;
@@ -21393,6 +21677,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 if (spec === trustedV2Spec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_TELEPHONE_V2_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_TELEPHONE_V2_ASSET_FILE);
+                }
+                if (spec === trustedExcretorySpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE);
                 }
                 image.addEventListener("load", resizeAnnotationCanvas);
                 diagramContainer.appendChild(image);
@@ -21443,6 +21731,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 }
             }
         }
+        ENGLISH_EXCRETORY_SYSTEM_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedExcretorySpec);
         return answerRoot;
     }
 
@@ -21472,6 +21762,167 @@ function enhanceEnglishTelephoneV2FormalSearchResults(responseRoot) {
     return ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN.enhanceCurrent(responseRoot);
 }
 
+
+const ENGLISH_EXCRETORY_SYSTEM_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    let currentContext = null;
+    let generation = 0;
+
+    function detachInlineImage(image) {
+        const wrapper = image && image.closest
+            ? image.closest(".image-tts-overlay-wrapper") : null;
+        if (!wrapper) return;
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper.contains(active) &&
+            active.classList && active.classList.contains("excretory-system-panel-hit-area")) {
+            cancelEnglishImageTTSImageTextSequence(true);
+        }
+        const activeMenuTrigger = englishImageTTSOverlayState.activeTrigger;
+        if (activeMenuTrigger && wrapper.contains(activeMenuTrigger) &&
+            activeMenuTrigger.classList &&
+            activeMenuTrigger.classList.contains("excretory-system-panel-hit-area")) {
+            closeEnglishImageTTSMenu();
+        }
+        wrapper.querySelectorAll(".excretory-system-panel-hit-area").forEach(button => button.remove());
+    }
+
+    function revokeImage(context, image) {
+        if (!context || !image || !context.images.has(image)) return;
+        originByImage.delete(image);
+        context.images.delete(image);
+        detachInlineImage(image);
+    }
+
+    function revokeRemovedSubtrees(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revokeImage(context, record.target);
+                return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removedNode => {
+                Array.from(context.images).forEach(image => {
+                    if (removedNode === image ||
+                        removedNode && typeof removedNode.contains === "function" &&
+                        removedNode.contains(image)) revokeImage(context, image);
+                });
+            });
+        });
+    }
+
+    function expireCurrentContext() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revokeImage(context, image));
+        currentContext = null;
+    }
+
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer) {
+            revokeRemovedSubtrees(context, context.observer.takeRecords());
+        }
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked ||
+            origin.context !== context || origin.generation !== context.generation ||
+            !context.observer || !image.isConnected ||
+            context.responseRoot !== document.getElementById("ai-response") ||
+            !context.responseRoot.isConnected ||
+            !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(image) ||
+            image.getAttribute("src") !== ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !==
+                ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !==
+                ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE) return false;
+        const matchingEntries = Array.isArray(diagramMap)
+            ? diagramMap.filter(entry => entry &&
+                (entry.id === ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
+                    entry.file === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE))
+            : [];
+        return matchingEntries.length === 1 &&
+            matchingEntries[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID &&
+            origin.diagram.file === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE;
+    }
+
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot || !diagramContainer || !trustedSpec ||
+            typeof MutationObserver !== "function" ||
+            responseRoot !== document.getElementById("ai-response") ||
+            !responseRoot.isConnected || !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matchingEntries = Array.isArray(diagramMap)
+            ? diagramMap.filter(entry => entry &&
+                (entry.id === ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
+                    entry.file === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE))
+            : [];
+        const targetSpecs = (Array.isArray(renderedSpecs) ? renderedSpecs : [])
+            .filter(entry => entry && entry.spec && entry.spec.imageData &&
+                entry.spec.imageData.file === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE);
+        const rendered = renderedSpecs.find(entry => entry && entry.spec === trustedSpec);
+        if (matchingEntries.length !== 1 || matchingEntries[0] !== diagram ||
+            !diagram || diagram.id !== ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
+            diagram.file !== ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE ||
+            targetSpecs.length !== 1 || !rendered || !rendered.image ||
+            !rendered.image.isConnected || !diagramContainer.contains(rendered.image)) return false;
+
+        const image = rendered.image;
+        const wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) ||
+            !diagramContainer.contains(wrapper)) return false;
+        const context = {
+            generation: ++generation,
+            responseRoot,
+            diagramContainer,
+            diagram,
+            images: new Set([image]),
+            observer: null,
+            revoked: false
+        };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram });
+        context.observer = new MutationObserver(records =>
+            revokeRemovedSubtrees(context, records));
+        context.observer.observe(responseRoot, {
+            childList: true, subtree: true, attributes: true,
+            attributeFilter: [
+                "src", "data-english-image-library-id", "data-english-image-library-file"
+            ]
+        });
+        if (!isTrustedNode(image)) {
+            expireCurrentContext();
+            return false;
+        }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+
+    return { register, expireCurrentContext, isTrustedNode };
+})();
+
+function isEnglishExcretorySystemFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !== ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !== ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE ||
+        !ENGLISH_EXCRETORY_SYSTEM_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData ||
+        !Array.isArray(diagramMap)) return false;
+    const record = imageTTSData[ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE];
+    if (getEnglishExcretorySystemImageTTSRecord(
+        record, ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE) !== record) return false;
+    const matchingEntries = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
+            entry.file === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE));
+    return matchingEntries.length === 1 &&
+        matchingEntries[0].id === ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID &&
+        matchingEntries[0].file === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE;
+}
+
 function enhanceEnglishImageTTSOverlays(responseRoot) {
     if (!responseRoot || typeof responseRoot.querySelectorAll !== "function") {
         return 0;
@@ -21481,6 +21932,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE &&
+            !isEnglishExcretorySystemFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_TELEPHONE_V2_ASSET_FILE) {
             const wrapper = wrapEnglishImageForTTS(image);
             if (wrapper) {
@@ -21537,6 +21990,26 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishExcretorySystemImageTTSRecord(record)) {
+                const hasExpectedDimensions = () => image.getAttribute("src") ===
+                    ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE && image.complete === true &&
+                    image.naturalWidth === 1536 && image.naturalHeight === 1024;
+                if (!isEnglishExcretorySystemFormalSearchImage(image) ||
+                    (image.complete && !hasExpectedDimensions())) return;
+                record.panels.forEach(panel => {
+                    if (createEnglishExcretorySystemPanelHitArea(wrapper, panel, record)) added += 1;
+                });
+                image.addEventListener("load", () => {
+                    if (hasExpectedDimensions()) layoutEnglishExcretorySystemPanelHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", () => {
+                    layoutEnglishExcretorySystemPanelHitAreas(wrapper);
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+                }, { once: true });
+                layoutEnglishExcretorySystemPanelHitAreas(wrapper);
+                return;
+            }
             if (isEnglishSolarEnergyImageTTSRecord(record)) {
                 const hasExpectedDimensions = () => image.getAttribute("src") ===
                     ENGLISH_SOLAR_ENERGY_ASSET_FILE && image.complete === true &&
@@ -22582,7 +23055,25 @@ function getEnglishAnimalsWildlifeImageTextSpeechSegments(record,item) {
  if(p.panelId===2&&item.itemId===1)return ["Animals live in different places.","They have unique features and ways to survive in nature."];
  return [item.ttsText];
 }
+function getEnglishExcretorySystemImageTextSpeechSegments(record, item) {
+    if (!isEnglishExcretorySystemImageTTSItemText(record, item)) return null;
+    const safeText = getEnglishTTSUnitText(item.ttsText);
+    if (!safeText) return null;
+    if (item.type === "label") return [safeText];
+    const normalized = safeText.replace(/[ \t]*\n[ \t]*/g, " ");
+    const segmentation = splitEnglishTTSSentences(normalized);
+    const segments = segmentation && segmentation.reliable && Array.isArray(segmentation.sentences)
+        ? segmentation.sentences.map(getEnglishTTSUnitText) : [];
+    if (!segments.length || segments.some(segment => !segment) ||
+        segments.join(" ").replace(/\s+/g, " ").trim() !==
+            normalized.replace(/\s+/g, " ").trim()) return null;
+    return segments;
+}
+
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishExcretorySystemImageTTSItemText(record, item)) {
+        return getEnglishTTSUnitText(item.ttsText);
+    }
     if (isEnglishSolarEnergyImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishCyclingImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishMuscularSystemImageTTSItemText(record, item)) {
@@ -22744,6 +23235,9 @@ function speakEnglishImageTTSImageTextSequence(
     const itemList = Array.isArray(items) ? items : [];
     const allItems = record ? record.panels.flatMap(panel => panel.items) : [];
     const isWaterCycleImageText = isEnglishWaterCycleImageTTSRecord(record);
+    const isExcretorySystemImageText = isEnglishExcretorySystemImageTTSRecord(record);
+    const isExcretorySystemSingleItemSequence = Boolean(isExcretorySystemImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isWaterCycleSingleItemSequence = Boolean(isWaterCycleImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
     const isEnergyTransformationsImageText = Boolean(record &&
@@ -23118,6 +23612,11 @@ function speakEnglishImageTTSImageTextSequence(
             step.speechSegments = getEnglishHumanHealthNutritionImageTextSpeechSegments(record, step.item);
         });
     }
+    if (isExcretorySystemImageText) {
+        playbackSteps.forEach(step => {
+            step.speechSegments = getEnglishExcretorySystemImageTextSpeechSegments(record, step.item);
+        });
+    }
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
     if (!trigger || !wrapper || !record || !trigger.classList ||
         !trigger.classList.contains("image-tts-image-text-hit-area") ||
@@ -23127,7 +23626,8 @@ function speakEnglishImageTTSImageTextSequence(
         triggerPanel !== record.panels.find(panel => panel.panelId === triggerPanel.panelId) ||
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
         (!isPanelSequence && !telephoneV2P4WholePanelSequence &&
-            !telephoneV2P7WholePanelSequence && !isTelephoneV2P4SingleItemSequence &&
+            !telephoneV2P7WholePanelSequence && !isExcretorySystemSingleItemSequence &&
+            !isTelephoneV2P4SingleItemSequence &&
             !isTelephoneV2P7SingleItemSequence &&
             !isMuscularSystemPanelSequence && !isWholeImageSequence &&
             !isCyclingSingleItemSequence &&
@@ -23431,13 +23931,15 @@ function speakEnglishImageTTSImageTextSequence(
                     finishSequence();
                     return;
                 }
-                const delay = isTyphoonsImageText
+                const delay = isExcretorySystemImageText
+                    ? 500
+                    : (isTyphoonsImageText
                     ? getEnglishTyphoonsImageTextSpeechPause(record, previousItem, previousSpeechSegmentIndex)
                     : (isAnimalsAdaptationImageText
                     ? getEnglishAnimalsAdaptationImageTextSpeechPause(
                         record, previousItem, previousSpeechSegmentIndex
                     )
-                    : previousItem.type === "sentence" ? 500 : 300);
+                    : previousItem.type === "sentence" ? 500 : 300));
                 if (delay !== 300 && delay !== 500) {
                     cancelEnglishImageTTSImageTextSequence(true);
                     setEnglishTTSStatus(isTyphoonsImageText
@@ -23748,6 +24250,68 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isEnglishExcretorySystemImageTTSRecord(safeRecord)) {
+        const options = getEnglishExcretorySystemPanelMenuOptions(safeRecord, panel);
+        const image = wrapper.querySelector("img");
+        if (!options || record !== safeRecord ||
+            trigger._englishImageTTSImageTextRecord !== safeRecord ||
+            trigger._englishImageTTSImageTextPanel !== panel ||
+            !isEnglishExcretorySystemPanelTriggerReady(trigger) ||
+            !image || image.getAttribute("src") !== ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE ||
+            !image.complete || image.naturalWidth !== 1536 || image.naturalHeight !== 1024) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        menu.setAttribute("aria-label",
+            "The Excretory System & Kidneys 第 " + panel.panelId + " 格朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀本格完整內容",
+            "依原圖順序朗讀第 " + panel.panelId + " 格全部旁白、標籤與泡泡",
+            () => speakEnglishImageTTSImageTextSequence(
+                trigger, options.fullItems,
+                "The Excretory System & Kidneys 第 " + panel.panelId + " 格完整內容已朗讀完成。"
+            )
+        ));
+        const toggle = createEnglishImageTTSMenuButton(
+            "🔊 單句／標籤選讀",
+            "展開本格每一個句子、標籤或泡泡的獨立朗讀選項",
+            () => {
+                const list = menu.querySelector(".english-image-tts-sentences");
+                if (!list) return;
+                list.hidden = !list.hidden;
+                toggle.setAttribute("aria-expanded", String(!list.hidden));
+                scheduleEnglishImageTTSMenuPosition();
+            }
+        );
+        toggle.setAttribute("aria-expanded", "false");
+        const list = document.createElement("div");
+        list.className = "english-image-tts-sentences";
+        list.hidden = true;
+        options.choices.forEach(choice => {
+            const prefix = choice.kind === "bubble" ? "泡泡" :
+                choice.kind === "label" ? "標籤" : "單句";
+            list.appendChild(createEnglishImageTTSMenuButton(
+                "🔊 " + prefix + "：" + choice.item.sourceText.replace(/\r?\n/g, " "),
+                "單獨朗讀第 " + panel.panelId + " 格" + prefix + "：「" +
+                    choice.item.sourceText + "」",
+                () => speakEnglishImageTTSImageTextSequence(
+                    trigger, [choice.item],
+                    "已朗讀第 " + panel.panelId + " 格所選原圖文字。"
+                )
+            ));
+        });
+        menu.appendChild(toggle);
+        menu.appendChild(list);
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
     }
 
     if (isEnglishSolarEnergyImageTTSRecord(safeRecord)) {
