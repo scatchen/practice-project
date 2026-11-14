@@ -20938,6 +20938,82 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/energy-and-energy-sources-basics.png": {
+        imageId: "energy-and-energy-sources-basics",
+        assetFile: "images/english/energy-and-energy-sources-basics.png",
+        contentType: "image-text",
+        layout: "custom-energy-and-sources-title-plus-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1254, height: 1254 },
+        panels: [
+            { panelId: 0, readingOrder: 1,
+                bounds: { xPct: 0.5, yPct: 0.5, widthPct: 99, heightPct: 13.6 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Energy and Energy Sources", ttsText: "Energy and Energy Sources",
+                        bounds: { xPct: 5.2, yPct: 2.4, widthPct: 74, heightPct: 6.1 },
+                        tapRegion: { xPct: 0.5, yPct: 0.5, widthPct: 99, heightPct: 13.6 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence", sourceText: "Energy makes things happen. It comes from different sources.", ttsText: "Energy makes things happen. It comes from different sources.",
+                        bounds: { xPct: 4.1, yPct: 9.2, widthPct: 76, heightPct: 3.4 } }
+                ]
+            },
+            { panelId: 1, readingOrder: 2,
+                bounds: { xPct: 0.7, yPct: 15.7, widthPct: 48.7, heightPct: 40.2 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "What is energy?", ttsText: "What is energy?",
+                        bounds: { xPct: 2.4, yPct: 17.1, widthPct: 30.5, heightPct: 4.2 },
+                        tapRegion: { xPct: 0.7, yPct: 15.7, widthPct: 48.7, heightPct: 40.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence", sourceText: "Energy is the ability to do work or cause change.", ttsText: "Energy is the ability to do work or cause change.",
+                        bounds: { xPct: 2.6, yPct: 22.2, widthPct: 30, heightPct: 6.4 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence", sourceText: "Energy helps us move, heat, light and power things!", ttsText: "Energy helps us move, heat, light and power things!",
+                        bounds: { xPct: 24.8, yPct: 30.1, widthPct: 19, heightPct: 11.6 } }
+                ]
+            },
+            { panelId: 2, readingOrder: 3,
+                bounds: { xPct: 50.5, yPct: 15.7, widthPct: 48.8, heightPct: 40.2 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Common Energy Sources", ttsText: "Common Energy Sources",
+                        bounds: { xPct: 53, yPct: 17.1, widthPct: 40, heightPct: 4.2 },
+                        tapRegion: { xPct: 50.5, yPct: 15.7, widthPct: 48.8, heightPct: 40.2 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence", sourceText: "We get energy from many different sources, including renewable and non-renewable sources.", ttsText: "We get energy from many different sources, including renewable and non-renewable sources.",
+                        bounds: { xPct: 53, yPct: 22.4, widthPct: 44, heightPct: 5.5 } },
+                    { itemId: 3, readingOrder: 3, type: "label", sourceText: "Sunlight (solar)", ttsText: "Sunlight (solar)", bounds: { xPct: 54.8, yPct: 38.4, widthPct: 12, heightPct: 4.3 } },
+                    { itemId: 4, readingOrder: 4, type: "label", sourceText: "Wind", ttsText: "Wind", bounds: { xPct: 71, yPct: 38.4, widthPct: 7, heightPct: 2.5 } },
+                    { itemId: 5, readingOrder: 5, type: "label", sourceText: "Water (hydroelectric)", ttsText: "Water (hydroelectric)", bounds: { xPct: 81.8, yPct: 37.4, widthPct: 16, heightPct: 5.3 } },
+                    { itemId: 6, readingOrder: 6, type: "label", sourceText: "Coal (non-renewable)", ttsText: "Coal (non-renewable)", bounds: { xPct: 53, yPct: 51, widthPct: 14, heightPct: 4.4 } },
+                    { itemId: 7, readingOrder: 7, type: "label", sourceText: "Natural Gas (non-renewable)", ttsText: "Natural Gas (non-renewable)", bounds: { xPct: 68.7, yPct: 50.8, widthPct: 17, heightPct: 4.8 } },
+                    { itemId: 8, readingOrder: 8, type: "label", sourceText: "Oil (non-renewable)", ttsText: "Oil (non-renewable)", bounds: { xPct: 87, yPct: 51, widthPct: 10.5, heightPct: 4.4 } }
+                ]
+            },
+            { panelId: 3, readingOrder: 4,
+                bounds: { xPct: 0.7, yPct: 56.9, widthPct: 48.7, heightPct: 42.5 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "Energy in Our Daily Life", ttsText: "Energy in Our Daily Life",
+                        bounds: { xPct: 2.8, yPct: 58.2, widthPct: 38, heightPct: 4.6 },
+                        tapRegion: { xPct: 0.7, yPct: 56.9, widthPct: 48.7, heightPct: 42.5 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence", sourceText: "We use energy every day — at home, at school and when we travel.", ttsText: "We use energy every day — at home, at school and when we travel.",
+                        bounds: { xPct: 2.5, yPct: 63.3, widthPct: 43, heightPct: 5.5 } },
+                    { itemId: 3, readingOrder: 3, type: "label", sourceText: "Electricity (lights, computers)", ttsText: "Electricity (lights, computers)", bounds: { xPct: 4.5, yPct: 79.5, widthPct: 20, heightPct: 4.7 } },
+                    { itemId: 4, readingOrder: 4, type: "label", sourceText: "Muscle energy (moving, riding)", ttsText: "Muscle energy (moving, riding)", bounds: { xPct: 27, yPct: 79.5, widthPct: 18, heightPct: 4.7 } },
+                    { itemId: 5, readingOrder: 5, type: "label", sourceText: "Heat energy (cooking)", ttsText: "Heat energy (cooking)", bounds: { xPct: 4.6, yPct: 93.8, widthPct: 20.5, heightPct: 4.8 } },
+                    { itemId: 6, readingOrder: 6, type: "label", sourceText: "Light and sound energy (TV, music)", ttsText: "Light and sound energy (TV, music)", bounds: { xPct: 25.2, yPct: 93.6, widthPct: 22.4, heightPct: 5 } }
+                ]
+            },
+            { panelId: 4, readingOrder: 5,
+                bounds: { xPct: 50.5, yPct: 56.9, widthPct: 48.8, heightPct: 42.5 },
+                items: [
+                    { itemId: 1, readingOrder: 1, type: "label", sourceText: "A Cleaner, Brighter Future", ttsText: "A Cleaner, Brighter Future",
+                        bounds: { xPct: 53, yPct: 58.2, widthPct: 42, heightPct: 4.6 },
+                        tapRegion: { xPct: 50.5, yPct: 56.9, widthPct: 48.8, heightPct: 42.5 } },
+                    { itemId: 2, readingOrder: 2, type: "sentence", sourceText: "We can use clean and renewable energy to protect our planet.", ttsText: "We can use clean and renewable energy to protect our planet.",
+                        bounds: { xPct: 52.8, yPct: 63.6, widthPct: 44, heightPct: 6.2 } },
+                    { itemId: 3, readingOrder: 3, type: "sentence", sourceText: "Clean energy helps a healthier Earth!", ttsText: "Clean energy helps a healthier Earth!", bounds: { xPct: 58, yPct: 71.4, widthPct: 21, heightPct: 10.2 } }
+                ]
+            }
+        ]
+    },
     "images/english/energy-transformations-basics.png": {
         imageId: "energy-transformations-basics",
         assetFile: "images/english/energy-transformations-basics.png",

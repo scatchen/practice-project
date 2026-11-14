@@ -11301,6 +11301,20 @@ function isEnglishKarstImageTTSItemText(record, item) {
         (panel.panelId === 4 && n === 0 || getEnglishTTSUnitText(item.sourceText)));
 }
 
+function isEnglishEnergySourcesImageTTSItemText(record, item) {
+    const file = "images/english/energy-and-energy-sources-basics.png";
+    if (!isEnglishEnergySourcesImageTTSRecord(record) || !item || !imageTTSData[file] || record.panels !== imageTTSData[file].panels) return false;
+    const safe = getEnglishEnergySourcesImageTextRecord(record, file);
+    return Boolean(safe && safe.panels.some(panel => panel.items.includes(item)));
+}
+
+function getEnglishEnergySourcesImageTextSpeechSegments(record, item) {
+    if (!isEnglishEnergySourcesImageTTSItemText(record, item)) return null;
+    const panel = record.panels.find(candidate => candidate.items.includes(item));
+    if (!panel || panel.panelId !== 0 || item.itemId !== 2 || item.sourceText !== "Energy makes things happen. It comes from different sources.") return null;
+    return ["Energy makes things happen.", "It comes from different sources."];
+}
+
 function isEnglishEnergyTransformationsImageTTSItemText(record, item) {
     const file = "images/english/energy-transformations-basics.png";
     if (!isEnglishEnergyTransformationsImageTTSRecord(record) || !item ||
@@ -11460,6 +11474,7 @@ function isEnglishImageTTSItemText(record, item) {
     if (isEnglishTyphoonsImageTTSItemText(record, item)) return true;
     if (isEnglishHumanHealthNutritionImageTTSItemText(record, item)) return true;
     if (isEnglishMountainsImageTTSItemText(record, item) ||
+        isEnglishEnergySourcesImageTTSItemText(record, item) ||
         isEnglishEnergyTransformationsImageTTSItemText(record, item) ||
         isEnglishAnimalsAdaptationImageTTSItemText(record, item) ||
         isEnglishAnimalsWildlifeImageTTSItemText(record,item) ||
@@ -12024,6 +12039,8 @@ function isEnglishImageTTSFullTitleImageTextRecord(record) {
             record.assetFile === "images/english/circulatory-system-basics.png") ||
         (record.imageId === "static-electricity-basics" &&
             record.assetFile === "images/english/static-electricity-basics.png") ||
+        (record.imageId === "energy-and-energy-sources-basics" &&
+            record.assetFile === "images/english/energy-and-energy-sources-basics.png") ||
         (record.imageId === "energy-transformations-basics" &&
             record.assetFile === "images/english/energy-transformations-basics.png") ||
         (record.imageId === "plains-basics" &&
@@ -12062,6 +12079,7 @@ function getEnglishImageTTSImageTextName(record) {
     if (isEnglishAnimalsAdaptationImageTTSRecord(record)) return "Animals & Adaptation";
     if (isEnglishWaterCycleImageTTSRecord(record)) return "Water Cycle";
     if (isEnglishMountainsImageTTSRecord(record)) return "Mountains & Mountain Ranges";
+    if (isEnglishEnergySourcesImageTTSRecord(record)) return "Energy & Energy Sources";
     if (isEnglishEnergyTransformationsImageTTSRecord(record)) return "Energy Transformations";
     if (isEnglishAnimalsWildlifeImageTTSRecord(record)) return "Animals & Wildlife";
     if (isEnglishPlainsImageTTSRecord(record)) return "Plains";
@@ -14591,6 +14609,115 @@ function getEnglishAnimalsWildlifeExpectedPanels() {
                 { type: "label", sourceText: "ecosystem" }
             ] }
     ];
+}
+
+function isEnglishEnergySourcesImageTTSRecord(record) {
+    const file = "images/english/energy-and-energy-sources-basics.png";
+    return Boolean(record && record.imageId === "energy-and-energy-sources-basics" &&
+        record.assetFile === file && record.contentType === "image-text" &&
+        record.layout === "custom-energy-and-sources-title-plus-2x2" &&
+        record.coordinateStatus === "estimated" && record.overlayRuntimeStatus === "not-tested" &&
+        typeof imageTTSData !== "undefined" && imageTTSData && imageTTSData[file] &&
+        record.panels === imageTTSData[file].panels);
+}
+
+function getEnglishEnergySourcesExpectedPanels() {
+    const b = (xPct, yPct, widthPct, heightPct) => ({ xPct, yPct, widthPct, heightPct });
+    const item = (itemId, readingOrder, type, sourceText, bounds, tapRegion = null) => {
+        const result = { itemId, readingOrder, type, sourceText, ttsText: sourceText, bounds: b(...bounds) };
+        if (tapRegion) result.tapRegion = b(...tapRegion);
+        return result;
+    };
+    const panel = (panelId, readingOrder, bounds, items) => ({ panelId, readingOrder, bounds: b(...bounds), items });
+    return [
+        panel(0, 1, [0.5, 0.5, 99, 13.6], [
+            item(1, 1, "label", "Energy and Energy Sources", [5.2, 2.4, 74, 6.1], [0.5, 0.5, 99, 13.6]),
+            item(2, 2, "sentence", "Energy makes things happen. It comes from different sources.", [4.1, 9.2, 76, 3.4])]),
+        panel(1, 2, [0.7, 15.7, 48.7, 40.2], [
+            item(1, 1, "label", "What is energy?", [2.4, 17.1, 30.5, 4.2], [0.7, 15.7, 48.7, 40.2]),
+            item(2, 2, "sentence", "Energy is the ability to do work or cause change.", [2.6, 22.2, 30, 6.4]),
+            item(3, 3, "sentence", "Energy helps us move, heat, light and power things!", [24.8, 30.1, 19, 11.6])]),
+        panel(2, 3, [50.5, 15.7, 48.8, 40.2], [
+            item(1, 1, "label", "Common Energy Sources", [53, 17.1, 40, 4.2], [50.5, 15.7, 48.8, 40.2]),
+            item(2, 2, "sentence", "We get energy from many different sources, including renewable and non-renewable sources.", [53, 22.4, 44, 5.5]),
+            item(3, 3, "label", "Sunlight (solar)", [54.8, 38.4, 12, 4.3]),
+            item(4, 4, "label", "Wind", [71, 38.4, 7, 2.5]),
+            item(5, 5, "label", "Water (hydroelectric)", [81.8, 37.4, 16, 5.3]),
+            item(6, 6, "label", "Coal (non-renewable)", [53, 51, 14, 4.4]),
+            item(7, 7, "label", "Natural Gas (non-renewable)", [68.7, 50.8, 17, 4.8]),
+            item(8, 8, "label", "Oil (non-renewable)", [87, 51, 10.5, 4.4])]),
+        panel(3, 4, [0.7, 56.9, 48.7, 42.5], [
+            item(1, 1, "label", "Energy in Our Daily Life", [2.8, 58.2, 38, 4.6], [0.7, 56.9, 48.7, 42.5]),
+            item(2, 2, "sentence", "We use energy every day — at home, at school and when we travel.", [2.5, 63.3, 43, 5.5]),
+            item(3, 3, "label", "Electricity (lights, computers)", [4.5, 79.5, 20, 4.7]),
+            item(4, 4, "label", "Muscle energy (moving, riding)", [27, 79.5, 18, 4.7]),
+            item(5, 5, "label", "Heat energy (cooking)", [4.6, 93.8, 20.5, 4.8]),
+            item(6, 6, "label", "Light and sound energy (TV, music)", [25.2, 93.6, 22.4, 5])]),
+        panel(4, 5, [50.5, 56.9, 48.8, 42.5], [
+            item(1, 1, "label", "A Cleaner, Brighter Future", [53, 58.2, 42, 4.6], [50.5, 56.9, 48.8, 42.5]),
+            item(2, 2, "sentence", "We can use clean and renewable energy to protect our planet.", [52.8, 63.6, 44, 6.2]),
+            item(3, 3, "sentence", "Clean energy helps a healthier Earth!", [58, 71.4, 21, 10.2])])
+    ];
+}
+
+function getEnglishEnergySourcesImageTextRecord(record, assetFile) {
+    const file = "images/english/energy-and-energy-sources-basics.png";
+    const exact = (value, keys) => value && typeof value === "object" && !Array.isArray(value) &&
+        Object.keys(value).length === keys.length && keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const same = (actual, wanted) => {
+        if (Array.isArray(wanted)) return Array.isArray(actual) && actual.length === wanted.length &&
+            wanted.every((value, index) => same(actual[index], value));
+        if (wanted && typeof wanted === "object") return exact(actual, Object.keys(wanted)) &&
+            Object.keys(wanted).every(key => same(actual[key], wanted[key]));
+        return actual === wanted;
+    };
+    const keys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const valid = value => exact(value, keys) && keys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 && value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const within = (a, b) => valid(a) && valid(b) && b.xPct >= a.xPct && b.yPct >= a.yPct &&
+        b.xPct + b.widthPct <= a.xPct + a.widthPct && b.yPct + b.heightPct <= a.yPct + a.heightPct;
+    const overlaps = (a, b) => a.xPct < b.xPct + b.widthPct && a.xPct + a.widthPct > b.xPct &&
+        a.yPct < b.yPct + b.heightPct && a.yPct + a.heightPct > b.yPct;
+    const expected = getEnglishEnergySourcesExpectedPanels();
+    const topKeys = ["imageId", "assetFile", "contentType", "layout", "transcriptStatus", "transcriptReviewMethod",
+        "coordinateStatus", "overlayRuntimeStatus", "sourceImageDimensions", "panels"];
+    if (!exact(record, topKeys) || record.imageId !== "energy-and-energy-sources-basics" || record.assetFile !== file ||
+        assetFile !== file || record.contentType !== "image-text" || record.layout !== "custom-energy-and-sources-title-plus-2x2" ||
+        record.transcriptStatus !== "verified" || record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) || record.sourceImageDimensions.width !== 1254 ||
+        record.sourceImageDimensions.height !== 1254 || !Array.isArray(record.panels) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || record.panels !== imageTTSData[file].panels ||
+        !same(record.panels, expected)) return null;
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate && (candidate.imageId === record.imageId || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry && (entry.id === record.imageId || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file || library.length !== 1 || library[0].id !== record.imageId ||
+        library[0].file !== file || library[0].category !== "english") return null;
+    const panels = [], taps = [], itemBounds = [];
+    let count = 0;
+    for (const panel of record.panels) {
+        if (!valid(panel.bounds) || !Array.isArray(panel.items) || !panel.items.length) return null;
+        panels.push(panel.bounds);
+        for (let i = 0; i < panel.items.length; i += 1) {
+            const item = panel.items[i];
+            if (!valid(item.bounds) || !within(panel.bounds, item.bounds) || item.sourceText !== item.ttsText || !getEnglishTTSUnitText(item.ttsText)) return null;
+            if (itemBounds.some(bounds => overlaps(bounds, item.bounds))) return null;
+            itemBounds.push(item.bounds);
+            if (Object.prototype.hasOwnProperty.call(item, "tapRegion")) {
+                if (i !== 0 || !valid(item.tapRegion) || !within(panel.bounds, item.tapRegion) || !same(item.tapRegion, panel.bounds)) return null;
+                taps.push(item.tapRegion);
+            }
+            count += 1;
+        }
+    }
+    for (let i = 0; i < panels.length; i += 1) for (let j = i + 1; j < panels.length; j += 1) {
+        if (overlaps(panels[i], panels[j]) || overlaps(taps[i], taps[j])) return null;
+    }
+    return count === 22 && taps.length === 5 ? record : null;
 }
 
 function getEnglishEnergyTransformationsExpectedPanels() {
@@ -17489,6 +17616,9 @@ function getEnglishImageTTSRecord(assetFile) {
         record.assetFile === ENGLISH_MOUNTAINS_ASSET_FILE || assetFile === ENGLISH_MOUNTAINS_ASSET_FILE)) {
         return getEnglishMountainsImageTextRecord(record, assetFile);
     }
+    const energySourcesFile = "images/english/energy-and-energy-sources-basics.png";
+    if (record && (record.imageId === "energy-and-energy-sources-basics" || record.assetFile === energySourcesFile || assetFile === energySourcesFile))
+        return getEnglishEnergySourcesImageTextRecord(record, assetFile);
     const energyFile = "images/english/energy-transformations-basics.png";
     if (record && (record.imageId === "energy-transformations-basics" ||
         record.assetFile === energyFile || assetFile === energyFile)) {
@@ -21146,7 +21276,62 @@ function layoutEnglishSolarEnergyImageTTSHitAreas(wrapper) {
     return enabled > 0;
 }
 
+function layoutEnglishEnergySourcesImageTTSHitAreas(wrapper, verifyTrigger = null) {
+    const file = ENGLISH_ENERGY_SOURCES_ASSET_FILE;
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function" ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
+    const image = wrapper && typeof wrapper.querySelector === "function" ? wrapper.querySelector("img") : null;
+    const hide = button => { button.hidden = true; button.disabled = true; button.setAttribute("aria-disabled", "true"); if (button.style) button.style.pointerEvents = "none"; };
+    const fail = () => {
+        buttons.forEach(hide);
+        if (englishImageTTSOverlayState.activeTrigger && wrapper && wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+        if (englishTTSState.imageTextSequenceTrigger && wrapper && wrapper.contains(englishTTSState.imageTextSequenceTrigger)) cancelEnglishImageTTSImageTextSequence(true);
+        return false;
+    };
+    const record = typeof imageTTSData !== "undefined" && imageTTSData ? imageTTSData[file] : null;
+    if (!wrapper || !wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== file || !record || !isEnglishEnergySourcesImageTTSRecord(record) ||
+        !image || !isEnglishEnergySourcesFormalSearchImage(image) || image.getAttribute("src") !== file || image.complete !== true ||
+        image.naturalWidth !== 1254 || image.naturalHeight !== 1254 || buttons.length !== 5) return fail();
+    let imageRect, wrapperRect;
+    try { imageRect = image.getBoundingClientRect(); wrapperRect = wrapper.getBoundingClientRect(); } catch (error) { return fail(); }
+    if (!imageRect || !wrapperRect || ![imageRect.left,imageRect.top,imageRect.width,imageRect.height,wrapperRect.left,wrapperRect.top,wrapperRect.width,wrapperRect.height].every(Number.isFinite) ||
+        imageRect.width <= 0 || imageRect.height <= 0 || Math.abs(imageRect.width-imageRect.height) > Math.max(1,imageRect.width*0.01) ||
+        Math.abs(imageRect.left-wrapperRect.left)>1 || Math.abs(imageRect.top-wrapperRect.top)>1 || Math.abs(imageRect.width-wrapperRect.width)>1 || Math.abs(imageRect.height-wrapperRect.height)>1) return fail();
+    const hitAreas=[];
+    for (const panel of record.panels) {
+        const item=panel.items[0], matches=buttons.filter(button=>button.getAttribute("data-image-tts-panel-id")===String(panel.panelId)&&button.getAttribute("data-image-tts-item-id")===String(item.itemId));
+        if(matches.length!==1)return fail();
+        const button=matches[0],tap=item.tapRegion;
+        if(!button.classList||!button.classList.contains("image-tts-image-text-hit-area")||button._englishImageTTSImageTextRecord!==record||
+            button._englishImageTTSImageTextPanel!==panel||button._englishImageTTSImageTextItem!==item||button.style.left!==tap.xPct+"%"||button.style.top!==tap.yPct+"%"||
+            button.style.width!==tap.widthPct+"%"||button.style.height!==tap.heightPct+"%")return fail();
+        // Reveal first; never treat the zero rectangle of a hidden control as safe.
+        button.hidden=false;button.disabled=true;button.setAttribute("aria-disabled","true");button.style.pointerEvents="auto";
+        let rect;try{rect=button.getBoundingClientRect();}catch(error){return fail();}
+        const expected={left:imageRect.left+imageRect.width*tap.xPct/100,top:imageRect.top+imageRect.height*tap.yPct/100,width:imageRect.width*tap.widthPct/100,height:imageRect.height*tap.heightPct/100};
+        if(!rect||![rect.left,rect.top,rect.width,rect.height].every(Number.isFinite)||rect.width<44||rect.height<44||
+            Math.abs(rect.left-expected.left)>1||Math.abs(rect.top-expected.top)>1||Math.abs(rect.width-expected.width)>1||Math.abs(rect.height-expected.height)>1)return fail();
+        hitAreas.push({button,rect});
+    }
+    const selected=verifyTrigger?hitAreas.find(entry=>entry.button===verifyTrigger):null;
+    if(verifyTrigger&&(!selected||verifyTrigger.hidden||isEnglishImageTTSDrawingMode()||typeof document.elementFromPoint!=="function"))return false;
+    if(selected){
+        const v=window.visualViewport,view=v&&[v.offsetLeft,v.offsetTop,v.width,v.height].every(Number.isFinite)&&v.width>0&&v.height>0
+            ?{left:v.offsetLeft,top:v.offsetTop,right:v.offsetLeft+v.width,bottom:v.offsetTop+v.height}:{left:0,top:0,right:window.innerWidth,bottom:window.innerHeight};
+        const r=selected.rect,left=Math.max(r.left,view.left),top=Math.max(r.top,view.top),right=Math.min(r.left+r.width,view.right),bottom=Math.min(r.top+r.height,view.bottom),w=right-left,h=bottom-top;
+        if(w<44||h<44)return false;
+        const ix=Math.min(6,w/4),iy=Math.min(6,h/4),cx=(left+right)/2,cy=(top+bottom)/2,points=[[cx,cy],[left+ix,cy],[right-ix,cy],[cx,top+iy],[cx,bottom-iy]];
+        try{for(const [x,y] of points){const hit=document.elementFromPoint(x,y);if(hit!==selected.button&&!selected.button.contains(hit))return false;}}catch(error){return false;}
+    }
+    const selectable=drawMode==="select"&&appState.subjectMode==="english";
+    hitAreas.forEach(({button})=>{button.hidden=!selectable;button.disabled=!selectable;button.setAttribute("aria-disabled",String(!selectable));button.style.pointerEvents=selectable?"auto":"none";});
+    return selectable;
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
+    if (wrapper && wrapper.dataset && wrapper.dataset.imageTtsAssetFile === "images/english/energy-and-energy-sources-basics.png") {
+        layoutEnglishEnergySourcesImageTTSHitAreas(wrapper);
+        return;
+    }
     if (wrapper && wrapper.dataset &&
         wrapper.dataset.imageTtsAssetFile === ENGLISH_HUMAN_BRAIN_ASSET_FILE) {
         return layoutEnglishHumanBrainPanelHitAreas(wrapper);
@@ -23041,6 +23226,7 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
     }
 
     function renderResponse(responseRoot, question, headingText, answerHTML) {
+        ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_EXCRETORY_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_SKELETAL_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_IMMUNE_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
@@ -23210,6 +23396,12 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 ? immuneSpecs[0]
                 : null;
 
+        const energyMatches=Array.isArray(diagramMap)?diagramMap.filter(entry=>entry&&(entry.id===ENGLISH_ENERGY_SOURCES_IMAGE_ID||entry.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE)):[];
+        const canonicalEnergy=energyMatches.length===1&&energyMatches[0].id===ENGLISH_ENERGY_SOURCES_IMAGE_ID&&energyMatches[0].file===ENGLISH_ENERGY_SOURCES_ASSET_FILE?energyMatches[0]:null;
+        const returnedEnergy=canonicalEnergy?diagrams.filter(diagram=>diagram===canonicalEnergy).length:0;
+        const energySpecs=specs.filter(spec=>spec.imageData.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE);
+        const trustedEnergySourcesSpec=canonicalEnergy&&returnedEnergy===1&&energySpecs.length===1&&energySpecs[0].diagram===canonicalEnergy?energySpecs[0]:null;
+
         responseRoot.replaceChildren();
         const heading = document.createElement("h2");
         heading.textContent = headingText;
@@ -23229,6 +23421,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 image.style.width = "100%";
                 image.style.borderRadius = "10px";
                 image.style.marginBottom = "20px";
+                if (spec === trustedEnergySourcesSpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_ENERGY_SOURCES_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_ENERGY_SOURCES_ASSET_FILE);
+                }
                 if (spec === trustedV2Spec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_TELEPHONE_V2_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_TELEPHONE_V2_ASSET_FILE);
@@ -23322,11 +23518,55 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedPlantsPhotosynthesisSpec);
         ENGLISH_PLANT_REPRODUCTION_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedPlantReproductionSpec);
+        ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedEnergySourcesSpec);
         return answerRoot;
     }
 
     return { renderResponse, isTrustedNode, enhanceCurrent };
 })();
+
+const ENGLISH_ENERGY_SOURCES_ASSET_FILE = "images/english/energy-and-energy-sources-basics.png";
+const ENGLISH_ENERGY_SOURCES_IMAGE_ID = "energy-and-energy-sources-basics";
+const ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage=new WeakMap();let currentContext=null,generation=0;
+    function detach(image){const wrapper=image&&image.closest?image.closest(".image-tts-overlay-wrapper"):null;if(!wrapper)return;
+        const active=englishTTSState.imageTextSequenceTrigger;if(active&&wrapper.contains(active))cancelEnglishImageTTSImageTextSequence(true);
+        const menu=englishImageTTSOverlayState.activeTrigger;if(menu&&wrapper.contains(menu))closeEnglishImageTTSMenu();
+        wrapper.querySelectorAll(".image-tts-image-text-hit-area").forEach(button=>button.remove());}
+    function revoke(context,image){if(!context||!context.images.has(image))return;originByImage.delete(image);context.images.delete(image);detach(image);}
+    function process(context,records){if(!context||!Array.isArray(records))return;records.forEach(record=>{
+        if(record.type==="attributes"&&context.images.has(record.target)){revoke(context,record.target);return;}
+        if(record.type!=="childList")return;Array.from(record.removedNodes||[]).forEach(removed=>Array.from(context.images).forEach(image=>{
+            if(removed===image||removed&&typeof removed.contains==="function"&&removed.contains(image))revoke(context,image);}));});}
+    function expire(){const context=currentContext;if(!context)return;context.revoked=true;if(context.observer)context.observer.disconnect();Array.from(context.images).forEach(image=>revoke(context,image));currentContext=null;}
+    function isTrustedNode(image){const context=currentContext;if(context&&context.observer)process(context,context.observer.takeRecords());const origin=image&&originByImage.get(image);
+        if(!context||!origin||context.revoked||origin.context!==context||origin.generation!==context.generation||!context.observer||!image.isConnected||
+            context.responseRoot!==document.getElementById("ai-response")||!context.responseRoot.isConnected||!context.responseRoot.contains(context.diagramContainer)||
+            !context.diagramContainer.contains(image)||image.getAttribute("src")!==ENGLISH_ENERGY_SOURCES_ASSET_FILE||
+            image.getAttribute("data-english-image-library-id")!==ENGLISH_ENERGY_SOURCES_IMAGE_ID||image.getAttribute("data-english-image-library-file")!==ENGLISH_ENERGY_SOURCES_ASSET_FILE)return false;
+        const matches=Array.isArray(diagramMap)?diagramMap.filter(entry=>entry&&(entry.id===ENGLISH_ENERGY_SOURCES_IMAGE_ID||entry.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE)):[];
+        return matches.length===1&&matches[0]===origin.diagram&&origin.diagram.id===ENGLISH_ENERGY_SOURCES_IMAGE_ID&&origin.diagram.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE;}
+    function register(responseRoot,diagramContainer,renderedSpecs,trustedSpec){expire();
+        if(!responseRoot||!diagramContainer||!trustedSpec||typeof MutationObserver!=="function"||responseRoot!==document.getElementById("ai-response")||!responseRoot.isConnected||!diagramContainer.isConnected)return false;
+        const diagram=trustedSpec.diagram,matches=Array.isArray(diagramMap)?diagramMap.filter(entry=>entry&&(entry.id===ENGLISH_ENERGY_SOURCES_IMAGE_ID||entry.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE)):[];
+        const specs=(Array.isArray(renderedSpecs)?renderedSpecs:[]).filter(entry=>entry&&entry.spec&&entry.spec.imageData&&entry.spec.imageData.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE);
+        const rendered=renderedSpecs.find(entry=>entry&&entry.spec===trustedSpec);
+        if(matches.length!==1||matches[0]!==diagram||!diagram||diagram.id!==ENGLISH_ENERGY_SOURCES_IMAGE_ID||diagram.file!==ENGLISH_ENERGY_SOURCES_ASSET_FILE||
+            specs.length!==1||!rendered||!rendered.image||!rendered.image.isConnected||!diagramContainer.contains(rendered.image))return false;
+        const image=rendered.image,wrapper=wrapEnglishImageForTTS(image);if(!wrapper||!wrapper.contains(image)||!diagramContainer.contains(wrapper))return false;
+        const context={generation:++generation,responseRoot,diagramContainer,diagram,images:new Set([image]),observer:null,revoked:false};currentContext=context;originByImage.set(image,{context,generation:context.generation,diagram});
+        context.observer=new MutationObserver(records=>process(context,records));context.observer.observe(responseRoot,{childList:true,subtree:true,attributes:true,attributeFilter:["src","data-english-image-library-id","data-english-image-library-file"]});
+        if(!isTrustedNode(image)){expire();return false;}enhanceEnglishImageTTSOverlays(responseRoot);return true;}
+    return{register,expireCurrentContext:expire,isTrustedNode};
+})();
+function isEnglishEnergySourcesFormalSearchImage(image){
+    if(!image||image.getAttribute("src")!==ENGLISH_ENERGY_SOURCES_ASSET_FILE||image.getAttribute("data-english-image-library-id")!==ENGLISH_ENERGY_SOURCES_IMAGE_ID||
+        image.getAttribute("data-english-image-library-file")!==ENGLISH_ENERGY_SOURCES_ASSET_FILE||!ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN.isTrustedNode(image)||
+        typeof imageTTSData==="undefined"||!imageTTSData||!Array.isArray(diagramMap))return false;
+    const record=imageTTSData[ENGLISH_ENERGY_SOURCES_ASSET_FILE];if(getEnglishEnergySourcesImageTextRecord(record,ENGLISH_ENERGY_SOURCES_ASSET_FILE)!==record)return false;
+    const matches=diagramMap.filter(entry=>entry&&(entry.id===ENGLISH_ENERGY_SOURCES_IMAGE_ID||entry.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE));
+    return matches.length===1&&matches[0].id===ENGLISH_ENERGY_SOURCES_IMAGE_ID&&matches[0].file===ENGLISH_ENERGY_SOURCES_ASSET_FILE;}
 
 function isEnglishTelephoneV2FormalSearchImage(image) {
     if (!image || image.getAttribute("src") !== ENGLISH_TELEPHONE_V2_ASSET_FILE ||
@@ -24292,6 +24532,7 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_ENERGY_SOURCES_ASSET_FILE && !isEnglishEnergySourcesFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_HUMAN_BRAIN_ASSET_FILE &&
             !isEnglishHumanBrainFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_IMMUNE_SYSTEM_ASSET_FILE &&
@@ -24360,6 +24601,16 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishEnergySourcesImageTTSRecord(record)) {
+                const dimensionsOK=()=>isEnglishEnergySourcesFormalSearchImage(image)&&image.getAttribute("src")===ENGLISH_ENERGY_SOURCES_ASSET_FILE&&image.complete===true&&image.naturalWidth===1254&&image.naturalHeight===1254;
+                if(image.complete&&!dimensionsOK())return;
+                record.panels.forEach(panel=>{const item=panel.items[0];if(item&&item.tapRegion&&createEnglishImageTTSImageTextHitArea(wrapper,panel,item,record))added++;});
+                const hide=()=>{wrapper.querySelectorAll(".image-tts-image-text-hit-area").forEach(button=>{button.hidden=true;button.disabled=true;button.setAttribute("aria-disabled","true");button.style.pointerEvents="none";});
+                    if(englishImageTTSOverlayState.activeTrigger&&wrapper.contains(englishImageTTSOverlayState.activeTrigger))closeEnglishImageTTSMenu();
+                    if(englishTTSState.imageTextSequenceTrigger&&wrapper.contains(englishTTSState.imageTextSequenceTrigger))cancelEnglishImageTTSImageTextSequence(true);};
+                image.addEventListener("load",()=>{if(dimensionsOK())layoutEnglishEnergySourcesImageTTSHitAreas(wrapper);else hide();},{once:true});image.addEventListener("error",hide,{once:true});
+                layoutEnglishEnergySourcesImageTTSHitAreas(wrapper);return;
+            }
             if (isEnglishPlantReproductionImageTTSRecord(record)) {
                 const hasExpectedDimensions = () => image.getAttribute("src") ===
                     ENGLISH_PLANT_REPRODUCTION_ASSET_FILE && image.complete === true &&
@@ -25661,6 +25912,7 @@ function getEnglishImageTTSImageTextSpeechText(record, item) {
     }
     if (isEnglishWaterCycleImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishMountainsImageTTSItemText(record, item)) return item.ttsText;
+    if (isEnglishEnergySourcesImageTTSItemText(record, item)) return getEnglishTTSUnitText(item.ttsText);
     if (isEnglishEnergyTransformationsImageTTSItemText(record, item)) {
         return item.ttsText;
     }
@@ -25813,6 +26065,13 @@ function speakEnglishImageTTSImageTextSequence(
         itemList.length === 1 && allItems.includes(itemList[0]));
     const isWaterCycleSingleItemSequence = Boolean(isWaterCycleImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isEnergySourcesImageText=Boolean(record&&isEnglishEnergySourcesImageTTSRecord(record));
+    const energySourcesPanel=trigger&&trigger._englishImageTTSImageTextPanel;
+    const energySourcesPanelSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===energySourcesPanel.items.length&&energySourcesPanel.items.every((item,index)=>item===itemList[index]));
+    const energySourcesSingleItemSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===1&&energySourcesPanel.items.includes(itemList[0]));
+    const energySourcesReady=!isEnergySourcesImageText||Boolean(record===imageTTSData[ENGLISH_ENERGY_SOURCES_ASSET_FILE]&&trigger._englishImageTTSImageTextRecord===record&&
+        record.panels.includes(energySourcesPanel)&&trigger._englishImageTTSImageTextPanel===energySourcesPanel&&energySourcesPanel.items.includes(trigger._englishImageTTSImageTextItem)&&
+        itemList.every(item=>energySourcesPanel.items.includes(item))&&layoutEnglishEnergySourcesImageTTSHitAreas(wrapper,trigger));
     const isEnergyTransformationsImageText = Boolean(record &&
         isEnglishEnergyTransformationsImageTTSRecord(record));
     const isEnergyTransformationsSingleItemSequence = Boolean(
@@ -26262,6 +26521,9 @@ function speakEnglishImageTTSImageTextSequence(
                             : getEnglishSimpleMachinesImageTextSpeechSegments(record, item))))))
                 : null
         })));
+    if (isEnergySourcesImageText) playbackSteps.forEach(step => {
+        step.speechSegments=getEnglishEnergySourcesImageTextSpeechSegments(record,step.item);
+    });
     if (isTyphoonsImageText) {
         playbackSteps.forEach(step => {
             step.speechSegments = getEnglishTyphoonsImageTextSpeechSegments(record, step.item);
@@ -26295,6 +26557,7 @@ function speakEnglishImageTTSImageTextSequence(
         !triggerPanel ||
         triggerPanel !== record.panels.find(panel => panel.panelId === triggerPanel.panelId) ||
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
+        (isEnergySourcesImageText && !energySourcesPanelSequence && !energySourcesSingleItemSequence) ||
         (!isPanelSequence && !telephoneV2P4WholePanelSequence &&
             !telephoneV2P7WholePanelSequence && !isExcretorySystemSingleItemSequence &&
             !isSkeletalSystemSingleItemSequence && !isImmuneSystemSingleItemSequence &&
@@ -26305,6 +26568,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isMuscularSystemPanelSequence && !isWholeImageSequence &&
             !isCyclingSingleItemSequence &&
             !isEnergyTransformationsSingleItemSequence &&
+            !energySourcesSingleItemSequence &&
             !isSolarSingleItemSequence &&
             !isWaterCycleSingleItemSequence &&
             !isPlateausSingleItemSequence && !isKarstSingleItemSequence &&
@@ -26333,6 +26597,7 @@ function speakEnglishImageTTSImageTextSequence(
                 !isEnglishEnergyTransformationsImageTTSItemText(record, item)) ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady || !mountainsReady ||
+        !energySourcesReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
         !animalsAdaptationImageReady || !humanHealthImageReady || !typhoonsImageReady ||
         !muscularImageReady || !cyclingImageReady || !solarImageReady ||
@@ -27084,6 +27349,26 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isEnglishEnergySourcesImageTTSRecord(safeRecord)) {
+        const image=wrapper.querySelector("img"),buttons=Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")),clicked=trigger._englishImageTTSImageTextItem;
+        if(record!==safeRecord||!image||!isEnglishEnergySourcesFormalSearchImage(image)||image.getAttribute("src")!==safeRecord.assetFile||!image.complete||image.naturalWidth!==1254||image.naturalHeight!==1254||
+            buttons.length!==5||!buttons.includes(trigger)||trigger.hidden||trigger.disabled||trigger._englishImageTTSImageTextRecord!==safeRecord||trigger._englishImageTTSImageTextPanel!==panel||
+            !panel.items.includes(clicked)||!isEnglishEnergySourcesImageTTSItemText(safeRecord,clicked)||!layoutEnglishEnergySourcesImageTTSHitAreas(wrapper)){closeEnglishImageTTSMenu();return;}
+        const run=(items,done)=>{closeEnglishImageTTSMenu();speakEnglishImageTTSImageTextSequence(trigger,items,done);};
+        const banner=panel.panelId===0;
+        menu.setAttribute("aria-label",banner?"Energy & Energy Sources 橫幅朗讀選項":"Energy & Energy Sources 第 "+panel.panelId+" 格朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton(banner?"🔊 朗讀橫幅完整內容":"🔊 朗讀本格完整內容",
+            banner?"依序朗讀橫幅標題與文字":"依原圖順序朗讀本格標題、正文與標籤",
+            ()=>run(panel.items,banner?"Energy & Energy Sources 橫幅已朗讀完成。":"Energy & Energy Sources 第 "+panel.panelId+" 格已朗讀完成。")));
+        const toggle=createEnglishImageTTSMenuButton("🔊 單項選讀（"+panel.items.length+" 項）","展開本區每一項原圖文字的獨立朗讀選項",()=>{
+            const list=menu.querySelector(".english-image-tts-sentences");if(!list)return;list.hidden=!list.hidden;toggle.setAttribute("aria-expanded",String(!list.hidden));scheduleEnglishImageTTSMenuPosition();});
+        toggle.setAttribute("aria-expanded","false");const list=document.createElement("div");list.className="english-image-tts-sentences";list.hidden=true;
+        panel.items.forEach(item=>list.appendChild(createEnglishImageTTSMenuButton("🔊 "+(item.type==="label"?"標題／標籤：":"句子：")+item.sourceText.replace(/\r?\n/g," "),
+            "單獨朗讀原圖文字：「"+item.sourceText+"」",()=>run([item],"已朗讀 Energy & Energy Sources 所選原圖文字。"))));
+        menu.appendChild(toggle);menu.appendChild(list);menu.hidden=false;menu.style.visibility="hidden";positionEnglishImageTTSMenu();
+        if(!menu.hidden&&menu.firstChild){try{menu.firstChild.focus({preventScroll:true});}catch(error){menu.firstChild.focus();}}return;
     }
 
     if (isEnglishPlantReproductionImageTTSRecord(safeRecord)) {
