@@ -22738,5 +22738,231 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+
+    "images/english/skeletal-system-and-bones-basics.png": {
+        imageId: "skeletal-system-and-bones-basics",
+        title: "The Skeletal System & Bones",
+        assetFile: "images/english/skeletal-system-and-bones-basics.png",
+        contentType: "image-text",
+        layout: "custom-skeletal-system-bones-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1536, height: 1024 },
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 8/1536*100, yPct: 104/1024*100, widthPct: 755/1536*100, heightPct: 449/1024*100 },
+                items: [
+                    {
+                        itemId: "skeletal-p1-bubble-frame",
+                        readingOrder: 1,
+                        type: "bubble",
+                        sourceText: "The skeleton is the body’s frame.",
+                        ttsText: "The skeleton is the body’s frame.",
+                        bounds: { xPct: 50/1536*100, yPct: 192/1024*100, widthPct: 304/1536*100, heightPct: 164/1024*100 },
+                        textFragments: [
+                            { text: "The skeleton", bounds: { xPct: 84/1536*100, yPct: 220/1024*100, widthPct: 230/1536*100, heightPct: 39/1024*100 } },
+                            { text: "is the body’s", bounds: { xPct: 101/1536*100, yPct: 261/1024*100, widthPct: 195/1536*100, heightPct: 39/1024*100 } },
+                            { text: "frame.", bounds: { xPct: 137/1536*100, yPct: 301/1024*100, widthPct: 125/1536*100, heightPct: 39/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 45/1536*100, yPct: 186/1024*100, widthPct: 314/1536*100, heightPct: 176/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p1-label-skull",
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "skull",
+                        ttsText: "skull",
+                        bounds: { xPct: 636/1536*100, yPct: 137/1024*100, widthPct: 95/1536*100, heightPct: 37/1024*100 },
+                        textFragments: [{ text: "skull", bounds: { xPct: 639/1536*100, yPct: 141/1024*100, widthPct: 86/1536*100, heightPct: 29/1024*100 } }],
+                        tapRegion: { xPct: 631/1536*100, yPct: 132/1024*100, widthPct: 105/1536*100, heightPct: 47/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p1-label-rib-cage",
+                        readingOrder: 3,
+                        type: "label",
+                        sourceText: "rib cage",
+                        ttsText: "rib cage",
+                        bounds: { xPct: 636/1536*100, yPct: 258/1024*100, widthPct: 118/1536*100, heightPct: 42/1024*100 },
+                        textFragments: [{ text: "rib cage", bounds: { xPct: 641/1536*100, yPct: 263/1024*100, widthPct: 108/1536*100, heightPct: 33/1024*100 } }],
+                        tapRegion: { xPct: 629/1536*100, yPct: 252/1024*100, widthPct: 132/1536*100, heightPct: 54/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p1-label-spine",
+                        readingOrder: 4,
+                        type: "label",
+                        sourceText: "spine",
+                        ttsText: "spine",
+                        bounds: { xPct: 671/1536*100, yPct: 342/1024*100, widthPct: 83/1536*100, heightPct: 39/1024*100 },
+                        textFragments: [{ text: "spine", bounds: { xPct: 674/1536*100, yPct: 346/1024*100, widthPct: 73/1536*100, heightPct: 31/1024*100 } }],
+                        tapRegion: { xPct: 665/1536*100, yPct: 336/1024*100, widthPct: 96/1536*100, heightPct: 51/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p1-label-pelvis",
+                        readingOrder: 5,
+                        type: "label",
+                        sourceText: "pelvis",
+                        ttsText: "pelvis",
+                        bounds: { xPct: 679/1536*100, yPct: 406/1024*100, widthPct: 82/1536*100, heightPct: 39/1024*100 },
+                        textFragments: [{ text: "pelvis", bounds: { xPct: 682/1536*100, yPct: 410/1024*100, widthPct: 72/1536*100, heightPct: 31/1024*100 } }],
+                        tapRegion: { xPct: 670/1536*100, yPct: 400/1024*100, widthPct: 92/1536*100, heightPct: 51/1024*100 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 772/1536*100, yPct: 104/1024*100, widthPct: 754/1536*100, heightPct: 449/1024*100 },
+                items: [
+                    {
+                        itemId: "skeletal-p2-sentence-many-bones",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "Our body has many bones.",
+                        ttsText: "Our body has many bones.",
+                        bounds: { xPct: 808/1536*100, yPct: 190/1024*100, widthPct: 402/1536*100, heightPct: 43/1024*100 },
+                        textFragments: [{ text: "Our body has many bones.", bounds: { xPct: 812/1536*100, yPct: 195/1024*100, widthPct: 390/1536*100, heightPct: 34/1024*100 } }],
+                        tapRegion: { xPct: 802/1536*100, yPct: 184/1024*100, widthPct: 414/1536*100, heightPct: 55/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p2-sentence-hard-strong",
+                        readingOrder: 2,
+                        type: "sentence",
+                        sourceText: "Bones are hard and strong.",
+                        ttsText: "Bones are hard and strong.",
+                        bounds: { xPct: 808/1536*100, yPct: 232/1024*100, widthPct: 402/1536*100, heightPct: 43/1024*100 },
+                        textFragments: [{ text: "Bones are hard and strong.", bounds: { xPct: 812/1536*100, yPct: 237/1024*100, widthPct: 390/1536*100, heightPct: 34/1024*100 } }],
+                        tapRegion: { xPct: 802/1536*100, yPct: 226/1024*100, widthPct: 414/1536*100, heightPct: 55/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p2-label-bone",
+                        readingOrder: 3,
+                        type: "label",
+                        sourceText: "bone",
+                        ttsText: "bone",
+                        bounds: { xPct: 990/1536*100, yPct: 375/1024*100, widthPct: 80/1536*100, heightPct: 40/1024*100 },
+                        textFragments: [{ text: "bone", bounds: { xPct: 996/1536*100, yPct: 380/1024*100, widthPct: 68/1536*100, heightPct: 31/1024*100 } }],
+                        tapRegion: { xPct: 984/1536*100, yPct: 369/1024*100, widthPct: 92/1536*100, heightPct: 52/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p2-bubble-strong-healthy",
+                        readingOrder: 4,
+                        type: "bubble",
+                        sourceText: "Bones help our body stay strong and healthy.",
+                        ttsText: "Bones help our body stay strong and healthy.",
+                        bounds: { xPct: 807/1536*100, yPct: 429/1024*100, widthPct: 419/1536*100, heightPct: 105/1024*100 },
+                        textFragments: [
+                            { text: "Bones help our body", bounds: { xPct: 838/1536*100, yPct: 446/1024*100, widthPct: 356/1536*100, heightPct: 37/1024*100 } },
+                            { text: "stay strong and healthy.", bounds: { xPct: 837/1536*100, yPct: 485/1024*100, widthPct: 365/1536*100, heightPct: 37/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 798/1536*100, yPct: 422/1024*100, widthPct: 437/1536*100, heightPct: 119/1024*100 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 8/1536*100, yPct: 559/1024*100, widthPct: 755/1536*100, heightPct: 455/1024*100 },
+                items: [
+                    {
+                        itemId: "skeletal-p3-sentence-joints-connect",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "Joints connect bones.",
+                        ttsText: "Joints connect bones.",
+                        bounds: { xPct: 46/1536*100, yPct: 646/1024*100, widthPct: 374/1536*100, heightPct: 43/1024*100 },
+                        textFragments: [{ text: "Joints connect bones.", bounds: { xPct: 53/1536*100, yPct: 651/1024*100, widthPct: 347/1536*100, heightPct: 34/1024*100 } }],
+                        tapRegion: { xPct: 40/1536*100, yPct: 640/1024*100, widthPct: 388/1536*100, heightPct: 55/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p3-sentence-help-move",
+                        readingOrder: 2,
+                        type: "sentence",
+                        sourceText: "They help us move different body parts.",
+                        ttsText: "They help us move different body parts.",
+                        bounds: { xPct: 46/1536*100, yPct: 686/1024*100, widthPct: 374/1536*100, heightPct: 78/1024*100 },
+                        textFragments: [
+                            { text: "They help us move", bounds: { xPct: 53/1536*100, yPct: 691/1024*100, widthPct: 347/1536*100, heightPct: 34/1024*100 } },
+                            { text: "different body parts.", bounds: { xPct: 53/1536*100, yPct: 730/1024*100, widthPct: 347/1536*100, heightPct: 34/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 40/1536*100, yPct: 680/1024*100, widthPct: 388/1536*100, heightPct: 90/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p3-label-knee-joint",
+                        readingOrder: 3,
+                        type: "label",
+                        sourceText: "knee joint",
+                        ttsText: "knee joint",
+                        bounds: { xPct: 623/1536*100, yPct: 753/1024*100, widthPct: 127/1536*100, heightPct: 41/1024*100 },
+                        textFragments: [{ text: "knee joint", bounds: { xPct: 628/1536*100, yPct: 758/1024*100, widthPct: 117/1536*100, heightPct: 32/1024*100 } }],
+                        tapRegion: { xPct: 616/1536*100, yPct: 747/1024*100, widthPct: 141/1536*100, heightPct: 53/1024*100 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 772/1536*100, yPct: 559/1024*100, widthPct: 754/1536*100, heightPct: 455/1024*100 },
+                items: [
+                    {
+                        itemId: "skeletal-p4-sentence-system-functions",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "The skeletal system supports our body, helps us move, and protects our important organs.",
+                        ttsText: "The skeletal system supports our body, helps us move, and protects our important organs.",
+                        bounds: { xPct: 797/1536*100, yPct: 651/1024*100, widthPct: 262/1536*100, heightPct: 195/1024*100 },
+                        textFragments: [
+                            { text: "The skeletal system", bounds: { xPct: 802/1536*100, yPct: 665/1024*100, widthPct: 250/1536*100, heightPct: 34/1024*100 } },
+                            { text: "supports our body,", bounds: { xPct: 802/1536*100, yPct: 704/1024*100, widthPct: 250/1536*100, heightPct: 34/1024*100 } },
+                            { text: "helps us move, and", bounds: { xPct: 802/1536*100, yPct: 743/1024*100, widthPct: 250/1536*100, heightPct: 34/1024*100 } },
+                            { text: "protects our important", bounds: { xPct: 802/1536*100, yPct: 782/1024*100, widthPct: 250/1536*100, heightPct: 34/1024*100 } },
+                            { text: "organs.", bounds: { xPct: 802/1536*100, yPct: 821/1024*100, widthPct: 250/1536*100, heightPct: 25/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 790/1536*100, yPct: 644/1024*100, widthPct: 276/1536*100, heightPct: 210/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p4-label-supports-body",
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "supports our body",
+                        ttsText: "supports our body",
+                        bounds: { xPct: 1330/1536*100, yPct: 640/1024*100, widthPct: 180/1536*100, heightPct: 97/1024*100 },
+                        textFragments: [
+                            { text: "supports", bounds: { xPct: 1364/1536*100, yPct: 645/1024*100, widthPct: 111/1536*100, heightPct: 34/1024*100 } },
+                            { text: "our body", bounds: { xPct: 1364/1536*100, yPct: 682/1024*100, widthPct: 111/1536*100, heightPct: 34/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 1324/1536*100, yPct: 634/1024*100, widthPct: 192/1536*100, heightPct: 109/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p4-label-protects-organs",
+                        readingOrder: 3,
+                        type: "label",
+                        sourceText: "protects important organs (like the heart and lungs)",
+                        ttsText: "protects important organs (like the heart and lungs)",
+                        bounds: { xPct: 1326/1536*100, yPct: 755/1024*100, widthPct: 186/1536*100, heightPct: 112/1024*100 },
+                        textFragments: [
+                            { text: "protects", bounds: { xPct: 1363/1536*100, yPct: 763/1024*100, widthPct: 112/1536*100, heightPct: 31/1024*100 } },
+                            { text: "important organs", bounds: { xPct: 1341/1536*100, yPct: 797/1024*100, widthPct: 156/1536*100, heightPct: 31/1024*100 } },
+                            { text: "(like the heart and lungs)", bounds: { xPct: 1331/1536*100, yPct: 831/1024*100, widthPct: 177/1536*100, heightPct: 29/1024*100 } }
+                        ],
+                        tapRegion: { xPct: 1320/1536*100, yPct: 749/1024*100, widthPct: 198/1536*100, heightPct: 124/1024*100 }
+                    },
+                    {
+                        itemId: "skeletal-p4-label-helps-move",
+                        readingOrder: 4,
+                        type: "label",
+                        sourceText: "helps us move",
+                        ttsText: "helps us move",
+                        bounds: { xPct: 1330/1536*100, yPct: 883/1024*100, widthPct: 180/1536*100, heightPct: 59/1024*100 },
+                        textFragments: [{ text: "helps us move", bounds: { xPct: 1354/1536*100, yPct: 896/1024*100, widthPct: 133/1536*100, heightPct: 34/1024*100 } }],
+                        tapRegion: { xPct: 1324/1536*100, yPct: 877/1024*100, widthPct: 192/1536*100, heightPct: 71/1024*100 }
+                    }
+                ]
+            }
+        ]
     }
 };
