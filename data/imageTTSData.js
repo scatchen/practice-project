@@ -23125,5 +23125,110 @@ const imageTTSData = {
                 ]
             }
         ]
-    }
+    },
+
+    "images/english/human-brain-and-nervous-system-basics.png": (() => {
+        const rect = ([x, y, width, height]) => ({
+            xPct: x / 1536 * 100,
+            yPct: y / 1024 * 100,
+            widthPct: width / 1536 * 100,
+            heightPct: height / 1024 * 100
+        });
+        const unit = (itemId, type, sourceText, box) => {
+            const bounds = rect(box);
+            return {
+                itemId,
+                type,
+                sourceText,
+                ttsText: sourceText,
+                bounds,
+                textFragments: [{ text: sourceText, bounds }],
+                tapRegion: rect([box[0] - 4, box[1] - 4, box[2] + 8, box[3] + 8])
+            };
+        };
+        const panel = (panelId, box, items) => ({
+            panelId,
+            readingOrder: panelId,
+            bounds: rect(box),
+            items: items.map((item, index) => ({ ...item, readingOrder: index + 1 }))
+        });
+        return {
+            imageId: "human-brain-and-nervous-system-basics",
+            title: "The Human Brain & Nervous System",
+            assetFile: "images/english/human-brain-and-nervous-system-basics.png",
+            contentType: "image-text",
+            layout: "custom-human-brain-nervous-system-2x2",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1536, height: 1024 },
+            panels: [
+                panel(1, [14, 12, 744, 484], [
+                    unit("human-brain-p1-main-sentence", "sentence",
+                        "Your brain and nervous system work together to help you think, move, feel and interact with the world!",
+                        [40, 177, 378, 99]),
+                    unit("human-brain-p1-controls-everything-bubble", "bubble",
+                        "It’s amazing how your brain controls everything!",
+                        [564, 405, 167, 68])
+                ]),
+                panel(2, [776, 12, 747, 484], [
+                    unit("human-brain-p2-frontal-lobe", "label", "Frontal Lobe", [800, 102, 160, 30]),
+                    unit("human-brain-p2-frontal-thinking", "label", "thinking", [812, 143, 106, 20]),
+                    unit("human-brain-p2-frontal-decision-making", "label", "decision making", [812, 166, 138, 20]),
+                    unit("human-brain-p2-frontal-personality", "label", "personality", [812, 190, 105, 20]),
+                    unit("human-brain-p2-parietal-lobe", "label", "Parietal Lobe", [1230, 101, 145, 30]),
+                    unit("human-brain-p2-parietal-senses", "label", "senses (touch, temperature)", [1240, 140, 138, 20]),
+                    unit("human-brain-p2-parietal-spatial-awareness", "label", "spatial awareness", [1240, 163, 137, 20]),
+                    unit("human-brain-p2-temporal-lobe", "label", "Temporal Lobe", [798, 276, 150, 32]),
+                    unit("human-brain-p2-temporal-memory", "label", "memory", [811, 320, 90, 20]),
+                    unit("human-brain-p2-temporal-language", "label", "language", [811, 344, 94, 20]),
+                    unit("human-brain-p2-temporal-hearing", "label", "hearing", [811, 368, 90, 20]),
+                    unit("human-brain-p2-occipital-lobe", "label", "Occipital Lobe", [1240, 218, 137, 30]),
+                    unit("human-brain-p2-occipital-vision", "label", "vision", [1253, 258, 76, 20]),
+                    unit("human-brain-p2-brainstem", "label", "Brainstem", [926, 382, 162, 30]),
+                    unit("human-brain-p2-brainstem-basic-functions", "label", "basic life functions", [925, 422, 165, 20]),
+                    unit("human-brain-p2-brainstem-breathing-heart-rate", "label", "breathing, heart rate", [925, 445, 168, 20]),
+                    unit("human-brain-p2-cerebellum", "label", "Cerebellum", [1197, 364, 141, 30]),
+                    unit("human-brain-p2-cerebellum-balance", "label", "balance", [1208, 400, 88, 20]),
+                    unit("human-brain-p2-cerebellum-coordination", "label", "coordination", [1208, 424, 118, 20])
+                ]),
+                panel(3, [14, 512, 744, 495], [
+                    unit("human-brain-p3-two-parts-intro", "sentence",
+                        "The nervous system has two parts:", [42, 593, 474, 30]),
+                    unit("human-brain-p3-central-nervous-system", "label",
+                        "Central Nervous System (CNS)", [254, 655, 280, 30]),
+                    unit("human-brain-p3-cns-brain", "label", "brain", [264, 696, 77, 20]),
+                    unit("human-brain-p3-cns-spinal-cord-information", "label",
+                        "spinal cord\n(processes information)", [264, 720, 226, 42]),
+                    unit("human-brain-p3-peripheral-nervous-system", "label",
+                        "Peripheral Nervous System (PNS)", [236, 795, 299, 31]),
+                    unit("human-brain-p3-pns-nerves-messages", "label",
+                        "nerves throughout your body\n(carries messages)", [249, 850, 270, 45]),
+                    unit("human-brain-p3-nerves-roads-bubble", "bubble",
+                        "The nerves are like roads that carry messages!", [610, 616, 112, 123])
+                ]),
+                panel(4, [776, 512, 747, 495], [
+                    unit("human-brain-p4-step-1-sense", "label", "1 Sense", [804, 602, 128, 31]),
+                    unit("human-brain-p4-sense-sentence", "sentence",
+                        "Your sensory organs\ncollect information\n(e.g., see, hear, touch).",
+                        [804, 647, 158, 67]),
+                    unit("human-brain-p4-step-2-process", "label", "2 Process", [995, 602, 148, 31]),
+                    unit("human-brain-p4-process-sentence", "sentence",
+                        "Your brain\ninterprets\nthe information.", [1005, 647, 120, 67]),
+                    unit("human-brain-p4-step-3-respond", "label", "3 Respond", [1175, 602, 157, 31]),
+                    unit("human-brain-p4-respond-sentence", "sentence",
+                        "Your nervous system\nsends signals\nto your muscles\nor glands.", [1176, 647, 158, 80]),
+                    unit("human-brain-p4-step-4-action", "label", "4 Action", [1366, 602, 133, 31]),
+                    unit("human-brain-p4-action-sentence", "sentence",
+                        "You react\n(e.g., move,\nspeak, or feel).", [1372, 647, 130, 65]),
+                    unit("human-brain-p4-every-second-sentence", "sentence",
+                        "Your brain and nervous system\nwork together every second\n— even when you’re not aware of it!",
+                        [836, 879, 284, 75]),
+                    unit("human-brain-p4-amazing-right-bubble", "bubble",
+                        "Amazing,\nright?", [1360, 868, 87, 54])
+                ])
+            ]
+        };
+    })()
 };

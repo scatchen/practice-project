@@ -11446,6 +11446,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 function isEnglishImageTTSItemText(record, item) {
     const telephoneV2P1Test = window.englishTelephoneV2P1Test;
     if (telephoneV2P1Test && telephoneV2P1Test.isItem(record, item)) return true;
+    if (isEnglishHumanBrainImageTTSItemText(record, item)) return true;
     if (isEnglishImmuneSystemImageTTSItemText(record, item)) return true;
     if (isEnglishSkeletalSystemImageTTSItemText(record, item)) return true;
     if (isEnglishExcretorySystemImageTTSItemText(record, item)) return true;
@@ -12042,6 +12043,7 @@ function getEnglishImageTTSImageTextName(record) {
     if (telephoneV2P1Test && telephoneV2P1Test.isRecord(record)) {
         return "Telephone V2";
     }
+    if (isEnglishHumanBrainImageTTSRecord(record)) return "The Human Brain & Nervous System";
     if (isEnglishImmuneSystemImageTTSRecord(record)) return "The Immune System";
     if (isEnglishSkeletalSystemImageTTSRecord(record)) return "The Skeletal System & Bones";
     if (isEnglishExcretorySystemImageTTSRecord(record)) return "The Excretory System & Kidneys";
@@ -16516,6 +16518,28 @@ function getEnglishSkeletalSystemPanelEntryBounds(panelId) {
     };
 }
 
+const ENGLISH_HUMAN_BRAIN_ASSET_FILE =
+    "images/english/human-brain-and-nervous-system-basics.png";
+const ENGLISH_HUMAN_BRAIN_IMAGE_ID = "human-brain-and-nervous-system-basics";
+const ENGLISH_HUMAN_BRAIN_PANEL_ENTRY_PIXELS = Object.freeze([
+    Object.freeze({ panelId: 1, x: 25, y: 24, width: 720, height: 460 }),
+    Object.freeze({ panelId: 2, x: 790, y: 24, width: 718, height: 460 }),
+    Object.freeze({ panelId: 3, x: 25, y: 526, width: 720, height: 463 }),
+    Object.freeze({ panelId: 4, x: 790, y: 526, width: 718, height: 463 })
+]);
+
+function getEnglishHumanBrainPanelEntryBounds(panelId) {
+    const region = ENGLISH_HUMAN_BRAIN_PANEL_ENTRY_PIXELS.find(item =>
+        item.panelId === panelId);
+    if (!region) return null;
+    return {
+        xPct: region.x / 1536 * 100,
+        yPct: region.y / 1024 * 100,
+        widthPct: region.width / 1536 * 100,
+        heightPct: region.height / 1024 * 100
+    };
+}
+
 const ENGLISH_IMMUNE_SYSTEM_ASSET_FILE = "images/english/immune-system-basics.png";
 const ENGLISH_IMMUNE_SYSTEM_IMAGE_ID = "immune-system-basics";
 const ENGLISH_IMMUNE_SYSTEM_PANEL_ENTRY_PIXELS = Object.freeze([
@@ -16667,6 +16691,182 @@ function getEnglishImmuneSystemPanelMenuOptions(record, panel) {
     return {
         fullItems: panel.items.slice(),
         choices: panel.items.map(item => ({ item, kind: item.type === "label" ? "label" : "sentence" }))
+    };
+}
+
+function getEnglishHumanBrainImageTTSRecord(record, assetFile) {
+    const topKeys = [
+        "imageId", "title", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"
+    ];
+    const exactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const rect = value => exactKeys(value, ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        [value.xPct, value.yPct, value.widthPct, value.heightPct].every(number =>
+            Number.isFinite(number) && number >= 0 && number <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const contains = (outer, inner) => rect(outer) && rect(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const normalize = value => String(value || "").replace(/\s+/g, " ").trim();
+    const expectedItems = [
+        [
+            ["human-brain-p1-main-sentence", "sentence",
+                "Your brain and nervous system work together to help you think, move, feel and interact with the world!"],
+            ["human-brain-p1-controls-everything-bubble", "bubble",
+                "It’s amazing how your brain controls everything!"]
+        ],
+        [
+            ["human-brain-p2-frontal-lobe", "label", "Frontal Lobe"],
+            ["human-brain-p2-frontal-thinking", "label", "thinking"],
+            ["human-brain-p2-frontal-decision-making", "label", "decision making"],
+            ["human-brain-p2-frontal-personality", "label", "personality"],
+            ["human-brain-p2-parietal-lobe", "label", "Parietal Lobe"],
+            ["human-brain-p2-parietal-senses", "label", "senses (touch, temperature)"],
+            ["human-brain-p2-parietal-spatial-awareness", "label", "spatial awareness"],
+            ["human-brain-p2-temporal-lobe", "label", "Temporal Lobe"],
+            ["human-brain-p2-temporal-memory", "label", "memory"],
+            ["human-brain-p2-temporal-language", "label", "language"],
+            ["human-brain-p2-temporal-hearing", "label", "hearing"],
+            ["human-brain-p2-occipital-lobe", "label", "Occipital Lobe"],
+            ["human-brain-p2-occipital-vision", "label", "vision"],
+            ["human-brain-p2-brainstem", "label", "Brainstem"],
+            ["human-brain-p2-brainstem-basic-functions", "label", "basic life functions"],
+            ["human-brain-p2-brainstem-breathing-heart-rate", "label", "breathing, heart rate"],
+            ["human-brain-p2-cerebellum", "label", "Cerebellum"],
+            ["human-brain-p2-cerebellum-balance", "label", "balance"],
+            ["human-brain-p2-cerebellum-coordination", "label", "coordination"]
+        ],
+        [
+            ["human-brain-p3-two-parts-intro", "sentence", "The nervous system has two parts:"],
+            ["human-brain-p3-central-nervous-system", "label", "Central Nervous System (CNS)"],
+            ["human-brain-p3-cns-brain", "label", "brain"],
+            ["human-brain-p3-cns-spinal-cord-information", "label",
+                "spinal cord\n(processes information)"],
+            ["human-brain-p3-peripheral-nervous-system", "label", "Peripheral Nervous System (PNS)"],
+            ["human-brain-p3-pns-nerves-messages", "label",
+                "nerves throughout your body\n(carries messages)"],
+            ["human-brain-p3-nerves-roads-bubble", "bubble",
+                "The nerves are like roads that carry messages!"]
+        ],
+        [
+            ["human-brain-p4-step-1-sense", "label", "1 Sense"],
+            ["human-brain-p4-sense-sentence", "sentence",
+                "Your sensory organs\ncollect information\n(e.g., see, hear, touch)."],
+            ["human-brain-p4-step-2-process", "label", "2 Process"],
+            ["human-brain-p4-process-sentence", "sentence",
+                "Your brain\ninterprets\nthe information."],
+            ["human-brain-p4-step-3-respond", "label", "3 Respond"],
+            ["human-brain-p4-respond-sentence", "sentence",
+                "Your nervous system\nsends signals\nto your muscles\nor glands."],
+            ["human-brain-p4-step-4-action", "label", "4 Action"],
+            ["human-brain-p4-action-sentence", "sentence",
+                "You react\n(e.g., move,\nspeak, or feel)."],
+            ["human-brain-p4-every-second-sentence", "sentence",
+                "Your brain and nervous system\nwork together every second\n— even when you’re not aware of it!"],
+            ["human-brain-p4-amazing-right-bubble", "bubble", "Amazing,\nright?"]
+        ]
+    ];
+    const panelBounds = [
+        { xPct: 14/1536*100, yPct: 12/1024*100, widthPct: 744/1536*100, heightPct: 484/1024*100 },
+        { xPct: 776/1536*100, yPct: 12/1024*100, widthPct: 747/1536*100, heightPct: 484/1024*100 },
+        { xPct: 14/1536*100, yPct: 512/1024*100, widthPct: 744/1536*100, heightPct: 495/1024*100 },
+        { xPct: 776/1536*100, yPct: 512/1024*100, widthPct: 747/1536*100, heightPct: 495/1024*100 }
+    ];
+    const sameRect = (left, right) => rect(left) && rect(right) &&
+        ["xPct", "yPct", "widthPct", "heightPct"].every(key =>
+            Math.abs(left[key] - right[key]) < 0.000001);
+
+    if (assetFile !== ENGLISH_HUMAN_BRAIN_ASSET_FILE ||
+        typeof imageTTSData === "undefined" || !imageTTSData ||
+        record !== imageTTSData[ENGLISH_HUMAN_BRAIN_ASSET_FILE] ||
+        !exactKeys(record, topKeys) ||
+        record.imageId !== ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
+        record.title !== "The Human Brain & Nervous System" ||
+        record.assetFile !== ENGLISH_HUMAN_BRAIN_ASSET_FILE ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-human-brain-nervous-system-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !exactKeys(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 ||
+        record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== 4) return null;
+
+    const matchingKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === ENGLISH_HUMAN_BRAIN_ASSET_FILE || candidate &&
+            (candidate.imageId === ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
+                candidate.assetFile === ENGLISH_HUMAN_BRAIN_ASSET_FILE);
+    });
+    if (matchingKeys.length !== 1 ||
+        matchingKeys[0] !== ENGLISH_HUMAN_BRAIN_ASSET_FILE) return null;
+
+    const usedIds = new Set();
+    for (let panelIndex = 0; panelIndex < record.panels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expected = expectedItems[panelIndex];
+        if (!exactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== panelIndex + 1 || panel.readingOrder !== panelIndex + 1 ||
+            !sameRect(panel.bounds, panelBounds[panelIndex]) ||
+            !contains(panel.bounds, getEnglishHumanBrainPanelEntryBounds(panel.panelId)) ||
+            !Array.isArray(panel.items) || panel.items.length !== expected.length) return null;
+        for (let itemIndex = 0; itemIndex < panel.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const [itemId, type, sourceText] = expected[itemIndex];
+            if (!exactKeys(item, [
+                "itemId", "readingOrder", "type", "sourceText", "ttsText",
+                "bounds", "textFragments", "tapRegion"
+            ]) || usedIds.has(item.itemId) || item.itemId !== itemId ||
+                item.readingOrder !== itemIndex + 1 || item.type !== type ||
+                item.sourceText !== sourceText || item.ttsText !== sourceText ||
+                !["sentence", "label", "bubble"].includes(item.type) ||
+                !rect(item.bounds) || !rect(item.tapRegion) ||
+                !contains(panel.bounds, item.bounds) ||
+                !contains(panel.bounds, item.tapRegion) ||
+                !contains(item.tapRegion, item.bounds) ||
+                !Array.isArray(item.textFragments) || !item.textFragments.length) return null;
+            usedIds.add(item.itemId);
+            let fragments = "";
+            for (const fragment of item.textFragments) {
+                if (!exactKeys(fragment, ["text", "bounds"]) ||
+                    typeof fragment.text !== "string" || !fragment.text.trim() ||
+                    !rect(fragment.bounds) || !contains(item.bounds, fragment.bounds) ||
+                    !contains(item.tapRegion, fragment.bounds)) return null;
+                fragments += (fragments ? " " : "") + fragment.text;
+            }
+            if (normalize(fragments) !== normalize(item.sourceText)) return null;
+        }
+    }
+    return record;
+}
+
+function isEnglishHumanBrainImageTTSRecord(record) {
+    return Boolean(record && getEnglishHumanBrainImageTTSRecord(
+        record, ENGLISH_HUMAN_BRAIN_ASSET_FILE) === record);
+}
+
+function isEnglishHumanBrainImageTTSItemText(record, item) {
+    return Boolean(isEnglishHumanBrainImageTTSRecord(record) && item &&
+        record.panels.some(panel => panel.items.includes(item)));
+}
+
+function getEnglishHumanBrainPanelMenuOptions(record, panel) {
+    if (!isEnglishHumanBrainImageTTSRecord(record) || !panel ||
+        record.panels.find(candidate => candidate.panelId === panel.panelId) !== panel) return null;
+    return {
+        fullItems: panel.items.slice(),
+        choices: panel.items.map(item => ({
+            item,
+            kind: item.type === "bubble" ? "bubble" :
+                item.type === "label" ? "label" : "sentence"
+        }))
     };
 }
 
@@ -16937,6 +17137,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_HUMAN_BRAIN_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
+            record.assetFile === ENGLISH_HUMAN_BRAIN_ASSET_FILE)) {
+        return getEnglishHumanBrainImageTTSRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_IMMUNE_SYSTEM_ASSET_FILE || record &&
         (record.imageId === ENGLISH_IMMUNE_SYSTEM_IMAGE_ID ||
             record.assetFile === ENGLISH_IMMUNE_SYSTEM_ASSET_FILE)) {
@@ -20658,6 +20863,10 @@ function layoutEnglishSolarEnergyImageTTSHitAreas(wrapper) {
 
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
     if (wrapper && wrapper.dataset &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_HUMAN_BRAIN_ASSET_FILE) {
+        return layoutEnglishHumanBrainPanelHitAreas(wrapper);
+    }
+    if (wrapper && wrapper.dataset &&
         wrapper.dataset.imageTtsAssetFile === ENGLISH_IMMUNE_SYSTEM_ASSET_FILE) {
         return layoutEnglishImmuneSystemPanelHitAreas(wrapper);
     }
@@ -21113,6 +21322,134 @@ function createEnglishExcretorySystemPanelHitArea(wrapper, panel, record) {
     button.addEventListener("click", event => {
         event.stopPropagation();
         if (!isEnglishExcretorySystemPanelTriggerReady(button)) return;
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishImageTTSImageTextMenu(button, record, panel);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
+function layoutEnglishHumanBrainPanelHitAreas(wrapper) {
+    if (!wrapper || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_HUMAN_BRAIN_ASSET_FILE) return false;
+    const image = wrapper.querySelector("img");
+    const record = getEnglishHumanBrainImageTTSRecord(
+        imageTTSData && imageTTSData[ENGLISH_HUMAN_BRAIN_ASSET_FILE],
+        ENGLISH_HUMAN_BRAIN_ASSET_FILE);
+    const buttons = Array.from(wrapper.querySelectorAll(".human-brain-system-panel-hit-area"));
+    const imageRect = image && image.getBoundingClientRect();
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const ready = Boolean(image && isEnglishHumanBrainFormalSearchImage(image) && record &&
+        image.complete === true && image.naturalWidth === 1536 && image.naturalHeight === 1024 &&
+        imageRect && imageRect.width > 0 && imageRect.height > 0 &&
+        wrapperRect && buttons.length === 4);
+    if (!ready) {
+        buttons.forEach(button => {
+            button.hidden = true;
+            button.disabled = true;
+            button.setAttribute("aria-disabled", "true");
+            button.style.pointerEvents = "none";
+        });
+        return false;
+    }
+
+    buttons.forEach(button => {
+        const panelId = Number(button.getAttribute("data-image-tts-panel-id"));
+        const region = ENGLISH_HUMAN_BRAIN_PANEL_ENTRY_PIXELS.find(item =>
+            item.panelId === panelId);
+        if (!region) {
+            button.hidden = true;
+            button.disabled = true;
+            button.setAttribute("aria-disabled", "true");
+            button.style.pointerEvents = "none";
+            return;
+        }
+        const imageLeft = imageRect.left - wrapperRect.left;
+        const imageTop = imageRect.top - wrapperRect.top;
+        const renderedWidth = imageRect.width * region.width / 1536;
+        const renderedHeight = imageRect.height * region.height / 1024;
+        button.style.left = imageLeft + imageRect.width * region.x / 1536 + "px";
+        button.style.top = imageTop + imageRect.height * region.y / 1024 + "px";
+        button.style.width = renderedWidth + "px";
+        button.style.height = renderedHeight + "px";
+        // 以原圖實際顯示的 CSS 尺寸換算，絕不使用 hidden 按鈕的零尺寸。
+        const enabled = drawMode === "select" && appState.subjectMode === "english" &&
+            renderedWidth >= 44 && renderedHeight >= 44;
+        button.hidden = !enabled;
+        button.disabled = !enabled;
+        button.setAttribute("aria-disabled", String(!enabled));
+        button.style.pointerEvents = enabled ? "auto" : "none";
+    });
+    return buttons.every(button => !button.hidden && !button.disabled);
+}
+
+function isEnglishHumanBrainPanelTriggerReady(trigger) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    const record = getEnglishHumanBrainImageTTSRecord(
+        imageTTSData && imageTTSData[ENGLISH_HUMAN_BRAIN_ASSET_FILE],
+        ENGLISH_HUMAN_BRAIN_ASSET_FILE);
+    const panel = trigger && trigger._englishImageTTSImageTextPanel;
+    const buttons = wrapper
+        ? Array.from(wrapper.querySelectorAll(".human-brain-system-panel-hit-area")) : [];
+    if (!wrapper || !image || !record || !isEnglishHumanBrainFormalSearchImage(image) ||
+        trigger._englishImageTTSImageTextRecord !== record ||
+        !trigger.classList || !trigger.classList.contains("human-brain-system-panel-hit-area") ||
+        buttons.length !== 4 || !buttons.includes(trigger) || !panel ||
+        record.panels[panel.panelId - 1] !== panel ||
+        trigger._englishImageTTSImageTextItem !== panel.items[0] ||
+        trigger._englishImageTTSImageTextActivePanel !== panel ||
+        !layoutEnglishHumanBrainPanelHitAreas(wrapper) || trigger.hidden || trigger.disabled)
+        return false;
+    const rect = trigger.getBoundingClientRect();
+    if (!rect || rect.width < 44 || rect.height < 44 ||
+        typeof document.elementFromPoint !== "function") return false;
+    const points = [
+        [(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2],
+        [rect.left + rect.width * 0.25, rect.top + rect.height * 0.25],
+        [rect.left + rect.width * 0.75, rect.top + rect.height * 0.25],
+        [rect.left + rect.width * 0.25, rect.top + rect.height * 0.75],
+        [rect.left + rect.width * 0.75, rect.top + rect.height * 0.75]
+    ];
+    try {
+        return points.every(([x, y]) => {
+            const hit = document.elementFromPoint(x, y);
+            return hit === trigger || trigger.contains(hit);
+        });
+    } catch (error) { return false; }
+}
+
+function createEnglishHumanBrainPanelHitArea(wrapper, panel, record) {
+    const firstItem = panel && panel.items[0];
+    if (!wrapper || !panel || !firstItem || !isEnglishHumanBrainImageTTSRecord(record) ||
+        !isEnglishHumanBrainFormalSearchImage(wrapper.querySelector("img"))) return null;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-image-text-hit-area human-brain-system-panel-hit-area";
+    button.hidden = true;
+    button.disabled = true;
+    button.setAttribute("aria-disabled", "true");
+    button.setAttribute("aria-label",
+        "Human Brain and Nervous System 第 " + panel.panelId +
+        " 格教學內容入口，開啟本格完整朗讀及單句、標籤選讀選項");
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("data-image-tts-item-id", firstItem.itemId);
+    button._englishImageTTSImageTextRecord = record;
+    button._englishImageTTSImageTextPanel = panel;
+    button._englishImageTTSImageTextItem = firstItem;
+    button._englishImageTTSImageTextActivePanel = panel;
+    button._englishImageTTSImageTextActiveItem = firstItem;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (!isEnglishHumanBrainPanelTriggerReady(button)) return;
         if (englishImageTTSOverlayState.activeTrigger === button &&
             englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
             closeEnglishImageTTSMenu();
@@ -22164,6 +22501,7 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
         ENGLISH_EXCRETORY_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_SKELETAL_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_IMMUNE_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
+        ENGLISH_HUMAN_BRAIN_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         expireCurrentContext();
         const renderGeneration = ++generation;
         const diagrams = typeof question === "string" ? getDiagramInfo(question) : [];
@@ -22221,6 +22559,26 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             returnedExcretoryCount === 1 && excretorySpecs.length === 1 &&
             excretorySpecs[0].diagram === canonicalExcretoryEntry
                 ? excretorySpecs[0]
+                : null;
+
+        const matchingBrainEntries = Array.isArray(diagramMap)
+            ? diagramMap.filter(entry => entry &&
+                (entry.id === ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
+                    entry.file === ENGLISH_HUMAN_BRAIN_ASSET_FILE))
+            : [];
+        const canonicalBrainEntry = matchingBrainEntries.length === 1 &&
+            matchingBrainEntries[0].id === ENGLISH_HUMAN_BRAIN_IMAGE_ID &&
+            matchingBrainEntries[0].file === ENGLISH_HUMAN_BRAIN_ASSET_FILE
+                ? matchingBrainEntries[0]
+                : null;
+        const returnedBrainCount = canonicalBrainEntry
+            ? diagrams.filter(diagram => diagram === canonicalBrainEntry).length
+            : 0;
+        const brainSpecs = specs.filter(spec =>
+            spec.imageData.file === ENGLISH_HUMAN_BRAIN_ASSET_FILE);
+        const trustedBrainSpec = canonicalBrainEntry && returnedBrainCount === 1 &&
+            brainSpecs.length === 1 && brainSpecs[0].diagram === canonicalBrainEntry
+                ? brainSpecs[0]
                 : null;
 
         const matchingSkeletalEntries = Array.isArray(diagramMap)
@@ -22299,6 +22657,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                     image.setAttribute("data-english-image-library-id", ENGLISH_IMMUNE_SYSTEM_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_IMMUNE_SYSTEM_ASSET_FILE);
                 }
+                if (spec === trustedBrainSpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_HUMAN_BRAIN_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_HUMAN_BRAIN_ASSET_FILE);
+                }
                 image.addEventListener("load", resizeAnnotationCanvas);
                 diagramContainer.appendChild(image);
                 renderedSpecs.push({ spec, image });
@@ -22354,6 +22716,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedSkeletalSpec);
         ENGLISH_IMMUNE_SYSTEM_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedImmuneSpec);
+        ENGLISH_HUMAN_BRAIN_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedBrainSpec);
         return answerRoot;
     }
 
@@ -22802,6 +23166,163 @@ const ENGLISH_IMMUNE_SYSTEM_FORMAL_SEARCH_ORIGIN = (() => {
     return { register, expireCurrentContext, isTrustedNode };
 })();
 
+const ENGLISH_HUMAN_BRAIN_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    let currentContext = null;
+    let generation = 0;
+
+    function detachInlineImage(image) {
+        const wrapper = image && image.closest
+            ? image.closest(".image-tts-overlay-wrapper") : null;
+        if (!wrapper) return;
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper.contains(active) && active.classList &&
+            active.classList.contains("human-brain-system-panel-hit-area")) {
+            cancelEnglishImageTTSImageTextSequence(true);
+        }
+        const activeMenuTrigger = englishImageTTSOverlayState.activeTrigger;
+        if (activeMenuTrigger && wrapper.contains(activeMenuTrigger) &&
+            activeMenuTrigger.classList &&
+            activeMenuTrigger.classList.contains("human-brain-system-panel-hit-area")) {
+            closeEnglishImageTTSMenu();
+        }
+        wrapper.querySelectorAll(".human-brain-system-panel-hit-area").forEach(button => button.remove());
+    }
+
+    function revokeImage(context, image) {
+        if (!context || !image || !context.images.has(image)) return;
+        originByImage.delete(image);
+        context.images.delete(image);
+        detachInlineImage(image);
+    }
+
+    function revokeRemovedSubtrees(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revokeImage(context, record.target);
+                return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removedNode => {
+                Array.from(context.images).forEach(image => {
+                    if (removedNode === image ||
+                        removedNode && typeof removedNode.contains === "function" &&
+                        removedNode.contains(image)) revokeImage(context, image);
+                });
+            });
+        });
+    }
+
+    function expireCurrentContext() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revokeImage(context, image));
+        currentContext = null;
+    }
+
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer) {
+            revokeRemovedSubtrees(context, context.observer.takeRecords());
+        }
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked ||
+            origin.context !== context || origin.generation !== context.generation ||
+            !context.observer || !image.isConnected ||
+            context.responseRoot !== document.getElementById("ai-response") ||
+            !context.responseRoot.isConnected ||
+            !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(image) ||
+            image.getAttribute("src") !== ENGLISH_HUMAN_BRAIN_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !== ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !== ENGLISH_HUMAN_BRAIN_ASSET_FILE)
+            return false;
+        const matchingEntries = Array.isArray(diagramMap)
+            ? diagramMap.filter(entry => entry &&
+                (entry.id === ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
+                    entry.file === ENGLISH_HUMAN_BRAIN_ASSET_FILE))
+            : [];
+        return matchingEntries.length === 1 && matchingEntries[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_HUMAN_BRAIN_IMAGE_ID &&
+            origin.diagram.file === ENGLISH_HUMAN_BRAIN_ASSET_FILE;
+    }
+
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot || !diagramContainer || !trustedSpec ||
+            typeof MutationObserver !== "function" ||
+            responseRoot !== document.getElementById("ai-response") ||
+            !responseRoot.isConnected || !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matchingEntries = Array.isArray(diagramMap)
+            ? diagramMap.filter(entry => entry &&
+                (entry.id === ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
+                    entry.file === ENGLISH_HUMAN_BRAIN_ASSET_FILE))
+            : [];
+        const targetSpecs = (Array.isArray(renderedSpecs) ? renderedSpecs : [])
+            .filter(entry => entry && entry.spec && entry.spec.imageData &&
+                entry.spec.imageData.file === ENGLISH_HUMAN_BRAIN_ASSET_FILE);
+        const rendered = renderedSpecs.find(entry => entry && entry.spec === trustedSpec);
+        if (matchingEntries.length !== 1 || matchingEntries[0] !== diagram ||
+            !diagram || diagram.id !== ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
+            diagram.file !== ENGLISH_HUMAN_BRAIN_ASSET_FILE ||
+            targetSpecs.length !== 1 || !rendered || !rendered.image ||
+            !rendered.image.isConnected || !diagramContainer.contains(rendered.image)) return false;
+
+        const image = rendered.image;
+        const wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) || !diagramContainer.contains(wrapper)) return false;
+        const context = {
+            generation: ++generation,
+            responseRoot,
+            diagramContainer,
+            diagram,
+            images: new Set([image]),
+            observer: null,
+            revoked: false
+        };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram });
+        context.observer = new MutationObserver(records =>
+            revokeRemovedSubtrees(context, records));
+        context.observer.observe(responseRoot, {
+            childList: true, subtree: true, attributes: true,
+            attributeFilter: [
+                "src", "data-english-image-library-id", "data-english-image-library-file"
+            ]
+        });
+        if (!isTrustedNode(image)) {
+            expireCurrentContext();
+            return false;
+        }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+
+    return { register, expireCurrentContext, isTrustedNode };
+})();
+
+function isEnglishHumanBrainFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_HUMAN_BRAIN_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !== ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !== ENGLISH_HUMAN_BRAIN_ASSET_FILE ||
+        !ENGLISH_HUMAN_BRAIN_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || !Array.isArray(diagramMap))
+        return false;
+    const record = imageTTSData[ENGLISH_HUMAN_BRAIN_ASSET_FILE];
+    if (getEnglishHumanBrainImageTTSRecord(
+        record, ENGLISH_HUMAN_BRAIN_ASSET_FILE) !== record) return false;
+    const matchingEntries = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
+            entry.file === ENGLISH_HUMAN_BRAIN_ASSET_FILE));
+    return matchingEntries.length === 1 &&
+        matchingEntries[0].id === ENGLISH_HUMAN_BRAIN_IMAGE_ID &&
+        matchingEntries[0].file === ENGLISH_HUMAN_BRAIN_ASSET_FILE;
+}
+
 function isEnglishExcretorySystemFormalSearchImage(image) {
     if (!image || image.getAttribute("src") !== ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE ||
         image.getAttribute("data-english-image-library-id") !== ENGLISH_EXCRETORY_SYSTEM_IMAGE_ID ||
@@ -22863,6 +23384,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_HUMAN_BRAIN_ASSET_FILE &&
+            !isEnglishHumanBrainFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_IMMUNE_SYSTEM_ASSET_FILE &&
             !isEnglishImmuneSystemFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_SKELETAL_SYSTEM_ASSET_FILE &&
@@ -22925,6 +23448,26 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishHumanBrainImageTTSRecord(record)) {
+                const hasExpectedDimensions = () => image.getAttribute("src") ===
+                    ENGLISH_HUMAN_BRAIN_ASSET_FILE && image.complete === true &&
+                    image.naturalWidth === 1536 && image.naturalHeight === 1024;
+                if (!isEnglishHumanBrainFormalSearchImage(image) ||
+                    (image.complete && !hasExpectedDimensions())) return;
+                record.panels.forEach(panel => {
+                    if (createEnglishHumanBrainPanelHitArea(wrapper, panel, record)) added += 1;
+                });
+                image.addEventListener("load", () => {
+                    if (hasExpectedDimensions()) layoutEnglishHumanBrainPanelHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", () => {
+                    layoutEnglishHumanBrainPanelHitAreas(wrapper);
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+                }, { once: true });
+                layoutEnglishHumanBrainPanelHitAreas(wrapper);
+                return;
+            }
             if (isEnglishImmuneSystemImageTTSRecord(record)) {
                 const hasExpectedDimensions = () => image.getAttribute("src") ===
                     ENGLISH_IMMUNE_SYSTEM_ASSET_FILE && image.complete === true &&
@@ -24092,6 +24635,9 @@ function getEnglishSkeletalSystemImageTextSpeechSegments(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishHumanBrainImageTTSItemText(record, item)) {
+        return getEnglishTTSUnitText(item.ttsText);
+    }
     if (isEnglishImmuneSystemImageTTSItemText(record, item)) {
         return getEnglishTTSUnitText(item.ttsText);
     }
@@ -24261,6 +24807,9 @@ function speakEnglishImageTTSImageTextSequence(
     }
     const itemList = Array.isArray(items) ? items : [];
     const allItems = record ? record.panels.flatMap(panel => panel.items) : [];
+    const isHumanBrainImageText = isEnglishHumanBrainImageTTSRecord(record);
+    const isHumanBrainSingleItemSequence = Boolean(isHumanBrainImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isImmuneSystemImageText = isEnglishImmuneSystemImageTTSRecord(record);
     const isImmuneSystemSingleItemSequence = Boolean(isImmuneSystemImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
@@ -24580,6 +25129,23 @@ function speakEnglishImageTTSImageTextSequence(
         immuneSystemButtons.length === 4 && immuneSystemButtons.includes(trigger) &&
         itemList.length > 0 && itemList.every(item => immuneSystemPanel.items.includes(item)) &&
         isEnglishImmuneSystemPanelTriggerReady(trigger));
+    const humanBrainImage = isHumanBrainImageText ? wrapper.querySelector("img") : null;
+    const humanBrainPanel = isHumanBrainImageText && trigger
+        ? trigger._englishImageTTSImageTextPanel : null;
+    const humanBrainButtons = isHumanBrainImageText
+        ? Array.from(wrapper.querySelectorAll(".human-brain-system-panel-hit-area")) : [];
+    const humanBrainImageReady = !isHumanBrainImageText || Boolean(
+        assetFile === ENGLISH_HUMAN_BRAIN_ASSET_FILE &&
+        record === imageTTSData[assetFile] && humanBrainImage &&
+        isEnglishHumanBrainFormalSearchImage(humanBrainImage) &&
+        humanBrainImage.getAttribute("src") === ENGLISH_HUMAN_BRAIN_ASSET_FILE &&
+        humanBrainImage.complete === true && humanBrainImage.naturalWidth === 1536 &&
+        humanBrainImage.naturalHeight === 1024 &&
+        trigger._englishImageTTSImageTextRecord === record &&
+        humanBrainPanel && record.panels.includes(humanBrainPanel) &&
+        humanBrainButtons.length === 4 && humanBrainButtons.includes(trigger) &&
+        itemList.length > 0 && itemList.every(item => humanBrainPanel.items.includes(item)) &&
+        isEnglishHumanBrainPanelTriggerReady(trigger));
     const skeletalSystemImage = isSkeletalSystemImageText ? wrapper.querySelector("img") : null;
     const skeletalSystemPanel = isSkeletalSystemImageText && trigger
         ? trigger._englishImageTTSImageTextPanel : null;
@@ -24703,6 +25269,7 @@ function speakEnglishImageTTSImageTextSequence(
         (!isPanelSequence && !telephoneV2P4WholePanelSequence &&
             !telephoneV2P7WholePanelSequence && !isExcretorySystemSingleItemSequence &&
             !isSkeletalSystemSingleItemSequence && !isImmuneSystemSingleItemSequence &&
+            !isHumanBrainSingleItemSequence &&
             !isTelephoneV2P4SingleItemSequence &&
             !isTelephoneV2P7SingleItemSequence &&
             !isMuscularSystemPanelSequence && !isWholeImageSequence &&
@@ -24740,6 +25307,7 @@ function speakEnglishImageTTSImageTextSequence(
         !animalsAdaptationImageReady || !humanHealthImageReady || !typhoonsImageReady ||
         !muscularImageReady || !cyclingImageReady || !solarImageReady ||
         !xraysImageReady || !skeletalSystemImageReady || !immuneSystemImageReady ||
+        !humanBrainImageReady ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
@@ -25009,7 +25577,7 @@ function speakEnglishImageTTSImageTextSequence(
                     return;
                 }
                 const delay = isExcretorySystemImageText || isSkeletalSystemImageText ||
-                    isImmuneSystemImageText
+                    isImmuneSystemImageText || isHumanBrainImageText
                     ? 500
                     : (isTyphoonsImageText
                     ? getEnglishTyphoonsImageTextSpeechPause(record, previousItem, previousSpeechSegmentIndex)
@@ -25246,6 +25814,16 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const typhoonsLayoutReady = !isTyphoonsImageText || Boolean(
         layoutEnglishTyphoonsImageTTSHitAreas(wrapper) && typhoonsButtons.length === 4 &&
         typhoonsButtons.includes(trigger) && !trigger.hidden && !trigger.disabled);
+    const isHumanBrainImageText = Boolean(safeRecord &&
+        isEnglishHumanBrainImageTTSRecord(safeRecord));
+    const humanBrainImage = isHumanBrainImageText && wrapper
+        ? wrapper.querySelector("img") : null;
+    const humanBrainButtons = isHumanBrainImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".human-brain-system-panel-hit-area")) : [];
+    const humanBrainLayoutReady = !isHumanBrainImageText || Boolean(
+        layoutEnglishHumanBrainPanelHitAreas(wrapper) &&
+        humanBrainButtons.length === 4 && humanBrainButtons.includes(trigger) &&
+        !trigger.hidden && !trigger.disabled);
     const isHumanHealthNutritionImageText = Boolean(safeRecord &&
         isEnglishHumanHealthNutritionImageTTSRecord(safeRecord));
     const humanHealthImage = isHumanHealthNutritionImageText && wrapper
@@ -25272,6 +25850,11 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
             !typhoonsImage.complete || typhoonsImage.naturalWidth !== 1536 ||
             typhoonsImage.naturalHeight !== 1024 || !typhoonsLayoutReady ||
             typhoonsButtons.length !== 4 || !typhoonsButtons.includes(trigger))) ||
+        (isHumanBrainImageText && (!humanBrainImage ||
+            humanBrainImage.getAttribute("src") !== ENGLISH_HUMAN_BRAIN_ASSET_FILE ||
+            !humanBrainImage.complete || humanBrainImage.naturalWidth !== 1536 ||
+            humanBrainImage.naturalHeight !== 1024 || !humanBrainLayoutReady ||
+            humanBrainButtons.length !== 4 || !humanBrainButtons.includes(trigger))) ||
         (isHumanHealthNutritionImageText && (!humanHealthImage ||
             humanHealthImage.getAttribute("src") !== safeRecord.assetFile ||
             !humanHealthImage.complete || humanHealthImage.naturalWidth !== 1536 ||
@@ -25328,6 +25911,74 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isEnglishHumanBrainImageTTSRecord(safeRecord)) {
+        const options = getEnglishHumanBrainPanelMenuOptions(safeRecord, panel);
+        const image = wrapper.querySelector("img");
+        if (!options || record !== safeRecord ||
+            trigger._englishImageTTSImageTextRecord !== safeRecord ||
+            trigger._englishImageTTSImageTextPanel !== panel ||
+            !isEnglishHumanBrainPanelTriggerReady(trigger) ||
+            !image || image.getAttribute("src") !== ENGLISH_HUMAN_BRAIN_ASSET_FILE ||
+            !image.complete || image.naturalWidth !== 1536 || image.naturalHeight !== 1024) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        menu.setAttribute("aria-label",
+            "The Human Brain & Nervous System 第 " + panel.panelId + " 格朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀本格完整內容",
+            "依原圖順序朗讀本格全部正文、泡泡、腦區名稱與功能",
+            () => {
+                closeEnglishImageTTSMenu();
+                speakEnglishImageTTSImageTextSequence(
+                    trigger, options.fullItems,
+                    "The Human Brain & Nervous System 第 " + panel.panelId + " 格完整內容已朗讀完成。"
+                );
+            }
+        ));
+        const toggle = createEnglishImageTTSMenuButton(
+            "🔊 單句／泡泡／標籤選讀",
+            "展開本格每一句正文、泡泡、腦區標籤及功能的獨立朗讀選項",
+            () => {
+                const list = menu.querySelector(".english-image-tts-sentences");
+                if (!list) return;
+                list.hidden = !list.hidden;
+                toggle.setAttribute("aria-expanded", String(!list.hidden));
+                scheduleEnglishImageTTSMenuPosition();
+            }
+        );
+        toggle.setAttribute("aria-expanded", "false");
+        const list = document.createElement("div");
+        list.className = "english-image-tts-sentences";
+        list.hidden = true;
+        options.choices.forEach(choice => {
+            const prefix = choice.kind === "bubble" ? "泡泡" :
+                choice.kind === "label" ? "標籤" : "單句";
+            list.appendChild(createEnglishImageTTSMenuButton(
+                "🔊 " + prefix + "：" + choice.item.sourceText.replace(/\r?\n/g, " "),
+                "單獨朗讀第 " + panel.panelId + " 格" + prefix + "：「" +
+                    choice.item.sourceText + "」",
+                () => {
+                    closeEnglishImageTTSMenu();
+                    speakEnglishImageTTSImageTextSequence(
+                        trigger, [choice.item],
+                        "已朗讀第 " + panel.panelId + " 格所選原圖文字。"
+                    );
+                }
+            ));
+        });
+        menu.appendChild(toggle);
+        menu.appendChild(list);
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
     }
 
     if (isEnglishImmuneSystemImageTTSRecord(safeRecord)) {
