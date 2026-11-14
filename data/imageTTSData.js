@@ -23315,5 +23315,80 @@ const imageTTSData = {
                 ])
             ]
         };
+    })(),
+    "images/english/plant-reproduction-basics.png": (() => {
+        const rect = ([x, y, width, height]) => ({
+            xPct: x / 1254 * 100,
+            yPct: y / 1254 * 100,
+            widthPct: width / 1254 * 100,
+            heightPct: height / 1254 * 100
+        });
+        const unit = (itemId, type, sourceText, box) => ({
+            itemId,
+            type,
+            sourceText,
+            ttsText: sourceText,
+            bounds: rect(box)
+        });
+        const panel = (panelId, box, items) => ({
+            panelId,
+            readingOrder: panelId,
+            bounds: rect(box),
+            items: items.map((entry, index) => ({ ...entry, readingOrder: index + 1 }))
+        });
+        return {
+            imageId: "plant-reproduction-basics",
+            title: "Plant Reproduction",
+            assetFile: "images/english/plant-reproduction-basics.png",
+            contentType: "image-text",
+            layout: "custom-plant-reproduction-2x2",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1254, height: 1254 },
+            panels: [
+                panel(1, [6, 118, 620, 543], [
+                    unit("plant-reproduction-p1-main-sentence", "sentence",
+                        "Flowers help plants reproduce.", [137, 136, 471, 102]),
+                    unit("plant-reproduction-p1-petal", "label", "petal", [77, 267, 115, 83]),
+                    unit("plant-reproduction-p1-stamen", "label",
+                        "stamen (makes pollen)", [414, 251, 199, 139]),
+                    unit("plant-reproduction-p1-pistil", "label",
+                        "pistil (contains ovules)", [403, 492, 210, 139])
+                ]),
+                panel(2, [632, 118, 616, 543], [
+                    unit("plant-reproduction-p2-heading", "label", "Pollination",
+                        [885, 137, 188, 45]),
+                    unit("plant-reproduction-p2-main-sentence", "sentence",
+                        "Pollen moves from one flower to another.", [790, 179, 318, 72]),
+                    unit("plant-reproduction-p2-pollen", "label", "pollen",
+                        [917, 449, 120, 90])
+                ]),
+                panel(3, [6, 671, 620, 568], [
+                    unit("plant-reproduction-p3-heading", "label", "Fertilization",
+                        [251, 698, 178, 42]),
+                    unit("plant-reproduction-p3-main-sentence", "sentence",
+                        "The pollen helps fertilize the ovule.", [143, 739, 450, 41]),
+                    unit("plant-reproduction-p3-pollen", "label", "pollen",
+                        [153, 838, 120, 83]),
+                    unit("plant-reproduction-p3-ovule", "label", "ovule",
+                        [345, 1084, 120, 85])
+                ]),
+                panel(4, [632, 671, 616, 568], [
+                    unit("plant-reproduction-p4-heading", "label", "Seeds & Fruits",
+                        [833, 693, 260, 40]),
+                    unit("plant-reproduction-p4-seeds-can-grow-sentence", "sentence",
+                        "Seeds can grow into new plants.", [801, 741, 376, 39]),
+                    unit("plant-reproduction-p4-fruits-protect-sentence", "sentence",
+                        "Fruits protect the seeds.", [843, 776, 321, 34]),
+                    unit("plant-reproduction-p4-fruit", "label", "fruit",
+                        [784, 876, 116, 77]),
+                    unit("plant-reproduction-p4-seeds", "label", "seeds",
+                        [825, 1083, 118, 85])
+                ])
+            ]
+        };
     })()
+
 };

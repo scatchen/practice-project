@@ -11446,6 +11446,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 function isEnglishImageTTSItemText(record, item) {
     const telephoneV2P1Test = window.englishTelephoneV2P1Test;
     if (telephoneV2P1Test && telephoneV2P1Test.isItem(record, item)) return true;
+    if (isEnglishPlantReproductionImageTTSItemText(record, item)) return true;
     if (isEnglishPlantsPhotosynthesisImageTTSItemText(record, item)) return true;
     if (isEnglishHumanBrainImageTTSItemText(record, item)) return true;
     if (isEnglishImmuneSystemImageTTSItemText(record, item)) return true;
@@ -12044,6 +12045,7 @@ function getEnglishImageTTSImageTextName(record) {
     if (telephoneV2P1Test && telephoneV2P1Test.isRecord(record)) {
         return "Telephone V2";
     }
+    if (isEnglishPlantReproductionImageTTSRecord(record)) return "Plant Reproduction";
     if (isEnglishPlantsPhotosynthesisImageTTSRecord(record)) return "Plants & Photosynthesis";
     if (isEnglishHumanBrainImageTTSRecord(record)) return "The Human Brain & Nervous System";
     if (isEnglishImmuneSystemImageTTSRecord(record)) return "The Immune System";
@@ -16667,6 +16669,140 @@ function getEnglishPlantsPhotosynthesisPanelMenuOptions(record, panel) {
     };
 }
 
+
+const ENGLISH_PLANT_REPRODUCTION_ASSET_FILE =
+    "images/english/plant-reproduction-basics.png";
+const ENGLISH_PLANT_REPRODUCTION_IMAGE_ID = "plant-reproduction-basics";
+function getEnglishPlantReproductionImageTTSRecord(record, assetFile) {
+    const topKeys = [
+        "imageId", "title", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"
+    ];
+    const exactKeys = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const rect = box => ({
+        xPct: box[0] / 1254 * 100,
+        yPct: box[1] / 1254 * 100,
+        widthPct: box[2] / 1254 * 100,
+        heightPct: box[3] / 1254 * 100
+    });
+    const sameRect = (actual, expected) => exactKeys(actual,
+        ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        ["xPct", "yPct", "widthPct", "heightPct"].every(key =>
+            Number.isFinite(actual[key]) && Math.abs(actual[key] - expected[key]) < 0.000001);
+    const contains = (outer, inner) =>
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const expectedPanels = [
+        { panelId: 1, box: [6, 118, 620, 543], items: [
+            ["plant-reproduction-p1-main-sentence", "sentence",
+                "Flowers help plants reproduce.", [137, 136, 471, 102]],
+            ["plant-reproduction-p1-petal", "label", "petal", [77, 267, 115, 83]],
+            ["plant-reproduction-p1-stamen", "label",
+                "stamen (makes pollen)", [414, 251, 199, 139]],
+            ["plant-reproduction-p1-pistil", "label",
+                "pistil (contains ovules)", [403, 492, 210, 139]]
+        ] },
+        { panelId: 2, box: [632, 118, 616, 543], items: [
+            ["plant-reproduction-p2-heading", "label", "Pollination", [885, 137, 188, 45]],
+            ["plant-reproduction-p2-main-sentence", "sentence",
+                "Pollen moves from one flower to another.", [790, 179, 318, 72]],
+            ["plant-reproduction-p2-pollen", "label", "pollen", [917, 449, 120, 90]]
+        ] },
+        { panelId: 3, box: [6, 671, 620, 568], items: [
+            ["plant-reproduction-p3-heading", "label", "Fertilization", [251, 698, 178, 42]],
+            ["plant-reproduction-p3-main-sentence", "sentence",
+                "The pollen helps fertilize the ovule.", [143, 739, 450, 41]],
+            ["plant-reproduction-p3-pollen", "label", "pollen", [153, 838, 120, 83]],
+            ["plant-reproduction-p3-ovule", "label", "ovule", [345, 1084, 120, 85]]
+        ] },
+        { panelId: 4, box: [632, 671, 616, 568], items: [
+            ["plant-reproduction-p4-heading", "label", "Seeds & Fruits", [833, 693, 260, 40]],
+            ["plant-reproduction-p4-seeds-can-grow-sentence", "sentence",
+                "Seeds can grow into new plants.", [801, 741, 376, 39]],
+            ["plant-reproduction-p4-fruits-protect-sentence", "sentence",
+                "Fruits protect the seeds.", [843, 776, 321, 34]],
+            ["plant-reproduction-p4-fruit", "label", "fruit", [784, 876, 116, 77]],
+            ["plant-reproduction-p4-seeds", "label", "seeds", [825, 1083, 118, 85]]
+        ] }
+    ];
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_PLANT_REPRODUCTION_ASSET_FILE] : null;
+    if (assetFile !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE || record !== canonical ||
+        !exactKeys(record, topKeys) ||
+        record.imageId !== ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
+        record.title !== "Plant Reproduction" ||
+        record.assetFile !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-plant-reproduction-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !exactKeys(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1254 ||
+        record.sourceImageDimensions.height !== 1254 ||
+        !Array.isArray(record.panels) || record.panels.length !== expectedPanels.length) return null;
+
+    const identityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE || candidate &&
+            (candidate.imageId === ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
+                candidate.assetFile === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE);
+    });
+    if (identityKeys.length !== 1 || identityKeys[0] !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE)
+        return null;
+
+    const usedIds = new Set();
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex];
+        const expected = expectedPanels[panelIndex];
+        const panelRect = rect(expected.box);
+        if (!exactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expected.panelId || panel.readingOrder !== panelIndex + 1 ||
+            !sameRect(panel.bounds, panelRect) || !Array.isArray(panel.items) ||
+            panel.items.length !== expected.items.length) return null;
+        for (let itemIndex = 0; itemIndex < expected.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const [itemId, type, sourceText, box] = expected.items[itemIndex];
+            const itemRect = rect(box);
+            if (!exactKeys(item,
+                    ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]) ||
+                usedIds.has(item.itemId) || item.itemId !== itemId ||
+                item.readingOrder !== itemIndex + 1 || item.type !== type ||
+                item.sourceText !== sourceText || item.ttsText !== sourceText ||
+                !sameRect(item.bounds, itemRect) || !contains(panelRect, itemRect)) return null;
+            usedIds.add(item.itemId);
+        }
+    }
+    return record;
+}
+
+function isEnglishPlantReproductionImageTTSRecord(record) {
+    return Boolean(record && getEnglishPlantReproductionImageTTSRecord(
+        record, ENGLISH_PLANT_REPRODUCTION_ASSET_FILE) === record);
+}
+
+function isEnglishPlantReproductionImageTTSItemText(record, item) {
+    return Boolean(isEnglishPlantReproductionImageTTSRecord(record) && item &&
+        record.panels.some(panel => panel.items.includes(item)));
+}
+
+function getEnglishPlantReproductionPanelMenuOptions(record, panel) {
+    if (!isEnglishPlantReproductionImageTTSRecord(record) || !panel ||
+        record.panels.find(candidate => candidate.panelId === panel.panelId) !== panel) return null;
+    return {
+        fullItems: panel.items.slice(),
+        choices: panel.items.map(item => ({
+            item,
+            kind: item.type === "label" ? "label" : "sentence"
+        }))
+    };
+}
+
 function getEnglishHumanBrainPanelEntryBounds(panelId) {
     const region = ENGLISH_HUMAN_BRAIN_PANEL_ENTRY_PIXELS.find(item =>
         item.panelId === panelId);
@@ -17276,6 +17412,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
+            record.assetFile === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE)) {
+        return getEnglishPlantReproductionImageTTSRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_PLANTS_PHOTOSYNTHESIS_ASSET_FILE || record &&
         (record.imageId === ENGLISH_PLANTS_PHOTOSYNTHESIS_IMAGE_ID ||
             record.assetFile === ENGLISH_PLANTS_PHOTOSYNTHESIS_ASSET_FILE)) {
@@ -21734,6 +21875,135 @@ function createEnglishPlantsPhotosynthesisPanelHitArea(wrapper, panel, record) {
     return button;
 }
 
+
+function layoutEnglishPlantReproductionPanelHitAreas(wrapper) {
+    if (!wrapper || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE) return false;
+    const image = wrapper.querySelector("img");
+    const record = getEnglishPlantReproductionImageTTSRecord(
+        imageTTSData && imageTTSData[ENGLISH_PLANT_REPRODUCTION_ASSET_FILE],
+        ENGLISH_PLANT_REPRODUCTION_ASSET_FILE);
+    const buttons = Array.from(wrapper.querySelectorAll(".plant-reproduction-panel-hit-area"));
+    const imageRect = image && image.getBoundingClientRect();
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const ready = Boolean(image && isEnglishPlantReproductionFormalSearchImage(image) &&
+        record && image.complete === true && image.naturalWidth === 1254 &&
+        image.naturalHeight === 1254 && imageRect && imageRect.width > 0 &&
+        imageRect.height > 0 && wrapperRect && buttons.length === 4);
+    if (!ready) {
+        buttons.forEach(button => {
+            button.hidden = true;
+            button.disabled = true;
+            button.setAttribute("aria-disabled", "true");
+            button.style.pointerEvents = "none";
+        });
+        return false;
+    }
+
+    buttons.forEach(button => {
+        const panelId = Number(button.getAttribute("data-image-tts-panel-id"));
+        const panel = record.panels.find(candidate => candidate.panelId === panelId);
+        const bounds = panel && panel.bounds;
+        if (!panel || !bounds) {
+            button.hidden = true;
+            button.disabled = true;
+            button.setAttribute("aria-disabled", "true");
+            button.style.pointerEvents = "none";
+            return;
+        }
+        const imageLeft = imageRect.left - wrapperRect.left;
+        const imageTop = imageRect.top - wrapperRect.top;
+        const renderedWidth = imageRect.width * bounds.widthPct / 100;
+        const renderedHeight = imageRect.height * bounds.heightPct / 100;
+        button.style.left = imageLeft + imageRect.width * bounds.xPct / 100 + "px";
+        button.style.top = imageTop + imageRect.height * bounds.yPct / 100 + "px";
+        button.style.width = renderedWidth + "px";
+        button.style.height = renderedHeight + "px";
+        const enabled = drawMode === "select" && appState.subjectMode === "english" &&
+            renderedWidth >= 44 && renderedHeight >= 44;
+        button.hidden = !enabled;
+        button.disabled = !enabled;
+        button.setAttribute("aria-disabled", String(!enabled));
+        button.style.pointerEvents = enabled ? "auto" : "none";
+    });
+    return buttons.every(button => !button.hidden && !button.disabled);
+}
+
+function isEnglishPlantReproductionPanelTriggerReady(trigger) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    const record = getEnglishPlantReproductionImageTTSRecord(
+        imageTTSData && imageTTSData[ENGLISH_PLANT_REPRODUCTION_ASSET_FILE],
+        ENGLISH_PLANT_REPRODUCTION_ASSET_FILE);
+    const panel = trigger && trigger._englishImageTTSImageTextPanel;
+    const buttons = wrapper
+        ? Array.from(wrapper.querySelectorAll(".plant-reproduction-panel-hit-area")) : [];
+    if (!wrapper || !image || !record || !isEnglishPlantReproductionFormalSearchImage(image) ||
+        trigger._englishImageTTSImageTextRecord !== record || !trigger.classList ||
+        !trigger.classList.contains("plant-reproduction-panel-hit-area") ||
+        buttons.length !== 4 || !buttons.includes(trigger) || !panel ||
+        record.panels[panel.panelId - 1] !== panel ||
+        trigger._englishImageTTSImageTextItem !== panel.items[0] ||
+        trigger._englishImageTTSImageTextActivePanel !== panel ||
+        !layoutEnglishPlantReproductionPanelHitAreas(wrapper) || trigger.hidden || trigger.disabled)
+        return false;
+    const rect = trigger.getBoundingClientRect();
+    if (!rect || rect.width < 44 || rect.height < 44 ||
+        typeof document.elementFromPoint !== "function") return false;
+    const points = [
+        [(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2],
+        [rect.left + rect.width * 0.25, rect.top + rect.height * 0.25],
+        [rect.left + rect.width * 0.75, rect.top + rect.height * 0.25],
+        [rect.left + rect.width * 0.25, rect.top + rect.height * 0.75],
+        [rect.left + rect.width * 0.75, rect.top + rect.height * 0.75]
+    ];
+    try {
+        return points.every(([x, y]) => {
+            const hit = document.elementFromPoint(x, y);
+            return hit === trigger || trigger.contains(hit);
+        });
+    } catch (error) { return false; }
+}
+
+function createEnglishPlantReproductionPanelHitArea(wrapper, panel, record) {
+    const firstItem = panel && panel.items[0];
+    if (!wrapper || !panel || !firstItem ||
+        !isEnglishPlantReproductionImageTTSRecord(record) ||
+        !isEnglishPlantReproductionFormalSearchImage(wrapper.querySelector("img"))) return null;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-image-text-hit-area plant-reproduction-panel-hit-area";
+    button.hidden = true;
+    button.disabled = true;
+    button.setAttribute("aria-disabled", "true");
+    button.setAttribute("aria-label",
+        "Plant Reproduction 第 " + panel.panelId +
+        " 格內容入口，開啟本格完整朗讀及各項標籤選讀選項");
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("data-image-tts-item-id", firstItem.itemId);
+    button._englishImageTTSImageTextRecord = record;
+    button._englishImageTTSImageTextPanel = panel;
+    button._englishImageTTSImageTextItem = firstItem;
+    button._englishImageTTSImageTextActivePanel = panel;
+    button._englishImageTTSImageTextActiveItem = firstItem;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (!isEnglishPlantReproductionPanelTriggerReady(button)) return;
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishImageTTSImageTextMenu(button, record, panel);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
 function layoutEnglishImmuneSystemPanelHitAreas(wrapper) {
     if (!wrapper || !wrapper.dataset ||
         wrapper.dataset.imageTtsAssetFile !== ENGLISH_IMMUNE_SYSTEM_ASSET_FILE) return false;
@@ -22776,6 +23046,7 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
         ENGLISH_IMMUNE_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_HUMAN_BRAIN_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_PLANTS_PHOTOSYNTHESIS_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
+        ENGLISH_PLANT_REPRODUCTION_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         expireCurrentContext();
         const renderGeneration = ++generation;
         const diagrams = typeof question === "string" ? getDiagramInfo(question) : [];
@@ -22877,6 +23148,27 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 ? plantsPhotosynthesisSpecs[0]
                 : null;
 
+        const matchingPlantReproductionEntries = Array.isArray(diagramMap)
+            ? diagramMap.filter(entry => entry &&
+                (entry.id === ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
+                    entry.file === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE))
+            : [];
+        const canonicalPlantReproductionEntry = matchingPlantReproductionEntries.length === 1 &&
+            matchingPlantReproductionEntries[0].id === ENGLISH_PLANT_REPRODUCTION_IMAGE_ID &&
+            matchingPlantReproductionEntries[0].file === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE
+                ? matchingPlantReproductionEntries[0]
+                : null;
+        const returnedPlantReproductionCount = canonicalPlantReproductionEntry
+            ? diagrams.filter(diagram => diagram === canonicalPlantReproductionEntry).length
+            : 0;
+        const plantReproductionSpecs = specs.filter(spec =>
+            spec.imageData.file === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE);
+        const trustedPlantReproductionSpec = canonicalPlantReproductionEntry &&
+            returnedPlantReproductionCount === 1 && plantReproductionSpecs.length === 1 &&
+            plantReproductionSpecs[0].diagram === canonicalPlantReproductionEntry
+                ? plantReproductionSpecs[0]
+                : null;
+
         const matchingSkeletalEntries = Array.isArray(diagramMap)
             ? diagramMap.filter(entry => entry &&
                 (entry.id === ENGLISH_SKELETAL_SYSTEM_IMAGE_ID ||
@@ -22963,6 +23255,12 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                     image.setAttribute("data-english-image-library-file",
                         ENGLISH_PLANTS_PHOTOSYNTHESIS_ASSET_FILE);
                 }
+                if (spec === trustedPlantReproductionSpec) {
+                    image.setAttribute("data-english-image-library-id",
+                        ENGLISH_PLANT_REPRODUCTION_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file",
+                        ENGLISH_PLANT_REPRODUCTION_ASSET_FILE);
+                }
                 image.addEventListener("load", resizeAnnotationCanvas);
                 diagramContainer.appendChild(image);
                 renderedSpecs.push({ spec, image });
@@ -23022,6 +23320,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedBrainSpec);
         ENGLISH_PLANTS_PHOTOSYNTHESIS_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedPlantsPhotosynthesisSpec);
+        ENGLISH_PLANT_REPRODUCTION_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedPlantReproductionSpec);
         return answerRoot;
     }
 
@@ -23741,6 +24041,138 @@ const ENGLISH_PLANTS_PHOTOSYNTHESIS_FORMAL_SEARCH_ORIGIN = (() => {
     return { register, expireCurrentContext, isTrustedNode };
 })();
 
+
+const ENGLISH_PLANT_REPRODUCTION_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    let currentContext = null;
+    let generation = 0;
+
+    function detachImage(image) {
+        const wrapper = image && image.closest
+            ? image.closest(".image-tts-overlay-wrapper") : null;
+        if (!wrapper) return;
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper.contains(active) && active.classList &&
+            active.classList.contains("plant-reproduction-panel-hit-area")) {
+            cancelEnglishImageTTSImageTextSequence(true);
+        }
+        const activeMenu = englishImageTTSOverlayState.activeTrigger;
+        if (activeMenu && wrapper.contains(activeMenu) && activeMenu.classList &&
+            activeMenu.classList.contains("plant-reproduction-panel-hit-area")) {
+            closeEnglishImageTTSMenu();
+        }
+        wrapper.querySelectorAll(".plant-reproduction-panel-hit-area").forEach(button => button.remove());
+    }
+
+    function revokeImage(context, image) {
+        if (!context || !image || !context.images.has(image)) return;
+        originByImage.delete(image);
+        context.images.delete(image);
+        detachImage(image);
+    }
+
+    function processMutations(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revokeImage(context, record.target);
+                return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removedNode => {
+                Array.from(context.images).forEach(image => {
+                    if (removedNode === image || removedNode &&
+                        typeof removedNode.contains === "function" && removedNode.contains(image)) {
+                        revokeImage(context, image);
+                    }
+                });
+            });
+        });
+    }
+
+    function expireCurrentContext() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revokeImage(context, image));
+        currentContext = null;
+    }
+
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer) processMutations(context, context.observer.takeRecords());
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked || origin.context !== context ||
+            origin.generation !== context.generation || !context.observer || !image.isConnected ||
+            context.responseRoot !== document.getElementById("ai-response") ||
+            !context.responseRoot.isConnected ||
+            !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(image) ||
+            image.getAttribute("src") !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !== ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !==
+                ENGLISH_PLANT_REPRODUCTION_ASSET_FILE) return false;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
+                entry.file === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE)) : [];
+        return matches.length === 1 && matches[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_PLANT_REPRODUCTION_IMAGE_ID &&
+            origin.diagram.file === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE;
+    }
+
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot || !diagramContainer || !trustedSpec ||
+            typeof MutationObserver !== "function" ||
+            responseRoot !== document.getElementById("ai-response") ||
+            !responseRoot.isConnected || !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
+                entry.file === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE)) : [];
+        const targetSpecs = (Array.isArray(renderedSpecs) ? renderedSpecs : []).filter(entry =>
+            entry && entry.spec && entry.spec.imageData &&
+            entry.spec.imageData.file === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE);
+        const rendered = renderedSpecs.find(entry => entry && entry.spec === trustedSpec);
+        if (matches.length !== 1 || matches[0] !== diagram ||
+            !diagram || diagram.id !== ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
+            diagram.file !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE ||
+            targetSpecs.length !== 1 || !rendered || !rendered.image ||
+            !rendered.image.isConnected || !diagramContainer.contains(rendered.image)) return false;
+
+        const image = rendered.image;
+        const wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) || !diagramContainer.contains(wrapper)) return false;
+        const context = {
+            generation: ++generation,
+            responseRoot,
+            diagramContainer,
+            diagram,
+            images: new Set([image]),
+            observer: null,
+            revoked: false
+        };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram });
+        context.observer = new MutationObserver(records => processMutations(context, records));
+        context.observer.observe(responseRoot, {
+            childList: true, subtree: true, attributes: true,
+            attributeFilter: [
+                "src", "data-english-image-library-id", "data-english-image-library-file"
+            ]
+        });
+        if (!isTrustedNode(image)) {
+            expireCurrentContext();
+            return false;
+        }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+
+    return { register, expireCurrentContext, isTrustedNode };
+})();
+
 function isEnglishHumanBrainFormalSearchImage(image) {
     if (!image || image.getAttribute("src") !== ENGLISH_HUMAN_BRAIN_ASSET_FILE ||
         image.getAttribute("data-english-image-library-id") !== ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
@@ -23757,6 +24189,26 @@ function isEnglishHumanBrainFormalSearchImage(image) {
     return matchingEntries.length === 1 &&
         matchingEntries[0].id === ENGLISH_HUMAN_BRAIN_IMAGE_ID &&
         matchingEntries[0].file === ENGLISH_HUMAN_BRAIN_ASSET_FILE;
+}
+
+
+function isEnglishPlantReproductionFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !== ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !==
+            ENGLISH_PLANT_REPRODUCTION_ASSET_FILE ||
+        !ENGLISH_PLANT_REPRODUCTION_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || !Array.isArray(diagramMap))
+        return false;
+    const record = imageTTSData[ENGLISH_PLANT_REPRODUCTION_ASSET_FILE];
+    if (getEnglishPlantReproductionImageTTSRecord(
+        record, ENGLISH_PLANT_REPRODUCTION_ASSET_FILE) !== record) return false;
+    const matches = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
+            entry.file === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE));
+    return matches.length === 1 &&
+        matches[0].id === ENGLISH_PLANT_REPRODUCTION_IMAGE_ID &&
+        matches[0].file === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE;
 }
 
 function isEnglishPlantsPhotosynthesisFormalSearchImage(image) {
@@ -23848,6 +24300,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
             !isEnglishSkeletalSystemFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_EXCRETORY_SYSTEM_ASSET_FILE &&
             !isEnglishExcretorySystemFormalSearchImage(image)) return;
+        if (assetFile === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE &&
+            !isEnglishPlantReproductionFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_PLANTS_PHOTOSYNTHESIS_ASSET_FILE &&
             !isEnglishPlantsPhotosynthesisFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_TELEPHONE_V2_ASSET_FILE) {
@@ -23906,6 +24360,28 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishPlantReproductionImageTTSRecord(record)) {
+                const hasExpectedDimensions = () => image.getAttribute("src") ===
+                    ENGLISH_PLANT_REPRODUCTION_ASSET_FILE && image.complete === true &&
+                    image.naturalWidth === 1254 && image.naturalHeight === 1254;
+                if (!isEnglishPlantReproductionFormalSearchImage(image) ||
+                    (image.complete && !hasExpectedDimensions())) return;
+                record.panels.forEach(panel => {
+                    if (createEnglishPlantReproductionPanelHitArea(wrapper, panel, record))
+                        added += 1;
+                });
+                image.addEventListener("load", () => {
+                    if (hasExpectedDimensions()) layoutEnglishPlantReproductionPanelHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", () => {
+                    layoutEnglishPlantReproductionPanelHitAreas(wrapper);
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger))
+                        closeEnglishImageTTSMenu();
+                }, { once: true });
+                layoutEnglishPlantReproductionPanelHitAreas(wrapper);
+                return;
+            }
             if (isEnglishPlantsPhotosynthesisImageTTSRecord(record)) {
                 const hasExpectedDimensions = () => image.getAttribute("src") ===
                     ENGLISH_PLANTS_PHOTOSYNTHESIS_ASSET_FILE && image.complete === true &&
@@ -24754,6 +25230,10 @@ function scheduleEnglishImageTTSLayout() {
                 wrapper.dataset.imageTtsAssetFile === ENGLISH_PLANTS_PHOTOSYNTHESIS_ASSET_FILE) {
                 layoutEnglishPlantsPhotosynthesisPanelHitAreas(wrapper);
             }
+            if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE) {
+                layoutEnglishPlantReproductionPanelHitAreas(wrapper);
+            }
             if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_TELEPHONE_V2_ASSET_FILE) {
                 const telephoneV2State = window.englishTelephoneV2P1Test;
                 if (telephoneV2State && telephoneV2State.inlineMode &&
@@ -24859,6 +25339,10 @@ function syncEnglishImageTTSDrawingMode() {
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_PLANTS_PHOTOSYNTHESIS_ASSET_FILE) {
             layoutEnglishPlantsPhotosynthesisPanelHitAreas(wrapper);
+        }
+        if (wrapper.dataset &&
+            wrapper.dataset.imageTtsAssetFile === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE) {
+            layoutEnglishPlantReproductionPanelHitAreas(wrapper);
         }
     });
     if (telephoneV2State && telephoneV2State.inlineMode) telephoneV2State.layout();
@@ -25123,6 +25607,12 @@ function getEnglishSkeletalSystemImageTextSpeechSegments(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishPlantReproductionImageTTSItemText(record, item)) {
+        const speechText = item.itemId === "plant-reproduction-p4-heading" &&
+            item.sourceText === "Seeds & Fruits"
+                ? "Seeds and Fruits" : item.ttsText;
+        return getEnglishTTSUnitText(speechText);
+    }
     if (isEnglishPlantsPhotosynthesisImageTTSItemText(record, item)) {
         const spokenText = item.ttsText
             .replace(/CO₂/g, "C O two")
@@ -25302,6 +25792,9 @@ function speakEnglishImageTTSImageTextSequence(
     }
     const itemList = Array.isArray(items) ? items : [];
     const allItems = record ? record.panels.flatMap(panel => panel.items) : [];
+    const isPlantReproductionImageText = isEnglishPlantReproductionImageTTSRecord(record);
+    const isPlantReproductionSingleItemSequence = Boolean(isPlantReproductionImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
     const isPlantsPhotosynthesisImageText = isEnglishPlantsPhotosynthesisImageTTSRecord(record);
     const isPlantsPhotosynthesisSingleItemSequence = Boolean(isPlantsPhotosynthesisImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
@@ -25663,6 +26156,25 @@ function speakEnglishImageTTSImageTextSequence(
         plantsPhotosynthesisButtons.length === 4 && plantsPhotosynthesisButtons.includes(trigger) &&
         itemList.length > 0 && itemList.every(item => plantsPhotosynthesisPanel.items.includes(item)) &&
         isEnglishPlantsPhotosynthesisPanelTriggerReady(trigger));
+    const plantReproductionImage = isPlantReproductionImageText
+        ? wrapper.querySelector("img") : null;
+    const plantReproductionPanel = isPlantReproductionImageText && trigger
+        ? trigger._englishImageTTSImageTextPanel : null;
+    const plantReproductionButtons = isPlantReproductionImageText
+        ? Array.from(wrapper.querySelectorAll(".plant-reproduction-panel-hit-area")) : [];
+    const plantReproductionImageReady = !isPlantReproductionImageText || Boolean(
+        assetFile === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE &&
+        record === imageTTSData[assetFile] && plantReproductionImage &&
+        isEnglishPlantReproductionFormalSearchImage(plantReproductionImage) &&
+        plantReproductionImage.getAttribute("src") === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE &&
+        plantReproductionImage.complete === true &&
+        plantReproductionImage.naturalWidth === 1254 &&
+        plantReproductionImage.naturalHeight === 1254 &&
+        trigger._englishImageTTSImageTextRecord === record &&
+        plantReproductionPanel && record.panels.includes(plantReproductionPanel) &&
+        plantReproductionButtons.length === 4 && plantReproductionButtons.includes(trigger) &&
+        itemList.length > 0 && itemList.every(item => plantReproductionPanel.items.includes(item)) &&
+        isEnglishPlantReproductionPanelTriggerReady(trigger));
     const skeletalSystemImage = isSkeletalSystemImageText ? wrapper.querySelector("img") : null;
     const skeletalSystemPanel = isSkeletalSystemImageText && trigger
         ? trigger._englishImageTTSImageTextPanel : null;
@@ -25787,6 +26299,7 @@ function speakEnglishImageTTSImageTextSequence(
             !telephoneV2P7WholePanelSequence && !isExcretorySystemSingleItemSequence &&
             !isSkeletalSystemSingleItemSequence && !isImmuneSystemSingleItemSequence &&
             !isHumanBrainSingleItemSequence && !isPlantsPhotosynthesisSingleItemSequence &&
+            !isPlantReproductionSingleItemSequence &&
             !isTelephoneV2P4SingleItemSequence &&
             !isTelephoneV2P7SingleItemSequence &&
             !isMuscularSystemPanelSequence && !isWholeImageSequence &&
@@ -25824,7 +26337,7 @@ function speakEnglishImageTTSImageTextSequence(
         !animalsAdaptationImageReady || !humanHealthImageReady || !typhoonsImageReady ||
         !muscularImageReady || !cyclingImageReady || !solarImageReady ||
         !xraysImageReady || !skeletalSystemImageReady || !immuneSystemImageReady ||
-        !humanBrainImageReady || !plantsPhotosynthesisImageReady ||
+        !humanBrainImageReady || !plantsPhotosynthesisImageReady || !plantReproductionImageReady ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
@@ -26095,7 +26608,7 @@ function speakEnglishImageTTSImageTextSequence(
                 }
                 const delay = isExcretorySystemImageText || isSkeletalSystemImageText ||
                     isImmuneSystemImageText || isHumanBrainImageText ||
-                    isPlantsPhotosynthesisImageText
+                    isPlantsPhotosynthesisImageText || isPlantReproductionImageText
                     ? 500
                     : (isTyphoonsImageText
                     ? getEnglishTyphoonsImageTextSpeechPause(record, previousItem, previousSpeechSegmentIndex)
@@ -26359,6 +26872,65 @@ function populateEnglishPlantsPhotosynthesisPanelMenu(trigger, record, panel, me
     return true;
 }
 
+
+function populateEnglishPlantReproductionPanelMenu(trigger, record, panel, menu, options) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    if (!menu || !options || !isEnglishPlantReproductionImageTTSRecord(record) ||
+        !panel || record.panels.find(candidate => candidate.panelId === panel.panelId) !== panel ||
+        trigger._englishImageTTSImageTextRecord !== record ||
+        trigger._englishImageTTSImageTextPanel !== panel ||
+        !isEnglishPlantReproductionPanelTriggerReady(trigger) ||
+        !image || !isEnglishPlantReproductionFormalSearchImage(image) ||
+        image.getAttribute("src") !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE ||
+        !image.complete || image.naturalWidth !== 1254 || image.naturalHeight !== 1254) return false;
+
+    menu.setAttribute("aria-label", "Plant Reproduction 第 " + panel.panelId + " 格朗讀選項");
+    menu.appendChild(createEnglishImageTTSMenuButton(
+        "🔊 朗讀本格完整內容",
+        "依原圖順序朗讀本格全部正文、標籤與教學關鍵詞",
+        () => {
+            closeEnglishImageTTSMenu();
+            speakEnglishImageTTSImageTextSequence(
+                trigger, options.fullItems,
+                "Plant Reproduction 第 " + panel.panelId + " 格完整內容已朗讀完成。"
+            );
+        }
+    ));
+    const toggle = createEnglishImageTTSMenuButton(
+        "🔊 單句／標籤選讀",
+        "展開本格每個完整句子、標籤或教學關鍵詞的獨立朗讀選項",
+        () => {
+            const list = menu.querySelector(".english-image-tts-sentences");
+            if (!list) return;
+            list.hidden = !list.hidden;
+            toggle.setAttribute("aria-expanded", String(!list.hidden));
+            scheduleEnglishImageTTSMenuPosition();
+        }
+    );
+    toggle.setAttribute("aria-expanded", "false");
+    const list = document.createElement("div");
+    list.className = "english-image-tts-sentences";
+    list.hidden = true;
+    options.choices.forEach(choice => {
+        const prefix = choice.kind === "label" ? "標籤／關鍵詞" : "單句";
+        list.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 " + prefix + "：" + choice.item.sourceText.replace(/\r?\n/g, " "),
+            "單獨朗讀第 " + panel.panelId + " 格" + prefix + "：「" +
+                choice.item.sourceText + "」",
+            () => {
+                closeEnglishImageTTSMenu();
+                speakEnglishImageTTSImageTextSequence(
+                    trigger, [choice.item], "已朗讀第 " + panel.panelId + " 格所選原圖文字。"
+                );
+            }
+        ));
+    });
+    menu.appendChild(toggle);
+    menu.appendChild(list);
+    return true;
+}
+
 function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const wrapper = trigger && typeof trigger.closest === "function"
         ? trigger.closest(".image-tts-overlay-wrapper")
@@ -26369,6 +26941,16 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const clickedPanel = trigger && trigger._englishImageTTSImageTextPanel;
     const safePanel = safeRecord && safeRecord.panels.find(item =>
         item.panelId === (panel && panel.panelId));
+    const isPlantReproductionImageText = Boolean(safeRecord &&
+        isEnglishPlantReproductionImageTTSRecord(safeRecord));
+    const plantReproductionImage = isPlantReproductionImageText && wrapper
+        ? wrapper.querySelector("img") : null;
+    const plantReproductionButtons = isPlantReproductionImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".plant-reproduction-panel-hit-area")) : [];
+    const plantReproductionLayoutReady = !isPlantReproductionImageText || Boolean(
+        layoutEnglishPlantReproductionPanelHitAreas(wrapper) &&
+        plantReproductionButtons.length === 4 && plantReproductionButtons.includes(trigger) &&
+        !trigger.hidden && !trigger.disabled);
     const isPlantsPhotosynthesisImageText = Boolean(safeRecord &&
         isEnglishPlantsPhotosynthesisImageTTSRecord(safeRecord));
     const plantsPhotosynthesisImage = isPlantsPhotosynthesisImageText && wrapper
@@ -26426,6 +27008,11 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         !safePanel || safePanel !== panel ||
         !panel.items.includes(trigger._englishImageTTSImageTextItem) ||
         wrapper.dataset.imageTtsAssetFile !== safeRecord.assetFile ||
+        (isPlantReproductionImageText && (!plantReproductionImage ||
+            plantReproductionImage.getAttribute("src") !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE ||
+            !plantReproductionImage.complete || plantReproductionImage.naturalWidth !== 1254 ||
+            plantReproductionImage.naturalHeight !== 1254 || !plantReproductionLayoutReady ||
+            !isEnglishPlantReproductionPanelTriggerReady(trigger))) ||
         (isPlantsPhotosynthesisImageText && (!plantsPhotosynthesisImage ||
             plantsPhotosynthesisImage.getAttribute("src") !== ENGLISH_PLANTS_PHOTOSYNTHESIS_ASSET_FILE ||
             !plantsPhotosynthesisImage.complete || plantsPhotosynthesisImage.naturalWidth !== 1448 ||
@@ -26497,6 +27084,29 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isEnglishPlantReproductionImageTTSRecord(safeRecord)) {
+        const options = getEnglishPlantReproductionPanelMenuOptions(safeRecord, panel);
+        const image = wrapper.querySelector("img");
+        if (!options || record !== safeRecord ||
+            trigger._englishImageTTSImageTextRecord !== safeRecord ||
+            trigger._englishImageTTSImageTextPanel !== panel ||
+            !isEnglishPlantReproductionPanelTriggerReady(trigger) ||
+            !image || image.getAttribute("src") !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE ||
+            !image.complete || image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+            !populateEnglishPlantReproductionPanelMenu(trigger, safeRecord, panel, menu, options)) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
     }
 
     if (isEnglishPlantsPhotosynthesisImageTTSRecord(safeRecord)) {
