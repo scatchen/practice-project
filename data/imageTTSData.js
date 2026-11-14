@@ -22964,5 +22964,166 @@ const imageTTSData = {
                 ]
             }
         ]
+    },
+    "images/english/immune-system-basics.png": {
+        imageId: "immune-system-basics",
+        title: "The Immune System",
+        assetFile: "images/english/immune-system-basics.png",
+        contentType: "image-text",
+        layout: "custom-immune-system-2x2",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1254, height: 1254 },
+        panels: [
+            {
+                panelId: 1,
+                readingOrder: 1,
+                bounds: { xPct: 10/1254*100, yPct: 160/1254*100, widthPct: 615/1254*100, heightPct: 515/1254*100 },
+                items: [
+                    {
+                        itemId: "immune-p1-germs-enter-body",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "Germs can enter our body through our nose, mouth, or cuts in the skin.",
+                        ttsText: "Germs can enter our body through our nose, mouth, or cuts in the skin.",
+                        bounds: { xPct: 92/1254*100, yPct: 247/1254*100, widthPct: 500/1254*100, heightPct: 70/1254*100 },
+                        textFragments: [
+                            { text: "Germs can enter our body through", bounds: { xPct: 96/1254*100, yPct: 250/1254*100, widthPct: 480/1254*100, heightPct: 29/1254*100 } },
+                            { text: "our nose, mouth, or cuts in the skin.", bounds: { xPct: 96/1254*100, yPct: 282/1254*100, widthPct: 480/1254*100, heightPct: 29/1254*100 } }
+                        ],
+                        tapRegion: { xPct: 80/1254*100, yPct: 239/1254*100, widthPct: 530/1254*100, heightPct: 84/1254*100 }
+                    }
+                ]
+            },
+            {
+                panelId: 2,
+                readingOrder: 2,
+                bounds: { xPct: 633/1254*100, yPct: 160/1254*100, widthPct: 612/1254*100, heightPct: 515/1254*100 },
+                items: [
+                    {
+                        itemId: "immune-p2-detect-germs",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "The immune system recognizes the germs as something harmful.",
+                        ttsText: "The immune system recognizes the germs as something harmful.",
+                        bounds: { xPct: 729/1254*100, yPct: 245/1254*100, widthPct: 486/1254*100, heightPct: 67/1254*100 },
+                        textFragments: [
+                            { text: "The immune system recognizes", bounds: { xPct: 735/1254*100, yPct: 248/1254*100, widthPct: 470/1254*100, heightPct: 30/1254*100 } },
+                            { text: "the germs as something harmful.", bounds: { xPct: 735/1254*100, yPct: 282/1254*100, widthPct: 470/1254*100, heightPct: 30/1254*100 } }
+                        ],
+                        tapRegion: { xPct: 715/1254*100, yPct: 237/1254*100, widthPct: 506/1254*100, heightPct: 86/1254*100 }
+                    },
+                    {
+                        itemId: "immune-p2-label-immune-system",
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "IMMUNE SYSTEM",
+                        ttsText: "IMMUNE SYSTEM",
+                        bounds: { xPct: 741/1254*100, yPct: 376/1254*100, widthPct: 140/1254*100, heightPct: 73/1254*100 },
+                        textFragments: [
+                            { text: "IMMUNE", bounds: { xPct: 744/1254*100, yPct: 380/1254*100, widthPct: 130/1254*100, heightPct: 28/1254*100 } },
+                            { text: "SYSTEM", bounds: { xPct: 748/1254*100, yPct: 409/1254*100, widthPct: 120/1254*100, heightPct: 28/1254*100 } }
+                        ],
+                        tapRegion: { xPct: 733/1254*100, yPct: 368/1254*100, widthPct: 157/1254*100, heightPct: 91/1254*100 }
+                    },
+                    {
+                        itemId: "immune-p2-label-harmful-germs",
+                        readingOrder: 3,
+                        type: "label",
+                        sourceText: "HARMFUL GERMS",
+                        ttsText: "HARMFUL GERMS",
+                        bounds: { xPct: 1013/1254*100, yPct: 374/1254*100, widthPct: 132/1254*100, heightPct: 64/1254*100 },
+                        textFragments: [
+                            { text: "HARMFUL", bounds: { xPct: 1020/1254*100, yPct: 380/1254*100, widthPct: 115/1254*100, heightPct: 28/1254*100 } },
+                            { text: "GERMS", bounds: { xPct: 1030/1254*100, yPct: 409/1254*100, widthPct: 95/1254*100, heightPct: 27/1254*100 } }
+                        ],
+                        tapRegion: { xPct: 1005/1254*100, yPct: 366/1254*100, widthPct: 149/1254*100, heightPct: 80/1254*100 }
+                    }
+                ]
+            },
+            {
+                panelId: 3,
+                readingOrder: 3,
+                bounds: { xPct: 10/1254*100, yPct: 684/1254*100, widthPct: 615/1254*100, heightPct: 561/1254*100 },
+                items: [
+                    {
+                        itemId: "immune-p3-fight-germs",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "Immune cells, like white blood cells, attack and help destroy the germs.",
+                        ttsText: "Immune cells, like white blood cells, attack and help destroy the germs.",
+                        bounds: { xPct: 101/1254*100, yPct: 773/1254*100, widthPct: 501/1254*100, heightPct: 70/1254*100 },
+                        textFragments: [
+                            { text: "Immune cells, like white blood cells,", bounds: { xPct: 106/1254*100, yPct: 778/1254*100, widthPct: 490/1254*100, heightPct: 30/1254*100 } },
+                            { text: "attack and help destroy the germs.", bounds: { xPct: 107/1254*100, yPct: 812/1254*100, widthPct: 480/1254*100, heightPct: 28/1254*100 } }
+                        ],
+                        tapRegion: { xPct: 92/1254*100, yPct: 765/1254*100, widthPct: 522/1254*100, heightPct: 92/1254*100 }
+                    },
+                    {
+                        itemId: "immune-p3-label-immune-cells",
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "IMMUNE CELLS",
+                        ttsText: "IMMUNE CELLS",
+                        bounds: { xPct: 260/1254*100, yPct: 1015/1254*100, widthPct: 135/1254*100, heightPct: 99/1254*100 },
+                        textFragments: [
+                            { text: "IMMUNE", bounds: { xPct: 269/1254*100, yPct: 1022/1254*100, widthPct: 120/1254*100, heightPct: 36/1254*100 } },
+                            { text: "CELLS", bounds: { xPct: 269/1254*100, yPct: 1062/1254*100, widthPct: 120/1254*100, heightPct: 36/1254*100 } }
+                        ],
+                        tapRegion: { xPct: 250/1254*100, yPct: 1005/1254*100, widthPct: 155/1254*100, heightPct: 118/1254*100 }
+                    }
+                ]
+            },
+            {
+                panelId: 4,
+                readingOrder: 4,
+                bounds: { xPct: 633/1254*100, yPct: 684/1254*100, widthPct: 612/1254*100, heightPct: 561/1254*100 },
+                items: [
+                    {
+                        itemId: "immune-p4-remember-germs",
+                        readingOrder: 1,
+                        type: "sentence",
+                        sourceText: "The immune system can remember some germs, so it can respond faster if the same germs enter again.",
+                        ttsText: "The immune system can remember some germs, so it can respond faster if the same germs enter again.",
+                        bounds: { xPct: 740/1254*100, yPct: 767/1254*100, widthPct: 488/1254*100, heightPct: 108/1254*100 },
+                        textFragments: [
+                            { text: "The immune system can remember", bounds: { xPct: 749/1254*100, yPct: 771/1254*100, widthPct: 465/1254*100, heightPct: 30/1254*100 } },
+                            { text: "some germs, so it can respond faster", bounds: { xPct: 745/1254*100, yPct: 807/1254*100, widthPct: 475/1254*100, heightPct: 30/1254*100 } },
+                            { text: "if the same germs enter again.", bounds: { xPct: 746/1254*100, yPct: 843/1254*100, widthPct: 475/1254*100, heightPct: 28/1254*100 } }
+                        ],
+                        tapRegion: { xPct: 730/1254*100, yPct: 758/1254*100, widthPct: 506/1254*100, heightPct: 126/1254*100 }
+                    },
+                    {
+                        itemId: "immune-p4-label-faster-response",
+                        readingOrder: 2,
+                        type: "label",
+                        sourceText: "Faster Response Next Time!",
+                        ttsText: "Faster Response Next Time!",
+                        bounds: { xPct: 1131/1254*100, yPct: 913/1254*100, widthPct: 100/1254*100, heightPct: 93/1254*100 },
+                        textFragments: [
+                            { text: "Faster", bounds: { xPct: 1137/1254*100, yPct: 917/1254*100, widthPct: 88/1254*100, heightPct: 26/1254*100 } },
+                            { text: "Response", bounds: { xPct: 1135/1254*100, yPct: 944/1254*100, widthPct: 92/1254*100, heightPct: 26/1254*100 } },
+                            { text: "Next Time!", bounds: { xPct: 1134/1254*100, yPct: 971/1254*100, widthPct: 95/1254*100, heightPct: 28/1254*100 } }
+                        ],
+                        tapRegion: { xPct: 1123/1254*100, yPct: 906/1254*100, widthPct: 117/1254*100, heightPct: 110/1254*100 }
+                    },
+                    {
+                        itemId: "immune-p4-label-immune-memory",
+                        readingOrder: 3,
+                        type: "label",
+                        sourceText: "IMMUNE MEMORY",
+                        ttsText: "IMMUNE MEMORY",
+                        bounds: { xPct: 844/1254*100, yPct: 1084/1254*100, widthPct: 131/1254*100, heightPct: 78/1254*100 },
+                        textFragments: [
+                            { text: "IMMUNE", bounds: { xPct: 850/1254*100, yPct: 1090/1254*100, widthPct: 119/1254*100, heightPct: 30/1254*100 } },
+                            { text: "MEMORY", bounds: { xPct: 850/1254*100, yPct: 1124/1254*100, widthPct: 119/1254*100, heightPct: 30/1254*100 } }
+                        ],
+                        tapRegion: { xPct: 835/1254*100, yPct: 1075/1254*100, widthPct: 150/1254*100, heightPct: 94/1254*100 }
+                    }
+                ]
+            }
+        ]
     }
 };
