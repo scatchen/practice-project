@@ -23127,6 +23127,91 @@ const imageTTSData = {
         ]
     },
 
+    "images/english/plants-and-photosynthesis-basics.png": (() => {
+        const rect = ([x, y, width, height]) => ({
+            xPct: x / 1448 * 100,
+            yPct: y / 1086 * 100,
+            widthPct: width / 1448 * 100,
+            heightPct: height / 1086 * 100
+        });
+        const item = (itemId, type, sourceText, box) => ({
+            itemId,
+            type,
+            sourceText,
+            ttsText: sourceText,
+            bounds: rect(box)
+        });
+        const panel = (panelId, box, items) => ({
+            panelId,
+            readingOrder: panelId,
+            bounds: rect(box),
+            items: items.map((entry, index) => ({ ...entry, readingOrder: index + 1 }))
+        });
+        return {
+            imageId: "plants-and-photosynthesis-basics",
+            title: "Plants & Photosynthesis",
+            assetFile: "images/english/plants-and-photosynthesis-basics.png",
+            contentType: "image-text",
+            layout: "custom-plants-and-photosynthesis-2x2",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1448, height: 1086 },
+            panels: [
+                panel(1, [10, 6, 711, 530], [
+                    item("plants-photo-p1-main-sentence", "sentence",
+                        "Plants use sunlight, water and carbon dioxide to make their own food!",
+                        [45, 187, 318, 110])
+                ]),
+                panel(2, [733, 6, 707, 530], [
+                    item("plants-photo-p2-sunlight", "label", "Sunlight (light energy)",
+                        [876, 110, 170, 70]),
+                    item("plants-photo-p2-carbon-dioxide", "label", "Carbon Dioxide (CO₂)",
+                        [750, 269, 196, 72]),
+                    item("plants-photo-p2-oxygen", "label", "Oxygen (O₂)",
+                        [1245, 118, 166, 86]),
+                    item("plants-photo-p2-glucose", "label", "Glucose (plant food)",
+                        [1243, 260, 180, 90]),
+                    item("plants-photo-p2-water", "label", "Water (H₂O)",
+                        [764, 417, 174, 86])
+                ]),
+                panel(3, [10, 550, 711, 513], [
+                    item("plants-photo-p3-flower", "label", "Flower", [31, 628, 120, 40]),
+                    item("plants-photo-p3-flower-pollinators", "label",
+                        "Attracts pollinators", [43, 678, 240, 30]),
+                    item("plants-photo-p3-flower-seeds", "label",
+                        "Helps make seeds", [43, 708, 190, 32]),
+                    item("plants-photo-p3-leaves", "label", "Leaves", [31, 752, 120, 40]),
+                    item("plants-photo-p3-leaves-sunlight", "label",
+                        "Capture sunlight", [41, 803, 207, 30]),
+                    item("plants-photo-p3-leaves-photosynthesis", "label",
+                        "Make food (photosynthesis)", [42, 832, 211, 52]),
+                    item("plants-photo-p3-stem", "label", "Stem", [497, 708, 119, 45]),
+                    item("plants-photo-p3-stem-support", "label",
+                        "Supports the plant", [506, 763, 201, 31]),
+                    item("plants-photo-p3-stem-transports", "label",
+                        "Transports water and food", [505, 794, 212, 55]),
+                    item("plants-photo-p3-roots", "label", "Roots", [33, 912, 117, 43]),
+                    item("plants-photo-p3-roots-absorb", "label",
+                        "Absorb water and minerals", [42, 965, 190, 47])
+                ]),
+                panel(4, [733, 550, 707, 513], [
+                    item("plants-photo-p4-provide-oxygen", "label",
+                        "Provide oxygen", [793, 749, 140, 61]),
+                    item("plants-photo-p4-give-food", "label",
+                        "Give us food", [952, 748, 144, 64]),
+                    item("plants-photo-p4-help-environment", "label",
+                        "Help the environment", [789, 902, 140, 70]),
+                    item("plants-photo-p4-world-greener", "label",
+                        "Make our world greener", [942, 902, 157, 72]),
+                    item("plants-photo-p4-healthy-plants-bubble", "bubble",
+                        "Healthy plants, healthy planet!", [1187, 641, 222, 132])
+                ])
+            ]
+        };
+    })(),
+
     "images/english/human-brain-and-nervous-system-basics.png": (() => {
         const rect = ([x, y, width, height]) => ({
             xPct: x / 1536 * 100,
