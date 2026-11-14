@@ -5347,6 +5347,9 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
     }
     const isTyphoonsImageText = record.imageId === ENGLISH_TYPHOONS_IMAGE_ID &&
         record.assetFile === ENGLISH_TYPHOONS_ASSET_FILE;
+    const isNaturalResourcesImageText =
+        record.imageId === ENGLISH_NATURAL_RESOURCES_IMAGE_ID &&
+        record.assetFile === ENGLISH_NATURAL_RESOURCES_ASSET_FILE;
     if (isEnglishSolarEnergyImageTTSRecord(record)) {
         return placeEnglishSolarEnergyImageTTSStopButton(
             button, wrapper, validatedRecord, safePanel, safeItem
@@ -5427,7 +5430,10 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
         {
             preferBelow: true,
             scanForClearPosition: true,
-            strictAvoidance: isPlateausImageText,
+            strictAvoidance: isPlateausImageText || isNaturalResourcesImageText,
+            fixedStopSize: isNaturalResourcesImageText,
+            fixedStopWidth: isNaturalResourcesImageText ? 52 : undefined,
+            fixedStopHeight: isNaturalResourcesImageText ? 52 : undefined,
             stopControlClass: "is-image-tts-image-text-stop-control"
         }
     );
@@ -11463,6 +11469,7 @@ function isEnglishImageTTSItemText(record, item) {
     if (isEnglishPlantReproductionImageTTSItemText(record, item)) return true;
     if (isEnglishPlantsPhotosynthesisImageTTSItemText(record, item)) return true;
     if (isEnglishHumanBrainImageTTSItemText(record, item)) return true;
+    if (isEnglishNaturalResourcesImageTTSItemText(record, item)) return true;
     if (isEnglishImmuneSystemImageTTSItemText(record, item)) return true;
     if (isEnglishSkeletalSystemImageTTSItemText(record, item)) return true;
     if (isEnglishExcretorySystemImageTTSItemText(record, item)) return true;
@@ -12066,6 +12073,7 @@ function getEnglishImageTTSImageTextName(record) {
     if (isEnglishPlantReproductionImageTTSRecord(record)) return "Plant Reproduction";
     if (isEnglishPlantsPhotosynthesisImageTTSRecord(record)) return "Plants & Photosynthesis";
     if (isEnglishHumanBrainImageTTSRecord(record)) return "The Human Brain & Nervous System";
+    if (isEnglishNaturalResourcesImageTTSRecord(record)) return "Natural Resources";
     if (isEnglishImmuneSystemImageTTSRecord(record)) return "The Immune System";
     if (isEnglishSkeletalSystemImageTTSRecord(record)) return "The Skeletal System & Bones";
     if (isEnglishExcretorySystemImageTTSRecord(record)) return "The Excretory System & Kidneys";
@@ -16782,6 +16790,33 @@ function getEnglishSkeletalSystemPanelEntryBounds(panelId) {
 const ENGLISH_HUMAN_BRAIN_ASSET_FILE =
     "images/english/human-brain-and-nervous-system-basics.png";
 const ENGLISH_HUMAN_BRAIN_IMAGE_ID = "human-brain-and-nervous-system-basics";
+const ENGLISH_NATURAL_RESOURCES_ASSET_FILE = "images/english/natural-resources-basics.png";
+const ENGLISH_NATURAL_RESOURCES_IMAGE_ID = "natural-resources-basics";
+const ENGLISH_NATURAL_RESOURCES_PANEL_ENTRY_PIXELS = Object.freeze([
+    Object.freeze({ panelId: 1, x: 12, y: 154, width: 740, height: 390 }),
+    Object.freeze({ panelId: 2, x: 784, y: 154, width: 740, height: 390 }),
+    Object.freeze({ panelId: 3, x: 12, y: 574, width: 740, height: 432 }),
+    Object.freeze({ panelId: 4, x: 784, y: 574, width: 740, height: 432 })
+]);
+const ENGLISH_NATURAL_RESOURCES_TEXT_PIXELS = Object.freeze([
+    Object.freeze({ panelId: 1, items: Object.freeze([
+        Object.freeze({ itemId: "natural-resources-p1-label-water", type: "label", sourceText: "Water", bounds: Object.freeze([118, 163, 200, 68]) }),
+        Object.freeze({ itemId: "natural-resources-p1-sentence-water", type: "sentence", sourceText: "We use water to drink, clean, and grow food.", bounds: Object.freeze([32, 246, 325, 78]) })
+    ]) }),
+    Object.freeze({ panelId: 2, items: Object.freeze([
+        Object.freeze({ itemId: "natural-resources-p2-label-forests", type: "label", sourceText: "Forests", bounds: Object.freeze([885, 163, 260, 72]) }),
+        Object.freeze({ itemId: "natural-resources-p2-sentence-forests", type: "sentence", sourceText: "Forests give us wood, clean air, and a home for many animals.", bounds: Object.freeze([803, 247, 317, 102]) })
+    ]) }),
+    Object.freeze({ panelId: 3, items: Object.freeze([
+        Object.freeze({ itemId: "natural-resources-p3-label-minerals", type: "label", sourceText: "Minerals", bounds: Object.freeze([123, 578, 278, 72]) }),
+        Object.freeze({ itemId: "natural-resources-p3-sentence-minerals-earth", type: "sentence", sourceText: "We get minerals from the Earth.", bounds: Object.freeze([30, 665, 320, 56]) }),
+        Object.freeze({ itemId: "natural-resources-p3-sentence-minerals-uses", type: "sentence", sourceText: "They are used to make metal, electronics, and many other things.", bounds: Object.freeze([30, 716, 355, 72]) })
+    ]) }),
+    Object.freeze({ panelId: 4, items: Object.freeze([
+        Object.freeze({ itemId: "natural-resources-p4-label-fossil-fuels", type: "label", sourceText: "Fossil Fuels", bounds: Object.freeze([912, 580, 300, 72]) }),
+        Object.freeze({ itemId: "natural-resources-p4-sentence-fossil-fuels", type: "sentence", sourceText: "Fossil fuels like coal, oil, and natural gas give us energy for electricity, transportation, and heating.", bounds: Object.freeze([800, 663, 350, 126]) })
+    ]) })
+]);
 const ENGLISH_HUMAN_BRAIN_PANEL_ENTRY_PIXELS = Object.freeze([
     Object.freeze({ panelId: 1, x: 25, y: 24, width: 720, height: 460 }),
     Object.freeze({ panelId: 2, x: 790, y: 24, width: 718, height: 460 }),
@@ -17662,6 +17697,100 @@ function getEnglishExcretorySystemPanelMenuOptions(record, panel) {
     };
 }
 
+function getEnglishNaturalResourcesExpectedPanels() {
+    const rect = ([x, y, width, height]) => ({
+        xPct: x / 1536 * 100, yPct: y / 1024 * 100,
+        widthPct: width / 1536 * 100, heightPct: height / 1024 * 100
+    });
+    return ENGLISH_NATURAL_RESOURCES_TEXT_PIXELS.map(expected => {
+        const region = ENGLISH_NATURAL_RESOURCES_PANEL_ENTRY_PIXELS.find(item =>
+            item.panelId === expected.panelId);
+        return {
+            panelId: expected.panelId, readingOrder: expected.panelId,
+            bounds: rect([region.x, region.y, region.width, region.height]),
+            items: expected.items.map((item, index) => ({
+                itemId: item.itemId, readingOrder: index + 1, type: item.type,
+                sourceText: item.sourceText, ttsText: item.sourceText, bounds: rect(item.bounds)
+            }))
+        };
+    });
+}
+
+function getEnglishNaturalResourcesImageTTSRecord(record, assetFile) {
+    const file = ENGLISH_NATURAL_RESOURCES_ASSET_FILE;
+    const expected = getEnglishNaturalResourcesExpectedPanels();
+    const exact = (value, keys) => value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+    const rectKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validRect = value => exact(value, rectKeys) &&
+        rectKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const sameRect = (actual, wanted) => validRect(actual) &&
+        rectKeys.every(key => Math.abs(actual[key] - wanted[key]) <= 0.0001);
+    const contains = (outer, inner) => validRect(outer) && validRect(inner) &&
+        inner.xPct >= outer.xPct - 0.0001 && inner.yPct >= outer.yPct - 0.0001 &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct + 0.0001 &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct + 0.0001;
+    if (!exact(record, ["imageId", "title", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "sourceImageDimensions", "panels"]) ||
+        record.imageId !== ENGLISH_NATURAL_RESOURCES_IMAGE_ID ||
+        record.title !== "Natural Resources" || record.assetFile !== file || assetFile !== file ||
+        typeof imageTTSData === "undefined" || !imageTTSData || imageTTSData[file] !== record ||
+        record.contentType !== "image-text" || record.layout !== "custom-natural-resources-2x2-card-menu" ||
+        record.transcriptStatus !== "verified" || record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== expected.length) return null;
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === ENGLISH_NATURAL_RESOURCES_IMAGE_ID || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_NATURAL_RESOURCES_IMAGE_ID || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file || library.length !== 1 ||
+        library[0].id !== ENGLISH_NATURAL_RESOURCES_IMAGE_ID || library[0].file !== file ||
+        library[0].category !== "english") return null;
+    for (let p = 0; p < expected.length; p += 1) {
+        const panel = record.panels[p], wanted = expected[p];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== wanted.panelId || panel.readingOrder !== wanted.readingOrder ||
+            !sameRect(panel.bounds, wanted.bounds) || !Array.isArray(panel.items) ||
+            panel.items.length !== wanted.items.length) return null;
+        for (let i = 0; i < wanted.items.length; i += 1) {
+            const item = panel.items[i], target = wanted.items[i];
+            if (!exact(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]) ||
+                item.itemId !== target.itemId || item.readingOrder !== target.readingOrder ||
+                item.type !== target.type || item.sourceText !== target.sourceText ||
+                item.ttsText !== target.ttsText || !getEnglishTTSUnitText(item.ttsText) ||
+                !sameRect(item.bounds, target.bounds) || !contains(panel.bounds, item.bounds)) return null;
+        }
+    }
+    return record;
+}
+
+function isEnglishNaturalResourcesImageTTSRecord(record) {
+    return Boolean(record && typeof imageTTSData !== "undefined" && imageTTSData &&
+        imageTTSData[ENGLISH_NATURAL_RESOURCES_ASSET_FILE] === record &&
+        getEnglishNaturalResourcesImageTTSRecord(record, ENGLISH_NATURAL_RESOURCES_ASSET_FILE) === record);
+}
+function isEnglishNaturalResourcesImageTTSItemText(record, item) {
+    return Boolean(isEnglishNaturalResourcesImageTTSRecord(record) && item &&
+        record.panels.some(panel => panel.items.includes(item)));
+}
+function getEnglishNaturalResourcesPanelMenuOptions(record, panel) {
+    if (!isEnglishNaturalResourcesImageTTSRecord(record) || !panel ||
+        record.panels.find(candidate => candidate.panelId === panel.panelId) !== panel) return null;
+    return {
+        fullItems: panel.items.slice(),
+        choices: panel.items.map(item => ({ item, kind: item.type === "label" ? "label" : "sentence" }))
+    };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -17669,6 +17798,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_NATURAL_RESOURCES_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_NATURAL_RESOURCES_IMAGE_ID ||
+            record.assetFile === ENGLISH_NATURAL_RESOURCES_ASSET_FILE)) {
+        return getEnglishNaturalResourcesImageTTSRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE || record &&
         (record.imageId === ENGLISH_PLANT_REPRODUCTION_IMAGE_ID ||
             record.assetFile === ENGLISH_PLANT_REPRODUCTION_ASSET_FILE)) {
@@ -22058,6 +22192,106 @@ function createEnglishExcretorySystemPanelHitArea(wrapper, panel, record) {
     return button;
 }
 
+function layoutEnglishNaturalResourcesPanelHitAreas(wrapper) {
+    if (!wrapper || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_NATURAL_RESOURCES_ASSET_FILE) return false;
+    const image = wrapper.querySelector("img");
+    const record = getEnglishNaturalResourcesImageTTSRecord(
+        imageTTSData && imageTTSData[ENGLISH_NATURAL_RESOURCES_ASSET_FILE],
+        ENGLISH_NATURAL_RESOURCES_ASSET_FILE);
+    const buttons = Array.from(wrapper.querySelectorAll(".natural-resources-panel-hit-area"));
+    const imageRect = image && image.getBoundingClientRect(), wrapperRect = wrapper.getBoundingClientRect();
+    const ready = Boolean(image && isEnglishNaturalResourcesFormalSearchImage(image) && record &&
+        image.complete === true && image.naturalWidth === 1536 && image.naturalHeight === 1024 &&
+        imageRect && imageRect.width > 0 && imageRect.height > 0 && wrapperRect && buttons.length === 4);
+    const hide = button => {
+        button.hidden = true; button.disabled = true;
+        button.setAttribute("aria-disabled", "true"); button.style.pointerEvents = "none";
+    };
+    if (!ready) { buttons.forEach(hide); return false; }
+    buttons.forEach(button => {
+        const panelId = Number(button.getAttribute("data-image-tts-panel-id"));
+        const region = ENGLISH_NATURAL_RESOURCES_PANEL_ENTRY_PIXELS.find(item => item.panelId === panelId);
+        if (!region) { hide(button); return; }
+        const imageLeft = imageRect.left - wrapperRect.left, imageTop = imageRect.top - wrapperRect.top;
+        const renderedWidth = imageRect.width * region.width / 1536;
+        const renderedHeight = imageRect.height * region.height / 1024;
+        button.style.left = imageLeft + imageRect.width * region.x / 1536 + "px";
+        button.style.top = imageTop + imageRect.height * region.y / 1024 + "px";
+        button.style.width = renderedWidth + "px"; button.style.height = renderedHeight + "px";
+        const enabled = drawMode === "select" && appState.subjectMode === "english" &&
+            renderedWidth >= 44 && renderedHeight >= 44;
+        button.hidden = !enabled; button.disabled = !enabled;
+        button.setAttribute("aria-disabled", String(!enabled));
+        button.style.pointerEvents = enabled ? "auto" : "none";
+    });
+    return buttons.every(button => !button.hidden && !button.disabled);
+}
+function isEnglishNaturalResourcesPanelTriggerReady(trigger) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    const record = getEnglishNaturalResourcesImageTTSRecord(
+        imageTTSData && imageTTSData[ENGLISH_NATURAL_RESOURCES_ASSET_FILE],
+        ENGLISH_NATURAL_RESOURCES_ASSET_FILE);
+    const panel = trigger && trigger._englishImageTTSImageTextPanel;
+    const buttons = wrapper ? Array.from(wrapper.querySelectorAll(".natural-resources-panel-hit-area")) : [];
+    if (!wrapper || !image || !record || !isEnglishNaturalResourcesFormalSearchImage(image) ||
+        trigger._englishImageTTSImageTextRecord !== record || !trigger.classList ||
+        !trigger.classList.contains("natural-resources-panel-hit-area") || buttons.length !== 4 ||
+        !buttons.includes(trigger) || !panel || record.panels[panel.panelId - 1] !== panel ||
+        trigger._englishImageTTSImageTextItem !== panel.items[0] ||
+        trigger._englishImageTTSImageTextActivePanel !== panel ||
+        !layoutEnglishNaturalResourcesPanelHitAreas(wrapper) || trigger.hidden || trigger.disabled)
+        return false;
+    const rect = trigger.getBoundingClientRect();
+    if (!rect || rect.width < 44 || rect.height < 44 || typeof document.elementFromPoint !== "function")
+        return false;
+    const points = [
+        [(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2],
+        [rect.left + rect.width * .25, rect.top + rect.height * .25],
+        [rect.left + rect.width * .75, rect.top + rect.height * .25],
+        [rect.left + rect.width * .25, rect.top + rect.height * .75],
+        [rect.left + rect.width * .75, rect.top + rect.height * .75]
+    ];
+    try { return points.every(([x, y]) => {
+        const hit = document.elementFromPoint(x, y);
+        return hit === trigger || trigger.contains(hit);
+    }); } catch (error) { return false; }
+}
+function createEnglishNaturalResourcesPanelHitArea(wrapper, panel, record) {
+    const firstItem = panel && panel.items[0];
+    if (!wrapper || !panel || !firstItem || !isEnglishNaturalResourcesImageTTSRecord(record) ||
+        !isEnglishNaturalResourcesFormalSearchImage(wrapper.querySelector("img"))) return null;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-image-text-hit-area natural-resources-panel-hit-area";
+    button.hidden = true; button.disabled = true;
+    button.setAttribute("aria-disabled", "true");
+    button.setAttribute("aria-label", "Natural Resources 第 " + panel.panelId +
+        " 卡教學內容入口，開啟本卡完整朗讀及句子、標籤選讀選項");
+    button.setAttribute("aria-haspopup", "true"); button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("data-image-tts-item-id", firstItem.itemId);
+    button._englishImageTTSImageTextRecord = record;
+    button._englishImageTTSImageTextPanel = panel;
+    button._englishImageTTSImageTextItem = firstItem;
+    button._englishImageTTSImageTextActivePanel = panel;
+    button._englishImageTTSImageTextActiveItem = firstItem;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (!isEnglishNaturalResourcesPanelTriggerReady(button)) return;
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu(); return;
+        }
+        openEnglishImageTTSImageTextMenu(button, record, panel);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
 function layoutEnglishHumanBrainPanelHitAreas(wrapper) {
     if (!wrapper || !wrapper.dataset ||
         wrapper.dataset.imageTtsAssetFile !== ENGLISH_HUMAN_BRAIN_ASSET_FILE) return false;
@@ -23489,6 +23723,7 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
     function renderResponse(responseRoot, question, headingText, answerHTML) {
         ENGLISH_WIND_ENERGY_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
+        ENGLISH_NATURAL_RESOURCES_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_EXCRETORY_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_SKELETAL_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_IMMUNE_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
@@ -23668,6 +23903,23 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
         const trustedWindEnergySpec = canonicalWind && returnedWind === 1 && windSpecs.length === 1 &&
             windSpecs[0].diagram === canonicalWind ? windSpecs[0] : null;
 
+        const naturalResourcesMatches = Array.isArray(diagramMap)
+            ? diagramMap.filter(entry => entry &&
+                (entry.id === ENGLISH_NATURAL_RESOURCES_IMAGE_ID ||
+                    entry.file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE)) : [];
+        const canonicalNaturalResourcesEntry = naturalResourcesMatches.length === 1 &&
+            naturalResourcesMatches[0].id === ENGLISH_NATURAL_RESOURCES_IMAGE_ID &&
+            naturalResourcesMatches[0].file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE
+                ? naturalResourcesMatches[0] : null;
+        const returnedNaturalResourcesCount = canonicalNaturalResourcesEntry
+            ? diagrams.filter(diagram => diagram === canonicalNaturalResourcesEntry).length : 0;
+        const naturalResourcesSpecs = specs.filter(spec =>
+            spec.imageData.file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE);
+        const trustedNaturalResourcesSpec = canonicalNaturalResourcesEntry &&
+            returnedNaturalResourcesCount === 1 && naturalResourcesSpecs.length === 1 &&
+            naturalResourcesSpecs[0].diagram === canonicalNaturalResourcesEntry
+                ? naturalResourcesSpecs[0] : null;
+
         const energyMatches=Array.isArray(diagramMap)?diagramMap.filter(entry=>entry&&(entry.id===ENGLISH_ENERGY_SOURCES_IMAGE_ID||entry.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE)):[];
         const canonicalEnergy=energyMatches.length===1&&energyMatches[0].id===ENGLISH_ENERGY_SOURCES_IMAGE_ID&&energyMatches[0].file===ENGLISH_ENERGY_SOURCES_ASSET_FILE?energyMatches[0]:null;
         const returnedEnergy=canonicalEnergy?diagrams.filter(diagram=>diagram===canonicalEnergy).length:0;
@@ -23700,6 +23952,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 if (spec === trustedEnergySourcesSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_ENERGY_SOURCES_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_ENERGY_SOURCES_ASSET_FILE);
+                }
+                if (spec === trustedNaturalResourcesSpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_NATURAL_RESOURCES_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_NATURAL_RESOURCES_ASSET_FILE);
                 }
                 if (spec === trustedV2Spec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_TELEPHONE_V2_IMAGE_ID);
@@ -23798,11 +24054,130 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedWindEnergySpec);
         ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedEnergySourcesSpec);
+        ENGLISH_NATURAL_RESOURCES_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedNaturalResourcesSpec);
         return answerRoot;
     }
 
     return { renderResponse, isTrustedNode, enhanceCurrent };
 })();
+
+const ENGLISH_NATURAL_RESOURCES_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    let currentContext = null, generation = 0;
+    function detachInlineImage(image) {
+        const wrapper = image && image.closest ? image.closest(".image-tts-overlay-wrapper") : null;
+        if (!wrapper) return;
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper.contains(active) && active.classList &&
+            active.classList.contains("natural-resources-panel-hit-area"))
+            cancelEnglishImageTTSImageTextSequence(true);
+        const activeMenu = englishImageTTSOverlayState.activeTrigger;
+        if (activeMenu && wrapper.contains(activeMenu) && activeMenu.classList &&
+            activeMenu.classList.contains("natural-resources-panel-hit-area"))
+            closeEnglishImageTTSMenu();
+        wrapper.querySelectorAll(".natural-resources-panel-hit-area").forEach(button => button.remove());
+    }
+    function revokeImage(context, image) {
+        if (!context || !image || !context.images.has(image)) return;
+        originByImage.delete(image); context.images.delete(image); detachInlineImage(image);
+    }
+    function process(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revokeImage(context, record.target); return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removed =>
+                Array.from(context.images).forEach(image => {
+                    if (removed === image || removed && typeof removed.contains === "function" &&
+                        removed.contains(image)) revokeImage(context, image);
+                }));
+        });
+    }
+    function expireCurrentContext() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revokeImage(context, image));
+        currentContext = null;
+    }
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer) process(context, context.observer.takeRecords());
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked || origin.context !== context ||
+            origin.generation !== context.generation || !context.observer || !image.isConnected ||
+            context.responseRoot !== document.getElementById("ai-response") ||
+            !context.responseRoot.isConnected || !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(image) ||
+            image.getAttribute("src") !== ENGLISH_NATURAL_RESOURCES_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !== ENGLISH_NATURAL_RESOURCES_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !== ENGLISH_NATURAL_RESOURCES_ASSET_FILE)
+            return false;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_NATURAL_RESOURCES_IMAGE_ID ||
+                entry.file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE)) : [];
+        return matches.length === 1 && matches[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_NATURAL_RESOURCES_IMAGE_ID &&
+            origin.diagram.file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE;
+    }
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot || !diagramContainer || !trustedSpec ||
+            typeof MutationObserver !== "function" ||
+            responseRoot !== document.getElementById("ai-response") ||
+            !responseRoot.isConnected || !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_NATURAL_RESOURCES_IMAGE_ID ||
+                entry.file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE)) : [];
+        const targetSpecs = (Array.isArray(renderedSpecs) ? renderedSpecs : []).filter(entry =>
+            entry && entry.spec && entry.spec.imageData &&
+            entry.spec.imageData.file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE);
+        const rendered = renderedSpecs.find(entry => entry && entry.spec === trustedSpec);
+        if (matches.length !== 1 || matches[0] !== diagram ||
+            !diagram || diagram.id !== ENGLISH_NATURAL_RESOURCES_IMAGE_ID ||
+            diagram.file !== ENGLISH_NATURAL_RESOURCES_ASSET_FILE ||
+            targetSpecs.length !== 1 || !rendered || !rendered.image ||
+            !rendered.image.isConnected || !diagramContainer.contains(rendered.image)) return false;
+        const image = rendered.image, wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) || !diagramContainer.contains(wrapper)) return false;
+        const context = {
+            generation: ++generation, responseRoot, diagramContainer, diagram,
+            images: new Set([image]), observer: null, revoked: false
+        };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram });
+        context.observer = new MutationObserver(records => process(context, records));
+        context.observer.observe(responseRoot, {
+            childList: true, subtree: true, attributes: true,
+            attributeFilter: ["src", "data-english-image-library-id", "data-english-image-library-file"]
+        });
+        if (!isTrustedNode(image)) { expireCurrentContext(); return false; }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+    return { register, expireCurrentContext, isTrustedNode };
+})();
+
+function isEnglishNaturalResourcesFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_NATURAL_RESOURCES_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !== ENGLISH_NATURAL_RESOURCES_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !== ENGLISH_NATURAL_RESOURCES_ASSET_FILE ||
+        !ENGLISH_NATURAL_RESOURCES_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || !Array.isArray(diagramMap)) return false;
+    const record = imageTTSData[ENGLISH_NATURAL_RESOURCES_ASSET_FILE];
+    if (getEnglishNaturalResourcesImageTTSRecord(record, ENGLISH_NATURAL_RESOURCES_ASSET_FILE) !== record)
+        return false;
+    const matches = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_NATURAL_RESOURCES_IMAGE_ID ||
+            entry.file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE));
+    return matches.length === 1 && matches[0].id === ENGLISH_NATURAL_RESOURCES_IMAGE_ID &&
+        matches[0].file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE;
+}
 
 const ENGLISH_ENERGY_SOURCES_ASSET_FILE = "images/english/energy-and-energy-sources-basics.png";
 const ENGLISH_ENERGY_SOURCES_IMAGE_ID = "energy-and-energy-sources-basics";
@@ -24938,6 +25313,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_NATURAL_RESOURCES_ASSET_FILE &&
+            !isEnglishNaturalResourcesFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_WIND_ENERGY_ASSET_FILE && !isEnglishWindEnergyFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_ENERGY_SOURCES_ASSET_FILE && !isEnglishEnergySourcesFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_HUMAN_BRAIN_ASSET_FILE &&
@@ -25008,6 +25385,35 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishNaturalResourcesImageTTSRecord(record)) {
+                const dimensionsOK = () => isEnglishNaturalResourcesFormalSearchImage(image) &&
+                    image.getAttribute("src") === ENGLISH_NATURAL_RESOURCES_ASSET_FILE &&
+                    image.complete === true && image.naturalWidth === 1536 && image.naturalHeight === 1024;
+                if (image.complete && !dimensionsOK()) return;
+                record.panels.forEach(panel => {
+                    if (createEnglishNaturalResourcesPanelHitArea(wrapper, panel, record)) added += 1;
+                });
+                const hide = () => {
+                    wrapper.querySelectorAll(".natural-resources-panel-hit-area").forEach(button => {
+                        button.hidden = true; button.disabled = true;
+                        button.setAttribute("aria-disabled", "true"); button.style.pointerEvents = "none";
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger))
+                        closeEnglishImageTTSMenu();
+                    const active = englishTTSState.imageTextSequenceTrigger;
+                    if (active && wrapper.contains(active) && active.classList &&
+                        active.classList.contains("natural-resources-panel-hit-area"))
+                        cancelEnglishImageTTSImageTextSequence(true);
+                };
+                image.addEventListener("load", () => {
+                    if (!dimensionsOK()) { hide(); return; }
+                    layoutEnglishNaturalResourcesPanelHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", hide, { once: true });
+                layoutEnglishNaturalResourcesPanelHitAreas(wrapper);
+                return;
+            }
             if (isEnglishWindEnergyImageTTSRecord(record)) {
                 const dimensionsOK = () => isEnglishWindEnergyFormalSearchImage(image) &&
                     image.getAttribute("src") === ENGLISH_WIND_ENERGY_ASSET_FILE &&
@@ -26304,6 +26710,9 @@ function getEnglishImageTTSImageTextSpeechText(record, item) {
     if (isEnglishHumanBrainImageTTSItemText(record, item)) {
         return getEnglishTTSUnitText(item.ttsText);
     }
+    if (isEnglishNaturalResourcesImageTTSItemText(record, item)) {
+        return getEnglishTTSUnitText(item.ttsText);
+    }
     if (isEnglishImmuneSystemImageTTSItemText(record, item)) {
         return getEnglishTTSUnitText(item.ttsText);
     }
@@ -26484,6 +26893,10 @@ function speakEnglishImageTTSImageTextSequence(
     const isHumanBrainImageText = isEnglishHumanBrainImageTTSRecord(record);
     const isHumanBrainSingleItemSequence = Boolean(isHumanBrainImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
+    const isNaturalResourcesImageText = isEnglishNaturalResourcesImageTTSRecord(record);
+    const isNaturalResourcesSingleItemSequence = Boolean(isNaturalResourcesImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const naturalResourcesPanel = trigger && trigger._englishImageTTSImageTextPanel;
     const isImmuneSystemImageText = isEnglishImmuneSystemImageTTSRecord(record);
     const isImmuneSystemSingleItemSequence = Boolean(isImmuneSystemImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
@@ -26853,6 +27266,23 @@ function speakEnglishImageTTSImageTextSequence(
         humanBrainButtons.length === 4 && humanBrainButtons.includes(trigger) &&
         itemList.length > 0 && itemList.every(item => humanBrainPanel.items.includes(item)) &&
         isEnglishHumanBrainPanelTriggerReady(trigger));
+    const naturalResourcesImage = isNaturalResourcesImageText ? wrapper.querySelector("img") : null;
+    const naturalResourcesButtons = isNaturalResourcesImageText
+        ? Array.from(wrapper.querySelectorAll(".natural-resources-panel-hit-area")) : [];
+    const naturalResourcesImageReady = !isNaturalResourcesImageText || Boolean(
+        assetFile === ENGLISH_NATURAL_RESOURCES_ASSET_FILE &&
+        record === imageTTSData[assetFile] && naturalResourcesImage &&
+        isEnglishNaturalResourcesFormalSearchImage(naturalResourcesImage) &&
+        naturalResourcesImage.getAttribute("src") === ENGLISH_NATURAL_RESOURCES_ASSET_FILE &&
+        naturalResourcesImage.complete === true && naturalResourcesImage.naturalWidth === 1536 &&
+        naturalResourcesImage.naturalHeight === 1024 &&
+        trigger._englishImageTTSImageTextRecord === record && naturalResourcesPanel &&
+        record.panels.includes(naturalResourcesPanel) &&
+        trigger._englishImageTTSImageTextPanel === naturalResourcesPanel &&
+        trigger._englishImageTTSImageTextItem === naturalResourcesPanel.items[0] &&
+        naturalResourcesButtons.length === 4 && naturalResourcesButtons.includes(trigger) &&
+        itemList.length > 0 && itemList.every(item => naturalResourcesPanel.items.includes(item)) &&
+        isEnglishNaturalResourcesPanelTriggerReady(trigger));
     const plantsPhotosynthesisImage = isPlantsPhotosynthesisImageText
         ? wrapper.querySelector("img") : null;
     const plantsPhotosynthesisPanel = isPlantsPhotosynthesisImageText && trigger
@@ -27018,7 +27448,8 @@ function speakEnglishImageTTSImageTextSequence(
         (!isPanelSequence && !telephoneV2P4WholePanelSequence &&
             !telephoneV2P7WholePanelSequence && !isExcretorySystemSingleItemSequence &&
             !isSkeletalSystemSingleItemSequence && !isImmuneSystemSingleItemSequence &&
-            !isHumanBrainSingleItemSequence && !isPlantsPhotosynthesisSingleItemSequence &&
+            !isHumanBrainSingleItemSequence && !isNaturalResourcesSingleItemSequence &&
+            !isPlantsPhotosynthesisSingleItemSequence &&
             !isPlantReproductionSingleItemSequence &&
             !isTelephoneV2P4SingleItemSequence &&
             !isTelephoneV2P7SingleItemSequence &&
@@ -27060,7 +27491,8 @@ function speakEnglishImageTTSImageTextSequence(
         !animalsAdaptationImageReady || !humanHealthImageReady || !typhoonsImageReady ||
         !muscularImageReady || !cyclingImageReady || !solarImageReady ||
         !xraysImageReady || !skeletalSystemImageReady || !immuneSystemImageReady ||
-        !humanBrainImageReady || !plantsPhotosynthesisImageReady || !plantReproductionImageReady ||
+        !humanBrainImageReady || !naturalResourcesImageReady ||
+        !plantsPhotosynthesisImageReady || !plantReproductionImageReady ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
@@ -27331,7 +27763,8 @@ function speakEnglishImageTTSImageTextSequence(
                 }
                 const delay = isWindEnergyImageText || isExcretorySystemImageText ||
                     isSkeletalSystemImageText || isImmuneSystemImageText || isHumanBrainImageText ||
-                    isPlantsPhotosynthesisImageText || isPlantReproductionImageText
+                    isNaturalResourcesImageText || isPlantsPhotosynthesisImageText ||
+                    isPlantReproductionImageText
                     ? 500
                     : (isTyphoonsImageText
                     ? getEnglishTyphoonsImageTextSpeechPause(record, previousItem, previousSpeechSegmentIndex)
@@ -27651,6 +28084,50 @@ function populateEnglishPlantReproductionPanelMenu(trigger, record, panel, menu,
     });
     menu.appendChild(toggle);
     menu.appendChild(list);
+    return true;
+}
+
+function populateEnglishNaturalResourcesPanelMenu(trigger, record, panel, menu) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    const options = getEnglishNaturalResourcesPanelMenuOptions(record, panel);
+    const buttons = wrapper ? Array.from(wrapper.querySelectorAll(".natural-resources-panel-hit-area")) : [];
+    if (!options || record !== imageTTSData[ENGLISH_NATURAL_RESOURCES_ASSET_FILE] ||
+        trigger._englishImageTTSImageTextRecord !== record ||
+        trigger._englishImageTTSImageTextPanel !== panel ||
+        !isEnglishNaturalResourcesPanelTriggerReady(trigger) ||
+        !image || image.getAttribute("src") !== ENGLISH_NATURAL_RESOURCES_ASSET_FILE ||
+        !image.complete || image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+        buttons.length !== 4 || !buttons.includes(trigger)) return false;
+    const run = (items, completion) => {
+        closeEnglishImageTTSMenu();
+        speakEnglishImageTTSImageTextSequence(trigger, items, completion);
+    };
+    menu.setAttribute("aria-label", "Natural Resources 第 " + panel.panelId + " 卡朗讀選項");
+    menu.appendChild(createEnglishImageTTSMenuButton(
+        "🔊 朗讀本卡完整內容", "依原圖順序朗讀本卡標籤與全部句子",
+        () => run(options.fullItems, "Natural Resources 第 " + panel.panelId + " 卡完整內容已朗讀完成。")
+    ));
+    const toggle = createEnglishImageTTSMenuButton("🔊 標籤／單句選讀",
+        "展開本卡每個標籤與句子的獨立朗讀選項", () => {
+            const list = menu.querySelector(".english-image-tts-sentences");
+            if (!list) return;
+            list.hidden = !list.hidden;
+            toggle.setAttribute("aria-expanded", String(!list.hidden));
+            scheduleEnglishImageTTSMenuPosition();
+        });
+    toggle.setAttribute("aria-expanded", "false");
+    const list = document.createElement("div");
+    list.className = "english-image-tts-sentences"; list.hidden = true;
+    options.choices.forEach(choice => {
+        const prefix = choice.kind === "label" ? "標籤" : "單句";
+        list.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 單獨朗讀" + prefix + "：「" + choice.item.sourceText + "」",
+            "單獨朗讀 Natural Resources 原圖文字：「" + choice.item.sourceText + "」",
+            () => run([choice.item], "已朗讀 Natural Resources 所選原圖文字。")
+        ));
+    });
+    menu.appendChild(toggle); menu.appendChild(list);
     return true;
 }
 
@@ -27995,6 +28472,18 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         return;
     }
 
+    if (isEnglishNaturalResourcesImageTTSRecord(safeRecord)) {
+        if (!populateEnglishNaturalResourcesPanelMenu(trigger, safeRecord, panel, menu)) {
+            closeEnglishImageTTSMenu(); return;
+        }
+        menu.hidden = false; menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
+    }
     if (isEnglishImmuneSystemImageTTSRecord(safeRecord)) {
         const options = getEnglishImmuneSystemPanelMenuOptions(safeRecord, panel);
         const image = wrapper.querySelector("img");

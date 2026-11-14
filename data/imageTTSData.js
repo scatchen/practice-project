@@ -23547,6 +23547,135 @@ const imageTTSData = {
                 ])
             ]
         };
-    })()
+    })(),
 
+    "images/english/natural-resources-basics.png": {
+        imageId: "natural-resources-basics",
+        title: "Natural Resources",
+        assetFile: "images/english/natural-resources-basics.png",
+        contentType: "image-text",
+        layout: "custom-natural-resources-2x2-card-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1536, height: 1024 },
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: {
+                    xPct: 12 / 1536 * 100, yPct: 154 / 1024 * 100,
+                    widthPct: 740 / 1536 * 100, heightPct: 390 / 1024 * 100
+                },
+                items: [
+                    {
+                        itemId: "natural-resources-p1-label-water", readingOrder: 1, type: "label",
+                        sourceText: "Water", ttsText: "Water",
+                        bounds: {
+                            xPct: 118 / 1536 * 100, yPct: 163 / 1024 * 100,
+                            widthPct: 200 / 1536 * 100, heightPct: 68 / 1024 * 100
+                        }
+                    },
+                    {
+                        itemId: "natural-resources-p1-sentence-water", readingOrder: 2, type: "sentence",
+                        sourceText: "We use water to drink, clean, and grow food.",
+                        ttsText: "We use water to drink, clean, and grow food.",
+                        bounds: {
+                            xPct: 32 / 1536 * 100, yPct: 246 / 1024 * 100,
+                            widthPct: 325 / 1536 * 100, heightPct: 78 / 1024 * 100
+                        }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: {
+                    xPct: 784 / 1536 * 100, yPct: 154 / 1024 * 100,
+                    widthPct: 740 / 1536 * 100, heightPct: 390 / 1024 * 100
+                },
+                items: [
+                    {
+                        itemId: "natural-resources-p2-label-forests", readingOrder: 1, type: "label",
+                        sourceText: "Forests", ttsText: "Forests",
+                        bounds: {
+                            xPct: 885 / 1536 * 100, yPct: 163 / 1024 * 100,
+                            widthPct: 260 / 1536 * 100, heightPct: 72 / 1024 * 100
+                        }
+                    },
+                    {
+                        itemId: "natural-resources-p2-sentence-forests", readingOrder: 2, type: "sentence",
+                        sourceText: "Forests give us wood, clean air, and a home for many animals.",
+                        ttsText: "Forests give us wood, clean air, and a home for many animals.",
+                        bounds: {
+                            xPct: 803 / 1536 * 100, yPct: 247 / 1024 * 100,
+                            widthPct: 317 / 1536 * 100, heightPct: 102 / 1024 * 100
+                        }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: {
+                    xPct: 12 / 1536 * 100, yPct: 574 / 1024 * 100,
+                    widthPct: 740 / 1536 * 100, heightPct: 432 / 1024 * 100
+                },
+                items: [
+                    {
+                        itemId: "natural-resources-p3-label-minerals", readingOrder: 1, type: "label",
+                        sourceText: "Minerals", ttsText: "Minerals",
+                        bounds: {
+                            xPct: 123 / 1536 * 100, yPct: 578 / 1024 * 100,
+                            widthPct: 278 / 1536 * 100, heightPct: 72 / 1024 * 100
+                        }
+                    },
+                    {
+                        itemId: "natural-resources-p3-sentence-minerals-earth", readingOrder: 2,
+                        type: "sentence", sourceText: "We get minerals from the Earth.",
+                        ttsText: "We get minerals from the Earth.",
+                        bounds: {
+                            xPct: 30 / 1536 * 100, yPct: 665 / 1024 * 100,
+                            widthPct: 320 / 1536 * 100, heightPct: 56 / 1024 * 100
+                        }
+                    },
+                    {
+                        itemId: "natural-resources-p3-sentence-minerals-uses", readingOrder: 3,
+                        type: "sentence",
+                        sourceText: "They are used to make metal, electronics, and many other things.",
+                        ttsText: "They are used to make metal, electronics, and many other things.",
+                        bounds: {
+                            xPct: 30 / 1536 * 100, yPct: 716 / 1024 * 100,
+                            widthPct: 355 / 1536 * 100, heightPct: 72 / 1024 * 100
+                        }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: {
+                    xPct: 784 / 1536 * 100, yPct: 574 / 1024 * 100,
+                    widthPct: 740 / 1536 * 100, heightPct: 432 / 1024 * 100
+                },
+                items: [
+                    {
+                        itemId: "natural-resources-p4-label-fossil-fuels", readingOrder: 1,
+                        type: "label", sourceText: "Fossil Fuels", ttsText: "Fossil Fuels",
+                        bounds: {
+                            xPct: 912 / 1536 * 100, yPct: 580 / 1024 * 100,
+                            widthPct: 300 / 1536 * 100, heightPct: 72 / 1024 * 100
+                        }
+                    },
+                    {
+                        itemId: "natural-resources-p4-sentence-fossil-fuels", readingOrder: 2,
+                        type: "sentence",
+                        sourceText: "Fossil fuels like coal, oil, and natural gas give us energy for electricity, transportation, and heating.",
+                        ttsText: "Fossil fuels like coal, oil, and natural gas give us energy for electricity, transportation, and heating.",
+                        bounds: {
+                            xPct: 800 / 1536 * 100, yPct: 663 / 1024 * 100,
+                            widthPct: 350 / 1536 * 100, heightPct: 126 / 1024 * 100
+                        }
+                    }
+                ]
+            }
+        ]
+    }
 };
