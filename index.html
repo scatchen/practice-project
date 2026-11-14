@@ -11474,6 +11474,7 @@ function isEnglishImageTTSItemText(record, item) {
     if (isEnglishTyphoonsImageTTSItemText(record, item)) return true;
     if (isEnglishHumanHealthNutritionImageTTSItemText(record, item)) return true;
     if (isEnglishMountainsImageTTSItemText(record, item) ||
+        isEnglishWindEnergyImageTTSItemText(record, item) ||
         isEnglishEnergySourcesImageTTSItemText(record, item) ||
         isEnglishEnergyTransformationsImageTTSItemText(record, item) ||
         isEnglishAnimalsAdaptationImageTTSItemText(record, item) ||
@@ -12080,6 +12081,7 @@ function getEnglishImageTTSImageTextName(record) {
     if (isEnglishWaterCycleImageTTSRecord(record)) return "Water Cycle";
     if (isEnglishMountainsImageTTSRecord(record)) return "Mountains & Mountain Ranges";
     if (isEnglishEnergySourcesImageTTSRecord(record)) return "Energy & Energy Sources";
+    if (isEnglishWindEnergyImageTTSRecord(record)) return "Wind Energy";
     if (isEnglishEnergyTransformationsImageTTSRecord(record)) return "Energy Transformations";
     if (isEnglishAnimalsWildlifeImageTTSRecord(record)) return "Animals & Wildlife";
     if (isEnglishPlainsImageTTSRecord(record)) return "Plains";
@@ -14619,6 +14621,134 @@ function isEnglishEnergySourcesImageTTSRecord(record) {
         record.coordinateStatus === "estimated" && record.overlayRuntimeStatus === "not-tested" &&
         typeof imageTTSData !== "undefined" && imageTTSData && imageTTSData[file] &&
         record.panels === imageTTSData[file].panels);
+}
+
+const ENGLISH_WIND_ENERGY_ASSET_FILE = "images/english/wind-energy-basics.png";
+const ENGLISH_WIND_ENERGY_IMAGE_ID = "wind-energy-basics";
+
+function getEnglishWindEnergyExpectedPanels() {
+    const rect = (x, y, width, height) => ({
+        xPct: x / 1536 * 100, yPct: y / 1024 * 100,
+        widthPct: width / 1536 * 100, heightPct: height / 1024 * 100
+    });
+    const item = (itemId, type, sourceText, textBox, tapBox = null) => {
+        const result = { itemId, type, sourceText, ttsText: sourceText, bounds: rect(...textBox) };
+        if (tapBox) result.tapRegion = rect(...tapBox);
+        return result;
+    };
+    const panel = (panelId, box, items) => ({
+        panelId, readingOrder: panelId, bounds: rect(...box),
+        items: items.map((entry, index) => ({ ...entry, readingOrder: index + 1 }))
+    });
+    return [
+        panel(1, [88, 154, 650, 98], [
+            item("wind-energy-subtitle", "sentence", "Clean Power from the Wind",
+                [110, 166, 604, 51], [88, 154, 650, 98])]),
+        panel(2, [142, 260, 342, 145], [
+            item("wind-energy-wind-bubble", "bubble", "The wind makes the blades turn.",
+                [180, 292, 267, 82], [142, 260, 342, 145])]),
+        panel(3, [937, 121, 271, 146], [
+            item("wind-energy-blades-label", "label", "1 Blades",
+                [1012, 138, 178, 42], [937, 121, 271, 146]),
+            item("wind-energy-blades-sentence", "sentence", "The wind turns the blades.",
+                [1007, 188, 173, 60])]),
+        panel(4, [1092, 298, 333, 175], [
+            item("wind-energy-generator-label", "label", "2 Generator",
+                [1173, 314, 218, 42], [1092, 298, 333, 175]),
+            item("wind-energy-generator-sentence", "sentence",
+                "The spinning blades turn a generator to make electricity.",
+                [1167, 362, 236, 96])]),
+        panel(5, [946, 549, 317, 199], [
+            item("wind-energy-electricity-label", "label", "3 Electricity",
+                [1024, 566, 216, 42], [946, 549, 317, 199]),
+            item("wind-energy-electricity-sentence", "sentence",
+                "The electricity travels through power lines to our homes and cities.",
+                [1021, 614, 224, 124])]),
+        panel(6, [45, 838, 461, 149], [
+            item("wind-energy-renewable-label", "label", "Renewable",
+                [191, 851, 185, 41], [45, 838, 461, 149]),
+            item("wind-energy-renewable-sentence", "sentence",
+                "Wind is a natural and endless resource.", [191, 896, 287, 73])]),
+        panel(7, [529, 838, 474, 149], [
+            item("wind-energy-clean-energy-label", "label", "Clean Energy",
+                [687, 851, 267, 41], [529, 838, 474, 149]),
+            item("wind-energy-clean-energy-sentence", "sentence",
+                "It produces electricity without air pollution.", [688, 896, 290, 72])]),
+        panel(8, [1026, 838, 470, 151], [
+            item("wind-energy-future-label", "label", "Helps Our Future",
+                [1148, 851, 303, 42], [1026, 838, 470, 151]),
+            item("wind-energy-future-sentence", "sentence",
+                "Wind energy provides clean power for a healthier and brighter tomorrow.",
+                [1148, 896, 326, 83])])
+    ];
+}
+
+function getEnglishWindEnergyImageTextRecord(record, assetFile) {
+    const file = ENGLISH_WIND_ENERGY_ASSET_FILE;
+    const exact = (value, keys) => Boolean(value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key)));
+    const same = (actual, wanted) => {
+        if (Array.isArray(wanted)) return Array.isArray(actual) && actual.length === wanted.length &&
+            wanted.every((value, index) => same(actual[index], value));
+        if (wanted && typeof wanted === "object") return exact(actual, Object.keys(wanted)) &&
+            Object.keys(wanted).every(key => same(actual[key], wanted[key]));
+        return actual === wanted;
+    };
+    const topKeys = ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"];
+    if (!exact(record, topKeys) || assetFile !== file || record.imageId !== ENGLISH_WIND_ENERGY_IMAGE_ID ||
+        record.assetFile !== file || record.contentType !== "image-text" ||
+        record.layout !== "custom-wind-energy-8-areas" || record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" || record.coordinateStatus !== "estimated" ||
+        record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024 ||
+        typeof imageTTSData === "undefined" || !imageTTSData ||
+        imageTTSData[file] !== record || !Array.isArray(record.panels) || record.panels.length !== 8 ||
+        !same(record.panels, getEnglishWindEnergyExpectedPanels())) return null;
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === ENGLISH_WIND_ENERGY_IMAGE_ID || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_WIND_ENERGY_IMAGE_ID || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file || library.length !== 1 ||
+        library[0].id !== ENGLISH_WIND_ENERGY_IMAGE_ID || library[0].file !== file ||
+        library[0].category !== "english") return null;
+    const panels = record.panels;
+    const overlaps = (a, b) => a.xPct < b.xPct + b.widthPct &&
+        a.xPct + a.widthPct > b.xPct && a.yPct < b.yPct + b.heightPct &&
+        a.yPct + a.heightPct > b.yPct;
+    const taps = [];
+    for (const panel of panels) {
+        if (!panel.items.length || !panel.items[0].tapRegion ||
+            panel.items.slice(1).some(item => Object.prototype.hasOwnProperty.call(item, "tapRegion")) ||
+            panel.items.some(item => !getEnglishTTSUnitText(item.ttsText) ||
+                item.sourceText !== item.ttsText)) return null;
+        taps.push(panel.items[0].tapRegion);
+    }
+    for (let left = 0; left < panels.length; left += 1) {
+        for (let right = left + 1; right < panels.length; right += 1) {
+            if (overlaps(panels[left].bounds, panels[right].bounds) || overlaps(taps[left], taps[right]))
+                return null;
+        }
+    }
+    return record;
+}
+
+function isEnglishWindEnergyImageTTSRecord(record) {
+    return Boolean(record && record === imageTTSData[ENGLISH_WIND_ENERGY_ASSET_FILE] &&
+        getEnglishWindEnergyImageTextRecord(record, ENGLISH_WIND_ENERGY_ASSET_FILE) === record);
+}
+
+function isEnglishWindEnergyImageTTSItemText(record, item) {
+    if (!isEnglishWindEnergyImageTTSRecord(record) || !item ||
+        item.sourceText !== item.ttsText) return false;
+    return record.panels.some(panel => panel.items.includes(item));
 }
 
 function getEnglishEnergySourcesExpectedPanels() {
@@ -17619,6 +17749,10 @@ function getEnglishImageTTSRecord(assetFile) {
     const energySourcesFile = "images/english/energy-and-energy-sources-basics.png";
     if (record && (record.imageId === "energy-and-energy-sources-basics" || record.assetFile === energySourcesFile || assetFile === energySourcesFile))
         return getEnglishEnergySourcesImageTextRecord(record, assetFile);
+    if (assetFile === ENGLISH_WIND_ENERGY_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_WIND_ENERGY_IMAGE_ID || record.assetFile === ENGLISH_WIND_ENERGY_ASSET_FILE)) {
+        return getEnglishWindEnergyImageTextRecord(record, assetFile);
+    }
     const energyFile = "images/english/energy-transformations-basics.png";
     if (record && (record.imageId === "energy-transformations-basics" ||
         record.assetFile === energyFile || assetFile === energyFile)) {
@@ -21276,6 +21410,124 @@ function layoutEnglishSolarEnergyImageTTSHitAreas(wrapper) {
     return enabled > 0;
 }
 
+function layoutEnglishWindEnergyImageTTSHitAreas(wrapper, verifyTrigger = null) {
+    const file = ENGLISH_WIND_ENERGY_ASSET_FILE;
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".image-tts-wind-energy-hit-area")) : [];
+    const image = wrapper && typeof wrapper.querySelector === "function" ? wrapper.querySelector("img") : null;
+    const hide = button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "none";
+    };
+    const fail = () => {
+        buttons.forEach(hide);
+        const menuTrigger = englishImageTTSOverlayState.activeTrigger;
+        if (menuTrigger && wrapper && wrapper.contains(menuTrigger)) closeEnglishImageTTSMenu();
+        return false;
+    };
+    const record = typeof imageTTSData !== "undefined" && imageTTSData ? imageTTSData[file] : null;
+    if (!wrapper || !wrapper.isConnected || !wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== file ||
+        getEnglishWindEnergyImageTextRecord(record, file) !== record || !image ||
+        !isEnglishWindEnergyFormalSearchImage(image) || image.getAttribute("src") !== file ||
+        image.complete !== true || image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+        buttons.length !== 8 || typeof document.elementFromPoint !== "function") return fail();
+    let imageRect, wrapperRect;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+    } catch (error) { return fail(); }
+    if (!imageRect || !wrapperRect ||
+        ![imageRect.left, imageRect.top, imageRect.width, imageRect.height,
+            wrapperRect.left, wrapperRect.top, wrapperRect.width, wrapperRect.height].every(Number.isFinite) ||
+        imageRect.width <= 0 || imageRect.height <= 0 ||
+        Math.abs(imageRect.height - imageRect.width * 1024 / 1536) > Math.max(1, imageRect.height * 0.01) ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 || Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 || Math.abs(imageRect.height - wrapperRect.height) > 1)
+        return fail();
+    const visual = window.visualViewport;
+    const viewport = visual && [visual.offsetLeft, visual.offsetTop, visual.width, visual.height].every(Number.isFinite) &&
+        visual.width > 0 && visual.height > 0
+        ? { left: visual.offsetLeft, top: visual.offsetTop,
+            right: visual.offsetLeft + visual.width, bottom: visual.offsetTop + visual.height }
+        : { left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight };
+    const selectable = appState.subjectMode === "english" && drawMode === "select";
+    let enabled = 0;
+    let selectedSafe = false;
+    for (const panel of record.panels) {
+        const item = panel.items[0];
+        const found = buttons.filter(button =>
+            button.getAttribute("data-image-tts-panel-id") === String(panel.panelId) &&
+            button.getAttribute("data-image-tts-item-id") === String(item.itemId));
+        if (found.length !== 1) return fail();
+        const button = found[0];
+        const tap = item.tapRegion;
+        // CSSOM may normalize the decimal percentages assigned at creation;
+        // the measured rectangle below is the authoritative geometry check.
+        if (!button.classList.contains("image-tts-image-text-hit-area") ||
+            button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== panel ||
+            button._englishImageTTSImageTextItem !== item) return fail();
+        // Reveal before measuring; hidden controls report a zero-sized rectangle.
+        button.hidden = false;
+        button.style.pointerEvents = "auto";
+        let rect;
+        try { rect = button.getBoundingClientRect(); } catch (error) { return fail(); }
+        const expected = {
+            left: imageRect.left + imageRect.width * tap.xPct / 100,
+            top: imageRect.top + imageRect.height * tap.yPct / 100,
+            width: imageRect.width * tap.widthPct / 100,
+            height: imageRect.height * tap.heightPct / 100
+        };
+        if (!rect || ![rect.left, rect.top, rect.width, rect.height].every(Number.isFinite) ||
+            rect.width < 44 || rect.height < 44 ||
+            Math.abs(rect.left - expected.left) > 1 || Math.abs(rect.top - expected.top) > 1 ||
+            Math.abs(rect.width - expected.width) > 1 || Math.abs(rect.height - expected.height) > 1) {
+            hide(button);
+            if (button === verifyTrigger) return false;
+            continue;
+        }
+        const fullyVisible = rect.left >= viewport.left && rect.top >= viewport.top &&
+            rect.left + rect.width <= viewport.right && rect.top + rect.height <= viewport.bottom;
+        if (!selectable || !fullyVisible) {
+            hide(button);
+            continue;
+        }
+        const shouldHitTest = button === verifyTrigger || englishImageTTSOverlayState.menu.hidden;
+        if (shouldHitTest) {
+            const insetX = Math.min(6, rect.width / 4);
+            const insetY = Math.min(6, rect.height / 4);
+            const points = [
+                [rect.left + rect.width / 2, rect.top + rect.height / 2],
+                [rect.left + insetX, rect.top + insetY],
+                [rect.left + rect.width - insetX, rect.top + insetY],
+                [rect.left + insetX, rect.top + rect.height - insetY],
+                [rect.left + rect.width - insetX, rect.top + rect.height - insetY]
+            ];
+            let safe = false;
+            try {
+                safe = points.every(([x, y]) => {
+                    const hit = document.elementFromPoint(x, y);
+                    return hit === button || button.contains(hit);
+                });
+            } catch (error) { safe = false; }
+            if (!safe) {
+                hide(button);
+                if (button === verifyTrigger) return false;
+                continue;
+            }
+        }
+        button.hidden = false;
+        button.disabled = false;
+        button.setAttribute("aria-disabled", "false");
+        button.style.pointerEvents = "auto";
+        enabled += 1;
+        if (button === verifyTrigger) selectedSafe = true;
+    }
+    return verifyTrigger ? selectedSafe : enabled > 0;
+}
+
 function layoutEnglishEnergySourcesImageTTSHitAreas(wrapper, verifyTrigger = null) {
     const file = ENGLISH_ENERGY_SOURCES_ASSET_FILE;
     const buttons = wrapper && typeof wrapper.querySelectorAll === "function" ? Array.from(wrapper.querySelectorAll(".image-tts-image-text-hit-area")) : [];
@@ -21328,6 +21580,9 @@ function layoutEnglishEnergySourcesImageTTSHitAreas(wrapper, verifyTrigger = nul
 }
 
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
+    if (wrapper && wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_WIND_ENERGY_ASSET_FILE) {
+        return layoutEnglishWindEnergyImageTTSHitAreas(wrapper);
+    }
     if (wrapper && wrapper.dataset && wrapper.dataset.imageTtsAssetFile === "images/english/energy-and-energy-sources-basics.png") {
         layoutEnglishEnergySourcesImageTTSHitAreas(wrapper);
         return;
@@ -22423,6 +22678,7 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
     const button = document.createElement("button");
     button.type = "button";
     button.className = "image-tts-image-text-hit-area";
+    if (isEnglishWindEnergyImageTTSRecord(record)) button.classList.add("image-tts-wind-energy-hit-area");
     button.textContent = "";
     button.hidden = true;
     const isFullTitleImageText = isEnglishImageTTSFullTitleImageTextRecord(record);
@@ -22452,6 +22708,10 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
                         " 項原圖文字：" + item.sourceText + "，開啟本格朗讀選項")))));
     if (isXRaysTextArea) {
         button.setAttribute("aria-label", "X-rays 第 " + panel.panelId + " 格主文字區，開啟朗讀選項");
+    }
+    if (isEnglishWindEnergyImageTTSRecord(record)) {
+        button.setAttribute("aria-label", "Wind Energy 第 " + panel.panelId +
+            " 個區域，開啟完整內容與單項朗讀選項");
     }
     if (isMuscularSystemTextArea) {
         button.setAttribute("aria-label", "The Muscular System & Muscles 第 " +
@@ -22485,7 +22745,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
             isEnglishTyphoonsImageTTSRecord(record) ||
             isEnglishXRaysImageTTSRecord(record) ||
             isEnglishMuscularSystemImageTTSRecord(record) ||
-            isEnglishSolarEnergyImageTTSRecord(record)) && button.hidden) ||
+            isEnglishSolarEnergyImageTTSRecord(record) ||
+            isEnglishWindEnergyImageTTSRecord(record)) && button.hidden) ||
             button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
             return;
         }
@@ -23226,6 +23487,7 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
     }
 
     function renderResponse(responseRoot, question, headingText, answerHTML) {
+        ENGLISH_WIND_ENERGY_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_EXCRETORY_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_SKELETAL_SYSTEM_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
@@ -23396,6 +23658,16 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 ? immuneSpecs[0]
                 : null;
 
+        const windMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_WIND_ENERGY_IMAGE_ID || entry.file === ENGLISH_WIND_ENERGY_ASSET_FILE)) : [];
+        const canonicalWind = windMatches.length === 1 &&
+            windMatches[0].id === ENGLISH_WIND_ENERGY_IMAGE_ID &&
+            windMatches[0].file === ENGLISH_WIND_ENERGY_ASSET_FILE ? windMatches[0] : null;
+        const returnedWind = canonicalWind ? diagrams.filter(diagram => diagram === canonicalWind).length : 0;
+        const windSpecs = specs.filter(spec => spec.imageData.file === ENGLISH_WIND_ENERGY_ASSET_FILE);
+        const trustedWindEnergySpec = canonicalWind && returnedWind === 1 && windSpecs.length === 1 &&
+            windSpecs[0].diagram === canonicalWind ? windSpecs[0] : null;
+
         const energyMatches=Array.isArray(diagramMap)?diagramMap.filter(entry=>entry&&(entry.id===ENGLISH_ENERGY_SOURCES_IMAGE_ID||entry.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE)):[];
         const canonicalEnergy=energyMatches.length===1&&energyMatches[0].id===ENGLISH_ENERGY_SOURCES_IMAGE_ID&&energyMatches[0].file===ENGLISH_ENERGY_SOURCES_ASSET_FILE?energyMatches[0]:null;
         const returnedEnergy=canonicalEnergy?diagrams.filter(diagram=>diagram===canonicalEnergy).length:0;
@@ -23421,6 +23693,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 image.style.width = "100%";
                 image.style.borderRadius = "10px";
                 image.style.marginBottom = "20px";
+                if (spec === trustedWindEnergySpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_WIND_ENERGY_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_WIND_ENERGY_ASSET_FILE);
+                }
                 if (spec === trustedEnergySourcesSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_ENERGY_SOURCES_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_ENERGY_SOURCES_ASSET_FILE);
@@ -23518,6 +23794,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedPlantsPhotosynthesisSpec);
         ENGLISH_PLANT_REPRODUCTION_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedPlantReproductionSpec);
+        ENGLISH_WIND_ENERGY_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedWindEnergySpec);
         ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedEnergySourcesSpec);
         return answerRoot;
@@ -23567,6 +23845,134 @@ function isEnglishEnergySourcesFormalSearchImage(image){
     const record=imageTTSData[ENGLISH_ENERGY_SOURCES_ASSET_FILE];if(getEnglishEnergySourcesImageTextRecord(record,ENGLISH_ENERGY_SOURCES_ASSET_FILE)!==record)return false;
     const matches=diagramMap.filter(entry=>entry&&(entry.id===ENGLISH_ENERGY_SOURCES_IMAGE_ID||entry.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE));
     return matches.length===1&&matches[0].id===ENGLISH_ENERGY_SOURCES_IMAGE_ID&&matches[0].file===ENGLISH_ENERGY_SOURCES_ASSET_FILE;}
+
+const ENGLISH_WIND_ENERGY_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    let currentContext = null;
+    let generation = 0;
+
+    function detach(image) {
+        const wrapper = image && image.closest ? image.closest(".image-tts-overlay-wrapper") : null;
+        if (!wrapper) return;
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper.contains(active) &&
+            active.classList && active.classList.contains("image-tts-wind-energy-hit-area")) {
+            cancelEnglishImageTTSImageTextSequence(true);
+        }
+        const activeMenu = englishImageTTSOverlayState.activeTrigger;
+        if (activeMenu && wrapper.contains(activeMenu) &&
+            activeMenu.classList && activeMenu.classList.contains("image-tts-wind-energy-hit-area")) {
+            closeEnglishImageTTSMenu();
+        }
+        wrapper.querySelectorAll(".image-tts-wind-energy-hit-area").forEach(button => button.remove());
+    }
+
+    function revoke(context, image) {
+        if (!context || !context.images.has(image)) return;
+        originByImage.delete(image);
+        context.images.delete(image);
+        detach(image);
+    }
+
+    function process(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revoke(context, record.target);
+                return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removed =>
+                Array.from(context.images).forEach(image => {
+                    if (removed === image || removed && typeof removed.contains === "function" &&
+                        removed.contains(image)) revoke(context, image);
+                }));
+        });
+    }
+
+    function expire() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revoke(context, image));
+        currentContext = null;
+    }
+
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer) process(context, context.observer.takeRecords());
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked || origin.context !== context ||
+            origin.generation !== context.generation || !context.observer || !image.isConnected ||
+            context.responseRoot !== document.getElementById("ai-response") ||
+            !context.responseRoot.isConnected || !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(image) ||
+            image.getAttribute("src") !== ENGLISH_WIND_ENERGY_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !== ENGLISH_WIND_ENERGY_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !== ENGLISH_WIND_ENERGY_ASSET_FILE) return false;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_WIND_ENERGY_IMAGE_ID || entry.file === ENGLISH_WIND_ENERGY_ASSET_FILE)) : [];
+        return matches.length === 1 && matches[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_WIND_ENERGY_IMAGE_ID &&
+            origin.diagram.file === ENGLISH_WIND_ENERGY_ASSET_FILE;
+    }
+
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expire();
+        if (!responseRoot || !diagramContainer || !trustedSpec ||
+            typeof MutationObserver !== "function" || responseRoot !== document.getElementById("ai-response") ||
+            !responseRoot.isConnected || !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_WIND_ENERGY_IMAGE_ID || entry.file === ENGLISH_WIND_ENERGY_ASSET_FILE)) : [];
+        const specs = (Array.isArray(renderedSpecs) ? renderedSpecs : []).filter(entry =>
+            entry && entry.spec && entry.spec.imageData &&
+            entry.spec.imageData.file === ENGLISH_WIND_ENERGY_ASSET_FILE);
+        const rendered = (Array.isArray(renderedSpecs) ? renderedSpecs : []).find(entry =>
+            entry && entry.spec === trustedSpec);
+        if (matches.length !== 1 || matches[0] !== diagram ||
+            diagram.id !== ENGLISH_WIND_ENERGY_IMAGE_ID || diagram.file !== ENGLISH_WIND_ENERGY_ASSET_FILE ||
+            specs.length !== 1 || !rendered || !rendered.image || !rendered.image.isConnected ||
+            !diagramContainer.contains(rendered.image)) return false;
+        const image = rendered.image;
+        const wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) || !diagramContainer.contains(wrapper)) return false;
+        const context = {
+            generation: ++generation, responseRoot, diagramContainer, diagram,
+            images: new Set([image]), observer: null, revoked: false
+        };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram });
+        context.observer = new MutationObserver(records => process(context, records));
+        context.observer.observe(responseRoot, {
+            childList: true, subtree: true, attributes: true,
+            attributeFilter: ["src", "data-english-image-library-id", "data-english-image-library-file"]
+        });
+        if (!isTrustedNode(image)) {
+            expire();
+            return false;
+        }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+
+    return { register, expireCurrentContext: expire, isTrustedNode };
+})();
+
+function isEnglishWindEnergyFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_WIND_ENERGY_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !== ENGLISH_WIND_ENERGY_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !== ENGLISH_WIND_ENERGY_ASSET_FILE ||
+        !ENGLISH_WIND_ENERGY_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || !Array.isArray(diagramMap)) return false;
+    const record = imageTTSData[ENGLISH_WIND_ENERGY_ASSET_FILE];
+    if (getEnglishWindEnergyImageTextRecord(record, ENGLISH_WIND_ENERGY_ASSET_FILE) !== record) return false;
+    const matches = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_WIND_ENERGY_IMAGE_ID || entry.file === ENGLISH_WIND_ENERGY_ASSET_FILE));
+    return matches.length === 1 && matches[0].id === ENGLISH_WIND_ENERGY_IMAGE_ID &&
+        matches[0].file === ENGLISH_WIND_ENERGY_ASSET_FILE;
+}
 
 function isEnglishTelephoneV2FormalSearchImage(image) {
     if (!image || image.getAttribute("src") !== ENGLISH_TELEPHONE_V2_ASSET_FILE ||
@@ -24532,6 +24938,7 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_WIND_ENERGY_ASSET_FILE && !isEnglishWindEnergyFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_ENERGY_SOURCES_ASSET_FILE && !isEnglishEnergySourcesFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_HUMAN_BRAIN_ASSET_FILE &&
             !isEnglishHumanBrainFormalSearchImage(image)) return;
@@ -24601,6 +25008,21 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishWindEnergyImageTTSRecord(record)) {
+                const dimensionsOK = () => isEnglishWindEnergyFormalSearchImage(image) &&
+                    image.getAttribute("src") === ENGLISH_WIND_ENERGY_ASSET_FILE &&
+                    image.complete === true && image.naturalWidth === 1536 && image.naturalHeight === 1024;
+                if (image.complete && !dimensionsOK()) return;
+                record.panels.forEach(panel => {
+                    const item = panel.items[0];
+                    if (item && item.tapRegion &&
+                        createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record)) added += 1;
+                });
+                image.addEventListener("load", () => layoutEnglishWindEnergyImageTTSHitAreas(wrapper), { once: true });
+                image.addEventListener("error", () => layoutEnglishWindEnergyImageTTSHitAreas(wrapper), { once: true });
+                layoutEnglishWindEnergyImageTTSHitAreas(wrapper);
+                return;
+            }
             if (isEnglishEnergySourcesImageTTSRecord(record)) {
                 const dimensionsOK=()=>isEnglishEnergySourcesFormalSearchImage(image)&&image.getAttribute("src")===ENGLISH_ENERGY_SOURCES_ASSET_FILE&&image.complete===true&&image.naturalWidth===1254&&image.naturalHeight===1254;
                 if(image.complete&&!dimensionsOK())return;
@@ -25448,6 +25870,10 @@ function scheduleEnglishImageTTSLayout() {
                 layoutEnglishSkeletalSystemPanelHitAreas(wrapper);
             }
             if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === ENGLISH_WIND_ENERGY_ASSET_FILE) {
+                layoutEnglishWindEnergyImageTTSHitAreas(wrapper);
+            }
+            if (wrapper.dataset &&
                 wrapper.dataset.imageTtsAssetFile === ENGLISH_SOLAR_ENERGY_ASSET_FILE) {
                 layoutEnglishSolarEnergyImageTTSHitAreas(wrapper);
             }
@@ -25560,6 +25986,10 @@ function syncEnglishImageTTSDrawingMode() {
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_SKELETAL_SYSTEM_ASSET_FILE) {
             layoutEnglishSkeletalSystemPanelHitAreas(wrapper);
+        }
+        if (wrapper.dataset &&
+            wrapper.dataset.imageTtsAssetFile === ENGLISH_WIND_ENERGY_ASSET_FILE) {
+            layoutEnglishWindEnergyImageTTSHitAreas(wrapper);
         }
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_SOLAR_ENERGY_ASSET_FILE) {
@@ -25912,6 +26342,7 @@ function getEnglishImageTTSImageTextSpeechText(record, item) {
     }
     if (isEnglishWaterCycleImageTTSItemText(record, item)) return item.ttsText;
     if (isEnglishMountainsImageTTSItemText(record, item)) return item.ttsText;
+    if (isEnglishWindEnergyImageTTSItemText(record, item)) return getEnglishTTSUnitText(item.ttsText);
     if (isEnglishEnergySourcesImageTTSItemText(record, item)) return getEnglishTTSUnitText(item.ttsText);
     if (isEnglishEnergyTransformationsImageTTSItemText(record, item)) {
         return item.ttsText;
@@ -26069,6 +26500,32 @@ function speakEnglishImageTTSImageTextSequence(
     const energySourcesPanel=trigger&&trigger._englishImageTTSImageTextPanel;
     const energySourcesPanelSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===energySourcesPanel.items.length&&energySourcesPanel.items.every((item,index)=>item===itemList[index]));
     const energySourcesSingleItemSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===1&&energySourcesPanel.items.includes(itemList[0]));
+    const isWindEnergyImageText = Boolean(record && isEnglishWindEnergyImageTTSRecord(record));
+    const windEnergyPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const windEnergyPanelSequence = Boolean(isWindEnergyImageText && windEnergyPanel &&
+        itemList.length === windEnergyPanel.items.length &&
+        windEnergyPanel.items.every((item, index) => item === itemList[index]));
+    const windEnergySingleItemSequence = Boolean(isWindEnergyImageText && windEnergyPanel &&
+        itemList.length === 1 && windEnergyPanel.items.includes(itemList[0]) &&
+        trigger._englishImageTTSImageTextRecord === record &&
+        trigger._englishImageTTSImageTextPanel === windEnergyPanel &&
+        trigger._englishImageTTSImageTextItem === windEnergyPanel.items[0]);
+    const windEnergyImage = isWindEnergyImageText ? wrapper.querySelector("img") : null;
+    const windEnergyButtons = isWindEnergyImageText
+        ? Array.from(wrapper.querySelectorAll(".image-tts-wind-energy-hit-area")) : [];
+    const windEnergyReady = !isWindEnergyImageText || Boolean(
+        record === imageTTSData[ENGLISH_WIND_ENERGY_ASSET_FILE] &&
+        trigger._englishImageTTSImageTextRecord === record && windEnergyPanel &&
+        record.panels.includes(windEnergyPanel) && trigger._englishImageTTSImageTextPanel === windEnergyPanel &&
+        trigger._englishImageTTSImageTextItem === windEnergyPanel.items[0] &&
+        itemList.every(item => windEnergyPanel.items.includes(item)) &&
+        windEnergyButtons.length === 8 && windEnergyButtons.includes(trigger) &&
+        trigger.classList.contains("image-tts-wind-energy-hit-area") &&
+        windEnergyImage && isEnglishWindEnergyFormalSearchImage(windEnergyImage) &&
+        windEnergyImage.getAttribute("src") === ENGLISH_WIND_ENERGY_ASSET_FILE &&
+        windEnergyImage.complete === true && windEnergyImage.naturalWidth === 1536 &&
+        windEnergyImage.naturalHeight === 1024 &&
+        layoutEnglishWindEnergyImageTTSHitAreas(wrapper, trigger));
     const energySourcesReady=!isEnergySourcesImageText||Boolean(record===imageTTSData[ENGLISH_ENERGY_SOURCES_ASSET_FILE]&&trigger._englishImageTTSImageTextRecord===record&&
         record.panels.includes(energySourcesPanel)&&trigger._englishImageTTSImageTextPanel===energySourcesPanel&&energySourcesPanel.items.includes(trigger._englishImageTTSImageTextItem)&&
         itemList.every(item=>energySourcesPanel.items.includes(item))&&layoutEnglishEnergySourcesImageTTSHitAreas(wrapper,trigger));
@@ -26591,13 +27048,14 @@ function speakEnglishImageTTSImageTextSequence(
             !isXRaysSingleItemSequence &&
             !isTyphoonsSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
-            !isHumanBodyHowItWorksSingleItemSequence) ||
+            !isHumanBodyHowItWorksSingleItemSequence &&
+            !windEnergySingleItemSequence) ||
         itemList.some(item => !item ||
             (item.sourceText !== item.ttsText &&
                 !isEnglishEnergyTransformationsImageTTSItemText(record, item)) ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady || !mountainsReady ||
-        !energySourcesReady ||
+        !energySourcesReady || !windEnergyReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
         !animalsAdaptationImageReady || !humanHealthImageReady || !typhoonsImageReady ||
         !muscularImageReady || !cyclingImageReady || !solarImageReady ||
@@ -26871,8 +27329,8 @@ function speakEnglishImageTTSImageTextSequence(
                     finishSequence();
                     return;
                 }
-                const delay = isExcretorySystemImageText || isSkeletalSystemImageText ||
-                    isImmuneSystemImageText || isHumanBrainImageText ||
+                const delay = isWindEnergyImageText || isExcretorySystemImageText ||
+                    isSkeletalSystemImageText || isImmuneSystemImageText || isHumanBrainImageText ||
                     isPlantsPhotosynthesisImageText || isPlantReproductionImageText
                     ? 500
                     : (isTyphoonsImageText
@@ -27203,6 +27661,13 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const assetFile = wrapper && wrapper.dataset.imageTtsAssetFile;
     const safeRecord = assetFile ? getEnglishImageTTSRecord(assetFile) : null;
     const safeRecordName = getEnglishImageTTSImageTextName(safeRecord);
+    const isWindEnergyImageText = Boolean(safeRecord && isEnglishWindEnergyImageTTSRecord(safeRecord));
+    const windEnergyImage = isWindEnergyImageText && wrapper ? wrapper.querySelector("img") : null;
+    const windEnergyButtons = isWindEnergyImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".image-tts-wind-energy-hit-area")) : [];
+    const windEnergyLayoutReady = !isWindEnergyImageText || Boolean(
+        layoutEnglishWindEnergyImageTTSHitAreas(wrapper, trigger) && windEnergyButtons.length === 8 &&
+        windEnergyButtons.includes(trigger) && !trigger.hidden && !trigger.disabled);
     const clickedPanel = trigger && trigger._englishImageTTSImageTextPanel;
     const safePanel = safeRecord && safeRecord.panels.find(item =>
         item.panelId === (panel && panel.panelId));
@@ -27273,6 +27738,12 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         !safePanel || safePanel !== panel ||
         !panel.items.includes(trigger._englishImageTTSImageTextItem) ||
         wrapper.dataset.imageTtsAssetFile !== safeRecord.assetFile ||
+        (isWindEnergyImageText && (!windEnergyImage ||
+            !isEnglishWindEnergyFormalSearchImage(windEnergyImage) ||
+            windEnergyImage.getAttribute("src") !== ENGLISH_WIND_ENERGY_ASSET_FILE ||
+            !windEnergyImage.complete || windEnergyImage.naturalWidth !== 1536 ||
+            windEnergyImage.naturalHeight !== 1024 || windEnergyButtons.length !== 8 ||
+            !windEnergyLayoutReady)) ||
         (isPlantReproductionImageText && (!plantReproductionImage ||
             plantReproductionImage.getAttribute("src") !== ENGLISH_PLANT_REPRODUCTION_ASSET_FILE ||
             !plantReproductionImage.complete || plantReproductionImage.naturalWidth !== 1254 ||
@@ -27349,6 +27820,51 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isWindEnergyImageText) {
+        const clicked = trigger._englishImageTTSImageTextItem;
+        const panelItems = panel && Array.isArray(panel.items) ? panel.items : [];
+        const allItems = safeRecord.panels.flatMap(candidate => candidate.items);
+        if (record !== safeRecord || !panel || !panelItems.length ||
+            !panelItems.includes(clicked) || panel !== safeRecord.panels.find(candidate => candidate === panel) ||
+            trigger._englishImageTTSImageTextRecord !== safeRecord ||
+            trigger._englishImageTTSImageTextPanel !== panel ||
+            clicked !== panel.items[0] || !isEnglishWindEnergyImageTTSItemText(safeRecord, clicked) ||
+            allItems.length !== 14 || !windEnergyLayoutReady || !windEnergyImage ||
+            !isEnglishWindEnergyFormalSearchImage(windEnergyImage)) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const areaNames = ["副句", "對話泡泡", "Blades 卡片", "Generator 卡片",
+            "Electricity 卡片", "Renewable 卡片", "Clean Energy 卡片", "Helps Our Future 卡片"];
+        const areaName = areaNames[panel.panelId - 1];
+        const run = (items, done) => {
+            closeEnglishImageTTSMenu();
+            return speakEnglishImageTTSImageTextSequence(trigger, items, done);
+        };
+        const add = (label, description, items, done) =>
+            menu.appendChild(createEnglishImageTTSMenuButton(label, description,
+                () => run(items, done)));
+        menu.setAttribute("aria-label", "Wind Energy " + areaName + "朗讀選項");
+        add("🔊 朗讀此區完整內容", "依原圖順序朗讀「" + areaName + "」全部文字",
+            panel.items, "Wind Energy「" + areaName + "」已朗讀完成。");
+        if (panel.items.length > 1) {
+            panel.items.forEach(item => {
+                const kind = item.type === "label" ? "標題／標籤" : "句子";
+                add("🔊 單獨朗讀" + kind + "：「" + item.sourceText + "」",
+                    "單獨朗讀 Wind Energy 原圖文字：「" + item.sourceText + "」",
+                    [item], "已朗讀 Wind Energy 所選原圖文字。");
+            });
+        }
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
     }
 
     if (isEnglishEnergySourcesImageTTSRecord(safeRecord)) {

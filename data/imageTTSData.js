@@ -23465,6 +23465,88 @@ const imageTTSData = {
                 ])
             ]
         };
+    })(),
+    "images/english/wind-energy-basics.png": (() => {
+        const rect = ([x, y, width, height]) => ({
+            xPct: x / 1536 * 100,
+            yPct: y / 1024 * 100,
+            widthPct: width / 1536 * 100,
+            heightPct: height / 1024 * 100
+        });
+        const unit = (itemId, type, sourceText, textBox, tapBox = null) => {
+            const result = {
+                itemId, type, sourceText, ttsText: sourceText,
+                bounds: rect(textBox)
+            };
+            if (tapBox) result.tapRegion = rect(tapBox);
+            return result;
+        };
+        const panel = (panelId, box, items) => ({
+            panelId,
+            readingOrder: panelId,
+            bounds: rect(box),
+            items: items.map((item, index) => ({ ...item, readingOrder: index + 1 }))
+        });
+        return {
+            imageId: "wind-energy-basics",
+            assetFile: "images/english/wind-energy-basics.png",
+            contentType: "image-text",
+            layout: "custom-wind-energy-8-areas",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1536, height: 1024 },
+            panels: [
+                panel(1, [88, 154, 650, 98], [
+                    unit("wind-energy-subtitle", "sentence", "Clean Power from the Wind",
+                        [110, 166, 604, 51], [88, 154, 650, 98])
+                ]),
+                panel(2, [142, 260, 342, 145], [
+                    unit("wind-energy-wind-bubble", "bubble", "The wind makes the blades turn.",
+                        [180, 292, 267, 82], [142, 260, 342, 145])
+                ]),
+                panel(3, [937, 121, 271, 146], [
+                    unit("wind-energy-blades-label", "label", "1 Blades",
+                        [1012, 138, 178, 42], [937, 121, 271, 146]),
+                    unit("wind-energy-blades-sentence", "sentence", "The wind turns the blades.",
+                        [1007, 188, 173, 60])
+                ]),
+                panel(4, [1092, 298, 333, 175], [
+                    unit("wind-energy-generator-label", "label", "2 Generator",
+                        [1173, 314, 218, 42], [1092, 298, 333, 175]),
+                    unit("wind-energy-generator-sentence", "sentence",
+                        "The spinning blades turn a generator to make electricity.",
+                        [1167, 362, 236, 96])
+                ]),
+                panel(5, [946, 549, 317, 199], [
+                    unit("wind-energy-electricity-label", "label", "3 Electricity",
+                        [1024, 566, 216, 42], [946, 549, 317, 199]),
+                    unit("wind-energy-electricity-sentence", "sentence",
+                        "The electricity travels through power lines to our homes and cities.",
+                        [1021, 614, 224, 124])
+                ]),
+                panel(6, [45, 838, 461, 149], [
+                    unit("wind-energy-renewable-label", "label", "Renewable",
+                        [191, 851, 185, 41], [45, 838, 461, 149]),
+                    unit("wind-energy-renewable-sentence", "sentence",
+                        "Wind is a natural and endless resource.", [191, 896, 287, 73])
+                ]),
+                panel(7, [529, 838, 474, 149], [
+                    unit("wind-energy-clean-energy-label", "label", "Clean Energy",
+                        [687, 851, 267, 41], [529, 838, 474, 149]),
+                    unit("wind-energy-clean-energy-sentence", "sentence",
+                        "It produces electricity without air pollution.", [688, 896, 290, 72])
+                ]),
+                panel(8, [1026, 838, 470, 151], [
+                    unit("wind-energy-future-label", "label", "Helps Our Future",
+                        [1148, 851, 303, 42], [1026, 838, 470, 151]),
+                    unit("wind-energy-future-sentence", "sentence",
+                        "Wind energy provides clean power for a healthier and brighter tomorrow.",
+                        [1148, 896, 326, 83])
+                ])
+            ]
+        };
     })()
 
 };
