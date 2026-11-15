@@ -11487,6 +11487,7 @@ function isEnglishImageTTSItemText(record, item) {
     if (isEnglishPlantsPhotosynthesisImageTTSItemText(record, item)) return true;
     if (isEnglishHumanBrainImageTTSItemText(record, item)) return true;
     if (isEnglishNaturalResourcesImageTTSItemText(record, item)) return true;
+    if (isEnglishRenewableEnergyImageTTSItemText(record, item)) return true;
     if (isEnglishConservationBiodiversityImageTTSItemText(record, item)) return true;
     if (isEnglishImmuneSystemImageTTSItemText(record, item)) return true;
     if (isEnglishSkeletalSystemImageTTSItemText(record, item)) return true;
@@ -12092,6 +12093,7 @@ function getEnglishImageTTSImageTextName(record) {
     if (isEnglishPlantsPhotosynthesisImageTTSRecord(record)) return "Plants & Photosynthesis";
     if (isEnglishHumanBrainImageTTSRecord(record)) return "The Human Brain & Nervous System";
     if (isEnglishNaturalResourcesImageTTSRecord(record)) return "Natural Resources";
+    if (isEnglishRenewableEnergyImageTTSRecord(record)) return "Renewable Energy";
     if (isEnglishConservationBiodiversityImageTTSRecord(record)) return "Conservation and Biodiversity";
     if (isEnglishImmuneSystemImageTTSRecord(record)) return "The Immune System";
     if (isEnglishSkeletalSystemImageTTSRecord(record)) return "The Skeletal System & Bones";
@@ -14875,6 +14877,140 @@ function getEnglishEnergySourcesImageTextRecord(record, assetFile) {
         if (overlaps(panels[i], panels[j]) || overlaps(taps[i], taps[j])) return null;
     }
     return count === 22 && taps.length === 5 ? record : null;
+}
+
+function getEnglishRenewableEnergyExpectedPanels() {
+    const rect = (x, y, width, height) => ({
+        xPct: x / 1254 * 100, yPct: y / 1254 * 100,
+        widthPct: width / 1254 * 100, heightPct: height / 1254 * 100
+    });
+    const item = (itemId, readingOrder, type, sourceText, box, tapBox = null) => ({
+        itemId, readingOrder, type, sourceText, ttsText: sourceText, bounds: rect(...box),
+        ...(tapBox ? { tapRegion: rect(...tapBox) } : {})
+    });
+    const panel = (panelId, readingOrder, box, items) => ({
+        panelId, readingOrder, bounds: rect(...box), items
+    });
+    return [
+        panel(0, 1, [3, 2, 1248, 168], [
+            item("renewable-energy-banner-subtitle", 1, "sentence",
+                "Clean energy for a brighter future!", [310, 101, 630, 51], [3, 2, 1248, 168])
+        ]),
+        panel(1, 2, [4, 175, 617, 490], [
+            item("renewable-energy-p1-solar-label", 1, "label", "Solar Energy",
+                [54, 193, 308, 72], [4, 175, 617, 490]),
+            item("renewable-energy-p1-solar-sentence", 2, "sentence",
+                "The sun gives us clean and renewable energy.", [48, 276, 344, 120])
+        ]),
+        panel(2, 3, [634, 175, 616, 490], [
+            item("renewable-energy-p2-wind-label", 1, "label", "Wind Energy",
+                [672, 193, 342, 72], [634, 175, 616, 490]),
+            item("renewable-energy-p2-wind-sentence", 2, "sentence",
+                "Wind turns turbines to make electricity.", [678, 277, 345, 87])
+        ]),
+        panel(3, 4, [4, 682, 617, 566], [
+            item("renewable-energy-p3-hydropower-label", 1, "label", "Hydropower",
+                [16, 690, 326, 82], [4, 682, 617, 566]),
+            item("renewable-energy-p3-hydropower-sentence", 2, "sentence",
+                "Moving water spins turbines to generate electricity.", [48, 779, 355, 118])
+        ]),
+        panel(4, 5, [634, 682, 616, 566], [
+            item("renewable-energy-p4-geothermal-label", 1, "label", "Geothermal Energy",
+                [648, 690, 438, 82], [634, 682, 616, 566]),
+            item("renewable-energy-p4-geothermal-sentence", 2, "sentence",
+                "Heat from inside the Earth can also be used for clean energy.", [671, 776, 419, 123]),
+            item("renewable-energy-p4-future-sentence", 3, "sentence",
+                "Renewable energy helps protect our planet for future generations.", [949, 1096, 280, 121])
+        ])
+    ];
+}
+
+function getEnglishRenewableEnergyImageTextRecord(record, assetFile) {
+    const file = "images/english/renewable-energy-basics.png";
+    const imageId = "renewable-energy-basics";
+    const exact = (value, keys) => Boolean(value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key)));
+    const same = (actual, wanted) => {
+        if (Array.isArray(wanted)) return Array.isArray(actual) && actual.length === wanted.length &&
+            wanted.every((value, index) => same(actual[index], value));
+        if (wanted && typeof wanted === "object") return exact(actual, Object.keys(wanted)) &&
+            Object.keys(wanted).every(key => same(actual[key], wanted[key]));
+        return actual === wanted;
+    };
+    const rectKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validRect = value => exact(value, rectKeys) &&
+        rectKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const within = (outer, inner) => validRect(outer) && validRect(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (first, second) => first.xPct < second.xPct + second.widthPct &&
+        first.xPct + first.widthPct > second.xPct &&
+        first.yPct < second.yPct + second.heightPct &&
+        first.yPct + first.heightPct > second.yPct;
+    const expected = getEnglishRenewableEnergyExpectedPanels();
+    const topKeys = ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "sourceImageDimensions", "panels"];
+    if (!exact(record, topKeys) || record.imageId !== imageId || record.assetFile !== file ||
+        assetFile !== file || record.contentType !== "image-text" ||
+        record.layout !== "custom-renewable-energy-banner-plus-2x2" ||
+        record.transcriptStatus !== "verified" || record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1254 || record.sourceImageDimensions.height !== 1254 ||
+        !Array.isArray(record.panels) || typeof imageTTSData === "undefined" || !imageTTSData ||
+        imageTTSData[file] !== record || record.panels !== imageTTSData[file].panels ||
+        !same(record.panels, expected)) return null;
+    const identityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate && (candidate.imageId === imageId || candidate.assetFile === file);
+    });
+    const library = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry && (entry.id === imageId || entry.file === file)) : [];
+    if (identityKeys.length !== 1 || identityKeys[0] !== file || library.length !== 1 ||
+        library[0].id !== imageId || library[0].file !== file || library[0].category !== "english") return null;
+    const textBounds = [], tapRegions = [];
+    let unitCount = 0;
+    for (let panelIndex = 0; panelIndex < expected.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex], wanted = expected[panelIndex];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== wanted.panelId || panel.readingOrder !== wanted.readingOrder ||
+            !validRect(panel.bounds) || !Array.isArray(panel.items) ||
+            panel.items.length !== wanted.items.length) return null;
+        for (let itemIndex = 0; itemIndex < wanted.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex], target = wanted.items[itemIndex];
+            const expectedKeys = itemIndex === 0
+                ? ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds", "tapRegion"]
+                : ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"];
+            if (!exact(item, expectedKeys) || item.itemId !== target.itemId ||
+                item.readingOrder !== target.readingOrder || item.type !== target.type ||
+                item.sourceText !== target.sourceText || item.ttsText !== item.sourceText ||
+                !getEnglishTTSUnitText(item.sourceText) || !validRect(item.bounds) ||
+                !within(panel.bounds, item.bounds)) return null;
+            if (itemIndex === 0) {
+                if (!validRect(item.tapRegion) || !within(panel.bounds, item.tapRegion) ||
+                    !same(item.tapRegion, panel.bounds)) return null;
+                tapRegions.push(item.tapRegion);
+            }
+            textBounds.push(item.bounds);
+            unitCount += 1;
+        }
+    }
+    for (let left = 0; left < record.panels.length; left += 1) {
+        for (let right = left + 1; right < record.panels.length; right += 1) {
+            if (overlaps(record.panels[left].bounds, record.panels[right].bounds) ||
+                overlaps(tapRegions[left], tapRegions[right])) return null;
+        }
+    }
+    for (let left = 0; left < textBounds.length; left += 1) {
+        for (let right = left + 1; right < textBounds.length; right += 1) {
+            if (overlaps(textBounds[left], textBounds[right])) return null;
+        }
+    }
+    return unitCount === 10 && tapRegions.length === 5 ? record : null;
 }
 
 function getEnglishEnergyTransformationsExpectedPanels() {
@@ -17939,6 +18075,15 @@ function isEnglishNaturalResourcesImageTTSItemText(record, item) {
     return Boolean(isEnglishNaturalResourcesImageTTSRecord(record) && item &&
         record.panels.some(panel => panel.items.includes(item)));
 }
+function isEnglishRenewableEnergyImageTTSRecord(record) {
+    const file = "images/english/renewable-energy-basics.png";
+    return Boolean(record && typeof imageTTSData !== "undefined" && imageTTSData &&
+        imageTTSData[file] === record && getEnglishRenewableEnergyImageTextRecord(record, file) === record);
+}
+function isEnglishRenewableEnergyImageTTSItemText(record, item) {
+    return Boolean(isEnglishRenewableEnergyImageTTSRecord(record) && item &&
+        record.panels.some(panel => panel.items.includes(item)));
+}
 function getEnglishNaturalResourcesPanelMenuOptions(record, panel) {
     if (!isEnglishNaturalResourcesImageTTSRecord(record) || !panel ||
         record.panels.find(candidate => candidate.panelId === panel.panelId) !== panel) return null;
@@ -17955,6 +18100,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === "images/english/renewable-energy-basics.png" || record &&
+        (record.imageId === "renewable-energy-basics" ||
+            record.assetFile === "images/english/renewable-energy-basics.png")) {
+        return getEnglishRenewableEnergyImageTextRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_NATURAL_RESOURCES_ASSET_FILE || record &&
         (record.imageId === ENGLISH_NATURAL_RESOURCES_IMAGE_ID ||
             record.assetFile === ENGLISH_NATURAL_RESOURCES_ASSET_FILE)) {
@@ -21875,12 +22025,133 @@ function layoutEnglishEnergySourcesImageTTSHitAreas(wrapper, verifyTrigger = nul
     return selectable;
 }
 
+function layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper, verifyTrigger = null) {
+    const file = ENGLISH_RENEWABLE_ENERGY_ASSET_FILE;
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".renewable-energy-panel-hit-area")) : [];
+    const image = wrapper && typeof wrapper.querySelector === "function" ? wrapper.querySelector("img") : null;
+    const hide = button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "none";
+    };
+    const fail = () => {
+        buttons.forEach(hide);
+        if (englishImageTTSOverlayState.activeTrigger && wrapper &&
+            wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+        return false;
+    };
+    const record = typeof imageTTSData !== "undefined" && imageTTSData ? imageTTSData[file] : null;
+    if (!wrapper || !wrapper.isConnected || !wrapper.dataset || wrapper.dataset.imageTtsAssetFile !== file ||
+        !record || !isEnglishRenewableEnergyImageTTSRecord(record) || !image ||
+        !isEnglishRenewableEnergyFormalSearchImage(image) || image.getAttribute("src") !== file ||
+        image.complete !== true || image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+        buttons.length !== 5 || typeof document.elementFromPoint !== "function") return fail();
+    let imageRect, wrapperRect;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+    } catch (error) { return fail(); }
+    if (!imageRect || !wrapperRect ||
+        ![imageRect.left, imageRect.top, imageRect.width, imageRect.height,
+            wrapperRect.left, wrapperRect.top, wrapperRect.width, wrapperRect.height].every(Number.isFinite) ||
+        imageRect.width <= 0 || imageRect.height <= 0 ||
+        Math.abs(imageRect.width - imageRect.height) > Math.max(1, imageRect.width * 0.01) ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 || Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 ||
+        Math.abs(imageRect.height - wrapperRect.height) > 1) return fail();
+    const visual = window.visualViewport;
+    const viewport = visual && [visual.offsetLeft, visual.offsetTop, visual.width, visual.height].every(Number.isFinite) &&
+        visual.width > 0 && visual.height > 0
+        ? { left: visual.offsetLeft, top: visual.offsetTop,
+            right: visual.offsetLeft + visual.width, bottom: visual.offsetTop + visual.height }
+        : { left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight };
+    const selectable = appState.subjectMode === "english" && drawMode === "select";
+    let enabled = 0;
+    let selectedSafe = false;
+    for (const panel of record.panels) {
+        const item = panel.items[0];
+        const found = buttons.filter(button =>
+            button.getAttribute("data-image-tts-panel-id") === String(panel.panelId) &&
+            button.getAttribute("data-image-tts-item-id") === String(item.itemId));
+        if (found.length !== 1) return fail();
+        const button = found[0];
+        const tap = item.tapRegion;
+        if (!button.classList || !button.classList.contains("image-tts-image-text-hit-area") ||
+            button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== panel ||
+            button._englishImageTTSImageTextItem !== item) return fail();
+        // Reveal the control before measuring. Hidden controls have a zero rectangle.
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "auto";
+        let rect;
+        try { rect = button.getBoundingClientRect(); } catch (error) { return fail(); }
+        const expected = {
+            left: imageRect.left + imageRect.width * tap.xPct / 100,
+            top: imageRect.top + imageRect.height * tap.yPct / 100,
+            width: imageRect.width * tap.widthPct / 100,
+            height: imageRect.height * tap.heightPct / 100
+        };
+        if (!rect || ![rect.left, rect.top, rect.width, rect.height].every(Number.isFinite) ||
+            rect.width < 44 || rect.height < 44 || Math.abs(rect.left - expected.left) > 1 ||
+            Math.abs(rect.top - expected.top) > 1 || Math.abs(rect.width - expected.width) > 1 ||
+            Math.abs(rect.height - expected.height) > 1) {
+            hide(button);
+            if (button === verifyTrigger) return false;
+            continue;
+        }
+        const fullyVisible = rect.left >= viewport.left && rect.top >= viewport.top &&
+            rect.left + rect.width <= viewport.right && rect.top + rect.height <= viewport.bottom;
+        if (!selectable || !fullyVisible) {
+            hide(button);
+            continue;
+        }
+        if (button === verifyTrigger || englishImageTTSOverlayState.menu.hidden) {
+            const insetX = Math.min(6, rect.width / 4);
+            const insetY = Math.min(6, rect.height / 4);
+            const points = [
+                [rect.left + rect.width / 2, rect.top + rect.height / 2],
+                [rect.left + insetX, rect.top + insetY],
+                [rect.left + rect.width - insetX, rect.top + insetY],
+                [rect.left + insetX, rect.top + rect.height - insetY],
+                [rect.left + rect.width - insetX, rect.top + rect.height - insetY]
+            ];
+            let safe = false;
+            try {
+                safe = points.every(([x, y]) => {
+                    const hit = document.elementFromPoint(x, y);
+                    return hit === button || button.contains(hit);
+                });
+            } catch (error) { safe = false; }
+            if (!safe) {
+                hide(button);
+                if (button === verifyTrigger) return false;
+                continue;
+            }
+        }
+        button.hidden = false;
+        button.disabled = false;
+        button.setAttribute("aria-disabled", "false");
+        button.style.pointerEvents = "auto";
+        enabled += 1;
+        if (button === verifyTrigger) selectedSafe = true;
+    }
+    return verifyTrigger ? selectedSafe : enabled > 0;
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
     if (wrapper && wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_WIND_ENERGY_ASSET_FILE) {
         return layoutEnglishWindEnergyImageTTSHitAreas(wrapper);
     }
     if (wrapper && wrapper.dataset && wrapper.dataset.imageTtsAssetFile === "images/english/energy-and-energy-sources-basics.png") {
         layoutEnglishEnergySourcesImageTTSHitAreas(wrapper);
+        return;
+    }
+    if (wrapper && wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) {
+        layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
         return;
     }
     if (wrapper && wrapper.dataset &&
@@ -23180,6 +23451,7 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
     button.type = "button";
     button.className = "image-tts-image-text-hit-area";
     if (isEnglishWindEnergyImageTTSRecord(record)) button.classList.add("image-tts-wind-energy-hit-area");
+    if (isEnglishRenewableEnergyImageTTSRecord(record)) button.classList.add("renewable-energy-panel-hit-area");
     button.textContent = "";
     button.hidden = true;
     const isFullTitleImageText = isEnglishImageTTSFullTitleImageTextRecord(record);
@@ -23247,7 +23519,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
             isEnglishXRaysImageTTSRecord(record) ||
             isEnglishMuscularSystemImageTTSRecord(record) ||
             isEnglishSolarEnergyImageTTSRecord(record) ||
-            isEnglishWindEnergyImageTTSRecord(record)) && button.hidden) ||
+            isEnglishWindEnergyImageTTSRecord(record) ||
+            isEnglishRenewableEnergyImageTTSRecord(record)) && button.hidden) ||
             button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
             return;
         }
@@ -23256,6 +23529,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
             closeEnglishImageTTSMenu();
             return;
         }
+        if (isEnglishRenewableEnergyImageTTSRecord(record) &&
+            !layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper, button)) return;
         openEnglishImageTTSImageTextMenu(button, record, panel);
     });
     wrapper.appendChild(button);
@@ -23988,6 +24263,7 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
     }
 
     function renderResponse(responseRoot, question, headingText, answerHTML) {
+        ENGLISH_RENEWABLE_ENERGY_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_WIND_ENERGY_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_NATURAL_RESOURCES_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
@@ -24211,6 +24487,20 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
         const energySpecs=specs.filter(spec=>spec.imageData.file===ENGLISH_ENERGY_SOURCES_ASSET_FILE);
         const trustedEnergySourcesSpec=canonicalEnergy&&returnedEnergy===1&&energySpecs.length===1&&energySpecs[0].diagram===canonicalEnergy?energySpecs[0]:null;
 
+        const renewableMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_RENEWABLE_ENERGY_IMAGE_ID || entry.file === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE)) : [];
+        const canonicalRenewable = renewableMatches.length === 1 &&
+            renewableMatches[0].id === ENGLISH_RENEWABLE_ENERGY_IMAGE_ID &&
+            renewableMatches[0].file === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE
+                ? renewableMatches[0] : null;
+        const returnedRenewable = canonicalRenewable
+            ? diagrams.filter(diagram => diagram === canonicalRenewable).length : 0;
+        const renewableSpecs = specs.filter(spec =>
+            spec.imageData.file === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE);
+        const trustedRenewableEnergySpec = canonicalRenewable && returnedRenewable === 1 &&
+            renewableSpecs.length === 1 && renewableSpecs[0].diagram === canonicalRenewable
+                ? renewableSpecs[0] : null;
+
         responseRoot.replaceChildren();
         const heading = document.createElement("h2");
         heading.textContent = headingText;
@@ -24237,6 +24527,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 if (spec === trustedEnergySourcesSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_ENERGY_SOURCES_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_ENERGY_SOURCES_ASSET_FILE);
+                }
+                if (spec === trustedRenewableEnergySpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_RENEWABLE_ENERGY_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_RENEWABLE_ENERGY_ASSET_FILE);
                 }
                 if (spec === trustedNaturalResourcesSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_NATURAL_RESOURCES_IMAGE_ID);
@@ -24343,6 +24637,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedWindEnergySpec);
         ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedEnergySourcesSpec);
+        ENGLISH_RENEWABLE_ENERGY_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedRenewableEnergySpec);
         ENGLISH_NATURAL_RESOURCES_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedNaturalResourcesSpec);
         ENGLISH_CONSERVATION_BIODIVERSITY_FORMAL_SEARCH_ORIGIN.register(
@@ -24580,6 +24876,148 @@ function isEnglishNaturalResourcesFormalSearchImage(image) {
             entry.file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE));
     return matches.length === 1 && matches[0].id === ENGLISH_NATURAL_RESOURCES_IMAGE_ID &&
         matches[0].file === ENGLISH_NATURAL_RESOURCES_ASSET_FILE;
+}
+
+const ENGLISH_RENEWABLE_ENERGY_ASSET_FILE = "images/english/renewable-energy-basics.png";
+const ENGLISH_RENEWABLE_ENERGY_IMAGE_ID = "renewable-energy-basics";
+const ENGLISH_RENEWABLE_ENERGY_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    let currentContext = null;
+    let generation = 0;
+
+    function detach(image, registeredWrapper = null) {
+        const wrapper = registeredWrapper ||
+            (image && image.closest ? image.closest(".image-tts-overlay-wrapper") : null);
+        if (!wrapper) return;
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper.contains(active) && active.classList &&
+            active.classList.contains("renewable-energy-panel-hit-area")) {
+            cancelEnglishImageTTSImageTextSequence(true);
+        }
+        const activeMenu = englishImageTTSOverlayState.activeTrigger;
+        if (activeMenu && wrapper.contains(activeMenu) && activeMenu.classList &&
+            activeMenu.classList.contains("renewable-energy-panel-hit-area")) {
+            closeEnglishImageTTSMenu();
+        }
+        wrapper.querySelectorAll(".renewable-energy-panel-hit-area").forEach(button => button.remove());
+    }
+
+    function revoke(context, image) {
+        if (!context || !context.images.has(image)) return;
+        const origin = originByImage.get(image);
+        originByImage.delete(image);
+        context.images.delete(image);
+        detach(image, origin && origin.wrapper);
+    }
+
+    function process(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revoke(context, record.target);
+                return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removedNode => {
+                Array.from(context.images).forEach(image => {
+                    if (removedNode === image || removedNode &&
+                        typeof removedNode.contains === "function" && removedNode.contains(image)) {
+                        revoke(context, image);
+                    }
+                });
+            });
+        });
+    }
+
+    function expireCurrentContext() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revoke(context, image));
+        currentContext = null;
+    }
+
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer) process(context, context.observer.takeRecords());
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked || origin.context !== context ||
+            origin.generation !== context.generation || !context.observer || !image.isConnected ||
+            context.responseRoot !== document.getElementById("ai-response") ||
+            !context.responseRoot.isConnected ||
+            !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(image) ||
+            image.getAttribute("src") !== ENGLISH_RENEWABLE_ENERGY_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !== ENGLISH_RENEWABLE_ENERGY_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !== ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) return false;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_RENEWABLE_ENERGY_IMAGE_ID ||
+                entry.file === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE)) : [];
+        return matches.length === 1 && matches[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_RENEWABLE_ENERGY_IMAGE_ID &&
+            origin.diagram.file === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE;
+    }
+
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot || !diagramContainer || !trustedSpec ||
+            typeof MutationObserver !== "function" ||
+            responseRoot !== document.getElementById("ai-response") ||
+            !responseRoot.isConnected || !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_RENEWABLE_ENERGY_IMAGE_ID ||
+                entry.file === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE)) : [];
+        const specs = (Array.isArray(renderedSpecs) ? renderedSpecs : []).filter(entry =>
+            entry && entry.spec && entry.spec.imageData &&
+            entry.spec.imageData.file === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE);
+        const rendered = Array.isArray(renderedSpecs)
+            ? renderedSpecs.find(entry => entry && entry.spec === trustedSpec) : null;
+        if (matches.length !== 1 || matches[0] !== diagram || !diagram ||
+            diagram.id !== ENGLISH_RENEWABLE_ENERGY_IMAGE_ID ||
+            diagram.file !== ENGLISH_RENEWABLE_ENERGY_ASSET_FILE || specs.length !== 1 ||
+            !rendered || !rendered.image || !rendered.image.isConnected ||
+            !diagramContainer.contains(rendered.image)) return false;
+        const image = rendered.image;
+        const wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) || !diagramContainer.contains(wrapper)) return false;
+        const context = {
+            generation: ++generation, responseRoot, diagramContainer, diagram,
+            images: new Set([image]), observer: null, revoked: false
+        };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram, wrapper });
+        context.observer = new MutationObserver(records => process(context, records));
+        context.observer.observe(responseRoot, {
+            childList: true, subtree: true, attributes: true,
+            attributeFilter: ["src", "data-english-image-library-id", "data-english-image-library-file"]
+        });
+        if (!isTrustedNode(image)) {
+            expireCurrentContext();
+            return false;
+        }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+
+    return { register, expireCurrentContext, isTrustedNode };
+})();
+
+function isEnglishRenewableEnergyFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_RENEWABLE_ENERGY_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !== ENGLISH_RENEWABLE_ENERGY_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !== ENGLISH_RENEWABLE_ENERGY_ASSET_FILE ||
+        !ENGLISH_RENEWABLE_ENERGY_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || !Array.isArray(diagramMap)) return false;
+    const record = imageTTSData[ENGLISH_RENEWABLE_ENERGY_ASSET_FILE];
+    if (getEnglishRenewableEnergyImageTextRecord(record, ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) !== record)
+        return false;
+    const matches = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_RENEWABLE_ENERGY_IMAGE_ID ||
+            entry.file === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE));
+    return matches.length === 1 && matches[0].id === ENGLISH_RENEWABLE_ENERGY_IMAGE_ID &&
+        matches[0].file === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE;
 }
 
 const ENGLISH_ENERGY_SOURCES_ASSET_FILE = "images/english/energy-and-energy-sources-basics.png";
@@ -25716,6 +26154,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE &&
+            !isEnglishRenewableEnergyFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_NATURAL_RESOURCES_ASSET_FILE &&
             !isEnglishNaturalResourcesFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_CONSERVATION_BIODIVERSITY_ASSET_FILE &&
@@ -25790,6 +26230,37 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishRenewableEnergyImageTTSRecord(record)) {
+                const dimensionsOK = () => isEnglishRenewableEnergyFormalSearchImage(image) &&
+                    image.getAttribute("src") === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE &&
+                    image.complete === true && image.naturalWidth === 1254 && image.naturalHeight === 1254;
+                const hideRenewableHitAreas = () => {
+                    wrapper.querySelectorAll(".renewable-energy-panel-hit-area").forEach(button => {
+                        button.hidden = true;
+                        button.disabled = true;
+                        button.setAttribute("aria-disabled", "true");
+                        button.style.pointerEvents = "none";
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+                    if (englishTTSState.imageTextSequenceTrigger &&
+                        wrapper.contains(englishTTSState.imageTextSequenceTrigger))
+                        cancelEnglishImageTTSImageTextSequence(true);
+                };
+                if (image.complete && !dimensionsOK()) return;
+                record.panels.forEach(panel => {
+                    const item = panel.items[0];
+                    if (item && item.tapRegion &&
+                        createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record)) added += 1;
+                });
+                image.addEventListener("load", () => {
+                    if (!dimensionsOK()) { hideRenewableHitAreas(); return; }
+                    layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", hideRenewableHitAreas, { once: true });
+                layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
+                return;
+            }
             if (isEnglishConservationBiodiversityImageTTSRecord(record)) {
                 const dimensionsOK = () => isEnglishConservationBiodiversityFormalSearchImage(image) &&
                     image.getAttribute("src") === ENGLISH_CONSERVATION_BIODIVERSITY_ASSET_FILE &&
@@ -26698,6 +27169,10 @@ function scheduleEnglishImageTTSLayout() {
         englishImageTTSOverlayState.layoutFrame = 0;
         document.querySelectorAll("#ai-response .image-tts-overlay-wrapper").forEach(wrapper => {
             layoutEnglishImageTTSPanelSpeakers(wrapper);
+            if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) {
+                layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
+            }
             layoutEnglishImageTTSPlateausSideButtons(wrapper);
             layoutEnglishImageTTSKarstSideButtons(wrapper);
             if (wrapper.dataset &&
@@ -26822,6 +27297,10 @@ function syncEnglishImageTTSDrawingMode() {
     });
     document.querySelectorAll("#ai-response .image-tts-overlay-wrapper").forEach(wrapper => {
         layoutEnglishImageTTSKarstSideButtons(wrapper);
+        if (wrapper.dataset &&
+            wrapper.dataset.imageTtsAssetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) {
+            layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
+        }
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_SKELETAL_SYSTEM_ASSET_FILE) {
             layoutEnglishSkeletalSystemPanelHitAreas(wrapper);
@@ -27146,6 +27625,9 @@ function getEnglishImageTTSImageTextSpeechText(record, item) {
     if (isEnglishNaturalResourcesImageTTSItemText(record, item)) {
         return getEnglishTTSUnitText(item.ttsText);
     }
+    if (isEnglishRenewableEnergyImageTTSItemText(record, item)) {
+        return getEnglishTTSUnitText(item.ttsText);
+    }
     if (isEnglishConservationBiodiversityImageTTSItemText(record, item)) {
         return getEnglishTTSUnitText(item.ttsText);
     }
@@ -27354,6 +27836,31 @@ function speakEnglishImageTTSImageTextSequence(
     const energySourcesPanel=trigger&&trigger._englishImageTTSImageTextPanel;
     const energySourcesPanelSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===energySourcesPanel.items.length&&energySourcesPanel.items.every((item,index)=>item===itemList[index]));
     const energySourcesSingleItemSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===1&&energySourcesPanel.items.includes(itemList[0]));
+    const isRenewableEnergyImageText = Boolean(record && isEnglishRenewableEnergyImageTTSRecord(record));
+    const renewableEnergyPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const renewableEnergyPanelSequence = Boolean(isRenewableEnergyImageText && renewableEnergyPanel &&
+        itemList.length === renewableEnergyPanel.items.length &&
+        renewableEnergyPanel.items.every((item, index) => item === itemList[index]));
+    const renewableEnergySingleItemSequence = Boolean(isRenewableEnergyImageText && renewableEnergyPanel &&
+        itemList.length === 1 && renewableEnergyPanel.items.includes(itemList[0]));
+    const renewableEnergyImage = isRenewableEnergyImageText && wrapper
+        ? wrapper.querySelector("img") : null;
+    const renewableEnergyButtons = isRenewableEnergyImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".renewable-energy-panel-hit-area")) : [];
+    const renewableEnergyReady = !isRenewableEnergyImageText || Boolean(
+        record === imageTTSData[ENGLISH_RENEWABLE_ENERGY_ASSET_FILE] && trigger &&
+        trigger._englishImageTTSImageTextRecord === record && renewableEnergyPanel &&
+        record.panels.includes(renewableEnergyPanel) &&
+        trigger._englishImageTTSImageTextPanel === renewableEnergyPanel &&
+        trigger._englishImageTTSImageTextItem === renewableEnergyPanel.items[0] &&
+        itemList.every(item => renewableEnergyPanel.items.includes(item)) &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE &&
+        renewableEnergyImage && isEnglishRenewableEnergyFormalSearchImage(renewableEnergyImage) &&
+        renewableEnergyImage.getAttribute("src") === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE &&
+        renewableEnergyImage.complete === true && renewableEnergyImage.naturalWidth === 1254 &&
+        renewableEnergyImage.naturalHeight === 1254 && renewableEnergyButtons.length === 5 &&
+        renewableEnergyButtons.includes(trigger) && !trigger.hidden && !trigger.disabled &&
+        layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper, trigger));
     const isWindEnergyImageText = Boolean(record && isEnglishWindEnergyImageTTSRecord(record));
     const windEnergyPanel = trigger && trigger._englishImageTTSImageTextPanel;
     const windEnergyPanelSequence = Boolean(isWindEnergyImageText && windEnergyPanel &&
@@ -27904,6 +28411,7 @@ function speakEnglishImageTTSImageTextSequence(
         triggerPanel !== record.panels.find(panel => panel.panelId === triggerPanel.panelId) ||
         wrapper.dataset.imageTtsAssetFile !== assetFile ||
         (isEnergySourcesImageText && !energySourcesPanelSequence && !energySourcesSingleItemSequence) ||
+        (isRenewableEnergyImageText && !renewableEnergyPanelSequence && !renewableEnergySingleItemSequence) ||
         (!isPanelSequence && !telephoneV2P4WholePanelSequence &&
             !telephoneV2P7WholePanelSequence && !isExcretorySystemSingleItemSequence &&
             !isSkeletalSystemSingleItemSequence && !isImmuneSystemSingleItemSequence &&
@@ -27917,6 +28425,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isCyclingSingleItemSequence &&
             !isEnergyTransformationsSingleItemSequence &&
             !energySourcesSingleItemSequence &&
+            !renewableEnergySingleItemSequence &&
             !isSolarSingleItemSequence &&
             !isWaterCycleSingleItemSequence &&
             !isPlateausSingleItemSequence && !isKarstSingleItemSequence &&
@@ -27946,7 +28455,7 @@ function speakEnglishImageTTSImageTextSequence(
                 !isEnglishEnergyTransformationsImageTTSItemText(record, item)) ||
             !isEnglishImageTTSItemText(record, item)) ||
         !isValidSelectedSpeechUnit || !playbackSteps.length || !karstReady || !mountainsReady ||
-        !energySourcesReady || !windEnergyReady ||
+        !energySourcesReady || !renewableEnergyReady || !windEnergyReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
         !animalsAdaptationImageReady || !humanHealthImageReady || !typhoonsImageReady ||
         !muscularImageReady || !cyclingImageReady || !solarImageReady ||
@@ -28646,6 +29155,21 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const assetFile = wrapper && wrapper.dataset.imageTtsAssetFile;
     const safeRecord = assetFile ? getEnglishImageTTSRecord(assetFile) : null;
     const safeRecordName = getEnglishImageTTSImageTextName(safeRecord);
+    const isRenewableEnergyImageText = Boolean(safeRecord &&
+        isEnglishRenewableEnergyImageTTSRecord(safeRecord));
+    const renewableEnergyImage = isRenewableEnergyImageText && wrapper
+        ? wrapper.querySelector("img") : null;
+    const renewableEnergyButtons = isRenewableEnergyImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".renewable-energy-panel-hit-area")) : [];
+    const renewableEnergyLayoutReady = !isRenewableEnergyImageText || Boolean(
+        trigger && record === safeRecord && trigger._englishImageTTSImageTextRecord === safeRecord &&
+        panel && safeRecord.panels.includes(panel) && panel.items[0] === trigger._englishImageTTSImageTextItem &&
+        renewableEnergyImage && isEnglishRenewableEnergyFormalSearchImage(renewableEnergyImage) &&
+        renewableEnergyImage.getAttribute("src") === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE &&
+        renewableEnergyImage.complete === true && renewableEnergyImage.naturalWidth === 1254 &&
+        renewableEnergyImage.naturalHeight === 1254 && renewableEnergyButtons.length === 5 &&
+        renewableEnergyButtons.includes(trigger) && !trigger.hidden && !trigger.disabled &&
+        layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper, trigger));
     const isConservationBiodiversityImageText = Boolean(safeRecord &&
         isEnglishConservationBiodiversityImageTTSRecord(safeRecord));
     const isWindEnergyImageText = Boolean(safeRecord && isEnglishWindEnergyImageTTSRecord(safeRecord));
@@ -28741,6 +29265,7 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
             !isEnglishConservationBiodiversityFormalSearchImage(conservationBiodiversityImage) ||
             trigger._englishImageTTSImageTextRecord !== safeRecord ||
             conservationBiodiversityButtons.length !== 4 || !conservationBiodiversityButtons.includes(trigger))) ||
+        (isRenewableEnergyImageText && (!renewableEnergyLayoutReady || !renewableEnergyButtons.includes(trigger))) ||
         (isWindEnergyImageText && (!windEnergyImage ||
             !isEnglishWindEnergyFormalSearchImage(windEnergyImage) ||
             windEnergyImage.getAttribute("src") !== ENGLISH_WIND_ENERGY_ASSET_FILE ||
@@ -28860,6 +29385,68 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
                     [item], "已朗讀 Wind Energy 所選原圖文字。");
             });
         }
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
+    }
+
+    if (isRenewableEnergyImageText) {
+        const image = wrapper.querySelector("img");
+        const buttons = Array.from(wrapper.querySelectorAll(".renewable-energy-panel-hit-area"));
+        const clicked = trigger._englishImageTTSImageTextItem;
+        if (record !== safeRecord || !image || !isEnglishRenewableEnergyFormalSearchImage(image) ||
+            image.getAttribute("src") !== ENGLISH_RENEWABLE_ENERGY_ASSET_FILE || !image.complete ||
+            image.naturalWidth !== 1254 || image.naturalHeight !== 1254 || buttons.length !== 5 ||
+            !buttons.includes(trigger) || trigger.hidden || trigger.disabled ||
+            trigger._englishImageTTSImageTextRecord !== safeRecord ||
+            trigger._englishImageTTSImageTextPanel !== panel ||
+            !panel.items.includes(clicked) || clicked !== panel.items[0] ||
+            !isEnglishRenewableEnergyImageTTSItemText(safeRecord, clicked) ||
+            !layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper, trigger)) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const run = (items, completion) => {
+            closeEnglishImageTTSMenu();
+            speakEnglishImageTTSImageTextSequence(trigger, items, completion);
+        };
+        const banner = panel.panelId === 0;
+        const sectionName = banner ? "橫幅副標" : "P" + panel.panelId + " 卡片";
+        menu.setAttribute("aria-label", "Renewable Energy " + sectionName + "朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            banner ? "🔊 朗讀橫幅副標" : "🔊 朗讀本卡完整內容",
+            banner ? "朗讀 Renewable Energy 橫幅副標" : "依原圖順序朗讀本卡標籤與全部句子",
+            () => run(panel.items, banner
+                ? "Renewable Energy 橫幅副標已朗讀完成。"
+                : "Renewable Energy 第 " + panel.panelId + " 卡完整內容已朗讀完成。")
+        ));
+        const toggle = createEnglishImageTTSMenuButton(
+            "🔊 單項選讀（" + panel.items.length + " 項）",
+            "展開本區每個標籤與完整句子的獨立朗讀選項",
+            () => {
+                const list = menu.querySelector(".english-image-tts-sentences");
+                if (!list) return;
+                list.hidden = !list.hidden;
+                toggle.setAttribute("aria-expanded", String(!list.hidden));
+                scheduleEnglishImageTTSMenuPosition();
+            }
+        );
+        toggle.setAttribute("aria-expanded", "false");
+        const list = document.createElement("div");
+        list.className = "english-image-tts-sentences";
+        list.hidden = true;
+        panel.items.forEach(item => list.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 " + (item.type === "label" ? "卡片標籤：" : "完整句子：") + item.sourceText,
+            "單獨朗讀 Renewable Energy 原圖文字：「" + item.sourceText + "」",
+            () => run([item], "已朗讀 Renewable Energy 所選原圖文字。")
+        )));
+        menu.appendChild(toggle);
+        menu.appendChild(list);
         menu.hidden = false;
         menu.style.visibility = "hidden";
         positionEnglishImageTTSMenu();

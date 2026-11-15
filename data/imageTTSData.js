@@ -21014,6 +21014,64 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/renewable-energy-basics.png": (() => {
+        const rect = (x, y, width, height) => ({
+            xPct: x / 1254 * 100, yPct: y / 1254 * 100,
+            widthPct: width / 1254 * 100, heightPct: height / 1254 * 100
+        });
+        const item = (itemId, readingOrder, type, sourceText, box, tapBox = null) => ({
+            itemId, readingOrder, type, sourceText, ttsText: sourceText,
+            bounds: rect(...box), ...(tapBox ? { tapRegion: rect(...tapBox) } : {})
+        });
+        const panel = (panelId, readingOrder, box, items) => ({
+            panelId, readingOrder, bounds: rect(...box), items
+        });
+        return {
+            imageId: "renewable-energy-basics",
+            assetFile: "images/english/renewable-energy-basics.png",
+            contentType: "image-text",
+            layout: "custom-renewable-energy-banner-plus-2x2",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1254, height: 1254 },
+            panels: [
+                panel(0, 1, [3, 2, 1248, 168], [
+                    item("renewable-energy-banner-subtitle", 1, "sentence",
+                        "Clean energy for a brighter future!", [310, 101, 630, 51], [3, 2, 1248, 168])
+                ]),
+                panel(1, 2, [4, 175, 617, 490], [
+                    item("renewable-energy-p1-solar-label", 1, "label", "Solar Energy",
+                        [54, 193, 308, 72], [4, 175, 617, 490]),
+                    item("renewable-energy-p1-solar-sentence", 2, "sentence",
+                        "The sun gives us clean and renewable energy.", [48, 276, 344, 120])
+                ]),
+                panel(2, 3, [634, 175, 616, 490], [
+                    item("renewable-energy-p2-wind-label", 1, "label", "Wind Energy",
+                        [672, 193, 342, 72], [634, 175, 616, 490]),
+                    item("renewable-energy-p2-wind-sentence", 2, "sentence",
+                        "Wind turns turbines to make electricity.", [678, 277, 345, 87])
+                ]),
+                panel(3, 4, [4, 682, 617, 566], [
+                    item("renewable-energy-p3-hydropower-label", 1, "label", "Hydropower",
+                        [16, 690, 326, 82], [4, 682, 617, 566]),
+                    item("renewable-energy-p3-hydropower-sentence", 2, "sentence",
+                        "Moving water spins turbines to generate electricity.", [48, 779, 355, 118])
+                ]),
+                panel(4, 5, [634, 682, 616, 566], [
+                    item("renewable-energy-p4-geothermal-label", 1, "label", "Geothermal Energy",
+                        [648, 690, 438, 82], [634, 682, 616, 566]),
+                    item("renewable-energy-p4-geothermal-sentence", 2, "sentence",
+                        "Heat from inside the Earth can also be used for clean energy.",
+                        [671, 776, 419, 123]),
+                    item("renewable-energy-p4-future-sentence", 3, "sentence",
+                        "Renewable energy helps protect our planet for future generations.",
+                        [949, 1096, 280, 121])
+                ])
+            ]
+        };
+    })(),
     "images/english/energy-transformations-basics.png": {
         imageId: "energy-transformations-basics",
         assetFile: "images/english/energy-transformations-basics.png",
