@@ -23677,5 +23677,138 @@ const imageTTSData = {
                 ]
             }
         ]
-    }
+    },
+    "images/english/conservation-and-biodiversity-basics.png": {
+        imageId: "conservation-and-biodiversity-basics",
+        title: "Conservation and Biodiversity",
+        assetFile: "images/english/conservation-and-biodiversity-basics.png",
+        contentType: "image-text",
+        layout: "custom-conservation-biodiversity-2x2-card-menu",
+        transcriptStatus: "verified",
+        transcriptReviewMethod: "manual-visual-no-OCR",
+        coordinateStatus: "estimated",
+        overlayRuntimeStatus: "not-tested",
+        sourceImageDimensions: { width: 1254, height: 1254 },
+        panels: [
+            {
+                panelId: 1, readingOrder: 1,
+                bounds: {
+                    xPct: 8 / 1254 * 100, yPct: 108 / 1254 * 100,
+                    widthPct: 616 / 1254 * 100, heightPct: 548 / 1254 * 100
+                },
+                items: [
+                    {
+                        itemId: "conservation-biodiversity-p1-title", readingOrder: 1, type: "label",
+                        sourceText: "1. Protect animals", ttsText: "1. Protect animals",
+                        bounds: {
+                            xPct: 42 / 1254 * 100, yPct: 116 / 1254 * 100,
+                            widthPct: 468 / 1254 * 100, heightPct: 68 / 1254 * 100
+                        }
+                    }
+                ]
+            },
+            {
+                panelId: 2, readingOrder: 2,
+                bounds: {
+                    xPct: 640 / 1254 * 100, yPct: 108 / 1254 * 100,
+                    widthPct: 608 / 1254 * 100, heightPct: 548 / 1254 * 100
+                },
+                items: [
+                    {
+                        itemId: "conservation-biodiversity-p2-title", readingOrder: 1, type: "label",
+                        sourceText: "2. Protect habitats", ttsText: "2. Protect habitats",
+                        bounds: {
+                            xPct: 690 / 1254 * 100, yPct: 117 / 1254 * 100,
+                            widthPct: 456 / 1254 * 100, heightPct: 70 / 1254 * 100
+                        }
+                    },
+                    {
+                        itemId: "conservation-biodiversity-p2-forests", readingOrder: 2, type: "label",
+                        sourceText: "FORESTS", ttsText: "FORESTS",
+                        bounds: {
+                            xPct: 1110 / 1254 * 100, yPct: 190 / 1254 * 100,
+                            widthPct: 130 / 1254 * 100, heightPct: 56 / 1254 * 100
+                        }
+                    },
+                    {
+                        itemId: "conservation-biodiversity-p2-rivers", readingOrder: 3, type: "label",
+                        sourceText: "RIVERS", ttsText: "RIVERS",
+                        bounds: {
+                            xPct: 1114 / 1254 * 100, yPct: 282 / 1254 * 100,
+                            widthPct: 126 / 1254 * 100, heightPct: 56 / 1254 * 100
+                        }
+                    },
+                    {
+                        itemId: "conservation-biodiversity-p2-oceans", readingOrder: 4, type: "label",
+                        sourceText: "OCEANS", ttsText: "OCEANS",
+                        bounds: {
+                            xPct: 1113 / 1254 * 100, yPct: 345 / 1254 * 100,
+                            widthPct: 128 / 1254 * 100, heightPct: 57 / 1254 * 100
+                        }
+                    },
+                    {
+                        itemId: "conservation-biodiversity-p2-wetlands", readingOrder: 5, type: "label",
+                        sourceText: "WETLANDS", ttsText: "WETLANDS",
+                        bounds: {
+                            xPct: 1107 / 1254 * 100, yPct: 407 / 1254 * 100,
+                            widthPct: 133 / 1254 * 100, heightPct: 58 / 1254 * 100
+                        }
+                    }
+                ]
+            },
+            {
+                panelId: 3, readingOrder: 3,
+                bounds: {
+                    xPct: 8 / 1254 * 100, yPct: 670 / 1254 * 100,
+                    widthPct: 616 / 1254 * 100, heightPct: 576 / 1254 * 100
+                },
+                items: [
+                    {
+                        itemId: "conservation-biodiversity-p3-title", readingOrder: 1, type: "label",
+                        sourceText: "3. Biodiversity", ttsText: "3. Biodiversity",
+                        bounds: {
+                            xPct: 42 / 1254 * 100, yPct: 680 / 1254 * 100,
+                            widthPct: 388 / 1254 * 100, heightPct: 72 / 1254 * 100
+                        }
+                    },
+                    {
+                        itemId: "conservation-biodiversity-p3-sentence", readingOrder: 2, type: "sentence",
+                        sourceText: "Many different living things work together.",
+                        ttsText: "Many different living things work together.",
+                        bounds: {
+                            xPct: 384 / 1254 * 100, yPct: 758 / 1254 * 100,
+                            widthPct: 230 / 1254 * 100, heightPct: 114 / 1254 * 100
+                        }
+                    }
+                ]
+            },
+            {
+                panelId: 4, readingOrder: 4,
+                bounds: {
+                    xPct: 638 / 1254 * 100, yPct: 670 / 1254 * 100,
+                    widthPct: 610 / 1254 * 100, heightPct: 576 / 1254 * 100
+                },
+                items: [
+                    {
+                        itemId: "conservation-biodiversity-p4-title", readingOrder: 1, type: "label",
+                        sourceText: "4. A healthy planet", ttsText: "4. A healthy planet",
+                        bounds: {
+                            xPct: 677 / 1254 * 100, yPct: 682 / 1254 * 100,
+                            widthPct: 480 / 1254 * 100, heightPct: 75 / 1254 * 100
+                        }
+                    },
+                    {
+                        itemId: "conservation-biodiversity-p4-bubble", readingOrder: 2, type: "bubble",
+                        sourceText: "Conservation helps people, wildlife and our planet.",
+                        ttsText: "Conservation helps people, wildlife and our planet.",
+                        bounds: {
+                            xPct: 1040 / 1254 * 100, yPct: 756 / 1254 * 100,
+                            widthPct: 202 / 1254 * 100, heightPct: 197 / 1254 * 100
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+
 };
