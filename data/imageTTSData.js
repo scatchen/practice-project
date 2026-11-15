@@ -23943,4 +23943,81 @@ const imageTTSData = {
         };
     })(),
 
+
+    "images/english/layers-of-the-earth-basics.png": (() => {
+        const rect = (x, y, width, height) => ({
+            xPct: x / 1536 * 100, yPct: y / 1024 * 100,
+            widthPct: width / 1536 * 100, heightPct: height / 1024 * 100
+        });
+        const item = (itemId, readingOrder, type, sourceText, box) => ({
+            itemId, readingOrder, type, sourceText, ttsText: sourceText,
+            bounds: rect(...box)
+        });
+        const panel = (panelId, readingOrder, bounds, items) => ({
+            panelId, readingOrder, bounds: rect(...bounds), items
+        });
+        return {
+            imageId: "layers-of-the-earth-basics",
+            assetFile: "images/english/layers-of-the-earth-basics.png",
+            contentType: "image-text",
+            layout: "custom-layers-of-the-earth-2x2-card-menu",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1536, height: 1024 },
+            panels: [
+                panel(1, 1, [10, 103, 748, 410], [
+                    item("layers-earth-p1-title", 1, "label",
+                        "Layers of the Earth", [274, 14, 588, 64]),
+                    item("layers-earth-p1-earth", 2, "label",
+                        "Earth", [118, 109, 271, 59]),
+                    item("layers-earth-p1-sentence", 3, "sentence",
+                        "Earth is a rocky planet with different layers inside.",
+                        [470, 183, 283, 166])
+                ]),
+                panel(2, 2, [778, 103, 748, 410], [
+                    item("layers-earth-p2-crust", 1, "label",
+                        "Crust", [886, 109, 161, 59]),
+                    item("layers-earth-p2-sentence-1", 2, "sentence",
+                        "The crust is the outermost layer.", [1270, 180, 250, 64]),
+                    item("layers-earth-p2-sentence-2", 3, "sentence",
+                        "It is solid and made of rocks.", [1270, 244, 250, 70]),
+                    item("layers-earth-p2-sentence-3", 4, "sentence",
+                        "We live on the crust.", [1270, 307, 250, 48])
+                ]),
+                panel(3, 3, [10, 532, 748, 474], [
+                    item("layers-earth-p3-mantle", 1, "label",
+                        "Mantle", [115, 534, 310, 62]),
+                    item("layers-earth-p3-sentence-1", 2, "sentence",
+                        "The mantle is below the crust.", [441, 601, 307, 66]),
+                    item("layers-earth-p3-sentence-2", 3, "sentence",
+                        "It is very hot rock that moves slowly.", [441, 666, 307, 94]),
+                    item("layers-earth-p3-sentence-3", 4, "sentence",
+                        "This movement helps drive plate movement on the crust.",
+                        [441, 758, 307, 116])
+                ]),
+                panel(4, 4, [778, 532, 748, 474], [
+                    item("layers-earth-p4-title", 1, "label",
+                        "Outer Core & Inner Core", [870, 528, 418, 64]),
+                    item("layers-earth-p4-crust", 2, "label",
+                        "Crust", [1110, 605, 169, 58]),
+                    item("layers-earth-p4-crust-description", 3, "phrase",
+                        "Thin, solid rock", [1290, 607, 229, 49]),
+                    item("layers-earth-p4-mantle", 4, "label",
+                        "Mantle", [1110, 670, 169, 58]),
+                    item("layers-earth-p4-mantle-description", 5, "phrase",
+                        "Very hot, slowly moving rock", [1290, 672, 229, 55]),
+                    item("layers-earth-p4-outer-core", 6, "label",
+                        "Outer Core", [1110, 748, 169, 86]),
+                    item("layers-earth-p4-outer-core-description", 7, "phrase",
+                        "Liquid metal (mainly iron and nickel)", [1290, 748, 229, 88]),
+                    item("layers-earth-p4-inner-core", 8, "label",
+                        "Inner Core", [1110, 858, 169, 87]),
+                    item("layers-earth-p4-inner-core-description", 9, "phrase",
+                        "Solid metal (mainly iron and nickel)", [1290, 860, 229, 87])
+                ])
+            ]
+        };
+    })(),
 };

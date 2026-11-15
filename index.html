@@ -11481,6 +11481,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishLayersOfTheEarthImageTTSItemText(record, item)) return true;
     if (isEnglishMatterStatesOfMatterImageTTSItemText(record, item)) return true;
     const telephoneV2P1Test = window.englishTelephoneV2P1Test;
     if (telephoneV2P1Test && telephoneV2P1Test.isItem(record, item)) return true;
@@ -12088,6 +12089,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishLayersOfTheEarthImageTTSRecord(record)) return "Layers of the Earth";
     if (isEnglishMatterStatesOfMatterImageTTSRecord(record)) return "Matter and States of Matter";
     const telephoneV2P1Test = window.englishTelephoneV2P1Test;
     if (telephoneV2P1Test && telephoneV2P1Test.isRecord(record)) {
@@ -18256,6 +18258,132 @@ function getEnglishNaturalResourcesPanelMenuOptions(record, panel) {
     };
 }
 
+
+const ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID = "layers-of-the-earth-basics";
+const ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE =
+    "images/english/layers-of-the-earth-basics.png";
+
+function getEnglishLayersOfTheEarthImageTextRecord(record, assetFile) {
+    const imageId = ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID;
+    const file = ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE;
+    const exactKeys = (value, keys) => Boolean(value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key)));
+    const rect = (x, y, width, height) => ({
+        xPct: x / 1536 * 100, yPct: y / 1024 * 100,
+        widthPct: width / 1536 * 100, heightPct: height / 1024 * 100
+    });
+    const sameRect = (actual, expected) => exactKeys(actual,
+        ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        ["xPct", "yPct", "widthPct", "heightPct"].every(key => actual[key] === expected[key]);
+    const validRect = value => exactKeys(value, ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        ["xPct", "yPct", "widthPct", "heightPct"].every(key =>
+            Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const expected = [
+        { panelId: 1, bounds: [10, 103, 748, 410], items: [
+            ["layers-earth-p1-title", "label", "Layers of the Earth"],
+            ["layers-earth-p1-earth", "label", "Earth"],
+            ["layers-earth-p1-sentence", "sentence",
+                "Earth is a rocky planet with different layers inside."]
+        ]},
+        { panelId: 2, bounds: [778, 103, 748, 410], items: [
+            ["layers-earth-p2-crust", "label", "Crust"],
+            ["layers-earth-p2-sentence-1", "sentence", "The crust is the outermost layer."],
+            ["layers-earth-p2-sentence-2", "sentence", "It is solid and made of rocks."],
+            ["layers-earth-p2-sentence-3", "sentence", "We live on the crust."]
+        ]},
+        { panelId: 3, bounds: [10, 532, 748, 474], items: [
+            ["layers-earth-p3-mantle", "label", "Mantle"],
+            ["layers-earth-p3-sentence-1", "sentence", "The mantle is below the crust."],
+            ["layers-earth-p3-sentence-2", "sentence", "It is very hot rock that moves slowly."],
+            ["layers-earth-p3-sentence-3", "sentence",
+                "This movement helps drive plate movement on the crust."]
+        ]},
+        { panelId: 4, bounds: [778, 532, 748, 474], items: [
+            ["layers-earth-p4-title", "label", "Outer Core & Inner Core"],
+            ["layers-earth-p4-crust", "label", "Crust"],
+            ["layers-earth-p4-crust-description", "phrase", "Thin, solid rock"],
+            ["layers-earth-p4-mantle", "label", "Mantle"],
+            ["layers-earth-p4-mantle-description", "phrase", "Very hot, slowly moving rock"],
+            ["layers-earth-p4-outer-core", "label", "Outer Core"],
+            ["layers-earth-p4-outer-core-description", "phrase",
+                "Liquid metal (mainly iron and nickel)"],
+            ["layers-earth-p4-inner-core", "label", "Inner Core"],
+            ["layers-earth-p4-inner-core-description", "phrase",
+                "Solid metal (mainly iron and nickel)"]
+        ]}
+    ];
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[file] : null;
+    if (assetFile !== file || record !== canonical || !exactKeys(record, [
+        "imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"
+    ]) || record.imageId !== imageId || record.assetFile !== file ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-layers-of-the-earth-2x2-card-menu" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exactKeys(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== expected.length) return null;
+    const identityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === imageId || candidate.assetFile === file);
+    });
+    if (identityKeys.length !== 1 || identityKeys[0] !== file) return null;
+    const seen = new Set();
+    for (let p = 0; p < expected.length; p += 1) {
+        const panel = record.panels[p], wanted = expected[p];
+        if (!exactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== wanted.panelId || panel.readingOrder !== p + 1 ||
+            !sameRect(panel.bounds, rect(...wanted.bounds)) ||
+            !Array.isArray(panel.items) || panel.items.length !== wanted.items.length) return null;
+        for (let i = 0; i < wanted.items.length; i += 1) {
+            const item = panel.items[i], [itemId, type, text] = wanted.items[i];
+            if (!exactKeys(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]) ||
+                item.itemId !== itemId || seen.has(item.itemId) ||
+                item.readingOrder !== i + 1 || item.type !== type ||
+                item.sourceText !== text || item.ttsText !== text || !validRect(item.bounds)) return null;
+            seen.add(item.itemId);
+        }
+    }
+    return record;
+}
+
+function isEnglishLayersOfTheEarthImageTTSRecord(record) {
+    return getEnglishLayersOfTheEarthImageTextRecord(
+        record, ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE) === record;
+}
+
+function isEnglishLayersOfTheEarthImageTTSItemText(record, item) {
+    return Boolean(isEnglishLayersOfTheEarthImageTTSRecord(record) && item &&
+        record.panels.some(panel => panel.items.includes(item)));
+}
+
+function getEnglishLayersOfTheEarthPanelMenuOptions(record, panel) {
+    if (!isEnglishLayersOfTheEarthImageTTSRecord(record) || !panel ||
+        !record.panels.includes(panel)) return null;
+    const pairs = panel.panelId === 4
+        ? [1, 3, 5, 7].map(index => ({
+            items: [panel.items[index], panel.items[index + 1]],
+            label: panel.items[index].sourceText + " — " + panel.items[index + 1].sourceText
+        })) : [];
+    return {
+        fullItems: panel.items.slice(),
+        choices: panel.items.map(item => ({
+            item,
+            kind: item.type === "phrase" ? "phrase" :
+                item.type === "label" ? "label" : "sentence"
+        })),
+        pairs
+    };
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -18263,6 +18391,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
+            record.assetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE)) {
+        return getEnglishLayersOfTheEarthImageTextRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE || record &&
         (record.imageId === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID ||
             record.assetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE)) {
@@ -22502,7 +22635,223 @@ function createEnglishMatterStatesOfMatterPanelHitArea(wrapper, panel, record) {
     return button;
 }
 
+
+function layoutEnglishLayersOfTheEarthPanelHitAreas(wrapper, verifyTrigger = null) {
+    const file = ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE;
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".layers-of-the-earth-panel-hit-area")) : [];
+    const hide = button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "none";
+    };
+    const hideAll = () => buttons.forEach(hide);
+    const fail = () => {
+        hideAll();
+        if (englishImageTTSOverlayState.activeTrigger && wrapper &&
+            wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+        return false;
+    };
+    const image = wrapper && wrapper.querySelector("img");
+    const record = imageTTSData && imageTTSData[file];
+    if (!wrapper || !wrapper.isConnected || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== file || !image ||
+        !isEnglishLayersOfTheEarthFormalSearchImage(image) ||
+        image.getAttribute("src") !== file || image.complete !== true ||
+        image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+        !isEnglishLayersOfTheEarthImageTTSRecord(record) || buttons.length !== 4 ||
+        typeof document.elementFromPoint !== "function") return fail();
+
+    const finiteRect = rect => rect && [rect.left, rect.top, rect.right, rect.bottom,
+        rect.width, rect.height].every(Number.isFinite) && rect.width > 0 && rect.height > 0;
+    let imageRect, wrapperRect, viewport;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+        const visual = window.visualViewport;
+        const width = visual ? visual.width :
+            (document.documentElement && document.documentElement.clientWidth || window.innerWidth);
+        const height = visual ? visual.height :
+            (document.documentElement && document.documentElement.clientHeight || window.innerHeight);
+        viewport = visual ? {
+            left: visual.offsetLeft, top: visual.offsetTop,
+            right: visual.offsetLeft + width, bottom: visual.offsetTop + height
+        } : { left: 0, top: 0, right: width, bottom: height };
+    } catch (error) { return fail(); }
+    if (!finiteRect(imageRect) || !finiteRect(wrapperRect) ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 ||
+        Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 ||
+        Math.abs(imageRect.height - wrapperRect.height) > 1 ||
+        !viewport || ![viewport.left, viewport.top, viewport.right, viewport.bottom].every(Number.isFinite) ||
+        viewport.right <= viewport.left || viewport.bottom <= viewport.top) return fail();
+
+    const byPanel = new Map();
+    for (const button of buttons) {
+        const panelId = button.getAttribute("data-image-tts-panel-id");
+        if (!panelId || byPanel.has(panelId)) return fail();
+        byPanel.set(panelId, button);
+    }
+    const candidates = [];
+    for (const panel of record.panels) {
+        const button = byPanel.get(String(panel.panelId));
+        const item = panel.items[0], bounds = panel.bounds;
+        if (!button || !item || !button.classList ||
+            !button.classList.contains("image-tts-image-text-hit-area") ||
+            button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== panel ||
+            button._englishImageTTSImageTextItem !== item ||
+            button.getAttribute("data-image-tts-item-id") !== item.itemId) return fail();
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "auto";
+        let rect;
+        try { rect = button.getBoundingClientRect(); } catch (error) { return fail(); }
+        const expected = {
+            left: imageRect.left + imageRect.width * bounds.xPct / 100,
+            top: imageRect.top + imageRect.height * bounds.yPct / 100,
+            width: imageRect.width * bounds.widthPct / 100,
+            height: imageRect.height * bounds.heightPct / 100
+        };
+        if (!finiteRect(rect) || rect.width < 44 || rect.height < 44 ||
+            Math.abs(rect.left - expected.left) > 1 ||
+            Math.abs(rect.top - expected.top) > 1 ||
+            Math.abs(rect.width - expected.width) > 1 ||
+            Math.abs(rect.height - expected.height) > 1) {
+            hide(button);
+            candidates.push({ button, safe: false });
+            continue;
+        }
+        const fullyVisible = rect.left >= viewport.left && rect.top >= viewport.top &&
+            rect.right <= viewport.right && rect.bottom <= viewport.bottom;
+        if (!fullyVisible) {
+            hide(button);
+            candidates.push({ button, safe: false });
+            continue;
+        }
+        let style = null;
+        try { style = window.getComputedStyle(button); } catch (error) { style = null; }
+        if (style && (style.display === "none" || style.visibility !== "visible")) {
+            hide(button);
+            candidates.push({ button, safe: false });
+            continue;
+        }
+        const insetX = Math.min(6, rect.width / 4);
+        const insetY = Math.min(6, rect.height / 4);
+        const points = [
+            [(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2],
+            [rect.left + insetX, rect.top + insetY],
+            [rect.right - insetX, rect.top + insetY],
+            [rect.left + insetX, rect.bottom - insetY],
+            [rect.right - insetX, rect.bottom - insetY]
+        ];
+        let safe = false;
+        try {
+            safe = points.every(([x, y]) => {
+                const hit = document.elementFromPoint(x, y);
+                const menu = englishImageTTSOverlayState.menu;
+                const activeMenu = englishImageTTSOverlayState.activeTrigger === button &&
+                    menu && !menu.hidden && menu.id === "english-image-tts-menu";
+                return hit === button || button.contains(hit) ||
+                    activeMenu && (hit === menu || menu.contains(hit));
+            });
+        } catch (error) { safe = false; }
+        if (!safe) hide(button);
+        candidates.push({ button, safe });
+    }
+    if (byPanel.size !== 4 || candidates.length !== 4) return fail();
+    const selectable = drawMode === "select" && appState.subjectMode === "english";
+    candidates.forEach(({ button, safe }) => {
+        const enabled = selectable && safe;
+        button.hidden = !enabled;
+        button.disabled = !enabled;
+        button.setAttribute("aria-disabled", String(!enabled));
+        button.style.pointerEvents = enabled ? "auto" : "none";
+    });
+    if (verifyTrigger) {
+        const selected = candidates.find(candidate => candidate.button === verifyTrigger);
+        return Boolean(selected && selected.safe && selectable &&
+            !verifyTrigger.hidden && !verifyTrigger.disabled);
+    }
+    return candidates.some(candidate => candidate.safe && selectable);
+}
+
+function isEnglishLayersOfTheEarthPanelTriggerReady(trigger) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    const record = getEnglishLayersOfTheEarthImageTextRecord(
+        imageTTSData && imageTTSData[ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE],
+        ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE);
+    const panel = trigger && trigger._englishImageTTSImageTextPanel;
+    const buttons = wrapper
+        ? Array.from(wrapper.querySelectorAll(".layers-of-the-earth-panel-hit-area")) : [];
+    return Boolean(wrapper && image && record &&
+        isEnglishLayersOfTheEarthFormalSearchImage(image) &&
+        trigger._englishImageTTSImageTextRecord === record &&
+        trigger.classList && trigger.classList.contains("layers-of-the-earth-panel-hit-area") &&
+        buttons.length === 4 && buttons.includes(trigger) && panel &&
+        record.panels.find(candidate => candidate.panelId === panel.panelId) === panel &&
+        trigger._englishImageTTSImageTextItem === panel.items[0] &&
+        trigger._englishImageTTSImageTextActivePanel === panel &&
+        !trigger.hidden && !trigger.disabled &&
+        layoutEnglishLayersOfTheEarthPanelHitAreas(wrapper, trigger));
+}
+
+function createEnglishLayersOfTheEarthPanelHitArea(wrapper, panel, record) {
+    const item = panel && panel.items[0];
+    if (!wrapper || !panel || !item ||
+        !isEnglishLayersOfTheEarthImageTTSRecord(record) ||
+        !isEnglishLayersOfTheEarthFormalSearchImage(wrapper.querySelector("img"))) return null;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className =
+        "image-tts-image-text-hit-area layers-of-the-earth-panel-hit-area";
+    button.hidden = true;
+    button.disabled = true;
+    button.setAttribute("aria-disabled", "true");
+    button.setAttribute("aria-label", panel.panelId === 1
+        ? "Layers of the Earth P1 Earth card; opens the title, complete panel, and individual reading choices"
+        : "Layers of the Earth P" + panel.panelId +
+            " card; opens the complete panel, individual reading, and matched P4 label and description choices");
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("data-image-tts-item-id", item.itemId);
+    button.style.left = panel.bounds.xPct + "%";
+    button.style.top = panel.bounds.yPct + "%";
+    button.style.width = panel.bounds.widthPct + "%";
+    button.style.height = panel.bounds.heightPct + "%";
+    button.style.pointerEvents = "none";
+    button._englishImageTTSImageTextPanel = panel;
+    button._englishImageTTSImageTextItem = item;
+    button._englishImageTTSImageTextRecord = record;
+    button._englishImageTTSImageTextActivePanel = panel;
+    button._englishImageTTSImageTextActiveItem = item;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (button.disabled || appState.subjectMode !== "english" ||
+            isEnglishImageTTSDrawingMode()) return;
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        if (!isEnglishLayersOfTheEarthPanelTriggerReady(button)) return;
+        openEnglishImageTTSImageTextMenu(button, record, panel);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
+    if (wrapper && wrapper.dataset &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE) {
+        return layoutEnglishLayersOfTheEarthPanelHitAreas(wrapper);
+    }
     if (wrapper && wrapper.dataset &&
         wrapper.dataset.imageTtsAssetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE) {
         return layoutEnglishMatterStatesOfMatterHitAreas(wrapper);
@@ -24627,6 +24976,7 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
     }
 
     function renderResponse(responseRoot, question, headingText, answerHTML) {
+        ENGLISH_LAYERS_OF_THE_EARTH_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_MATTER_STATES_OF_MATTER_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_RENEWABLE_ENERGY_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_WIND_ENERGY_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
@@ -24881,6 +25231,21 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             matterSpecs.length === 1 && matterSpecs[0].diagram === canonicalMatter
                 ? matterSpecs[0] : null;
 
+        const layersEarthMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
+                entry.file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE)) : [];
+        const canonicalLayersEarth = layersEarthMatches.length === 1 &&
+            layersEarthMatches[0].id === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID &&
+            layersEarthMatches[0].file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE
+                ? layersEarthMatches[0] : null;
+        const returnedLayersEarth = canonicalLayersEarth
+            ? diagrams.filter(diagram => diagram === canonicalLayersEarth).length : 0;
+        const layersEarthSpecs = specs.filter(spec =>
+            spec.imageData.file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE);
+        const trustedLayersEarthSpec = canonicalLayersEarth && returnedLayersEarth === 1 &&
+            layersEarthSpecs.length === 1 && layersEarthSpecs[0].diagram === canonicalLayersEarth
+                ? layersEarthSpecs[0] : null;
+
         responseRoot.replaceChildren();
         const heading = document.createElement("h2");
         heading.textContent = headingText;
@@ -24915,6 +25280,12 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 if (spec === trustedMatterStatesSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE);
+                }
+                if (spec === trustedLayersEarthSpec) {
+                    image.setAttribute("data-english-image-library-id",
+                        ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file",
+                        ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE);
                 }
                 if (spec === trustedNaturalResourcesSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_NATURAL_RESOURCES_IMAGE_ID);
@@ -25029,6 +25400,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedConservationBiodiversitySpec);
         ENGLISH_MATTER_STATES_OF_MATTER_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedMatterStatesSpec);
+        ENGLISH_LAYERS_OF_THE_EARTH_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedLayersEarthSpec);
         return answerRoot;
     }
 
@@ -25231,6 +25604,149 @@ const ENGLISH_NATURAL_RESOURCES_FORMAL_SEARCH_ORIGIN = (() => {
     }
     return { register, expireCurrentContext, isTrustedNode };
 })();
+
+
+const ENGLISH_LAYERS_OF_THE_EARTH_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    const wrapperByImage = new WeakMap();
+    let currentContext = null, generation = 0;
+
+    function revokeImage(context, image) {
+        if (!context || !image || !context.images.has(image)) return;
+        const wrapper = wrapperByImage.get(image);
+        originByImage.delete(image);
+        wrapperByImage.delete(image);
+        context.images.delete(image);
+        if (wrapper) {
+            const active = englishTTSState.imageTextSequenceTrigger;
+            if (active && wrapper.contains(active) && active.classList &&
+                active.classList.contains("layers-of-the-earth-panel-hit-area"))
+                cancelEnglishImageTTSImageTextSequence(true);
+            if (englishImageTTSOverlayState.activeTrigger &&
+                wrapper.contains(englishImageTTSOverlayState.activeTrigger))
+                closeEnglishImageTTSMenu();
+            wrapper.querySelectorAll(".layers-of-the-earth-panel-hit-area")
+                .forEach(button => button.remove());
+        }
+    }
+
+    function process(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revokeImage(context, record.target);
+                return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removed =>
+                Array.from(context.images).forEach(image => {
+                    if (removed === image || removed &&
+                        typeof removed.contains === "function" && removed.contains(image))
+                        revokeImage(context, image);
+                }));
+        });
+    }
+
+    function expireCurrentContext() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revokeImage(context, image));
+        context.images.clear();
+        currentContext = null;
+    }
+
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer)
+            process(context, context.observer.takeRecords());
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked ||
+            origin.context !== context || origin.generation !== context.generation ||
+            !context.observer || !image.isConnected ||
+            context.responseRoot !== document.getElementById("ai-response") ||
+            !context.responseRoot.isConnected ||
+            !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(wrapperByImage.get(image)) ||
+            image.getAttribute("src") !== ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !==
+                ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !==
+                ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE) return false;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
+                entry.file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE)) : [];
+        return matches.length === 1 && matches[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID &&
+            origin.diagram.file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE;
+    }
+
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot || !diagramContainer || !trustedSpec ||
+            typeof MutationObserver !== "function" ||
+            responseRoot !== document.getElementById("ai-response") ||
+            !responseRoot.isConnected || !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
+                entry.file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE)) : [];
+        const targetSpecs = (Array.isArray(renderedSpecs) ? renderedSpecs : []).filter(entry =>
+            entry && entry.spec && entry.spec.imageData &&
+            entry.spec.imageData.file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE);
+        const rendered = (Array.isArray(renderedSpecs) ? renderedSpecs : [])
+            .find(entry => entry && entry.spec === trustedSpec);
+        if (matches.length !== 1 || matches[0] !== diagram ||
+            !diagram || diagram.id !== ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
+            diagram.file !== ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE ||
+            targetSpecs.length !== 1 || !rendered || !rendered.image ||
+            !rendered.image.isConnected || !diagramContainer.contains(rendered.image)) return false;
+        const image = rendered.image;
+        const wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) || !diagramContainer.contains(wrapper)) return false;
+        const context = {
+            generation: ++generation, responseRoot, diagramContainer, diagram,
+            images: new Set([image]), observer: null, revoked: false
+        };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram });
+        wrapperByImage.set(image, wrapper);
+        context.observer = new MutationObserver(records => process(context, records));
+        context.observer.observe(responseRoot, {
+            childList: true, subtree: true, attributes: true,
+            attributeFilter: ["src", "data-english-image-library-id",
+                "data-english-image-library-file"]
+        });
+        if (!isTrustedNode(image)) {
+            expireCurrentContext();
+            return false;
+        }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+
+    return { register, expireCurrentContext, isTrustedNode };
+})();
+
+function isEnglishLayersOfTheEarthFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !==
+            ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !==
+            ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE ||
+        !ENGLISH_LAYERS_OF_THE_EARTH_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || !Array.isArray(diagramMap))
+        return false;
+    const record = imageTTSData[ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE];
+    if (getEnglishLayersOfTheEarthImageTextRecord(
+        record, ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE) !== record) return false;
+    const matches = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
+            entry.file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE));
+    return matches.length === 1 && matches[0].id === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID &&
+        matches[0].file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE;
+}
 
 function isEnglishConservationBiodiversityFormalSearchImage(image) {
     if (!image || image.getAttribute("src") !== ENGLISH_CONSERVATION_BIODIVERSITY_ASSET_FILE ||
@@ -26677,6 +27193,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE &&
+            !isEnglishLayersOfTheEarthFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE &&
             !isEnglishMatterStatesOfMatterFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE &&
@@ -26755,6 +27273,39 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishLayersOfTheEarthImageTTSRecord(record)) {
+                const dimensionsOK = () =>
+                    isEnglishLayersOfTheEarthFormalSearchImage(image) &&
+                    image.getAttribute("src") === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE &&
+                    image.complete === true && image.naturalWidth === 1536 &&
+                    image.naturalHeight === 1024;
+                const hideLayersEarthHitAreas = () => {
+                    wrapper.querySelectorAll(".layers-of-the-earth-panel-hit-area").forEach(button => {
+                        button.hidden = true;
+                        button.disabled = true;
+                        button.setAttribute("aria-disabled", "true");
+                        button.style.pointerEvents = "none";
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger))
+                        closeEnglishImageTTSMenu();
+                    const active = englishTTSState.imageTextSequenceTrigger;
+                    if (active && wrapper.contains(active) && active.classList &&
+                        active.classList.contains("layers-of-the-earth-panel-hit-area"))
+                        cancelEnglishImageTTSImageTextSequence(true);
+                };
+                if (image.complete && !dimensionsOK()) return;
+                record.panels.forEach(panel => {
+                    if (createEnglishLayersOfTheEarthPanelHitArea(wrapper, panel, record)) added += 1;
+                });
+                image.addEventListener("load", () => {
+                    if (!dimensionsOK()) { hideLayersEarthHitAreas(); return; }
+                    layoutEnglishLayersOfTheEarthPanelHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", hideLayersEarthHitAreas, { once: true });
+                layoutEnglishLayersOfTheEarthPanelHitAreas(wrapper);
+                return;
+            }
             if (isEnglishMatterStatesOfMatterImageTTSRecord(record)) {
                 const dimensionsOK = () => isEnglishMatterStatesOfMatterFormalSearchImage(image) &&
                     image.getAttribute("src") === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE &&
@@ -27729,6 +28280,10 @@ function scheduleEnglishImageTTSLayout() {
                 layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
             }
             if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE) {
+                layoutEnglishLayersOfTheEarthPanelHitAreas(wrapper);
+            }
+            if (wrapper.dataset &&
                 wrapper.dataset.imageTtsAssetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE) {
                 layoutEnglishMatterStatesOfMatterHitAreas(wrapper);
             }
@@ -27859,6 +28414,10 @@ function syncEnglishImageTTSDrawingMode() {
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) {
             layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
+        }
+        if (wrapper.dataset &&
+            wrapper.dataset.imageTtsAssetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE) {
+            layoutEnglishLayersOfTheEarthPanelHitAreas(wrapper);
         }
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE) {
@@ -28184,6 +28743,11 @@ function getEnglishMatterStatesOfMatterImageTextSpeechSegments(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishLayersOfTheEarthImageTTSItemText(record, item)) {
+        const speechText = item.itemId === "layers-earth-p4-title"
+            ? item.ttsText.replace(" & ", " and ") : item.ttsText;
+        return getEnglishTTSUnitText(speechText);
+    }
     if (isEnglishMatterStatesOfMatterImageTTSItemText(record, item)) {
         const speechText = item.itemId === "matter-p4-footer-summary"
             ? item.ttsText.replace(/\s*·\s*/gu, ". ") : item.ttsText;
@@ -28420,6 +28984,34 @@ function speakEnglishImageTTSImageTextSequence(
     const energySourcesPanelSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===energySourcesPanel.items.length&&energySourcesPanel.items.every((item,index)=>item===itemList[index]));
     const energySourcesSingleItemSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===1&&energySourcesPanel.items.includes(itemList[0]));
     const isRenewableEnergyImageText = Boolean(record && isEnglishRenewableEnergyImageTTSRecord(record));
+    const isLayersOfTheEarthImageText = Boolean(record &&
+        isEnglishLayersOfTheEarthImageTTSRecord(record));
+    const layersOfTheEarthPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const isLayersOfTheEarthSingleItemSequence = Boolean(isLayersOfTheEarthImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const layersOfTheEarthPairs = isLayersOfTheEarthImageText
+        ? getEnglishLayersOfTheEarthPanelMenuOptions(record, record.panels[3]).pairs : [];
+    const isLayersOfTheEarthPairSequence = Boolean(isLayersOfTheEarthImageText &&
+        layersOfTheEarthPanel && layersOfTheEarthPanel.panelId === 4 &&
+        layersOfTheEarthPairs.some(pair => pair.items[0] === itemList[0] &&
+            pair.items[1] === itemList[1] && itemList.length === 2));
+    const layersOfTheEarthImage = isLayersOfTheEarthImageText && wrapper
+        ? wrapper.querySelector("img") : null;
+    const layersOfTheEarthButtons = isLayersOfTheEarthImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".layers-of-the-earth-panel-hit-area")) : [];
+    const layersOfTheEarthImageReady = !isLayersOfTheEarthImageText || Boolean(
+        assetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE &&
+        record === imageTTSData[assetFile] && layersOfTheEarthImage &&
+        isEnglishLayersOfTheEarthFormalSearchImage(layersOfTheEarthImage) &&
+        layersOfTheEarthImage.getAttribute("src") === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE &&
+        layersOfTheEarthImage.complete === true && layersOfTheEarthImage.naturalWidth === 1536 &&
+        layersOfTheEarthImage.naturalHeight === 1024 && trigger &&
+        trigger._englishImageTTSImageTextRecord === record && layersOfTheEarthPanel &&
+        record.panels.includes(layersOfTheEarthPanel) &&
+        trigger._englishImageTTSImageTextItem === layersOfTheEarthPanel.items[0] &&
+        layersOfTheEarthButtons.length === 4 && layersOfTheEarthButtons.includes(trigger) &&
+        itemList.length > 0 && itemList.every(item => layersOfTheEarthPanel.items.includes(item)) &&
+        isEnglishLayersOfTheEarthPanelTriggerReady(trigger));
     const isMatterStatesOfMatterImageText = Boolean(record &&
         isEnglishMatterStatesOfMatterImageTTSRecord(record));
     const matterPanel = trigger && trigger._englishImageTTSImageTextPanel;
@@ -29056,7 +29648,8 @@ function speakEnglishImageTTSImageTextSequence(
             !isTyphoonsSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
             !isHumanBodyHowItWorksSingleItemSequence &&
-            !windEnergySingleItemSequence) ||
+            !windEnergySingleItemSequence && !isLayersOfTheEarthSingleItemSequence &&
+            !isLayersOfTheEarthPairSequence) ||
         itemList.some(item => !item ||
             (item.sourceText !== item.ttsText &&
                 !isEnglishEnergyTransformationsImageTTSItemText(record, item)) ||
@@ -29068,7 +29661,8 @@ function speakEnglishImageTTSImageTextSequence(
         !muscularImageReady || !cyclingImageReady || !solarImageReady ||
         !xraysImageReady || !skeletalSystemImageReady || !immuneSystemImageReady ||
         !humanBrainImageReady || !naturalResourcesImageReady || !conservationBiodiversityImageReady ||
-        !matterImageReady || !plantsPhotosynthesisImageReady || !plantReproductionImageReady ||
+        !matterImageReady || !layersOfTheEarthImageReady ||
+        !plantsPhotosynthesisImageReady || !plantReproductionImageReady ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
@@ -29994,6 +30588,84 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
                     [item], "已朗讀 Wind Energy 所選原圖文字。");
             });
         }
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
+    }
+
+
+    if (isEnglishLayersOfTheEarthImageTTSRecord(safeRecord)) {
+        const options = getEnglishLayersOfTheEarthPanelMenuOptions(safeRecord, panel);
+        const image = wrapper && wrapper.querySelector("img");
+        const buttons = wrapper
+            ? Array.from(wrapper.querySelectorAll(".layers-of-the-earth-panel-hit-area")) : [];
+        if (!options || record !== safeRecord ||
+            trigger._englishImageTTSImageTextRecord !== safeRecord ||
+            trigger._englishImageTTSImageTextPanel !== panel ||
+            !isEnglishLayersOfTheEarthPanelTriggerReady(trigger) ||
+            !image || image.getAttribute("src") !== ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE ||
+            !image.complete || image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+            buttons.length !== 4 || !buttons.includes(trigger)) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const section = "P" + panel.panelId;
+        const run = (items, completion) => {
+            closeEnglishImageTTSMenu();
+            if (!isEnglishLayersOfTheEarthPanelTriggerReady(trigger)) {
+                setEnglishTTSStatus("Layers of the Earth：入口目前無法安全點擊，未開始朗讀。");
+                return false;
+            }
+            return speakEnglishImageTTSImageTextSequence(trigger, items, completion);
+        };
+        menu.setAttribute("aria-label", "Layers of the Earth " + section + "朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            panel.panelId === 1
+                ? "🔊 朗讀跨幅標題與 P1 完整內容"
+                : "🔊 朗讀本格完整內容",
+            panel.panelId === 1
+                ? "依序朗讀全圖標題、Earth 標籤和 P1 完整句子"
+                : "依原圖順序朗讀本格全部英文標籤、句子與片語",
+            () => run(options.fullItems,
+                "Layers of the Earth " + section + " 完整內容已朗讀完成。")
+        ));
+        options.pairs.forEach(pair => menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀配對：「" + pair.label + "」",
+            "依原圖配對朗讀 " + pair.label,
+            () => run(pair.items, "已朗讀 Layers of the Earth " + pair.label + "。")
+        )));
+        const toggle = createEnglishImageTTSMenuButton(
+            "🔊 單項選讀（" + options.choices.length + " 項）",
+            "展開本格標題、標籤、每個完整句子或片語的獨立朗讀選項",
+            () => {
+                const list = menu.querySelector(".english-image-tts-sentences");
+                if (!list) return;
+                list.hidden = !list.hidden;
+                toggle.setAttribute("aria-expanded", String(!list.hidden));
+                scheduleEnglishImageTTSMenuPosition();
+            }
+        );
+        toggle.setAttribute("aria-expanded", "false");
+        const list = document.createElement("div");
+        list.className = "english-image-tts-sentences";
+        list.hidden = true;
+        options.choices.forEach(choice => {
+            const prefix = choice.kind === "label" ? "標籤" :
+                choice.kind === "phrase" ? "短說明" : "完整句子";
+            list.appendChild(createEnglishImageTTSMenuButton(
+                "🔊 單獨朗讀" + prefix + "：「" + choice.item.sourceText + "」",
+                "單獨朗讀 Layers of the Earth 原圖文字：「" +
+                    choice.item.sourceText + "」",
+                () => run([choice.item], "已朗讀 Layers of the Earth 所選原圖文字。")
+            ));
+        });
+        menu.appendChild(toggle);
+        menu.appendChild(list);
         menu.hidden = false;
         menu.style.visibility = "hidden";
         positionEnglishImageTTSMenu();
