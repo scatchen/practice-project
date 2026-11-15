@@ -23868,5 +23868,79 @@ const imageTTSData = {
             }
         ]
     },
+    "images/english/matter-and-states-of-matter-basics.png": (() => {
+        const rect = (x, y, width, height) => ({
+            xPct: x / 1254 * 100, yPct: y / 1254 * 100,
+            widthPct: width / 1254 * 100, heightPct: height / 1254 * 100
+        });
+        const item = (itemId, readingOrder, type, sourceText, box, tapBox = null) => ({
+            itemId, readingOrder, type, sourceText, ttsText: sourceText,
+            bounds: rect(...box), ...(tapBox ? { tapRegion: rect(...tapBox) } : {})
+        });
+        const panel = (panelId, readingOrder, box, items) => ({
+            panelId, readingOrder, bounds: rect(...box), items
+        });
+        return {
+            imageId: "matter-and-states-of-matter-basics",
+            assetFile: "images/english/matter-and-states-of-matter-basics.png",
+            contentType: "image-text",
+            layout: "custom-matter-states-of-matter-banner-plus-2x2",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1254, height: 1254 },
+            panels: [
+                panel(0, 1, [12, 10, 1230, 156], [
+                    item("matter-title", 1, "label", "Matter and States of Matter",
+                        [248, 28, 770, 68], [12, 10, 1230, 156]),
+                    item("matter-subtitle", 2, "sentence",
+                        "Matter is anything that has mass and takes up space.", [254, 101, 730, 47])
+                ]),
+                panel(1, 2, [12, 177, 607, 470], [
+                    item("matter-p1-solid-label", 1, "label", "Solid",
+                        [76, 198, 172, 58], [12, 177, 607, 470]),
+                    item("matter-p1-solid-sentence", 2, "sentence",
+                        "Particles are tightly packed and keep their shape and volume.",
+                        [42, 273, 360, 98]),
+                    item("matter-p1-ice-bubble", 3, "bubble", "This is ice. It’s a solid!",
+                        [301, 370, 184, 109])
+                ]),
+                panel(2, 3, [634, 177, 608, 470], [
+                    item("matter-p2-liquid-label", 1, "label", "Liquid",
+                        [696, 198, 242, 60], [634, 177, 608, 470]),
+                    item("matter-p2-liquid-sentence-1", 2, "sentence",
+                        "Particles are close together but can move around.", [663, 273, 369, 65]),
+                    item("matter-p2-liquid-sentence-2", 3, "sentence",
+                        "It keeps its volume but takes the shape of its container.", [663, 342, 369, 91]),
+                    item("matter-p2-water-bubble", 4, "bubble", "This is water. It’s a liquid!",
+                        [728, 445, 188, 94])
+                ]),
+                panel(3, 4, [12, 659, 607, 509], [
+                    item("matter-p3-gas-label", 1, "label", "Gas",
+                        [76, 681, 220, 65], [12, 659, 607, 509]),
+                    item("matter-p3-gas-sentence-1", 2, "sentence",
+                        "Particles are far apart and move freely.", [42, 758, 361, 61]),
+                    item("matter-p3-gas-sentence-2", 3, "sentence",
+                        "It has no fixed shape and no fixed volume.", [42, 820, 360, 72]),
+                    item("matter-p3-air-bubble", 4, "bubble", "This is air. It’s a gas!",
+                        [271, 922, 183, 110])
+                ]),
+                panel(4, 5, [634, 659, 608, 509], [
+                    item("matter-p4-plasma-label", 1, "label", "Plasma",
+                        [695, 681, 237, 65], [634, 659, 608, 509]),
+                    item("matter-p4-plasma-sentence-1", 2, "sentence",
+                        "Particles are ionized (have electric charge).", [671, 758, 355, 64]),
+                    item("matter-p4-plasma-sentence-2", 3, "sentence",
+                        "It is very hot and usually found in stars, lightning and neon lights.",
+                        [671, 823, 364, 95]),
+                    item("matter-p4-sun-bubble", 4, "bubble", "The sun is plasma!",
+                        [841, 942, 179, 108]),
+                    item("matter-p4-footer-summary", 5, "sentence",
+                        "Same matter · Different energy · Different states!", [241, 1185, 781, 48])
+                ])
+            ]
+        };
+    })(),
 
 };

@@ -11481,6 +11481,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishMatterStatesOfMatterImageTTSItemText(record, item)) return true;
     const telephoneV2P1Test = window.englishTelephoneV2P1Test;
     if (telephoneV2P1Test && telephoneV2P1Test.isItem(record, item)) return true;
     if (isEnglishPlantReproductionImageTTSItemText(record, item)) return true;
@@ -12073,7 +12074,9 @@ function isEnglishImageTTSFullTitleImageTextRecord(record) {
         (record.imageId === "plains-basics" &&
             record.assetFile === "images/english/plains-basics.png") ||
         (record.imageId === "animals-and-adaptation-basics" &&
-            record.assetFile === "images/english/animals-and-adaptation-basics.png")
+            record.assetFile === "images/english/animals-and-adaptation-basics.png") ||
+        (record.imageId === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID &&
+            record.assetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE)
     ));
 }
 
@@ -12085,6 +12088,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishMatterStatesOfMatterImageTTSRecord(record)) return "Matter and States of Matter";
     const telephoneV2P1Test = window.englishTelephoneV2P1Test;
     if (telephoneV2P1Test && telephoneV2P1Test.isRecord(record)) {
         return "Telephone V2";
@@ -16947,6 +16951,9 @@ const ENGLISH_HUMAN_BRAIN_ASSET_FILE =
 const ENGLISH_HUMAN_BRAIN_IMAGE_ID = "human-brain-and-nervous-system-basics";
 const ENGLISH_NATURAL_RESOURCES_ASSET_FILE = "images/english/natural-resources-basics.png";
 const ENGLISH_NATURAL_RESOURCES_IMAGE_ID = "natural-resources-basics";
+const ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE =
+    "images/english/matter-and-states-of-matter-basics.png";
+const ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID = "matter-and-states-of-matter-basics";
 const ENGLISH_CONSERVATION_BIODIVERSITY_ASSET_FILE =
     "images/english/conservation-and-biodiversity-basics.png";
 const ENGLISH_CONSERVATION_BIODIVERSITY_IMAGE_ID = "conservation-and-biodiversity-basics";
@@ -18075,6 +18082,162 @@ function isEnglishNaturalResourcesImageTTSItemText(record, item) {
     return Boolean(isEnglishNaturalResourcesImageTTSRecord(record) && item &&
         record.panels.some(panel => panel.items.includes(item)));
 }
+function getEnglishMatterStatesOfMatterExpectedPanels() {
+    const rect = (x, y, width, height) => ({
+        xPct: x / 1254 * 100, yPct: y / 1254 * 100,
+        widthPct: width / 1254 * 100, heightPct: height / 1254 * 100
+    });
+    const item = (itemId, readingOrder, type, sourceText, box, tapBox = null) => ({
+        itemId, readingOrder, type, sourceText, ttsText: sourceText,
+        bounds: rect(...box), ...(tapBox ? { tapRegion: rect(...tapBox) } : {})
+    });
+    const panel = (panelId, readingOrder, box, items) => ({
+        panelId, readingOrder, bounds: rect(...box), items
+    });
+    return [
+        panel(0, 1, [12, 10, 1230, 156], [
+            item("matter-title", 1, "label", "Matter and States of Matter",
+                [248, 28, 770, 68], [12, 10, 1230, 156]),
+            item("matter-subtitle", 2, "sentence",
+                "Matter is anything that has mass and takes up space.", [254, 101, 730, 47])
+        ]),
+        panel(1, 2, [12, 177, 607, 470], [
+            item("matter-p1-solid-label", 1, "label", "Solid",
+                [76, 198, 172, 58], [12, 177, 607, 470]),
+            item("matter-p1-solid-sentence", 2, "sentence",
+                "Particles are tightly packed and keep their shape and volume.",
+                [42, 273, 360, 98]),
+            item("matter-p1-ice-bubble", 3, "bubble", "This is ice. It’s a solid!", [301, 370, 184, 109])
+        ]),
+        panel(2, 3, [634, 177, 608, 470], [
+            item("matter-p2-liquid-label", 1, "label", "Liquid",
+                [696, 198, 242, 60], [634, 177, 608, 470]),
+            item("matter-p2-liquid-sentence-1", 2, "sentence",
+                "Particles are close together but can move around.", [663, 273, 369, 65]),
+            item("matter-p2-liquid-sentence-2", 3, "sentence",
+                "It keeps its volume but takes the shape of its container.", [663, 342, 369, 91]),
+            item("matter-p2-water-bubble", 4, "bubble", "This is water. It’s a liquid!", [728, 445, 188, 94])
+        ]),
+        panel(3, 4, [12, 659, 607, 509], [
+            item("matter-p3-gas-label", 1, "label", "Gas",
+                [76, 681, 220, 65], [12, 659, 607, 509]),
+            item("matter-p3-gas-sentence-1", 2, "sentence",
+                "Particles are far apart and move freely.", [42, 758, 361, 61]),
+            item("matter-p3-gas-sentence-2", 3, "sentence",
+                "It has no fixed shape and no fixed volume.", [42, 820, 360, 72]),
+            item("matter-p3-air-bubble", 4, "bubble", "This is air. It’s a gas!", [271, 922, 183, 110])
+        ]),
+        panel(4, 5, [634, 659, 608, 509], [
+            item("matter-p4-plasma-label", 1, "label", "Plasma",
+                [695, 681, 237, 65], [634, 659, 608, 509]),
+            item("matter-p4-plasma-sentence-1", 2, "sentence",
+                "Particles are ionized (have electric charge).", [671, 758, 355, 64]),
+            item("matter-p4-plasma-sentence-2", 3, "sentence",
+                "It is very hot and usually found in stars, lightning and neon lights.",
+                [671, 823, 364, 95]),
+            item("matter-p4-sun-bubble", 4, "bubble", "The sun is plasma!", [841, 942, 179, 108]),
+            item("matter-p4-footer-summary", 5, "sentence",
+                "Same matter · Different energy · Different states!", [241, 1185, 781, 48])
+        ])
+    ];
+}
+
+function getEnglishMatterStatesOfMatterImageTTSRecord(record, assetFile) {
+    const exact = (value, keys) => Boolean(value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key)));
+    const same = (actual, expected) => {
+        if (Array.isArray(expected)) return Array.isArray(actual) && actual.length === expected.length &&
+            expected.every((value, index) => same(actual[index], value));
+        if (expected && typeof expected === "object") {
+            return exact(actual, Object.keys(expected)) &&
+                Object.keys(expected).every(key => same(actual[key], expected[key]));
+        }
+        return actual === expected;
+    };
+    const validRect = value => exact(value, ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        [value.xPct, value.yPct, value.widthPct, value.heightPct].every(number =>
+            Number.isFinite(number) && number >= 0 && number <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const contains = (outer, inner) => validRect(outer) && validRect(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const expectedKeys = ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus", "sourceImageDimensions", "panels"];
+    const file = ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE;
+    if (assetFile !== file || typeof imageTTSData === "undefined" || !imageTTSData ||
+        record !== imageTTSData[file] || !exact(record, expectedKeys) ||
+        record.imageId !== ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID || record.assetFile !== file ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-matter-states-of-matter-banner-plus-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1254 || record.sourceImageDimensions.height !== 1254 ||
+        !Array.isArray(record.panels) || record.panels.length !== 5) return null;
+
+    const identities = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID || candidate.assetFile === file);
+    });
+    const entries = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID || entry.file === file)) : [];
+    if (identities.length !== 1 || identities[0] !== file || entries.length !== 1 ||
+        entries[0].id !== ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID || entries[0].file !== file ||
+        entries[0].category !== "english") return null;
+
+    const expectedPanels = getEnglishMatterStatesOfMatterExpectedPanels();
+    if (!same(record.panels, expectedPanels) || record.panels.flatMap(panel => panel.items).length !== 18)
+        return null;
+    const tapRegions = [];
+    for (const panel of record.panels) {
+        if (!panel.items.length || panel.items[0].readingOrder !== 1 || !panel.items[0].tapRegion ||
+            panel.items.slice(1).some(item => Object.prototype.hasOwnProperty.call(item, "tapRegion"))) return null;
+        for (const item of panel.items) {
+            const footer = item.itemId === "matter-p4-footer-summary";
+            if (!validRect(item.bounds) || (!footer && !contains(panel.bounds, item.bounds)) ||
+                !["label", "sentence", "bubble"].includes(item.type) || item.sourceText !== item.ttsText)
+                return null;
+            const speechText = footer ? item.ttsText.replace(/\s*·\s*/gu, ". ") : item.ttsText;
+            if (!getEnglishTTSUnitText(speechText)) return null;
+        }
+        tapRegions.push(panel.items[0].tapRegion);
+    }
+    for (let left = 0; left < tapRegions.length; left += 1) {
+        for (let right = left + 1; right < tapRegions.length; right += 1) {
+            const a = tapRegions[left], b = tapRegions[right];
+            if (a.xPct < b.xPct + b.widthPct && a.xPct + a.widthPct > b.xPct &&
+                a.yPct < b.yPct + b.heightPct && a.yPct + a.heightPct > b.yPct) return null;
+        }
+    }
+    return record;
+}
+
+function isEnglishMatterStatesOfMatterImageTTSRecord(record) {
+    return Boolean(record && typeof imageTTSData !== "undefined" && imageTTSData &&
+        imageTTSData[ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE] === record &&
+        getEnglishMatterStatesOfMatterImageTTSRecord(
+            record, ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE) === record);
+}
+
+function isEnglishMatterStatesOfMatterImageTTSItemText(record, item) {
+    return Boolean(isEnglishMatterStatesOfMatterImageTTSRecord(record) && item &&
+        record.panels.some(panel => panel.items.includes(item)));
+}
+
+function getEnglishMatterStatesOfMatterPanelMenuOptions(record, panel) {
+    if (!isEnglishMatterStatesOfMatterImageTTSRecord(record) || !panel ||
+        record.panels.find(candidate => candidate.panelId === panel.panelId) !== panel) return null;
+    return { fullItems: panel.items.slice(), choices: panel.items.map(item => ({
+        item, kind: item.type === "bubble" ? "bubble" : item.type === "label" ? "label" : "sentence"
+    })) };
+}
+
 function isEnglishRenewableEnergyImageTTSRecord(record) {
     const file = "images/english/renewable-energy-basics.png";
     return Boolean(record && typeof imageTTSData !== "undefined" && imageTTSData &&
@@ -18100,6 +18263,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID ||
+            record.assetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE)) {
+        return getEnglishMatterStatesOfMatterImageTTSRecord(record, assetFile);
+    }
     if (assetFile === "images/english/renewable-energy-basics.png" || record &&
         (record.imageId === "renewable-energy-basics" ||
             record.assetFile === "images/english/renewable-energy-basics.png")) {
@@ -22142,7 +22310,203 @@ function layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper, verifyTrigger = n
     return verifyTrigger ? selectedSafe : enabled > 0;
 }
 
+function layoutEnglishMatterStatesOfMatterHitAreas(wrapper, verifyTrigger = null) {
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".matter-states-of-matter-panel-hit-area")) : [];
+    const hide = button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        if (button.style) button.style.pointerEvents = "none";
+    };
+    const fail = () => {
+        buttons.forEach(hide);
+        if (englishImageTTSOverlayState.activeTrigger && wrapper &&
+            wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+        return false;
+    };
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    const record = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE] : null;
+    if (!wrapper || !wrapper.isConnected || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE ||
+        !record || !isEnglishMatterStatesOfMatterImageTTSRecord(record) || !image ||
+        !isEnglishMatterStatesOfMatterFormalSearchImage(image) ||
+        image.getAttribute("src") !== ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE ||
+        image.complete !== true || image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+        wrapper.querySelectorAll("img").length !== 1 || buttons.length !== 5 ||
+        typeof document.elementFromPoint !== "function") return fail();
+    let imageRect, wrapperRect;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+    } catch (error) { return fail(); }
+    if (!imageRect || !wrapperRect ||
+        ![imageRect.left, imageRect.top, imageRect.width, imageRect.height,
+            wrapperRect.left, wrapperRect.top, wrapperRect.width, wrapperRect.height].every(Number.isFinite) ||
+        imageRect.width <= 0 || imageRect.height <= 0 ||
+        Math.abs(imageRect.width - imageRect.height) > Math.max(1, imageRect.width * 0.01) ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 ||
+        Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 ||
+        Math.abs(imageRect.height - wrapperRect.height) > 1) return fail();
+
+    const visual = window.visualViewport;
+    const viewport = visual && [visual.offsetLeft, visual.offsetTop, visual.width, visual.height].every(Number.isFinite) &&
+        visual.width > 0 && visual.height > 0
+        ? { left: visual.offsetLeft, top: visual.offsetTop,
+            right: visual.offsetLeft + visual.width, bottom: visual.offsetTop + visual.height }
+        : { left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight };
+    const selectable = appState.subjectMode === "english" && drawMode === "select";
+    let enabled = 0;
+    let selectedSafe = false;
+    for (const panel of record.panels) {
+        const item = panel.items[0];
+        const matches = buttons.filter(button =>
+            button.getAttribute("data-image-tts-panel-id") === String(panel.panelId) &&
+            button.getAttribute("data-image-tts-item-id") === String(item.itemId));
+        if (matches.length !== 1) return fail();
+        const button = matches[0];
+        const tap = item.tapRegion;
+        if (!button.classList || !button.classList.contains("image-tts-image-text-hit-area") ||
+            button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== panel ||
+            button._englishImageTTSImageTextItem !== item ||
+            button._englishImageTTSImageTextActivePanel !== panel) return fail();
+        button.style.left = imageRect.left - wrapperRect.left + imageRect.width * tap.xPct / 100 + "px";
+        button.style.top = imageRect.top - wrapperRect.top + imageRect.height * tap.yPct / 100 + "px";
+        button.style.width = imageRect.width * tap.widthPct / 100 + "px";
+        button.style.height = imageRect.height * tap.heightPct / 100 + "px";
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "auto";
+        let rect;
+        try { rect = button.getBoundingClientRect(); } catch (error) { return fail(); }
+        const expected = {
+            left: imageRect.left + imageRect.width * tap.xPct / 100,
+            top: imageRect.top + imageRect.height * tap.yPct / 100,
+            width: imageRect.width * tap.widthPct / 100,
+            height: imageRect.height * tap.heightPct / 100
+        };
+        if (!rect || ![rect.left, rect.top, rect.width, rect.height].every(Number.isFinite) ||
+            rect.width < 44 || rect.height < 44 ||
+            Math.abs(rect.left - expected.left) > 1 || Math.abs(rect.top - expected.top) > 1 ||
+            Math.abs(rect.width - expected.width) > 1 || Math.abs(rect.height - expected.height) > 1) {
+            hide(button);
+            if (button === verifyTrigger) return false;
+            continue;
+        }
+        const fullyVisible = rect.left >= viewport.left && rect.top >= viewport.top &&
+            rect.left + rect.width <= viewport.right && rect.top + rect.height <= viewport.bottom;
+        if (!selectable || !fullyVisible) {
+            hide(button);
+            continue;
+        }
+        if (button === verifyTrigger || !englishImageTTSOverlayState.menu ||
+            englishImageTTSOverlayState.menu.hidden) {
+            const insetX = Math.min(6, rect.width / 4);
+            const insetY = Math.min(6, rect.height / 4);
+            const points = [
+                [(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2],
+                [rect.left + insetX, rect.top + insetY],
+                [rect.right - insetX, rect.top + insetY],
+                [rect.left + insetX, rect.bottom - insetY],
+                [rect.right - insetX, rect.bottom - insetY]
+            ];
+            let safe = false;
+            try {
+                safe = points.every(([x, y]) => {
+                    const hit = document.elementFromPoint(x, y);
+                    return hit === button || button.contains(hit);
+                });
+            } catch (error) { safe = false; }
+            if (!safe) {
+                hide(button);
+                if (button === verifyTrigger) return false;
+                continue;
+            }
+        }
+        button.hidden = false;
+        button.disabled = false;
+        button.setAttribute("aria-disabled", "false");
+        button.style.pointerEvents = "auto";
+        enabled += 1;
+        if (button === verifyTrigger) selectedSafe = true;
+    }
+    return verifyTrigger ? selectedSafe : enabled > 0;
+}
+
+function isEnglishMatterStatesOfMatterPanelTriggerReady(trigger) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    const record = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE] : null;
+    const panel = trigger && trigger._englishImageTTSImageTextPanel;
+    const buttons = wrapper
+        ? Array.from(wrapper.querySelectorAll(".matter-states-of-matter-panel-hit-area")) : [];
+    return Boolean(wrapper && image && record && isEnglishMatterStatesOfMatterFormalSearchImage(image) &&
+        trigger._englishImageTTSImageTextRecord === record &&
+        trigger.classList && trigger.classList.contains("matter-states-of-matter-panel-hit-area") &&
+        buttons.length === 5 && buttons.includes(trigger) && panel &&
+        record.panels.find(candidate => candidate.panelId === panel.panelId) === panel &&
+        trigger._englishImageTTSImageTextItem === panel.items[0] &&
+        trigger._englishImageTTSImageTextActivePanel === panel &&
+        !trigger.hidden && !trigger.disabled &&
+        layoutEnglishMatterStatesOfMatterHitAreas(wrapper, trigger));
+}
+
+function createEnglishMatterStatesOfMatterPanelHitArea(wrapper, panel, record) {
+    const item = panel && panel.items[0];
+    if (!wrapper || !panel || !item || !item.tapRegion ||
+        !isEnglishMatterStatesOfMatterImageTTSRecord(record) ||
+        !isEnglishMatterStatesOfMatterFormalSearchImage(wrapper.querySelector("img"))) return null;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-image-text-hit-area matter-states-of-matter-panel-hit-area";
+    button.hidden = true;
+    button.disabled = true;
+    button.setAttribute("aria-disabled", "true");
+    button.setAttribute("aria-label", panel.panelId === 0
+        ? "Matter and States of Matter 標題橫幅，開啟標題、副標及橫幅完整朗讀選項"
+        : "Matter and States of Matter P" + panel.panelId + " 卡片，開啟本卡完整內容與單句選讀");
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("data-image-tts-item-id", String(item.itemId));
+    button.style.left = item.tapRegion.xPct + "%";
+    button.style.top = item.tapRegion.yPct + "%";
+    button.style.width = item.tapRegion.widthPct + "%";
+    button.style.height = item.tapRegion.heightPct + "%";
+    button.style.pointerEvents = "none";
+    button._englishImageTTSImageTextPanel = panel;
+    button._englishImageTTSImageTextItem = item;
+    button._englishImageTTSImageTextRecord = record;
+    button._englishImageTTSImageTextActivePanel = panel;
+    button._englishImageTTSImageTextActiveItem = item;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) return;
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        if (!isEnglishMatterStatesOfMatterPanelTriggerReady(button)) return;
+        openEnglishImageTTSImageTextMenu(button, record, panel);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
+    if (wrapper && wrapper.dataset &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE) {
+        return layoutEnglishMatterStatesOfMatterHitAreas(wrapper);
+    }
     if (wrapper && wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_WIND_ENERGY_ASSET_FILE) {
         return layoutEnglishWindEnergyImageTTSHitAreas(wrapper);
     }
@@ -24263,6 +24627,7 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
     }
 
     function renderResponse(responseRoot, question, headingText, answerHTML) {
+        ENGLISH_MATTER_STATES_OF_MATTER_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_RENEWABLE_ENERGY_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_WIND_ENERGY_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
         ENGLISH_ENERGY_SOURCES_FORMAL_SEARCH_ORIGIN.expireCurrentContext();
@@ -24501,6 +24866,21 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             renewableSpecs.length === 1 && renewableSpecs[0].diagram === canonicalRenewable
                 ? renewableSpecs[0] : null;
 
+        const matterMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID ||
+                entry.file === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE)) : [];
+        const canonicalMatter = matterMatches.length === 1 &&
+            matterMatches[0].id === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID &&
+            matterMatches[0].file === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE
+                ? matterMatches[0] : null;
+        const returnedMatter = canonicalMatter
+            ? diagrams.filter(diagram => diagram === canonicalMatter).length : 0;
+        const matterSpecs = specs.filter(spec =>
+            spec.imageData.file === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE);
+        const trustedMatterStatesSpec = canonicalMatter && returnedMatter === 1 &&
+            matterSpecs.length === 1 && matterSpecs[0].diagram === canonicalMatter
+                ? matterSpecs[0] : null;
+
         responseRoot.replaceChildren();
         const heading = document.createElement("h2");
         heading.textContent = headingText;
@@ -24531,6 +24911,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 if (spec === trustedRenewableEnergySpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_RENEWABLE_ENERGY_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_RENEWABLE_ENERGY_ASSET_FILE);
+                }
+                if (spec === trustedMatterStatesSpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE);
                 }
                 if (spec === trustedNaturalResourcesSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_NATURAL_RESOURCES_IMAGE_ID);
@@ -24643,6 +25027,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedNaturalResourcesSpec);
         ENGLISH_CONSERVATION_BIODIVERSITY_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedConservationBiodiversitySpec);
+        ENGLISH_MATTER_STATES_OF_MATTER_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedMatterStatesSpec);
         return answerRoot;
     }
 
@@ -26035,6 +26421,143 @@ const ENGLISH_PLANT_REPRODUCTION_FORMAL_SEARCH_ORIGIN = (() => {
     return { register, expireCurrentContext, isTrustedNode };
 })();
 
+const ENGLISH_MATTER_STATES_OF_MATTER_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    let currentContext = null;
+    let generation = 0;
+
+    function detachImage(image, wrapper) {
+        if (!wrapper && image && typeof image.closest === "function")
+            wrapper = image.closest(".image-tts-overlay-wrapper");
+        if (!wrapper) return;
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper.contains(active) && active.classList &&
+            active.classList.contains("matter-states-of-matter-panel-hit-area")) {
+            cancelEnglishImageTTSImageTextSequence(true);
+        }
+        const activeMenu = englishImageTTSOverlayState.activeTrigger;
+        if (activeMenu && wrapper.contains(activeMenu) && activeMenu.classList &&
+            activeMenu.classList.contains("matter-states-of-matter-panel-hit-area")) {
+            closeEnglishImageTTSMenu();
+        }
+        wrapper.querySelectorAll(".matter-states-of-matter-panel-hit-area").forEach(button => button.remove());
+    }
+
+    function revokeImage(context, image) {
+        if (!context || !image || !context.images.has(image)) return;
+        const origin = originByImage.get(image);
+        originByImage.delete(image);
+        context.images.delete(image);
+        detachImage(image, origin && origin.wrapper);
+    }
+
+    function processMutations(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revokeImage(context, record.target);
+                return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removedNode => {
+                Array.from(context.images).forEach(image => {
+                    if (removedNode === image || removedNode &&
+                        typeof removedNode.contains === "function" && removedNode.contains(image)) {
+                        revokeImage(context, image);
+                    }
+                });
+            });
+        });
+    }
+
+    function expireCurrentContext() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revokeImage(context, image));
+        currentContext = null;
+    }
+
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer) processMutations(context, context.observer.takeRecords());
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked || origin.context !== context ||
+            origin.generation !== context.generation || !context.observer || !image.isConnected ||
+            context.responseRoot !== document.getElementById("ai-response") ||
+            !context.responseRoot.isConnected || !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(image) || !origin.wrapper ||
+            !origin.wrapper.contains(image) ||
+            image.getAttribute("src") !== ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !== ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !==
+                ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE) return false;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID ||
+                entry.file === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE)) : [];
+        return matches.length === 1 && matches[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID &&
+            origin.diagram.file === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE;
+    }
+
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot || !diagramContainer || !trustedSpec ||
+            typeof MutationObserver !== "function" ||
+            responseRoot !== document.getElementById("ai-response") ||
+            !responseRoot.isConnected || !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID ||
+                entry.file === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE)) : [];
+        const targetSpecs = (Array.isArray(renderedSpecs) ? renderedSpecs : []).filter(entry =>
+            entry && entry.spec && entry.spec.imageData &&
+            entry.spec.imageData.file === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE);
+        const rendered = Array.isArray(renderedSpecs)
+            ? renderedSpecs.find(entry => entry && entry.spec === trustedSpec) : null;
+        if (matches.length !== 1 || matches[0] !== diagram || !diagram ||
+            diagram.id !== ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID ||
+            diagram.file !== ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE ||
+            targetSpecs.length !== 1 || !rendered || !rendered.image ||
+            !rendered.image.isConnected || !diagramContainer.contains(rendered.image)) return false;
+        const image = rendered.image;
+        const wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) || !diagramContainer.contains(wrapper)) return false;
+        const context = { generation: ++generation, responseRoot, diagramContainer, diagram,
+            images: new Set([image]), observer: null, revoked: false };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram, wrapper });
+        context.observer = new MutationObserver(records => processMutations(context, records));
+        context.observer.observe(responseRoot, { childList: true, subtree: true, attributes: true,
+            attributeFilter: ["src", "data-english-image-library-id", "data-english-image-library-file"] });
+        if (!isTrustedNode(image)) {
+            expireCurrentContext();
+            return false;
+        }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+
+    return { register, expireCurrentContext, isTrustedNode };
+})();
+
+function isEnglishMatterStatesOfMatterFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !== ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !== ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE ||
+        !ENGLISH_MATTER_STATES_OF_MATTER_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || !Array.isArray(diagramMap)) return false;
+    const record = imageTTSData[ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE];
+    if (getEnglishMatterStatesOfMatterImageTTSRecord(
+        record, ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE) !== record) return false;
+    const matches = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID ||
+            entry.file === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE));
+    return matches.length === 1 && matches[0].id === ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID &&
+        matches[0].file === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE;
+}
+
 function isEnglishHumanBrainFormalSearchImage(image) {
     if (!image || image.getAttribute("src") !== ENGLISH_HUMAN_BRAIN_ASSET_FILE ||
         image.getAttribute("data-english-image-library-id") !== ENGLISH_HUMAN_BRAIN_IMAGE_ID ||
@@ -26154,6 +26677,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE &&
+            !isEnglishMatterStatesOfMatterFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE &&
             !isEnglishRenewableEnergyFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_NATURAL_RESOURCES_ASSET_FILE &&
@@ -26230,6 +26755,36 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+            if (isEnglishMatterStatesOfMatterImageTTSRecord(record)) {
+                const dimensionsOK = () => isEnglishMatterStatesOfMatterFormalSearchImage(image) &&
+                    image.getAttribute("src") === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE &&
+                    image.complete === true && image.naturalWidth === 1254 && image.naturalHeight === 1254;
+                const hide = () => {
+                    wrapper.querySelectorAll(".matter-states-of-matter-panel-hit-area").forEach(button => {
+                        button.hidden = true;
+                        button.disabled = true;
+                        button.setAttribute("aria-disabled", "true");
+                        button.style.pointerEvents = "none";
+                    });
+                    if (englishImageTTSOverlayState.activeTrigger &&
+                        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+                    const active = englishTTSState.imageTextSequenceTrigger;
+                    if (active && wrapper.contains(active) && active.classList &&
+                        active.classList.contains("matter-states-of-matter-panel-hit-area"))
+                        cancelEnglishImageTTSImageTextSequence(true);
+                };
+                if (image.complete && !dimensionsOK()) return;
+                record.panels.forEach(panel => {
+                    if (createEnglishMatterStatesOfMatterPanelHitArea(wrapper, panel, record)) added += 1;
+                });
+                image.addEventListener("load", () => {
+                    if (!dimensionsOK()) { hide(); return; }
+                    layoutEnglishMatterStatesOfMatterHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", hide, { once: true });
+                layoutEnglishMatterStatesOfMatterHitAreas(wrapper);
+                return;
+            }
             if (isEnglishRenewableEnergyImageTTSRecord(record)) {
                 const dimensionsOK = () => isEnglishRenewableEnergyFormalSearchImage(image) &&
                     image.getAttribute("src") === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE &&
@@ -27173,6 +27728,10 @@ function scheduleEnglishImageTTSLayout() {
                 wrapper.dataset.imageTtsAssetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) {
                 layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
             }
+            if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE) {
+                layoutEnglishMatterStatesOfMatterHitAreas(wrapper);
+            }
             layoutEnglishImageTTSPlateausSideButtons(wrapper);
             layoutEnglishImageTTSKarstSideButtons(wrapper);
             if (wrapper.dataset &&
@@ -27300,6 +27859,10 @@ function syncEnglishImageTTSDrawingMode() {
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) {
             layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
+        }
+        if (wrapper.dataset &&
+            wrapper.dataset.imageTtsAssetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE) {
+            layoutEnglishMatterStatesOfMatterHitAreas(wrapper);
         }
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_SKELETAL_SYSTEM_ASSET_FILE) {
@@ -27605,7 +28168,27 @@ function getEnglishSkeletalSystemImageTextSpeechSegments(record, item) {
     return segments;
 }
 
+function getEnglishMatterStatesOfMatterImageTextSpeechSegments(record, item) {
+    if (!isEnglishMatterStatesOfMatterImageTTSItemText(record, item)) return null;
+    const speechText = getEnglishImageTTSImageTextSpeechText(record, item);
+    if (!speechText) return null;
+    if (item.type === "label") return [speechText];
+    const normalized = speechText.replace(/[ \t]*\n[ \t]*/g, " ");
+    const segmentation = splitEnglishTTSSentences(normalized);
+    const segments = segmentation && segmentation.reliable && Array.isArray(segmentation.sentences)
+        ? segmentation.sentences.map(getEnglishTTSUnitText) : [];
+    if (!segments.length || segments.some(segment => !segment) ||
+        segments.join(" ").replace(/\s+/g, " ").trim() !== normalized.replace(/\s+/g, " ").trim())
+        return null;
+    return segments;
+}
+
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishMatterStatesOfMatterImageTTSItemText(record, item)) {
+        const speechText = item.itemId === "matter-p4-footer-summary"
+            ? item.ttsText.replace(/\s*·\s*/gu, ". ") : item.ttsText;
+        return getEnglishTTSUnitText(speechText);
+    }
     if (isEnglishPlantReproductionImageTTSItemText(record, item)) {
         const speechText = item.itemId === "plant-reproduction-p4-heading" &&
             item.sourceText === "Seeds & Fruits"
@@ -27837,6 +28420,26 @@ function speakEnglishImageTTSImageTextSequence(
     const energySourcesPanelSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===energySourcesPanel.items.length&&energySourcesPanel.items.every((item,index)=>item===itemList[index]));
     const energySourcesSingleItemSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===1&&energySourcesPanel.items.includes(itemList[0]));
     const isRenewableEnergyImageText = Boolean(record && isEnglishRenewableEnergyImageTTSRecord(record));
+    const isMatterStatesOfMatterImageText = Boolean(record &&
+        isEnglishMatterStatesOfMatterImageTTSRecord(record));
+    const matterPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const matterSingleItemSequence = Boolean(isMatterStatesOfMatterImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const matterImage = isMatterStatesOfMatterImageText ? wrapper.querySelector("img") : null;
+    const matterButtons = isMatterStatesOfMatterImageText
+        ? Array.from(wrapper.querySelectorAll(".matter-states-of-matter-panel-hit-area")) : [];
+    const matterImageReady = !isMatterStatesOfMatterImageText || Boolean(
+        assetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE &&
+        record === imageTTSData[assetFile] && matterImage &&
+        isEnglishMatterStatesOfMatterFormalSearchImage(matterImage) &&
+        matterImage.getAttribute("src") === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE &&
+        matterImage.complete === true && matterImage.naturalWidth === 1254 && matterImage.naturalHeight === 1254 &&
+        trigger._englishImageTTSImageTextRecord === record && matterPanel &&
+        record.panels.includes(matterPanel) && trigger._englishImageTTSImageTextPanel === matterPanel &&
+        trigger._englishImageTTSImageTextItem === matterPanel.items[0] &&
+        matterButtons.length === 5 && matterButtons.includes(trigger) &&
+        itemList.length > 0 && itemList.every(item => matterPanel.items.includes(item)) &&
+        isEnglishMatterStatesOfMatterPanelTriggerReady(trigger));
     const renewableEnergyPanel = trigger && trigger._englishImageTTSImageTextPanel;
     const renewableEnergyPanelSequence = Boolean(isRenewableEnergyImageText && renewableEnergyPanel &&
         itemList.length === renewableEnergyPanel.items.length &&
@@ -28374,6 +28977,9 @@ function speakEnglishImageTTSImageTextSequence(
                             : getEnglishSimpleMachinesImageTextSpeechSegments(record, item))))))
                 : null
         })));
+    if (isMatterStatesOfMatterImageText) playbackSteps.forEach(step => {
+        step.speechSegments = getEnglishMatterStatesOfMatterImageTextSpeechSegments(record, step.item);
+    });
     if (isEnergySourcesImageText) playbackSteps.forEach(step => {
         step.speechSegments=getEnglishEnergySourcesImageTextSpeechSegments(record,step.item);
     });
@@ -28443,6 +29049,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isCirculatorySystemSingleItemSequence &&
             !isAnimalsWildlifeSingleItemSequence &&
             !isAnimalsAdaptationSingleItemSequence &&
+            !matterSingleItemSequence &&
             !isHumanHealthNutritionSingleItemSequence &&
             !isMuscularSystemSingleItemSequence &&
             !isXRaysSingleItemSequence &&
@@ -28461,7 +29068,7 @@ function speakEnglishImageTTSImageTextSequence(
         !muscularImageReady || !cyclingImageReady || !solarImageReady ||
         !xraysImageReady || !skeletalSystemImageReady || !immuneSystemImageReady ||
         !humanBrainImageReady || !naturalResourcesImageReady || !conservationBiodiversityImageReady ||
-        !plantsPhotosynthesisImageReady || !plantReproductionImageReady ||
+        !matterImageReady || !plantsPhotosynthesisImageReady || !plantReproductionImageReady ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
         return false;
@@ -28730,7 +29337,9 @@ function speakEnglishImageTTSImageTextSequence(
                     finishSequence();
                     return;
                 }
-                const delay = isWindEnergyImageText || isExcretorySystemImageText ||
+                const delay = isMatterStatesOfMatterImageText
+                    ? (previousItem.type === "label" ? 300 : 500)
+                    : (isWindEnergyImageText || isExcretorySystemImageText ||
                     isSkeletalSystemImageText || isImmuneSystemImageText || isHumanBrainImageText ||
                     isNaturalResourcesImageText || isPlantsPhotosynthesisImageText ||
                     isPlantReproductionImageText
@@ -28741,7 +29350,7 @@ function speakEnglishImageTTSImageTextSequence(
                     ? getEnglishAnimalsAdaptationImageTextSpeechPause(
                         record, previousItem, previousSpeechSegmentIndex
                     )
-                    : previousItem.type === "sentence" ? 500 : 300));
+                    : previousItem.type === "sentence" ? 500 : 300)));
                 if (delay !== 300 && delay !== 500) {
                     cancelEnglishImageTTSImageTextSequence(true);
                     setEnglishTTSStatus(isTyphoonsImageText
@@ -29385,6 +29994,73 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
                     [item], "已朗讀 Wind Energy 所選原圖文字。");
             });
         }
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
+    }
+
+    if (isEnglishMatterStatesOfMatterImageTTSRecord(safeRecord)) {
+        const options = getEnglishMatterStatesOfMatterPanelMenuOptions(safeRecord, panel);
+        const image = wrapper.querySelector("img");
+        const buttons = Array.from(wrapper.querySelectorAll(".matter-states-of-matter-panel-hit-area"));
+        if (!options || record !== safeRecord || trigger._englishImageTTSImageTextRecord !== safeRecord ||
+            trigger._englishImageTTSImageTextPanel !== panel || !isEnglishMatterStatesOfMatterPanelTriggerReady(trigger) ||
+            !image || image.getAttribute("src") !== ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE ||
+            !image.complete || image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+            buttons.length !== 5 || !buttons.includes(trigger)) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        const banner = panel.panelId === 0;
+        const section = banner ? "標題橫幅" : "P" + panel.panelId + " 卡片";
+        const run = (items, completion) => {
+            closeEnglishImageTTSMenu();
+            if (!isEnglishMatterStatesOfMatterPanelTriggerReady(trigger)) {
+                setEnglishTTSStatus("Matter and States of Matter：入口目前無法安全點擊，未開始朗讀。");
+                return false;
+            }
+            return speakEnglishImageTTSImageTextSequence(trigger, items, completion);
+        };
+        menu.setAttribute("aria-label", "Matter and States of Matter " + section + "朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            banner ? "🔊 朗讀橫幅標題與副標" : "🔊 朗讀本卡完整內容",
+            banner ? "依序朗讀橫幅標題與副標" : "依原圖順序朗讀本卡標籤、完整句子與泡泡",
+            () => run(options.fullItems, banner
+                ? "Matter and States of Matter 標題橫幅已朗讀完成。"
+                : "Matter and States of Matter P" + panel.panelId + " 卡片已朗讀完成。")
+        ));
+        const toggle = createEnglishImageTTSMenuButton(
+            "🔊 單項選讀（" + options.choices.length + " 項）",
+            "展開本區標題、標籤、每個完整句子及泡泡的獨立朗讀選項",
+            () => {
+                const list = menu.querySelector(".english-image-tts-sentences");
+                if (!list) return;
+                list.hidden = !list.hidden;
+                toggle.setAttribute("aria-expanded", String(!list.hidden));
+                scheduleEnglishImageTTSMenuPosition();
+            }
+        );
+        toggle.setAttribute("aria-expanded", "false");
+        const list = document.createElement("div");
+        list.className = "english-image-tts-sentences";
+        list.hidden = true;
+        options.choices.forEach(choice => {
+            const prefix = choice.kind === "bubble" ? "泡泡" :
+                choice.kind === "label" ? (banner ? "標題" : "標籤") :
+                    (banner ? "副標" : "完整句子");
+            list.appendChild(createEnglishImageTTSMenuButton(
+                "🔊 單獨朗讀" + prefix + "：「" + choice.item.sourceText + "」",
+                "單獨朗讀 Matter and States of Matter 原圖文字：「" + choice.item.sourceText + "」",
+                () => run([choice.item], "已朗讀 Matter and States of Matter 所選原圖文字。")
+            ));
+        });
+        menu.appendChild(toggle);
+        menu.appendChild(list);
         menu.hidden = false;
         menu.style.visibility = "hidden";
         positionEnglishImageTTSMenu();
