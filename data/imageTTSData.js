@@ -24020,4 +24020,103 @@ const imageTTSData = {
             ]
         };
     })(),
+
+    "images/english/earthquakes-basics.png": (() => {
+        const rect = (x, y, width, height) => ({
+            xPct: x / 1254 * 100,
+            yPct: y / 1254 * 100,
+            widthPct: width / 1254 * 100,
+            heightPct: height / 1254 * 100
+        });
+        const item = (itemId, readingOrder, type, sourceText, box) => ({
+            itemId, readingOrder, type, sourceText, ttsText: sourceText,
+            bounds: rect(...box)
+        });
+        const panel = (panelId, bounds, items) => ({
+            panelId, readingOrder: panelId, bounds: rect(...bounds), items
+        });
+        return {
+            imageId: "earthquakes-basics",
+            title: "Earthquakes",
+            assetFile: "images/english/earthquakes-basics.png",
+            contentType: "image-text",
+            layout: "custom-earthquakes-2x2-panel-menu",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1254, height: 1254 },
+            panels: [
+                panel(1, [10, 127, 676, 493], [
+                    item("earthquakes-p1-question", 1, "sentence",
+                        "What is an earthquake?", [28, 138, 427, 56]),
+                    item("earthquakes-p1-definition", 2, "sentence",
+                        "An earthquake is the sudden shaking of the ground caused by the movement of Earth’s plates underground.",
+                        [40, 207, 400, 120]),
+                    item("earthquakes-p1-beneath-feet", 3, "sentence",
+                        "It happens beneath our feet!", [145, 362, 182, 88]),
+                    item("earthquakes-p1-epicenter", 4, "label",
+                        "Epicenter (on the surface)", [455, 286, 150, 58]),
+                    item("earthquakes-p1-focus", 5, "label",
+                        "Focus (underground)", [517, 552, 137, 56])
+                ]),
+                panel(2, [697, 14, 550, 612], [
+                    item("earthquakes-p2-question", 1, "sentence",
+                        "Why do earthquakes happen?", [735, 29, 485, 61]),
+                    item("earthquakes-p2-plates-sentence", 2, "sentence",
+                        "The Earth’s crust is made of large plates that are always moving.",
+                        [738, 117, 463, 66]),
+                    item("earthquakes-p2-stress-sentence", 3, "sentence",
+                        "When the plates get stuck, stress builds up.", [738, 183, 463, 52]),
+                    item("earthquakes-p2-release-sentence", 4, "sentence",
+                        "When the stress is released, the ground shakes.", [738, 235, 463, 47]),
+                    item("earthquakes-p2-tectonic-plates", 5, "label",
+                        "Tectonic plates", [869, 289, 168, 43]),
+                    item("earthquakes-p2-pressure-bubble", 6, "sentence",
+                        "So, it’s like releasing built-up pressure!", [1066, 368, 166, 115])
+                ]),
+                panel(3, [10, 638, 611, 596], [
+                    item("earthquakes-p3-heading", 1, "label",
+                        "Effects of earthquakes", [28, 647, 439, 65]),
+                    item("earthquakes-p3-intro", 2, "phrase",
+                        "Earthquakes can cause:", [41, 727, 540, 40]),
+                    item("earthquakes-p3-buildings", 3, "sentence",
+                        "Buildings and roads to be damaged.", [73, 760, 450, 30]),
+                    item("earthquakes-p3-landslides-cracks", 4, "sentence",
+                        "Landslides and ground cracks.", [73, 794, 450, 30]),
+                    item("earthquakes-p3-tsunamis", 5, "sentence",
+                        "Tsunamis (if the earthquake happens under the ocean).",
+                        [73, 827, 450, 55]),
+                    item("earthquakes-p3-damaged-buildings-label", 6, "label",
+                        "Damaged buildings", [56, 967, 220, 63]),
+                    item("earthquakes-p3-landslides-label", 7, "label",
+                        "Landslides", [328, 980, 162, 55]),
+                    item("earthquakes-p3-tsunamis-label", 8, "label",
+                        "Tsunamis", [92, 1178, 144, 44]),
+                    item("earthquakes-p3-ground-cracks-label", 9, "label",
+                        "Ground cracks", [364, 1179, 170, 46])
+                ]),
+                panel(4, [634, 639, 612, 595], [
+                    item("earthquakes-p4-heading", 1, "label",
+                        "How to stay safe during an earthquake", [649, 650, 581, 66]),
+                    item("earthquakes-p4-remember", 2, "sentence",
+                        "Remember: Drop, Cover, and Hold On!", [660, 735, 557, 42]),
+                    item("earthquakes-p4-drop", 3, "label",
+                        "Drop", [651, 778, 181, 55]),
+                    item("earthquakes-p4-drop-instruction", 4, "sentence",
+                        "Get down on your hands and knees.", [660, 976, 174, 79]),
+                    item("earthquakes-p4-cover", 5, "label",
+                        "Cover", [846, 778, 188, 55]),
+                    item("earthquakes-p4-cover-instruction", 6, "sentence",
+                        "Take cover under a sturdy table or desk.", [858, 976, 173, 80]),
+                    item("earthquakes-p4-hold-on", 7, "label",
+                        "Hold On", [1045, 778, 184, 55]),
+                    item("earthquakes-p4-hold-on-instruction", 8, "sentence",
+                        "Hold on until the shaking stops.", [1058, 976, 174, 80]),
+                    item("earthquakes-p4-summary-bubble", 9, "sentence",
+                        "Stay calm, be prepared, and stay safe!", [773, 1067, 216, 141])
+                ])
+            ]
+        };
+    })(),
 };

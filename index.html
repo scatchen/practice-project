@@ -5350,6 +5350,7 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
     const isNaturalResourcesImageText =
         record.imageId === ENGLISH_NATURAL_RESOURCES_IMAGE_ID &&
         record.assetFile === ENGLISH_NATURAL_RESOURCES_ASSET_FILE;
+    const isEarthquakesImageText = isEnglishEarthquakesImageTTSRecord(record);
     const isConservationBiodiversityImageText =
         record.imageId === ENGLISH_CONSERVATION_BIODIVERSITY_IMAGE_ID &&
         record.assetFile === ENGLISH_CONSERVATION_BIODIVERSITY_ASSET_FILE;
@@ -5434,10 +5435,13 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
             preferBelow: true,
             scanForClearPosition: true,
             strictAvoidance: isPlateausImageText || isNaturalResourcesImageText ||
-                isConservationBiodiversityImageText,
-            fixedStopSize: isNaturalResourcesImageText || isConservationBiodiversityImageText,
-            fixedStopWidth: isNaturalResourcesImageText || isConservationBiodiversityImageText ? 52 : undefined,
-            fixedStopHeight: isNaturalResourcesImageText || isConservationBiodiversityImageText ? 52 : undefined,
+                isConservationBiodiversityImageText || isEarthquakesImageText,
+            fixedStopSize: isNaturalResourcesImageText || isConservationBiodiversityImageText ||
+                isEarthquakesImageText,
+            fixedStopWidth: isNaturalResourcesImageText || isConservationBiodiversityImageText ||
+                isEarthquakesImageText ? 52 : undefined,
+            fixedStopHeight: isNaturalResourcesImageText || isConservationBiodiversityImageText ||
+                isEarthquakesImageText ? 52 : undefined,
             stopControlClass: "is-image-tts-image-text-stop-control"
         }
     );
@@ -11481,6 +11485,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishEarthquakesImageTTSItemText(record, item)) return true;
     if (isEnglishLayersOfTheEarthImageTTSItemText(record, item)) return true;
     if (isEnglishMatterStatesOfMatterImageTTSItemText(record, item)) return true;
     const telephoneV2P1Test = window.englishTelephoneV2P1Test;
@@ -12089,6 +12094,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishEarthquakesImageTTSRecord(record)) return "Earthquakes";
     if (isEnglishLayersOfTheEarthImageTTSRecord(record)) return "Layers of the Earth";
     if (isEnglishMatterStatesOfMatterImageTTSRecord(record)) return "Matter and States of Matter";
     const telephoneV2P1Test = window.englishTelephoneV2P1Test;
@@ -16953,6 +16959,8 @@ const ENGLISH_HUMAN_BRAIN_ASSET_FILE =
 const ENGLISH_HUMAN_BRAIN_IMAGE_ID = "human-brain-and-nervous-system-basics";
 const ENGLISH_NATURAL_RESOURCES_ASSET_FILE = "images/english/natural-resources-basics.png";
 const ENGLISH_NATURAL_RESOURCES_IMAGE_ID = "natural-resources-basics";
+const ENGLISH_EARTHQUAKES_ASSET_FILE = "images/english/earthquakes-basics.png";
+const ENGLISH_EARTHQUAKES_IMAGE_ID = "earthquakes-basics";
 const ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE =
     "images/english/matter-and-states-of-matter-basics.png";
 const ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID = "matter-and-states-of-matter-basics";
@@ -18384,6 +18392,119 @@ function getEnglishLayersOfTheEarthPanelMenuOptions(record, panel) {
     };
 }
 
+
+function getEnglishEarthquakesImageTTSRecord(record, assetFile) {
+    const file = ENGLISH_EARTHQUAKES_ASSET_FILE;
+    const imageId = ENGLISH_EARTHQUAKES_IMAGE_ID;
+    const exactKeys = (value, keys) => Boolean(value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key)));
+    const rect = (x, y, width, height) => ({
+        xPct: x / 1254 * 100, yPct: y / 1254 * 100,
+        widthPct: width / 1254 * 100, heightPct: height / 1254 * 100
+    });
+    const expectedPanels = [
+        { panelId: 1, bounds: [10, 127, 676, 493], items: [
+            ["earthquakes-p1-question", "sentence", "What is an earthquake?", [28, 138, 427, 56]],
+            ["earthquakes-p1-definition", "sentence", "An earthquake is the sudden shaking of the ground caused by the movement of Earth’s plates underground.", [40, 207, 400, 120]],
+            ["earthquakes-p1-beneath-feet", "sentence", "It happens beneath our feet!", [145, 362, 182, 88]],
+            ["earthquakes-p1-epicenter", "label", "Epicenter (on the surface)", [455, 286, 150, 58]],
+            ["earthquakes-p1-focus", "label", "Focus (underground)", [517, 552, 137, 56]]
+        ] },
+        { panelId: 2, bounds: [697, 14, 550, 612], items: [
+            ["earthquakes-p2-question", "sentence", "Why do earthquakes happen?", [735, 29, 485, 61]],
+            ["earthquakes-p2-plates-sentence", "sentence", "The Earth’s crust is made of large plates that are always moving.", [738, 117, 463, 66]],
+            ["earthquakes-p2-stress-sentence", "sentence", "When the plates get stuck, stress builds up.", [738, 183, 463, 52]],
+            ["earthquakes-p2-release-sentence", "sentence", "When the stress is released, the ground shakes.", [738, 235, 463, 47]],
+            ["earthquakes-p2-tectonic-plates", "label", "Tectonic plates", [869, 289, 168, 43]],
+            ["earthquakes-p2-pressure-bubble", "sentence", "So, it’s like releasing built-up pressure!", [1066, 368, 166, 115]]
+        ] },
+        { panelId: 3, bounds: [10, 638, 611, 596], items: [
+            ["earthquakes-p3-heading", "label", "Effects of earthquakes", [28, 647, 439, 65]],
+            ["earthquakes-p3-intro", "phrase", "Earthquakes can cause:", [41, 727, 540, 40]],
+            ["earthquakes-p3-buildings", "sentence", "Buildings and roads to be damaged.", [73, 760, 450, 30]],
+            ["earthquakes-p3-landslides-cracks", "sentence", "Landslides and ground cracks.", [73, 794, 450, 30]],
+            ["earthquakes-p3-tsunamis", "sentence", "Tsunamis (if the earthquake happens under the ocean).", [73, 827, 450, 55]],
+            ["earthquakes-p3-damaged-buildings-label", "label", "Damaged buildings", [56, 967, 220, 63]],
+            ["earthquakes-p3-landslides-label", "label", "Landslides", [328, 980, 162, 55]],
+            ["earthquakes-p3-tsunamis-label", "label", "Tsunamis", [92, 1178, 144, 44]],
+            ["earthquakes-p3-ground-cracks-label", "label", "Ground cracks", [364, 1179, 170, 46]]
+        ] },
+        { panelId: 4, bounds: [634, 639, 612, 595], items: [
+            ["earthquakes-p4-heading", "label", "How to stay safe during an earthquake", [649, 650, 581, 66]],
+            ["earthquakes-p4-remember", "sentence", "Remember: Drop, Cover, and Hold On!", [660, 735, 557, 42]],
+            ["earthquakes-p4-drop", "label", "Drop", [651, 778, 181, 55]],
+            ["earthquakes-p4-drop-instruction", "sentence", "Get down on your hands and knees.", [660, 976, 174, 79]],
+            ["earthquakes-p4-cover", "label", "Cover", [846, 778, 188, 55]],
+            ["earthquakes-p4-cover-instruction", "sentence", "Take cover under a sturdy table or desk.", [858, 976, 173, 80]],
+            ["earthquakes-p4-hold-on", "label", "Hold On", [1045, 778, 184, 55]],
+            ["earthquakes-p4-hold-on-instruction", "sentence", "Hold on until the shaking stops.", [1058, 976, 174, 80]],
+            ["earthquakes-p4-summary-bubble", "sentence", "Stay calm, be prepared, and stay safe!", [773, 1067, 216, 141]]
+        ] }
+    ];
+    if (assetFile !== file || !exactKeys(record, [
+        "imageId", "title", "assetFile", "contentType", "layout", "transcriptStatus",
+        "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+        "sourceImageDimensions", "panels"
+    ]) || record.imageId !== imageId || record.title !== "Earthquakes" ||
+        record.assetFile !== file || record.contentType !== "image-text" ||
+        record.layout !== "custom-earthquakes-2x2-panel-menu" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exactKeys(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1254 || record.sourceImageDimensions.height !== 1254 ||
+        !Array.isArray(record.panels) || record.panels.length !== 4) return null;
+    const validRect = value => exactKeys(value, ["xPct", "yPct", "widthPct", "heightPct"]) &&
+        [value.xPct, value.yPct, value.widthPct, value.heightPct].every(number =>
+            Number.isFinite(number) && number >= 0 && number <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100.000001 &&
+        value.yPct + value.heightPct <= 100.000001;
+    const sameRect = (actual, pixels) => {
+        if (!validRect(actual)) return false;
+        const wanted = rect(...pixels);
+        return ["xPct", "yPct", "widthPct", "heightPct"].every(key =>
+            Math.abs(actual[key] - wanted[key]) < 0.000001);
+    };
+    const contains = (outer, inner) => inner.xPct >= outer.xPct - 0.000001 &&
+        inner.yPct >= outer.yPct - 0.000001 &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct + 0.000001 &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct + 0.000001;
+    for (let panelIndex = 0; panelIndex < expectedPanels.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex], expected = expectedPanels[panelIndex];
+        if (!exactKeys(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expected.panelId || panel.readingOrder !== panelIndex + 1 ||
+            !sameRect(panel.bounds, expected.bounds) || !Array.isArray(panel.items) ||
+            panel.items.length !== expected.items.length) return null;
+        const seen = new Set();
+        for (let itemIndex = 0; itemIndex < expected.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex];
+            const [itemId, type, sourceText, pixels] = expected.items[itemIndex];
+            if (!exactKeys(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]) ||
+                item.itemId !== itemId || seen.has(item.itemId) ||
+                item.readingOrder !== itemIndex + 1 || item.type !== type ||
+                item.sourceText !== sourceText || item.ttsText !== sourceText ||
+                !getEnglishTTSUnitText(item.ttsText) || !sameRect(item.bounds, pixels) ||
+                !contains(panel.bounds, item.bounds)) return null;
+            seen.add(item.itemId);
+        }
+    }
+    return record;
+}
+
+function isEnglishEarthquakesImageTTSRecord(record) {
+    return Boolean(typeof imageTTSData !== "undefined" && imageTTSData &&
+        record === imageTTSData[ENGLISH_EARTHQUAKES_ASSET_FILE] &&
+        getEnglishEarthquakesImageTTSRecord(record, ENGLISH_EARTHQUAKES_ASSET_FILE) === record);
+}
+
+function isEnglishEarthquakesImageTTSItemText(record, item) {
+    return Boolean(isEnglishEarthquakesImageTTSRecord(record) && item &&
+        item.sourceText === item.ttsText &&
+        record.panels.some(panel => panel.items.includes(item)));
+}
+
 function getEnglishImageTTSRecord(assetFile) {
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
@@ -18391,6 +18512,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_EARTHQUAKES_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_EARTHQUAKES_IMAGE_ID ||
+            record.assetFile === ENGLISH_EARTHQUAKES_ASSET_FILE)) {
+        return getEnglishEarthquakesImageTTSRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE || record &&
         (record.imageId === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
             record.assetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE)) {
@@ -22778,6 +22904,302 @@ function layoutEnglishLayersOfTheEarthPanelHitAreas(wrapper, verifyTrigger = nul
     return candidates.some(candidate => candidate.safe && selectable);
 }
 
+
+function hideEnglishEarthquakesPanelHitAreas(wrapper) {
+    if (!wrapper) return;
+    wrapper.querySelectorAll(".earthquakes-panel-hit-area").forEach(button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "none";
+    });
+    if (englishImageTTSOverlayState.activeTrigger &&
+        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+}
+
+function layoutEnglishEarthquakesPanelHitAreas(wrapper, verifyTrigger = null) {
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".earthquakes-panel-hit-area")) : [];
+    const fail = () => {
+        hideEnglishEarthquakesPanelHitAreas(wrapper);
+        return false;
+    };
+    const image = wrapper && typeof wrapper.querySelector === "function"
+        ? wrapper.querySelector("img") : null;
+    const record = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_EARTHQUAKES_ASSET_FILE] : null;
+    if (!wrapper || wrapper.isConnected === false || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_EARTHQUAKES_ASSET_FILE ||
+        !image || !isEnglishEarthquakesFormalSearchImage(image) ||
+        image.getAttribute("src") !== ENGLISH_EARTHQUAKES_ASSET_FILE ||
+        image.complete !== true || image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+        !isEnglishEarthquakesImageTTSRecord(record) || buttons.length !== 4 ||
+        typeof document.elementFromPoint !== "function") return fail();
+
+    let imageRect, wrapperRect, viewport;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+        const visual = window.visualViewport;
+        const viewportWidth = visual ? visual.width :
+            (document.documentElement && document.documentElement.clientWidth || window.innerWidth);
+        const viewportHeight = visual ? visual.height :
+            (document.documentElement && document.documentElement.clientHeight || window.innerHeight);
+        viewport = visual ? {
+            left: visual.offsetLeft, top: visual.offsetTop,
+            right: visual.offsetLeft + viewportWidth,
+            bottom: visual.offsetTop + viewportHeight
+        } : { left: 0, top: 0, right: viewportWidth, bottom: viewportHeight };
+    } catch (error) { return fail(); }
+    const finiteRect = rect => rect && [rect.left, rect.top, rect.right, rect.bottom,
+        rect.width, rect.height].every(Number.isFinite) && rect.width > 0 && rect.height > 0;
+    if (!finiteRect(imageRect) || !finiteRect(wrapperRect) ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 ||
+        Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 ||
+        Math.abs(imageRect.height - wrapperRect.height) > 1 ||
+        !viewport || ![viewport.left, viewport.top, viewport.right, viewport.bottom].every(Number.isFinite) ||
+        viewport.right <= viewport.left || viewport.bottom <= viewport.top ||
+        imageRect.width * (550 / 1254) < 44 || imageRect.height * (493 / 1254) < 44) return fail();
+
+    const byPanel = new Map();
+    for (const button of buttons) {
+        const panelId = button.getAttribute("data-image-tts-panel-id");
+        if (!panelId || byPanel.has(panelId)) return fail();
+        byPanel.set(panelId, button);
+    }
+    if (byPanel.size !== 4) return fail();
+    const selectable = appState.subjectMode === "english" && drawMode === "select";
+    const candidates = [];
+    for (const panel of record.panels) {
+        const button = byPanel.get(String(panel.panelId));
+        const firstItem = panel.items[0];
+        const bounds = panel.bounds;
+        if (!button || !firstItem || !button.classList ||
+            !button.classList.contains("image-tts-image-text-hit-area") ||
+            button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== panel ||
+            button._englishImageTTSImageTextItem !== firstItem ||
+            button.getAttribute("data-image-tts-item-id") !== firstItem.itemId) return fail();
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "auto";
+        let rect;
+        try { rect = button.getBoundingClientRect(); } catch (error) { return fail(); }
+        const expected = {
+            left: imageRect.left + imageRect.width * bounds.xPct / 100,
+            top: imageRect.top + imageRect.height * bounds.yPct / 100,
+            width: imageRect.width * bounds.widthPct / 100,
+            height: imageRect.height * bounds.heightPct / 100
+        };
+        if (!finiteRect(rect) || rect.width < 44 || rect.height < 44 ||
+            Math.abs(rect.left - expected.left) > 1 ||
+            Math.abs(rect.top - expected.top) > 1 ||
+            Math.abs(rect.width - expected.width) > 1 ||
+            Math.abs(rect.height - expected.height) > 1) {
+            button.hidden = true;
+            candidates.push({ button, safe: false });
+            continue;
+        }
+        const fullyVisible = rect.left >= viewport.left && rect.top >= viewport.top &&
+            rect.right <= viewport.right && rect.bottom <= viewport.bottom;
+        if (!fullyVisible || !selectable) {
+            button.hidden = true;
+            candidates.push({ button, safe: false });
+            continue;
+        }
+        let style = null;
+        try { style = window.getComputedStyle(button); } catch (error) { style = null; }
+        if (style && (style.display === "none" || style.visibility !== "visible")) {
+            button.hidden = true;
+            candidates.push({ button, safe: false });
+            continue;
+        }
+        const insetX = Math.min(6, rect.width / 4);
+        const insetY = Math.min(6, rect.height / 4);
+        const points = [
+            [(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2],
+            [rect.left + insetX, rect.top + insetY],
+            [rect.right - insetX, rect.top + insetY],
+            [rect.left + insetX, rect.bottom - insetY],
+            [rect.right - insetX, rect.bottom - insetY]
+        ];
+        const menu = englishImageTTSOverlayState.menu;
+        const activeMenu = englishImageTTSOverlayState.activeTrigger === button &&
+            menu && !menu.hidden && menu.id === "english-image-tts-menu";
+        let safe = false;
+        try {
+            safe = points.every(([x, y]) => {
+                const hit = document.elementFromPoint(x, y);
+                return hit === button || button.contains(hit) ||
+                    activeMenu && (hit === menu || menu.contains(hit));
+            });
+        } catch (error) { safe = false; }
+        if (!safe) {
+            button.hidden = true;
+            candidates.push({ button, safe: false });
+            continue;
+        }
+        candidates.push({ button, safe: true });
+    }
+    candidates.forEach(({ button, safe }) => {
+        const enabled = selectable && safe;
+        button.hidden = !enabled;
+        button.disabled = !enabled;
+        button.setAttribute("aria-disabled", String(!enabled));
+        button.style.pointerEvents = enabled ? "auto" : "none";
+    });
+    if (verifyTrigger) {
+        const candidate = candidates.find(item => item.button === verifyTrigger);
+        return Boolean(candidate && candidate.safe && selectable &&
+            !verifyTrigger.hidden && !verifyTrigger.disabled);
+    }
+    return candidates.some(candidate => candidate.safe && selectable);
+}
+
+function isEnglishEarthquakesPanelTriggerReady(trigger) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    const record = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_EARTHQUAKES_ASSET_FILE] : null;
+    const panel = trigger && trigger._englishImageTTSImageTextPanel;
+    const buttons = wrapper
+        ? Array.from(wrapper.querySelectorAll(".earthquakes-panel-hit-area")) : [];
+    return Boolean(wrapper && image && isEnglishEarthquakesImageTTSRecord(record) &&
+        isEnglishEarthquakesFormalSearchImage(image) &&
+        trigger._englishImageTTSImageTextRecord === record &&
+        trigger.classList && trigger.classList.contains("earthquakes-panel-hit-area") &&
+        buttons.length === 4 && buttons.includes(trigger) && panel &&
+        record.panels.find(candidate => candidate.panelId === panel.panelId) === panel &&
+        trigger._englishImageTTSImageTextItem === panel.items[0] &&
+        trigger._englishImageTTSImageTextActivePanel === panel &&
+        !trigger.hidden && !trigger.disabled &&
+        layoutEnglishEarthquakesPanelHitAreas(wrapper, trigger));
+}
+
+function createEnglishEarthquakesPanelHitArea(wrapper, panel, record) {
+    const item = panel && panel.items[0];
+    const image = wrapper && wrapper.querySelector("img");
+    if (!wrapper || !panel || !item || !isEnglishEarthquakesImageTTSRecord(record) ||
+        !image || !isEnglishEarthquakesFormalSearchImage(image)) return null;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "image-tts-image-text-hit-area earthquakes-panel-hit-area";
+    button.hidden = true;
+    button.disabled = true;
+    button.setAttribute("aria-disabled", "true");
+    button.setAttribute("aria-label", "Earthquakes P" + panel.panelId +
+        " teaching area; opens complete area reading and each original text unit");
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "english-image-tts-menu");
+    button.setAttribute("data-english-tts-control", "true");
+    button.setAttribute("data-image-tts-panel-id", String(panel.panelId));
+    button.setAttribute("data-image-tts-item-id", item.itemId);
+    button.style.left = panel.bounds.xPct + "%";
+    button.style.top = panel.bounds.yPct + "%";
+    button.style.width = panel.bounds.widthPct + "%";
+    button.style.height = panel.bounds.heightPct + "%";
+    button._englishImageTTSImageTextPanel = panel;
+    button._englishImageTTSImageTextItem = item;
+    button._englishImageTTSImageTextRecord = record;
+    button._englishImageTTSImageTextActivePanel = panel;
+    button._englishImageTTSImageTextActiveItem = item;
+    button.addEventListener("click", event => {
+        event.stopPropagation();
+        if (button.disabled || appState.subjectMode !== "english" ||
+            isEnglishImageTTSDrawingMode() ||
+            !isEnglishEarthquakesPanelTriggerReady(button)) return;
+        if (englishImageTTSOverlayState.activeTrigger === button &&
+            englishImageTTSOverlayState.menu && !englishImageTTSOverlayState.menu.hidden) {
+            closeEnglishImageTTSMenu();
+            return;
+        }
+        openEnglishEarthquakesPanelMenu(button, record, panel);
+    });
+    wrapper.appendChild(button);
+    return button;
+}
+
+function openEnglishEarthquakesPanelMenu(trigger, record, panel) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    const canonical = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_EARTHQUAKES_ASSET_FILE] : null;
+    if (!trigger || record !== canonical || !isEnglishEarthquakesImageTTSRecord(record) ||
+        !panel || record.panels.find(candidate => candidate === panel) !== panel ||
+        trigger._englishImageTTSImageTextPanel !== panel ||
+        trigger._englishImageTTSImageTextItem !== panel.items[0] ||
+        !isEnglishEarthquakesFormalSearchImage(image) ||
+        !isEnglishEarthquakesPanelTriggerReady(trigger)) return false;
+    cancelEnglishImageTTSStorySequenceForDifferentTrigger(trigger);
+    if (englishTTSState.dialogueSequenceTrigger &&
+        englishTTSState.dialogueSequenceTrigger !== trigger)
+        cancelEnglishImageTTSDialogueSequence(true);
+    if (englishTTSState.imageTextSequenceTrigger &&
+        englishTTSState.imageTextSequenceTrigger !== trigger)
+        cancelEnglishImageTTSImageTextSequence(true);
+    closeEnglishImageTTSMenu();
+    const menu = englishImageTTSOverlayState.menu;
+    if (!menu) return false;
+    englishImageTTSOverlayState.activeTrigger = trigger;
+    trigger.setAttribute("aria-expanded", "true");
+    menu.classList.remove("is-tap-regions-dialogue");
+    menu.setAttribute("aria-label", "Earthquakes P" + panel.panelId + " 朗讀選項");
+    while (menu.firstChild) menu.removeChild(menu.firstChild);
+    const run = (items, completion) => {
+        closeEnglishImageTTSMenu();
+        if (!isEnglishEarthquakesPanelTriggerReady(trigger)) {
+            setEnglishTTSStatus("Earthquakes 選單已關閉，但點讀區目前不安全；未開始朗讀。");
+            return false;
+        }
+        return speakEnglishImageTTSImageTextSequence(trigger, items, completion);
+    };
+    const whole = createEnglishImageTTSMenuButton(
+        "🔊 朗讀本格完整內容",
+        "依序朗讀 Earthquakes P" + panel.panelId + " 所有原圖文字",
+        () => run(panel.items.slice(),
+            "Earthquakes P" + panel.panelId + " 完整內容已朗讀完成。")
+    );
+    const toggle = createEnglishImageTTSMenuButton(
+        "🔊 單句／標籤選讀",
+        "展開本區每項原圖英文的獨立朗讀選項",
+        () => {
+            const list = menu.querySelector(".english-image-tts-sentences");
+            if (!list) return;
+            list.hidden = !list.hidden;
+            toggle.setAttribute("aria-expanded", String(!list.hidden));
+            scheduleEnglishImageTTSMenuPosition();
+        }
+    );
+    toggle.setAttribute("aria-expanded", "false");
+    const list = document.createElement("div");
+    list.className = "english-image-tts-sentences";
+    list.hidden = true;
+    panel.items.forEach(item => {
+        const kind = item.type === "label" ? "標籤" :
+            item.type === "phrase" ? "片語" : "單句";
+        list.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 " + kind + "：「" + item.sourceText.replace(/\r?\n/g, " ") + "」",
+            "單獨朗讀 Earthquakes P" + panel.panelId + " 原圖文字：「" +
+                item.sourceText + "」",
+            () => run([item], "已朗讀 Earthquakes P" + panel.panelId + " 所選原圖文字。")
+        ));
+    });
+    menu.appendChild(whole);
+    menu.appendChild(toggle);
+    menu.appendChild(list);
+    menu.hidden = false;
+    menu.style.visibility = "hidden";
+    positionEnglishImageTTSMenu();
+    if (!menu.hidden && menu.firstChild) {
+        try { menu.firstChild.focus({ preventScroll: true }); }
+        catch (error) { menu.firstChild.focus(); }
+    }
+    return true;
+}
+
 function isEnglishLayersOfTheEarthPanelTriggerReady(trigger) {
     const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
     const image = wrapper && wrapper.querySelector("img");
@@ -25231,6 +25653,23 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             matterSpecs.length === 1 && matterSpecs[0].diagram === canonicalMatter
                 ? matterSpecs[0] : null;
 
+
+        const earthquakesMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_EARTHQUAKES_IMAGE_ID ||
+                entry.file === ENGLISH_EARTHQUAKES_ASSET_FILE)) : [];
+        const canonicalEarthquakesEntry = earthquakesMatches.length === 1 &&
+            earthquakesMatches[0].id === ENGLISH_EARTHQUAKES_IMAGE_ID &&
+            earthquakesMatches[0].file === ENGLISH_EARTHQUAKES_ASSET_FILE
+                ? earthquakesMatches[0] : null;
+        const returnedEarthquakesCount = canonicalEarthquakesEntry
+            ? diagrams.filter(diagram => diagram === canonicalEarthquakesEntry).length : 0;
+        const earthquakesSpecs = specs.filter(spec =>
+            spec.imageData.file === ENGLISH_EARTHQUAKES_ASSET_FILE);
+        const trustedEarthquakesSpec = canonicalEarthquakesEntry &&
+            returnedEarthquakesCount === 1 && earthquakesSpecs.length === 1 &&
+            earthquakesSpecs[0].diagram === canonicalEarthquakesEntry
+                ? earthquakesSpecs[0] : null;
+
         const layersEarthMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
             (entry.id === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
                 entry.file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE)) : [];
@@ -25280,6 +25719,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 if (spec === trustedMatterStatesSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_MATTER_STATES_OF_MATTER_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE);
+                }
+                if (spec === trustedEarthquakesSpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_EARTHQUAKES_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_EARTHQUAKES_ASSET_FILE);
                 }
                 if (spec === trustedLayersEarthSpec) {
                     image.setAttribute("data-english-image-library-id",
@@ -25402,6 +25845,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedMatterStatesSpec);
         ENGLISH_LAYERS_OF_THE_EARTH_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedLayersEarthSpec);
+        ENGLISH_EARTHQUAKES_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedEarthquakesSpec);
         return answerRoot;
     }
 
@@ -25728,6 +26173,145 @@ const ENGLISH_LAYERS_OF_THE_EARTH_FORMAL_SEARCH_ORIGIN = (() => {
 
     return { register, expireCurrentContext, isTrustedNode };
 })();
+
+
+const ENGLISH_EARTHQUAKES_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    const wrapperByImage = new WeakMap();
+    let currentContext = null;
+    let generation = 0;
+
+    function revokeImage(context, image) {
+        if (!context || !image || !context.images.has(image)) return;
+        const wrapper = wrapperByImage.get(image);
+        originByImage.delete(image);
+        wrapperByImage.delete(image);
+        context.images.delete(image);
+        if (wrapper) {
+            const active = englishTTSState.imageTextSequenceTrigger;
+            if (active && wrapper.contains(active) && active.classList &&
+                active.classList.contains("earthquakes-panel-hit-area"))
+                cancelEnglishImageTTSImageTextSequence(true);
+            if (englishImageTTSOverlayState.activeTrigger &&
+                wrapper.contains(englishImageTTSOverlayState.activeTrigger))
+                closeEnglishImageTTSMenu();
+            wrapper.querySelectorAll(".earthquakes-panel-hit-area")
+                .forEach(button => button.remove());
+        }
+    }
+
+    function process(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revokeImage(context, record.target);
+                return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removed =>
+                Array.from(context.images).forEach(image => {
+                    if (removed === image || removed &&
+                        typeof removed.contains === "function" && removed.contains(image))
+                        revokeImage(context, image);
+                }));
+        });
+    }
+
+    function expireCurrentContext() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revokeImage(context, image));
+        context.images.clear();
+        currentContext = null;
+    }
+
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer) process(context, context.observer.takeRecords());
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked || origin.context !== context ||
+            origin.generation !== context.generation || !context.observer ||
+            !image.isConnected || context.responseRoot !== document.getElementById("ai-response") ||
+            !context.responseRoot.isConnected ||
+            !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(wrapperByImage.get(image)) ||
+            image.getAttribute("src") !== ENGLISH_EARTHQUAKES_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !== ENGLISH_EARTHQUAKES_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !== ENGLISH_EARTHQUAKES_ASSET_FILE)
+            return false;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_EARTHQUAKES_IMAGE_ID ||
+                entry.file === ENGLISH_EARTHQUAKES_ASSET_FILE)) : [];
+        return matches.length === 1 && matches[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_EARTHQUAKES_IMAGE_ID &&
+            origin.diagram.file === ENGLISH_EARTHQUAKES_ASSET_FILE;
+    }
+
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot || !diagramContainer || !trustedSpec ||
+            typeof MutationObserver !== "function" ||
+            responseRoot !== document.getElementById("ai-response") ||
+            !responseRoot.isConnected || !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_EARTHQUAKES_IMAGE_ID ||
+                entry.file === ENGLISH_EARTHQUAKES_ASSET_FILE)) : [];
+        const targetSpecs = (Array.isArray(renderedSpecs) ? renderedSpecs : []).filter(entry =>
+            entry && entry.spec && entry.spec.imageData &&
+            entry.spec.imageData.file === ENGLISH_EARTHQUAKES_ASSET_FILE);
+        const rendered = (Array.isArray(renderedSpecs) ? renderedSpecs : [])
+            .find(entry => entry && entry.spec === trustedSpec);
+        if (matches.length !== 1 || matches[0] !== diagram ||
+            !diagram || diagram.id !== ENGLISH_EARTHQUAKES_IMAGE_ID ||
+            diagram.file !== ENGLISH_EARTHQUAKES_ASSET_FILE ||
+            targetSpecs.length !== 1 || !rendered || !rendered.image ||
+            !rendered.image.isConnected || !diagramContainer.contains(rendered.image)) return false;
+        const image = rendered.image;
+        const wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) || !diagramContainer.contains(wrapper)) return false;
+        const context = {
+            generation: ++generation, responseRoot, diagramContainer, diagram,
+            images: new Set([image]), observer: null, revoked: false
+        };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram });
+        wrapperByImage.set(image, wrapper);
+        context.observer = new MutationObserver(records => process(context, records));
+        context.observer.observe(responseRoot, {
+            childList: true, subtree: true, attributes: true,
+            attributeFilter: ["src", "data-english-image-library-id",
+                "data-english-image-library-file"]
+        });
+        if (!isTrustedNode(image)) {
+            expireCurrentContext();
+            return false;
+        }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+
+    return { register, expireCurrentContext, isTrustedNode };
+})();
+
+function isEnglishEarthquakesFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_EARTHQUAKES_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !== ENGLISH_EARTHQUAKES_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !== ENGLISH_EARTHQUAKES_ASSET_FILE ||
+        !ENGLISH_EARTHQUAKES_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || !Array.isArray(diagramMap))
+        return false;
+    const record = imageTTSData[ENGLISH_EARTHQUAKES_ASSET_FILE];
+    if (getEnglishEarthquakesImageTTSRecord(record, ENGLISH_EARTHQUAKES_ASSET_FILE) !== record)
+        return false;
+    const matches = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_EARTHQUAKES_IMAGE_ID ||
+            entry.file === ENGLISH_EARTHQUAKES_ASSET_FILE));
+    return matches.length === 1 && matches[0].id === ENGLISH_EARTHQUAKES_IMAGE_ID &&
+        matches[0].file === ENGLISH_EARTHQUAKES_ASSET_FILE;
+}
 
 function isEnglishLayersOfTheEarthFormalSearchImage(image) {
     if (!image || image.getAttribute("src") !== ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE ||
@@ -27193,6 +27777,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_EARTHQUAKES_ASSET_FILE &&
+            !isEnglishEarthquakesFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE &&
             !isEnglishLayersOfTheEarthFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE &&
@@ -27273,6 +27859,32 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
         }
 
         if (record.contentType === "image-text") {
+
+            if (isEnglishEarthquakesImageTTSRecord(record)) {
+                const dimensionsOK = () =>
+                    isEnglishEarthquakesFormalSearchImage(image) &&
+                    image.getAttribute("src") === ENGLISH_EARTHQUAKES_ASSET_FILE &&
+                    image.complete === true && image.naturalWidth === 1254 &&
+                    image.naturalHeight === 1254;
+                if (image.complete && !dimensionsOK()) return;
+                record.panels.forEach(panel => {
+                    if (createEnglishEarthquakesPanelHitArea(wrapper, panel, record)) added += 1;
+                });
+                const hide = () => {
+                    hideEnglishEarthquakesPanelHitAreas(wrapper);
+                    const active = englishTTSState.imageTextSequenceTrigger;
+                    if (active && wrapper.contains(active) &&
+                        active.classList.contains("earthquakes-panel-hit-area"))
+                        cancelEnglishImageTTSImageTextSequence(true);
+                };
+                image.addEventListener("load", () => {
+                    if (!dimensionsOK()) { hide(); return; }
+                    layoutEnglishEarthquakesPanelHitAreas(wrapper);
+                }, { once: true });
+                image.addEventListener("error", hide, { once: true });
+                layoutEnglishEarthquakesPanelHitAreas(wrapper);
+                return;
+            }
             if (isEnglishLayersOfTheEarthImageTTSRecord(record)) {
                 const dimensionsOK = () =>
                     isEnglishLayersOfTheEarthFormalSearchImage(image) &&
@@ -28280,6 +28892,10 @@ function scheduleEnglishImageTTSLayout() {
                 layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
             }
             if (wrapper.dataset &&
+                wrapper.dataset.imageTtsAssetFile === ENGLISH_EARTHQUAKES_ASSET_FILE) {
+                layoutEnglishEarthquakesPanelHitAreas(wrapper);
+            }
+            if (wrapper.dataset &&
                 wrapper.dataset.imageTtsAssetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE) {
                 layoutEnglishLayersOfTheEarthPanelHitAreas(wrapper);
             }
@@ -28414,6 +29030,10 @@ function syncEnglishImageTTSDrawingMode() {
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) {
             layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
+        }
+        if (wrapper.dataset &&
+            wrapper.dataset.imageTtsAssetFile === ENGLISH_EARTHQUAKES_ASSET_FILE) {
+            layoutEnglishEarthquakesPanelHitAreas(wrapper);
         }
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE) {
@@ -28743,6 +29363,9 @@ function getEnglishMatterStatesOfMatterImageTextSpeechSegments(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishEarthquakesImageTTSItemText(record, item)) {
+        return getEnglishTTSUnitText(item.ttsText);
+    }
     if (isEnglishLayersOfTheEarthImageTTSItemText(record, item)) {
         const speechText = item.itemId === "layers-earth-p4-title"
             ? item.ttsText.replace(" & ", " and ") : item.ttsText;
@@ -28984,6 +29607,29 @@ function speakEnglishImageTTSImageTextSequence(
     const energySourcesPanelSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===energySourcesPanel.items.length&&energySourcesPanel.items.every((item,index)=>item===itemList[index]));
     const energySourcesSingleItemSequence=Boolean(isEnergySourcesImageText&&energySourcesPanel&&itemList.length===1&&energySourcesPanel.items.includes(itemList[0]));
     const isRenewableEnergyImageText = Boolean(record && isEnglishRenewableEnergyImageTTSRecord(record));
+    const isEarthquakesImageText = Boolean(record &&
+        isEnglishEarthquakesImageTTSRecord(record));
+    const earthquakesPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const isEarthquakesSingleItemSequence = Boolean(isEarthquakesImageText &&
+        itemList.length === 1 && allItems.includes(itemList[0]));
+    const earthquakesImage = isEarthquakesImageText && wrapper ? wrapper.querySelector("img") : null;
+    const earthquakesButtons = isEarthquakesImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".earthquakes-panel-hit-area")) : [];
+    const earthquakesImageReady = !isEarthquakesImageText || Boolean(
+        assetFile === ENGLISH_EARTHQUAKES_ASSET_FILE &&
+        record === imageTTSData[ENGLISH_EARTHQUAKES_ASSET_FILE] &&
+        trigger._englishImageTTSImageTextRecord === record && earthquakesPanel &&
+        record.panels.includes(earthquakesPanel) &&
+        trigger._englishImageTTSImageTextPanel === earthquakesPanel &&
+        trigger._englishImageTTSImageTextItem === earthquakesPanel.items[0] &&
+        earthquakesImage && isEnglishEarthquakesFormalSearchImage(earthquakesImage) &&
+        earthquakesImage.getAttribute("src") === ENGLISH_EARTHQUAKES_ASSET_FILE &&
+        earthquakesImage.complete === true && earthquakesImage.naturalWidth === 1254 &&
+        earthquakesImage.naturalHeight === 1254 && earthquakesButtons.length === 4 &&
+        earthquakesButtons.includes(trigger) && itemList.length > 0 &&
+        itemList.every(item => earthquakesPanel.items.includes(item)) &&
+        trigger.classList.contains("earthquakes-panel-hit-area") &&
+        isEnglishEarthquakesPanelTriggerReady(trigger));
     const isLayersOfTheEarthImageText = Boolean(record &&
         isEnglishLayersOfTheEarthImageTTSRecord(record));
     const layersOfTheEarthPanel = trigger && trigger._englishImageTTSImageTextPanel;
@@ -29648,7 +30294,8 @@ function speakEnglishImageTTSImageTextSequence(
             !isTyphoonsSingleItemSequence &&
             !isEarthEnvironmentSingleItemSequence &&
             !isHumanBodyHowItWorksSingleItemSequence &&
-            !windEnergySingleItemSequence && !isLayersOfTheEarthSingleItemSequence &&
+            !windEnergySingleItemSequence && !isEarthquakesSingleItemSequence &&
+            !isLayersOfTheEarthSingleItemSequence &&
             !isLayersOfTheEarthPairSequence) ||
         itemList.some(item => !item ||
             (item.sourceText !== item.ttsText &&
@@ -29661,7 +30308,7 @@ function speakEnglishImageTTSImageTextSequence(
         !muscularImageReady || !cyclingImageReady || !solarImageReady ||
         !xraysImageReady || !skeletalSystemImageReady || !immuneSystemImageReady ||
         !humanBrainImageReady || !naturalResourcesImageReady || !conservationBiodiversityImageReady ||
-        !matterImageReady || !layersOfTheEarthImageReady ||
+        !matterImageReady || !layersOfTheEarthImageReady || !earthquakesImageReady ||
         !plantsPhotosynthesisImageReady || !plantReproductionImageReady ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
