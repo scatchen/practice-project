@@ -3397,6 +3397,7 @@ const englishTTSState = {
     xraysViewportCleanup: null,
     muscularSystemViewportCleanup: null,
     stopPositionFrame: 0,
+    batteryStopPositionTimer: 0,
     responseObserver: null,
     collocationReplayTimer: 0,
     collocationReplayGeneration: 0,
@@ -5322,6 +5323,112 @@ function failEnglishCyclingImageTTSSequence(trigger) {
 }
 
 
+function placeEnglishBatteryImageTTSStopButton(button, wrapper, record, panel, item) {
+    const fail = () => {
+        if (button) {
+            button.hidden = true;
+            button.style.visibility = "hidden";
+            button.style.pointerEvents = "none";
+        }
+        return false;
+    };
+    const trigger = englishTTSState.activeSpeechTrigger;
+    const canonical = imageTTSData && imageTTSData[ENGLISH_BATTERY_ASSET_FILE];
+    const image = wrapper && wrapper.querySelector("img");
+    const panelItems = record && record.panels.find(candidate =>
+        candidate.panelId === (panel && panel.panelId));
+    if (!button || !wrapper || wrapper.isConnected === false || record !== canonical ||
+        !isEnglishBatteryImageTTSRecord(record) || !isEnglishBatteryFormalSearchImage(image) ||
+        !trigger || !trigger.classList || !trigger.classList.contains("battery-panel-hit-area") ||
+        trigger._englishImageTTSImageTextRecord !== record || !wrapper.contains(trigger) ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_BATTERY_ASSET_FILE ||
+        image.getAttribute("src") !== ENGLISH_BATTERY_ASSET_FILE || image.complete !== true ||
+        image.naturalWidth !== 1536 || image.naturalHeight !== 1024 || !panelItems ||
+        panel !== panelItems || !item || !panel.items.includes(item) ||
+        item !== trigger._englishImageTTSImageTextActiveItem ||
+        panel !== trigger._englishImageTTSImageTextActivePanel ||
+        typeof document.elementFromPoint !== "function") return fail();
+    const avoidRects = [];
+    try {
+        document.querySelectorAll(
+            ".control-bar, .brush-colors, .scribble-box, .english-image-story-controls:not([hidden]), " +
+            ".english-image-tts-menu:not([hidden]), #english-tts-panel:not([hidden]), " +
+            "button:not(#english-tts-floating-stop), [role='button'], input, select, textarea"
+        ).forEach(element => {
+            if (!element || element === button || wrapper.contains(element) || element.hidden) return;
+            const style = window.getComputedStyle(element);
+            if (!style || style.display === "none" || style.visibility === "hidden" ||
+                style.visibility === "collapse") return;
+            const rect = element.getBoundingClientRect();
+            if (!rect || ![rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height]
+                .every(Number.isFinite)) throw new Error("Unreadable visible control");
+            if (rect.width > 0 && rect.height > 0)
+                avoidRects.push({ left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom });
+        });
+    } catch (error) { return fail(); }
+
+    button.style.pointerEvents = "auto";
+    const placed = placeEnglishImageTTSStoryStopButton(button, wrapper, {
+        bounds: item.bounds,
+        avoidBounds: record.panels.flatMap(candidate => candidate.tapRegions),
+        avoidRects
+    }, {
+        preferBelow: true, scanForClearPosition: true, strictAvoidance: true,
+        fixedStopSize: true, fixedStopWidth: 52, fixedStopHeight: 52,
+        fixedStopClass: "is-image-tts-battery-stop-control", fixedStopText: "⏹",
+        fixedStopAriaLabel: "停止 The Battery — Alessandro Volta 英文朗讀",
+        stopControlClass: "is-image-tts-image-text-stop-control"
+    });
+    if (!placed) return fail();
+    let rect, style, viewport;
+    try {
+        rect = button.getBoundingClientRect();
+        style = window.getComputedStyle(button);
+        const visual = window.visualViewport;
+        const width = visual && Number.isFinite(visual.width) ? visual.width :
+            (document.documentElement && document.documentElement.clientWidth || window.innerWidth);
+        const height = visual && Number.isFinite(visual.height) ? visual.height :
+            (document.documentElement && document.documentElement.clientHeight || window.innerHeight);
+        viewport = visual ? { left: visual.offsetLeft, top: visual.offsetTop,
+            right: visual.offsetLeft + width, bottom: visual.offsetTop + height }
+            : { left: 0, top: 0, right: width, bottom: height };
+    } catch (error) { return fail(); }
+    if (!rect || !style || ![rect.left, rect.top, rect.right, rect.bottom,
+        rect.width, rect.height].every(Number.isFinite) ||
+        Math.abs(rect.width - 52) > 0.5 || Math.abs(rect.height - 52) > 0.5 ||
+        style.display === "none" || style.visibility !== "visible" ||
+        style.pointerEvents === "none" || !viewport ||
+        ![viewport.left, viewport.top, viewport.right, viewport.bottom].every(Number.isFinite)) return fail();
+    const safeInset = name => {
+        try {
+            const value = parseFloat(window.getComputedStyle(button).getPropertyValue(name));
+            return Number.isFinite(value) && value > 0 ? value : 0;
+        } catch (error) { return 0; }
+    };
+    const safe = {
+        left: viewport.left + safeInset("--english-tts-safe-left") + 8,
+        top: viewport.top + safeInset("--english-tts-safe-top") + 8,
+        right: viewport.right - safeInset("--english-tts-safe-right") - 8,
+        bottom: viewport.bottom - safeInset("--english-tts-safe-bottom") - 8
+    };
+    const overlap = (a, b) => a.left < b.right && a.right > b.left &&
+        a.top < b.bottom && a.bottom > b.top;
+    if (rect.left < safe.left || rect.top < safe.top || rect.right > safe.right ||
+        rect.bottom > safe.bottom || avoidRects.some(other => overlap(rect, other))) return fail();
+    const inset = Math.min(6, rect.width / 4, rect.height / 4);
+    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    const points = [[cx, cy], [rect.left + inset, rect.top + inset],
+        [rect.right - inset, rect.top + inset], [rect.left + inset, rect.bottom - inset],
+        [rect.right - inset, rect.bottom - inset]];
+    try {
+        if (!points.every(([x, y]) => {
+            const hit = document.elementFromPoint(x, y);
+            return hit === button || button.contains(hit);
+        })) return fail();
+    } catch (error) { return fail(); }
+    return true;
+}
+
 function placeEnglishLightBulbImageTTSStopButton(button, wrapper, record, panel, item) {
     const fail = () => {
         if (button) {
@@ -5472,6 +5579,11 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
     }
     if (isEnglishCyclingImageTTSRecord(record)) {
         return placeEnglishCyclingImageTTSStopButton(
+            button, wrapper, validatedRecord, safePanel, safeItem
+        );
+    }
+    if (isEnglishBatteryImageTTSRecord(record)) {
+        return placeEnglishBatteryImageTTSStopButton(
             button, wrapper, validatedRecord, safePanel, safeItem
         );
     }
@@ -6028,6 +6140,28 @@ function positionEnglishTTSFloatingStopButton() {
             englishTTSState.activeImageTTSWrapper
         )) {
             button.hidden = true;
+            const batteryRecord = imageTextTrigger._englishImageTTSImageTextRecord;
+            const isBatteryTrigger = Boolean(
+                imageTextTrigger.classList.contains("battery-panel-hit-area") &&
+                batteryRecord && isEnglishBatteryImageTTSRecord(batteryRecord)
+            );
+            if (isBatteryTrigger &&
+                englishTTSState.imageTextSequenceTrigger === imageTextTrigger &&
+                isEnglishTTSPlaybackActive()) {
+                const generation = englishTTSState.imageTextSequenceGeneration;
+                if (englishTTSState.batteryStopPositionTimer) {
+                    window.clearTimeout(englishTTSState.batteryStopPositionTimer);
+                }
+                englishTTSState.batteryStopPositionTimer = window.setTimeout(() => {
+                    englishTTSState.batteryStopPositionTimer = 0;
+                    if (generation !== englishTTSState.imageTextSequenceGeneration ||
+                        englishTTSState.imageTextSequenceTrigger !== imageTextTrigger ||
+                        !isEnglishTTSPlaybackActive()) return;
+                    if (!placeEnglishImageTTSImageTextStopButton(
+                        button, englishTTSState.activeImageTTSWrapper
+                    )) button.hidden = true;
+                }, 180);
+            }
             const conservationRecord = imageTextTrigger._englishImageTTSImageTextRecord;
             const isConservationBiodiversityTrigger = Boolean(
                 imageTextTrigger.classList.contains("conservation-biodiversity-panel-hit-area") &&
@@ -11602,6 +11736,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 
 function isEnglishImageTTSItemText(record, item) {
     if (isEnglishOceansImageTTSItemText(record, item)) return true;
+    if (isEnglishBatteryImageTTSItemText(record, item)) return true;
     if (isEnglishEarthquakesImageTTSItemText(record, item)) return true;
     if (isEnglishLayersOfTheEarthImageTTSItemText(record, item)) return true;
     if (isEnglishMatterStatesOfMatterImageTTSItemText(record, item)) return true;
@@ -12205,6 +12340,9 @@ function isEnglishImageTTSFullTitleImageTextRecord(record) {
 }
 
 function getEnglishImageTTSImageTextPanelLabel(record, panel) {
+    if (isEnglishBatteryImageTTSRecord(record) && panel) {
+        return panel.panelId === 0 ? "導言" : "P" + panel.panelId;
+    }
     if (isEnglishImageTTSFullTitleImageTextRecord(record) && panel) {
         return panel.panelId === 0 ? "全圖標題" : "第 " + panel.panelId + " 格";
     }
@@ -12212,6 +12350,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishBatteryImageTTSRecord(record)) return "The Battery — Alessandro Volta";
     if (isEnglishOceansImageTTSRecord(record)) return "Oceans & Marine Life";
     if (isEnglishEarthquakesImageTTSRecord(record)) return "Earthquakes";
     if (isEnglishLayersOfTheEarthImageTTSRecord(record)) return "Layers of the Earth";
@@ -18716,6 +18855,175 @@ function isEnglishEarthquakesImageTTSItemText(record, item) {
 }
 
 
+const ENGLISH_BATTERY_IMAGE_ID = "battery-alessandro-volta-basics";
+const ENGLISH_BATTERY_ASSET_FILE = "images/english/battery-alessandro-volta-basics.png";
+const ENGLISH_BATTERY_CANONICAL_RECORD = typeof imageTTSData !== "undefined" && imageTTSData
+    ? imageTTSData[ENGLISH_BATTERY_ASSET_FILE] : null;
+
+function getEnglishBatteryExpectedPanels() {
+    const rect = (x, y, width, height) => ({
+        xPct: x / 1536 * 100, yPct: y / 1024 * 100,
+        widthPct: width / 1536 * 100, heightPct: height / 1024 * 100
+    });
+    const item = (itemId, readingOrder, type, sourceText, bounds) => ({
+        itemId, readingOrder, type, sourceText, bounds: rect(...bounds)
+    });
+    const panel = (panelId, readingOrder, bounds, tapRegions, items) => ({
+        panelId, readingOrder, bounds: rect(...bounds),
+        tapRegions: tapRegions.map(region => rect(...region)), items
+    });
+    return [
+        panel(0, 1, [4, 3, 1528, 147], [[18, 16, 1090, 128]], [
+            item("battery-intro-sentence", 1, "sentence",
+                "The first battery gave people a steady source of electric current.",
+                [58, 91, 1018, 45])
+        ]),
+        panel(1, 2, [4, 158, 761, 420], [
+            [163, 224, 423, 136], [13, 449, 202, 129]
+        ], [
+            item("battery-p1-sentence", 1, "sentence",
+                "Scientists experimented with electricity, but they needed a steady source of electric current.",
+                [163, 224, 423, 136]),
+            item("battery-p1-science", 2, "label", "SCIENCE", [17, 459, 184, 31]),
+            item("battery-p1-electricity", 3, "label", "(ELECTRICITY)", [17, 502, 184, 31]),
+            item("battery-p1-experiments", 4, "label", "(EXPERIMENTS)", [17, 544, 184, 31])
+        ]),
+        panel(2, 3, [772, 158, 759, 420], [
+            [795, 224, 555, 224], [1255, 450, 170, 128]
+        ], [
+            item("battery-p2-sentence", 1, "sentence",
+                "Alessandro Volta (1745–1827) built the voltaic pile, an early battery made from different metals and an electrolyte.",
+                [795, 228, 211, 190]),
+            item("battery-p2-zinc-plate", 2, "label", "Zinc plate", [1025, 352, 82, 68]),
+            item("battery-p2-copper-plate", 3, "label", "Copper plate", [1241, 344, 91, 63]),
+            item("battery-p2-electrolyte", 4, "label", "Electrolyte (salt water)", [1280, 492, 130, 63])
+        ]),
+        panel(3, 4, [4, 586, 761, 433], [
+            [25, 649, 410, 136], [32, 800, 280, 200], [615, 660, 142, 130]
+        ], [
+            item("battery-p3-main-sentence", 1, "sentence",
+                "Chemical reactions between the materials produced a flow of electric charge (electric current).",
+                [25, 660, 410, 120]),
+            item("battery-p3-zinc", 2, "label", "Zinc", [100, 822, 180, 38]),
+            item("battery-p3-reaction-sentence", 3, "sentence",
+                "Chemical reactions produce electric charge.", [88, 880, 198, 40]),
+            item("battery-p3-copper", 4, "label", "Copper", [90, 928, 200, 42]),
+            item("battery-p3-electric-current", 5, "sentence",
+                "Electric current flows!", [627, 677, 114, 101])
+        ]),
+        panel(4, 5, [772, 586, 759, 433], [[796, 631, 716, 130]], [
+            item("battery-p4-sentence", 1, "sentence",
+                "Batteries gave scientists a practical source of electricity and helped later electrical technology develop.",
+                [796, 658, 706, 98])
+        ])
+    ];
+}
+
+function getEnglishBatteryImageTextRecord(record, assetFile) {
+    const exact = (value, keys) => Boolean(value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key)));
+    const rectKeys = ["xPct", "yPct", "widthPct", "heightPct"];
+    const validRect = value => exact(value, rectKeys) &&
+        rectKeys.every(key => Number.isFinite(value[key]) && value[key] >= 0 && value[key] <= 100) &&
+        value.widthPct > 0 && value.heightPct > 0 &&
+        value.xPct + value.widthPct <= 100 && value.yPct + value.heightPct <= 100;
+    const sameRect = (actual, expected) => validRect(actual) &&
+        rectKeys.every(key => actual[key] === expected[key]);
+    const contains = (outer, inner) => validRect(outer) && validRect(inner) &&
+        inner.xPct >= outer.xPct && inner.yPct >= outer.yPct &&
+        inner.xPct + inner.widthPct <= outer.xPct + outer.widthPct &&
+        inner.yPct + inner.heightPct <= outer.yPct + outer.heightPct;
+    const overlaps = (a, b) => a.xPct < b.xPct + b.widthPct &&
+        a.xPct + a.widthPct > b.xPct && a.yPct < b.yPct + b.heightPct &&
+        a.yPct + a.heightPct > b.yPct;
+    const canonical = ENGLISH_BATTERY_CANONICAL_RECORD;
+    const expected = getEnglishBatteryExpectedPanels();
+    if (assetFile !== ENGLISH_BATTERY_ASSET_FILE || !canonical ||
+        imageTTSData[ENGLISH_BATTERY_ASSET_FILE] !== canonical || record !== canonical ||
+        !exact(record, ["imageId", "assetFile", "contentType", "layout", "transcriptStatus",
+            "transcriptReviewMethod", "coordinateStatus", "overlayRuntimeStatus",
+            "sourceImageDimensions", "panels"]) ||
+        record.imageId !== ENGLISH_BATTERY_IMAGE_ID || record.assetFile !== ENGLISH_BATTERY_ASSET_FILE ||
+        record.contentType !== "image-text" ||
+        record.layout !== "custom-battery-alessandro-volta-intro-plus-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1536 || record.sourceImageDimensions.height !== 1024 ||
+        !Array.isArray(record.panels) || record.panels.length !== expected.length) return null;
+
+    const identityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === ENGLISH_BATTERY_ASSET_FILE || candidate &&
+            (candidate.imageId === ENGLISH_BATTERY_IMAGE_ID ||
+                candidate.assetFile === ENGLISH_BATTERY_ASSET_FILE);
+    });
+    const catalog = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_BATTERY_IMAGE_ID || entry.file === ENGLISH_BATTERY_ASSET_FILE)) : [];
+    if (identityKeys.length !== 1 || identityKeys[0] !== ENGLISH_BATTERY_ASSET_FILE ||
+        catalog.length !== 1 || catalog[0].id !== ENGLISH_BATTERY_IMAGE_ID ||
+        catalog[0].file !== ENGLISH_BATTERY_ASSET_FILE || catalog[0].category !== "english" ||
+        Object.prototype.hasOwnProperty.call(catalog[0], "images")) return null;
+
+    const panelBounds = [], tapRegions = [];
+    let unitCount = 0;
+    for (let p = 0; p < expected.length; p += 1) {
+        const panel = record.panels[p], wanted = expected[p];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "tapRegions", "items"]) ||
+            panel.panelId !== wanted.panelId || panel.readingOrder !== wanted.readingOrder ||
+            !sameRect(panel.bounds, wanted.bounds) || !Array.isArray(panel.tapRegions) ||
+            panel.tapRegions.length !== wanted.tapRegions.length || !Array.isArray(panel.items) ||
+            panel.items.length !== wanted.items.length) return null;
+        panelBounds.push(panel.bounds);
+        for (let r = 0; r < wanted.tapRegions.length; r += 1) {
+            const region = panel.tapRegions[r], wantedRegion = wanted.tapRegions[r];
+            if (!sameRect(region, wantedRegion) || !contains(panel.bounds, region)) return null;
+            for (const width of [528, 540, 600, 768, 900, 1024, 1200]) {
+                const height = width * 1024 / 1536;
+                if (region.widthPct * width / 100 < 44 || region.heightPct * height / 100 < 44) return null;
+            }
+            tapRegions.push(region);
+        }
+        for (let i = 0; i < wanted.items.length; i += 1) {
+            const item = panel.items[i], expectedItem = wanted.items[i];
+            if (!exact(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]) ||
+                item.itemId !== expectedItem.itemId || item.readingOrder !== expectedItem.readingOrder ||
+                item.type !== expectedItem.type || item.sourceText !== expectedItem.sourceText ||
+                item.ttsText !== expectedItem.sourceText || !sameRect(item.bounds, expectedItem.bounds) ||
+                !contains(panel.bounds, item.bounds) ||
+                !panel.tapRegions.some(region => contains(region, item.bounds)) ||
+                !getEnglishTTSUnitText(item.ttsText)) return null;
+            unitCount += 1;
+        }
+    }
+    if (unitCount !== 15 || tapRegions.length !== 9) return null;
+    for (let i = 0; i < panelBounds.length; i += 1) {
+        for (let j = i + 1; j < panelBounds.length; j += 1) {
+            if (overlaps(panelBounds[i], panelBounds[j])) return null;
+        }
+    }
+    for (let i = 0; i < tapRegions.length; i += 1) {
+        for (let j = i + 1; j < tapRegions.length; j += 1) {
+            if (overlaps(tapRegions[i], tapRegions[j])) return null;
+        }
+    }
+    return record;
+}
+
+function isEnglishBatteryImageTTSRecord(record) {
+    const canonical = ENGLISH_BATTERY_CANONICAL_RECORD;
+    return Boolean(record && canonical && imageTTSData[ENGLISH_BATTERY_ASSET_FILE] === canonical &&
+        record === canonical && getEnglishBatteryImageTextRecord(record, ENGLISH_BATTERY_ASSET_FILE) === record);
+}
+
+function isEnglishBatteryImageTTSItemText(record, item) {
+    return Boolean(isEnglishBatteryImageTTSRecord(record) && item &&
+        item.sourceText === item.ttsText && record.panels.some(panel => panel.items.includes(item)));
+}
+
 const ENGLISH_LIGHT_BULB_IMAGE_ID = "light-bulb-thomas-edison-basics";
 const ENGLISH_LIGHT_BULB_ASSET_FILE = "images/english/light-bulb-thomas-edison-basics.png";
 const ENGLISH_LIGHT_BULB_CANONICAL_RECORD = typeof imageTTSData !== "undefined" && imageTTSData
@@ -18871,6 +19179,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_BATTERY_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_BATTERY_IMAGE_ID ||
+            record.assetFile === ENGLISH_BATTERY_ASSET_FILE)) {
+        return getEnglishBatteryImageTextRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_LIGHT_BULB_ASSET_FILE || record &&
         (record.imageId === ENGLISH_LIGHT_BULB_IMAGE_ID ||
             record.assetFile === ENGLISH_LIGHT_BULB_ASSET_FILE)) {
@@ -23431,6 +23744,155 @@ function isEnglishLightBulbPanelTriggerReady(trigger, panel = null) {
         drawMode === "select" && layoutEnglishLightBulbPanelHitAreas(wrapper, trigger));
 }
 
+function hideEnglishBatteryPanelHitAreas(wrapper) {
+    if (!wrapper || typeof wrapper.querySelectorAll !== "function") return;
+    wrapper.querySelectorAll(".battery-panel-hit-area").forEach(button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "none";
+        button.style.visibility = "hidden";
+    });
+    if (englishImageTTSOverlayState.activeTrigger &&
+        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+}
+
+function layoutEnglishBatteryPanelHitAreas(wrapper, verifyTrigger = null) {
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll(".battery-panel-hit-area")) : [];
+    const fail = () => { hideEnglishBatteryPanelHitAreas(wrapper); return false; };
+    const image = wrapper && typeof wrapper.querySelector === "function" ? wrapper.querySelector("img") : null;
+    const record = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_BATTERY_ASSET_FILE] : null;
+    if (!wrapper || wrapper.isConnected === false || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_BATTERY_ASSET_FILE || !image ||
+        !isEnglishBatteryFormalSearchImage(image) || image.getAttribute("src") !== ENGLISH_BATTERY_ASSET_FILE ||
+        image.complete !== true || image.naturalWidth !== 1536 || image.naturalHeight !== 1024 ||
+        !isEnglishBatteryImageTTSRecord(record) || buttons.length !== 9 ||
+        typeof document.elementFromPoint !== "function") return fail();
+
+    const finiteRect = rect => rect && [rect.left, rect.top, rect.right, rect.bottom,
+        rect.width, rect.height].every(Number.isFinite) && rect.width > 0 && rect.height > 0;
+    let imageRect, wrapperRect, viewport;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+        const visual = window.visualViewport;
+        const width = visual && Number.isFinite(visual.width) && visual.width > 0
+            ? visual.width : (document.documentElement && document.documentElement.clientWidth || window.innerWidth);
+        const height = visual && Number.isFinite(visual.height) && visual.height > 0
+            ? visual.height : (document.documentElement && document.documentElement.clientHeight || window.innerHeight);
+        viewport = visual ? { left: visual.offsetLeft, top: visual.offsetTop,
+            right: visual.offsetLeft + width, bottom: visual.offsetTop + height }
+            : { left: 0, top: 0, right: width, bottom: height };
+    } catch (error) { return fail(); }
+    if (!finiteRect(imageRect) || !finiteRect(wrapperRect) ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 || Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 || Math.abs(imageRect.height - wrapperRect.height) > 1 ||
+        !viewport || ![viewport.left, viewport.top, viewport.right, viewport.bottom].every(Number.isFinite) ||
+        viewport.right <= viewport.left || viewport.bottom <= viewport.top) return fail();
+    if (appState.subjectMode !== "english" || drawMode !== "select") {
+        hideEnglishBatteryPanelHitAreas(wrapper);
+        return false;
+    }
+
+    const byRegion = new Map();
+    for (const button of buttons) {
+        const panelId = button.getAttribute("data-image-tts-panel-id");
+        const regionIndex = Number(button.getAttribute("data-battery-tap-region-index"));
+        const key = panelId + ":" + regionIndex;
+        if (!panelId || !Number.isInteger(regionIndex) || regionIndex < 0 || byRegion.has(key)) return fail();
+        byRegion.set(key, button);
+    }
+    const candidates = [];
+    let expectedCount = 0;
+    for (const panel of record.panels) {
+        for (let regionIndex = 0; regionIndex < panel.tapRegions.length; regionIndex += 1) {
+            expectedCount += 1;
+            const button = byRegion.get(String(panel.panelId) + ":" + regionIndex);
+            const item = panel.items[0], bounds = panel.tapRegions[regionIndex];
+            if (!button || !item || !button.classList ||
+                !button.classList.contains("image-tts-image-text-hit-area") ||
+                !button.classList.contains("battery-panel-hit-area") ||
+                button._englishImageTTSImageTextRecord !== record ||
+                button._englishImageTTSImageTextPanel !== panel ||
+                button._englishImageTTSImageTextItem !== item ||
+                button.getAttribute("data-image-tts-item-id") !== item.itemId) return fail();
+            button.hidden = false; button.disabled = true;
+            button.setAttribute("aria-disabled", "true");
+            button.style.pointerEvents = "auto"; button.style.visibility = "visible";
+            let rect;
+            try { rect = button.getBoundingClientRect(); } catch (error) { return fail(); }
+            const expectedRect = {
+                left: imageRect.left + imageRect.width * bounds.xPct / 100,
+                top: imageRect.top + imageRect.height * bounds.yPct / 100,
+                width: imageRect.width * bounds.widthPct / 100,
+                height: imageRect.height * bounds.heightPct / 100
+            };
+            if (!finiteRect(rect) || rect.width < 44 || rect.height < 44 ||
+                Math.abs(rect.left - expectedRect.left) > 1 || Math.abs(rect.top - expectedRect.top) > 1 ||
+                Math.abs(rect.width - expectedRect.width) > 1 || Math.abs(rect.height - expectedRect.height) > 1) {
+                button.hidden = true; button.style.pointerEvents = "none";
+                button.style.visibility = "hidden"; candidates.push({ button, safe: false }); continue;
+            }
+            const fullyVisible = rect.left >= viewport.left && rect.top >= viewport.top &&
+                rect.right <= viewport.right && rect.bottom <= viewport.bottom;
+            if (!fullyVisible) {
+                button.hidden = true; button.style.pointerEvents = "none";
+                button.style.visibility = "hidden"; candidates.push({ button, safe: false }); continue;
+            }
+            const insetX = Math.min(6, rect.width / 4), insetY = Math.min(6, rect.height / 4);
+            const points = [
+                [(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2],
+                [rect.left + insetX, rect.top + insetY], [rect.right - insetX, rect.top + insetY],
+                [rect.left + insetX, rect.bottom - insetY], [rect.right - insetX, rect.bottom - insetY]
+            ];
+            const safe = points.every(([x, y]) => {
+                const hit = document.elementFromPoint(x, y);
+                const menu = englishImageTTSOverlayState.menu;
+                const activeMenu = englishImageTTSOverlayState.activeTrigger === button &&
+                    menu && !menu.hidden && menu.id === "english-image-tts-menu";
+                return hit === button || button.contains(hit) ||
+                    activeMenu && (hit === menu || menu.contains(hit));
+            });
+            candidates.push({ button, safe });
+        }
+    }
+    if (byRegion.size !== 9 || expectedCount !== 9 || candidates.length !== 9) return fail();
+    candidates.forEach(({ button, safe }) => {
+        button.hidden = !safe; button.disabled = !safe;
+        button.setAttribute("aria-disabled", String(!safe));
+        button.style.pointerEvents = safe ? "auto" : "none";
+        button.style.visibility = safe ? "visible" : "hidden";
+    });
+    if (verifyTrigger) {
+        const selected = candidates.find(candidate => candidate.button === verifyTrigger);
+        return Boolean(selected && selected.safe && !verifyTrigger.hidden && !verifyTrigger.disabled);
+    }
+    return candidates.some(candidate => candidate.safe);
+}
+
+function isEnglishBatteryPanelTriggerReady(trigger, panel = null) {
+    const wrapper = trigger && trigger.closest ? trigger.closest(".image-tts-overlay-wrapper") : null;
+    const image = wrapper && wrapper.querySelector("img");
+    const record = imageTTSData && imageTTSData[ENGLISH_BATTERY_ASSET_FILE];
+    const targetPanel = panel || trigger && trigger._englishImageTTSImageTextPanel;
+    const buttons = wrapper ? Array.from(wrapper.querySelectorAll(".battery-panel-hit-area")) : [];
+    const regionIndex = Number(trigger && trigger.getAttribute("data-battery-tap-region-index"));
+    return Boolean(wrapper && image && isEnglishBatteryImageTTSRecord(record) &&
+        isEnglishBatteryFormalSearchImage(image) && image.getAttribute("src") === ENGLISH_BATTERY_ASSET_FILE &&
+        image.complete === true && image.naturalWidth === 1536 && image.naturalHeight === 1024 &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_BATTERY_ASSET_FILE &&
+        trigger._englishImageTTSImageTextRecord === record && targetPanel &&
+        record.panels.includes(targetPanel) && trigger._englishImageTTSImageTextPanel === targetPanel &&
+        trigger._englishImageTTSImageTextItem === targetPanel.items[0] &&
+        Number.isInteger(regionIndex) && regionIndex >= 0 && regionIndex < targetPanel.tapRegions.length &&
+        trigger.classList.contains("battery-panel-hit-area") && buttons.length === 9 &&
+        buttons.includes(trigger) && !trigger.hidden && !trigger.disabled &&
+        appState.subjectMode === "english" && drawMode === "select" &&
+        layoutEnglishBatteryPanelHitAreas(wrapper, trigger));
+}
+
 function hideEnglishEarthquakesPanelHitAreas(wrapper) {
     if (!wrapper) return;
     wrapper.querySelectorAll(".earthquakes-panel-hit-area").forEach(button => {
@@ -23796,6 +24258,10 @@ function createEnglishLayersOfTheEarthPanelHitArea(wrapper, panel, record) {
 }
 
 function layoutEnglishImageTTSImageTextHitAreas(wrapper) {
+    if (wrapper && wrapper.dataset &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_BATTERY_ASSET_FILE) {
+        return layoutEnglishBatteryPanelHitAreas(wrapper);
+    }
     if (wrapper && wrapper.dataset &&
         wrapper.dataset.imageTtsAssetFile === ENGLISH_LIGHT_BULB_ASSET_FILE) {
         return layoutEnglishLightBulbPanelHitAreas(wrapper);
@@ -26366,6 +26832,18 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             layersEarthSpecs.length === 1 && layersEarthSpecs[0].diagram === canonicalLayersEarth
                 ? layersEarthSpecs[0] : null;
 
+        const batteryMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_BATTERY_IMAGE_ID || entry.file === ENGLISH_BATTERY_ASSET_FILE)) : [];
+        const canonicalBattery = batteryMatches.length === 1 &&
+            batteryMatches[0].id === ENGLISH_BATTERY_IMAGE_ID &&
+            batteryMatches[0].file === ENGLISH_BATTERY_ASSET_FILE &&
+            !Object.prototype.hasOwnProperty.call(batteryMatches[0], "images") ? batteryMatches[0] : null;
+        const returnedBattery = canonicalBattery
+            ? diagrams.filter(diagram => diagram === canonicalBattery).length : 0;
+        const batterySpecs = specs.filter(spec => spec.imageData.file === ENGLISH_BATTERY_ASSET_FILE);
+        const trustedBatterySpec = canonicalBattery && returnedBattery === 1 && batterySpecs.length === 1 &&
+            batterySpecs[0].diagram === canonicalBattery ? batterySpecs[0] : null;
+
         const lightBulbMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
             (entry.id === ENGLISH_LIGHT_BULB_IMAGE_ID || entry.file === ENGLISH_LIGHT_BULB_ASSET_FILE)) : [];
         const canonicalLightBulb = lightBulbMatches.length === 1 &&
@@ -26431,6 +26909,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 if (spec === trustedLightBulbSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_LIGHT_BULB_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_LIGHT_BULB_ASSET_FILE);
+                }
+                if (spec === trustedBatterySpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_BATTERY_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_BATTERY_ASSET_FILE);
                 }
                 if (spec === trustedNaturalResourcesSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_NATURAL_RESOURCES_IMAGE_ID);
@@ -26553,6 +27035,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedOceansSpec);
         ENGLISH_LIGHT_BULB_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedLightBulbSpec);
+        ENGLISH_BATTERY_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedBatterySpec);
         return answerRoot;
     }
 
@@ -27260,6 +27744,141 @@ function isEnglishLightBulbFormalSearchImage(image) {
         (entry.id === ENGLISH_LIGHT_BULB_IMAGE_ID || entry.file === ENGLISH_LIGHT_BULB_ASSET_FILE));
     return matches.length === 1 && matches[0].id === ENGLISH_LIGHT_BULB_IMAGE_ID &&
         matches[0].file === ENGLISH_LIGHT_BULB_ASSET_FILE;
+}
+
+const ENGLISH_BATTERY_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    const wrapperByImage = new WeakMap();
+    const cleanupByImage = new WeakMap();
+    let currentContext = null, generation = 0;
+
+    function detachImage(image) {
+        const wrapper = wrapperByImage.get(image);
+        if (!wrapper) return;
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper.contains(active) && active.classList &&
+            active.classList.contains("battery-panel-hit-area")) {
+            cancelEnglishImageTTSImageTextSequence(true);
+        }
+        if (englishImageTTSOverlayState.activeTrigger &&
+            wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+        wrapper.querySelectorAll(".battery-panel-hit-area").forEach(button => button.remove());
+    }
+
+    function revokeImage(context, image) {
+        if (!context || !image || !context.images.has(image)) return;
+        detachImage(image);
+        const cleanup = cleanupByImage.get(image);
+        cleanupByImage.delete(image);
+        if (cleanup) { try { cleanup(); } catch (error) {} }
+        originByImage.delete(image);
+        wrapperByImage.delete(image);
+        context.images.delete(image);
+    }
+
+    function process(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revokeImage(context, record.target);
+                return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removed =>
+                Array.from(context.images).forEach(image => {
+                    if (removed === image || removed && typeof removed.contains === "function" &&
+                        removed.contains(image)) revokeImage(context, image);
+                }));
+        });
+    }
+
+    function expireCurrentContext() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revokeImage(context, image));
+        context.images.clear();
+        currentContext = null;
+    }
+
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer) process(context, context.observer.takeRecords());
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked || origin.context !== context ||
+            origin.generation !== context.generation || !context.observer || !image.isConnected ||
+            context.responseRoot !== document.getElementById("ai-response") ||
+            !context.responseRoot.isConnected || !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(wrapperByImage.get(image)) ||
+            image.getAttribute("src") !== ENGLISH_BATTERY_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !== ENGLISH_BATTERY_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !== ENGLISH_BATTERY_ASSET_FILE) return false;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_BATTERY_IMAGE_ID || entry.file === ENGLISH_BATTERY_ASSET_FILE)) : [];
+        return matches.length === 1 && matches[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_BATTERY_IMAGE_ID && origin.diagram.file === ENGLISH_BATTERY_ASSET_FILE;
+    }
+
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot || !diagramContainer || !trustedSpec ||
+            typeof MutationObserver !== "function" || responseRoot !== document.getElementById("ai-response") ||
+            !responseRoot.isConnected || !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_BATTERY_IMAGE_ID || entry.file === ENGLISH_BATTERY_ASSET_FILE)) : [];
+        const targetSpecs = (Array.isArray(renderedSpecs) ? renderedSpecs : []).filter(entry =>
+            entry && entry.spec && entry.spec.imageData && entry.spec.imageData.file === ENGLISH_BATTERY_ASSET_FILE);
+        const rendered = (Array.isArray(renderedSpecs) ? renderedSpecs : [])
+            .find(entry => entry && entry.spec === trustedSpec);
+        if (matches.length !== 1 || matches[0] !== diagram ||
+            diagram.id !== ENGLISH_BATTERY_IMAGE_ID || diagram.file !== ENGLISH_BATTERY_ASSET_FILE ||
+            Object.prototype.hasOwnProperty.call(diagram, "images") || targetSpecs.length !== 1 ||
+            !rendered || !rendered.image || !rendered.image.isConnected ||
+            !diagramContainer.contains(rendered.image)) return false;
+        const image = rendered.image;
+        const wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) || !diagramContainer.contains(wrapper)) return false;
+        const context = { generation: ++generation, responseRoot, diagramContainer, diagram,
+            images: new Set([image]), observer: null, revoked: false };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram });
+        wrapperByImage.set(image, wrapper);
+        context.observer = new MutationObserver(records => process(context, records));
+        context.observer.observe(responseRoot, { childList: true, subtree: true, attributes: true,
+            attributeFilter: ["src", "data-english-image-library-id", "data-english-image-library-file"] });
+        if (!isTrustedNode(image)) { expireCurrentContext(); return false; }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+
+    function trackCleanup(image, cleanup) {
+        if (!image || typeof cleanup !== "function" || !isTrustedNode(image)) {
+            if (typeof cleanup === "function") { try { cleanup(); } catch (error) {} }
+            return false;
+        }
+        const previous = cleanupByImage.get(image);
+        if (previous) { try { previous(); } catch (error) {} }
+        cleanupByImage.set(image, cleanup);
+        return true;
+    }
+
+    return { register, expireCurrentContext, isTrustedNode, trackCleanup };
+})();
+
+function isEnglishBatteryFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_BATTERY_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !== ENGLISH_BATTERY_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !== ENGLISH_BATTERY_ASSET_FILE ||
+        !ENGLISH_BATTERY_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || !Array.isArray(diagramMap)) return false;
+    const record = imageTTSData[ENGLISH_BATTERY_ASSET_FILE];
+    if (getEnglishBatteryImageTextRecord(record, ENGLISH_BATTERY_ASSET_FILE) !== record) return false;
+    const matches = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_BATTERY_IMAGE_ID || entry.file === ENGLISH_BATTERY_ASSET_FILE));
+    return matches.length === 1 && matches[0].id === ENGLISH_BATTERY_IMAGE_ID &&
+        matches[0].file === ENGLISH_BATTERY_ASSET_FILE;
 }
 
 function isEnglishLayersOfTheEarthFormalSearchImage(image) {
@@ -28726,6 +29345,7 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_BATTERY_ASSET_FILE && !isEnglishBatteryFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_OCEANS_ASSET_FILE && !isEnglishOceansFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_EARTHQUAKES_ASSET_FILE &&
             !isEnglishEarthquakesFormalSearchImage(image)) return;
@@ -28859,6 +29479,78 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
                 }, { once: true });
                 image.addEventListener("error", hide, { once: true });
                 layoutEnglishEarthquakesPanelHitAreas(wrapper);
+                return;
+            }
+            if (isEnglishBatteryImageTTSRecord(record)) {
+                const dimensionsOK = () => isEnglishBatteryFormalSearchImage(image) &&
+                    image.getAttribute("src") === ENGLISH_BATTERY_ASSET_FILE && image.complete === true &&
+                    image.naturalWidth === 1536 && image.naturalHeight === 1024;
+                if (!isEnglishBatteryFormalSearchImage(image) || (image.complete && !dimensionsOK())) return;
+                record.panels.forEach(panel => panel.tapRegions.forEach((bounds, regionIndex) => {
+                    const button = createEnglishImageTTSImageTextHitArea(
+                        wrapper, panel, panel.items[0], record, { bounds });
+                    if (!button) return;
+                    button.classList.add("battery-panel-hit-area");
+                    button.setAttribute("data-battery-tap-region-index", String(regionIndex));
+                    button.setAttribute("aria-label", "The Battery — Alessandro Volta " +
+                        (panel.panelId === 0 ? "導言" : "P" + panel.panelId) + "區，開啟朗讀選項");
+                    button.disabled = true;
+                    button.setAttribute("aria-disabled", "true");
+                    button.style.pointerEvents = "none";
+                    added += 1;
+                }));
+                const hide = () => {
+                    hideEnglishBatteryPanelHitAreas(wrapper);
+                    const active = englishTTSState.imageTextSequenceTrigger;
+                    if (active && wrapper.contains(active)) cancelEnglishImageTTSImageTextSequence(true);
+                };
+                const onLoad = () => {
+                    image.removeEventListener("load", onLoad);
+                    image.removeEventListener("error", hide);
+                    if (dimensionsOK()) layoutEnglishBatteryPanelHitAreas(wrapper);
+                    else hide();
+                };
+                image.addEventListener("load", onLoad);
+                image.addEventListener("error", hide);
+                let frame = 0, timeout = 0, resizeObserver = null;
+                const relayout = () => {
+                    if (frame || timeout) return;
+                    const run = () => {
+                        frame = 0; timeout = 0;
+                        if (isEnglishBatteryFormalSearchImage(image))
+                            layoutEnglishBatteryPanelHitAreas(wrapper);
+                    };
+                    if (typeof window.requestAnimationFrame === "function") frame = window.requestAnimationFrame(run);
+                    else timeout = window.setTimeout(run, 0);
+                };
+                window.addEventListener("resize", relayout, { passive: true });
+                document.addEventListener("scroll", relayout, { capture: true, passive: true });
+                if (window.visualViewport) {
+                    window.visualViewport.addEventListener("resize", relayout, { passive: true });
+                    window.visualViewport.addEventListener("scroll", relayout, { passive: true });
+                }
+                if (typeof ResizeObserver === "function") {
+                    resizeObserver = new ResizeObserver(relayout);
+                    resizeObserver.observe(image);
+                    resizeObserver.observe(wrapper);
+                }
+                const cleanup = () => {
+                    image.removeEventListener("load", onLoad);
+                    image.removeEventListener("error", hide);
+                    window.removeEventListener("resize", relayout);
+                    document.removeEventListener("scroll", relayout, true);
+                    if (window.visualViewport) {
+                        window.visualViewport.removeEventListener("resize", relayout);
+                        window.visualViewport.removeEventListener("scroll", relayout);
+                    }
+                    if (resizeObserver) resizeObserver.disconnect();
+                    if (frame && typeof window.cancelAnimationFrame === "function")
+                        window.cancelAnimationFrame(frame);
+                    if (timeout) window.clearTimeout(timeout);
+                    frame = 0; timeout = 0;
+                };
+                ENGLISH_BATTERY_FORMAL_SEARCH_ORIGIN.trackCleanup(image, cleanup);
+                if (image.complete && dimensionsOK()) layoutEnglishBatteryPanelHitAreas(wrapper);
                 return;
             }
             if (isEnglishLightBulbImageTTSRecord(record)) {
@@ -30429,6 +31121,7 @@ function getEnglishMatterStatesOfMatterImageTextSpeechSegments(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishBatteryImageTTSItemText(record, item)) return getEnglishTTSUnitText(item.ttsText);
     if (isEnglishLightBulbImageTTSItemText(record, item)) return getEnglishTTSUnitText(item.ttsText);
     if (isEnglishEarthquakesImageTTSItemText(record, item)) {
         return getEnglishTTSUnitText(item.ttsText);
@@ -30991,6 +31684,15 @@ function speakEnglishImageTTSImageTextSequence(
     const isWholeImageSequence = !isTelephoneV2WholeImageSequence &&
         Boolean(record && allItems.length === itemList.length &&
             allItems.every((item, index) => item === itemList[index]));
+    const isBatteryImageText = isEnglishBatteryImageTTSRecord(record);
+    const batteryPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const isBatterySingleItemSequence = Boolean(isBatteryImageText && itemList.length === 1 &&
+        batteryPanel && record.panels.includes(batteryPanel) &&
+        trigger._englishImageTTSImageTextRecord === record &&
+        trigger._englishImageTTSImageTextItem === batteryPanel.items[0] &&
+        batteryPanel.items.includes(itemList[0]) && allItems.includes(itemList[0]));
+    const batterySequenceShape = isBatteryImageText &&
+        (isPanelSequence || isWholeImageSequence || isBatterySingleItemSequence);
     const isLightBulbWholeImageSequence = Boolean(isLightBulbImageText && isWholeImageSequence);
     const isHobbiesSingleItemSequence = Boolean(record &&
         record.imageId === "hobbies-interests-basics" &&
@@ -31338,6 +32040,21 @@ function speakEnglishImageTTSImageTextSequence(
         });
     }
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const batteryImage = isBatteryImageText && wrapper ? wrapper.querySelector("img") : null;
+    const batteryButtons = isBatteryImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll(".battery-panel-hit-area")) : [];
+    const batteryImageReady = !isBatteryImageText || Boolean(
+        assetFile === ENGLISH_BATTERY_ASSET_FILE && record === imageTTSData[assetFile] &&
+        wrapper.dataset.imageTtsAssetFile === ENGLISH_BATTERY_ASSET_FILE && batteryImage &&
+        isEnglishBatteryFormalSearchImage(batteryImage) &&
+        batteryImage.getAttribute("src") === ENGLISH_BATTERY_ASSET_FILE &&
+        batteryImage.complete === true && batteryImage.naturalWidth === 1536 &&
+        batteryImage.naturalHeight === 1024 && trigger._englishImageTTSImageTextRecord === record &&
+        triggerPanel && record.panels.includes(triggerPanel) &&
+        trigger._englishImageTTSImageTextItem === triggerPanel.items[0] &&
+        batteryButtons.length === 9 && batteryButtons.includes(trigger) && batterySequenceShape &&
+        itemList.every(item => allItems.includes(item)) &&
+        isEnglishBatteryPanelTriggerReady(trigger, triggerPanel));
     const lightBulbImage = isLightBulbImageText && wrapper ? wrapper.querySelector("img") : null;
     const lightBulbButtons = isLightBulbImageText && wrapper
         ? Array.from(wrapper.querySelectorAll(".light-bulb-panel-hit-area")) : [];
@@ -31405,12 +32122,13 @@ function speakEnglishImageTTSImageTextSequence(
             !windEnergySingleItemSequence && !isEarthquakesSingleItemSequence &&
             !isOceansSingleItemSequence &&
             !isLayersOfTheEarthSingleItemSequence &&
-            !isLayersOfTheEarthPairSequence && !isLightBulbSingleItemSequence) ||
+            !isLayersOfTheEarthPairSequence && !isLightBulbSingleItemSequence &&
+            !isBatterySingleItemSequence) ||
         itemList.some(item => !item ||
             (item.sourceText !== item.ttsText &&
                 !isEnglishEnergyTransformationsImageTTSItemText(record, item)) ||
             !isEnglishImageTTSItemText(record, item)) ||
-        !isValidSelectedSpeechUnit || !playbackSteps.length || !lightBulbImageReady ||
+        !isValidSelectedSpeechUnit || !playbackSteps.length || !lightBulbImageReady || !batteryImageReady ||
         !karstReady || !mountainsReady ||
         !energySourcesReady || !renewableEnergyReady || !windEnergyReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
@@ -31475,6 +32193,15 @@ function speakEnglishImageTTSImageTextSequence(
         }
         trigger._englishImageTTSImageTextActivePanel = itemPanel;
         trigger._englishImageTTSImageTextActiveItem = item;
+        if (isBatteryImageText && itemIndex === 0 &&
+            !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
+            cancelEnglishImageTTSImageTextSequence(true);
+            setEnglishTTSStatus(
+                "The Battery — Alessandro Volta：找不到安全的 52 CSS px Stop，未開始朗讀。"
+            );
+            updateEnglishTTSControls();
+            return false;
+        }
         if (isSolarImageText &&
             (!isEnglishSolarEnergyPlaybackItemReady(wrapper, record, itemPanel, item, false, trigger) ||
                 !placeEnglishImageTTSImageTextStopButton(
@@ -32151,6 +32878,8 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         layoutEnglishWindEnergyImageTTSHitAreas(wrapper, trigger) && windEnergyButtons.length === 8 &&
         windEnergyButtons.includes(trigger) && !trigger.hidden && !trigger.disabled);
     const clickedPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const isBatteryImageText = Boolean(safeRecord && isEnglishBatteryImageTTSRecord(safeRecord));
+    const batteryMenuReady = !isBatteryImageText || isEnglishBatteryPanelTriggerReady(trigger, panel);
     const isLightBulbImageText = Boolean(safeRecord && isEnglishLightBulbImageTTSRecord(safeRecord));
     const lightBulbMenuReady = !isLightBulbImageText ||
         isEnglishLightBulbPanelTriggerReady(trigger, panel);
@@ -32295,6 +33024,7 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         (isMountainsImageText && (!mountainsImage || mountainsImage.getAttribute("src") !== safeRecord.assetFile ||
             !mountainsImage.complete || mountainsImage.naturalWidth !== 1536 || mountainsImage.naturalHeight !== 1024 ||
             !mountainsLayoutReady || !trigger.classList.contains("image-tts-mountains-hit-area"))) ||
+        (isBatteryImageText && !batteryMenuReady) ||
         (isLightBulbImageText && !lightBulbMenuReady) ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         return;
@@ -32328,6 +33058,46 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isBatteryImageText) {
+        const section = panel.panelId === 0 ? "導言" : "P" + panel.panelId;
+        const run = (items, completion) => {
+            closeEnglishImageTTSMenu();
+            if (!isEnglishBatteryPanelTriggerReady(trigger, panel)) {
+                setEnglishTTSStatus("The Battery — Alessandro Volta：點讀區目前不安全，未開始朗讀。");
+                return false;
+            }
+            return speakEnglishImageTTSImageTextSequence(trigger, items, completion);
+        };
+        menu.setAttribute("aria-label", "The Battery — Alessandro Volta " + section + " 朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            panel.panelId === 0 ? "🔊 朗讀導言" : "🔊 朗讀本格完整內容",
+            "依原圖順序朗讀 " + section + " 的全部英文文字",
+            () => run(panel.items.slice(), "The Battery — Alessandro Volta " + section + " 已朗讀完成。")
+        ));
+        panel.items.forEach(item => {
+            const kind = item.type === "label" ? "標籤" : "完整句子";
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "🔊 單獨朗讀" + kind + "：「" + item.sourceText + "」",
+                "單獨朗讀 The Battery — Alessandro Volta 原圖文字：「" + item.sourceText + "」",
+                () => run([item], "已朗讀 The Battery — Alessandro Volta 所選原圖文字。")
+            ));
+        });
+        const allItems = safeRecord.panels.flatMap(candidate => candidate.items);
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 依序朗讀全圖 15 個單位",
+            "依導言、P1、P2、P3、P4 次序朗讀 The Battery 全部十五個原文單位",
+            () => run(allItems, "The Battery — Alessandro Volta 全圖完整內容已朗讀完成。")
+        ));
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
     }
 
     if (isLightBulbImageText) {

@@ -24225,4 +24225,73 @@ const imageTTSData = {
             ]
         };
     })(),
+    "images/english/battery-alessandro-volta-basics.png": (() => {
+        const rect = (x, y, width, height) => ({
+            xPct: x / 1536 * 100, yPct: y / 1024 * 100,
+            widthPct: width / 1536 * 100, heightPct: height / 1024 * 100
+        });
+        const item = (itemId, readingOrder, type, sourceText, bounds) => ({
+            itemId, readingOrder, type, sourceText, ttsText: sourceText, bounds: rect(...bounds)
+        });
+        const panel = (panelId, readingOrder, bounds, tapRegions, items) => ({
+            panelId, readingOrder, bounds: rect(...bounds),
+            tapRegions: tapRegions.map(region => rect(...region)), items
+        });
+        return {
+            imageId: "battery-alessandro-volta-basics",
+            assetFile: "images/english/battery-alessandro-volta-basics.png",
+            contentType: "image-text",
+            layout: "custom-battery-alessandro-volta-intro-plus-2x2",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1536, height: 1024 },
+            panels: [
+                panel(0, 1, [4, 3, 1528, 147], [[18, 16, 1090, 128]], [
+                    item("battery-intro-sentence", 1, "sentence",
+                        "The first battery gave people a steady source of electric current.",
+                        [58, 91, 1018, 45])
+                ]),
+                panel(1, 2, [4, 158, 761, 420], [
+                    [163, 224, 423, 136], [13, 449, 202, 129]
+                ], [
+                    item("battery-p1-sentence", 1, "sentence",
+                        "Scientists experimented with electricity, but they needed a steady source of electric current.",
+                        [163, 224, 423, 136]),
+                    item("battery-p1-science", 2, "label", "SCIENCE", [17, 459, 184, 31]),
+                    item("battery-p1-electricity", 3, "label", "(ELECTRICITY)", [17, 502, 184, 31]),
+                    item("battery-p1-experiments", 4, "label", "(EXPERIMENTS)", [17, 544, 184, 31])
+                ]),
+                panel(2, 3, [772, 158, 759, 420], [
+                    [795, 224, 555, 224], [1255, 450, 170, 128]
+                ], [
+                    item("battery-p2-sentence", 1, "sentence",
+                        "Alessandro Volta (1745–1827) built the voltaic pile, an early battery made from different metals and an electrolyte.",
+                        [795, 228, 211, 190]),
+                    item("battery-p2-zinc-plate", 2, "label", "Zinc plate", [1025, 352, 82, 68]),
+                    item("battery-p2-copper-plate", 3, "label", "Copper plate", [1241, 344, 91, 63]),
+                    item("battery-p2-electrolyte", 4, "label", "Electrolyte (salt water)", [1280, 492, 130, 63])
+                ]),
+                panel(3, 4, [4, 586, 761, 433], [
+                    [25, 649, 410, 136], [32, 800, 280, 200], [615, 660, 142, 130]
+                ], [
+                    item("battery-p3-main-sentence", 1, "sentence",
+                        "Chemical reactions between the materials produced a flow of electric charge (electric current).",
+                        [25, 660, 410, 120]),
+                    item("battery-p3-zinc", 2, "label", "Zinc", [100, 822, 180, 38]),
+                    item("battery-p3-reaction-sentence", 3, "sentence",
+                        "Chemical reactions produce electric charge.", [88, 880, 198, 40]),
+                    item("battery-p3-copper", 4, "label", "Copper", [90, 928, 200, 42]),
+                    item("battery-p3-electric-current", 5, "sentence",
+                        "Electric current flows!", [627, 677, 114, 101])
+                ]),
+                panel(4, 5, [772, 586, 759, 433], [[796, 631, 716, 130]], [
+                    item("battery-p4-sentence", 1, "sentence",
+                        "Batteries gave scientists a practical source of electricity and helped later electrical technology develop.",
+                        [796, 658, 706, 98])
+                ])
+            ]
+        };
+    })(),
 };
