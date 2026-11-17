@@ -24021,6 +24021,56 @@ const imageTTSData = {
         };
     })(),
 
+    "images/english/oceans-and-marine-life-basics.png": (() => {
+        const rect = (x, y, width, height) => ({
+            xPct: x / 1254 * 100, yPct: y / 1254 * 100,
+            widthPct: width / 1254 * 100, heightPct: height / 1254 * 100
+        });
+        const item = (itemId, readingOrder, type, sourceText, box) => ({
+            itemId, readingOrder, type, sourceText, ttsText: sourceText,
+            bounds: rect(...box)
+        });
+        const panel = (panelId, readingOrder, bounds, items) => ({
+            panelId, readingOrder, bounds: rect(...bounds), items
+        });
+        return {
+            imageId: "oceans-and-marine-life-basics",
+            title: "Oceans and Marine Life",
+            assetFile: "images/english/oceans-and-marine-life-basics.png",
+            contentType: "image-text",
+            layout: "custom-oceans-marine-life-3-panel-menu",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1254, height: 1254 },
+            panels: [
+                panel(2, 1, [635, 8, 614, 614], [
+                    item("oceans-p2-sentence", 1, "sentence",
+                        "The ocean is home to many amazing creatures.", [690, 30, 530, 78]),
+                    item("oceans-p2-whale", 2, "label", "whale", [672, 318, 105, 50]),
+                    item("oceans-p2-dolphin", 3, "label", "dolphin", [1041, 283, 132, 52]),
+                    item("oceans-p2-sea-turtle", 4, "label", "sea turtle", [714, 500, 153, 52]),
+                    item("oceans-p2-fish", 5, "label", "fish", [1005, 498, 94, 52])
+                ]),
+                panel(3, 2, [7, 632, 614, 610], [
+                    item("oceans-p3-sentence", 1, "sentence",
+                        "Some ocean animals are small, some are very big, but they all play an important role in the ocean.",
+                        [42, 649, 526, 119]),
+                    item("oceans-p3-octopus", 2, "label", "octopus", [89, 990, 128, 53]),
+                    item("oceans-p3-manta-ray", 3, "label", "manta ray", [336, 986, 157, 53]),
+                    item("oceans-p3-starfish", 4, "label", "starfish", [176, 1151, 135, 57])
+                ]),
+                panel(4, 3, [635, 632, 614, 610], [
+                    item("oceans-p4-sentence", 1, "sentence",
+                        "Let’s protect the oceans and their amazing marine life!", [695, 656, 493, 90]),
+                    item("oceans-p4-clean-oceans", 2, "label", "Clean Oceans", [1118, 952, 102, 62]),
+                    item("oceans-p4-healthy-planet", 3, "label", "Healthy Planet", [1114, 1009, 108, 67])
+                ])
+            ]
+        };
+    })(),
+
     "images/english/earthquakes-basics.png": (() => {
         const rect = (x, y, width, height) => ({
             xPct: x / 1254 * 100,

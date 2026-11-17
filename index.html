@@ -11485,6 +11485,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishOceansImageTTSItemText(record, item)) return true;
     if (isEnglishEarthquakesImageTTSItemText(record, item)) return true;
     if (isEnglishLayersOfTheEarthImageTTSItemText(record, item)) return true;
     if (isEnglishMatterStatesOfMatterImageTTSItemText(record, item)) return true;
@@ -12094,6 +12095,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishOceansImageTTSRecord(record)) return "Oceans & Marine Life";
     if (isEnglishEarthquakesImageTTSRecord(record)) return "Earthquakes";
     if (isEnglishLayersOfTheEarthImageTTSRecord(record)) return "Layers of the Earth";
     if (isEnglishMatterStatesOfMatterImageTTSRecord(record)) return "Matter and States of Matter";
@@ -16959,6 +16961,30 @@ const ENGLISH_HUMAN_BRAIN_ASSET_FILE =
 const ENGLISH_HUMAN_BRAIN_IMAGE_ID = "human-brain-and-nervous-system-basics";
 const ENGLISH_NATURAL_RESOURCES_ASSET_FILE = "images/english/natural-resources-basics.png";
 const ENGLISH_NATURAL_RESOURCES_IMAGE_ID = "natural-resources-basics";
+const ENGLISH_OCEANS_ASSET_FILE = "images/english/oceans-and-marine-life-basics.png";
+const ENGLISH_OCEANS_IMAGE_ID = "oceans-and-marine-life-basics";
+const ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS = "oceans-marine-life-panel-hit-area";
+const ENGLISH_OCEANS_EXPECTED_PANELS = Object.freeze([
+    Object.freeze({ panelId: 2, bounds: Object.freeze([635, 8, 614, 614]), items: Object.freeze([
+        Object.freeze(["oceans-p2-sentence", "sentence", "The ocean is home to many amazing creatures.", [690, 30, 530, 78]]),
+        Object.freeze(["oceans-p2-whale", "label", "whale", [672, 318, 105, 50]]),
+        Object.freeze(["oceans-p2-dolphin", "label", "dolphin", [1041, 283, 132, 52]]),
+        Object.freeze(["oceans-p2-sea-turtle", "label", "sea turtle", [714, 500, 153, 52]]),
+        Object.freeze(["oceans-p2-fish", "label", "fish", [1005, 498, 94, 52]])
+    ]) }),
+    Object.freeze({ panelId: 3, bounds: Object.freeze([7, 632, 614, 610]), items: Object.freeze([
+        Object.freeze(["oceans-p3-sentence", "sentence", "Some ocean animals are small, some are very big, but they all play an important role in the ocean.", [42, 649, 526, 119]]),
+        Object.freeze(["oceans-p3-octopus", "label", "octopus", [89, 990, 128, 53]]),
+        Object.freeze(["oceans-p3-manta-ray", "label", "manta ray", [336, 986, 157, 53]]),
+        Object.freeze(["oceans-p3-starfish", "label", "starfish", [176, 1151, 135, 57]])
+    ]) }),
+    Object.freeze({ panelId: 4, bounds: Object.freeze([635, 632, 614, 610]), items: Object.freeze([
+        Object.freeze(["oceans-p4-sentence", "sentence", "Let’s protect the oceans and their amazing marine life!", [695, 656, 493, 90]]),
+        Object.freeze(["oceans-p4-clean-oceans", "label", "Clean Oceans", [1118, 952, 102, 62]]),
+        Object.freeze(["oceans-p4-healthy-planet", "label", "Healthy Planet", [1114, 1009, 108, 67]])
+    ]) })
+]);
+
 const ENGLISH_EARTHQUAKES_ASSET_FILE = "images/english/earthquakes-basics.png";
 const ENGLISH_EARTHQUAKES_IMAGE_ID = "earthquakes-basics";
 const ENGLISH_MATTER_STATES_OF_MATTER_ASSET_FILE =
@@ -18393,6 +18419,72 @@ function getEnglishLayersOfTheEarthPanelMenuOptions(record, panel) {
 }
 
 
+function getEnglishOceansImageTTSRecord(record, assetFile) {
+    const exact = (value, keys) => Boolean(value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === keys.length &&
+        keys.every(key => Object.prototype.hasOwnProperty.call(value, key)));
+    const file = ENGLISH_OCEANS_ASSET_FILE;
+    if (assetFile !== file || !exact(record, ["imageId", "title", "assetFile", "contentType",
+        "layout", "transcriptStatus", "transcriptReviewMethod", "coordinateStatus",
+        "overlayRuntimeStatus", "sourceImageDimensions", "panels"]) ||
+        record.imageId !== ENGLISH_OCEANS_IMAGE_ID || record.title !== "Oceans and Marine Life" ||
+        record.assetFile !== file || record.contentType !== "image-text" ||
+        record.layout !== "custom-oceans-marine-life-3-panel-menu" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !exact(record.sourceImageDimensions, ["width", "height"]) ||
+        record.sourceImageDimensions.width !== 1254 || record.sourceImageDimensions.height !== 1254 ||
+        !Array.isArray(record.panels) || record.panels.length !== ENGLISH_OCEANS_EXPECTED_PANELS.length ||
+        typeof imageTTSData === "undefined" || imageTTSData[file] !== record ||
+        !Array.isArray(diagramMap)) return null;
+    const matchingKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === file || candidate &&
+            (candidate.imageId === ENGLISH_OCEANS_IMAGE_ID || candidate.assetFile === file);
+    });
+    const catalogMatches = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_OCEANS_IMAGE_ID || entry.file === file));
+    if (matchingKeys.length !== 1 || matchingKeys[0] !== file || catalogMatches.length !== 1 ||
+        catalogMatches[0].id !== ENGLISH_OCEANS_IMAGE_ID || catalogMatches[0].file !== file) return null;
+    const rect = (value, pixels) => {
+        if (!exact(value, ["xPct", "yPct", "widthPct", "heightPct"]) ||
+            ![value.xPct, value.yPct, value.widthPct, value.heightPct].every(Number.isFinite)) return false;
+        const expected = {
+            xPct: pixels[0] / 1254 * 100, yPct: pixels[1] / 1254 * 100,
+            widthPct: pixels[2] / 1254 * 100, heightPct: pixels[3] / 1254 * 100
+        };
+        return Object.keys(expected).every(key => Math.abs(value[key] - expected[key]) < 0.000001);
+    };
+    for (let panelIndex = 0; panelIndex < ENGLISH_OCEANS_EXPECTED_PANELS.length; panelIndex += 1) {
+        const panel = record.panels[panelIndex], expected = ENGLISH_OCEANS_EXPECTED_PANELS[panelIndex];
+        if (!exact(panel, ["panelId", "readingOrder", "bounds", "items"]) ||
+            panel.panelId !== expected.panelId || panel.readingOrder !== panelIndex + 1 ||
+            !rect(panel.bounds, expected.bounds) || !Array.isArray(panel.items) ||
+            panel.items.length !== expected.items.length) return null;
+        for (let itemIndex = 0; itemIndex < expected.items.length; itemIndex += 1) {
+            const item = panel.items[itemIndex], [itemId, type, sourceText, bounds] = expected.items[itemIndex];
+            if (!exact(item, ["itemId", "readingOrder", "type", "sourceText", "ttsText", "bounds"]) ||
+                item.itemId !== itemId || item.readingOrder !== itemIndex + 1 || item.type !== type ||
+                item.sourceText !== sourceText || item.ttsText !== sourceText ||
+                !getEnglishTTSUnitText(item.ttsText) || !rect(item.bounds, bounds)) return null;
+        }
+    }
+    return record;
+}
+
+function isEnglishOceansImageTTSRecord(record) {
+    return Boolean(typeof imageTTSData !== "undefined" && imageTTSData &&
+        record === imageTTSData[ENGLISH_OCEANS_ASSET_FILE] &&
+        getEnglishOceansImageTTSRecord(record, ENGLISH_OCEANS_ASSET_FILE) === record);
+}
+
+function isEnglishOceansImageTTSItemText(record, item) {
+    return Boolean(isEnglishOceansImageTTSRecord(record) && item &&
+        item.sourceText === item.ttsText &&
+        record.panels.some(panel => Array.isArray(panel.items) && panel.items.includes(item)));
+}
+
 function getEnglishEarthquakesImageTTSRecord(record, assetFile) {
     const file = ENGLISH_EARTHQUAKES_ASSET_FILE;
     const imageId = ENGLISH_EARTHQUAKES_IMAGE_ID;
@@ -18506,6 +18598,11 @@ function isEnglishEarthquakesImageTTSItemText(record, item) {
 }
 
 function getEnglishImageTTSRecord(assetFile) {
+    const earlyRecord = typeof imageTTSData !== "undefined" && imageTTSData ? imageTTSData[assetFile] : null;
+    if (assetFile === ENGLISH_OCEANS_ASSET_FILE || earlyRecord &&
+        (earlyRecord.imageId === ENGLISH_OCEANS_IMAGE_ID || earlyRecord.assetFile === ENGLISH_OCEANS_ASSET_FILE)) {
+        return getEnglishOceansImageTTSRecord(earlyRecord, assetFile);
+    }
     if (typeof imageTTSData === "undefined" || !imageTTSData ||
         typeof imageTTSData !== "object" || !assetFile) {
         return null;
@@ -24577,6 +24674,144 @@ function createEnglishSkeletalSystemPanelHitArea(wrapper, panel, record) {
     return button;
 }
 
+function hideEnglishOceansPanelHitAreas(wrapper) {
+    if (!wrapper || typeof wrapper.querySelectorAll !== "function") return;
+    wrapper.querySelectorAll("." + ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS).forEach(button => {
+        button.hidden = true;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "none";
+    });
+    if (englishImageTTSOverlayState.activeTrigger &&
+        wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+}
+
+function layoutEnglishOceansPanelHitAreas(wrapper, verifyTrigger = null) {
+    const buttons = wrapper && typeof wrapper.querySelectorAll === "function"
+        ? Array.from(wrapper.querySelectorAll("." + ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS)) : [];
+    const fail = () => { hideEnglishOceansPanelHitAreas(wrapper); return false; };
+    const image = wrapper && typeof wrapper.querySelector === "function" ? wrapper.querySelector("img") : null;
+    const record = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_OCEANS_ASSET_FILE] : null;
+    if (!wrapper || wrapper.isConnected === false || !wrapper.dataset ||
+        wrapper.dataset.imageTtsAssetFile !== ENGLISH_OCEANS_ASSET_FILE || !image ||
+        !isEnglishOceansFormalSearchImage(image) || image.getAttribute("src") !== ENGLISH_OCEANS_ASSET_FILE ||
+        image.complete !== true || image.naturalWidth !== 1254 || image.naturalHeight !== 1254 ||
+        !isEnglishOceansImageTTSRecord(record) || buttons.length !== 3 ||
+        typeof document.elementFromPoint !== "function") return fail();
+    let imageRect, wrapperRect, viewport;
+    try {
+        imageRect = image.getBoundingClientRect();
+        wrapperRect = wrapper.getBoundingClientRect();
+        const visual = window.visualViewport;
+        const width = visual ? visual.width :
+            (document.documentElement && document.documentElement.clientWidth || window.innerWidth);
+        const height = visual ? visual.height :
+            (document.documentElement && document.documentElement.clientHeight || window.innerHeight);
+        viewport = visual ? { left: visual.offsetLeft, top: visual.offsetTop,
+            right: visual.offsetLeft + width, bottom: visual.offsetTop + height } :
+            { left: 0, top: 0, right: width, bottom: height };
+    } catch (error) { return fail(); }
+    const validRect = rect => rect && [rect.left, rect.top, rect.right, rect.bottom,
+        rect.width, rect.height].every(Number.isFinite) && rect.width > 0 && rect.height > 0;
+    if (!validRect(imageRect) || !validRect(wrapperRect) ||
+        Math.abs(imageRect.left - wrapperRect.left) > 1 || Math.abs(imageRect.top - wrapperRect.top) > 1 ||
+        Math.abs(imageRect.width - wrapperRect.width) > 1 || Math.abs(imageRect.height - wrapperRect.height) > 1 ||
+        !viewport || ![viewport.left, viewport.top, viewport.right, viewport.bottom].every(Number.isFinite) ||
+        viewport.right <= viewport.left || viewport.bottom <= viewport.top ||
+        imageRect.width * (614 / 1254) < 44 || imageRect.height * (610 / 1254) < 44) return fail();
+    const byPanel = new Map();
+    for (const button of buttons) {
+        const id = button.getAttribute("data-image-tts-panel-id");
+        if (!id || byPanel.has(id)) return fail();
+        byPanel.set(id, button);
+    }
+    if (byPanel.size !== 3) return fail();
+    const selectable = appState.subjectMode === "english" && drawMode === "select";
+    const candidates = [];
+    for (const panel of record.panels) {
+        const button = byPanel.get(String(panel.panelId)), firstItem = panel.items[0];
+        if (!button || !firstItem || !button.classList ||
+            !button.classList.contains("image-tts-image-text-hit-area") ||
+            !button.classList.contains(ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS) ||
+            button._englishImageTTSImageTextRecord !== record ||
+            button._englishImageTTSImageTextPanel !== panel ||
+            button._englishImageTTSImageTextItem !== firstItem ||
+            button.getAttribute("data-image-tts-item-id") !== firstItem.itemId) return fail();
+        button.hidden = false;
+        button.disabled = true;
+        button.setAttribute("aria-disabled", "true");
+        button.style.pointerEvents = "auto";
+        let rect;
+        try { rect = button.getBoundingClientRect(); } catch (error) { return fail(); }
+        const bounds = panel.bounds;
+        const expected = { left: imageRect.left + imageRect.width * bounds.xPct / 100,
+            top: imageRect.top + imageRect.height * bounds.yPct / 100,
+            width: imageRect.width * bounds.widthPct / 100,
+            height: imageRect.height * bounds.heightPct / 100 };
+        if (!validRect(rect) || rect.width < 44 || rect.height < 44 ||
+            Math.abs(rect.left - expected.left) > 1 || Math.abs(rect.top - expected.top) > 1 ||
+            Math.abs(rect.width - expected.width) > 1 || Math.abs(rect.height - expected.height) > 1) {
+            button.hidden = true;
+            candidates.push({ button, safe: false });
+            continue;
+        }
+        const visible = rect.left >= viewport.left && rect.top >= viewport.top &&
+            rect.right <= viewport.right && rect.bottom <= viewport.bottom;
+        let style;
+        try { style = window.getComputedStyle(button); } catch (error) { style = null; }
+        if (!visible || !selectable || !style || style.display === "none" || style.visibility !== "visible") {
+            button.hidden = true;
+            candidates.push({ button, safe: false });
+            continue;
+        }
+        const insetX = Math.min(6, rect.width / 4), insetY = Math.min(6, rect.height / 4);
+        const points = [[(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2],
+            [rect.left + insetX, rect.top + insetY], [rect.right - insetX, rect.top + insetY],
+            [rect.left + insetX, rect.bottom - insetY], [rect.right - insetX, rect.bottom - insetY]];
+        const menu = englishImageTTSOverlayState.menu;
+        const activeMenu = englishImageTTSOverlayState.activeTrigger === button &&
+            menu && !menu.hidden && menu.id === "english-image-tts-menu";
+        let safe = false;
+        try {
+            safe = points.every(([x, y]) => {
+                const hit = document.elementFromPoint(x, y);
+                return hit === button || button.contains(hit) || activeMenu &&
+                    (hit === menu || menu.contains(hit));
+            });
+        } catch (error) { safe = false; }
+        if (!safe) button.hidden = true;
+        candidates.push({ button, safe });
+    }
+    candidates.forEach(({ button, safe }) => {
+        const enabled = selectable && safe;
+        button.hidden = !enabled;
+        button.disabled = !enabled;
+        button.setAttribute("aria-disabled", String(!enabled));
+        button.style.pointerEvents = enabled ? "auto" : "none";
+    });
+    if (verifyTrigger) {
+        const selected = candidates.find(candidate => candidate.button === verifyTrigger);
+        return Boolean(selected && selected.safe && selectable && !verifyTrigger.hidden && !verifyTrigger.disabled);
+    }
+    return candidates.some(candidate => candidate.safe && selectable);
+}
+
+function isEnglishOceansPanelTriggerReady(trigger) {
+    const wrapper = trigger && trigger.closest(".image-tts-overlay-wrapper");
+    const image = wrapper && wrapper.querySelector("img");
+    const record = typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_OCEANS_ASSET_FILE] : null;
+    const panel = trigger && trigger._englishImageTTSImageTextPanel;
+    const buttons = wrapper ? Array.from(wrapper.querySelectorAll("." + ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS)) : [];
+    return Boolean(wrapper && image && isEnglishOceansImageTTSRecord(record) &&
+        isEnglishOceansFormalSearchImage(image) && trigger._englishImageTTSImageTextRecord === record &&
+        trigger.classList && trigger.classList.contains(ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS) &&
+        buttons.length === 3 && buttons.includes(trigger) && panel && record.panels.includes(panel) &&
+        trigger._englishImageTTSImageTextItem === panel.items[0] && !trigger.hidden && !trigger.disabled &&
+        layoutEnglishOceansPanelHitAreas(wrapper, trigger));
+}
+
 function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, region = null) {
     const tapRegion = region && region.bounds || item && item.tapRegion;
     if (!wrapper || !panel || !item || !tapRegion) {
@@ -25670,6 +25905,18 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             earthquakesSpecs[0].diagram === canonicalEarthquakesEntry
                 ? earthquakesSpecs[0] : null;
 
+        const oceansMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_OCEANS_IMAGE_ID || entry.file === ENGLISH_OCEANS_ASSET_FILE)) : [];
+        const canonicalOceansEntry = oceansMatches.length === 1 &&
+            oceansMatches[0].id === ENGLISH_OCEANS_IMAGE_ID && oceansMatches[0].file === ENGLISH_OCEANS_ASSET_FILE
+                ? oceansMatches[0] : null;
+        const returnedOceansCount = canonicalOceansEntry
+            ? diagrams.filter(diagram => diagram === canonicalOceansEntry).length : 0;
+        const oceansSpecs = specs.filter(spec => spec.imageData.file === ENGLISH_OCEANS_ASSET_FILE);
+        const trustedOceansSpec = canonicalOceansEntry && returnedOceansCount === 1 &&
+            oceansSpecs.length === 1 && oceansSpecs[0].diagram === canonicalOceansEntry
+                ? oceansSpecs[0] : null;
+
         const layersEarthMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
             (entry.id === ENGLISH_LAYERS_OF_THE_EARTH_IMAGE_ID ||
                 entry.file === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE)) : [];
@@ -25723,6 +25970,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 if (spec === trustedEarthquakesSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_EARTHQUAKES_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_EARTHQUAKES_ASSET_FILE);
+                }
+                if (spec === trustedOceansSpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_OCEANS_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_OCEANS_ASSET_FILE);
                 }
                 if (spec === trustedLayersEarthSpec) {
                     image.setAttribute("data-english-image-library-id",
@@ -25847,6 +26098,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedLayersEarthSpec);
         ENGLISH_EARTHQUAKES_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedEarthquakesSpec);
+        ENGLISH_OCEANS_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedOceansSpec);
         return answerRoot;
     }
 
@@ -26174,6 +26427,109 @@ const ENGLISH_LAYERS_OF_THE_EARTH_FORMAL_SEARCH_ORIGIN = (() => {
     return { register, expireCurrentContext, isTrustedNode };
 })();
 
+
+const ENGLISH_OCEANS_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    const wrapperByImage = new WeakMap();
+    let currentContext = null, generation = 0;
+    function revokeImage(context, image) {
+        if (!context || !image || !context.images.has(image)) return;
+        const wrapper = wrapperByImage.get(image);
+        originByImage.delete(image); wrapperByImage.delete(image); context.images.delete(image);
+        if (wrapper) {
+            const active = englishTTSState.imageTextSequenceTrigger;
+            if (active && wrapper.contains(active) && active.classList &&
+                active.classList.contains(ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS))
+                cancelEnglishImageTTSImageTextSequence(true);
+            if (englishImageTTSOverlayState.activeTrigger &&
+                wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+            wrapper.querySelectorAll("." + ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS).forEach(button => button.remove());
+        }
+    }
+    function process(context, records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record => {
+            if (record.type === "attributes" && context.images.has(record.target)) {
+                revokeImage(context, record.target); return;
+            }
+            if (record.type !== "childList") return;
+            Array.from(record.removedNodes || []).forEach(removed =>
+                Array.from(context.images).forEach(image => {
+                    if (removed === image || removed && typeof removed.contains === "function" && removed.contains(image))
+                        revokeImage(context, image);
+                }));
+        });
+    }
+    function expireCurrentContext() {
+        const context = currentContext;
+        if (!context) return;
+        context.revoked = true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image => revokeImage(context, image));
+        context.images.clear(); currentContext = null;
+    }
+    function isTrustedNode(image) {
+        const context = currentContext;
+        if (context && context.observer) process(context, context.observer.takeRecords());
+        const origin = image && originByImage.get(image);
+        if (!context || !origin || context.revoked || origin.context !== context ||
+            origin.generation !== context.generation || !context.observer || !image.isConnected ||
+            context.responseRoot !== document.getElementById("ai-response") || !context.responseRoot.isConnected ||
+            !context.responseRoot.contains(context.diagramContainer) ||
+            !context.diagramContainer.contains(wrapperByImage.get(image)) ||
+            image.getAttribute("src") !== ENGLISH_OCEANS_ASSET_FILE ||
+            image.getAttribute("data-english-image-library-id") !== ENGLISH_OCEANS_IMAGE_ID ||
+            image.getAttribute("data-english-image-library-file") !== ENGLISH_OCEANS_ASSET_FILE) return false;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_OCEANS_IMAGE_ID || entry.file === ENGLISH_OCEANS_ASSET_FILE)) : [];
+        return matches.length === 1 && matches[0] === origin.diagram &&
+            origin.diagram.id === ENGLISH_OCEANS_IMAGE_ID && origin.diagram.file === ENGLISH_OCEANS_ASSET_FILE;
+    }
+    function register(responseRoot, diagramContainer, renderedSpecs, trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot || !diagramContainer || !trustedSpec || typeof MutationObserver !== "function" ||
+            responseRoot !== document.getElementById("ai-response") || !responseRoot.isConnected ||
+            !diagramContainer.isConnected) return false;
+        const diagram = trustedSpec.diagram;
+        const matches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_OCEANS_IMAGE_ID || entry.file === ENGLISH_OCEANS_ASSET_FILE)) : [];
+        const targetSpecs = (Array.isArray(renderedSpecs) ? renderedSpecs : []).filter(entry =>
+            entry && entry.spec && entry.spec.imageData && entry.spec.imageData.file === ENGLISH_OCEANS_ASSET_FILE);
+        const rendered = (Array.isArray(renderedSpecs) ? renderedSpecs : []).find(entry => entry && entry.spec === trustedSpec);
+        if (matches.length !== 1 || matches[0] !== diagram || !diagram ||
+            diagram.id !== ENGLISH_OCEANS_IMAGE_ID || diagram.file !== ENGLISH_OCEANS_ASSET_FILE ||
+            targetSpecs.length !== 1 || !rendered || !rendered.image || !rendered.image.isConnected ||
+            !diagramContainer.contains(rendered.image)) return false;
+        const image = rendered.image, wrapper = wrapEnglishImageForTTS(image);
+        if (!wrapper || !wrapper.contains(image) || !diagramContainer.contains(wrapper)) return false;
+        const context = { generation: ++generation, responseRoot, diagramContainer, diagram,
+            images: new Set([image]), observer: null, revoked: false };
+        currentContext = context;
+        originByImage.set(image, { context, generation: context.generation, diagram });
+        wrapperByImage.set(image, wrapper);
+        context.observer = new MutationObserver(records => process(context, records));
+        context.observer.observe(responseRoot, { childList: true, subtree: true, attributes: true,
+            attributeFilter: ["src", "data-english-image-library-id", "data-english-image-library-file"] });
+        if (!isTrustedNode(image)) { expireCurrentContext(); return false; }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+    return { register, expireCurrentContext, isTrustedNode };
+})();
+
+function isEnglishOceansFormalSearchImage(image) {
+    if (!image || image.getAttribute("src") !== ENGLISH_OCEANS_ASSET_FILE ||
+        image.getAttribute("data-english-image-library-id") !== ENGLISH_OCEANS_IMAGE_ID ||
+        image.getAttribute("data-english-image-library-file") !== ENGLISH_OCEANS_ASSET_FILE ||
+        !ENGLISH_OCEANS_FORMAL_SEARCH_ORIGIN.isTrustedNode(image) ||
+        typeof imageTTSData === "undefined" || !imageTTSData || !Array.isArray(diagramMap)) return false;
+    const record = imageTTSData[ENGLISH_OCEANS_ASSET_FILE];
+    if (getEnglishOceansImageTTSRecord(record, ENGLISH_OCEANS_ASSET_FILE) !== record) return false;
+    const matches = diagramMap.filter(entry => entry &&
+        (entry.id === ENGLISH_OCEANS_IMAGE_ID || entry.file === ENGLISH_OCEANS_ASSET_FILE));
+    return matches.length === 1 && matches[0].id === ENGLISH_OCEANS_IMAGE_ID &&
+        matches[0].file === ENGLISH_OCEANS_ASSET_FILE;
+}
 
 const ENGLISH_EARTHQUAKES_FORMAL_SEARCH_ORIGIN = (() => {
     const originByImage = new WeakMap();
@@ -27777,6 +28133,7 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_OCEANS_ASSET_FILE && !isEnglishOceansFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_EARTHQUAKES_ASSET_FILE &&
             !isEnglishEarthquakesFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_LAYERS_OF_THE_EARTH_ASSET_FILE &&
@@ -27860,6 +28217,30 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
 
         if (record.contentType === "image-text") {
 
+            if (isEnglishOceansImageTTSRecord(record)) {
+                const dimensionsOK = () => isEnglishOceansFormalSearchImage(image) &&
+                    image.getAttribute("src") === ENGLISH_OCEANS_ASSET_FILE && image.complete === true &&
+                    image.naturalWidth === 1254 && image.naturalHeight === 1254;
+                if (!isEnglishOceansFormalSearchImage(image) || (image.complete && !dimensionsOK())) return;
+                record.panels.forEach(panel => {
+                    const button = createEnglishImageTTSImageTextHitArea(
+                        wrapper, panel, panel.items[0], record, { bounds: panel.bounds });
+                    if (button) {
+                        button.classList.add(ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS);
+                        button.disabled = true;
+                        button.setAttribute("aria-disabled", "true");
+                        added += 1;
+                    }
+                });
+                const hide = () => hideEnglishOceansPanelHitAreas(wrapper);
+                image.addEventListener("load", () => {
+                    if (dimensionsOK()) layoutEnglishOceansPanelHitAreas(wrapper);
+                    else hide();
+                }, { once: true });
+                image.addEventListener("error", hide, { once: true });
+                layoutEnglishOceansPanelHitAreas(wrapper);
+                return;
+            }
             if (isEnglishEarthquakesImageTTSRecord(record)) {
                 const dimensionsOK = () =>
                     isEnglishEarthquakesFormalSearchImage(image) &&
@@ -28891,6 +29272,9 @@ function scheduleEnglishImageTTSLayout() {
                 wrapper.dataset.imageTtsAssetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) {
                 layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
             }
+            if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_OCEANS_ASSET_FILE) {
+                layoutEnglishOceansPanelHitAreas(wrapper);
+            }
             if (wrapper.dataset &&
                 wrapper.dataset.imageTtsAssetFile === ENGLISH_EARTHQUAKES_ASSET_FILE) {
                 layoutEnglishEarthquakesPanelHitAreas(wrapper);
@@ -29030,6 +29414,9 @@ function syncEnglishImageTTSDrawingMode() {
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_RENEWABLE_ENERGY_ASSET_FILE) {
             layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper);
+        }
+        if (wrapper.dataset && wrapper.dataset.imageTtsAssetFile === ENGLISH_OCEANS_ASSET_FILE) {
+            layoutEnglishOceansPanelHitAreas(wrapper);
         }
         if (wrapper.dataset &&
             wrapper.dataset.imageTtsAssetFile === ENGLISH_EARTHQUAKES_ASSET_FILE) {
@@ -29609,6 +29996,22 @@ function speakEnglishImageTTSImageTextSequence(
     const isRenewableEnergyImageText = Boolean(record && isEnglishRenewableEnergyImageTTSRecord(record));
     const isEarthquakesImageText = Boolean(record &&
         isEnglishEarthquakesImageTTSRecord(record));
+    const isOceansImageText = Boolean(record && isEnglishOceansImageTTSRecord(record));
+    const oceansPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const isOceansSingleItemSequence = Boolean(isOceansImageText && itemList.length === 1 &&
+        allItems.includes(itemList[0]));
+    const oceansImage = isOceansImageText && wrapper ? wrapper.querySelector("img") : null;
+    const oceansButtons = isOceansImageText && wrapper
+        ? Array.from(wrapper.querySelectorAll("." + ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS)) : [];
+    const oceansImageReady = !isOceansImageText || Boolean(
+        assetFile === ENGLISH_OCEANS_ASSET_FILE && record === imageTTSData[assetFile] &&
+        trigger._englishImageTTSImageTextRecord === record && oceansPanel &&
+        record.panels.includes(oceansPanel) && trigger._englishImageTTSImageTextItem === oceansPanel.items[0] &&
+        oceansImage && isEnglishOceansFormalSearchImage(oceansImage) &&
+        oceansImage.complete === true && oceansImage.naturalWidth === 1254 && oceansImage.naturalHeight === 1254 &&
+        oceansButtons.length === 3 && oceansButtons.includes(trigger) &&
+        itemList.length > 0 && itemList.every(item => oceansPanel.items.includes(item)) &&
+        isEnglishOceansPanelTriggerReady(trigger));
     const earthquakesPanel = trigger && trigger._englishImageTTSImageTextPanel;
     const isEarthquakesSingleItemSequence = Boolean(isEarthquakesImageText &&
         itemList.length === 1 && allItems.includes(itemList[0]));
@@ -30295,6 +30698,7 @@ function speakEnglishImageTTSImageTextSequence(
             !isEarthEnvironmentSingleItemSequence &&
             !isHumanBodyHowItWorksSingleItemSequence &&
             !windEnergySingleItemSequence && !isEarthquakesSingleItemSequence &&
+            !isOceansSingleItemSequence &&
             !isLayersOfTheEarthSingleItemSequence &&
             !isLayersOfTheEarthPairSequence) ||
         itemList.some(item => !item ||
@@ -30308,7 +30712,7 @@ function speakEnglishImageTTSImageTextSequence(
         !muscularImageReady || !cyclingImageReady || !solarImageReady ||
         !xraysImageReady || !skeletalSystemImageReady || !immuneSystemImageReady ||
         !humanBrainImageReady || !naturalResourcesImageReady || !conservationBiodiversityImageReady ||
-        !matterImageReady || !layersOfTheEarthImageReady || !earthquakesImageReady ||
+        !matterImageReady || !layersOfTheEarthImageReady || !earthquakesImageReady || !oceansImageReady ||
         !plantsPhotosynthesisImageReady || !plantReproductionImageReady ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
         setEnglishTTSStatus("原圖文字資料不完整，未開始朗讀。");
@@ -31005,6 +31409,10 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
     const assetFile = wrapper && wrapper.dataset.imageTtsAssetFile;
     const safeRecord = assetFile ? getEnglishImageTTSRecord(assetFile) : null;
     const safeRecordName = getEnglishImageTTSImageTextName(safeRecord);
+    const oceansImage = isEnglishOceansImageTTSRecord(safeRecord) && wrapper
+        ? wrapper.querySelector("img") : null;
+    const oceansButtons = isEnglishOceansImageTTSRecord(safeRecord) && wrapper
+        ? Array.from(wrapper.querySelectorAll("." + ENGLISH_OCEANS_PANEL_HIT_AREA_CLASS)) : [];
     const isRenewableEnergyImageText = Boolean(safeRecord &&
         isEnglishRenewableEnergyImageTTSRecord(safeRecord));
     const renewableEnergyImage = isRenewableEnergyImageText && wrapper
@@ -31111,6 +31519,11 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         !safePanel || safePanel !== panel ||
         !panel.items.includes(trigger._englishImageTTSImageTextItem) ||
         wrapper.dataset.imageTtsAssetFile !== safeRecord.assetFile ||
+        (isEnglishOceansImageTTSRecord(safeRecord) &&
+            (!isEnglishOceansFormalSearchImage(oceansImage) || !oceansImage.complete ||
+                oceansImage.naturalWidth !== 1254 || oceansImage.naturalHeight !== 1254 ||
+                oceansButtons.length !== 3 || !oceansButtons.includes(trigger) ||
+                !isEnglishOceansPanelTriggerReady(trigger))) ||
         (isConservationBiodiversityImageText && (!conservationBiodiversityLayoutReady ||
             !isEnglishConservationBiodiversityFormalSearchImage(conservationBiodiversityImage) ||
             trigger._englishImageTTSImageTextRecord !== safeRecord ||
@@ -31198,6 +31611,53 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isEnglishOceansImageTTSRecord(safeRecord)) {
+        if (!isEnglishOceansPanelTriggerReady(trigger)) { closeEnglishImageTTSMenu(); return; }
+        const run = (items, completion) => {
+            closeEnglishImageTTSMenu();
+            if (!isEnglishOceansPanelTriggerReady(trigger)) {
+                setEnglishTTSStatus("Oceans & Marine Life：點讀區目前不安全，未開始朗讀。");
+                return false;
+            }
+            return speakEnglishImageTTSImageTextSequence(trigger, items, completion);
+        };
+        const section = "P" + panel.panelId;
+        menu.setAttribute("aria-label", "Oceans & Marine Life " + section + " 朗讀選項");
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀本區完整內容", "依原圖順序朗讀 " + section + " 的句子與標籤",
+            () => run(panel.items.slice(), "Oceans & Marine Life " + section + " 完整內容已朗讀完成。")));
+        const toggle = createEnglishImageTTSMenuButton(
+            "🔊 單項選讀（" + panel.items.length + " 項）", "展開每個完整句子、動物名稱或環保標語的朗讀選項",
+            () => {
+                const list = menu.querySelector(".english-image-tts-sentences");
+                if (!list) return;
+                list.hidden = !list.hidden;
+                toggle.setAttribute("aria-expanded", String(!list.hidden));
+                scheduleEnglishImageTTSMenuPosition();
+            });
+        toggle.setAttribute("aria-expanded", "false");
+        const list = document.createElement("div");
+        list.className = "english-image-tts-sentences";
+        list.hidden = true;
+        panel.items.forEach(item => {
+            const kind = item.type === "label" ? "標籤／動物名稱" : "完整句子";
+            list.appendChild(createEnglishImageTTSMenuButton(
+                "🔊 單獨朗讀" + kind + "：「" + item.sourceText + "」",
+                "單獨朗讀原圖文字：「" + item.sourceText + "」",
+                () => run([item], "已朗讀 Oceans & Marine Life 所選原圖文字。")));
+        });
+        menu.appendChild(toggle);
+        menu.appendChild(list);
+        menu.hidden = false;
+        menu.style.visibility = "hidden";
+        positionEnglishImageTTSMenu();
+        if (!menu.hidden && menu.firstChild) {
+            try { menu.firstChild.focus({ preventScroll: true }); }
+            catch (error) { menu.firstChild.focus(); }
+        }
+        return;
     }
 
     if (isWindEnergyImageText) {
@@ -34376,8 +34836,6 @@ function setDrawMode(mode){
 
     drawMode = mode;
 
-    syncEnglishImageTTSDrawingMode();
-
     console.log("🎨目前模式:", drawMode);
 
 
@@ -34396,6 +34854,7 @@ function setDrawMode(mode){
 
     }
 
+    syncEnglishImageTTSDrawingMode();
 }
 
 // 🎨 預設畫筆設定
