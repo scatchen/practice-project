@@ -24169,4 +24169,60 @@ const imageTTSData = {
             ]
         };
     })(),
+    "images/english/light-bulb-thomas-edison-basics.png": (() => {
+        const rect = (x, y, width, height) => ({
+            xPct: x / 1536 * 100, yPct: y / 1024 * 100,
+            widthPct: width / 1536 * 100, heightPct: height / 1024 * 100
+        });
+        const item = (itemId, readingOrder, type, sourceText, bounds) => ({
+            itemId, readingOrder, type, sourceText, ttsText: sourceText,
+            bounds: rect(...bounds)
+        });
+        const panel = (panelId, bounds, tapRegion, items) => ({
+            panelId, readingOrder: panelId, bounds: rect(...bounds),
+            tapRegion: rect(...tapRegion), items
+        });
+        return {
+            imageId: "light-bulb-thomas-edison-basics",
+            assetFile: "images/english/light-bulb-thomas-edison-basics.png",
+            contentType: "image-text",
+            layout: "custom-light-bulb-thomas-edison-2x2-text-menu",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1536, height: 1024 },
+            panels: [
+                panel(1, [12, 104, 754, 447], [82, 178, 640, 136], [
+                    item("light-bulb-p1-sentence", 1, "sentence",
+                        "In the past, people used candles and oil lamps at night.",
+                        [126, 184, 532, 74])
+                ]),
+                panel(2, [772, 104, 754, 447], [816, 178, 680, 136], [
+                    item("light-bulb-p2-sentence", 1, "sentence",
+                        "Thomas Edison worked on a practical electric light bulb.",
+                        [858, 184, 604, 74])
+                ]),
+                panel(3, [12, 558, 754, 458], [62, 632, 690, 300], [
+                    item("light-bulb-p3-sentence", 1, "sentence",
+                        "Electric current heated a thin filament, producing light.",
+                        [92, 637, 607, 72]),
+                    item("light-bulb-p3-electric-current", 2, "label",
+                        "electric current", [260, 744, 139, 62]),
+                    item("light-bulb-p3-light", 3, "label",
+                        "light", [614, 716, 77, 46]),
+                    item("light-bulb-p3-filament", 4, "label",
+                        "filament (heated)", [603, 800, 132, 96])
+                ]),
+                panel(4, [772, 558, 754, 458], [816, 632, 694, 140], [
+                    item("light-bulb-p4-sentence-1", 1, "sentence",
+                        "Electric lights made homes, streets, and workplaces brighter.",
+                        [846, 639, 610, 72]),
+                    item("light-bulb-p4-sentence-2", 2, "sentence",
+                        "People could read, study, and work even at night.",
+                        [846, 678, 616, 72])
+                ])
+            ]
+        };
+    })(),
 };
