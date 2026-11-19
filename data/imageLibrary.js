@@ -5167,7 +5167,7 @@ const diagramMap = [
         "Why was the telegraph important",
         "How did the telegraph change communication"
     ],
-    file: "images/english/telegraph-samuel-morse-basics.png",
+    file: "images/english/telegraph-samuel-morse-basics-tts-ready-v4.png",
     alt: "The Telegraph — Samuel Morse 英文教學圖，呈現電報出現前的遠距離訊息傳遞、Samuel Morse 與電報及摩斯電碼、電訊號透過電線傳遞點與劃，以及電報如何加速遠距離通訊",
     category: "english",
     grade: 8,

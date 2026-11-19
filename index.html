@@ -3398,6 +3398,7 @@ const englishTTSState = {
     muscularSystemViewportCleanup: null,
     stopPositionFrame: 0,
     batteryStopPositionTimer: 0,
+    telegraphStopPositionTimer: 0,
     responseObserver: null,
     collocationReplayTimer: 0,
     collocationReplayGeneration: 0,
@@ -5539,6 +5540,86 @@ function placeEnglishLightBulbImageTTSStopButton(button, wrapper, record, panel,
     return true;
 }
 
+
+function placeEnglishTelegraphImageTTSStopButton(button,wrapper,record,panel,item) {
+    const fail=()=>{
+        if(button){button.hidden=true;button.style.visibility="hidden";button.style.pointerEvents="none";}
+        return false;
+    };
+    const trigger=englishTTSState.activeSpeechTrigger;
+    const image=wrapper&&wrapper.querySelector("img");
+    if(!button||!wrapper||wrapper.isConnected===false||record!==imageTTSData[ENGLISH_TELEGRAPH_ASSET_FILE]||
+        !isEnglishTelegraphImageTTSRecord(record)||!isEnglishTelegraphFormalSearchImage(image)||
+        !trigger||!trigger.classList||!trigger.classList.contains("telegraph-panel-hit-area")||
+        trigger._englishImageTTSImageTextRecord!==record||!wrapper.contains(trigger)||
+        wrapper.dataset.imageTtsAssetFile!==ENGLISH_TELEGRAPH_ASSET_FILE||
+        image.getAttribute("src")!==ENGLISH_TELEGRAPH_ASSET_FILE||image.complete!==true||
+        image.naturalWidth!==1254||image.naturalHeight!==1254||panel!==trigger._englishImageTTSImageTextActivePanel||
+        item!==trigger._englishImageTTSImageTextActiveItem||!panel||!item||
+        !record.panels.includes(panel)||!panel.items.includes(item)||
+        typeof document.elementFromPoint!=="function")return fail();
+    const obstacles=[];
+    try {
+        document.querySelectorAll(".control-bar,.brush-colors,.scribble-box,"+
+            ".english-image-story-controls:not([hidden]),.english-image-tts-menu:not([hidden]),"+
+            "#english-tts-panel:not([hidden]),#english-tts-speak-selection:not([hidden]),"+
+            "button:not(#english-tts-floating-stop),[role='button'],input,select,textarea")
+            .forEach(element=>{
+                if(!element||element===button||wrapper.contains(element)||element.hidden)return;
+                const style=window.getComputedStyle(element);
+                if(!style||style.display==="none"||style.visibility==="hidden"||
+                    style.visibility==="collapse")return;
+                const r=element.getBoundingClientRect();
+                if(!r||![r.left,r.top,r.right,r.bottom,r.width,r.height].every(Number.isFinite))
+                    throw new Error("invalid visible control");
+                if(r.width>0&&r.height>0)obstacles.push({left:r.left,top:r.top,right:r.right,bottom:r.bottom});
+            });
+    } catch(error){return fail();}
+    button.style.pointerEvents="auto";
+    if(!placeEnglishImageTTSStoryStopButton(button,wrapper,{
+        bounds:item.bounds,
+        avoidBounds:record.panels.flatMap(p=>p.tapRegions.map(region=>region.bounds)),
+        avoidRects:obstacles
+    },{
+        preferBelow:true,scanForClearPosition:true,strictAvoidance:true,
+        fixedStopSize:true,fixedStopWidth:52,fixedStopHeight:52,
+        fixedStopClass:"is-image-tts-telegraph-stop-control",fixedStopText:"⏹",
+        fixedStopAriaLabel:"停止 The Telegraph — Samuel Morse 英文朗讀",
+        stopControlClass:"is-image-tts-image-text-stop-control"
+    }))return fail();
+    let rect,style,viewport;
+    try {
+        rect=button.getBoundingClientRect();style=window.getComputedStyle(button);
+        const vv=window.visualViewport,w=vv&&vv.width>0?vv.width:
+            (document.documentElement.clientWidth||window.innerWidth);
+        const h=vv&&vv.height>0?vv.height:(document.documentElement.clientHeight||window.innerHeight);
+        viewport=vv?{left:vv.offsetLeft,top:vv.offsetTop,right:vv.offsetLeft+w,bottom:vv.offsetTop+h}
+            :{left:0,top:0,right:w,bottom:h};
+    } catch(error){return fail();}
+    if(!rect||!style||![rect.left,rect.top,rect.right,rect.bottom,rect.width,rect.height].every(Number.isFinite)||
+        Math.abs(rect.width-52)>0.5||Math.abs(rect.height-52)>0.5||
+        style.display==="none"||style.visibility!=="visible"||style.pointerEvents==="none")return fail();
+    const inset=name=>{try{const n=parseFloat(window.getComputedStyle(button).getPropertyValue(name));
+        return Number.isFinite(n)&&n>0?n:0;}catch(error){return 0;}};
+    const safe={left:viewport.left+inset("--english-tts-safe-left")+8,
+        top:viewport.top+inset("--english-tts-safe-top")+8,
+        right:viewport.right-inset("--english-tts-safe-right")-8,
+        bottom:viewport.bottom-inset("--english-tts-safe-bottom")-8};
+    if(rect.left<safe.left||rect.top<safe.top||rect.right>safe.right||rect.bottom>safe.bottom||
+        obstacles.some(o=>rect.left<o.right&&rect.right>o.left&&rect.top<o.bottom&&rect.bottom>o.top))
+        return fail();
+    const d=Math.min(6,rect.width/4,rect.height/4);
+    const points=[[rect.left+rect.width/2,rect.top+rect.height/2],
+        [rect.left+d,rect.top+d],[rect.right-d,rect.top+d],
+        [rect.left+d,rect.bottom-d],[rect.right-d,rect.bottom-d]];
+    try {
+        if(!points.every(([x,y])=>{const hit=document.elementFromPoint(x,y);
+            return hit===button||button.contains(hit);}))return fail();
+    } catch(error){return fail();}
+    button.style.pointerEvents="auto";
+    return true;
+}
+
 function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
     const trigger = englishTTSState.activeSpeechTrigger;
     const record = trigger && trigger._englishImageTTSImageTextRecord;
@@ -5558,7 +5639,8 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
         !validatedRecord || validatedRecord.imageId !== record.imageId ||
         validatedRecord.assetFile !== record.assetFile ||
         !safePanel || safePanel !== activePanel || !safeItem || safeItem !== activeItem ||
-        safeItem.sourceText !== safeItem.ttsText ||
+        (safeItem.sourceText !== safeItem.ttsText &&
+            !isEnglishTelegraphImageTTSItemText(record,safeItem)) ||
         wrapper.dataset.imageTtsAssetFile !== record.assetFile ||
         (typeof wrapper.contains === "function" && !wrapper.contains(trigger))) {
         return false;
@@ -5581,6 +5663,9 @@ function placeEnglishImageTTSImageTextStopButton(button, wrapper) {
         return placeEnglishCyclingImageTTSStopButton(
             button, wrapper, validatedRecord, safePanel, safeItem
         );
+    }
+    if (isEnglishTelegraphImageTTSRecord(record)) {
+        return placeEnglishTelegraphImageTTSStopButton(button,wrapper,validatedRecord,safePanel,safeItem);
     }
     if (isEnglishBatteryImageTTSRecord(record)) {
         return placeEnglishBatteryImageTTSStopButton(
@@ -6594,6 +6679,7 @@ function cancelEnglishImageTTSImageTextSequence(cancelCurrentUtterance = false) 
     const xraysViewportCleanup = englishTTSState.xraysViewportCleanup;
     const muscularSystemViewportCleanup = englishTTSState.muscularSystemViewportCleanup;
     const hadSequence = Boolean(sequenceTrigger || englishTTSState.imageTextSequenceTimer ||
+        englishTTSState.telegraphStopPositionTimer ||
         viewportCleanup || humanHealthViewportCleanup || typhoonsViewportCleanup ||
         xraysViewportCleanup || muscularSystemViewportCleanup);
     if (!hadSequence) {
@@ -6618,6 +6704,10 @@ function cancelEnglishImageTTSImageTextSequence(cancelCurrentUtterance = false) 
     if (muscularSystemViewportCleanup) {
         englishTTSState.muscularSystemViewportCleanup = null;
         muscularSystemViewportCleanup();
+    }
+    if (englishTTSState.telegraphStopPositionTimer) {
+        window.clearTimeout(englishTTSState.telegraphStopPositionTimer);
+        englishTTSState.telegraphStopPositionTimer = 0;
     }
     if (englishTTSState.imageTextSequenceTimer) {
         window.clearTimeout(englishTTSState.imageTextSequenceTimer);
@@ -11735,6 +11825,7 @@ function getEnglishWaterCycleImageTextSpeechSegments(record, item) {
 }
 
 function isEnglishImageTTSItemText(record, item) {
+    if (isEnglishTelegraphImageTTSItemText(record,item)) return true;
     if (isEnglishOceansImageTTSItemText(record, item)) return true;
     if (isEnglishBatteryImageTTSItemText(record, item)) return true;
     if (isEnglishEarthquakesImageTTSItemText(record, item)) return true;
@@ -12350,6 +12441,7 @@ function getEnglishImageTTSImageTextPanelLabel(record, panel) {
 }
 
 function getEnglishImageTTSImageTextName(record) {
+    if (isEnglishTelegraphImageTTSRecord(record)) return "The Telegraph — Samuel Morse";
     if (isEnglishBatteryImageTTSRecord(record)) return "The Battery — Alessandro Volta";
     if (isEnglishOceansImageTTSRecord(record)) return "Oceans & Marine Life";
     if (isEnglishEarthquakesImageTTSRecord(record)) return "Earthquakes";
@@ -19024,6 +19116,152 @@ function isEnglishBatteryImageTTSItemText(record, item) {
         item.sourceText === item.ttsText && record.panels.some(panel => panel.items.includes(item)));
 }
 
+
+const ENGLISH_TELEGRAPH_IMAGE_ID = "telegraph-samuel-morse-basics";
+const ENGLISH_TELEGRAPH_ASSET_FILE =
+    "images/english/telegraph-samuel-morse-basics-tts-ready-v4.png";
+const ENGLISH_TELEGRAPH_CANONICAL_RECORD =
+    typeof imageTTSData !== "undefined" && imageTTSData
+        ? imageTTSData[ENGLISH_TELEGRAPH_ASSET_FILE] : null;
+
+function getEnglishTelegraphExpectedPanels() {
+    const r = (x, y, width, height) => ({
+        xPct: x / 1254 * 100, yPct: y / 1254 * 100,
+        widthPct: width / 1254 * 100, heightPct: height / 1254 * 100
+    });
+    const i = (itemId, readingOrder, type, sourceText, ttsText, b) =>
+        ({ itemId, readingOrder, type, sourceText, ttsText, bounds: r(...b) });
+    const t = (regionId, unitId, b) => ({ regionId, unitId, bounds: r(...b) });
+    const p = (panelId, b, tapRegions, items) =>
+        ({ panelId, readingOrder: panelId, bounds: r(...b), tapRegions, items });
+    return [
+        p(1, [4,112,609,533], [t("telegraph-p1-body","telegraph-p1-sentence",[12,196,378,238])], [
+            i("telegraph-p1-sentence",1,"sentence",
+                "Before electric telegraphs, people carried messages over land and sea.",
+                "Before electric telegraphs, people carried messages over land and sea.",[34,210,332,204])
+        ]),
+        p(2, [619,112,631,533], [t("telegraph-p2-body","telegraph-p2-sentence",[625,194,355,246])], [
+            i("telegraph-p2-sentence",1,"sentence",
+                "Samuel Morse and Alfred Vail worked together to develop the telegraph system and its dot-and-dash code.",
+                "Samuel Morse and Alfred Vail worked together to develop the telegraph system and its dot-and-dash code.",
+                [649,207,306,220])
+        ]),
+        p(3, [4,656,610,594], [t("telegraph-p3-body","telegraph-p3-sentence",[14,730,357,276])], [
+            i("telegraph-p3-sentence",1,"sentence",
+                "Operators sent electrical signals through wires to transmit messages.",
+                "Operators sent electrical signals through wires to transmit messages.",[38,746,309,237])
+        ]),
+        p(4, [620,656,630,594], [
+            t("telegraph-p4-morse-sentence","telegraph-p4-morse-sentence",[627,704,362,114]),
+            t("telegraph-p4-sos-text","telegraph-p4-sos-sentence",[627,818,362,152]),
+            t("telegraph-p4-sos-bubble","telegraph-p4-sos-sentence",[846,1024,390,182]),
+            t("telegraph-p4-code-table","telegraph-p4-code-table",[994,735,250,286])
+        ], [
+            i("telegraph-p4-morse-sentence",1,"sentence",
+                "Morse code uses dots and dashes.","Morse code uses dots and dashes.",[650,712,326,94]),
+            i("telegraph-p4-sos-sentence",2,"sentence",
+                "SOS is three dots, three dashes, and three dots.",
+                "SOS is three dots, three dashes, and three dots.",[648,826,322,136]),
+            i("telegraph-p4-code-table",3,"label",
+                "A ·—\nB —···\nC —·—·\nD —··\nE ·",
+                "A: dot, dash. B: dash, dot, dot, dot. C: dash, dot, dash, dot. D: dash, dot, dot. E: dot.",
+                [1004,744,230,266])
+        ])
+    ];
+}
+
+function getEnglishTelegraphImageTextRecord(record, assetFile) {
+    const keys = (value, expected) => Boolean(value && typeof value === "object" &&
+        !Array.isArray(value) && Object.keys(value).length === expected.length &&
+        expected.every(key => Object.prototype.hasOwnProperty.call(value,key)));
+    const canonical = ENGLISH_TELEGRAPH_CANONICAL_RECORD;
+    if (assetFile !== ENGLISH_TELEGRAPH_ASSET_FILE || !canonical ||
+        typeof imageTTSData === "undefined" || imageTTSData[ENGLISH_TELEGRAPH_ASSET_FILE] !== canonical ||
+        record !== canonical ||
+        !keys(record,["imageId","assetFile","contentType","layout","transcriptStatus",
+            "transcriptReviewMethod","coordinateStatus","overlayRuntimeStatus","sourceImageDimensions","panels"]) ||
+        record.imageId !== ENGLISH_TELEGRAPH_IMAGE_ID ||
+        record.assetFile !== ENGLISH_TELEGRAPH_ASSET_FILE || record.contentType !== "image-text" ||
+        record.layout !== "custom-telegraph-samuel-morse-v4-2x2" ||
+        record.transcriptStatus !== "verified" ||
+        record.transcriptReviewMethod !== "manual-visual-no-OCR" ||
+        record.coordinateStatus !== "estimated" || record.overlayRuntimeStatus !== "not-tested" ||
+        !keys(record.sourceImageDimensions,["width","height"]) ||
+        record.sourceImageDimensions.width !== 1254 || record.sourceImageDimensions.height !== 1254)
+        return null;
+    const expected = getEnglishTelegraphExpectedPanels();
+    if (!Array.isArray(record.panels) || JSON.stringify(record.panels) !== JSON.stringify(expected))
+        return null;
+    const identityKeys = Object.keys(imageTTSData).filter(key => {
+        const candidate = imageTTSData[key];
+        return key === ENGLISH_TELEGRAPH_ASSET_FILE || candidate &&
+            (candidate.imageId === ENGLISH_TELEGRAPH_IMAGE_ID ||
+                candidate.assetFile === ENGLISH_TELEGRAPH_ASSET_FILE);
+    });
+    const catalog = typeof diagramMap !== "undefined" && Array.isArray(diagramMap)
+        ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_TELEGRAPH_IMAGE_ID || entry.file === ENGLISH_TELEGRAPH_ASSET_FILE)) : [];
+    if (identityKeys.length !== 1 || identityKeys[0] !== ENGLISH_TELEGRAPH_ASSET_FILE ||
+        catalog.length !== 1 || catalog[0].id !== ENGLISH_TELEGRAPH_IMAGE_ID ||
+        catalog[0].file !== ENGLISH_TELEGRAPH_ASSET_FILE || catalog[0].category !== "english" ||
+        Object.prototype.hasOwnProperty.call(catalog[0],"images")) return null;
+    const rects = [];
+    let count = 0;
+    for (const panel of record.panels) {
+        count += panel.items.length;
+        for (const region of panel.tapRegions) {
+            const b = region.bounds;
+            const linkedItem = panel.items.find(item => item.itemId === region.unitId);
+            const itemFitsRegion = linkedItem &&
+                linkedItem.bounds.xPct >= b.xPct && linkedItem.bounds.yPct >= b.yPct &&
+                linkedItem.bounds.xPct + linkedItem.bounds.widthPct <= b.xPct + b.widthPct &&
+                linkedItem.bounds.yPct + linkedItem.bounds.heightPct <= b.yPct + b.heightPct;
+            const isSOSBubbleAlias = region.regionId === "telegraph-p4-sos-bubble" &&
+                region.unitId === "telegraph-p4-sos-sentence";
+            if (b.widthPct * 528 / 100 < 44 || b.heightPct * 528 / 100 < 44 ||
+                !linkedItem || (!itemFitsRegion && !isSOSBubbleAlias)) return null;
+            rects.push(b);
+        }
+        for (const item of panel.items) if (!getEnglishTTSUnitText(item.ttsText)) return null;
+    }
+    if (count !== 6 || rects.length !== 7) return null;
+    for (let a=0;a<rects.length;a++) for (let b=a+1;b<rects.length;b++) {
+        const x=rects[a], y=rects[b];
+        if (x.xPct < y.xPct+y.widthPct && x.xPct+x.widthPct > y.xPct &&
+            x.yPct < y.yPct+y.heightPct && x.yPct+x.heightPct > y.yPct) return null;
+    }
+    return record;
+}
+
+function isEnglishTelegraphImageTTSRecord(record) {
+    return Boolean(record && record === ENGLISH_TELEGRAPH_CANONICAL_RECORD &&
+        typeof imageTTSData !== "undefined" &&
+        imageTTSData[ENGLISH_TELEGRAPH_ASSET_FILE] === record &&
+        getEnglishTelegraphImageTextRecord(record,ENGLISH_TELEGRAPH_ASSET_FILE) === record);
+}
+
+function isEnglishTelegraphImageTTSItemText(record,item) {
+    return Boolean(isEnglishTelegraphImageTTSRecord(record) && item &&
+        record.panels.some(panel => panel.items.includes(item)) &&
+        (item.sourceText === item.ttsText ||
+            item.itemId === "telegraph-p4-code-table" &&
+            item.sourceText === "A ·—\nB —···\nC —·—·\nD —··\nE ·"));
+}
+
+function getEnglishTelegraphImageTextSpeechSegments(record,item) {
+    if (!isEnglishTelegraphImageTTSItemText(record,item)) return [];
+    if (item.itemId === "telegraph-p4-code-table") return [
+        "A: dot, dash.", "B: dash, dot, dot, dot.", "C: dash, dot, dash, dot.",
+        "D: dash, dot, dot.", "E: dot."
+    ];
+    return [getEnglishTTSUnitText(item.ttsText)];
+}
+
+function getEnglishTelegraphImageTextSpeechPause(record,item,index) {
+    if (!isEnglishTelegraphImageTTSItemText(record,item)) return 0;
+    return item.itemId === "telegraph-p4-code-table" && index >= 0 && index < 4 ? 300 : 500;
+}
+
 const ENGLISH_LIGHT_BULB_IMAGE_ID = "light-bulb-thomas-edison-basics";
 const ENGLISH_LIGHT_BULB_ASSET_FILE = "images/english/light-bulb-thomas-edison-basics.png";
 const ENGLISH_LIGHT_BULB_CANONICAL_RECORD = typeof imageTTSData !== "undefined" && imageTTSData
@@ -19179,6 +19417,11 @@ function getEnglishImageTTSRecord(assetFile) {
     }
 
     const record = imageTTSData[assetFile];
+    if (assetFile === ENGLISH_TELEGRAPH_ASSET_FILE || record &&
+        (record.imageId === ENGLISH_TELEGRAPH_IMAGE_ID ||
+            record.assetFile === ENGLISH_TELEGRAPH_ASSET_FILE)) {
+        return getEnglishTelegraphImageTextRecord(record, assetFile);
+    }
     if (assetFile === ENGLISH_BATTERY_ASSET_FILE || record &&
         (record.imageId === ENGLISH_BATTERY_IMAGE_ID ||
             record.assetFile === ENGLISH_BATTERY_ASSET_FILE)) {
@@ -23744,6 +23987,110 @@ function isEnglishLightBulbPanelTriggerReady(trigger, panel = null) {
         drawMode === "select" && layoutEnglishLightBulbPanelHitAreas(wrapper, trigger));
 }
 
+
+function hideEnglishTelegraphPanelHitAreas(wrapper) {
+    if (!wrapper) return;
+    wrapper.querySelectorAll(".telegraph-panel-hit-area").forEach(button => {
+        button.hidden=true; button.disabled=true; button.setAttribute("aria-disabled","true");
+        button.style.pointerEvents="none"; button.style.visibility="hidden";
+    });
+}
+function layoutEnglishTelegraphPanelHitAreas(wrapper,verifyTrigger=null) {
+    const buttons=wrapper?Array.from(wrapper.querySelectorAll(".telegraph-panel-hit-area")):[];
+    const hide=button=>{button.hidden=true;button.disabled=true;button.setAttribute("aria-disabled","true");
+        button.style.pointerEvents="none";button.style.visibility="hidden";};
+    const fail=()=>{buttons.forEach(hide);return false;};
+    const image=wrapper&&wrapper.querySelector("img");
+    const record=imageTTSData&&imageTTSData[ENGLISH_TELEGRAPH_ASSET_FILE];
+    if(!wrapper||wrapper.isConnected===false||!wrapper.dataset||
+        wrapper.dataset.imageTtsAssetFile!==ENGLISH_TELEGRAPH_ASSET_FILE||!image||
+        !isEnglishTelegraphFormalSearchImage(image)||image.complete!==true||
+        image.naturalWidth!==1254||image.naturalHeight!==1254||
+        !isEnglishTelegraphImageTTSRecord(record)||buttons.length!==7||
+        typeof document.elementFromPoint!=="function")return fail();
+    const good=r=>r&&[r.left,r.top,r.right,r.bottom,r.width,r.height].every(Number.isFinite)&&r.width>0&&r.height>0;
+    let ir,wr,v;
+    try {
+        ir=image.getBoundingClientRect();wr=wrapper.getBoundingClientRect();
+        const vv=window.visualViewport,w=vv&&vv.width>0?vv.width:
+            (document.documentElement.clientWidth||window.innerWidth);
+        const h=vv&&vv.height>0?vv.height:(document.documentElement.clientHeight||window.innerHeight);
+        v=vv?{left:vv.offsetLeft,top:vv.offsetTop,right:vv.offsetLeft+w,bottom:vv.offsetTop+h}
+            :{left:0,top:0,right:w,bottom:h};
+    } catch(error){return fail();}
+    if(!good(ir)||!good(wr)||Math.abs(ir.left-wr.left)>1||Math.abs(ir.top-wr.top)>1||
+        Math.abs(ir.width-wr.width)>1||Math.abs(ir.height-wr.height)>1||
+        !v||![v.left,v.top,v.right,v.bottom].every(Number.isFinite))return fail();
+    if(appState.subjectMode!=="english"||drawMode!=="select")return fail();
+    const byId=new Map();
+    for(const button of buttons){
+        const id=button.getAttribute("data-image-tts-region-id");
+        if(!id||byId.has(id))return fail();byId.set(id,button);
+    }
+    if(byId.size!==7)return fail();
+    const results=[];
+    for(const panel of record.panels)for(const region of panel.tapRegions){
+        const button=byId.get(region.regionId);
+        const item=panel.items.find(x=>x.itemId===region.unitId);
+        if(!button||!item||button._englishImageTTSImageTextRecord!==record||
+            button._englishImageTTSImageTextPanel!==panel||button._englishImageTTSImageTextItem!==item||
+            button.getAttribute("data-image-tts-panel-id")!==String(panel.panelId)||
+            button.getAttribute("data-image-tts-item-id")!==item.itemId)return fail();
+        button.hidden=false;button.disabled=true;button.style.pointerEvents="auto";button.style.visibility="visible";
+        let r;try{r=button.getBoundingClientRect();}catch(error){return fail();}
+        const e={left:ir.left+ir.width*region.bounds.xPct/100,top:ir.top+ir.height*region.bounds.yPct/100,
+            width:ir.width*region.bounds.widthPct/100,height:ir.height*region.bounds.heightPct/100};
+        if(!good(r)||r.width<44||r.height<44||Math.abs(r.left-e.left)>1||Math.abs(r.top-e.top)>1||
+            Math.abs(r.width-e.width)>1||Math.abs(r.height-e.height)>1||
+            r.left<v.left||r.top<v.top||r.right>v.right||r.bottom>v.bottom){
+            hide(button);results.push({button,safe:false});continue;
+        }
+        const ix=Math.min(6,r.width/4),iy=Math.min(6,r.height/4);
+        const pts=[[(r.left+r.right)/2,(r.top+r.bottom)/2],[r.left+ix,r.top+iy],
+            [r.right-ix,r.top+iy],[r.left+ix,r.bottom-iy],[r.right-ix,r.bottom-iy]];
+        const safe=pts.every(([x,y])=>{
+            const hit=document.elementFromPoint(x,y),menu=englishImageTTSOverlayState.menu;
+            const active=englishImageTTSOverlayState.activeTrigger===button&&menu&&!menu.hidden;
+            return hit===button||button.contains(hit)||active&&(hit===menu||menu.contains(hit));
+        });
+        results.push({button,safe});
+    }
+    if(results.length!==7)return fail();
+    results.forEach(({button,safe})=>{
+        button.hidden=!safe;button.disabled=!safe;button.setAttribute("aria-disabled",String(!safe));
+        button.style.pointerEvents=safe?"auto":"none";button.style.visibility=safe?"visible":"hidden";
+    });
+    if(verifyTrigger){const found=results.find(x=>x.button===verifyTrigger);
+        return Boolean(found&&found.safe&&!verifyTrigger.hidden&&!verifyTrigger.disabled);}
+    return results.some(x=>x.safe);
+}
+function isEnglishTelegraphPanelTriggerReady(trigger,panel=null) {
+    const wrapper=trigger&&trigger.closest?trigger.closest(".image-tts-overlay-wrapper"):null;
+    const image=wrapper&&wrapper.querySelector("img");
+    const record=imageTTSData&&imageTTSData[ENGLISH_TELEGRAPH_ASSET_FILE];
+    const target=panel||trigger&&trigger._englishImageTTSImageTextPanel;
+    const buttons=wrapper?Array.from(wrapper.querySelectorAll(".telegraph-panel-hit-area")):[];
+    return Boolean(wrapper&&image&&isEnglishTelegraphImageTTSRecord(record)&&
+        isEnglishTelegraphFormalSearchImage(image)&&image.complete===true&&image.naturalWidth===1254&&
+        image.naturalHeight===1254&&wrapper.dataset.imageTtsAssetFile===ENGLISH_TELEGRAPH_ASSET_FILE&&
+        trigger._englishImageTTSImageTextRecord===record&&target&&record.panels.includes(target)&&
+        trigger._englishImageTTSImageTextPanel===target&&
+        target.items.includes(trigger._englishImageTTSImageTextItem)&&
+        trigger.classList.contains("telegraph-panel-hit-area")&&
+        buttons.length===7&&buttons.includes(trigger)&&!trigger.hidden&&!trigger.disabled&&
+        appState.subjectMode==="english"&&drawMode==="select"&&
+        layoutEnglishTelegraphPanelHitAreas(wrapper,trigger));
+}
+function scheduleEnglishTelegraphStopRetry(trigger,wrapper,generation) {
+    if(englishTTSState.telegraphStopPositionTimer)
+        window.clearTimeout(englishTTSState.telegraphStopPositionTimer);
+    englishTTSState.telegraphStopPositionTimer=window.setTimeout(()=>{
+        englishTTSState.telegraphStopPositionTimer=0;
+        if(generation!==englishTTSState.imageTextSequenceGeneration||
+            englishTTSState.imageTextSequenceTrigger!==trigger||!isEnglishTTSPlaybackActive())return;
+        placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(),wrapper);
+    },180);
+}
 function hideEnglishBatteryPanelHitAreas(wrapper) {
     if (!wrapper || typeof wrapper.querySelectorAll !== "function") return;
     wrapper.querySelectorAll(".battery-panel-hit-area").forEach(button => {
@@ -25767,6 +26114,7 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
     button.setAttribute("data-image-tts-item-id", String(item.itemId));
     if ((isEnglishXRaysImageTTSRecord(record) ||
         isEnglishMuscularSystemImageTTSRecord(record) ||
+        isEnglishTelegraphImageTTSRecord(record) ||
         isEnglishSolarEnergyImageTTSRecord(record)) && region && region.regionId) {
         button.setAttribute("data-image-tts-region-id", region.regionId);
     }
@@ -25788,6 +26136,7 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
             isEnglishXRaysImageTTSRecord(record) ||
             isEnglishMuscularSystemImageTTSRecord(record) ||
             isEnglishSolarEnergyImageTTSRecord(record) ||
+            isEnglishTelegraphImageTTSRecord(record) ||
             isEnglishWindEnergyImageTTSRecord(record) ||
             isEnglishRenewableEnergyImageTTSRecord(record)) && button.hidden) ||
             button.disabled || appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
@@ -25800,6 +26149,8 @@ function createEnglishImageTTSImageTextHitArea(wrapper, panel, item, record, reg
         }
         if (isEnglishRenewableEnergyImageTTSRecord(record) &&
             !layoutEnglishRenewableEnergyImageTTSHitAreas(wrapper, button)) return;
+        if (isEnglishTelegraphImageTTSRecord(record) &&
+            !isEnglishTelegraphPanelTriggerReady(button,panel)) return;
         openEnglishImageTTSImageTextMenu(button, record, panel);
     });
     wrapper.appendChild(button);
@@ -26832,6 +27183,21 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             layersEarthSpecs.length === 1 && layersEarthSpecs[0].diagram === canonicalLayersEarth
                 ? layersEarthSpecs[0] : null;
 
+        const telegraphMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
+            (entry.id === ENGLISH_TELEGRAPH_IMAGE_ID || entry.file === ENGLISH_TELEGRAPH_ASSET_FILE)) : [];
+        const canonicalTelegraph = telegraphMatches.length === 1 &&
+            telegraphMatches[0].id === ENGLISH_TELEGRAPH_IMAGE_ID &&
+            telegraphMatches[0].file === ENGLISH_TELEGRAPH_ASSET_FILE &&
+            !Object.prototype.hasOwnProperty.call(telegraphMatches[0],"images")
+                ? telegraphMatches[0] : null;
+        const returnedTelegraph = canonicalTelegraph
+            ? diagrams.filter(diagram => diagram === canonicalTelegraph).length : 0;
+        const telegraphSpecs = specs.filter(spec =>
+            spec.imageData.file === ENGLISH_TELEGRAPH_ASSET_FILE);
+        const trustedTelegraphSpec = canonicalTelegraph && returnedTelegraph === 1 &&
+            telegraphSpecs.length === 1 && telegraphSpecs[0].diagram === canonicalTelegraph
+                ? telegraphSpecs[0] : null;
+
         const batteryMatches = Array.isArray(diagramMap) ? diagramMap.filter(entry => entry &&
             (entry.id === ENGLISH_BATTERY_IMAGE_ID || entry.file === ENGLISH_BATTERY_ASSET_FILE)) : [];
         const canonicalBattery = batteryMatches.length === 1 &&
@@ -26909,6 +27275,10 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
                 if (spec === trustedLightBulbSpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_LIGHT_BULB_IMAGE_ID);
                     image.setAttribute("data-english-image-library-file", ENGLISH_LIGHT_BULB_ASSET_FILE);
+                }
+                if (spec === trustedTelegraphSpec) {
+                    image.setAttribute("data-english-image-library-id", ENGLISH_TELEGRAPH_IMAGE_ID);
+                    image.setAttribute("data-english-image-library-file", ENGLISH_TELEGRAPH_ASSET_FILE);
                 }
                 if (spec === trustedBatterySpec) {
                     image.setAttribute("data-english-image-library-id", ENGLISH_BATTERY_IMAGE_ID);
@@ -27037,6 +27407,8 @@ const ENGLISH_TELEPHONE_V2_FORMAL_SEARCH_ORIGIN = (() => {
             responseRoot, diagramContainer, renderedSpecs, trustedLightBulbSpec);
         ENGLISH_BATTERY_FORMAL_SEARCH_ORIGIN.register(
             responseRoot, diagramContainer, renderedSpecs, trustedBatterySpec);
+        ENGLISH_TELEGRAPH_FORMAL_SEARCH_ORIGIN.register(
+            responseRoot, diagramContainer, renderedSpecs, trustedTelegraphSpec);
         return answerRoot;
     }
 
@@ -27866,6 +28238,134 @@ const ENGLISH_BATTERY_FORMAL_SEARCH_ORIGIN = (() => {
 
     return { register, expireCurrentContext, isTrustedNode, trackCleanup };
 })();
+
+
+const ENGLISH_TELEGRAPH_FORMAL_SEARCH_ORIGIN = (() => {
+    const originByImage = new WeakMap();
+    const wrapperByImage = new WeakMap();
+    const cleanupByImage = new WeakMap();
+    let currentContext = null, generation = 0;
+
+    function detachImage(image) {
+        const wrapper = wrapperByImage.get(image);
+        if (!wrapper) return;
+        const active = englishTTSState.imageTextSequenceTrigger;
+        if (active && wrapper.contains(active) && active.classList &&
+            active.classList.contains("telegraph-panel-hit-area"))
+            cancelEnglishImageTTSImageTextSequence(true);
+        if (englishImageTTSOverlayState.activeTrigger &&
+            wrapper.contains(englishImageTTSOverlayState.activeTrigger)) closeEnglishImageTTSMenu();
+        wrapper.querySelectorAll(".telegraph-panel-hit-area").forEach(button => button.remove());
+    }
+    function revokeImage(context,image) {
+        if (!context || !image || !context.images.has(image)) return;
+        detachImage(image);
+        const cleanup=cleanupByImage.get(image);
+        cleanupByImage.delete(image);
+        if (cleanup) { try { cleanup(); } catch (error) {} }
+        originByImage.delete(image); wrapperByImage.delete(image); context.images.delete(image);
+    }
+    function process(context,records) {
+        if (!context || !Array.isArray(records)) return;
+        records.forEach(record=>{
+            if (record.type==="attributes"&&context.images.has(record.target)) {
+                revokeImage(context,record.target); return;
+            }
+            if (record.type!=="childList") return;
+            Array.from(record.removedNodes||[]).forEach(removed=>
+                Array.from(context.images).forEach(image=>{
+                    if (removed===image||removed&&typeof removed.contains==="function"&&removed.contains(image))
+                        revokeImage(context,image);
+                }));
+        });
+    }
+    function expireCurrentContext() {
+        const context=currentContext;
+        if (!context) return;
+        context.revoked=true;
+        if (context.observer) context.observer.disconnect();
+        Array.from(context.images).forEach(image=>revokeImage(context,image));
+        context.images.clear(); currentContext=null;
+    }
+    function isTrustedNode(image) {
+        const context=currentContext;
+        if (context&&context.observer) process(context,context.observer.takeRecords());
+        const origin=image&&originByImage.get(image);
+        if (!context||!origin||context.revoked||origin.context!==context||
+            origin.generation!==context.generation||!context.observer||!image.isConnected||
+            context.responseRoot!==document.getElementById("ai-response")||
+            !context.responseRoot.isConnected||
+            !context.responseRoot.contains(context.diagramContainer)||
+            !context.diagramContainer.contains(wrapperByImage.get(image))||
+            image.getAttribute("src")!==ENGLISH_TELEGRAPH_ASSET_FILE||
+            image.getAttribute("data-english-image-library-id")!==ENGLISH_TELEGRAPH_IMAGE_ID||
+            image.getAttribute("data-english-image-library-file")!==ENGLISH_TELEGRAPH_ASSET_FILE) return false;
+        const matches=Array.isArray(diagramMap)?diagramMap.filter(entry=>entry&&
+            (entry.id===ENGLISH_TELEGRAPH_IMAGE_ID||entry.file===ENGLISH_TELEGRAPH_ASSET_FILE)):[];
+        return matches.length===1&&matches[0]===origin.diagram&&
+            origin.diagram.id===ENGLISH_TELEGRAPH_IMAGE_ID&&
+            origin.diagram.file===ENGLISH_TELEGRAPH_ASSET_FILE&&
+            !Object.prototype.hasOwnProperty.call(origin.diagram,"images");
+    }
+    function register(responseRoot,diagramContainer,renderedSpecs,trustedSpec) {
+        expireCurrentContext();
+        if (!responseRoot||!diagramContainer||!trustedSpec||
+            typeof MutationObserver!=="function"||
+            responseRoot!==document.getElementById("ai-response")||
+            !responseRoot.isConnected||!diagramContainer.isConnected) return false;
+        const diagram=trustedSpec.diagram;
+        const matches=Array.isArray(diagramMap)?diagramMap.filter(entry=>entry&&
+            (entry.id===ENGLISH_TELEGRAPH_IMAGE_ID||entry.file===ENGLISH_TELEGRAPH_ASSET_FILE)):[];
+        const targetSpecs=(Array.isArray(renderedSpecs)?renderedSpecs:[]).filter(entry=>
+            entry&&entry.spec&&entry.spec.imageData&&
+            entry.spec.imageData.file===ENGLISH_TELEGRAPH_ASSET_FILE);
+        const rendered=(Array.isArray(renderedSpecs)?renderedSpecs:[])
+            .find(entry=>entry&&entry.spec===trustedSpec);
+        if (matches.length!==1||matches[0]!==diagram||
+            diagram.id!==ENGLISH_TELEGRAPH_IMAGE_ID||diagram.file!==ENGLISH_TELEGRAPH_ASSET_FILE||
+            Object.prototype.hasOwnProperty.call(diagram,"images")||targetSpecs.length!==1||
+            !rendered||!rendered.image||!rendered.image.isConnected||
+            !diagramContainer.contains(rendered.image)) return false;
+        const image=rendered.image,wrapper=wrapEnglishImageForTTS(image);
+        if (!wrapper||!wrapper.contains(image)||!diagramContainer.contains(wrapper)) return false;
+        const context={generation:++generation,responseRoot,diagramContainer,diagram,
+            images:new Set([image]),observer:null,revoked:false};
+        currentContext=context;
+        originByImage.set(image,{context,generation:context.generation,diagram});
+        wrapperByImage.set(image,wrapper);
+        context.observer=new MutationObserver(records=>process(context,records));
+        context.observer.observe(responseRoot,{childList:true,subtree:true,attributes:true,
+            attributeFilter:["src","data-english-image-library-id","data-english-image-library-file"]});
+        if (!isTrustedNode(image)) { expireCurrentContext(); return false; }
+        enhanceEnglishImageTTSOverlays(responseRoot);
+        return true;
+    }
+    function trackCleanup(image,cleanup) {
+        if (!image||typeof cleanup!=="function"||!isTrustedNode(image)) {
+            if (typeof cleanup==="function") { try { cleanup(); } catch (error) {} }
+            return false;
+        }
+        const previous=cleanupByImage.get(image);
+        if (previous) { try { previous(); } catch (error) {} }
+        cleanupByImage.set(image,cleanup); return true;
+    }
+    return {register,expireCurrentContext,isTrustedNode,trackCleanup};
+})();
+
+function isEnglishTelegraphFormalSearchImage(image) {
+    if (!image||image.getAttribute("src")!==ENGLISH_TELEGRAPH_ASSET_FILE||
+        image.getAttribute("data-english-image-library-id")!==ENGLISH_TELEGRAPH_IMAGE_ID||
+        image.getAttribute("data-english-image-library-file")!==ENGLISH_TELEGRAPH_ASSET_FILE||
+        !ENGLISH_TELEGRAPH_FORMAL_SEARCH_ORIGIN.isTrustedNode(image)||
+        typeof imageTTSData==="undefined"||!imageTTSData||!Array.isArray(diagramMap)) return false;
+    const record=imageTTSData[ENGLISH_TELEGRAPH_ASSET_FILE];
+    if (getEnglishTelegraphImageTextRecord(record,ENGLISH_TELEGRAPH_ASSET_FILE)!==record) return false;
+    const matches=diagramMap.filter(entry=>entry&&
+        (entry.id===ENGLISH_TELEGRAPH_IMAGE_ID||entry.file===ENGLISH_TELEGRAPH_ASSET_FILE));
+    return matches.length===1&&matches[0].id===ENGLISH_TELEGRAPH_IMAGE_ID&&
+        matches[0].file===ENGLISH_TELEGRAPH_ASSET_FILE&&
+        !Object.prototype.hasOwnProperty.call(matches[0],"images");
+}
 
 function isEnglishBatteryFormalSearchImage(image) {
     if (!image || image.getAttribute("src") !== ENGLISH_BATTERY_ASSET_FILE ||
@@ -29345,6 +29845,8 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
     let added = 0;
     images.forEach(image => {
         const assetFile = image.getAttribute("src");
+        if (assetFile === ENGLISH_TELEGRAPH_ASSET_FILE &&
+            !isEnglishTelegraphFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_BATTERY_ASSET_FILE && !isEnglishBatteryFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_OCEANS_ASSET_FILE && !isEnglishOceansFormalSearchImage(image)) return;
         if (assetFile === ENGLISH_EARTHQUAKES_ASSET_FILE &&
@@ -29479,6 +29981,68 @@ function enhanceEnglishImageTTSOverlays(responseRoot) {
                 }, { once: true });
                 image.addEventListener("error", hide, { once: true });
                 layoutEnglishEarthquakesPanelHitAreas(wrapper);
+                return;
+            }
+            if (isEnglishTelegraphImageTTSRecord(record)) {
+                const dimensionsOK=()=>isEnglishTelegraphFormalSearchImage(image)&&image.complete===true&&
+                    image.naturalWidth===1254&&image.naturalHeight===1254;
+                if(!isEnglishTelegraphFormalSearchImage(image)||image.complete&&!dimensionsOK())return;
+                record.panels.forEach(panel=>panel.tapRegions.forEach(region=>{
+                    const item=panel.items.find(x=>x.itemId===region.unitId);
+                    const button=createEnglishImageTTSImageTextHitArea(
+                        wrapper,panel,item,record,{bounds:region.bounds,regionId:region.regionId});
+                    if(!button)return;
+                    button.classList.add("telegraph-panel-hit-area");
+                    button.setAttribute("data-image-tts-region-id",region.regionId);
+                    button.setAttribute("aria-label","The Telegraph — Samuel Morse P"+panel.panelId+
+                        " "+region.regionId.replace(/^telegraph-p\d+-/,"")+"區，開啟朗讀選項");
+                    button.disabled=true;button.setAttribute("aria-disabled","true");
+                    button.style.pointerEvents="none";added+=1;
+                }));
+                const hide=()=>hideEnglishTelegraphPanelHitAreas(wrapper);
+                const load=()=>{image.removeEventListener("load",load);image.removeEventListener("error",hide);
+                    if(dimensionsOK())layoutEnglishTelegraphPanelHitAreas(wrapper);else hide();};
+                image.addEventListener("load",load);image.addEventListener("error",hide);
+                let frame=0,timer=0,observer=null;
+                const relayout=()=>{
+                    if(frame||timer)return;
+                    const run=()=>{
+                        frame=0;timer=0;if(!isEnglishTelegraphFormalSearchImage(image))return;
+                        layoutEnglishTelegraphPanelHitAreas(wrapper);
+                        const active=englishTTSState.imageTextSequenceTrigger;
+                        if(active&&wrapper.contains(active)&&active.classList.contains("telegraph-panel-hit-area")&&
+                            isEnglishTTSPlaybackActive()&&
+                            !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(),wrapper))
+                            scheduleEnglishTelegraphStopRetry(active,wrapper,
+                                englishTTSState.imageTextSequenceGeneration);
+                    };
+                    if(typeof window.requestAnimationFrame==="function")frame=window.requestAnimationFrame(run);
+                    else timer=window.setTimeout(run,0);
+                };
+                window.addEventListener("resize",relayout,{passive:true});
+                window.addEventListener("orientationchange",relayout,{passive:true});
+                document.addEventListener("scroll",relayout,{capture:true,passive:true});
+                if(window.visualViewport){
+                    window.visualViewport.addEventListener("resize",relayout,{passive:true});
+                    window.visualViewport.addEventListener("scroll",relayout,{passive:true});
+                }
+                if(typeof ResizeObserver==="function"){
+                    observer=new ResizeObserver(relayout);observer.observe(image);observer.observe(wrapper);
+                }
+                const cleanup=()=>{
+                    image.removeEventListener("load",load);image.removeEventListener("error",hide);
+                    window.removeEventListener("resize",relayout);window.removeEventListener("orientationchange",relayout);
+                    document.removeEventListener("scroll",relayout,true);
+                    if(window.visualViewport){
+                        window.visualViewport.removeEventListener("resize",relayout);
+                        window.visualViewport.removeEventListener("scroll",relayout);
+                    }
+                    if(observer)observer.disconnect();
+                    if(frame&&typeof window.cancelAnimationFrame==="function")window.cancelAnimationFrame(frame);
+                    if(timer)window.clearTimeout(timer);frame=0;timer=0;
+                };
+                ENGLISH_TELEGRAPH_FORMAL_SEARCH_ORIGIN.trackCleanup(image,cleanup);
+                if(image.complete&&dimensionsOK())layoutEnglishTelegraphPanelHitAreas(wrapper);
                 return;
             }
             if (isEnglishBatteryImageTTSRecord(record)) {
@@ -30753,6 +31317,20 @@ function syncEnglishImageTTSDrawingMode() {
     });
     document.querySelectorAll(
         '#ai-response .image-tts-overlay-wrapper[data-image-tts-asset-file="' +
+            ENGLISH_TELEGRAPH_ASSET_FILE + '"]'
+    ).forEach(wrapper => layoutEnglishTelegraphPanelHitAreas(wrapper));
+    const activeTelegraph = englishTTSState.imageTextSequenceTrigger;
+    if (activeTelegraph && activeTelegraph.classList &&
+        activeTelegraph.classList.contains("telegraph-panel-hit-area") &&
+        isEnglishTTSPlaybackActive()) {
+        const wrapper = activeTelegraph.closest(".image-tts-overlay-wrapper");
+        if (wrapper && !placeEnglishImageTTSImageTextStopButton(
+            getEnglishTTSFloatingStopButton(),wrapper))
+            scheduleEnglishTelegraphStopRetry(activeTelegraph,wrapper,
+                englishTTSState.imageTextSequenceGeneration);
+    }
+    document.querySelectorAll(
+        '#ai-response .image-tts-overlay-wrapper[data-image-tts-asset-file="' +
             ENGLISH_IMMUNE_SYSTEM_ASSET_FILE + '"]'
     ).forEach(wrapper => layoutEnglishImmuneSystemPanelHitAreas(wrapper));
     const telephoneV2State = window.englishTelephoneV2P1Test;
@@ -31121,6 +31699,7 @@ function getEnglishMatterStatesOfMatterImageTextSpeechSegments(record, item) {
 }
 
 function getEnglishImageTTSImageTextSpeechText(record, item) {
+    if (isEnglishTelegraphImageTTSItemText(record,item)) return getEnglishTTSUnitText(item.ttsText);
     if (isEnglishBatteryImageTTSItemText(record, item)) return getEnglishTTSUnitText(item.ttsText);
     if (isEnglishLightBulbImageTTSItemText(record, item)) return getEnglishTTSUnitText(item.ttsText);
     if (isEnglishEarthquakesImageTTSItemText(record, item)) {
@@ -31684,6 +32263,13 @@ function speakEnglishImageTTSImageTextSequence(
     const isWholeImageSequence = !isTelephoneV2WholeImageSequence &&
         Boolean(record && allItems.length === itemList.length &&
             allItems.every((item, index) => item === itemList[index]));
+    const isTelegraphImageText = isEnglishTelegraphImageTTSRecord(record);
+    const telegraphPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const isTelegraphSingleItemSequence = Boolean(isTelegraphImageText&&itemList.length===1&&
+        telegraphPanel&&record.panels.includes(telegraphPanel)&&
+        trigger._englishImageTTSImageTextRecord===record&&
+        trigger._englishImageTTSImageTextItem===itemList[0]&&
+        telegraphPanel.items.includes(itemList[0])&&allItems.includes(itemList[0]));
     const isBatteryImageText = isEnglishBatteryImageTTSRecord(record);
     const batteryPanel = trigger && trigger._englishImageTTSImageTextPanel;
     const isBatterySingleItemSequence = Boolean(isBatteryImageText && itemList.length === 1 &&
@@ -32039,6 +32625,9 @@ function speakEnglishImageTTSImageTextSequence(
             step.speechSegments = getEnglishSkeletalSystemImageTextSpeechSegments(record, step.item);
         });
     }
+    if (isTelegraphImageText) playbackSteps.forEach(step => {
+        step.speechSegments=getEnglishTelegraphImageTextSpeechSegments(record,step.item);
+    });
     const triggerPanel = trigger && trigger._englishImageTTSImageTextPanel;
     const batteryImage = isBatteryImageText && wrapper ? wrapper.querySelector("img") : null;
     const batteryButtons = isBatteryImageText && wrapper
@@ -32055,6 +32644,21 @@ function speakEnglishImageTTSImageTextSequence(
         batteryButtons.length === 9 && batteryButtons.includes(trigger) && batterySequenceShape &&
         itemList.every(item => allItems.includes(item)) &&
         isEnglishBatteryPanelTriggerReady(trigger, triggerPanel));
+    const telegraphImage = isTelegraphImageText&&wrapper?wrapper.querySelector("img"):null;
+    const telegraphButtons = isTelegraphImageText&&wrapper
+        ?Array.from(wrapper.querySelectorAll(".telegraph-panel-hit-area")):[];
+    const telegraphSequenceShape = isTelegraphImageText&&
+        (isPanelSequence||isWholeImageSequence||isTelegraphSingleItemSequence);
+    const telegraphImageReady = !isTelegraphImageText||Boolean(
+        assetFile===ENGLISH_TELEGRAPH_ASSET_FILE&&record===imageTTSData[assetFile]&&
+        wrapper.dataset.imageTtsAssetFile===ENGLISH_TELEGRAPH_ASSET_FILE&&telegraphImage&&
+        isEnglishTelegraphFormalSearchImage(telegraphImage)&&telegraphImage.complete===true&&
+        telegraphImage.naturalWidth===1254&&telegraphImage.naturalHeight===1254&&
+        trigger._englishImageTTSImageTextRecord===record&&telegraphPanel&&
+        record.panels.includes(telegraphPanel)&&telegraphButtons.length===7&&
+        telegraphButtons.includes(trigger)&&telegraphSequenceShape&&
+        (isWholeImageSequence||itemList.every(item=>telegraphPanel.items.includes(item)))&&
+        isEnglishTelegraphPanelTriggerReady(trigger,telegraphPanel));
     const lightBulbImage = isLightBulbImageText && wrapper ? wrapper.querySelector("img") : null;
     const lightBulbButtons = isLightBulbImageText && wrapper
         ? Array.from(wrapper.querySelectorAll(".light-bulb-panel-hit-area")) : [];
@@ -32123,12 +32727,14 @@ function speakEnglishImageTTSImageTextSequence(
             !isOceansSingleItemSequence &&
             !isLayersOfTheEarthSingleItemSequence &&
             !isLayersOfTheEarthPairSequence && !isLightBulbSingleItemSequence &&
-            !isBatterySingleItemSequence) ||
+            !isBatterySingleItemSequence && !isTelegraphSingleItemSequence) ||
         itemList.some(item => !item ||
             (item.sourceText !== item.ttsText &&
-                !isEnglishEnergyTransformationsImageTTSItemText(record, item)) ||
+                !isEnglishEnergyTransformationsImageTTSItemText(record, item) &&
+                !isEnglishTelegraphImageTTSItemText(record,item)) ||
             !isEnglishImageTTSItemText(record, item)) ||
-        !isValidSelectedSpeechUnit || !playbackSteps.length || !lightBulbImageReady || !batteryImageReady ||
+        !isValidSelectedSpeechUnit || !playbackSteps.length || !telegraphImageReady ||
+        !lightBulbImageReady || !batteryImageReady ||
         !karstReady || !mountainsReady ||
         !energySourcesReady || !renewableEnergyReady || !windEnergyReady ||
         playbackSteps.some(step => !step.item || !step.text) ||
@@ -32193,6 +32799,15 @@ function speakEnglishImageTTSImageTextSequence(
         }
         trigger._englishImageTTSImageTextActivePanel = itemPanel;
         trigger._englishImageTTSImageTextActiveItem = item;
+        if (isTelegraphImageText &&
+            !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(),wrapper)) {
+            if(itemIndex===0){
+                cancelEnglishImageTTSImageTextSequence(true);
+                setEnglishTTSStatus("The Telegraph — Samuel Morse：找不到安全的 52 CSS px Stop，未開始朗讀。");
+                updateEnglishTTSControls();return false;
+            }
+            scheduleEnglishTelegraphStopRetry(trigger,wrapper,generation);
+        }
         if (isBatteryImageText && itemIndex === 0 &&
             !placeEnglishImageTTSImageTextStopButton(getEnglishTTSFloatingStopButton(), wrapper)) {
             cancelEnglishImageTTSImageTextSequence(true);
@@ -32373,7 +32988,9 @@ function speakEnglishImageTTSImageTextSequence(
                 if (speechSegmentIndex + 1 < speechSegments.length) {
                     const previousSpeechSegmentIndex = speechSegmentIndex;
                     speechSegmentIndex += 1;
-                    const delay = isTyphoonsImageText
+                    const delay = isTelegraphImageText
+                        ? getEnglishTelegraphImageTextSpeechPause(record,item,previousSpeechSegmentIndex)
+                        : (isTyphoonsImageText
                         ? getEnglishTyphoonsImageTextSpeechPause(record, item, previousSpeechSegmentIndex)
                         : (isHumanHealthNutritionImageText
                         ? getEnglishHumanHealthNutritionImageTextSpeechPause(
@@ -32383,7 +33000,7 @@ function speakEnglishImageTTSImageTextSequence(
                             ? getEnglishAnimalsAdaptationImageTextSpeechPause(
                                 record, item, previousSpeechSegmentIndex
                             )
-                            : 500));
+                            : 500)));
                     if (delay !== 300 && delay !== 500) {
                         cancelEnglishImageTTSImageTextSequence(true);
                         setEnglishTTSStatus(isTyphoonsImageText
@@ -32878,6 +33495,9 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         layoutEnglishWindEnergyImageTTSHitAreas(wrapper, trigger) && windEnergyButtons.length === 8 &&
         windEnergyButtons.includes(trigger) && !trigger.hidden && !trigger.disabled);
     const clickedPanel = trigger && trigger._englishImageTTSImageTextPanel;
+    const isTelegraphImageText = Boolean(safeRecord && isEnglishTelegraphImageTTSRecord(safeRecord));
+    const telegraphMenuReady = !isTelegraphImageText ||
+        isEnglishTelegraphPanelTriggerReady(trigger,panel);
     const isBatteryImageText = Boolean(safeRecord && isEnglishBatteryImageTTSRecord(safeRecord));
     const batteryMenuReady = !isBatteryImageText || isEnglishBatteryPanelTriggerReady(trigger, panel);
     const isLightBulbImageText = Boolean(safeRecord && isEnglishLightBulbImageTTSRecord(safeRecord));
@@ -33024,6 +33644,7 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         (isMountainsImageText && (!mountainsImage || mountainsImage.getAttribute("src") !== safeRecord.assetFile ||
             !mountainsImage.complete || mountainsImage.naturalWidth !== 1536 || mountainsImage.naturalHeight !== 1024 ||
             !mountainsLayoutReady || !trigger.classList.contains("image-tts-mountains-hit-area"))) ||
+        (isTelegraphImageText && !telegraphMenuReady) ||
         (isBatteryImageText && !batteryMenuReady) ||
         (isLightBulbImageText && !lightBulbMenuReady) ||
         appState.subjectMode !== "english" || isEnglishImageTTSDrawingMode()) {
@@ -33058,6 +33679,37 @@ function openEnglishImageTTSImageTextMenu(trigger, record, panel) {
         : safeRecordName + " 第 " + panel.panelId + " 格原圖文字朗讀選項");
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
+    }
+
+    if (isTelegraphImageText) {
+        const run=(items,message)=>{
+            closeEnglishImageTTSMenu();
+            return speakEnglishImageTTSImageTextSequence(trigger,items,message);
+        };
+        menu.setAttribute("aria-label","The Telegraph — Samuel Morse 第 "+panel.panelId+" 格朗讀選項");
+        panel.items.forEach(item=>{
+            const label=item.itemId==="telegraph-p4-code-table"
+                ?"朗讀 Morse Code A–E 碼表（單一分組）"
+                :"朗讀單句：「"+item.sourceText.replace(/\r?\n/g," ")+"」";
+            menu.appendChild(createEnglishImageTTSMenuButton(
+                "🔊 "+label,"朗讀原圖文字："+item.ttsText,
+                ()=>run([item],"The Telegraph — Samuel Morse 單項已朗讀完成。")
+            ));
+        });
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 朗讀本格完整內容","依序朗讀 P"+panel.panelId+" 全部朗讀單位",
+            ()=>run(panel.items.slice(),"The Telegraph — Samuel Morse P"+
+                panel.panelId+" 完整內容已朗讀完成。")
+        ));
+        menu.appendChild(createEnglishImageTTSMenuButton(
+            "🔊 依序朗讀全圖","依 P1 到 P4 順序朗讀六個邏輯單位",
+            ()=>run(safeRecord.panels.flatMap(candidate=>candidate.items),
+                "The Telegraph — Samuel Morse 全圖已朗讀完成。")
+        ));
+        menu.hidden=false;menu.style.visibility="hidden";positionEnglishImageTTSMenu();
+        const first=menu.firstChild;
+        if(first){try{first.focus({preventScroll:true});}catch(error){first.focus();}}
+        return;
     }
 
     if (isBatteryImageText) {

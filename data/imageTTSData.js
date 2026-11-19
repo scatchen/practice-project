@@ -24294,4 +24294,79 @@ const imageTTSData = {
             ]
         };
     })(),
+
+    "images/english/telegraph-samuel-morse-basics-tts-ready-v4.png": (() => {
+        const rect = (x, y, width, height) => ({
+            xPct: x / 1254 * 100, yPct: y / 1254 * 100,
+            widthPct: width / 1254 * 100, heightPct: height / 1254 * 100
+        });
+        const item = (itemId, readingOrder, type, sourceText, ttsText, bounds) => ({
+            itemId, readingOrder, type, sourceText, ttsText, bounds: rect(...bounds)
+        });
+        const region = (regionId, unitId, bounds) => ({
+            regionId, unitId, bounds: rect(...bounds)
+        });
+        const panel = (panelId, bounds, tapRegions, items) => ({
+            panelId, readingOrder: panelId, bounds: rect(...bounds), tapRegions, items
+        });
+        return {
+            imageId: "telegraph-samuel-morse-basics",
+            assetFile: "images/english/telegraph-samuel-morse-basics-tts-ready-v4.png",
+            contentType: "image-text",
+            layout: "custom-telegraph-samuel-morse-v4-2x2",
+            transcriptStatus: "verified",
+            transcriptReviewMethod: "manual-visual-no-OCR",
+            coordinateStatus: "estimated",
+            overlayRuntimeStatus: "not-tested",
+            sourceImageDimensions: { width: 1254, height: 1254 },
+            panels: [
+                panel(1, [4, 112, 609, 533], [
+                    region("telegraph-p1-body", "telegraph-p1-sentence", [12, 196, 378, 238])
+                ], [
+                    item("telegraph-p1-sentence", 1, "sentence",
+                        "Before electric telegraphs, people carried messages over land and sea.",
+                        "Before electric telegraphs, people carried messages over land and sea.",
+                        [34, 210, 332, 204])
+                ]),
+                panel(2, [619, 112, 631, 533], [
+                    region("telegraph-p2-body", "telegraph-p2-sentence", [625, 194, 355, 246])
+                ], [
+                    item("telegraph-p2-sentence", 1, "sentence",
+                        "Samuel Morse and Alfred Vail worked together to develop the telegraph system and its dot-and-dash code.",
+                        "Samuel Morse and Alfred Vail worked together to develop the telegraph system and its dot-and-dash code.",
+                        [649, 207, 306, 220])
+                ]),
+                panel(3, [4, 656, 610, 594], [
+                    region("telegraph-p3-body", "telegraph-p3-sentence", [14, 730, 357, 276])
+                ], [
+                    item("telegraph-p3-sentence", 1, "sentence",
+                        "Operators sent electrical signals through wires to transmit messages.",
+                        "Operators sent electrical signals through wires to transmit messages.",
+                        [38, 746, 309, 237])
+                ]),
+                panel(4, [620, 656, 630, 594], [
+                    region("telegraph-p4-morse-sentence", "telegraph-p4-morse-sentence",
+                        [627, 704, 362, 114]),
+                    region("telegraph-p4-sos-text", "telegraph-p4-sos-sentence",
+                        [627, 818, 362, 152]),
+                    region("telegraph-p4-sos-bubble", "telegraph-p4-sos-sentence",
+                        [846, 1024, 390, 182]),
+                    region("telegraph-p4-code-table", "telegraph-p4-code-table",
+                        [994, 735, 250, 286])
+                ], [
+                    item("telegraph-p4-morse-sentence", 1, "sentence",
+                        "Morse code uses dots and dashes.", "Morse code uses dots and dashes.",
+                        [650, 712, 326, 94]),
+                    item("telegraph-p4-sos-sentence", 2, "sentence",
+                        "SOS is three dots, three dashes, and three dots.",
+                        "SOS is three dots, three dashes, and three dots.",
+                        [648, 826, 322, 136]),
+                    item("telegraph-p4-code-table", 3, "label",
+                        "A ·—\nB —···\nC —·—·\nD —··\nE ·",
+                        "A: dot, dash. B: dash, dot, dot, dot. C: dash, dot, dash, dot. D: dash, dot, dot. E: dot.",
+                        [1004, 744, 230, 266])
+                ])
+            ]
+        };
+    })(),
 };
